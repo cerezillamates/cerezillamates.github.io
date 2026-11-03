@@ -365,6 +365,7 @@ function route(){
   VIEWS.forEach(v => $('#v-' + v).hidden = v !== h);
   $$('nav.tabs a').forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + h ? 'page' : 'false'));
   $('#backBtn').hidden = !(target && BACK);
+  if (h === 'ejercicios' && !target && !rendered) renderList();
   if (target){ openExercise(target); } else if (RESTORE != null){ const y = RESTORE; RESTORE = null; setTimeout(() => window.scrollTo(0, y), 30); } else window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
