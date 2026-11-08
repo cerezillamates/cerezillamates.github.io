@@ -10,7 +10,7 @@ TEMA.info = {
     {num:3, titulo:"Proporcionalidad compuesta", desc:"Tres o más magnitudes: flechas D o I hacia la x.", listo:true},
     {num:4, titulo:"Interés simple", desc:"Capital, rédito y tiempo. Años, meses y días.", listo:true},
     {num:5, titulo:"Repartos proporcionales", desc:"Reparto directo e inverso.", listo:true},
-    {num:6, titulo:"Porcentajes", desc:"Triángulo, índice, hacia atrás, variación, encadenados y compras inteligentes."},
+    {num:6, titulo:"Porcentajes", desc:"Triángulo, índice, hacia atrás, variación, encadenados y compras inteligentes.", listo:true},
     {num:7, titulo:"Grifos, móviles y mezclas", desc:"Trabajo en común, encuentro y alcance, precio de una mezcla."}
   ]
 };

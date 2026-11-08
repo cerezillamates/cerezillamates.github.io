@@ -257,3 +257,19 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 .c.v{background:#bbf7d0;border:2px solid #16a34a;color:#14532d}
 .c.z{background:#bfdbfe;border:2px solid #2563eb;color:#1e3a8a}
 .reparto .c{width:3.6em}
+/* porcentajes: tarjetas % → decimal, barras y cadenas de cambios */
+.dec-cards{display:flex;gap:.5em;justify-content:center;flex-wrap:wrap;margin:.4em 0}
+.dec-cards>div{background:var(--card);box-shadow:var(--sombra);border-radius:14px;padding:.35em .8em;text-align:center;display:grid;line-height:1.2;min-width:5.5em}
+.dec-cards b{font-family:var(--f-d);font-size:1.15em;color:var(--ind)}
+.dec-cards i{font-style:normal;color:var(--amb);font-size:.7em}
+.dec-cards span{font-weight:900;font-size:1.15em}
+.dec-cards small{color:var(--muted);font-size:.7em}
+.barra-pct{display:flex;border-radius:12px;overflow:hidden;box-shadow:var(--sombra);font-weight:800;font-size:.85em;max-width:34em;margin:0 auto}
+.barra-pct span{background:#e5e7eb;padding:.45em .5em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-right:2px solid #fff}
+.barra-pct span.pct-a{background:var(--ind);color:#fff}
+.barra-pct span.pct-s{background:#86efac;color:#14532d}
+.cadena{display:flex;align-items:center;justify-content:center;gap:.4em;flex-wrap:wrap;margin:.3em 0}
+.cadena .caja{background:var(--card);border:3px solid var(--ind);border-radius:14px;padding:.3em .8em;text-align:center;display:grid;line-height:1.2}
+.cadena .caja small{color:var(--muted);font-size:.7em;font-weight:700}
+.cadena .op{display:grid;text-align:center;font-weight:800;color:var(--amb);font-size:.85em;line-height:1.1}
+.cadena .op i{font-style:normal;color:var(--ind);letter-spacing:-2px}
