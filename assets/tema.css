@@ -62,7 +62,7 @@ a{color:var(--ind)}
 .b-def{background:var(--sky-bg)} .b-prop{background:var(--teal-bg)} .b-aviso{background:var(--rose-bg)}
 .b-nota{background:var(--amb-bg)} .b-resumen{background:var(--vio-bg)}
 .b-ej{background:var(--card);border:2px solid var(--ind-bg)}
-.etq{display:inline-block;font:800 .72em var(--f-b);letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:.2em .7em;border-radius:999px;margin-bottom:.4em;background:var(--ind)}
+.etq{display:inline-block;font:800 .72em var(--f-b);letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:.2em .7em;border-radius:10px;margin-bottom:.4em;background:var(--ind)}
 .b-def .etq{background:var(--sky)} .b-prop .etq{background:var(--teal)} .b-aviso .etq{background:var(--rose)}
 .b-nota .etq{background:var(--amb)} .b-resumen .etq{background:var(--vio)}
 .b-def>:last-child,.b-prop>:last-child,.b-aviso>:last-child,.b-nota>:last-child,.b-resumen>:last-child,.b-ej>:last-child{margin-bottom:0}
@@ -136,3 +136,35 @@ body.proy{overflow:hidden;background:var(--bg)}
 .cont{font:800 clamp(14px,1.2vw,20px) var(--f-d);color:var(--muted);min-width:4.5em;text-align:center}
 .proy .solo-estudio{display:none!important}
 .estudio .solo-proy{display:none!important}
+
+/* ---------- Dibujos ---------- */
+.cols-32{grid-template-columns:3fr 2fr;align-items:center}
+@media (max-width:700px){.cols-32{grid-template-columns:1fr}}
+.dib{margin:.4em 0;text-align:center}
+.dib svg{width:100%;max-width:16em;height:auto;font-family:var(--f-b)}
+.dib figcaption{font-weight:800;color:var(--muted);font-size:.85em;margin-top:.3em}
+.casillas{display:grid;gap:.35em;justify-items:start;background:var(--card);border:2px solid var(--ind-bg);border-radius:16px;padding:.6em .9em}
+.fila-c{display:flex;align-items:center;gap:.3em;flex-wrap:wrap}
+.fila-c b{min-width:6.5em;text-align:left}
+.fila-c em{font-style:normal;font-weight:900;margin-left:.4em}
+.c{display:inline-grid;place-items:center;width:3.2em;height:1.9em;border-radius:8px;font-weight:800;font-size:.85em}
+.c.r{background:#fecaca;border:2px solid #dc2626;color:#7f1d1d}
+.c.a{background:#fef08a;border:2px solid #ca8a04;color:#713f12}
+.casillas figcaption{justify-self:stretch;text-align:left}
+/* ---------- Proyectar: índice, pantalla en blanco, cursor ---------- */
+.velo{position:fixed;inset:0;background:#fff;z-index:50;cursor:pointer}
+.menu-p{position:fixed;inset:0;background:rgba(30,27,58,.55);z-index:40;display:grid;place-items:center;padding:3vh 3vw}
+.menu-p[hidden],.velo[hidden]{display:none}
+.menu-c{background:#fff;border-radius:20px;padding:18px 22px;width:min(760px,100%);max-height:94vh;overflow:auto;box-shadow:0 20px 50px rgba(0,0,0,.3);font-size:clamp(15px,1.3vw,20px)}
+.menu-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-family:var(--f-d);font-size:1.2em}
+.menu-c ol{margin:0;padding-left:1.6em;columns:2;column-gap:2em}
+.menu-c li{break-inside:avoid;margin:.15em 0}
+.menu-c li button{font:700 1em var(--f-b);background:none;border:none;color:var(--ink);cursor:pointer;text-align:left;padding:.2em .3em;border-radius:6px}
+.menu-c li button:hover{background:var(--ind-bg)}
+.menu-c li.act button{background:var(--ind);color:#fff}
+.atajos{color:var(--muted);font-size:.85em;margin:12px 0 0}
+body.sin-cursor,body.sin-cursor *{cursor:none!important}
+/* ---------- Estudiar: volver arriba ---------- */
+.arriba{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:var(--ind);color:#fff;display:grid;place-items:center;
+  text-decoration:none;font:800 22px var(--f-d);box-shadow:var(--sombra)}
+@media print{.arriba{display:none}}

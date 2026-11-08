@@ -116,12 +116,19 @@ TEMA.registrar({
     ]},
 
     { titulo:"Problema: la pantalla 16 : 9", cuerpo:[
-      {ej:{etq:"✍️ Problema resuelto", enun:"Una pantalla tiene formato 16 : 9 y mide 80 cm de ancho. ¿Cuánto mide de alto?",
+      {cols2:true, cols:[[{ej:{etq:"✍️ Problema resuelto", enun:"Una pantalla tiene formato 16 : 9 y mide 80 cm de ancho. ¿Cuánto mide de alto?",
         pasos:[R`Escribo las dos razones <b>en el mismo orden</b> (ancho / alto): $\dfrac{16}{9} = \dfrac{80}{x}$`,
                R`Multiplico en cruz: $16 \cdot x = 9 \cdot 80 = 720$`,
                R`$x = \dfrac{720}{16} = 45$`,
                "¿Tiene sentido? El alto tiene que ser menor que el ancho: 45 < 80 ✓"],
-        res:"Mide <b>45 cm</b> de alto"}}
+        res:"Mide <b>45 cm</b> de alto"}}],
+      [{html:`<figure class="dib"><svg viewBox="0 0 220 150" role="img" aria-label="Pantalla de 80 cm de ancho y x cm de alto">
+        <rect x="20" y="12" width="160" height="90" rx="6" fill="#eef0ff" stroke="#4338ca" stroke-width="4"/>
+        <text x="100" y="64" text-anchor="middle" font-size="22" font-weight="800" fill="#4338ca">16 : 9</text>
+        <line x1="20" y1="122" x2="180" y2="122" stroke="#1e1b3a" stroke-width="2"/><text x="100" y="142" text-anchor="middle" font-size="16" font-weight="700" fill="#1e1b3a">ancho = 80 cm</text>
+        <line x1="196" y1="12" x2="196" y2="102" stroke="#d97706" stroke-width="3"/><text x="208" y="62" font-size="18" font-weight="800" fill="#d97706">x</text>
+      </svg><figcaption>¿Cuánto mide el alto?</figcaption></figure>`}]
+    ]}
     ]},
 
     { titulo:"Problema: mezclar pintura", cuerpo:[
@@ -131,7 +138,9 @@ TEMA.registrar({
                R`$x = \dfrac{60}{3} = 20$ litros de amarilla`,
                R`Naranja: $12 + 20 = 32$ litros`],
         res:"20 L de amarilla y 32 L de naranja"}},
-      {estudio:[{nota:["Otra forma de pensarlo: 12 L de rojo son 4 veces 3. Entonces el amarillo también es 4 veces 5 = 20 L."]}]}
+      {html:`<figure class="dib casillas"><div class="fila-c"><b>Rojo (3)</b>${'<span class="c r">4 L</span>'.repeat(3)}<em>= 12 L</em></div>
+        <div class="fila-c"><b>Amarillo (5)</b>${'<span class="c a">4 L</span>'.repeat(5)}<em>= 20 L</em></div>
+        <figcaption>12 L de rojo son 3 partes → cada parte vale 12 : 3 = 4 L</figcaption></figure>`},
     ]},
 
     { titulo:"Medio proporcional", cuerpo:[
@@ -148,13 +157,14 @@ TEMA.registrar({
         pista:R`Plantea $\dfrac{2}{x} = \dfrac{x}{18}$ y multiplica en cruz.`}}
     ]},
 
-    { titulo:"⚠️ Errores típicos", cuerpo:[
-      {aviso:[{lista:[
-        R`<b>Cambiar el orden.</b> La razón entre chicos y chicas es $\dfrac{\text{chicos}}{\text{chicas}}$, no al revés.`,
-        "<b>Dividir cantidades en unidades distintas</b> (cm entre m) sin pasarlas antes a la misma unidad.",
-        R`<b>Plantear la proporción con un orden distinto en cada razón:</b> si arriba pones el ancho, en las dos razones va arriba el ancho.`,
-        R`<b>En el medio proporcional, olvidar la solución negativa:</b> $x = \pm\ldots$`
-      ]}], etq:"⚠️ Errores típicos"}
+    { titulo:"⚠️ Errores típicos con las razones", cuerpo:[
+      {aviso:[R`<b>Cambiar el orden.</b> La razón entre chicos y chicas es $\dfrac{\text{chicos}}{\text{chicas}}$, no al revés.`], etq:"⚠️ Error 1"},
+      {aviso:["<b>Dividir cantidades en unidades distintas</b> (cm entre m) sin pasarlas antes a la misma unidad."], etq:"⚠️ Error 2"}
+    ]},
+
+    { titulo:"⚠️ Errores típicos con las proporciones", cuerpo:[
+      {aviso:["<b>Cambiar el orden de una razón a otra.</b> Si en la primera razón el ancho va arriba, en la segunda también."], etq:"⚠️ Error 3"},
+      {aviso:[R`<b>En el medio proporcional, olvidar la solución negativa:</b> $x = \pm\ldots$`], etq:"⚠️ Error 4"}
     ]},
 
     { titulo:"📝 Resumen", cuerpo:[

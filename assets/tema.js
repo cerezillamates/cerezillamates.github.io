@@ -32,7 +32,7 @@ function bloque(b, modo){
   if(b.html)    return tx(b.html);
   if(b.formula) return `<div class="b-formula">${tex(b.formula,true)}</div>`;
   if(b.lista)   return `<ul class="lista">${b.lista.map(l=>`<li>${tx(l)}</li>`).join("")}</ul>`;
-  if(b.cols)    return `<div class="cols">${b.cols.map(c=>`<div>${[].concat(c).map(x=>bloque(x,modo)).join("")}</div>`).join("")}</div>`;
+  if(b.cols)    return `<div class="cols${b.cols2?" cols-32":""}">${b.cols.map(c=>`<div>${[].concat(c).map(x=>bloque(x,modo)).join("")}</div>`).join("")}</div>`;
   if(b.ej)      return ejemplo(b.ej);
   if(b.comp)    return modo==="estudiar" ? comprueba(b.comp) : "";
   for(const k in CAJAS){
@@ -117,7 +117,9 @@ function estudiar(ap){
   }
   const i = ap.num, sig = (TEMA.info.apartados||[]).find(a=>a.num===i+1 && a.listo);
   h += `<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:18px"><a class="btn" href="./">← Volver al tema</a>${sig?`<a class="btn main" href="apuntes.html?ap=${sig.num}">Apartado ${sig.num}: ${sig.titulo} →</a>`:""}</div></div>`;
+  h += `<a class="arriba" href="#" aria-label="Volver arriba">↑</a>`;
   document.body.innerHTML = h;
+  if(location.hash.length > 1){ const d = document.getElementById(location.hash.slice(1)); if(d) setTimeout(()=>d.scrollIntoView(), 50); }
 }
 
 /* ===================== MODO PROYECTAR ===================== */
@@ -134,8 +136,13 @@ function proyectar(ap){
       <button class="pb" id="ant" aria-label="Pantalla anterior">◀</button>
       <button class="pb paso-b" id="paso" aria-label="Mostrar el siguiente paso">👣 Siguiente paso</button>
       <button class="pb prim" id="sig" aria-label="Pantalla siguiente">▶</button>
-      <button class="pb" id="fs" aria-label="Pantalla completa">⛶</button>
-    </div></div>`;
+      <button class="pb" id="fs" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button>
+      <button class="pb" id="menu" aria-label="Índice de pantallas" title="Índice de pantallas">☰</button>
+    </div></div>
+    <div class="velo" id="velo" hidden></div>
+    <div class="menu-p" id="menuP" hidden><div class="menu-c"><div class="menu-h"><b>Pantallas del apartado</b><button class="pb" id="cerrar" aria-label="Cerrar">✕</button></div>
+      <ol>${L.map((l,k)=>`<li><button data-k="${k}">${l.portada?"Portada":tx(l.titulo)}</button></li>`).join("")}</ol>
+      <p class="atajos">⌨️ <b>→</b> o <b>espacio</b>: siguiente paso / pantalla · <b>←</b>: atrás · <b>Inicio/Fin</b>: primera / última · <b>F</b>: pantalla completa · <b>B</b>: pantalla en blanco</p></div></div>`;
   const $ = id=>document.getElementById(id);
   function pasosOcultos(){ return [...$("lam").querySelectorAll(".paso.oculto")]; }
   function pintar(){
@@ -187,6 +194,11 @@ function proyectar(ap){
   $("fs").onclick = ()=>{ document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(()=>{}); };
   document.addEventListener("keydown", e=>{
     if(e.target.closest("input,textarea")) return;
+    if(!$("velo").hidden){ $("velo").hidden = true; return; }
+    if(e.key==="Escape" && !menuP.hidden){ menuP.hidden = true; return; }
+    if(e.key==="b"||e.key==="B"){ $("velo").hidden = false; return; }
+    if(e.key==="Home"){ i=0; pintar(); return; }
+    if(e.key==="End"){ i=L.length-1; pintar(); return; }
     if(["ArrowRight","PageDown"," ","Enter"].includes(e.key)){ e.preventDefault(); e.key==="ArrowRight"||e.key==="PageDown" ? sig() : avanzar(); }
     else if(["ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); ant(); }
     else if(e.key==="ArrowDown"){ e.preventDefault(); verPaso(); }
@@ -195,6 +207,15 @@ function proyectar(ap){
   // deslizar el dedo en tablet o pizarra táctil
   let x0=null; document.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
   document.addEventListener("touchend",e=>{ if(x0===null) return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>70){ dx<0?sig():ant(); } x0=null; });
+  // índice de pantallas
+  const menuP = $("menuP");
+  $("menu").onclick = ()=>{ menuP.hidden = false; menuP.querySelectorAll("li").forEach((li,k)=>li.classList.toggle("act",k===i)); };
+  $("cerrar").onclick = ()=>{ menuP.hidden = true; };
+  menuP.addEventListener("click", e=>{ const b=e.target.closest("[data-k]"); if(b){ i=+b.dataset.k; menuP.hidden=true; pintar(); } else if(e.target===menuP) menuP.hidden=true; });
+  // pantalla en blanco (B) para que la clase mire a la pizarra
+  $("velo").onclick = ()=>{ $("velo").hidden = true; };
+  // ocultar el cursor si no se mueve
+  let tm; addEventListener("mousemove", ()=>{ document.body.classList.remove("sin-cursor"); clearTimeout(tm); tm=setTimeout(()=>document.body.classList.add("sin-cursor"),2500); });
   pintar();
 }
 
