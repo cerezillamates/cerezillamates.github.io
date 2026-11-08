@@ -219,3 +219,14 @@ body.sin-cursor,body.sin-cursor *{cursor:none!important}
 .t-n{font:800 .9em var(--f-d);color:#fff;background:var(--ind);border-radius:10px;width:1.8em;height:1.8em;display:grid;place-items:center}
 .t-ej .nivel{font-size:.55em;border:2px solid currentColor}
 @media (max-aspect-ratio:1/1){.todos{grid-template-columns:1fr}}
+/* tablas de proporcionalidad con operaciones y cuadro de la regla de tres */
+table.t{border-collapse:separate;border-spacing:0;margin:.4em auto;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--sombra)}
+table.t th,table.t td{padding:.25em .7em;text-align:center;border-bottom:1px solid var(--line)}
+table.t tr:last-child td,table.t tr:last-child th{border-bottom:none}
+table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text-align:left}
+.tprop td.op{color:var(--amb);font-weight:900;font-size:.8em;padding:.25em .2em;white-space:nowrap}
+.cuadro{margin:.2em 0!important}
+.cuadro th{text-align:center!important}
+.cuadro th.fl{background:var(--ind);color:#fff;font-size:.85em}
+.cuadro td.x{color:var(--amb);font-weight:900}
+.pasos li table.t{box-shadow:none;border:2px solid var(--ind-bg)}
