@@ -235,3 +235,10 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 .cmp tr.rel td{padding:.1em .5em;border-bottom:none}
 .cmp .rD,.cmp .rI,.cmp .rx{display:inline-block;font:900 .75em var(--f-b);padding:.1em .6em;border-radius:999px;color:#fff}
 .cmp .rD{background:var(--ok)} .cmp .rI{background:var(--rose)} .cmp .rx{background:var(--amb-hi)}
+/* interés: el capital año a año y el triángulo */
+.anios{display:flex;gap:.5em;justify-content:center;align-items:flex-end;flex-wrap:wrap;margin:.3em 0}
+.anios>div{display:flex;flex-direction:column-reverse;align-items:stretch;gap:2px;text-align:center;min-width:4.2em}
+.anios b{font-size:.75em;color:var(--muted);margin-top:.2em}
+.anios .cap{background:var(--ind);color:#fff;font-weight:800;border-radius:8px;padding:.5em .3em;font-size:.85em}
+.anios .int{background:#fcd34d;color:#713f12;font-weight:800;border-radius:6px;font-size:.75em;padding:.1em}
+.tri svg{max-width:13em}
