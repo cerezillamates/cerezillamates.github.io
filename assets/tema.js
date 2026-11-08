@@ -247,18 +247,23 @@ function camino(ap, aqui){
   const paso = (k, ico, t, href, d) => `<a class="cam-p ${aqui===k?"aqui":""}" href="${href}"><span class="cam-i">${ico}</span><b>${t}</b><small>${d}</small></a>`;
   return `<nav class="camino" aria-label="Pasos de la sesión">
     ${paso("estudiar","📘","1. Explicación",url("estudiar"),"Apuntes del apartado")}
-    ${ap.clase?paso("clase","✏️","2. Ejercicios de clase",url("clase"),`${ap.clase.length} ejercicios con cronómetro`):""}
+    ${ap.clase?paso("clase","✏️","2. Ejercicios de clase",url("clase"),`${ap.clase.length} ejercicios: todos juntos y corrección uno a uno`):""}
     ${ap.casa?paso("casa","🏠","3. Tareas para casa",url("casa"),`${ap.casa.length} ejercicios con soluciones`):""}
   </nav>
   <div class="cam-pie"><a class="btn" href="./">← Volver al tema</a>${sig?`<a class="btn main" href="apuntes.html?ap=${sig.num}">Apartado ${sig.num}: ${sig.titulo} →</a>`:""}</div>`;
 }
 
-/* ===================== EJERCICIOS DE CLASE (proyectar, uno a uno) ===================== */
+/* ===================== EJERCICIOS DE CLASE =====================
+   1) Pantalla con TODOS los enunciados + cronómetro: el alumnado trabaja a su ritmo.
+   2) CORRECCIÓN de uno en uno: la solución sale al pinchar (paso a paso o entera). */
 function clase(ap){
   const E = ap.clase || [];
+  const minTotal = E.reduce((t,e)=>t+(e.min||5),0);
   document.body.className = "proy act";
-  let i = Math.min(Math.max(parseInt(location.hash.slice(1)||"1",10)-1,0), E.length);
-  let sol = false;
+  // i = -1 → todos los enunciados; 0..n-1 → corrección; n → final
+  const h0 = location.hash.slice(1);
+  let i = (h0===""||h0==="todos") ? -1 : Math.min(Math.max(parseInt(h0,10)-1,-1), E.length);
+  if(isNaN(i)) i = -1;
   document.body.innerHTML = `<div class="proy-app">
     <header class="proy-cab"><div class="linea"><a href="./" title="Volver al tema">✕</a>
       <span>✏️ Ejercicios de clase · ${ap.num}. ${ap.titulo}</span><span class="sp"></span><span id="cont" class="cont" style="color:#fff"></span></div>
@@ -269,15 +274,16 @@ function clase(ap){
       <div class="barra"><i id="bar"></i></div></header>
     <div class="lamina-zona" id="zona"><div class="lamina" id="lam"></div></div>
     <div class="proy-bot">
-      <button class="pb" id="ant" aria-label="Ejercicio anterior">◀</button>
-      <button class="pb ver-sol" id="verSol">👁 Ver solución</button>
+      <button class="pb" id="ant" aria-label="Anterior">◀</button>
+      <button class="pb" id="todos">📋 Todos los enunciados</button>
       <button class="pb paso-b" id="paso">👣 Siguiente paso</button>
-      <button class="pb prim" id="sig" aria-label="Ejercicio siguiente">▶</button>
+      <button class="pb ver-sol" id="verTodo">👁 Ver toda la solución</button>
+      <button class="pb prim" id="sig" aria-label="Siguiente">▶</button>
       <button class="pb" id="fs" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button>
     </div></div>`;
   const $ = id=>document.getElementById(id), z=$("zona"), lam=$("lam");
 
-  /* --- cronómetro: cuenta atrás orientativa; al llegar a 0 no se para, sigue sumando tiempo extra --- */
+  /* --- cronómetro (uno para toda la sesión): cuenta atrás orientativa; al llegar a 0 sigue sumando --- */
   const T = {total:0, quedan:0, va:false, iv:null};
   const mmss = s => { const a=Math.abs(s); return (s<0?"+":"") + String(Math.floor(a/60)).padStart(2,"0")+":"+String(a%60).padStart(2,"0"); };
   function pintaT(){ $("cT").textContent = mmss(T.quedan); $("crono").classList.toggle("fin", T.quedan<=0 && T.total>0); $("crono").classList.toggle("va", T.va); $("cPlay").textContent = T.va ? "⏸" : "▶"; }
@@ -287,65 +293,63 @@ function clase(ap){
   $("cReset").onclick = ()=>ponT(T.total/60);
   $("cMas").onclick = ()=>{ T.total+=60; T.quedan+=60; pintaT(); };
   $("cMenos").onclick = ()=>{ if(T.total>=60){ T.total-=60; T.quedan-=60; } pintaT(); };
+  ponT(minTotal);
 
+  const nivel = e => e.nivel ? `<span class="nivel n-${e.nivel.toLowerCase()}">${e.nivel}</span>` : "";
   function ocultos(){ return [...lam.querySelectorAll(".paso.oculto")]; }
   function pintar(){
-    sol = false;
-    $("cont").textContent = i<E.length ? `${i+1} / ${E.length}` : "✓";
-    $("bar").style.width = (Math.min(i+1,E.length)/E.length*100)+"%";
-    history.replaceState(null,"","#"+(i+1));
-    if(i===E.length){ final(); return; }
-    const e = E[i];
-    $("tit").innerHTML = `Ejercicio ${i+1} <span class="de">de ${E.length}</span> <span class="nivel n-${(e.nivel||"").toLowerCase()}">${e.nivel||""}</span>`;
-    lam.innerHTML = `<div class="enun-act">${tx(e.enun)}</div>
-      <div class="sol-act" id="solBox" hidden><span class="etq">✅ Solución paso a paso</span>
-        <ol class="pasos">${(e.pasos||[]).map(p=>`<li class="paso oculto"><span>${tx(p)}</span></li>`).join("")}</ol>
-        ${e.res?`<div class="res paso oculto">${tx(e.res)}</div>`:""}</div>`;
-    ponT(e.min || 5);
+    $("cont").textContent = i<0 ? "Enunciados" : i<E.length ? `Corrección ${i+1} / ${E.length}` : "✓";
+    $("bar").style.width = (i<0 ? 0 : Math.min(i+1,E.length)/E.length*100)+"%";
+    history.replaceState(null,"", i<0 ? "#todos" : "#"+(i+1));
+    if(i<0){
+      $("tit").innerHTML = `Ejercicios <span class="de">· ${E.length} ejercicios · unos ${minTotal} min</span>`;
+      lam.innerHTML = `<div class="todos">${E.map((e,k)=>`<div class="t-ej"><div class="t-cab"><span class="t-n">${k+1}</span>${nivel(e)}</div><div>${tx(e.enun)}</div></div>`).join("")}</div>`;
+    } else if(i===E.length){
+      $("tit").innerHTML = "¡Corrección terminada!";
+      const sig = siguienteAp();
+      lam.innerHTML = `<div class="final-act"><div class="gran">🎉</div><p>Habéis hecho y corregido los <b>${E.length} ejercicios de clase</b> del apartado ${ap.num}.</p>
+        <div class="final-bot">${ap.casa?`<a class="pb paso-b" href="${url("casa")}">🏠 Tareas para casa</a>`:""}
+        <a class="pb" href="${url("proyectar")}">📘 Repasar la explicación</a>
+        ${sig?`<a class="pb prim" href="apuntes.html?ap=${sig.num}&modo=proyectar">Apartado ${sig.num} ▶</a>`:""}</div></div>`;
+    } else {
+      const e = E[i];
+      $("tit").innerHTML = `Corrección · Ejercicio ${i+1} <span class="de">de ${E.length}</span> ${nivel(e)}`;
+      lam.innerHTML = `<div class="enun-act">${tx(e.enun)}</div>
+        <div class="sol-act"><span class="etq">✅ Solución</span>
+          <ol class="pasos">${(e.pasos||[]).map(p=>`<li class="paso oculto"><span>${tx(p)}</span></li>`).join("")}</ol>
+          ${e.res?`<div class="res paso oculto">${tx(e.res)}</div>`:""}</div>`;
+    }
     actualizar(); encajar(z, lam);
-  }
-  function final(){
-    $("tit").innerHTML = "¡Ejercicios terminados!";
-    const sig = siguienteAp();
-    lam.innerHTML = `<div class="final-act"><div class="gran">🎉</div><p>Ya habéis hecho los <b>${E.length} ejercicios de clase</b> del apartado ${ap.num}.</p>
-      <div class="final-bot">${ap.casa?`<a class="pb paso-b" href="${url("casa")}">🏠 Tareas para casa</a>`:""}
-      <a class="pb" href="${url("proyectar")}">📘 Repasar la explicación</a>
-      ${sig?`<a class="pb prim" href="apuntes.html?ap=${sig.num}&modo=proyectar">Apartado ${sig.num} ▶</a>`:""}</div></div>`;
-    ponT(0); actualizar(); encajar(z, lam);
   }
   function actualizar(){
-    const fin = i===E.length, n = ocultos().length;
-    $("ant").disabled = i===0;
-    $("sig").disabled = fin;
-    $("sig").textContent = i===E.length-1 ? "Terminar ▶" : "▶";
-    $("verSol").style.display = fin ? "none" : "";
-    $("verSol").textContent = sol ? "🙈 Ocultar solución" : "👁 Ver solución";
-    $("paso").style.display = (sol && !fin) ? "" : "none";
+    const corr = i>=0 && i<E.length, n = ocultos().length;
+    $("ant").disabled = i<0;
+    $("sig").disabled = i===E.length;
+    $("sig").textContent = i<0 ? "✅ Empezar a corregir ▶" : i===E.length-1 ? "Terminar ▶" : "▶";
+    $("sig").classList.toggle("ir-clase", i<0);
+    $("todos").style.display = i<0 ? "none" : "";
+    $("paso").style.display = corr ? "" : "none";
+    $("verTodo").style.display = (corr && n) ? "" : "none";
     $("paso").disabled = n===0;
-    $("paso").textContent = n ? `👣 Siguiente paso (${n})` : "✓ Solución completa";
-    $("crono").style.visibility = fin ? "hidden" : "visible";
-  }
-  function verSol(){
-    sol = !sol; $("solBox").hidden = !sol;
-    if(!sol) lam.querySelectorAll(".paso").forEach(p=>{ p.classList.add("oculto"); p.classList.remove("actual","nuevo"); });
-    actualizar(); encajar(z, lam);
+    $("paso").textContent = n ? "👣 Siguiente paso" : "✓ Corregido";
   }
   function verPaso(){
-    if(!sol){ verSol(); return true; }
     const p = ocultos()[0]; if(!p) return false;
     lam.querySelectorAll(".actual").forEach(x=>x.classList.remove("actual"));
     p.classList.remove("oculto"); p.classList.add("nuevo"); if(p.tagName==="LI") p.classList.add("actual");
     actualizar(); return true;
   }
-  const sig = ()=>{ if(i<E.length){ i++; pintar(); } }, ant = ()=>{ if(i>0){ i--; pintar(); } };
-  $("sig").onclick = sig; $("ant").onclick = ant; $("verSol").onclick = verSol; $("paso").onclick = verPaso;
+  function verTodo(){ lam.querySelectorAll(".actual").forEach(x=>x.classList.remove("actual")); ocultos().forEach(p=>p.classList.remove("oculto")); actualizar(); }
+  const sig = ()=>{ if(i<E.length){ i++; pintar(); } }, ant = ()=>{ if(i>=0){ i--; pintar(); } };
+  $("sig").onclick = sig; $("ant").onclick = ant; $("paso").onclick = verPaso; $("verTodo").onclick = verTodo;
+  $("todos").onclick = ()=>{ i=-1; pintar(); };
   $("fs").onclick = ()=>{ document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(()=>{}); };
   document.addEventListener("keydown", e=>{
     if(e.target.closest("input,textarea")) return;
     if(e.key==="ArrowRight"||e.key==="PageDown"){ e.preventDefault(); sig(); }
     else if(e.key==="ArrowLeft"||e.key==="PageUp"){ e.preventDefault(); ant(); }
-    else if(e.key===" "||e.key==="Enter"||e.key==="ArrowDown"){ e.preventDefault(); verPaso(); }
-    else if(e.key==="s"||e.key==="S"){ if(i<E.length) verSol(); }
+    else if(e.key===" "||e.key==="Enter"||e.key==="ArrowDown"){ e.preventDefault(); if(i<0||!verPaso()) sig(); }
+    else if(e.key==="s"||e.key==="S"){ verTodo(); }
     else if(e.key==="t"||e.key==="T"){ playT(); }
     else if(e.key==="f"||e.key==="F"){ $("fs").click(); }
   });

@@ -212,3 +212,10 @@ body.sin-cursor,body.sin-cursor *{cursor:none!important}
 @media print{.t-bot,.camino,.cam-pie{display:none!important}}
 .guia{margin:0 0 14px;color:var(--muted)}
 .btn.verde{background:var(--ok);border-color:var(--ok);color:#fff}
+/* todos los enunciados en una pantalla */
+.todos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6em}
+.t-ej{background:var(--card);border-radius:16px;padding:.55em .8em;box-shadow:var(--sombra);line-height:1.45}
+.t-cab{display:flex;align-items:center;gap:.5em;margin-bottom:.25em}
+.t-n{font:800 .9em var(--f-d);color:#fff;background:var(--ind);border-radius:10px;width:1.8em;height:1.8em;display:grid;place-items:center}
+.t-ej .nivel{font-size:.55em;border:2px solid currentColor}
+@media (max-aspect-ratio:1/1){.todos{grid-template-columns:1fr}}
