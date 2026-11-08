@@ -124,7 +124,7 @@ function estudiar(ap){
   const secs = ap.laminas.filter(l=>!l.portada);
   const portada = ap.laminas.find(l=>l.portada);
   let h = `<header class="hero"><div class="wrap">
-    <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../3eso.html">${TEMA.info.curso}</a><span>›</span><a href="./">${TEMA.info.tema}</a></nav>
+    <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../${TEMA.info.cursoUrl||"3eso.html"}">${TEMA.info.curso}</a><span>›</span><a href="./">${TEMA.info.tema}</a></nav>
     <div class="kicker">Apuntes · Apartado ${ap.num}</div>
     <h1>${ap.num}. ${ap.titulo}</h1>
     <div class="est-cab"><a class="btn main" href="${url("proyectar")}">🖥 Proyectar en clase</a><button class="btn" onclick="print()">🖨 Imprimir</button>
@@ -366,7 +366,7 @@ function casa(ap){
   document.body.className = "estudio casa";
   const NIV = [["Básico","🟢 Ejercicios básicos"],["Consolidación","🔵 Para consolidar"],["Problema","🟠 Problemas"],["Para pensar","🔴 Para pensar más"]];
   let h = `<header class="hero"><div class="wrap">
-    <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../3eso.html">${TEMA.info.curso}</a><span>›</span><a href="./">${TEMA.info.tema}</a></nav>
+    <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../${TEMA.info.cursoUrl||"3eso.html"}">${TEMA.info.curso}</a><span>›</span><a href="./">${TEMA.info.tema}</a></nav>
     <div class="kicker">🏠 Tareas para casa · Apartado ${ap.num}</div>
     <h1>${ap.num}. ${ap.titulo}</h1>
     <p class="lead">Hazlos en tu cuaderno y después comprueba. Si te atascas, abre la solución <b>paso a paso</b>: mira solo el primer paso e intenta seguir tú.</p>

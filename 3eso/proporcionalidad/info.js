@@ -2,7 +2,7 @@
    Para activar un apartado nuevo: crear contenido/apN.js y poner listo:true */
 window.TEMA = window.TEMA || {};
 TEMA.info = {
-  curso: "3.º ESO",
+  curso: "3.º ESO", cursoUrl: "3eso.html",
   tema: "Tema 3 · Proporcionalidad y problemas aritméticos",
   apartados: [
     {num:1, titulo:"Razones y proporciones", desc:"Razón, proporción, propiedad fundamental, cuarto y medio proporcional.", listo:true},
