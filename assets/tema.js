@@ -165,7 +165,8 @@ function proyectar(ap){
       <ol>${L.map((l,k)=>`<li><button data-k="${k}">${l.portada?"Portada":tx(l.titulo)}</button></li>`).join("")}</ol>
       <p class="atajos">⌨️ <b>→</b> o <b>espacio</b>: siguiente paso / pantalla · <b>←</b>: atrás · <b>Inicio/Fin</b>: primera / última · <b>F</b>: pantalla completa · <b>B</b>: pantalla en blanco</p></div></div>`;
   const $ = id=>document.getElementById(id);
-  function pasosOcultos(){ return [...$("lam").querySelectorAll(".paso.oculto")]; }
+  // orden de aparición: data-o (texto y capas de una gráfica sincronizados) o, si no hay, el orden del documento
+  function pasosOcultos(){ return [...$("lam").querySelectorAll(".paso.oculto")].map((e,k)=>[e, e.dataset.o!==undefined ? +e.dataset.o : 1000+k]).sort((a,b)=>a[1]-b[1]).map(x=>x[0]); }
   function pintar(){
     const l = L[i];
     $("tit").innerHTML = l.portada ? TEMA.info.tema : tx(l.titulo);
@@ -207,7 +208,9 @@ function proyectar(ap){
   function verPaso(){
     const p = pasosOcultos()[0]; if(!p) return false;
     $("lam").querySelectorAll(".actual").forEach(x=>x.classList.remove("actual"));
-    p.classList.remove("oculto"); p.classList.add("nuevo"); if(p.tagName==="LI") p.classList.add("actual");
+    // los elementos con el mismo número de orden salen a la vez (el paso escrito y su dibujo)
+    const grupo = p.dataset.o!==undefined ? pasosOcultos().filter(q=>q.dataset.o===p.dataset.o) : [p];
+    grupo.forEach(q=>{ q.classList.remove("oculto"); q.classList.add("nuevo"); if(q.tagName==="LI") q.classList.add("actual"); });
     actualizar(); return true;
   }
   function sig(){ if(i<L.length-1){ i++; pintar(); } else if(ap.clase) location.href = url("clase"); }
@@ -338,7 +341,9 @@ function clase(ap){
   function verPaso(){
     const p = ocultos()[0]; if(!p) return false;
     lam.querySelectorAll(".actual").forEach(x=>x.classList.remove("actual"));
-    p.classList.remove("oculto"); p.classList.add("nuevo"); if(p.tagName==="LI") p.classList.add("actual");
+    // los elementos con el mismo número de orden salen a la vez (el paso escrito y su dibujo)
+    const grupo = p.dataset.o!==undefined ? pasosOcultos().filter(q=>q.dataset.o===p.dataset.o) : [p];
+    grupo.forEach(q=>{ q.classList.remove("oculto"); q.classList.add("nuevo"); if(q.tagName==="LI") q.classList.add("actual"); });
     actualizar(); return true;
   }
   function verTodo(){ lam.querySelectorAll(".actual").forEach(x=>x.classList.remove("actual")); ocultos().forEach(p=>p.classList.remove("oculto")); actualizar(); }

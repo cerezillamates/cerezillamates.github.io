@@ -274,3 +274,30 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 .cadena .op{display:grid;text-align:center;font-weight:800;color:var(--amb);font-size:.85em;line-height:1.1}
 .cadena .op i{font-style:normal;color:var(--ind);letter-spacing:-2px}
 .tablas{display:flex;gap:1em;flex-wrap:wrap;justify-content:center;align-items:flex-start}.tablas>div{text-align:center}
+
+/* ---------- Programación lineal: gráficas sincronizadas con los pasos ---------- */
+.lamina svg .paso.oculto,.lamina .paso.oculto{visibility:hidden}
+.lamina svg .paso.nuevo{animation:entra .35s ease-out}
+.pl-fig{margin:0 auto;width:100%;max-width:24em;text-align:center}
+.pl-fig svg{width:100%;height:auto;display:block;font-family:var(--f-b);background:#fff;border-radius:14px;border:2px solid var(--line)}
+.pl-fig svg text{font-size:17px;fill:#1e1b3a}
+.pl-fig svg text.ej{font:italic 800 19px var(--f-b)}
+.pl-fig svg .tk text{fill:#5b6078;font-size:15px}
+.pl-fig svg text.nr{font-size:20px;font-weight:800;paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+.pl-fig svg text.nr tspan{fill:inherit}
+.pl-fig svg text.vt{font-size:20px;font-weight:900;paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+.pl-fig figcaption{font-weight:800;color:var(--muted);font-size:.8em;margin-top:.3em}
+.pl-duo{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:1em;align-items:center}
+.pl-duo>div>:first-child{margin-top:0}
+@media (max-width:760px){.pl-duo{grid-template-columns:1fr}}
+.pl-tv{border-collapse:collapse;margin:.2em auto;font-size:.92em;min-width:8em}
+.pl-tv caption{font-weight:800;color:var(--c);padding-bottom:.15em;white-space:nowrap}
+.pl-tv th{background:var(--c);color:#fff;padding:.15em .8em}
+.pl-tv td{border:2px solid var(--line);padding:.1em .8em;text-align:center;background:#fff}
+.pl-tvs{display:flex;gap:1em;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+.sis{display:inline-block;border-left:4px solid var(--ind);padding:.1em .7em;border-radius:4px;background:var(--ind-bg)}
+.pl-tab{border-collapse:collapse;margin:.3em auto;font-size:.95em}
+.pl-tab th,.pl-tab td{border:2px solid var(--line);padding:.25em .7em;text-align:center;background:#fff}
+.pl-tab th{background:var(--ind-bg);color:var(--ind)}
+.pl-tab td.max{background:var(--ok-bg);font-weight:900;color:var(--ok)}
+.pl-tab td.min{background:var(--rose-bg);font-weight:900;color:var(--rose)}
