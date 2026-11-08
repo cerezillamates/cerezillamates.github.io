@@ -7,8 +7,8 @@ TEMA.info = {
   apartados: [
     {num:1, titulo:"Razón y proporción", desc:"Razón, proporción, propiedad fundamental, cuarto y medio proporcional.", listo:true},
     {num:2, titulo:"Proporcionalidad directa", desc:"Constante, regla de tres, reducción a la unidad, escalas y divisas.", listo:true},
-    {num:3, titulo:"Proporcionalidad inversa", desc:"Constante, regla de tres inversa y reducción a la unidad."},
-    {num:4, titulo:"Proporcionalidad compuesta", desc:"Tres magnitudes: tabla con flechas D o I."},
+    {num:3, titulo:"Proporcionalidad inversa", desc:"Constante (el producto), regla de tres inversa, reducción a la unidad y D, I o ninguna.", listo:true},
+    {num:4, titulo:"Proporcionalidad compuesta", desc:"Tres magnitudes: cuadro con flechas D o I y reducción a la unidad.", listo:true},
     {num:5, titulo:"Repartos proporcionales", desc:"Reparto directo e inverso."},
     {num:6, titulo:"Porcentajes", desc:"El r % de una cantidad, qué % es y el total, con la regla de tres."},
     {num:7, titulo:"Aumentos y disminuciones porcentuales", desc:"IVA, rebajas, precio de antes, índice de variación, encadenados y ofertas."},
