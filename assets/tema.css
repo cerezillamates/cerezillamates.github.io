@@ -168,3 +168,47 @@ body.sin-cursor,body.sin-cursor *{cursor:none!important}
 .arriba{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:var(--ind);color:#fff;display:grid;place-items:center;
   text-decoration:none;font:800 22px var(--f-d);box-shadow:var(--sombra)}
 @media print{.arriba{display:none}}
+
+/* ---------- Ejercicios de clase ---------- */
+.cab-fila{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.cab-fila h2 .de{opacity:.75;font-size:.7em}
+.nivel{display:inline-block;vertical-align:middle;font:800 .42em var(--f-b);letter-spacing:.06em;text-transform:uppercase;padding:.35em .9em;border-radius:999px;background:#fff;color:var(--ind)}
+.nivel.n-aplicación{color:#15803d} .nivel.n-práctica{color:#0369a1} .nivel.n-problema{color:#b45309} .nivel.n-reto{color:#be123c}
+.crono{display:flex;align-items:center;gap:6px;background:#fff;color:var(--ink);border-radius:999px;padding:.3em .5em;font:800 clamp(18px,1.9vw,34px) var(--f-d);box-shadow:var(--sombra)}
+.crono span{min-width:3.3em;text-align:center;font-variant-numeric:tabular-nums}
+.crono button{font:800 .7em var(--f-b);width:2em;height:2em;border-radius:50%;border:2px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.crono .c-play{background:var(--ok);border-color:var(--ok);color:#fff}
+.crono.va .c-play{background:var(--amb-hi);border-color:var(--amb-hi)}
+.crono.fin{background:#fff4d6} .crono.fin span{color:var(--amb)}
+.enun-act{background:var(--card);border-radius:18px;padding:.8em 1em;box-shadow:var(--sombra);font-size:1.12em;line-height:1.55}
+.sol-act{margin-top:.6em;background:#f0fdf4;border:3px solid #86efac;border-radius:18px;padding:.6em 1em .8em}
+.sol-act .etq{background:var(--ok)}
+.sol-act[hidden]{display:none}
+.final-act{text-align:center;padding:1em}
+.final-act .gran{font-size:3em}
+.final-bot{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:1em}
+.final-bot a{text-decoration:none}
+.pb.ver-sol{background:var(--ok);border-color:var(--ok);color:#fff}
+.pb.ir-clase{background:var(--ok);border-color:var(--ok)}
+
+/* ---------- Camino de la sesión ---------- */
+.camino{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:22px 0 12px}
+.cam-p{display:grid;gap:2px;text-decoration:none;color:var(--ink);background:var(--card);border-radius:16px;padding:14px 16px;box-shadow:var(--sombra);border:3px solid transparent;position:relative}
+.cam-p:hover{border-color:var(--ind-bg)}
+.cam-p.aqui{border-color:var(--ind)}
+.cam-p .cam-i{font-size:1.6rem}
+.cam-p small{color:var(--muted)}
+.cam-pie{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+
+/* ---------- Tareas para casa ---------- */
+.tarea{border-top:2px dashed var(--line);padding:14px 0}
+.tarea:first-of-type{border-top:none}
+.t-enun{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.t-num{font:800 1rem var(--f-d);color:#fff;background:var(--ind);border-radius:10px;width:2em;height:2em;display:grid;place-items:center}
+.t-bot{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0 calc(2em + 12px)}
+.t-bot .btn{font-size:.88rem;padding:7px 13px}
+.t-sol{margin:10px 0 0 calc(2em + 12px);background:#f0fdf4;border-radius:14px;padding:10px 14px}
+.t-sol .paso.oculto{display:none}
+@media print{.t-bot,.camino,.cam-pie{display:none!important}}
+.guia{margin:0 0 14px;color:var(--muted)}
+.btn.verde{background:var(--ok);border-color:var(--ok);color:#fff}

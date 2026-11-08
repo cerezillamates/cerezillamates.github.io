@@ -37,12 +37,16 @@ const tabs = document.getElementById("tabs"), pan = document.getElementById("pan
 SECC.forEach((s,i)=>{
   tabs.insertAdjacentHTML("beforeend",`<button role="tab" id="t-${s.id}" aria-controls="p-${s.id}" aria-selected="${i===0}">${s.t}</button>`);
   let h;
-  if(s.id==="apuntes"){
-    h = `<div class="aps">` + TEMA.info.apartados.map(a=>`<div class="ap ${a.listo?"":"prox"}">
+  const lista = (fn) => `<div class="aps">` + TEMA.info.apartados.map(a=>`<div class="ap ${a.listo?"":"prox"}">
       <span class="n">${a.num}</span><div><h3>${a.titulo}</h3><p>${a.desc}</p></div>
-      <div class="acts">${a.listo
-        ? `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Proyectar</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a>`
-        : `<span class="prox-tag">En preparación</span>`}</div></div>`).join("") + `</div>`;
+      <div class="acts">${a.listo ? fn(a) : `<span class="prox-tag">En preparación</span>`}</div></div>`).join("") + `</div>`;
+  if(s.id==="apuntes"){
+    h = `<p class="guia">Cada apartado es una sesión: <b>📘 explicación</b> → <b>✏️ ejercicios de clase</b> → <b>🏠 tareas para casa</b>.</p>` + lista(a=>
+      `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Explicar</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a><a class="btn verde" href="clase.html?ap=${a.num}">✏️ Clase</a><a class="btn" href="tareas.html?ap=${a.num}">🏠 Casa</a>`);
+  } else if(s.id==="clase"){
+    h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn verde" href="clase.html?ap=${a.num}">✏️ Proyectar ejercicios</a>`);
+  } else if(s.id==="tareas"){
+    h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn main" href="tareas.html?ap=${a.num}">🏠 Abrir tareas</a>`);
   } else {
     h = `<p><b>${s.t}</b></p><p style="color:var(--muted)">${s.d}</p><p class="prox-tag" style="display:inline-block">En preparación</p>`;
   }
