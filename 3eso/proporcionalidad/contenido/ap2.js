@@ -268,6 +268,12 @@ TEMA.registrar({
       {nota:["Comprueba: como 1 € vale más de 1 $, siempre te dan <b>más dólares</b> que euros entregas."]}
     ]},
 
+    { titulo:"🪄 Trucos para ir más rápido", cuerpo:[
+      {truco:[R`<b>¿D o I? Piensa en las pizzas de tu cumpleaños.</b> Si compras el doble de pizzas, ¿pagas el doble? Sí → <b>D</b>. Si invitas al doble de amigos, ¿te tocan más o menos porciones? Menos → <b>I</b>.`], etq:"🪄 Truco 1"},
+      {truco:[R`<b>En el súper la constante ya viene escrita:</b> la etiqueta pone el «precio por kilo» o «por litro». Es la reducción a la unidad hecha: sirve para comparar el paquete pequeño con el grande.`], etq:"🪄 Truco 2"},
+      {truco:[R`<b>Escalas sin liarte con los ceros:</b> 1 : 100 000 → 1 cm = 1 km · 1 : 50 000 → 1 cm = 500 m · 1 : 25 000 → 1 cm = 250 m (los mapas de senderismo).`], etq:"🪄 Truco 3"}
+    ]},
+
     { titulo:"⚠️ Errores típicos", cuerpo:[
       {aviso:["<b>Pensar que «a más, más» siempre es D</b> (el taxi) o que «a más, menos» siempre es I: hay que comprobar «doble → doble» o «doble → mitad»."], etq:"⚠️ Error 1"},
       {aviso:["<b>En una inversa, no darle la vuelta</b> a la fracción de la <i>x</i>: sale un resultado sin sentido (más obreros y más días)."], etq:"⚠️ Error 2"},

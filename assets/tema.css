@@ -242,3 +242,18 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 .anios .cap{background:var(--ind);color:#fff;font-weight:800;border-radius:8px;padding:.5em .3em;font-size:.85em}
 .anios .int{background:#fcd34d;color:#713f12;font-weight:800;border-radius:6px;font-size:.75em;padding:.1em}
 .tri svg{max-width:13em}
+/* numeración 1.1, 1.2… */
+.t-n{width:auto!important;min-width:1.8em;padding:0 .35em}
+.t-num{width:auto!important;min-width:2em;padding:0 .4em}
+/* recuadro de TRUCO */
+.b-truco{border-radius:16px;padding:.75em 1em;margin:.6em 0;background:linear-gradient(135deg,#fef9c3,#dcfce7);border:3px dashed #16a34a}
+.b-truco .etq{background:#16a34a}
+.b-truco>:last-child{margin-bottom:0} .b-truco>p:first-of-type{margin-top:0}
+/* repartos: los tres pasos y casillas de colores */
+.tres-pasos{display:flex;align-items:stretch;gap:.4em;flex-wrap:wrap}
+.tres-pasos>div{flex:1 1 9em;background:var(--ind-bg);border-radius:12px;padding:.4em .6em;text-align:center;line-height:1.35}
+.tres-pasos>div>.n3{display:block;font-size:1.2em}
+.tres-pasos>i{align-self:center;font-style:normal;color:var(--ind);font-weight:900}
+.c.v{background:#bbf7d0;border:2px solid #16a34a;color:#14532d}
+.c.z{background:#bfdbfe;border:2px solid #2563eb;color:#1e3a8a}
+.reparto .c{width:3.6em}

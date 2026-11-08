@@ -190,6 +190,12 @@ TEMA.registrar({
       {nota:["Cuando <b>ahorras</b>, el banco te paga intereses. Cuando <b>pides un préstamo</b>, los intereses los pagas tú."]}
     ]},
 
+    { titulo:"🪄 Trucos para ir más rápido", cuerpo:[
+      {truco:[R`<b>El 1 % de cabeza:</b> el 1 % de 9000 € es 90 € (quita dos ceros). El 1,5 % es la mitad más: $90 + 45 = 135$ €.`], etq:"🪄 Truco 1"},
+      {truco:[R`<b>Meses a años:</b> 6 meses = 0,5 años · 3 meses = 0,25 años · 18 meses = 1,5 años. Así puedes usar siempre $I = c \cdot r \cdot t$.`], etq:"🪄 Truco 2"},
+      {truco:[R`<b>Capital final de golpe:</b> al 3 % durante 4 años ganas el 12 %, así que tienes el 112 %: multiplica por <b>1,12</b>.`], etq:"🪄 Truco 3"}
+    ]},
+
     { titulo:"⚠️ Errores típicos", cuerpo:[
       {aviso:["<b>Poner el rédito en % (3) en lugar de en decimal (0,03).</b>"], etq:"⚠️ Error 1"},
       {aviso:["<b>No dividir entre 12 o entre 360</b> cuando el tiempo está en meses o en días."], etq:"⚠️ Error 2"},

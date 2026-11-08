@@ -14,16 +14,18 @@ function tex(src, display){
   try { return katex.renderToString(s, {displayMode:!!display, throwOnError:false, strict:false}); }
   catch(e){ return src; }
 }
+// un número y su unidad nunca se separan de línea (8 €, 25 %, 3 km…)
+const NBSP = /(\d) (?=(€|%|km\/h|km|kg|cm|min|m²|m³|L\b|h\b|m\b|g\b|°|años|días|horas|meses))/g;
 function tx(html){
   if(html == null) return "";
-  return String(html)
+  return String(html).split(/(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$)/).map((t,k)=>k%2 ? t : t.replace(NBSP,"$1\u00a0")).join("")
     .replace(/\$\$([\s\S]+?)\$\$/g, (_,m)=>tex(m,true))
     .replace(/\$([^$\n]+?)\$/g, (_,m)=>tex(m,false));
 }
 TEMA.tx = tx;
 
 /* ---------- Bloques ---------- */
-const CAJAS = {def:"Definición", prop:"Propiedad", aviso:"⚠️ Cuidado", nota:"💡 Fíjate", resumen:"📝 Resumen"};
+const CAJAS = {def:"Definición", prop:"Propiedad", aviso:"⚠️ Cuidado", nota:"💡 Fíjate", resumen:"📝 Resumen", truco:"🪄 Truco"};
 function bloque(b, modo){
   if(typeof b === "string") return `<p>${tx(b)}</p>`;
   if(b.estudio) return modo==="estudiar" ? b.estudio.map(x=>bloque(x,modo)).join("") : "";
@@ -298,12 +300,12 @@ function clase(ap){
   const nivel = e => e.nivel ? `<span class="nivel n-${e.nivel.toLowerCase()}">${e.nivel}</span>` : "";
   function ocultos(){ return [...lam.querySelectorAll(".paso.oculto")]; }
   function pintar(){
-    $("cont").textContent = i<0 ? "Enunciados" : i<E.length ? `Corrección ${i+1} / ${E.length}` : "✓";
+    $("cont").textContent = i<0 ? "Enunciados" : i<E.length ? `Corrección ${ap.num}.${i+1} · ${i+1} de ${E.length}` : "✓";
     $("bar").style.width = (i<0 ? 0 : Math.min(i+1,E.length)/E.length*100)+"%";
     history.replaceState(null,"", i<0 ? "#todos" : "#"+(i+1));
     if(i<0){
       $("tit").innerHTML = `Ejercicios <span class="de">· ${E.length} ejercicios · unos ${minTotal} min</span>`;
-      lam.innerHTML = `<div class="todos">${E.map((e,k)=>`<div class="t-ej"><div class="t-cab"><span class="t-n">${k+1}</span>${nivel(e)}</div><div>${tx(e.enun)}</div></div>`).join("")}</div>`;
+      lam.innerHTML = `<div class="todos">${E.map((e,k)=>`<div class="t-ej"><div class="t-cab"><span class="t-n">${ap.num}.${k+1}</span>${nivel(e)}</div><div>${tx(e.enun)}</div></div>`).join("")}</div>`;
     } else if(i===E.length){
       $("tit").innerHTML = "¡Corrección terminada!";
       const sig = siguienteAp();
@@ -313,7 +315,7 @@ function clase(ap){
         ${sig?`<a class="pb prim" href="apuntes.html?ap=${sig.num}&modo=proyectar">Apartado ${sig.num} ▶</a>`:""}</div></div>`;
     } else {
       const e = E[i];
-      $("tit").innerHTML = `Corrección · Ejercicio ${i+1} <span class="de">de ${E.length}</span> ${nivel(e)}`;
+      $("tit").innerHTML = `Corrección · Ejercicio ${ap.num}.${i+1} ${nivel(e)}`;
       lam.innerHTML = `<div class="enun-act">${tx(e.enun)}</div>
         <div class="sol-act"><span class="etq">✅ Solución</span>
           <ol class="pasos">${(e.pasos||[]).map(p=>`<li class="paso oculto"><span>${tx(p)}</span></li>`).join("")}</ol>
@@ -374,7 +376,7 @@ function casa(ap){
   NIV.forEach(([k,t])=>{
     const L = E.filter(e=>(e.nivel||"Básico")===k); if(!L.length) return;
     h += `<section class="est-sec"><h2>${t}</h2>` + L.map(e=>{ n++; return `<div class="tarea" id="t${n}">
-      <div class="t-enun"><span class="t-num">${n}</span><div>${tx(e.enun)}</div></div>
+      <div class="t-enun"><span class="t-num">${ap.num}.${n}</span><div>${tx(e.enun)}</div></div>
       <div class="t-bot"><button class="btn t-paso" data-t="${n}">👣 Ver el primer paso</button><button class="btn t-todo" data-t="${n}">Ver toda la solución</button></div>
       <div class="t-sol" hidden><ol class="pasos">${(e.pasos||[]).map(p=>`<li class="paso oculto"><span>${tx(p)}</span></li>`).join("")}</ol>${e.res?`<div class="res paso oculto">${tx(e.res)}</div>`:""}</div></div>`; }).join("") + `</section>`;
   });

@@ -265,6 +265,12 @@ TEMA.registrar({
         pista:R`Plantea $\dfrac{2}{x} = \dfrac{x}{18}$ y multiplica en cruz.`}}
     ]},
 
+    { titulo:"🪄 Trucos para ir más rápido", cuerpo:[
+      {truco:[R`<b>Busca las «veces».</b> En $\dfrac{16}{9} = \dfrac{80}{x}$: 80 es 5 veces 16, así que la $x$ es 5 veces 9 = <b>45</b>. ¡Sin multiplicar en cruz!`], etq:"🪄 Truco 1"},
+      {truco:[R`<b>¿Forman proporción? Usa la calculadora.</b> Divide cada razón: si sale el mismo decimal, sí. $3 : 7 = 0,428\ldots$ y $9 : 21 = 0,428\ldots$ ✓`], etq:"🪄 Truco 2"},
+      {truco:[R`<b>Medio proporcional de cabeza:</b> $4 \cdot 9 = 36$ y 36 es un cuadrado perfecto ($6 \cdot 6$). Apréndete 1, 4, 9, 16, 25, 36, 49, 64, 81, 100.`], etq:"🪄 Truco 3"}
+    ]},
+
     { titulo:"⚠️ Errores típicos con las razones", cuerpo:[
       {aviso:[R`<b>Cambiar el orden.</b> La razón entre chicos y chicas es $\dfrac{\text{chicos}}{\text{chicas}}$, no al revés.`], etq:"⚠️ Error 1"},
       {aviso:["<b>Dividir cantidades en unidades distintas</b> (cm entre m) sin pasarlas antes a la misma unidad."], etq:"⚠️ Error 2"}

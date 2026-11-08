@@ -193,6 +193,12 @@ TEMA.registrar({
         res:"<b>22 obreros</b>"}}
     ]},
 
+    { titulo:"🪄 Trucos para ir más rápido", cuerpo:[
+      {truco:[R`<b>Tapa con la mano</b> las columnas que no estás mirando y compara solo una con la de la $x$.`], etq:"🪄 Truco 1"},
+      {truco:[R`<b>Simplifica antes de multiplicar:</b> en $\dfrac{12}{10} \cdot \dfrac{10}{8}$ el 10 de arriba y el de abajo se van → queda $\dfrac{12}{8}$.`], etq:"🪄 Truco 2"},
+      {truco:[R`<b>Comprueba con el «trabajo total»:</b> 10 obreros × 8 h × 12 días = 960 horas de trabajo. 12 obreros × 10 h = 120 horas cada día → $960 : 120 = 8$ días ✓`], etq:"🪄 Truco 3"}
+    ]},
+
     { titulo:"⚠️ Errores típicos", cuerpo:[
       {aviso:["<b>Comparar dos columnas entre sí</b> en lugar de cada una con la de la <i>x</i>."], etq:"⚠️ Error 1"},
       {aviso:["<b>Darle la vuelta a la fracción de la <i>x</i></b>. En la compuesta, la <i>x</i> se queda igual; solo se da la vuelta a las <b>I</b>."], etq:"⚠️ Error 2"},
