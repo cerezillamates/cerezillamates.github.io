@@ -6,7 +6,7 @@ TEMA.info = {
   tema: "Tema 3 · Proporcionalidad y problemas aritméticos",
   apartados: [
     {num:1, titulo:"Razón y proporción", desc:"Razón, proporción, propiedad fundamental, cuarto y medio proporcional.", listo:true},
-    {num:2, titulo:"Proporcionalidad directa", desc:"Constante, regla de tres, reducción a la unidad, escalas y divisas."},
+    {num:2, titulo:"Proporcionalidad directa", desc:"Constante, regla de tres, reducción a la unidad, escalas y divisas.", listo:true},
     {num:3, titulo:"Proporcionalidad inversa", desc:"Constante, regla de tres inversa y reducción a la unidad."},
     {num:4, titulo:"Proporcionalidad compuesta", desc:"Tres magnitudes: tabla con flechas D o I."},
     {num:5, titulo:"Repartos proporcionales", desc:"Reparto directo e inverso."},

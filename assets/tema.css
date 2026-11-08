@@ -273,3 +273,4 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 .cadena .caja small{color:var(--muted);font-size:.7em;font-weight:700}
 .cadena .op{display:grid;text-align:center;font-weight:800;color:var(--amb);font-size:.85em;line-height:1.1}
 .cadena .op i{font-style:normal;color:var(--ind);letter-spacing:-2px}
+.tablas{display:flex;gap:1em;flex-wrap:wrap;justify-content:center;align-items:flex-start}.tablas>div{text-align:center}
