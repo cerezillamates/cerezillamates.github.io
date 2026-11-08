@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tema 3 · Proporcionalidad · 3.º ESO · Mercedes Cerezo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="../../assets/tema.css">
+<script src="info.js"></script>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../3eso.html">3.º ESO</a></nav>
+  <div class="kicker">3.º ESO · Tema 3</div>
+  <h1>Proporcionalidad y problemas aritméticos</h1>
+  <p class="lead">Razones, regla de tres, repartos, interés, porcentajes, grifos y móviles. En clase usa <b>Proyectar</b>; en casa, <b>Estudiar</b>.</p>
+</div></header>
+<div class="wrap">
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div id="paneles"></div>
+
+  <p style="margin-top:22px;font-size:.9rem;color:var(--muted)">¿Buscas la versión anterior del tema? <a href="../../Proporcionalidad%203%C2%BA%20ESO/index.html">Apuntes interactivos (versión anterior)</a>.</p>
+</div>
+<script>
+const SECC = [
+  {id:"apuntes", t:"📘 Apuntes"},
+  {id:"clase", t:"🧑‍🏫 Actividades de clase", d:"Unos 5 ejercicios por apartado, de uno en uno, con cronómetro y soluciones paso a paso."},
+  {id:"tareas", t:"🏠 Tareas para casa", d:"Ejercicios graduados por dificultad con sus soluciones."},
+  {id:"repaso", t:"📋 Repaso para el control", d:"Ejercicios de todo el tema y modelos de control resueltos."},
+  {id:"autoeval", t:"✅ Autoevaluación", d:"Test, verdadero/falso y respuesta numérica con corrección automática."},
+  {id:"situacion", t:"🌍 Situación de aprendizaje", d:"Un reto en un contexto real para aplicar todo el tema."},
+  {id:"ampliacion", t:"🧠 Ampliación y retos", d:"Problemas de ingenio, razonamiento y estilo olimpiada."}
+];
+const tabs = document.getElementById("tabs"), pan = document.getElementById("paneles");
+SECC.forEach((s,i)=>{
+  tabs.insertAdjacentHTML("beforeend",`<button role="tab" id="t-${s.id}" aria-controls="p-${s.id}" aria-selected="${i===0}">${s.t}</button>`);
+  let h;
+  if(s.id==="apuntes"){
+    h = `<div class="aps">` + TEMA.info.apartados.map(a=>`<div class="ap ${a.listo?"":"prox"}">
+      <span class="n">${a.num}</span><div><h3>${a.titulo}</h3><p>${a.desc}</p></div>
+      <div class="acts">${a.listo
+        ? `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Proyectar</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a>`
+        : `<span class="prox-tag">En preparación</span>`}</div></div>`).join("") + `</div>`;
+  } else {
+    h = `<p><b>${s.t}</b></p><p style="color:var(--muted)">${s.d}</p><p class="prox-tag" style="display:inline-block">En preparación</p>`;
+  }
+  pan.insertAdjacentHTML("beforeend",`<div class="panel" role="tabpanel" id="p-${s.id}" aria-labelledby="t-${s.id}" ${i?"hidden":""}>${h}</div>`);
+});
+function abrir(id){
+  SECC.forEach(s=>{ document.getElementById("t-"+s.id).setAttribute("aria-selected", s.id===id); document.getElementById("p-"+s.id).hidden = s.id!==id; });
+  history.replaceState(null,"","#"+id);
+}
+tabs.addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) abrir(b.id.slice(2)); });
+if(SECC.some(s=>"#"+s.id===location.hash)) abrir(location.hash.slice(1));
+</script>
+</body>
+</html>
