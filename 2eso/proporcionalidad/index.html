@@ -24,6 +24,13 @@
   <p style="margin-top:22px;font-size:.9rem;color:var(--muted)">¿Buscas la versión anterior del tema? <a href="../../Proporcionalidad_2ESO.html">Apuntes interactivos (versión anterior)</a>.</p>
 </div>
 <script>
+const EXTRA = {
+  repaso: [["R","Repaso y modelo de control 1","Qué entra, cómo reconocer cada problema y el mapa del tema. Modelo de control con cronómetro y corrección; ejercicios de repaso para casa.",[["🖥 Explicar","apuntes.html?ap=20&modo=proyectar","main"],["✏️ Modelo de control 1","clase.html?ap=20","verde"],["🏠 Ejercicios de repaso","tareas.html?ap=20"]]],
+           ["C2","Modelo de control 2","Otro control completo para practicar, con la solución paso a paso.",[["✏️ Proyectar","clase.html?ap=21","verde"],["🏠 Hacerlo en casa","tareas.html?ap=21"]]]],
+  autoeval: [["✅","Autoevaluación del tema","Test, verdadero o falso y respuesta numérica. Te corrige al momento, explica los errores y te da la nota final.",[["Empezar","apuntes.html?ap=22","main"]]]],
+  situacion: [["SA","Organizamos un viaje","Autobús, bocadillos, albergue, descuentos y la rifa: dos niveles de actividades con solución.",[["🖥 Presentar","apuntes.html?ap=23&modo=proyectar","main"],["✏️ Actividades","clase.html?ap=23","verde"],["🏠 En casa","tareas.html?ap=23"]]]],
+  ampliacion: [["★","Retos y estrategias","Problemas de ingenio y estilo olimpiada para pensar con calma.",[["🖥 Estrategias","apuntes.html?ap=24&modo=proyectar","main"],["✏️ Retos en clase","clase.html?ap=24","verde"],["🏠 Retos para casa","tareas.html?ap=24"]]]]
+};
 const SECC = [
   {id:"apuntes", t:"📘 Apuntes"},
   {id:"clase", t:"🧑‍🏫 Actividades de clase", d:"Primero todos los enunciados juntos con cronómetro; después la corrección de uno en uno con la solución paso a paso."},
@@ -47,6 +54,8 @@ SECC.forEach((s,i)=>{
     h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn verde" href="clase.html?ap=${a.num}">✏️ Proyectar ejercicios</a>`);
   } else if(s.id==="tareas"){
     h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn main" href="tareas.html?ap=${a.num}">🏠 Abrir tareas</a>`);
+  } else if(EXTRA[s.id]){
+    h = `<p class="guia">${s.d}</p><div class="aps">` + EXTRA[s.id].map((x,k)=>`<div class="ap"><span class="n">${x[0]}</span><div><h3>${x[1]}</h3><p>${x[2]}</p></div><div class="acts">${x[3].map(b=>`<a class="btn ${b[2]||""}" href="${b[1]}">${b[0]}</a>`).join("")}</div></div>`).join("") + `</div>`;
   } else {
     h = `<p><b>${s.t}</b></p><p style="color:var(--muted)">${s.d}</p><p class="prox-tag" style="display:inline-block">En preparación</p>`;
   }

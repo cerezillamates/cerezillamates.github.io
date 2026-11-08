@@ -75,6 +75,8 @@ document.addEventListener("click", ev=>{
     if(isNaN(v)){ fb.className="fb mal"; fb.innerHTML="Escribe un número (puedes usar coma decimal)."; return; }
     ok = [].concat(c.sol).some(s=>Math.abs(v - s) <= (c.tol ?? 0.005));
   }
+  TEMA._res = TEMA._res || {};
+  if(TEMA._res[b.dataset.c] === undefined){ TEMA._res[b.dataset.c] = ok; if(TEMA.marcador) TEMA.marcador(); }
   fb.className = "fb " + (ok ? "ok" : "mal");
   fb.innerHTML = (ok ? "✅ <b>¡Bien!</b> " : "❌ <b>Todavía no.</b> ") + tx(ok ? c.explic : (c.pista || c.explic));
 });
@@ -111,7 +113,14 @@ function encajar(z, lam){
 
 function arrancar(){
   const ap = TEMA.ap;
-  document.title = `${ap.num}. ${ap.titulo} · ${TEMA.info.curso}`;
+  // apartados numerados (1, 2…) o secciones especiales (repaso, autoevaluación…) con num de texto
+  const esNum = typeof ap.num === "number";
+  ap._nt = esNum ? `${ap.num}. ${ap.titulo}` : ap.titulo;
+  ap._ap = esNum ? `Apartado ${ap.num}` : (ap.seccion || ap.titulo);
+  ap._del = esNum ? `del apartado ${ap.num}` : `de «${ap.titulo}»`;
+  ap._pre = esNum ? `${ap.num}.` : (ap.pref ? `${ap.pref}.` : "");
+  ap._numSpan = esNum ? `<span class="num">${ap.num}.</span> ` : "";
+  document.title = `${ap._nt} · ${TEMA.info.curso}`;
   if(MODO === "proyectar") proyectar(ap);
   else if(MODO === "clase") clase(ap);
   else if(MODO === "casa") casa(ap);
@@ -125,21 +134,33 @@ function estudiar(ap){
   const portada = ap.laminas.find(l=>l.portada);
   let h = `<header class="hero"><div class="wrap">
     <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../${TEMA.info.cursoUrl||"3eso.html"}">${TEMA.info.curso}</a><span>›</span><a href="./">${TEMA.info.tema}</a></nav>
-    <div class="kicker">Apuntes · Apartado ${ap.num}</div>
-    <h1>${ap.num}. ${ap.titulo}</h1>
+    <div class="kicker">Apuntes · ${ap._ap}</div>
+    <h1>${ap._nt}</h1>
     <div class="est-cab"><a class="btn main" href="${url("proyectar")}">🖥 Proyectar en clase</a><button class="btn" onclick="print()">🖨 Imprimir</button>
       <details class="ind" ${innerWidth>700?"open":""}><summary>Índice del apartado</summary><div class="indice">${secs.map((l,i)=>`<a href="#s${i+1}">${tx(l.titulo)}</a>`).join("")}</div></details></div>
   </div></header><div class="wrap">`;
   if(portada) h += `<section class="est-sec">${portada.cuerpo.map(b=>bloque(b,"estudiar")).join("")}</section>`;
   secs.forEach((l,i)=>{
-    h += `<section class="est-sec" id="s${i+1}"><h2><small>${ap.num}.${i+1}</small>${tx(l.titulo)}</h2>${l.cuerpo.map(b=>bloque(b,"estudiar")).join("")}</section>`;
+    h += `<section class="est-sec" id="s${i+1}"><h2><small>${ap._pre}${i+1}</small>${tx(l.titulo)}</h2>${l.cuerpo.map(b=>bloque(b,"estudiar")).join("")}</section>`;
   });
   if(ap.videos && ap.videos.length){
     h += `<section class="est-sec"><h2>▶ Vídeos explicativos</h2><div class="video">${ap.videos.map(v=>`<a class="btn" href="${v.url}" target="_blank" rel="noopener">▶ ${v.t}</a>`).join("")}</div></section>`;
   }
   h += camino(ap, "estudiar") + `</div>`;
   h += `<a class="arriba" href="#" aria-label="Volver arriba">↑</a>`;
+  if(ap.autoeval) h += `<div class="marcador" id="marc"></div>`;
   document.body.innerHTML = h;
+  if(ap.autoeval){
+    const N = Object.keys(TEMA._comp||{}).length;
+    TEMA.marcador = ()=>{
+      const r = Object.values(TEMA._res||{}), hechas = r.length, bien = r.filter(Boolean).length;
+      const fin = hechas === N;
+      document.getElementById("marc").innerHTML = `<b>${fin?"🏁 Resultado final":"📊 Tu marcador"}</b><span>Respondidas: ${hechas} / ${N}</span><span>Bien a la primera: <b>${bien}</b></span>` +
+        (fin ? `<span class="nota">Nota: <b>${(bien/N*10).toFixed(1).replace(".",",")}</b> / 10</span>` : "") +
+        `<button class="btn" onclick="location.reload()">🔄 Repetir</button>`;
+    };
+    TEMA.marcador();
+  }
   if(location.hash.length > 1){ const d = document.getElementById(location.hash.slice(1)); if(d) setTimeout(()=>d.scrollIntoView(), 50); }
 }
 
@@ -150,7 +171,7 @@ function proyectar(ap){
   let i = Math.min(Math.max(parseInt(location.hash.slice(1)||"1",10)-1,0), L.length-1);
   document.body.innerHTML = `<div class="proy-app">
     <header class="proy-cab"><div class="linea"><a href="${url("estudiar")}" title="Salir del modo proyectar">✕</a>
-      <span>${TEMA.info.curso} · ${ap.num}. ${ap.titulo}</span><span class="sp"></span><span id="cont" class="cont" style="color:#fff"></span></div>
+      <span>${TEMA.info.curso} · ${ap._nt}</span><span class="sp"></span><span id="cont" class="cont" style="color:#fff"></span></div>
       <h2 id="tit"></h2><div class="barra"><i id="bar"></i></div></header>
     <div class="lamina-zona" id="zona"><div class="lamina" id="lam"></div></div>
     <div class="proy-bot">
@@ -171,7 +192,7 @@ function proyectar(ap){
     const l = L[i];
     $("tit").innerHTML = l.portada ? TEMA.info.tema : tx(l.titulo);
     $("lam").innerHTML = l.portada
-      ? `<div class="portada"><h2><span class="num">${ap.num}.</span> ${ap.titulo}</h2>${l.cuerpo.map(b=>bloque(b,"proyectar")).join("")}</div>`
+      ? `<div class="portada"><h2>${ap._numSpan}${ap.titulo}</h2>${l.cuerpo.map(b=>bloque(b,"proyectar")).join("")}</div>`
       : l.cuerpo.map(b=>bloque(b,"proyectar")).join("");
     $("lam").querySelectorAll(".paso").forEach(p=>p.classList.add("oculto"));
     $("zona").scrollTop = 0;
@@ -271,7 +292,7 @@ function clase(ap){
   if(isNaN(i)) i = -1;
   document.body.innerHTML = `<div class="proy-app">
     <header class="proy-cab"><div class="linea"><a href="./" title="Volver al tema">✕</a>
-      <span>✏️ Ejercicios de clase · ${ap.num}. ${ap.titulo}</span><span class="sp"></span><span id="cont" class="cont" style="color:#fff"></span></div>
+      <span>✏️ Ejercicios de clase · ${ap._nt}</span><span class="sp"></span><span id="cont" class="cont" style="color:#fff"></span></div>
       <div class="cab-fila"><h2 id="tit"></h2>
         <div class="crono" id="crono" title="Cronómetro: una ayuda para organizarse, no un límite">
           <button id="cMenos" aria-label="Un minuto menos">−</button><span id="cT">00:00</span><button id="cMas" aria-label="Un minuto más">+</button>
@@ -303,22 +324,22 @@ function clase(ap){
   const nivel = e => e.nivel ? `<span class="nivel n-${e.nivel.toLowerCase()}">${e.nivel}</span>` : "";
   function ocultos(){ return [...lam.querySelectorAll(".paso.oculto")]; }
   function pintar(){
-    $("cont").textContent = i<0 ? "Enunciados" : i<E.length ? `Corrección ${ap.num}.${i+1} · ${i+1} de ${E.length}` : "✓";
+    $("cont").textContent = i<0 ? "Enunciados" : i<E.length ? `Corrección ${ap._pre}${i+1} · ${i+1} de ${E.length}` : "✓";
     $("bar").style.width = (i<0 ? 0 : Math.min(i+1,E.length)/E.length*100)+"%";
     history.replaceState(null,"", i<0 ? "#todos" : "#"+(i+1));
     if(i<0){
       $("tit").innerHTML = `Ejercicios <span class="de">· ${E.length} ejercicios · unos ${minTotal} min</span>`;
-      lam.innerHTML = `<div class="todos">${E.map((e,k)=>`<div class="t-ej"><div class="t-cab"><span class="t-n">${ap.num}.${k+1}</span>${nivel(e)}</div><div>${tx(e.enun)}</div></div>`).join("")}</div>`;
+      lam.innerHTML = `<div class="todos">${E.map((e,k)=>`<div class="t-ej"><div class="t-cab"><span class="t-n">${ap._pre}${k+1}</span>${nivel(e)}</div><div>${tx(e.enun)}</div></div>`).join("")}</div>`;
     } else if(i===E.length){
       $("tit").innerHTML = "¡Corrección terminada!";
       const sig = siguienteAp();
-      lam.innerHTML = `<div class="final-act"><div class="gran">🎉</div><p>Habéis hecho y corregido los <b>${E.length} ejercicios de clase</b> del apartado ${ap.num}.</p>
+      lam.innerHTML = `<div class="final-act"><div class="gran">🎉</div><p>Habéis hecho y corregido los <b>${E.length} ejercicios de clase</b> ${ap._del}.</p>
         <div class="final-bot">${ap.casa?`<a class="pb paso-b" href="${url("casa")}">🏠 Tareas para casa</a>`:""}
         <a class="pb" href="${url("proyectar")}">📘 Repasar la explicación</a>
         ${sig?`<a class="pb prim" href="apuntes.html?ap=${sig.num}&modo=proyectar">Apartado ${sig.num} ▶</a>`:""}</div></div>`;
     } else {
       const e = E[i];
-      $("tit").innerHTML = `Corrección · Ejercicio ${ap.num}.${i+1} ${nivel(e)}`;
+      $("tit").innerHTML = `Corrección · Ejercicio ${ap._pre}${i+1} ${nivel(e)}`;
       lam.innerHTML = `<div class="enun-act">${tx(e.enun)}</div>
         <div class="sol-act"><span class="etq">✅ Solución</span>
           <ol class="pasos">${(e.pasos||[]).map(p=>`<li class="paso oculto"><span>${tx(p)}</span></li>`).join("")}</ol>
@@ -367,21 +388,24 @@ function clase(ap){
 
 /* ===================== TAREAS PARA CASA ===================== */
 function casa(ap){
-  const E = ap.casa || [];
+  const E = ap.casa || ap.clase || [];
   document.body.className = "estudio casa";
   const NIV = [["Básico","🟢 Ejercicios básicos"],["Consolidación","🔵 Para consolidar"],["Problema","🟠 Problemas"],["Para pensar","🔴 Para pensar más"]];
   let h = `<header class="hero"><div class="wrap">
     <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../${TEMA.info.cursoUrl||"3eso.html"}">${TEMA.info.curso}</a><span>›</span><a href="./">${TEMA.info.tema}</a></nav>
-    <div class="kicker">🏠 Tareas para casa · Apartado ${ap.num}</div>
-    <h1>${ap.num}. ${ap.titulo}</h1>
+    <div class="kicker">🏠 Tareas para casa · ${ap._ap}</div>
+    <h1>${ap._nt}</h1>
     <p class="lead">Hazlos en tu cuaderno y después comprueba. Si te atascas, abre la solución <b>paso a paso</b>: mira solo el primer paso e intenta seguir tú.</p>
     <div class="est-cab"><a class="btn main" href="${url("estudiar")}">📘 Repasar la explicación</a><button class="btn" onclick="print()">🖨 Imprimir</button></div>
   </div></header><div class="wrap">`;
   let n = 0;
-  NIV.forEach(([k,t])=>{
-    const L = E.filter(e=>(e.nivel||"Básico")===k); if(!L.length) return;
+  // niveles propios (Reto, N1, 1 punto…) después de los habituales, en el orden en que aparecen
+  const propios = [...new Set(E.map(e=>e.nivel||"Básico"))].filter(k=>!NIV.some(x=>x[0]===k)).map(k=>[k,"⭐ "+k]);
+  const unico = !E.some(e=>NIV.some(x=>x[0]===(e.nivel||"Básico"))) && ap.casa === undefined;
+  (unico ? [["*", "📝 Ejercicios"]] : NIV.concat(propios)).forEach(([k,t])=>{
+    const L = k==="*" ? E : E.filter(e=>(e.nivel||"Básico")===k); if(!L.length) return;
     h += `<section class="est-sec"><h2>${t}</h2>` + L.map(e=>{ n++; return `<div class="tarea" id="t${n}">
-      <div class="t-enun"><span class="t-num">${ap.num}.${n}</span><div>${tx(e.enun)}</div></div>
+      <div class="t-enun"><span class="t-num">${ap._pre}${n}</span><div>${tx(e.enun)}</div></div>
       <div class="t-bot"><button class="btn t-paso" data-t="${n}">👣 Ver el primer paso</button><button class="btn t-todo" data-t="${n}">Ver toda la solución</button></div>
       <div class="t-sol" hidden><ol class="pasos">${(e.pasos||[]).map(p=>`<li class="paso oculto"><span>${tx(p)}</span></li>`).join("")}</ol>${e.res?`<div class="res paso oculto">${tx(e.res)}</div>`:""}</div></div>`; }).join("") + `</section>`;
   });

@@ -301,3 +301,10 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 .pl-tab th{background:var(--ind-bg);color:var(--ind)}
 .pl-tab td.max{background:var(--ok-bg);font-weight:900;color:var(--ok)}
 .pl-tab td.min{background:var(--rose-bg);font-weight:900;color:var(--rose)}
+
+/* ---------- Autoevaluación: marcador fijo ---------- */
+.marcador{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:20;display:flex;gap:.9em;align-items:center;flex-wrap:wrap;justify-content:center;
+  background:var(--card);border:2px solid var(--ind);border-radius:16px;padding:.45em .9em;box-shadow:var(--sombra);font-size:.92rem;max-width:calc(100% - 24px)}
+.marcador .nota{background:var(--ok-bg);color:var(--ok);padding:.1em .6em;border-radius:10px}
+.marcador .btn{padding:.25em .8em}
+body.estudio:has(.marcador) .wrap{padding-bottom:110px}
