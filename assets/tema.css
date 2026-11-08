@@ -230,3 +230,8 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 .cuadro th.fl{background:var(--ind);color:#fff;font-size:.85em}
 .cuadro td.x{color:var(--amb);font-weight:900}
 .pasos li table.t{box-shadow:none;border:2px solid var(--ind-bg)}
+/* cuadro de la compuesta: flecha D o I de cada columna hacia la x */
+.cmp th{text-align:center!important}
+.cmp tr.rel td{padding:.1em .5em;border-bottom:none}
+.cmp .rD,.cmp .rI,.cmp .rx{display:inline-block;font:900 .75em var(--f-b);padding:.1em .6em;border-radius:999px;color:#fff}
+.cmp .rD{background:var(--ok)} .cmp .rI{background:var(--rose)} .cmp .rx{background:var(--amb-hi)}
