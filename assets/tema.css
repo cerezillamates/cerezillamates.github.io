@@ -278,7 +278,7 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 /* ---------- Programación lineal: gráficas sincronizadas con los pasos ---------- */
 .lamina svg .paso.oculto,.lamina .paso.oculto{visibility:hidden}
 .lamina svg .paso.nuevo{animation:entra .35s ease-out}
-.pl-fig{margin:0 auto;width:100%;max-width:24em;text-align:center}
+.pl-fig{margin:0 auto;width:100%;max-width:30em;text-align:center}
 .pl-fig svg{width:100%;height:auto;display:block;font-family:var(--f-b);background:#fff;border-radius:14px;border:2px solid var(--line)}
 .pl-fig svg text{font-size:17px;fill:#1e1b3a}
 .pl-fig svg text.ej{font:italic 800 19px var(--f-b)}
@@ -308,3 +308,10 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
 .marcador .nota{background:var(--ok-bg);color:var(--ok);padding:.1em .6em;border-radius:10px}
 .marcador .btn{padding:.25em .8em}
 body.estudio:has(.marcador) .wrap{padding-bottom:110px}
+
+.pl-paso{display:inline-block;background:var(--ind);color:#fff;border-radius:10px;padding:.05em .5em;font-size:.8em;margin-right:.3em;vertical-align:.08em}
+.pl-ruta{display:flex;flex-wrap:wrap;gap:.35em;align-items:center;justify-content:center;font-weight:800;font-size:.85em;margin-top:.4em}
+.pl-ruta span{background:var(--ind-bg);color:var(--ind);border-radius:999px;padding:.2em .7em}
+.pl-ruta i{color:var(--muted);font-style:normal}
+.pl-recta{border-left:5px solid var(--c,var(--ind));padding:.15em .6em;margin:.25em 0;background:#fff;border-radius:6px}
+.pl-vt td{font-size:.8em;padding:.2em .45em}

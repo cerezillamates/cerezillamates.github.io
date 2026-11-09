@@ -308,7 +308,7 @@ table.dt td,table.dt th{border:1px solid var(--line);padding:4px 10px}
     <select id="fl" aria-label="Tipo"><option value="">Todos los tipos</option></select>
     <select id="fn" aria-label="Dificultad"><option value="">Cualquier dificultad</option><option value="1">B• mínima</option><option value="2">B•• media</option><option value="3">B••• alta</option></select>
     <label class="row" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="fp"> Solo pendientes</label>
-    <span class="count" id="cnt"></span>
+    <button class="proy-btn" id="azar" title="Proyectar un ejercicio al azar de los filtrados">🎲 Uno al azar</button><span class="count" id="cnt"></span>
   </div>
   <div id="list" style="display:grid;gap:12px"></div>
 </section>
@@ -422,13 +422,14 @@ function renderList(){
   const xs = EX.filter(e => (!g || e.g === g) && (!c || e.c === c) && (!l || e.L.includes(l)) && (!n || String(e.lv) === n) && (!p || !DONE.has(e.n)) &&
                        (!q || (e.n + ' ' + e.h + ' ' + e.s + ' ' + e.b).toLowerCase().includes(q)));
   $('#cnt').textContent = xs.length + ' ejercicios';
+  window.XS = xs;
   let lastG = '';
   $('#list').innerHTML = xs.map(e => {
     let head = '';
     if (e.g !== lastG){ lastG = e.g; head = `<h2 style="font-size:1.2rem;margin-top:6px">${esc(e.g)}</h2>`; }
     return head + `<article class="card ex" id="ex${e.n}" data-n="${e.n}">
       <div class="hd"><span class="num">nº ${e.n}</span><span class="ttl">${esc(e.h)}</span><span class="codes">[${code(e)}]</span>
-      <span class="sp">${e.u ? `<a href="${esc(e.u)}" target="_blank" rel="noopener">Solución</a>` : ''}<label style="display:flex;gap:5px;align-items:center"><input type="checkbox" data-done="${e.n}"> Hecho</label></span></div>
+      <span class="sp"><button class="proy-btn" data-proy="${e.n}" title="Proyectar a pantalla completa con cronómetro">🖥 Proyectar</button>${e.u ? `<a href="${esc(e.u)}" target="_blank" rel="noopener">Solución</a>` : ''}<label style="display:flex;gap:5px;align-items:center"><input type="checkbox" data-done="${e.n}"> Hecho</label></span></div>
       <div class="body">${e.b}</div></article>`; }).join('');
   $$('#list img[data-k]').forEach(i => { i.src = DATA.imgs[i.dataset.k]; });
   rendered = true; refreshDone();
@@ -548,5 +549,76 @@ function draw4(){
 drawHero(); draw1(); draw2(); draw4(); route(); refreshDone();
 </script>
 
+
+<style>
+.proy-btn{font:700 .9rem var(--f-body);padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.proy-btn:hover{border-color:var(--acc);color:var(--acc)}
+#proy{position:fixed;inset:0;z-index:50;background:#fbfaf7;display:grid;grid-template-rows:auto 1fr auto;color:#1b1b1f}
+#proy[hidden]{display:none}
+#proy .pt{display:flex;gap:14px;align-items:center;padding:12px 22px;background:#1e1b3a;color:#fff;font:700 1.1rem var(--f-body);flex-wrap:wrap}
+#proy .pt .n{font:800 1.4rem var(--f-mono);color:#fbbf24}
+#proy .pt .s{opacity:.85;font-weight:600}
+#proy .pt .der{margin-left:auto;display:flex;gap:8px;align-items:center}
+#proy .pb{overflow:hidden;padding:2.2vh 4vw;line-height:1.45;font-family:var(--f-body)}
+#proy .pb img{max-width:100%;max-height:45vh;display:block;margin:.4em auto}
+#proy .pb p{margin:.35em 0}
+#proy .pf{display:flex;gap:10px;justify-content:center;align-items:center;padding:10px;border-top:1px solid #e5e2da;flex-wrap:wrap}
+#proy button,#proy a.b{font:700 1.05rem var(--f-body);padding:8px 16px;border-radius:999px;border:1px solid #d6d3cc;background:#fff;color:#1b1b1f;cursor:pointer;text-decoration:none}
+#proy button.main{background:#4338ca;color:#fff;border-color:#4338ca}
+#proy .crono{font:800 1.6rem var(--f-mono);padding:2px 14px;border-radius:12px;background:#fff;color:#1e1b3a;min-width:5.5ch;text-align:center}
+#proy .crono.extra{background:#fde68a}
+#proy .crono.fin{background:#fecaca}
+</style>
+<div id="proy" hidden role="dialog" aria-label="Ejercicio a pantalla completa">
+  <div class="pt"><span class="n" id="pn"></span><span class="s" id="ps"></span>
+    <span class="der"><button id="pmenos" title="Quitar 5 minutos">−5</button><span class="crono" id="pcr">20:00</span><button id="pmas" title="Añadir 5 minutos">+5</button><button id="pplay" class="main">▶ Empezar</button><button id="preset" title="Reiniciar">↺</button></span></div>
+  <div class="pb" id="pb"></div>
+  <div class="pf"><button id="pant">◀ Anterior</button><button id="pazar">🎲 Otro al azar</button><a class="b" id="psol" target="_blank" rel="noopener">Ver la solución</a><button id="pfull">⛶ Pantalla completa</button><button id="pnext">Siguiente ▶</button><button id="pcerrar">✕ Cerrar</button></div>
+</div>
+<script>
+/* ---------- modo proyección del buscador: un ejercicio a pantalla completa, letra grande y cronómetro ---------- */
+(function(){
+  const P = document.getElementById('proy'), B = document.getElementById('pb');
+  let cur = null, min = 20, rest = 1200, run = null;
+  const lista = () => (window.XS && window.XS.length ? window.XS : EX);
+  const fmt = t => { const a = Math.abs(t); return (t < 0 ? '+' : '') + String(Math.floor(a/60)).padStart(2,'0') + ':' + String(a%60).padStart(2,'0'); };
+  function pintaCrono(){ const c = document.getElementById('pcr'); c.textContent = fmt(rest); c.classList.toggle('extra', rest < 0); c.classList.toggle('fin', rest >= 0 && rest <= 60); }
+  function para(){ clearInterval(run); run = null; document.getElementById('pplay').textContent = '▶ Seguir'; }
+  function reinicia(){ clearInterval(run); run = null; rest = min*60; pintaCrono(); document.getElementById('pplay').textContent = '▶ Empezar'; }
+  function ajusta(){ // letra lo más grande posible sin que haga falta desplazarse
+    let lo = 14, hi = 64;
+    for (let k = 0; k < 12; k++){ const m = (lo+hi)/2; B.style.fontSize = m + 'px'; (B.scrollHeight <= B.clientHeight) ? lo = m : hi = m; }
+    B.style.fontSize = lo + 'px';
+  }
+  function abre(n){
+    const e = BYN[n]; if (!e) return; cur = n;
+    document.getElementById('pn').textContent = 'nº ' + e.n; document.getElementById('ps').textContent = e.h + ' · [' + code(e) + ']';
+    B.innerHTML = e.b; B.querySelectorAll('img[data-k]').forEach(i => { i.src = DATA.imgs[i.dataset.k]; i.onload = ajusta; });
+    const s = document.getElementById('psol'); s.style.display = e.u ? '' : 'none'; if (e.u) s.href = e.u;
+    P.hidden = false; document.body.style.overflow = 'hidden'; reinicia(); requestAnimationFrame(ajusta);
+  }
+  function cierra(){ P.hidden = true; document.body.style.overflow = ''; para(); if (document.fullscreenElement) document.exitFullscreen(); }
+  function mueve(d){ const L = lista(), i = L.findIndex(e => e.n === cur); const j = i < 0 ? 0 : (i + d + L.length) % L.length; abre(L[j].n); }
+  function azar(){ const L = lista(); abre(L[Math.floor(Math.random()*L.length)].n); }
+  document.addEventListener('click', ev => {
+    const b = ev.target.closest('[data-proy]'); if (b){ ev.preventDefault(); abre(+b.dataset.proy); }
+    if (ev.target.closest('#azar')){ if (!window.XS) renderList(); azar(); }
+  });
+  document.getElementById('pcerrar').onclick = cierra;
+  document.getElementById('pnext').onclick = () => mueve(1);
+  document.getElementById('pant').onclick = () => mueve(-1);
+  document.getElementById('pazar').onclick = azar;
+  document.getElementById('preset').onclick = reinicia;
+  document.getElementById('pmas').onclick = () => { min += 5; rest += 300; pintaCrono(); };
+  document.getElementById('pmenos').onclick = () => { if (min > 5){ min -= 5; rest -= 300; pintaCrono(); } };
+  document.getElementById('pplay').onclick = () => { if (run) return para(); run = setInterval(() => { rest--; pintaCrono(); }, 1000); document.getElementById('pplay').textContent = '⏸ Pausa'; };
+  document.getElementById('pfull').onclick = () => { document.fullscreenElement ? document.exitFullscreen() : P.requestFullscreen && P.requestFullscreen(); };
+  addEventListener('resize', () => { if (!P.hidden) ajusta(); });
+  document.addEventListener('fullscreenchange', () => setTimeout(ajusta, 100));
+  document.addEventListener('keydown', ev => { if (P.hidden) return;
+    if (ev.key === 'Escape') cierra(); else if (ev.key === 'ArrowRight') mueve(1); else if (ev.key === 'ArrowLeft') mueve(-1);
+    else if (ev.key === ' '){ ev.preventDefault(); document.getElementById('pplay').click(); } else if (ev.key === 'f' || ev.key === 'F') document.getElementById('pfull').click(); });
+})();
+</script>
 </body>
 </html>

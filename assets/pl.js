@@ -119,5 +119,83 @@ function pasos(L){
 function tabla(nom, ecu, filas, col){
   return `<table class="t pl-tv" style="--c:${COL[col]||col||COL.r1}"><caption>${nom?`<i>${nom}</i>: `:""}${TEMA.tx(ecu)}</caption><tr><th>x</th><th>y</th></tr>${filas.map(f=>`<tr><td>${TEMA.tx(String(f[0]))}</td><td>${TEMA.tx(String(f[1]))}</td></tr>`).join("")}</table>`;
 }
-window.PL = {fig, pasos, tabla, COL};
+
+/* ---------------------------------------------------------------------------
+   PL.problema(cfg): un problema resuelto con los pasos del examen, UN PASO POR PANTALLA
+   (los pasos de la página de selectividad: 0 plantear · 1 representar · 2 ¿acotada? ·
+   3 vértices · 4 F en los vértices · 5 responder). Devuelve la lista de láminas.
+   --------------------------------------------------------------------------- */
+function problema(c){
+  const tx = TEMA.tx, L = [];
+  const duo = (a, b, r) => `<div class="pl-duo"${r?` style="grid-template-columns:${r}"`:""}><div>${a}</div><div>${b}</div></div>`;
+  const sisTex = l => `$$\\left\\{\\begin{array}{l}${l.join("\\\\")}\\end{array}\\right.$$`;
+  const n = c.rectas.length;
+  const ejes = c.ejes===false ? [] : [{a:1,b:0,c:0,s:">=",flecha:false,col:"#94a3b8"},{a:0,b:1,c:0,s:">=",flecha:false,col:"#94a3b8"}];
+  const base = Object.assign({alt:c.alt||"Región factible"}, c.fig);
+  const R = (ord) => c.rectas.map((r,k)=>Object.assign({}, r, {nom:r.nomFig!==undefined?r.nomFig:r.nom, et:undefined, o:ord?ord(k):undefined, fo:ord?ord(k)+1:undefined}));
+  const VP = (o) => c.verts.map(v=>({x:v.x, y:v.y, t:v.t, lado:v.lado, o}));
+  const etapa = (num, t) => `<span class="pl-paso">PASO ${num}</span> ${t}`;
+  const pre = c.titulo ? c.titulo + " · " : "";
+
+  // enunciado
+  L.push({ titulo: pre + "El problema", cuerpo:[
+    {ej:{etq:c.etq||"📝 Enunciado", enun:c.enun}},
+    {html:`<div class="pl-ruta">${(c.datos||c.incog?["0 Plantear"]:[]).concat(["1 Representar","2 ¿Acotada?","3 Vértices","4 F en los vértices","5 Responder"]).map(x=>`<span>${x}</span>`).join("<i>›</i>")}</div>`}
+  ]});
+
+  // PASO 0
+  if(c.datos) L.push({ titulo: etapa(0, "Plantear: los datos en una tabla"), cuerpo:[
+    {html:`<table class="pl-tab">${`<tr>${c.datos.cab.map(h=>`<th>${tx(h)}</th>`).join("")}</tr>`}${c.datos.filas.map((f,k)=>`<tr class="paso" data-o="${k+1}">${f.map((v,j)=>`<td${j===0?' style="font-weight:800;text-align:left"':""}>${tx(String(v))}</td>`).join("")}</tr>`).join("")}</table>`},
+    {nota:["Primera fila: lo que se maximiza o minimiza. Cada fila de debajo será una <b>restricción</b>."]}
+  ]});
+  if(c.incog) L.push({ titulo: etapa(0, "Plantear: incógnitas, función y restricciones"), cuerpo:[
+    {html: pasos([[1,"<b>Incógnitas</b>: " + c.incog],
+                  [2,`<b>Función objetivo</b>: $${c.F}$ → <b>${c.obj==="MÍN"?"MINIMIZAR":"MAXIMIZAR"}</b>`],
+                  [3,"<b>Restricciones</b>:" + (c.traduce?` ${c.traduce}`:"")]]) +
+           `<div class="paso" data-o="3">${tx(sisTex(c.sis))}</div>`}
+  ]});
+
+  // PASO 1: representar (todo en una pantalla, apareciendo poco a poco)
+  const izq = c.rectas.map((r,k)=>`<div class="pl-recta" style="--c:${COL[r.col||"r"+(k+1)]||r.col}">
+      <div class="paso" data-o="${2*k+1}"><b>${tx("$"+r.nom+"$")}: ${tx("$"+r.ecu+"$")}</b> → ${tx(r.pts)}</div>
+      <div class="paso" data-o="${2*k+2}">Prueba ${tx(r.prueba)}</div></div>`).join("") +
+    `<div class="paso pl-recta" data-o="${2*n+1}">${tx(c.cierre || "Con $x \\ge 0$, $y \\ge 0$ (primer cuadrante), la parte común es la <b>región factible</b>.")}</div>`;
+  L.push({ titulo: etapa(1, "Representar la región factible"), cuerpo:[
+    {html: duo(izq, fig(Object.assign({}, base, {rectas: R(k=>2*k+1).concat(ejes), region: 2*n+1})), "minmax(0,1fr) minmax(0,1.35fr)") }
+  ]});
+
+  // PASO 2: ¿acotada?
+  L.push({ titulo: etapa(2, "¿La región es acotada o no acotada?"), cuerpo:[
+    {html: duo(
+      `<div class="b-${c.acotada===false?"aviso":"prop"}"><span class="etq">${c.acotada===false?"No acotada":"Acotada"}</span><p>${tx(c.acotada===false
+        ? "La región está <b>abierta</b>: se va al infinito. Puede que no haya máximo o mínimo; si existe, está en un vértice. Habrá que comprobarlo."
+        : "La región es un <b>polígono cerrado</b>. Por el teorema, el máximo y el mínimo <b>existen</b> y están en los <b>vértices</b>.")}</p></div>` + (c.p2?`<p>${tx(c.p2)}</p>`:""),
+      fig(Object.assign({}, base, {rectas: R().concat(ejes), region: 0})), "minmax(0,1fr) minmax(0,1.35fr)") }
+  ]});
+
+  // PASO 3: vértices
+  L.push({ titulo: etapa(3, "Calcular los vértices"), cuerpo:[
+    {html: duo(
+      `<table class="pl-tab pl-vt"><tr><th>Vértice</th><th>Sistema</th><th>Resolución</th></tr>${c.verts.map((v,k)=>`<tr class="paso" data-o="${k+1}"><td><b>${v.n}</b></td><td>${tx("$\\left\\{\\begin{array}{l}"+v.sis.join("\\\\")+"\\end{array}\\right.$")}</td><td>${tx(v.res)} → <b>${tx(v.t)}</b></td></tr>`).join("")}</table>` +
+      (c.p3?`<div class="b-aviso paso" data-o="${c.verts.length+1}"><span class="etq">¡Cuidado!</span><p>${tx(c.p3)}</p></div>`:""),
+      fig(Object.assign({}, base, {rectas: R().concat(ejes), region: 0, pts: c.verts.map((v,k)=>({x:v.x,y:v.y,t:v.n,lado:v.lado,o:k+1}))})), "minmax(0,1.2fr) minmax(0,1fr)") }
+  ]});
+
+  // PASO 4: F en los vértices
+  L.push({ titulo: etapa(4, "Valor de la función objetivo en cada vértice"), cuerpo:[
+    {html: duo(
+      `<table class="pl-tab"><tr><th>Vértice</th><th>${tx("$"+c.F+"$")}</th></tr>${c.valores.map((r,k)=>`<tr class="paso" data-o="${k+1}"><td>${tx(r[0])}</td><td class="${r[2]||""}">${tx(r[1])}${r[2]==="max"?" ← máx.":r[2]==="min"?" ← mín.":""}</td></tr>`).join("")}</table>` +
+      (c.p4?`<div class="paso" data-o="${c.valores.length+1}">${tx(c.p4)}</div>`:""),
+      fig(Object.assign({}, base, {rectas: R().concat(ejes), region: 0, pts: VP(0), nivel: c.nivel||[], tramos: c.tramos||[]})), "minmax(0,1fr) minmax(0,1.35fr)") }
+  ]});
+
+  // PASO 5: responder
+  L.push({ titulo: etapa(5, "Responder"), cuerpo: [
+    {html: (c.p5 ? pasos(c.p5) : "") + `<div class="res paso" data-o="${(c.p5||[]).length+1}">${tx(c.respuesta)}</div>`},
+    ...(c.nota5 ? [{nota:[c.nota5]}] : [])
+  ]});
+  return L.concat(c.extra || []);
+}
+window.PL = {fig, pasos, tabla, problema, COL};
+
 })();

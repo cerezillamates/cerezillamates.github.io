@@ -217,14 +217,16 @@ function proyectar(ap){
   }
   new ResizeObserver(()=>ajustar()).observe(document.getElementById("zona"));
   if(document.fonts){ document.fonts.ready.then(ajustar); document.fonts.addEventListener("loadingdone", ajustar); }
+  // al terminar: ejercicios de clase o, si el tema no los tiene, el destino que indique info.final (p. ej. un buscador)
+  const fin = ap.clase ? {t:"✏️ Ejercicios de clase ▶", u:url("clase")} : (TEMA.info.final ? {t:TEMA.info.final.t+" ▶", u:TEMA.info.final.url} : null);
   function actualizar(){
     const n = pasosOcultos().length;
     $("paso").style.display = $("lam").querySelector(".paso") ? "" : "none";
     $("paso").disabled = n===0;
     $("paso").textContent = n ? `👣 Siguiente paso (${n})` : "✓ Todo a la vista";
     const ult = i===L.length-1;
-    $("sig").textContent = ult ? "✏️ Ejercicios de clase ▶" : "▶";
-    $("sig").classList.toggle("ir-clase", ult);
+    $("sig").textContent = ult && fin ? fin.t : "▶";
+    $("sig").classList.toggle("ir-clase", ult && !!fin);
   }
   function verPaso(){
     const p = pasosOcultos()[0]; if(!p) return false;
@@ -234,7 +236,7 @@ function proyectar(ap){
     grupo.forEach(q=>{ q.classList.remove("oculto"); q.classList.add("nuevo"); if(q.tagName==="LI") q.classList.add("actual"); });
     actualizar(); return true;
   }
-  function sig(){ if(i<L.length-1){ i++; pintar(); } else if(ap.clase) location.href = url("clase"); }
+  function sig(){ if(i<L.length-1){ i++; pintar(); } else if(fin) location.href = fin.u; }
   function ant(){ if(i>0){ i--; pintar(); } }
   function avanzar(){ if(!verPaso()) sig(); }
   $("sig").onclick = sig; $("ant").onclick = ant; $("paso").onclick = verPaso;
@@ -275,6 +277,7 @@ function camino(ap, aqui){
     ${paso("estudiar","📘","1. Explicación",url("estudiar"),"Apuntes del apartado")}
     ${ap.clase?paso("clase","✏️","2. Ejercicios de clase",url("clase"),`${ap.clase.length} ejercicios: todos juntos y corrección uno a uno`):""}
     ${ap.casa?paso("casa","🏠","3. Tareas para casa",url("casa"),`${ap.casa.length} ejercicios con soluciones`):""}
+    ${!ap.clase && TEMA.info.final ? paso("fin","🔎","2. "+TEMA.info.final.t,TEMA.info.final.url,TEMA.info.final.d||"") : ""}
   </nav>
   <div class="cam-pie"><a class="btn" href="./">← Volver al tema</a>${sig?`<a class="btn main" href="apuntes.html?ap=${sig.num}">Apartado ${sig.num}: ${sig.titulo} →</a>`:""}</div>`;
 }

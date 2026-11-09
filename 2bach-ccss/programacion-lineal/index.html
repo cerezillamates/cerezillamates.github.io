@@ -15,7 +15,7 @@
   <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a></nav>
   <div class="kicker">2.º Bachillerato CCSS · Tema 3</div>
   <h1>Programación lineal</h1>
-  <p class="lead">Inecuaciones en el plano, región factible, método de los vértices, regiones no acotadas y problemas de enunciado. En clase usa <b>Explicar</b> (cada paso en una pantalla); en casa, <b>Estudiar</b>.</p>
+  <p class="lead">Cada problema resuelto como en el examen, con <b>un paso en cada pantalla</b>: plantear, representar, ¿acotada?, vértices, F en los vértices y responder. Para practicar: el <b>buscador de ejercicios de selectividad</b>.</p>
 </div></header>
 <div class="wrap">
   <div class="tabs" role="tablist" id="tabs"></div>
@@ -26,9 +26,7 @@
 <script>
 const SECC = [
   {id:"apuntes", t:"📘 Apuntes"},
-  {id:"clase", t:"🧑‍🏫 Actividades de clase", d:"Primero todos los enunciados juntos con cronómetro; después la corrección de uno en uno con la solución paso a paso."},
-  {id:"tareas", t:"🏠 Tareas para casa", d:"Ejercicios graduados por dificultad con sus soluciones."},
-  {id:"pau", t:"🎓 Selectividad", d:"Ejercicios de la PAU por tipos, cómo se escribe en el examen y plan de repaso."}
+  {id:"pau", t:"🔎 Ejercicios de selectividad", d:"363 ejercicios de la PAU (2017-2026) para buscar, filtrar y proyectar en clase, con su solución."}
 ];
 const tabs = document.getElementById("tabs"), pan = document.getElementById("paneles");
 SECC.forEach((s,i)=>{
@@ -39,13 +37,13 @@ SECC.forEach((s,i)=>{
       <div class="acts">${a.listo ? fn(a) : `<span class="prox-tag">En preparación</span>`}</div></div>`).join("") + `</div>`;
   if(s.id==="apuntes"){
     h = `<p class="guia">Cada apartado es una sesión: <b>📘 explicación</b> → <b>✏️ ejercicios de clase</b> → <b>🏠 tareas para casa</b>.</p>` + lista(a=>
-      `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Explicar</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a><a class="btn verde" href="clase.html?ap=${a.num}">✏️ Clase</a><a class="btn" href="tareas.html?ap=${a.num}">🏠 Casa</a>`);
+      `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Explicar</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a>`);
   } else if(s.id==="clase"){
     h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn verde" href="clase.html?ap=${a.num}">✏️ Proyectar ejercicios</a>`);
   } else if(s.id==="tareas"){
     h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn main" href="tareas.html?ap=${a.num}">🏠 Abrir tareas</a>`);
   } else if(s.id==="pau"){
-    h = `<p class="guia">${s.d}</p><div class="aps">${[["Tabla de ejercicios tipo","Por comunidad, año y tipo de pregunta.","#tabla"],["Método y examen","Cómo se escribe el ejercicio en el examen y las preguntas típicas.","#teoria"],["363 ejercicios de la PAU","Enunciados de 2017 a 2026.","#ejercicios"],["Plan de repaso","Por tipos y por dificultad.","#repaso"]].map((x,k)=>`<div class="ap"><span class="n">${k+1}</span><div><h3>${x[0]}</h3><p>${x[1]}</p></div><div class="acts"><a class="btn main" href="../../programacion-lineal.html${x[2]}">Abrir</a></div></div>`).join("")}</div>`;
+    h = `<p class="guia">${s.d}</p><div class="aps">${[["🔎 Buscador de ejercicios","Busca por palabra, comunidad, año, tipo y dificultad; proyecta cada ejercicio a pantalla completa con cronómetro, o elige uno al azar.","#ejercicios"],["Tabla de ejercicios tipo","Por comunidad, año y tipo de pregunta.","#tabla"],["Método y examen","Cómo se escribe el ejercicio en el examen y las preguntas típicas.","#teoria"],["Plan de repaso","Por tipos y por dificultad.","#repaso"]].map((x,k)=>`<div class="ap"><span class="n">${k+1}</span><div><h3>${x[0]}</h3><p>${x[1]}</p></div><div class="acts"><a class="btn main" href="../../programacion-lineal.html${x[2]}">Abrir</a></div></div>`).join("")}</div>`;
   } else {
     h = `<p><b>${s.t}</b></p><p style="color:var(--muted)">${s.d}</p><p class="prox-tag" style="display:inline-block">En preparación</p>`;
   }
