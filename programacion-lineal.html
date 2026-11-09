@@ -343,7 +343,7 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const store = { get(){ try { return JSON.parse(localStorage.getItem('pl-hechos') || '[]') } catch(e){ return [] } },
                  set(a){ try { localStorage.setItem('pl-hechos', JSON.stringify(a)) } catch(e){} } };
 let DONE = new Set(store.get());
-const EX = DATA.ex, BYN = Object.fromEntries(EX.map(e => [e.n, e]));
+const EX = DATA.ex, BYN = EX.reduce((o, e) => { o[e.n] = e; return o; }, {});
 const DOTS = {1:'•',2:'••',3:'•••'};
 const code = e => e.L.join('-') + (e.lv ? DOTS[e.lv] : '');
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -396,7 +396,7 @@ $('#tabFilter').addEventListener('click', ev => {
   let h = '<table class="grid"><tr><th>Año</th>' + cols.map(c => `<th>${c[1]}</th>`).join('') + '</tr>';
   years.forEach(y => { h += `<tr><td class="y">${y}</td>` + cols.map(c => { const xs = A.filter(e => e.y === y && e.v === c[0]); return '<td>' + (xs.length ? xs.map(e => chip(e)).join('') : (['ORD','EXT'].includes(c[0]) && y >= 2017 ? '<span class="count">—</span>' : '')) + '</td>'; }).join('') + '</tr>'; });
   $('#tAnd').innerHTML = h + '</table>';
-  const inA = new Set(A.flatMap(e => e.L)), miss = ROWS.map(r => r[0]).filter(k => !inA.has(k));
+  const inA = new Set(A.reduce((acc, e) => acc.concat(e.L), [])), miss = ROWS.map(r => r[0]).filter(k => !inA.has(k));
   $('#missA').innerHTML = '<b>Tipos que no han salido en Andalucía (2017-2026): ' + miss.join(', ') + '.</b> Están en el resto de comunidades: ' + miss.map(k => `<b>${k}</b> ${EX.filter(e => e.L.includes(k)).map(e => chip(e, '', true)).join(' ')}`).join(' · ');
   const coms = ['Aragón','Asturias','Baleares','Canarias','Cantabria','C-La Mancha','C. y León','Cataluña','Extremadura','Galicia','La Rioja','Madrid','Murcia','Navarra','País Vasco','Valencia'];
   h = '<table class="grid"><tr><th rowspan="2">Año</th>' + coms.map(c => `<th colspan="2">${c}</th>`).join('') + '</tr><tr>' + coms.map(() => '<th>ORD</th><th>EXT</th>').join('') + '</tr>';
@@ -612,7 +612,7 @@ drawHero(); draw1(); draw2(); draw4(); route(); refreshDone();
   document.getElementById('pmas').onclick = () => { min += 5; rest += 300; pintaCrono(); };
   document.getElementById('pmenos').onclick = () => { if (min > 5){ min -= 5; rest -= 300; pintaCrono(); } };
   document.getElementById('pplay').onclick = () => { if (run) return para(); run = setInterval(() => { rest--; pintaCrono(); }, 1000); document.getElementById('pplay').textContent = '⏸ Pausa'; };
-  document.getElementById('pfull').onclick = () => { document.fullscreenElement ? document.exitFullscreen() : P.requestFullscreen && P.requestFullscreen(); };
+  document.getElementById('pfull').onclick = () => { const d = document; try { if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d); else (P.requestFullscreen || P.webkitRequestFullscreen).call(P); } catch(e){} };
   addEventListener('resize', () => { if (!P.hidden) ajusta(); });
   document.addEventListener('fullscreenchange', () => setTimeout(ajusta, 100));
   document.addEventListener('keydown', ev => { if (P.hidden) return;

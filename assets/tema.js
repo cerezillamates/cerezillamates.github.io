@@ -73,7 +73,7 @@ document.addEventListener("click", ev=>{
   else {
     const v = num(document.getElementById(b.dataset.c+"-in").value);
     if(isNaN(v)){ fb.className="fb mal"; fb.innerHTML="Escribe un número (puedes usar coma decimal)."; return; }
-    ok = [].concat(c.sol).some(s=>Math.abs(v - s) <= (c.tol ?? 0.005));
+    ok = [].concat(c.sol).some(s=>Math.abs(v - s) <= ((c.tol != null ? c.tol : 0.005)));
   }
   TEMA._res = TEMA._res || {};
   if(TEMA._res[b.dataset.c] === undefined){ TEMA._res[b.dataset.c] = ok; if(TEMA.marcador) TEMA.marcador(); }
@@ -111,6 +111,16 @@ function encajar(z, lam){
   cabe(lo);
 }
 
+
+// pantalla completa compatible con navegadores antiguos (pizarras digitales)
+function pantallaCompleta(){
+  const d = document, e = d.documentElement;
+  const dentro = d.fullscreenElement || d.webkitFullscreenElement || d.msFullscreenElement;
+  try {
+    if(dentro){ (d.exitFullscreen || d.webkitExitFullscreen || d.msExitFullscreen).call(d); }
+    else { const r = (e.requestFullscreen || e.webkitRequestFullscreen || e.msRequestFullscreen).call(e); if(r && r.catch) r.catch(()=>{}); }
+  } catch(err){ /* sin pantalla completa: se usa F11 */ }
+}
 function arrancar(){
   const ap = TEMA.ap;
   // apartados numerados (1, 2…) o secciones especiales (repaso, autoevaluación…) con num de texto
@@ -215,8 +225,8 @@ function proyectar(ap){
     for(let k=0;k<14;k++){ const m=(lo+hi)/2; cabe(m) ? lo=m : hi=m; }
     cabe(lo);
   }
-  new ResizeObserver(()=>ajustar()).observe(document.getElementById("zona"));
-  if(document.fonts){ document.fonts.ready.then(ajustar); document.fonts.addEventListener("loadingdone", ajustar); }
+  if(window.ResizeObserver) new ResizeObserver(()=>ajustar()).observe(document.getElementById("zona")); else addEventListener("resize", ajustar);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(ajustar); if(document.fonts.addEventListener) document.fonts.addEventListener("loadingdone", ajustar); } setTimeout(ajustar, 800);
   // al terminar: ejercicios de clase o, si el tema no los tiene, el destino que indique info.final (p. ej. un buscador)
   const fin = ap.clase ? {t:"✏️ Ejercicios de clase ▶", u:url("clase")} : (TEMA.info.final ? {t:TEMA.info.final.t+" ▶", u:TEMA.info.final.url} : null);
   function actualizar(){
@@ -240,7 +250,7 @@ function proyectar(ap){
   function ant(){ if(i>0){ i--; pintar(); } }
   function avanzar(){ if(!verPaso()) sig(); }
   $("sig").onclick = sig; $("ant").onclick = ant; $("paso").onclick = verPaso;
-  $("fs").onclick = ()=>{ document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(()=>{}); };
+  $("fs").onclick = pantallaCompleta;
   document.addEventListener("keydown", e=>{
     if(e.target.closest("input,textarea")) return;
     if(!$("velo").hidden){ $("velo").hidden = true; return; }
@@ -374,7 +384,7 @@ function clase(ap){
   const sig = ()=>{ if(i<E.length){ i++; pintar(); } }, ant = ()=>{ if(i>=0){ i--; pintar(); } };
   $("sig").onclick = sig; $("ant").onclick = ant; $("paso").onclick = verPaso; $("verTodo").onclick = verTodo;
   $("todos").onclick = ()=>{ i=-1; pintar(); };
-  $("fs").onclick = ()=>{ document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(()=>{}); };
+  $("fs").onclick = pantallaCompleta;
   document.addEventListener("keydown", e=>{
     if(e.target.closest("input,textarea")) return;
     if(e.key==="ArrowRight"||e.key==="PageDown"){ e.preventDefault(); sig(); }
@@ -384,8 +394,8 @@ function clase(ap){
     else if(e.key==="t"||e.key==="T"){ playT(); }
     else if(e.key==="f"||e.key==="F"){ $("fs").click(); }
   });
-  new ResizeObserver(()=>encajar(z, lam)).observe(z);
-  if(document.fonts){ document.fonts.ready.then(()=>encajar(z, lam)); document.fonts.addEventListener("loadingdone", ()=>encajar(z, lam)); }
+  if(window.ResizeObserver) new ResizeObserver(()=>encajar(z, lam)).observe(z); else addEventListener("resize", ()=>encajar(z, lam));
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(()=>encajar(z, lam)); if(document.fonts.addEventListener) document.fonts.addEventListener("loadingdone", ()=>encajar(z, lam)); } setTimeout(()=>encajar(z, lam), 800);
   pintar();
 }
 

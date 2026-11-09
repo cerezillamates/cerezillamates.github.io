@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prueba de la pizarra · Mercedes Cerezo</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<style>
+body{font-family:system-ui,Arial,sans-serif;max-width:900px;margin:20px auto;padding:0 16px;color:#1e1b3a;font-size:20px;line-height:1.45}
+h1{font-size:1.6em} .ok{color:#15803d;font-weight:700} .mal{color:#b91c1c;font-weight:700}
+table{border-collapse:collapse;width:100%} td{border:1px solid #ddd;padding:8px 10px;vertical-align:top}
+#info{background:#eef2ff;border-radius:12px;padding:12px 16px;font-family:monospace;font-size:16px;word-break:break-all}
+a.b{display:inline-block;margin:6px 6px 0 0;padding:10px 16px;border-radius:999px;background:#4338ca;color:#fff;text-decoration:none;font-weight:700}
+.nota{background:#fff7d6;border-radius:12px;padding:10px 16px}
+</style></head><body>
+<h1>🖥 Prueba de la pizarra digital</h1>
+<p>Abre esta página <b>en el navegador de la pizarra</b>. Comprueba qué funciona y envíame una foto de la tabla (o copia el recuadro azul).</p>
+<div id="info">Cargando…</div>
+<table id="t" style="margin-top:14px"></table>
+<p style="margin-top:14px">Fórmula de prueba: <span id="f">x = \dfrac{60 - 2x}{3}</span></p>
+<div class="nota" id="consejo"></div>
+<p><a class="b" href="2bach-ccss/programacion-lineal/apuntes.html?ap=1&modo=proyectar">Probar una presentación de PL</a>
+<a class="b" href="3eso/proporcionalidad/clase.html?ap=1">Probar ejercicios de clase (3.º)</a></p>
+<script src="assets/katex/katex.min.js"></script>
+<script>
+var filas = [], ua = navigator.userAgent, m = ua.match(/(Chrome|Firefox|Edg|Version)\/(\d+)/), ver = m ? parseInt(m[2], 10) : 0;
+function prueba(nombre, fn){ var r; try { r = !!fn(); } catch(e){ r = false; } filas.push([nombre, r]); return r; }
+var js = prueba("JavaScript moderno (operador ??)", function(){ return new Function("var a=null; return (a ?? 1) === 1;")(); });
+prueba("Funciones flecha y plantillas", function(){ return new Function("return (x=>`${x}`)(1)==='1'")(); });
+prueba("Ajuste automático del tamaño (ResizeObserver)", function(){ return !!window.ResizeObserver; });
+prueba("Pantalla completa", function(){ var e=document.documentElement; return !!(e.requestFullscreen||e.webkitRequestFullscreen||e.msRequestFullscreen); });
+prueba("Fuentes web (document.fonts)", function(){ return !!document.fonts; });
+var kt = prueba("Fórmulas matemáticas (KaTeX)", function(){ katex.render(document.getElementById("f").textContent, document.getElementById("f")); return true; });
+prueba("Pantalla táctil", function(){ return ("ontouchstart" in window) || navigator.maxTouchPoints > 0; });
+document.getElementById("t").innerHTML = filas.map(function(f){ return "<tr><td>"+f[0]+"</td><td class='"+(f[1]?"ok":"mal")+"'>"+(f[1]?"✔ Sí":"✘ No")+"</td></tr>"; }).join("");
+document.getElementById("info").textContent = "Navegador: " + ua + " · Pantalla: " + screen.width + "×" + screen.height + " · Ventana: " + innerWidth + "×" + innerHeight + " · Zoom: " + (window.devicePixelRatio||1);
+var c = [];
+if(!js) c.push("El navegador es <b>antiguo</b>. Prueba con otro navegador de la pizarra (Chrome o Edge actualizados) o actualízalo.");
+if(ver && ver < 80 && /Chrome/.test(ua)) c.push("Tu Chrome es la versión " + ver + " (muy antigua). Si se puede, actualiza Chrome o instala otro navegador.");
+if(!kt) c.push("No se dibujan las fórmulas: revisa que la página se ha cargado entera (recarga con Ctrl + F5).");
+if(!c.length) c.push("✅ Todo funciona en este navegador. Si algo falla, recarga con <b>Ctrl + F5</b> (o borra la caché) para que coja la versión nueva.");
+document.getElementById("consejo").innerHTML = c.join("<br>");
+</script>
+</body></html>

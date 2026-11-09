@@ -307,7 +307,7 @@ table.t th{background:var(--ind-bg);color:var(--ind);font-family:var(--f-d);text
   background:var(--card);border:2px solid var(--ind);border-radius:16px;padding:.45em .9em;box-shadow:var(--sombra);font-size:.92rem;max-width:calc(100% - 24px)}
 .marcador .nota{background:var(--ok-bg);color:var(--ok);padding:.1em .6em;border-radius:10px}
 .marcador .btn{padding:.25em .8em}
-body.estudio:has(.marcador) .wrap{padding-bottom:110px}
+body.estudio .wrap{padding-bottom:110px}
 
 .pl-paso{display:inline-block;background:var(--ind);color:#fff;border-radius:10px;padding:.05em .5em;font-size:.8em;margin-right:.3em;vertical-align:.08em}
 .pl-ruta{display:flex;flex-wrap:wrap;gap:.35em;align-items:center;justify-content:center;font-weight:800;font-size:.85em;margin-top:.4em}

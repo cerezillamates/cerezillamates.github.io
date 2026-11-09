@@ -77,11 +77,11 @@ function fig(o){
     if(r.nom || r.et){
       const t = r.pos === undefined ? .86 : r.pos;
       const lx = px(sg[0][0]+(sg[1][0]-sg[0][0])*t), ly = py(sg[0][1]+(sg[1][1]-sg[0][1])*t);
-      const dx = r.dx ?? 8, dy = r.dy ?? -8;
+      const dx = (r.dx != null ? r.dx : 8), dy = (r.dy != null ? r.dy : -8);
       g += `<text x="${lx+dx}" y="${ly+dy}" fill="${c}" class="nr" text-anchor="${r.ta||"start"}">${r.nom?`<tspan font-style="italic">${r.nom}</tspan>`:""}${r.et?`<tspan class="ecu">${r.nom?": ":""}${r.et}</tspan>`:""}</text>`;
     }
     if(r.s && r.flecha !== false){
-      const t = r.fpos ?? .5, mx = sg[0][0]+(sg[1][0]-sg[0][0])*t, my = sg[0][1]+(sg[1][1]-sg[0][1])*t;
+      const t = (r.fpos != null ? r.fpos : .5), mx = sg[0][0]+(sg[1][0]-sg[0][0])*t, my = sg[0][1]+(sg[1][1]-sg[0][1])*t;
       let nx = r.a*sx, ny = -r.b*sy; const L = Math.hypot(nx,ny); nx/=L; ny/=L;
       if(r.s === "<="){ nx=-nx; ny=-ny; }
       const x0 = px(mx), y0 = py(my), x1 = x0+nx*30, y1 = y0+ny*30;
@@ -93,8 +93,8 @@ function fig(o){
   // rectas de nivel F = k (discontinuas)
   (o.nivel || []).forEach(n=>{
     const sg = segmento(n.a, n.b, n.k, X, Y); if(!sg) return;
-    const t = n.pos ?? .2, lx = px(sg[0][0]+(sg[1][0]-sg[0][0])*t), ly = py(sg[0][1]+(sg[1][1]-sg[0][1])*t);
-    s += capa(n.o, `<line x1="${px(sg[0][0])}" y1="${py(sg[0][1])}" x2="${px(sg[1][0])}" y2="${py(sg[1][1])}" stroke="${n.col||"#6b7280"}" stroke-width="2.6" stroke-dasharray="9 7"/>${n.et?`<text x="${lx+(n.dx??6)}" y="${ly+(n.dy??-8)}" fill="${n.col||"#4b5563"}" class="nr">${n.et}</text>`:""}`);
+    const t = (n.pos != null ? n.pos : .2), lx = px(sg[0][0]+(sg[1][0]-sg[0][0])*t), ly = py(sg[0][1]+(sg[1][1]-sg[0][1])*t);
+    s += capa(n.o, `<line x1="${px(sg[0][0])}" y1="${py(sg[0][1])}" x2="${px(sg[1][0])}" y2="${py(sg[1][1])}" stroke="${n.col||"#6b7280"}" stroke-width="2.6" stroke-dasharray="9 7"/>${n.et?`<text x="${lx+((n.dx != null ? n.dx : 6))}" y="${ly+((n.dy != null ? n.dy : -8))}" fill="${n.col||"#4b5563"}" class="nr">${n.et}</text>`:""}`);
   });
   // segmentos destacados (soluciones múltiples)
   (o.tramos || []).forEach(t=>{
@@ -164,7 +164,7 @@ function problema(c){
   const tarjetas = c.rectas.filter(r=>r.tab).map((r,k)=>`<div class="pl-tv-card paso" data-o="${k+1}" style="--c:${colR(c.rectas.indexOf(r))}">
       ${tabla(tx("$"+r.nom+"$"), "$"+r.ecu+"$", r.tab, colR(c.rectas.indexOf(r)))}<div class="pl-calc">${(r.calc||[]).map(x=>`<div>${tx("$"+x+"$")}</div>`).join("")}</div></div>`).join("");
   const R1 = c.rectas.map((r,k)=>Object.assign({}, r, {nom:r.nomFig!==undefined?r.nomFig:r.nom, et:undefined, s:undefined, o:r.tab?c.rectas.filter(q=>q.tab).indexOf(r)+1:undefined}));
-  const P1 = c.rectas.flatMap((r,k)=>r.tab ? r.tab.map(t=>({x:+String(t[0]).replace(",","."), y:+String(t[1]).replace(",","."), o:c.rectas.filter(q=>q.tab).indexOf(r)+1, col:colR(k)})).filter(q=>!isNaN(q.x)&&!isNaN(q.y)) : []);
+  const P1 = c.rectas.reduce((acc,r,k)=>acc.concat(r.tab ? r.tab.map(t=>({x:+String(t[0]).replace(",","."), y:+String(t[1]).replace(",","."), o:c.rectas.filter(q=>q.tab).indexOf(r)+1, col:colR(k)})).filter(q=>!isNaN(q.x)&&!isNaN(q.y)) : []), []);
   L.push({ titulo: etapa(1, "Representar (1): las rectas y sus tablas de valores"), cuerpo:[
     {html: `<p class="pl-intro">${tx("Cada restricción tiene una <b>recta asociada</b>: cambio la desigualdad por «=». Hago su <b>tabla de valores</b> con los cortes con los ejes ($x = 0$ y luego $y = 0$) y escribo los cálculos.")}</p>` +
       duo(`<div class="pl-tvs">${tarjetas}</div>` + (c.notaTabla?`<p class="pl-calcu">🧮 ${tx(c.notaTabla)}</p>`:""), fig(Object.assign({}, base, {rectas: R1.concat(ejes.map(e=>Object.assign({},e,{s:undefined}))), pts:P1})), "minmax(0,1.15fr) minmax(0,1fr)") }
