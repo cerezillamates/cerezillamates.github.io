@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cerezillamates.github.io/sitemap.xml
