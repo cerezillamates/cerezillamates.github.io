@@ -119,7 +119,17 @@ function pantallaCompleta(){
   try {
     if(dentro){ (d.exitFullscreen || d.webkitExitFullscreen || d.msExitFullscreen).call(d); }
     else { const r = (e.requestFullscreen || e.webkitRequestFullscreen || e.msRequestFullscreen).call(e); if(r && r.catch) r.catch(()=>{}); }
-  } catch(err){ /* sin pantalla completa: se usa F11 */ }
+  } catch(err){ avisoPantalla(); }
+  if(!(e.requestFullscreen || e.webkitRequestFullscreen || e.msRequestFullscreen)) avisoPantalla();
+}
+function avisoPantalla(){
+  const ios = /iPhone|iPod/.test(navigator.userAgent);
+  const t = ios
+    ? "En el iPhone ningún navegador (ni Safari ni Chrome) permite la pantalla completa en una web. Para verla sin barras: botón Compartir ⬆️ → «Añadir a pantalla de inicio» y abre la web desde ese icono. También ayuda girar el móvil."
+    : "Este navegador no permite la pantalla completa. Prueba con la tecla F11 o con otro navegador.";
+  let a = document.getElementById("aviso-pc");
+  if(!a){ a = document.createElement("div"); a.id = "aviso-pc"; document.body.appendChild(a); a.onclick = ()=>a.remove(); }
+  a.textContent = t + "  ✕"; clearTimeout(a._t); a._t = setTimeout(()=>{ if(a.parentNode) a.remove(); }, 9000);
 }
 function arrancar(){
   const ap = TEMA.ap;

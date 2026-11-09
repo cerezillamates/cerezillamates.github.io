@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mates">
 </head>
 <body>
 <title>Programación lineal PAU</title>
@@ -612,7 +617,9 @@ drawHero(); draw1(); draw2(); draw4(); route(); refreshDone();
   document.getElementById('pmas').onclick = () => { min += 5; rest += 300; pintaCrono(); };
   document.getElementById('pmenos').onclick = () => { if (min > 5){ min -= 5; rest -= 300; pintaCrono(); } };
   document.getElementById('pplay').onclick = () => { if (run) return para(); run = setInterval(() => { rest--; pintaCrono(); }, 1000); document.getElementById('pplay').textContent = '⏸ Pausa'; };
-  document.getElementById('pfull').onclick = () => { const d = document; try { if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d); else (P.requestFullscreen || P.webkitRequestFullscreen).call(P); } catch(e){} };
+  document.getElementById('pfull').onclick = () => { const d = document, f = P.requestFullscreen || P.webkitRequestFullscreen;
+    if (!f){ alert(/iPhone|iPod/.test(navigator.userAgent) ? 'En el iPhone ningún navegador (ni Safari ni Chrome) permite la pantalla completa en una web. Para verla sin barras: botón Compartir → «Añadir a pantalla de inicio» y abre la web desde ese icono. También ayuda girar el móvil.' : 'Este navegador no permite la pantalla completa. Prueba con la tecla F11.'); return; }
+    try { if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d); else f.call(P); } catch(e){} };
   addEventListener('resize', () => { if (!P.hidden) ajusta(); });
   document.addEventListener('fullscreenchange', () => setTimeout(ajusta, 100));
   document.addEventListener('keydown', ev => { if (P.hidden) return;

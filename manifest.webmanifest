@@ -1,0 +1,16 @@
+{
+ "name": "Matemáticas · Mercedes Cerezo",
+ "short_name": "Mates",
+ "start_url": "/",
+ "scope": "/",
+ "display": "fullscreen",
+ "background_color": "#ffffff",
+ "theme_color": "#4338ca",
+ "icons": [
+  {
+   "src": "/assets/favicon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml"
+  }
+ ]
+}

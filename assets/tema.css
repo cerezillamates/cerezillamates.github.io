@@ -324,3 +324,6 @@ body.estudio .wrap{padding-bottom:110px}
 .pl-semi td{font-size:.82em;padding:.25em .45em}
 
 .pl-calcu{font-size:.7em;color:var(--muted);margin:.5em 0 0}
+
+#aviso-pc{position:fixed;left:12px;right:12px;bottom:76px;margin:0 auto;z-index:99;max-width:640px;background:#1e1b3a;color:#fff;
+  font:600 15px/1.4 var(--f-b,system-ui);padding:12px 16px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer}
