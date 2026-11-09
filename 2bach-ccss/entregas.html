@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mates">
+<meta name="robots" content="noindex">
+<title>Entregas semanales · 2.º Bach CCSS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="../assets/portal.css">
+<link rel="icon" href="../assets/favicon.svg">
+<style>
+.caja{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:var(--sombra)}
+.reglas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.regla{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:var(--sombra);border-left:6px solid var(--c,var(--blue))}
+.regla>b{font-family:var(--f-d);font-size:1.05rem;display:block;margin-bottom:2px}
+.regla p{margin:0;color:var(--muted);font-size:.95rem}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font:800 .78rem var(--f-b);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+tr.ctl td{background:#f1f2f6;color:var(--muted);font-style:italic}
+tr.pend td{color:var(--muted)}
+tr.pasada td{opacity:.55}
+tr.ahora td{background:#ecfdf5;font-weight:700}
+tr.ahora td:first-child{box-shadow:inset 5px 0 0 var(--acc)}
+.tabla{overflow-x:auto}
+#form{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#cod{font:800 1.4rem/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;padding:12px 14px;border:2px solid var(--line);border-radius:12px;width:11.5ch;max-width:100%}
+#cod:focus{outline:none;border-color:var(--blue)}
+button{font:800 1rem var(--f-b);padding:12px 18px;border-radius:12px;border:0;background:var(--blue);color:#fff;cursor:pointer}
+button.sec{background:var(--bg);color:var(--ink);border:2px solid var(--line)}
+#msg{color:var(--rose);font-weight:700}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+.chip{border-radius:14px;padding:10px 14px;background:var(--bg);min-width:120px}
+.chip b{display:block;font:800 1.7rem var(--f-d)}
+.chip span{color:var(--muted);font-size:.85rem;font-weight:700}
+.st{display:inline-block;font-weight:800;font-size:.82rem;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.ok{background:#dcfce7;color:#166534} .tarde{background:#fef3c7;color:#92400e} .no{background:#fee2e2;color:#991b1b} .fut{background:#eef2ff;color:#3730a3}
+.barra{height:12px;border-radius:999px;background:#fee2e2;overflow:hidden;margin:6px 0 2px}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,#16a34a,#22c55e)}
+.com{font-size:.9rem;color:var(--ink);margin-top:3px}
+.nota{font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../2bach-ccss.html">← 2.º Bachillerato CCSS</a>
+  <header>
+    <div style="font:600 .85rem var(--f-b);letter-spacing:.08em;text-transform:uppercase">Matemáticas CCSS II · curso 2026-27</div>
+    <h1>Entregas <span>semanales</span></h1>
+    <p class="lead">Ejercicios de la PAU para ir repasando los temas anteriores. Aquí tienes el calendario hasta Navidad y, con tu código, cómo vas.</p>
+  </header>
+
+  <section>
+    <h2>🔐 Mi seguimiento</h2>
+    <div class="caja">
+      <form id="form" onsubmit="return entrar(event)">
+        <input id="cod" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX" maxlength="9" aria-label="Tu código personal">
+        <button>Ver cómo voy</button>
+        <span id="msg"></span>
+      </form>
+      <p class="nota" style="margin:10px 0 0">El código te lo da la profesora. Es personal: sin él nadie puede ver tus datos (están cifrados). No lo compartas.</p>
+      <div id="ficha"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>📌 Normas</h2>
+    <div class="reglas">
+      <div class="regla" style="--c:var(--acc)"><b>Un PDF por semana</b><p>Súbelo a <b>tu carpeta</b> de Drive con el nombre «Semana N» (por ejemplo «Semana 7»). Nada de fotos sueltas.</p></div>
+      <div class="regla" style="--c:var(--rose)"><b>Plazo: domingo 23:59</b><p>Cuenta la hora de subida que guarda Drive. Lo que llega después queda como «fuera de plazo».</p></div>
+      <div class="regla" style="--c:var(--blue)"><b>Ejercicios completos</b><p>Elige ejercicios de selectividad del buscador. Ejercicios enteros (no apartados sueltos), con todos los pasos.</p></div>
+      <div class="regla" style="--c:var(--amb)"><b>Mira las soluciones</b><p>Tienes las soluciones: <b>compruébalas antes de entregar</b>. Si un fallo se habría visto mirándolas, te lo diré.</p></div>
+      <div class="regla" style="--c:var(--vio)"><b>Trabajo propio</b><p>Cada uno entrega su trabajo. Los ejercicios copiados de un compañero no cuentan.</p></div>
+      <div class="regla" style="--c:var(--line)"><b>Semanas de control</b><p>La semana del control y la del global no se entrega nada.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🗓️ Calendario hasta Navidad</h2>
+    <div class="caja tabla">
+      <table>
+        <thead><tr><th>Semana</th><th>Fechas</th><th>Tema</th><th>Ejercicios</th><th>Se entrega</th></tr></thead>
+        <tbody>
+<tr class="pasada"><td><b>S1</b></td><td>21/09 – 27/09</td><td>Matrices</td><td>4 de matrices</td><td>Domingo 27/09 · 23:59</td></tr>
+<tr class="pasada"><td><b>S2</b></td><td>28/09 – 04/10</td><td>Matrices</td><td>4 de matrices</td><td>Domingo 04/10 · 23:59</td></tr>
+<tr class="pasada"><td><b>S3</b></td><td>05/10 – 11/10</td><td>Matrices</td><td>4 de matrices</td><td>Domingo 11/10 · 23:59</td></tr>
+<tr class="ctl pasada"><td><b>C1</b></td><td>12/10 – 18/10</td><td>Control de matrices</td><td>No se entrega</td><td>—</td></tr>
+<tr class="pasada"><td><b>S4</b></td><td>19/10 – 25/10</td><td>Sistemas</td><td>4 de sistemas + 2 de matrices</td><td>Domingo 25/10 · 23:59</td></tr>
+<tr class="pasada"><td><b>S5</b></td><td>26/10 – 01/11</td><td>Sistemas</td><td>4 de sistemas + 2 de matrices</td><td>Domingo 01/11 · 23:59</td></tr>
+<tr class="pasada"><td><b>S6</b></td><td>02/11 – 08/11</td><td>Sistemas</td><td>4 de sistemas + 2 de matrices</td><td>Domingo 08/11 · 23:59</td></tr>
+<tr class="ahora"><td><b>S7</b></td><td>09/11 – 15/11</td><td>Programación lineal</td><td>4 de PL + 2 de sistemas + 1 de matrices</td><td>Domingo 15/11 · 23:59</td></tr>
+<tr class=""><td><b>S8</b></td><td>16/11 – 22/11</td><td>Programación lineal</td><td>4 de PL + 2 de sistemas + 1 de matrices</td><td>Domingo 22/11 · 23:59</td></tr>
+<tr class=""><td><b>S9</b></td><td>23/11 – 29/11</td><td>Programación lineal</td><td>4 de PL + 2 de sistemas + 1 de matrices</td><td>Domingo 29/11 · 23:59</td></tr>
+<tr class="ctl"><td><b>C2</b></td><td>30/11 – 06/12</td><td>Control de sistemas y PL</td><td>No se entrega</td><td>—</td></tr>
+<tr class="ctl"><td><b>C3</b></td><td>07/12 – 13/12</td><td>Examen global</td><td>No se entrega</td><td>—</td></tr>
+<tr class="pend"><td><b>S10</b></td><td>14/12 – 20/12</td><td>Funciones (empieza la 2.ª evaluación)</td><td>Por confirmar</td><td>Domingo 20/12 · 23:59</td></tr>
+        </tbody>
+      </table>
+      <p class="nota">En cada tema nuevo se añaden ejercicios de los anteriores para no olvidarlos: matrices → 4 · sistemas → 4 + 2 de matrices · programación lineal → 4 + 2 de sistemas + 1 de matrices.</p>
+    </div>
+    <div class="links"><a class="main" href="../programacion-lineal.html#ejercicios">🔎 Buscador de ejercicios PAU</a><a href="../sistemas.html">Sistemas</a><a href="../programacion-lineal.html">Programación lineal</a></div>
+  </section>
+
+  <footer><p>Materiales elaborados por <b>Mercedes Cerezo</b>.</p></footer>
+</div>
+<script>
+var DATOS=null;
+function b64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+function hex(buf){return Array.prototype.map.call(new Uint8Array(buf),function(x){return ('0'+x.toString(16)).slice(-2)}).join('')}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+document.getElementById('cod').addEventListener('input',function(e){var v=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'');if(v.length>4)v=v.slice(0,4)+'-'+v.slice(4,8);e.target.value=v});
+async function entrar(ev){
+  ev.preventDefault();var msg=document.getElementById('msg');msg.textContent='';
+  var c=document.getElementById('cod').value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(c.length!==8){msg.textContent='El código tiene 8 caracteres.';return false}
+  if(!window.crypto||!crypto.subtle){msg.textContent='Este navegador no permite abrir los datos. Prueba con otro.';return false}
+  try{
+    if(!DATOS)DATOS=await (await fetch('seguimiento/datos.json?'+Date.now())).json();
+    var base=await crypto.subtle.importKey('raw',new TextEncoder().encode(c),'PBKDF2',false,['deriveBits']);
+    var bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:new TextEncoder().encode(DATOS.sal),iterations:DATOS.it,hash:'SHA-256'},base,384);
+    var idx=hex(bits.slice(32)),blob=DATOS.d[idx];
+    if(!blob){msg.textContent='Código no válido. Revísalo.';return false}
+    var key=await crypto.subtle.importKey('raw',bits.slice(0,32),'AES-GCM',false,['decrypt']);
+    var raw=b64(blob),pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:raw.slice(0,12)},key,raw.slice(12));
+    pinta(JSON.parse(new TextDecoder().decode(pt)));
+    try{sessionStorage.setItem('cod',c)}catch(e){}
+  }catch(e){msg.textContent='No se ha podido abrir. Revisa el código.'}
+  return false;
+}
+function pinta(f){
+  var ok=0,t=0,no=0,corr=0;
+  f.s.forEach(function(s){if(s.e==='ok')ok++;else if(s.e==='tarde')t++;else if(s.e==='no')no++;if(s.corr)corr++});
+  var tot=ok+t+no,pc=tot?Math.round(100*ok/tot):0;
+  var h='<h3 style="margin-top:18px">Hola, '+esc(f.n)+' 👋</h3><div class="nota">'+esc(f.g)+' · datos actualizados el '+esc(f.act)+'</div>';
+  h+='<div class="chips"><div class="chip"><b>'+ok+'</b><span>a tiempo</span></div><div class="chip"><b>'+t+'</b><span>fuera de plazo</span></div><div class="chip"><b>'+no+'</b><span>sin entregar</span></div><div class="chip"><b>'+corr+'</b><span>corregidas</span></div></div>';
+  h+='<div class="barra"><i style="width:'+pc+'%"></i></div><div class="nota">'+pc+' % de las semanas entregadas a tiempo</div>';
+  h+='<div class="tabla" style="margin-top:12px"><table><thead><tr><th>Semana</th><th>Tema</th><th>Estado</th><th>Subida</th><th>Comentario</th></tr></thead><tbody>';
+  f.s.forEach(function(s){
+    var st=s.e==='ok'?'<span class="st ok">A tiempo</span>':s.e==='tarde'?'<span class="st tarde">Fuera de plazo</span>':s.e==='no'?'<span class="st no">No entregada</span>':'<span class="st fut">Pendiente · dom '+esc(s.al)+'</span>';
+    if(s.corr)st+=' <span class="st ok">✓ corregida</span>';
+    var com=(s.v?'<b>'+esc(s.v)+'</b>':'')+(s.com?'<div class="com">'+esc(s.com)+'</div>':'');
+    if(!com&&s.corr)com='<span class="nota">Mira la corrección en tu carpeta</span>';
+    h+='<tr><td><b>'+esc(s.c)+'</b><div class="nota">'+esc(s.del_)+'–'+esc(s.al)+'</div></td><td>'+esc(s.tema)+'</td><td>'+st+'</td><td>'+esc(s.f||'—')+'</td><td>'+com+'</td></tr>';
+  });
+  h+='</tbody></table></div><p><button class="sec" onclick="salir()">Cerrar</button></p>';
+  document.getElementById('ficha').innerHTML=h;
+}
+function salir(){document.getElementById('ficha').innerHTML='';document.getElementById('cod').value='';try{sessionStorage.removeItem('cod')}catch(e){}}
+try{var g=sessionStorage.getItem('cod');if(g){document.getElementById('cod').value=g.slice(0,4)+'-'+g.slice(4);entrar({preventDefault:function(){}})}}catch(e){}
+</script>
+</body>
+</html>
