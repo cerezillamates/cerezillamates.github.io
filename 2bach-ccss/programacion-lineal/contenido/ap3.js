@@ -12,19 +12,21 @@ TEMA.registrar({
       F:"F(x, y) = x + y/2",
       ejes:false,
       rectas:[
-        {nom:"r_1", nomFig:"r₁", ecu:"y = x + 5", pts:"$(0, 5)$ y $(-3, 2)$", prueba:"$O$: $0 \\le 5$ ✓ → hacia el origen", a:-1,b:1,c:5,s:"<=", pos:.92,dx:-10,ta:"end"},
-        {nom:"r_2", nomFig:"r₂", ecu:"2x + y = -4", pts:"$(-2, 0)$ y $(-3, 2)$", prueba:"$O$: $0 \\ge -4$ ✓ → hacia el origen", a:2,b:1,c:-4,s:">=", pos:.08,dx:10},
-        {nom:"r_3", nomFig:"r₃", ecu:"4x + y = 10", pts:"$\\left(\\tfrac52, 0\\right)$ y $(1, 6)$", prueba:"$O$: $0 \\le 10$ ✓ → hacia el origen", a:4,b:1,c:10,s:"<=", pos:.12,dx:8},
-        {nom:"r_4", nomFig:"", ecu:"y = 0", pts:"el eje $X$", prueba:"$y \\ge 0$ → por encima", a:0,b:1,c:0,s:">=", col:"#94a3b8", flecha:false}
+        {nom:"r_1", nomFig:"r₁", ecu:"y = x + 5", ineq:"y \\le x + 5", tab:[[0,5],[-5,0]], calc:["x = 0 \\Rightarrow y = 5","y = 0 \\Rightarrow x = -5"], pr:{c:"0 \\le 0 + 5 = 5", ok:true}, semi:"Por debajo de $r_1$", a:-1,b:1,c:5,s:"<=", pos:.75,dx:-10,ta:"end"},
+        {nom:"r_2", nomFig:"r₂", ecu:"2x + y = -4", ineq:"2x + y \\ge -4", tab:[[0,-4],[-2,0]], calc:["x = 0 \\Rightarrow y = -4","y = 0 \\Rightarrow 2x = -4 \\Rightarrow x = -2"], pr:{c:"2 \\cdot 0 + 0 = 0 \\ge -4", ok:true}, semi:"Por encima de $r_2$", a:2,b:1,c:-4,s:">=", pos:.08,dx:10},
+        {nom:"r_3", nomFig:"r₃", ecu:"4x + y = 10", ineq:"4x \\le 10 - y", tab:[[0,10],["2,5",0]], calc:["x = 0 \\Rightarrow y = 10","y = 0 \\Rightarrow 4x = 10 \\Rightarrow x = 2{,}5"], pr:{c:"4 \\cdot 0 = 0 \\le 10 - 0 = 10", ok:true}, semi:"Por debajo de $r_3$", a:4,b:1,c:10,s:"<=", pos:.12,dx:8},
+        {nom:"r_4", nomFig:"", ecu:"y = 0", ineq:"y \\ge 0", examen:"Es el eje $X$: $y \\ge 0$ es el semiplano de <b>arriba</b>.", semi:"Por encima del eje $X$", a:0,b:1,c:0,s:">=", col:"#94a3b8", flecha:false}
       ],
-      fig:{x:[-4,3], y:[-1,7]},
+      fig:{x:[-6,3], y:[-5,11]},
       cierre:"La parte común es el <b>cuadrilátero</b> $ABCD$: el recinto $R$.",
       verts:[
-        {n:"A", x:-2, y:0, t:"A(−2, 0)", lado:"s", sis:["2x + y = -4","y = 0"], res:"$2x = -4 \\Rightarrow x = -2$"},
-        {n:"B", x:2.5, y:0, t:"B(5/2, 0)", lado:"s", sis:["4x + y = 10","y = 0"], res:"$4x = 10 \\Rightarrow x = \\tfrac52$"},
-        {n:"C", x:1, y:6, t:"C(1, 6)", lado:"e", sis:["y = x + 5","4x + y = 10"], res:"$4x + x + 5 = 10 \\Rightarrow x = 1,\\ y = 6$"},
-        {n:"D", x:-3, y:2, t:"D(−3, 2)", lado:"w", sis:["y = x + 5","2x + y = -4"], res:"$2x + x + 5 = -4 \\Rightarrow x = -3,\\ y = 2$"}
+        {n:"A", x:-2, y:0, t:"A(−2, 0)", lado:"s", sis:["\\mathbf{r_2}: & 2x + y = -4","\\text{eje } X: & y = 0"], res:"$2x = -4 \\Rightarrow x = -2$"},
+        {n:"B", x:2.5, y:0, t:"B(5/2, 0)", lado:"s", sis:["\\mathbf{r_3}: & 4x + y = 10","\\text{eje } X: & y = 0"], res:"$4x = 10 \\Rightarrow x = \\tfrac52$"},
+        {n:"C", x:1, y:6, t:"C(1, 6)", lado:"e", sis:["\\mathbf{r_1}: & y = x + 5","\\mathbf{r_3}: & 4x + y = 10"], res:"$4x + x + 5 = 10 \\Rightarrow x = 1,\\ y = 6$"},
+        {n:"D", x:-3, y:2, t:"D(−3, 2)", lado:"w", sis:["\\mathbf{r_1}: & y = x + 5","\\mathbf{r_2}: & 2x + y = -4"], res:"$2x + x + 5 = -4 \\Rightarrow x = -3,\\ y = 2$"}
       ],
+      cortes:["$(0, 10)$: $10 \\le 0 + 5$ ✗ → fuera: <b>no es vértice</b>.","$(-5, 0)$: $2 \\cdot (-5) + 0 = -10 \\ge -4$ ✗ → <b>no es vértice</b>.","$(0, 5)$ cumple todas, pero está en medio del lado $CD$: no es una esquina, <b>no es vértice</b>."],
+      cortesPts:[[0,5,"(0, 5)","e"]],
       valores:[["$A(-2, 0)$","$-2$","min"],["$B\\left(\\tfrac52, 0\\right)$","$\\tfrac52 = 2{,}5$"],["$C(1, 6)$","$1 + 3 = 4$","max"],["$D(-3, 2)$","$-3 + 1 = -2$","min"]],
       tramos:[{p:[-2,0],q:[-3,2],col:"#be123c"}],
       p5:[[1,"Máximo: 4, solo en $C$ (solución única)."],[2,"Mínimo: $-2$ en $A$ y en $D$ → en todo el segmento $AD$."]],

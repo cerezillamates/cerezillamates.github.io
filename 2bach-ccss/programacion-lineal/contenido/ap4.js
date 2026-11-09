@@ -13,19 +13,20 @@ TEMA.registrar({
       F:"H(x, y) = -3x + 3y + 2",
       ejes:false,
       rectas:[
-        {nom:"r_1", nomFig:"r₁", ecu:"3x + 2y = 3", pts:"$(1, 0)$ y $(-1, 3)$", prueba:"$O$: $0 \\le 3$ ✓ → hacia el origen", a:3,b:2,c:3,s:"<=", pos:.1,dx:10},
-        {nom:"r_2", nomFig:"r₂", ecu:"y = x - 6", pts:"$(0, -6)$ y $(6, 0)$", prueba:"$O$: $0 \\ge -6$ ✓ → hacia el origen", a:-1,b:1,c:-6,s:">=", pos:.92,dx:-8,ta:"end"},
-        {nom:"r_3", nomFig:"r₃", ecu:"2x - 7y = 37", pts:"$(1, -5)$ y $(-6, -7)$", prueba:"$O$: $0 \\le 37$ ✓ → hacia el origen", a:2,b:-7,c:37,s:"<=", pos:.05,dy:-10}
+        {nom:"r_1", nomFig:"r₁", ecu:"3x + 2y = 3", ineq:"2y \\le -3x + 3", tab:[[0,"1,5"],[1,0]], calc:["x = 0 \\Rightarrow 2y = 3 \\Rightarrow y = 1{,}5","y = 0 \\Rightarrow 3x = 3 \\Rightarrow x = 1"], pr:{c:"2 \\cdot 0 = 0 \\le -3 \\cdot 0 + 3 = 3", ok:true}, semi:"Por debajo de $r_1$", a:3,b:2,c:3,s:"<=", pos:.1,dx:10},
+        {nom:"r_2", nomFig:"r₂", ecu:"y = x - 6", ineq:"y \\ge x - 6", tab:[[0,-6],[6,0]], calc:["x = 0 \\Rightarrow y = -6","y = 0 \\Rightarrow x = 6"], pr:{c:"0 \\ge 0 - 6 = -6", ok:true}, semi:"Por encima de $r_2$", a:-1,b:1,c:-6,s:">=", pos:.92,dx:-8,ta:"end"},
+        {nom:"r_3", nomFig:"r₃", ecu:"2x - 7y = 37", ineq:"2x \\le 7y + 37", tab:[[1,-5],[-6,-7]], calc:["\\text{Los cortes con los ejes salen con decimales: doy otros valores}","x = 1 \\Rightarrow -7y = 35 \\Rightarrow y = -5","x = -6 \\Rightarrow -7y = 49 \\Rightarrow y = -7"], pr:{c:"2 \\cdot 0 = 0 \\le 7 \\cdot 0 + 37 = 37", ok:true}, semi:"Por encima de $r_3$", a:2,b:-7,c:37,s:"<=", pos:.05,dy:-10}
       ],
-      fig:{x:[-7,6], y:[-7,6]},
+      fig:{x:[-7,7], y:[-8,6]},
       cierre:"La parte común <b>no se cierra</b>: se abre hacia la izquierda.",
       acotada:false,
       p2:"Desde 2018/2019 la PAU propone regiones no acotadas, pero aseguran que el óptimo que piden existe.",
       verts:[
-        {n:"A", x:1, y:-5, t:"A(1, −5)", lado:"se", sis:["y = x - 6","2x - 7y = 37"], res:"$2x - 7x + 42 = 37 \\Rightarrow x = 1,\\ y = -5$"},
-        {n:"B", x:3, y:-3, t:"B(3, −3)", lado:"e", sis:["3x + 2y = 3","y = x - 6"], res:"$3x + 2x - 12 = 3 \\Rightarrow x = 3,\\ y = -3$"}
+        {n:"A", x:1, y:-5, t:"A(1, −5)", lado:"se", sis:["\\mathbf{r_2}: & y = x - 6","\\mathbf{r_3}: & 2x - 7y = 37"], res:"$2x - 7x + 42 = 37 \\Rightarrow x = 1,\\ y = -5$"},
+        {n:"B", x:3, y:-3, t:"B(3, −3)", lado:"e", sis:["\\mathbf{r_1}: & 3x + 2y = 3","\\mathbf{r_2}: & y = x - 6"], res:"$3x + 2x - 12 = 3 \\Rightarrow x = 3,\\ y = -3$"}
       ],
-      p3:"$r_1$ y $r_3$ se cortan en $(3{,}8;\\ -4{,}2)$, que no cumple $y \\ge x - 6$: no es un vértice.",
+      cortes:["$r_1$ y $r_3$ se cortan en $(3{,}8;\\ -4{,}2)$: $-4{,}2 \\ge 3{,}8 - 6 = -2{,}2$ ✗ → <b>no es vértice</b>."],
+      cortesPts:[[3.8,-4.2,"","e"]],
       valores:[["$A(1, -5)$","$-3 - 15 + 2 = -16$","min"],["$B(3, -3)$","$-9 - 9 + 2 = -16$","min"]],
       p4:"¿Es de verdad el mínimo? $H = 3(y - x) + 2$ y en la región $y - x \\ge -6$, así que $H \\ge -16$ ✓. Hacia la izquierda $H$ crece: <b>no hay máximo</b>.",
       tramos:[{p:[1,-5],q:[3,-3],col:"#be123c"}],

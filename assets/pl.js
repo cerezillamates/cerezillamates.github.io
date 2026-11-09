@@ -58,7 +58,7 @@ function fig(o){
   const R = o.rectas || [];
   // semiplanos de cada restricción (sombreado suave de su color)
   R.forEach((r,k)=>{
-    if(r.semi === undefined || r.semi === false || !r.s) return;
+    if((typeof r.semi !== "boolean" && typeof r.semi !== "number") || !r.semi || !r.s) return;
     const P = cortar(rect, r.a, r.b, r.c, r.s);
     if(P.length>2) s += capa(r.semi===true ? r.o : r.semi, `<polygon points="${P.map(pt).join(" ")}" fill="${COL[r.col||"r"+(k+1)]||r.col}" opacity=".13"/>`);
   });
@@ -127,6 +127,9 @@ function tabla(nom, ecu, filas, col){
    --------------------------------------------------------------------------- */
 function problema(c){
   const tx = TEMA.tx, L = [];
+  // frase del examen para el semiplano a partir de la prueba: pr = {p:"O(0, 0)", c:"cálculo", ok:true|false}
+  c.rectas.forEach(r=>{ if(r.pr && !r.examen){ const pt = r.pr.p || "O(0, 0)", org = pt.startsWith("O");
+    r.examen = `Sustituyo $${pt}$: $${r.pr.c}$. <b>${r.pr.ok?"Sí":"No"} se cumple</b>, luego el semiplano solución es el que <b>${r.pr.ok?"":"no "}contiene ${org?"al origen":"a $"+pt+"$"}</b>.`; } });
   const duo = (a, b, r) => `<div class="pl-duo"${r?` style="grid-template-columns:${r}"`:""}><div>${a}</div><div>${b}</div></div>`;
   const sisTex = l => `$$\\left\\{\\begin{array}{l}${l.join("\\\\")}\\end{array}\\right.$$`;
   const n = c.rectas.length;
@@ -155,30 +158,53 @@ function problema(c){
            `<div class="paso" data-o="3">${tx(sisTex(c.sis))}</div>`}
   ]});
 
-  // PASO 1: representar (todo en una pantalla, apareciendo poco a poco)
-  const izq = c.rectas.map((r,k)=>`<div class="pl-recta" style="--c:${COL[r.col||"r"+(k+1)]||r.col}">
-      <div class="paso" data-o="${2*k+1}"><b>${tx("$"+r.nom+"$")}: ${tx("$"+r.ecu+"$")}</b> → ${tx(r.pts)}</div>
-      <div class="paso" data-o="${2*k+2}">Prueba ${tx(r.prueba)}</div></div>`).join("") +
-    `<div class="paso pl-recta" data-o="${2*n+1}">${tx(c.cierre || "Con $x \\ge 0$, $y \\ge 0$ (primer cuadrante), la parte común es la <b>región factible</b>.")}</div>`;
-  L.push({ titulo: etapa(1, "Representar la región factible"), cuerpo:[
-    {html: duo(izq, fig(Object.assign({}, base, {rectas: R(k=>2*k+1).concat(ejes), region: 2*n+1})), "minmax(0,1fr) minmax(0,1.35fr)") }
+  // PASO 1: representar, como en la página de la profesora: (1) rectas y tablas de valores,
+  // (2) semiplano de cada restricción, (3) región factible.
+  const colR = k => COL[c.rectas[k].col||"r"+(k+1)] || c.rectas[k].col;
+  const tarjetas = c.rectas.filter(r=>r.tab).map((r,k)=>`<div class="pl-tv-card paso" data-o="${k+1}" style="--c:${colR(c.rectas.indexOf(r))}">
+      ${tabla(tx("$"+r.nom+"$"), "$"+r.ecu+"$", r.tab, colR(c.rectas.indexOf(r)))}<div class="pl-calc">${(r.calc||[]).map(x=>`<div>${tx("$"+x+"$")}</div>`).join("")}</div></div>`).join("");
+  const R1 = c.rectas.map((r,k)=>Object.assign({}, r, {nom:r.nomFig!==undefined?r.nomFig:r.nom, et:undefined, s:undefined, o:r.tab?c.rectas.filter(q=>q.tab).indexOf(r)+1:undefined}));
+  const P1 = c.rectas.flatMap((r,k)=>r.tab ? r.tab.map(t=>({x:+String(t[0]).replace(",","."), y:+String(t[1]).replace(",","."), o:c.rectas.filter(q=>q.tab).indexOf(r)+1, col:colR(k)})).filter(q=>!isNaN(q.x)&&!isNaN(q.y)) : []);
+  L.push({ titulo: etapa(1, "Representar (1): las rectas y sus tablas de valores"), cuerpo:[
+    {html: `<p class="pl-intro">${tx("Cada restricción tiene una <b>recta asociada</b>: cambio la desigualdad por «=». Hago su <b>tabla de valores</b> con los cortes con los ejes ($x = 0$ y luego $y = 0$) y escribo los cálculos.")}</p>` +
+      duo(`<div class="pl-tvs">${tarjetas}</div>` + (c.notaTabla?`<p class="pl-calcu">🧮 ${tx(c.notaTabla)}</p>`:""), fig(Object.assign({}, base, {rectas: R1.concat(ejes.map(e=>Object.assign({},e,{s:undefined}))), pts:P1})), "minmax(0,1.15fr) minmax(0,1fr)") }
+  ]});
+  const filas = c.rectas.filter(r=>r.ineq).map((r,k)=>`<tr class="paso" data-o="${k+1}"><td>${tx("$"+r.ineq+"$")}</td><td style="text-align:left">${tx(r.examen)}</td><td>${tx(r.semi)}</td></tr>`).join("") +
+    (c.ejes===false ? "" : `<tr class="paso" data-o="${c.rectas.filter(r=>r.ineq).length+1}"><td>${tx("$x \\ge 0,\\ y \\ge 0$")}</td><td style="text-align:left">Juntas dejan el primer cuadrante.</td><td>Primer cuadrante</td></tr>`);
+  const ordSemi = k => { const r = c.rectas[k]; return r.ineq ? c.rectas.filter(q=>q.ineq).indexOf(r)+1 : undefined; };
+  L.push({ titulo: etapa(1, "Representar (2): el semiplano de cada restricción"), cuerpo:[
+    {html: `<p class="pl-intro">${tx("Ahora trabajo con la <b>restricción</b> (la inecuación): la recta divide el plano en dos semiplanos y la restricción se cumple solo en uno. Lo marco con <b>flechas</b>.")}</p>` +
+      duo(`<table class="pl-tab pl-semi"><tr><th>Restricción</th><th>Lo que escribo en el examen</th><th>Semiplano</th></tr>${filas}</table>`,
+          fig(Object.assign({}, base, {rectas: c.rectas.map((r,k)=>Object.assign({}, r, {nom:r.nomFig!==undefined?r.nomFig:r.nom, et:undefined, fo:ordSemi(k)})).concat(ejes)})), "minmax(0,1.35fr) minmax(0,1fr)") }
+  ]});
+  L.push({ titulo: etapa(1, "Representar (3): la región factible"), cuerpo:[
+    {html: duo(pasos([[1, c.cierre || "Es la <b>zona común</b> a todos los semiplanos."],[2,"La sombreo y pongo una <b>letra a cada vértice</b>."]]),
+      fig(Object.assign({}, base, {rectas: R().concat(ejes), region: 1, pts: c.verts.map(v=>({x:v.x,y:v.y,t:v.n,lado:v.lado,o:2}))})), "minmax(0,1fr) minmax(0,1.35fr)") }
   ]});
 
   // PASO 2: ¿acotada?
+  const frase2 = c.acotada===false
+    ? "«La región factible <b>no está acotada</b>, así que el " + (c.obj==="MÍN"?"mínimo":"máximo (o el mínimo)") + " puede no existir.» Después se comprueba con la recta de $F$."
+    : "«La región factible es <b>acotada</b>; por el teorema fundamental, el máximo y el mínimo se alcanzan en alguno de sus <b>vértices</b>.»";
   L.push({ titulo: etapa(2, "¿La región es acotada o no acotada?"), cuerpo:[
     {html: duo(
-      `<div class="b-${c.acotada===false?"aviso":"prop"}"><span class="etq">${c.acotada===false?"No acotada":"Acotada"}</span><p>${tx(c.acotada===false
-        ? "La región está <b>abierta</b>: se va al infinito. Puede que no haya máximo o mínimo; si existe, está en un vértice. Habrá que comprobarlo."
-        : "La región es un <b>polígono cerrado</b>. Por el teorema, el máximo y el mínimo <b>existen</b> y están en los <b>vértices</b>.")}</p></div>` + (c.p2?`<p>${tx(c.p2)}</p>`:""),
-      fig(Object.assign({}, base, {rectas: R().concat(ejes), region: 0})), "minmax(0,1fr) minmax(0,1.35fr)") }
+      `<div class="b-${c.acotada===false?"aviso":"prop"}"><span class="etq">${c.acotada===false?"No acotada: abierta, se va al infinito":"Acotada: es un polígono cerrado"}</span><p>${tx(c.acotada===false
+        ? "Puede que no haya óptimo. Si existe, está en un vértice (o en un lado): hay que comprobarlo."
+        : "El máximo y el mínimo existen siempre: basta con calcular $F$ en los vértices.")}</p></div>` +
+      `<div class="b-nota paso" data-o="1"><span class="etq">✍️ Cómo se escribe</span><p>${tx(frase2)}</p></div>` + (c.p2?`<p class="paso" data-o="2">${tx(c.p2)}</p>`:""),
+      fig(Object.assign({}, base, {rectas: R().concat(ejes), region: 0, pts: c.verts.map(v=>({x:v.x,y:v.y,t:v.n,lado:v.lado}))})), "minmax(0,1fr) minmax(0,1.2fr)") }
   ]});
 
   // PASO 3: vértices
+  const nv = c.verts.length;
   L.push({ titulo: etapa(3, "Calcular los vértices"), cuerpo:[
     {html: duo(
-      `<table class="pl-tab pl-vt"><tr><th>Vértice</th><th>Sistema</th><th>Resolución</th></tr>${c.verts.map((v,k)=>`<tr class="paso" data-o="${k+1}"><td><b>${v.n}</b></td><td>${tx("$\\left\\{\\begin{array}{l}"+v.sis.join("\\\\")+"\\end{array}\\right.$")}</td><td>${tx(v.res)} → <b>${tx(v.t)}</b></td></tr>`).join("")}</table>` +
-      (c.p3?`<div class="b-aviso paso" data-o="${c.verts.length+1}"><span class="etq">¡Cuidado!</span><p>${tx(c.p3)}</p></div>`:""),
-      fig(Object.assign({}, base, {rectas: R().concat(ejes), region: 0, pts: c.verts.map((v,k)=>({x:v.x,y:v.y,t:v.n,lado:v.lado,o:k+1}))})), "minmax(0,1.2fr) minmax(0,1fr)") }
+      `<p class="pl-intro">${tx("Cada vértice es una esquina: el punto donde se cortan dos de sus rectas. Escribo el <b>sistema</b>, lo resuelvo y escribo el punto.")}</p>` +
+      `<table class="pl-tab pl-vt"><tr><th>Vértice</th><th>Sistema</th><th>Resolución</th></tr>${c.verts.map((v,k)=>`<tr class="paso" data-o="${k+1}"><td><b>${v.n}</b></td><td>${tx("$\\left\\{\\begin{array}{ll}"+v.sis.join("\\\\")+"\\end{array}\\right.$")}</td><td>${tx(v.res)} → <b>${tx(v.t)}</b></td></tr>`).join("")}</table>` +
+      (c.cortes?`<div class="b-aviso paso" data-o="${nv+1}"><span class="etq">¡Cuidado! No todos los cortes son vértices</span><p>Un vértice tiene que ser una esquina de la zona sombreada y cumplir <b>todas</b> las restricciones.</p>${c.cortes.map(x=>`<p>• ${tx(x)}</p>`).join("")}</div>`:"") +
+      (c.p3?`<div class="b-aviso paso" data-o="${nv+1}"><span class="etq">¡Cuidado!</span><p>${tx(c.p3)}</p></div>`:""),
+      fig(Object.assign({}, base, {rectas: R().concat(ejes), region: 0,
+        pts: c.verts.map((v,k)=>({x:v.x,y:v.y,t:v.t,lado:v.lado,o:k+1})).concat((c.cortesPts||[]).map(q=>({x:q[0],y:q[1],t:q[2]||"",lado:q[3]||"e",o:nv+1,col:"#9ca3af"})))})), "minmax(0,1.3fr) minmax(0,1fr)") }
   ]});
 
   // PASO 4: F en los vértices
@@ -190,7 +216,7 @@ function problema(c){
   ]});
 
   // PASO 5: responder
-  L.push({ titulo: etapa(5, "Responder"), cuerpo: [
+  L.push({ titulo: etapa(5, "Responder: cuánto vale, dónde se alcanza y qué significa"), cuerpo: [
     {html: (c.p5 ? pasos(c.p5) : "") + `<div class="res paso" data-o="${(c.p5||[]).length+1}">${tx(c.respuesta)}</div>`},
     ...(c.nota5 ? [{nota:[c.nota5]}] : [])
   ]});

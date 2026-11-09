@@ -315,3 +315,12 @@ body.estudio:has(.marcador) .wrap{padding-bottom:110px}
 .pl-ruta i{color:var(--muted);font-style:normal}
 .pl-recta{border-left:5px solid var(--c,var(--ind));padding:.15em .6em;margin:.25em 0;background:#fff;border-radius:6px}
 .pl-vt td{font-size:.8em;padding:.2em .45em}
+
+.pl-intro{margin:0 0 .4em;font-size:.92em}
+.pl-tvs{display:grid;gap:.5em}
+.pl-tv-card{display:flex;gap:.5em;align-items:center;border-left:5px solid var(--c);background:#fff;border-radius:8px;padding:.2em .5em}
+.pl-tv-card .pl-tv{margin:0;font-size:.95em}
+.pl-calc{font-size:.95em;line-height:1.6}
+.pl-semi td{font-size:.82em;padding:.25em .45em}
+
+.pl-calcu{font-size:.7em;color:var(--muted);margin:.5em 0 0}
