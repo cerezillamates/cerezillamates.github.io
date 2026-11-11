@@ -98,12 +98,12 @@ TEMA.registrar({
 
     { titulo:"El porcentaje de una cantidad", cuerpo:[
       {ej:{enun:"En una clase de 80 alumnos de 2.º, el 35 % viene andando. ¿Cuántos son?",
-        pasos:[R`Lo que había: $C_I = 80$. El porcentaje en decimal: $I_V = 0,35$`, R`$C_F = C_I \cdot I_V = 80 \cdot 0,35 = 28$`],
+        pasos:[R`Lo que había: $C_{\text{inicial}} = 80$. El % en decimal: $I_{\text{variación}} = 0,35$`, R`$C_{\text{final}} = 80 \cdot 0,35 = 28$`],
         res:"Vienen andando <b>28 alumnos</b>."}}
     ]},
 
     { titulo:"La fórmula (lo que hemos usado)", cuerpo:[
-      {prop:[{formula:R`C_F = C_I \cdot I_V`}], etq:"La fórmula"},
+      {prop:[{formula:R`C_{\text{final}} = C_{\text{inicial}} \cdot I_{\text{variación}}`}, R`Abreviado: $C_F = C_I \cdot I_V$`], etq:"La fórmula"},
       {html:`<div class="cfiv"><div><b>$C_I$</b><span>cantidad inicial</span><small>el total: el 100 %</small></div><div><b>$I_V$</b><span>índice de variación</span><small>el % en decimal</small></div><div><b>$C_F$</b><span>cantidad final</span><small>la parte que me piden</small></div></div>`}
     ]},
 

@@ -121,12 +121,12 @@ TEMA.registrar({
 
     { titulo:"🍕 Porcentaje de una cantidad", cuerpo:[
       {ej:{enun:"En una clase de 25 alumnos, al 40 % le gusta la pizza. ¿A cuántos?",
-        pasos:[R`$C_I = 25$, $I_V = 0,40$`, R`$C_F = 25 \cdot 0,40 = 10$`], res:"A <b>10 alumnos</b> les gusta la pizza."}},
+        pasos:[R`Lo que había: $C_{\text{inicial}} = 25$. El % en decimal: $I_{\text{variación}} = 0,40$`, R`$C_{\text{final}} = 25 \cdot 0,40 = 10$`], res:"A <b>10 alumnos</b> les gusta la pizza."}},
       {html:barra([[40,"40 % → 10 alumnos 🍕","pct-a"],[60,"60 % → 15 alumnos",""]])}
     ]},
 
     { titulo:"La fórmula (lo que hemos usado)", cuerpo:[
-      {prop:[{formula:R`C_F = C_I \cdot I_V`}], etq:"La fórmula"},
+      {prop:[{formula:R`C_{\text{final}} = C_{\text{inicial}} \cdot I_{\text{variación}}`}, R`Abreviado: $C_F = C_I \cdot I_V$`], etq:"La fórmula"},
       {html:`<div class="cfiv"><div><b>$C_I$</b><span>cantidad inicial</span><small>lo que había: el 100 %</small></div><div><b>$I_V$</b><span>índice de variación</span><small>el % en decimal</small></div><div><b>$C_F$</b><span>cantidad final</span><small>lo que queda o lo que me piden</small></div></div>`},
     ]},
 

@@ -90,6 +90,7 @@ function guiaAuto(t){
   if(/\{x\}/.test(t)) return "Planteamos la proporción y despejamos la x.";
   if(/^\s*(Total|En total)/i.test(t)) return "Calculamos el total.";
   const plano = t.replace(/<[^>]+>/g,"").replace(/^\s*[a-e]\)\s*/i,"").replace(/^[➊➋➌➍➎\s]+/,"").trim();
+  if(/datos nuevos/i.test(plano)) return "Primero calculamos los datos nuevos.";
   if(/^Otra forma/i.test(plano)) return "Lo resolvemos de otra forma.";
   if(/^¡Ojo!/.test(plano)) return "¡Cuidado con este detalle!";
   if(/^Ahora\b/i.test(plano)) return "Vemos qué cambia ahora.";
@@ -219,7 +220,7 @@ function aVoz(t){
   return String(t)
     .replace(/<[^>]+>/g," ")
     .replace(/\$([^$]+)\$/g,(_,m)=>" "+m
-      .replace(/C_F/g,"ce efe").replace(/C_I/g,"ce i").replace(/I_V/g,"i uve")
+      .replace(/C_\{\\text\{final\}\}/g,"ce final").replace(/C_\{\\text\{inicial\}\}/g,"ce inicial").replace(/I_\{\\text\{variaci[oó]n\}\}/g,"i de variación").replace(/C_F/g,"ce final").replace(/C_I/g,"ce inicial").replace(/I_V/g,"i de variación")
       .replace(/\\[dt]?frac\{([^}]*)\}\{([^}]*)\}/g,"$1 entre $2")
       .replace(/\\cdot|\\times/g," por ").replace(/\\approx/g," aproximadamente ").replace(/\\,|\;|\\quad|\\qquad/g," ")
       .replace(/\\text\{([^}]*)\}/g,"$1").replace(/\\overline\{([^}]*)\}/g,"$1 periódico")
@@ -256,42 +257,51 @@ function asistenteHTML(){
 }
 // La profe: antes de cada paso dice lo que hay que hacer; al terminar la pantalla dice el «Fíjate».
 function asistente($){
-  let notas = [], guia = "", actual = null, hubo = false;
-  const decir = t => { if(VOZ_ON) hablar(t); };
-  function abrir(tipo, voz){
-    actual = tipo;
-    if(tipo==="guia"){ $("bocaC").innerHTML = `<p class="guia">👉 ${tx(guia)}</p>`; if(voz) decir(aVoz(guia)); }
-    else { $("bocaC").innerHTML = notas.map(b=>bloque(b,"proyectar")).join(""); if(voz) decir(aVoz(notas.map(textoBloque).join(". "))); }
-    $("boca").classList.toggle("es-guia", tipo==="guia");
-    $("boca").hidden = false;
+  // La profe HABLA en cada paso, pero el bocadillo solo se abre si se pincha en ella (no tapa la pizarra).
+  let notas = [], guia = "", hubo = false, ultimo = "";
+  const decir = t => { ultimo = t; if(VOZ_ON) hablar(t); };
+  const txtNotas = () => notas.map(textoBloque).join(". ");
+  function pintarBoca(){
+    const html = (guia ? `<p class="guia">👉 ${tx(guia)}</p>` : "") + notas.map(b=>bloque(b,"proyectar")).join("");
+    $("bocaC").innerHTML = html;
+    $("boca").classList.toggle("es-guia", !notas.length);
   }
-  function cerrar(){ $("boca").hidden = true; actual = null; if("speechSynthesis" in window) speechSynthesis.cancel(); }
-  function visible(){ $("asis").hidden = !(guia || notas.length); $("asisN").textContent = notas.length > 1 ? notas.length : ""; }
-  $("asis").onclick = ()=>{ if(!$("boca").hidden) return cerrar(); if(guia) abrir("guia", true); else if(notas.length) abrir("notas", true); };
+  function abrir(){ pintarBoca(); $("boca").hidden = false; }
+  function cerrar(){ $("boca").hidden = true; }
+  function callar(){ if("speechSynthesis" in window) speechSynthesis.cancel(); }
+  function visible(){
+    $("asis").hidden = !(guia || notas.length);
+    $("asisN").textContent = notas.length > 1 ? notas.length : "";
+    $("asis").classList.toggle("habla", !!guia);
+    if(!$("boca").hidden) pintarBoca();
+  }
+  $("asis").onclick = ()=>{
+    if(!$("boca").hidden){ cerrar(); return; }
+    abrir();
+    decir(aVoz([guia, txtNotas()].filter(Boolean).join(". ")));
+  };
   $("bocaX").onclick = cerrar;
   $("bocaVoz").onclick = ()=>{
     VOZ_ON = !VOZ_ON; try{ localStorage.setItem("voz", VOZ_ON ? "si" : "no"); }catch(e){}
     $("bocaVoz").textContent = VOZ_ON ? "🔊" : "🔇";
-    if(!VOZ_ON){ if("speechSynthesis" in window) speechSynthesis.cancel(); } else if(actual) abrir(actual, true);
+    if(!VOZ_ON) callar(); else if(ultimo) hablar(ultimo);
   };
   return {
-    // nueva pantalla: notas que dirá al final y primer elemento que falta por salir
     pantalla(n, sigEl){
-      notas = n || []; hubo = !!sigEl; cerrar();
+      notas = n || []; hubo = !!sigEl; cerrar(); callar();
       guia = sigEl && sigEl.dataset.g ? sigEl.dataset.g : "";
       visible();
       $("asis").classList.remove("salta"); void $("asis").offsetWidth; if(!$("asis").hidden) $("asis").classList.add("salta");
-      if(guia) abrir("guia", true);
+      if(guia) decir(aVoz(guia));
     },
-    // después de cada paso
     paso(sigEl){
       guia = sigEl && sigEl.dataset.g ? sigEl.dataset.g : "";
       visible();
-      if(guia) abrir("guia", true);
-      else if(!sigEl && hubo && notas.length) abrir("notas", true);
-      else cerrar();
+      if(guia) decir(aVoz(guia));
+      else if(!sigEl && hubo && notas.length){ decir(aVoz(txtNotas())); $("asis").classList.remove("salta"); void $("asis").offsetWidth; $("asis").classList.add("salta"); }
+      else callar();
     },
-    cerrar
+    cerrar(){ cerrar(); callar(); }
   };
 }
 const AVATAR = (window.TEMA_AVATAR || (document.querySelector('script[src*="tema.js"]')||{src:""}).src.replace(/tema\.js.*$/,"avatar.svg"));
