@@ -18,7 +18,7 @@ TEMA.registrar({
     ]},
     { titulo:"Regla de tres y compuesta", cuerpo:[
       {comp:{q:"3 kg de manzanas cuestan 7,50 €. ¿Cuánto cuestan 5 kg?", sol:12.5, unidad:"€", explic:"1 kg = 2,50 € → 5 · 2,50 = 12,50 €", pista:"Calcula lo que cuesta 1 kg."}},
-      {comp:{q:"4 obreros tardan 15 días en una obra. ¿Cuántos días tardan 6 obreros?", sol:10, unidad:"días", explic:"Inversa: 4 · 15 = 60 → 60 : 6 = 10 días", pista:"Más obreros, menos días: el producto se mantiene."}},
+      {comp:{q:"4 obreros tardan 15 días en una obra. ¿Cuántos días tardan 6 obreros?", sol:10, unidad:"días", explic:"Inversa: le damos la vuelta, 4/6 = x/15 → 6 · x = 60 → x = 10 días", pista:"Más obreros, menos días: el producto se mantiene."}},
       {comp:{q:"2 máquinas hacen 100 piezas en 5 h. ¿Cuántas piezas hacen 4 máquinas en 4 h?", sol:160, unidad:"piezas", explic:"1 máquina en 1 h: 100 : 10 = 10 piezas → 4 · 4 · 10 = 160", pista:"¿Cuántas piezas hace 1 máquina en 1 hora?"}},
       {comp:{q:"En un mapa a escala 1 : 50 000, dos pueblos están a 4 cm. ¿Cuántos km hay?", sol:2, unidad:"km", explic:"4 · 50 000 = 200 000 cm = 2 km", pista:"Multiplica y pasa los cm a km (100 000 cm = 1 km)."}}
     ]},

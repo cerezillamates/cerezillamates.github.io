@@ -19,57 +19,52 @@ TEMA.registrar({
       enun:"Calcula de cabeza: <b>a)</b> 50 % de 46 &nbsp; <b>b)</b> 25 % de 80 &nbsp; <b>c)</b> 10 % de 350 &nbsp; <b>d)</b> 20 % de 45 &nbsp; <b>e)</b> 15 % de 200",
       pasos:["<b>a)</b> 50 % es la mitad: 46 : 2 = 23", "<b>b)</b> 25 % es la cuarta parte: 80 : 4 = 20", "<b>c)</b> 10 % es dividir entre 10: 35",
              "<b>d)</b> 20 % = 10 % · 2: 4,5 · 2 = 9", "<b>e)</b> 15 % = 10 % + 5 %: 20 + 10 = 30"],
-      res:"23 · 20 · 35 · 9 · 30" },
+      res:"a) 23 b) 20 c) 35 d) 9 e) 30" },
     { nivel:"Aplicación", min:6,
       enun:"En un hotel hay 325 personas: 39 italianas, 117 francesas, 78 alemanas y el resto rusas. ¿Qué porcentaje representa cada grupo?",
       pasos:[R`Italianas: $x\,\%$ de $325 = 39 \;\Rightarrow\; \dfrac{x}{100} \cdot 325 = 39 \;\Rightarrow\; x = \dfrac{39 \cdot 100}{325} = 12\,\%$`,
              R`Francesas: $\dfrac{117 \cdot 100}{325} = 36\,\%$ · Alemanas: $\dfrac{78 \cdot 100}{325} = 24\,\%$`,
              R`Rusas: $100 - 12 - 36 - 24 = 28\,\%$ (son $325 - 234 = 91$ personas: $\dfrac{91 \cdot 100}{325} = 28$ ✓)`],
-      res:"12 %, 36 %, 24 % y 28 %" },
+      res:"Hay un <b>12 %</b> de italianas, un <b>36 %</b> de francesas, un <b>24 %</b> de alemanas y un <b>28 %</b> de rusas." },
     { nivel:"Práctica", min:5,
       enun:"Una caja tiene 40 globos: 14 rojos, 10 azules, 6 verdes y el resto amarillos. Halla el porcentaje de globos de cada color.",
       pasos:["Amarillos: 40 − 14 − 10 − 6 = 10", cuadro("Globos","%",["40","100"],["14","x"]), R`Rojos: $x = \dfrac{14 \cdot 100}{40} = 35\,\%$`,
              R`Azules: $\dfrac{10 \cdot 100}{40} = 25\,\%$ · Verdes: $15\,\%$ · Amarillos: $25\,\%$`, "Comprueba: 35 + 25 + 15 + 25 = 100 % ✓"],
-      res:"35 %, 25 %, 15 % y 25 %" },
+      res:"Hay un <b>35 %</b> de globos rojos, un <b>25 %</b> azules, un <b>15 %</b> verdes y un <b>25 %</b> amarillos." },
     { nivel:"Práctica", min:4,
       enun:"En una clase de 25 alumnos, el 36 % ha aprobado todas las asignaturas en la 1.ª evaluación. ¿Cuántos alumnos son?",
       pasos:[R`$36\,\%$ de $25 = \dfrac{25 \cdot 36}{100} = \dfrac{900}{100} = 9$`],
-      res:"<b>9 alumnos</b>" },
+      res:"Han aprobado todo <b>9 alumnos</b>." },
     { nivel:"Problema", min:5,
       enun:"En una encuesta del instituto, 54 alumnos, que son el 45 % de los encuestados, prefieren el baloncesto. ¿Cuántos alumnos respondieron la encuesta?",
       pasos:["Ahora busco el <b>total</b>.", cuadro("%","Alumnos",["45","54"],["100","x"]), R`$x = \dfrac{100 \cdot 54}{45} = 120$`, "Comprueba: 45 % de 120 = 54 ✓"],
-      res:"<b>120 alumnos</b>" },
+      res:"Respondieron la encuesta <b>120 alumnos</b>." },
     { nivel:"Reto", min:6,
       enun:"<b>a)</b> «Tres de cada siete alumnos se dan cuenta de que dos ejercicios del examen están resueltos en el libro». Exprésalo en porcentaje.<br><b>b)</b> En un pueblo, el 60 % son adultos y, de ellos, el 25 % está jubilado. ¿Qué porcentaje del pueblo está jubilado?",
       pasos:[R`<b>a)</b> $\dfrac{3}{7} = 0,4285\ldots \approx 42,86\,\%$`, R`<b>b)</b> El 25 % del 60 %: $0,25 \cdot 60 = 15\,\%$`, "Con 100 personas: 60 adultos y 15 jubilados → 15 de cada 100."],
-      res:"a) ≈ 42,86 %&ensp;·&ensp;b) 15 %" }
+      res:"a) Se dan cuenta aproximadamente el <b>42,86 %</b> de los alumnos.<br>b) Está jubilado el <b>15 %</b> del pueblo." }
   ],
 
   casa: [
     { nivel:"Básico", enun:"Calcula: <b>a)</b> 30 % de 90 &nbsp; <b>b)</b> 5 % de 240 &nbsp; <b>c)</b> 75 % de 60 &nbsp; <b>d)</b> 1 % de 3500",
-      pasos:["a) 90 · 30 : 100 = 27", "b) 240 · 5 : 100 = 12", "c) 60 · 75 : 100 = 45", "d) 3500 : 100 = 35"], res:"27 · 12 · 45 · 35" },
+      pasos:["a) 90 · 30 : 100 = 27", "b) 240 · 5 : 100 = 12", "c) 60 · 75 : 100 = 45", "d) 3500 : 100 = 35"], res:"a) 27 b) 12 c) 45 d) 35" },
     { nivel:"Básico", enun:"Mi hermana tiene rotuladores: 10 azules, 5 amarillos, 15 verdes y 20 morados. ¿Qué porcentaje tiene de cada color?",
-      pasos:["Total: 50 rotuladores. 50 son el 100 %, así que cada rotulador es el 2 %.", "Azules 10 · 2 = 20 % · amarillos 10 % · verdes 30 % · morados 40 %"], res:"20 %, 10 %, 30 % y 40 %" },
+      pasos:["Total: 50 rotuladores. 50 son el 100 %, así que cada rotulador es el 2 %.", "Azules 10 · 2 = 20 % · amarillos 10 % · verdes 30 % · morados 40 %"], res:"Tiene un <b>20 %</b> azules, un <b>10 %</b> amarillos, un <b>30 %</b> verdes y un <b>40 %</b> morados." },
     { nivel:"Básico", enun:"Otra caja de rotuladores tiene 9 azules, 24 amarillos y 27 morados. ¿Qué porcentaje hay de cada color?",
-      pasos:["Total: 60", R`Azules: $\dfrac{9 \cdot 100}{60} = 15\,\%$ · amarillos: $\dfrac{24 \cdot 100}{60} = 40\,\%$ · morados: $45\,\%$`], res:"15 %, 40 % y 45 %" },
+      pasos:["Total: 60", R`Azules: $\dfrac{9 \cdot 100}{60} = 15\,\%$ · amarillos: $\dfrac{24 \cdot 100}{60} = 40\,\%$ · morados: $45\,\%$`], res:"Hay un <b>15 %</b> de azules, un <b>40 %</b> de amarillos y un <b>45 %</b> de morados." },
     { nivel:"Consolidación", enun:"En un hotel hay 120 personas: 24 portuguesas, 36 alemanas y el resto españolas. Calcula el porcentaje de cada nacionalidad.",
-      pasos:[R`Portuguesas: $\dfrac{24 \cdot 100}{120} = 20\,\%$ · alemanas: $\dfrac{36 \cdot 100}{120} = 30\,\%$`, "Españolas: 100 − 20 − 30 = 50 %"], res:"20 %, 30 % y 50 %" },
+      pasos:[R`Portuguesas: $\dfrac{24 \cdot 100}{120} = 20\,\%$ · alemanas: $\dfrac{36 \cdot 100}{120} = 30\,\%$`, "Españolas: 100 − 20 − 30 = 50 %"], res:"Hay un <b>20 %</b> de portugueses, un <b>30 %</b> de alemanes y un <b>50 %</b> de españoles." },
     { nivel:"Consolidación", enun:"En un centro de 680 alumnos han aprobado matemáticas 476. ¿Qué porcentaje ha aprobado?",
-      pasos:[R`$\dfrac{476 \cdot 100}{680} = 70\,\%$`], res:"70 %" },
+      pasos:[R`$\dfrac{476 \cdot 100}{680} = 70\,\%$`], res:"Ha aprobado el <b>70 %</b> de los alumnos." },
     { nivel:"Problema", enun:"18 alumnos de 2.º, que son el 60 % del curso, van a la excursión. ¿Cuántos alumnos hay en 2.º?",
-      pasos:[R`$\dfrac{60}{100} \cdot T = 18 \;\Rightarrow\; T = \dfrac{18 \cdot 100}{60} = 30$`], res:"30 alumnos" },
+      pasos:[R`$\dfrac{60}{100} \cdot T = 18 \;\Rightarrow\; T = \dfrac{18 \cdot 100}{60} = 30$`], res:"En 2.º hay <b>30 alumnos</b>." },
     { nivel:"Para pensar", enun:"¿Es lo mismo el 20 % de 50 que el 50 % de 20? ¿Por qué? Usa la idea para calcular de cabeza el 8 % de 25.",
-      pasos:[R`$20\,\%$ de $50 = \dfrac{20 \cdot 50}{100} = 10$ y $50\,\%$ de $20 = \dfrac{50 \cdot 20}{100} = 10$: se multiplican los mismos números.`, R`$8\,\%$ de $25 = 25\,\%$ de $8 = 8 : 4 = 2$`], res:"Sí; el 8 % de 25 es 2" }
+      pasos:[R`$20\,\%$ de $50 = \dfrac{20 \cdot 50}{100} = 10$ y $50\,\%$ de $20 = \dfrac{50 \cdot 20}{100} = 10$: se multiplican los mismos números.`, R`$8\,\%$ de $25 = 25\,\%$ de $8 = 8 : 4 = 2$`], res:"<b>Sí</b> es lo mismo, y el 8 % de 25 es <b>2</b>." }
   ],
 
   laminas: [
     { portada:true, cuerpo:[
-      {nota:[{lista:[
-        "Qué es un <b>porcentaje</b> y cómo se escribe como fracción y como decimal.",
-        "Calcular el <b>r % de una cantidad</b> (de cabeza y con la regla de tres).",
-        "Saber <b>qué porcentaje</b> es una parte del total.",
-        "Calcular el <b>total</b> si conozco una parte y su porcentaje."
-      ]}], etq:"🎯 En este apartado vas a aprender"}
+      {html:`<p class="gancho">¿Qué quiere decir «el 20 % de la clase»?</p>`}
     ]},
 
     { titulo:"¿Qué es un porcentaje?", cuerpo:[
@@ -83,7 +78,7 @@ TEMA.registrar({
         [{prop:["<b>50 %</b> → la mitad (: 2)", "<b>25 %</b> → la cuarta parte (: 4)", "<b>75 %</b> → tres cuartas partes"], etq:"Fracciones"}],
         [{prop:["<b>10 %</b> → divido entre 10", "<b>20 %</b> → el 10 % por 2", "<b>5 %</b> → la mitad del 10 %", "<b>1 %</b> → divido entre 100"], etq:"Con el 10 %"}]
       ]},
-      {ej:{enun:"Calcula el 15 % de 60.", pasos:["10 % de 60 = 6", "5 % de 60 = 3 (la mitad)", "15 % = 6 + 3"], res:"9"}}
+      {ej:{enun:"Calcula el 15 % de 60.", pasos:["10 % de 60 = 6", "5 % de 60 = 3 (la mitad)", "15 % = 6 + 3"], res:"El 15 % de 60 es <b>9</b>."}}
     ]},
 
     { titulo:"El r % de una cantidad", cuerpo:[
@@ -105,7 +100,7 @@ TEMA.registrar({
       {ej:{etq:"🖍️ Problema de examen", enun:"Mi hermana tiene 10 rotuladores azules, 5 amarillos, 15 verdes y 20 morados. ¿Qué porcentaje tiene de cada color?",
         pasos:["Total: 10 + 5 + 15 + 20 = 50", R`Azules: $\dfrac{10 \cdot 100}{50} = 20\,\%$ · amarillos: $\dfrac{5 \cdot 100}{50} = 10\,\%$`,
                R`Verdes: $\dfrac{15 \cdot 100}{50} = 30\,\%$ · morados: $\dfrac{20 \cdot 100}{50} = 40\,\%$`],
-        res:"20 %, 10 %, 30 % y 40 %"}},
+        res:"Tiene un <b>20 %</b> azules, un <b>10 %</b> amarillos, un <b>30 %</b> verdes y un <b>40 %</b> morados."}},
       {html:barra([[20,"20 %","a"],[10,"10 %","r"],[30,"30 %","v"],[40,"40 %","z"]],"Todos juntos suman el 100 %")}
     ]},
 

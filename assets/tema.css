@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap");
+@font-face{font-family:"Caveat";src:url("fonts/Caveat.ttf") format("truetype");font-weight:400 700;font-display:swap}
 /* ==========================================================================
    Estilos comunes de los temas · Matemáticas paso a paso (Mercedes Cerezo)
    Tipografías: Outfit (títulos) + Nunito (texto). Paleta viva y con contraste
@@ -359,3 +359,49 @@ body.estudio .wrap{padding-bottom:110px}
 .cfiv>div>small{display:block;color:var(--muted);font-size:.8em}
 .cfiv.desp>div{background:#fff;border:2px solid var(--ind-bg);font-size:.95em}
 .cfiv.desp>div>b{font-size:1.1em;margin-top:.15em}
+
+/* ---------- Pizarra: los pasos se reparten en dos columnas (tabla arriba a la izquierda, paso 2 a la derecha…)
+   y cada paso va en un color, como cuando se escribe con rotuladores distintos ---------- */
+.pasos li{--c:#1d4ed8}
+.pasos li:nth-child(4n+2){--c:#047857}
+.pasos li:nth-child(4n+3){--c:#7c3aed}
+.pasos li:nth-child(4n+4){--c:#c2410c}
+.pasos li>span,.pasos li>span .katex{color:var(--c)}
+.pasos li::before{background:var(--c)}
+.pasos li{border-left-color:var(--c)}
+.lamina .pasos:not(.lineal){grid-template-columns:repeat(2,minmax(0,1fr));gap:.45em .7em;align-items:start}
+.lamina .pasos:not(.lineal) li{background:#fff;border:2px solid color-mix(in srgb,var(--c) 22%,transparent);border-left:6px solid var(--c);padding:.35em .6em}
+.lamina .pasos:not(.lineal) li:only-child{grid-column:1/-1}
+.lamina .pasos li.actual{background:#fffbeb;border-color:var(--c);box-shadow:0 0 0 3px #fcd34d}
+.lamina .pasos li.actual::before{background:var(--c)}
+.lamina .b-ej>.res,.sol-act>.res{display:table;margin:.55em auto 0}
+@media (max-width:700px){.lamina .pasos:not(.lineal){grid-template-columns:1fr}}
+/* números y letras de las fórmulas también con letra de profe */
+.pasos li>span .katex .mord,.pasos li>span .katex .mrel,.pasos li>span .katex .mpunct,
+.res .katex .mord,.res .katex .mrel{font-family:"Caveat","KaTeX_Main",cursive}
+.pasos li>span .katex .mord.mathnormal,.res .katex .mord.mathnormal{font-family:"Caveat","KaTeX_Math",cursive;font-style:italic}
+.pasos li>span .katex,.res .katex{font-size:1em}
+.pasos li>span table td,.pasos li>span table th{font-family:"Caveat",cursive}
+.pasos li>span table td{font-size:1.15em;color:var(--c)}
+.pasos li>span table th{font-family:var(--f-b);font-size:.8em}
+
+/* ---------- Enunciado: primero se buscan los datos ---------- */
+.lamina .marca.oculto{visibility:visible!important}
+.lamina .marca.nuevo{animation:none}
+.marca .dato,.marca .dato-p,.marca .preg{transition:background .4s,color .4s,box-shadow .4s}
+.marca:not(.oculto) .dato{background:#dbeafe;color:#1d4ed8;font-weight:900;border-radius:.25em;padding:0 .18em;box-shadow:0 0 0 2px #93c5fd}
+.marca:not(.oculto) .dato-p{background:#dcfce7;color:#047857;font-weight:900;border-radius:.25em;padding:0 .18em;box-shadow:0 0 0 2px #86efac}
+.marca:not(.oculto) .preg{text-decoration:underline wavy #dc2626;text-decoration-thickness:.08em;text-underline-offset:.22em}
+
+/* ---------- Compuesta: arcos de cada magnitud hasta la de la x ---------- */
+.arcos-w{position:relative;display:inline-block;max-width:100%}
+.arcos-w>svg.arcos{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.arcos-w>table{margin-top:0!important}
+
+/* ---------- El bocadillo cuando la profe dice el siguiente paso ---------- */
+.bocadillo.es-guia{width:auto;max-width:min(40vw,560px);padding:8px 14px}
+.bocadillo .guia{margin:0;font-weight:800;color:#1e1b4b}
+.bocadillo.es-guia .boca-cab{margin-bottom:2px}
+.bocadillo.es-guia .boca-cab b{font-size:.75em;color:var(--muted)}
+/* portada: una sola frase, sin listas */
+.lamina .portada .gancho{font:800 1.25em/1.3 var(--f-d);color:var(--ind);margin:.6em auto 0;max-width:24em}

@@ -35,7 +35,7 @@ function bloque(b, modo){
   if(b.formula) return `<div class="b-formula">${tex(b.formula,true)}</div>`;
   if(b.lista)   return `<ul class="lista">${b.lista.map(l=>`<li>${tx(l)}</li>`).join("")}</ul>`;
   if(b.cols)    return `<div class="cols${b.cols2?" cols-32":""}">${b.cols.map(c=>`<div>${[].concat(c).map(x=>bloque(x,modo)).join("")}</div>`).join("")}</div>`;
-  if(b.ej)      return ejemplo(b.ej);
+  if(b.ej)      return ejemplo(b.ej, modo);
   if(b.comp)    return modo==="estudiar" ? comprueba(b.comp) : "";
   for(const k in CAJAS){
     if(b[k] !== undefined){
@@ -45,13 +45,127 @@ function bloque(b, modo){
   }
   return "";
 }
-function ejemplo(e){
-  const pasos = (e.pasos||[]).map(p=>`<li class="paso"><span>${tx(p)}</span></li>`).join("");
+function ejemplo(e, modo){
+  const proy = modo==="proyectar";
+  const pasos = pasosHTML(e.pasos, false);
+  const enun = e.enun ? (proy && !e.sinMarca ? `<div class="enun paso marca" data-g="${esc(GUIA_LEER)}">${tx(marcar(e.enun))}</div>` : `<div class="enun">${tx(e.enun)}</div>`) : "";
   return `<div class="b-ej"><span class="etq">${e.etq||"✍️ Ejemplo resuelto"}</span>
-    ${e.enun?`<div class="enun">${tx(e.enun)}</div>`:""}
-    ${pasos?`<ol class="pasos">${pasos}</ol>`:""}
-    ${e.res?`<div class="res paso">${tx(e.res)}</div>`:""}</div>`;
+    ${enun}
+    ${pasos?`<ol class="pasos${e.lineal?" lineal":""}">${pasos}</ol>`:""}
+    ${e.res?`<div class="res paso" data-g="${esc(GUIA_RES)}">${tx(e.res)}</div>`:""}</div>`;
 }
+
+/* ---------- Pasos: texto o {t:"…", g:"lo que dice la profe antes de este paso"} ---------- */
+const GUIA_LEER = "Leemos el enunciado. ¿Qué datos nos dan y qué nos preguntan?";
+const GUIA_RES  = "Respondemos con una frase.";
+const GUIA_ARCO = "Comparamos cada magnitud con la de la x. ¿Directa o inversa?";
+const esc = t => String(t).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const pT = p => (p && typeof p==="object") ? p.t : p;
+// verbos en primera persona → lo que dice la profe en plural («Divido…» → «Dividimos…»)
+const VERBOS = {divido:"Dividimos",multiplico:"Multiplicamos",sumo:"Sumamos",resto:"Restamos",paso:"Pasamos",simplifico:"Simplificamos",
+  escribo:"Escribimos",compruebo:"Comprobamos",calculo:"Calculamos",hago:"Hacemos",tapo:"Tapamos",busco:"Buscamos",pongo:"Ponemos",
+  comparo:"Comparamos",despejo:"Despejamos",reparto:"Repartimos",cuento:"Contamos",miro:"Miramos",igualo:"Igualamos",quito:"Quitamos",
+  redondeo:"Redondeamos",reduzco:"Reducimos",doy:"Damos",le:"",lo:"",elijo:"Elegimos",sustituyo:"Sustituimos",aplico:"Aplicamos",uso:"Usamos",
+  coloco:"Colocamos",ordeno:"Ordenamos",convierto:"Convertimos",averiguo:"Averiguamos",completo:"Completamos",planteo:"Planteamos",
+  "le doy":"Le damos","lo paso":"Lo pasamos"};
+function guiaVerbo(t){
+  const plano = t.replace(/<[^>]+>/g,"").replace(/\$[^$]*\$/g," ").replace(/^\s*[a-e]\)\s*/i,"").replace(/^[➊➋➌➍➎\s]+/,"").trim();
+  const m = plano.match(/^(le doy|lo paso|[A-Za-zÁÉÍÓÚáéíóúñ]+)\b([^:→.]*)/i);
+  if(!m) return "";
+  const v = VERBOS[m[1].toLowerCase()]; if(!v) return "";
+  const resto = m[2].replace(/\s+/g," ").trim().replace(/[,;]$/,"");
+  return (v + (resto ? " " + resto : "")).replace(/\bmi\b/g,"nuestro").trim() + ".";
+}
+function guiaAuto(t){
+  t = String(t||"");
+  if(/<table/.test(t)) return "Colocamos los datos en una tabla.";
+  if(/tiene sentido|Comprueba|Compruebo/i.test(t)) return "Comprobamos si el resultado tiene sentido.";
+  const v = guiaVerbo(t); if(v) return v;
+  if(/<b>[DIN]<\/b>|DIRECTA|INVERSA|\(D\)|\(I\)/.test(t)) return "¿Directa o inversa? Pensamos qué pasa si una magnitud se duplica.";
+  if(/^\s*Significa/i.test(t)) return "¿Qué significa el número que nos ha salido?";
+  if(/^\s*Extremos/i.test(t)) return "Multiplicamos los extremos y los medios.";
+  if(/I_V\s*=/.test(t)) return "Calculamos el índice de variación.";
+  if(/C_F\s*=|C_I\s*=/.test(t)) return "Aplicamos la fórmula.";
+  if(/x\s*=/.test(t) && !/\{x\}/.test(t)) return "Despejamos la x.";
+  if(/\{x\}/.test(t)) return "Planteamos la proporción y despejamos la x.";
+  if(/^\s*(Total|En total)/i.test(t)) return "Calculamos el total.";
+  const plano = t.replace(/<[^>]+>/g,"").replace(/^\s*[a-e]\)\s*/i,"").replace(/^[➊➋➌➍➎\s]+/,"").trim();
+  if(/^Otra forma/i.test(plano)) return "Lo resolvemos de otra forma.";
+  if(/^¡Ojo!/.test(plano)) return "¡Cuidado con este detalle!";
+  if(/^Ahora\b/i.test(plano)) return "Vemos qué cambia ahora.";
+  if(/^\d[\d\s.,]*:\s*\d+[\d\s.,]*=.*(cada parte|por cada)/i.test(plano)) return "Calculamos cuánto vale cada parte.";
+  if(/·.*=.*·.*=/.test(plano) && /€|partes|caramelos|balones/.test(plano)) return "Multiplicamos cada uno por sus partes.";
+  const et = plano.match(/^([A-Za-zÁÉÍÓÚáéíóúñ][^:$→=]{2,32}):\s/);
+  if(et) return "Ahora: " + et[1].trim().replace(/^./, c=>c.toLowerCase()).replace(/^(banco|tienda) (\w)$/i,(m,x,y)=>x+" "+y.toUpperCase()) + ".";
+  if(/\$/.test(t)) return "Hacemos las operaciones.";
+  return "";
+}
+const pG = p => (p && typeof p==="object" && p.g!==undefined) ? p.g : guiaAuto(pT(p));
+function pasosHTML(pasos, ocultar){
+  return (pasos||[]).map(p=>{ const g = pG(p); return `<li class="paso${ocultar?" oculto":""}"${g?` data-g="${esc(g)}"`:""}><span>${tx(pT(p))}</span></li>`; }).join("");
+}
+TEMA.pasosHTML = pasosHTML;
+// Enunciado: datos en azul, datos de la pregunta en verde y la pregunta subrayada (se ve al pulsar el primer paso)
+const NO_UNI = /^(de|del|y|e|en|a|al|con|por|para|que|es|son|se|lo|la|el|los|las|un|una|o|u|más|menos|veces|cada|si|le|les|su|sus|ha|han|hay)$/i;
+const NUM = /(\d+(?:[.,]\d+)*(?:[  ]\d{3})*)((?:[  ]?(?:%|€|°|º))|(?:[  ][a-záéíóúñü²³\/]+))?/gi;
+function marcar(s){
+  let enQ = false;
+  const marcaNum = t => t.replace(NUM, (m, n, u)=>{
+    let resto = "";
+    if(u && /^[  ][a-z]/i.test(u) && NO_UNI.test(u.trim())){ resto = u; u = ""; }
+    return `<span class="${enQ?"dato-p":"dato"}">${n}${u||""}</span>${resto}`;
+  });
+  return String(s).split(/(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$|<[^>]+>)/).map((t,k)=>{
+    if(k%2) return t;
+    let out = enQ ? '<span class="preg">' : "";
+    t.split(/(¿|\?)/).forEach(part=>{
+      if(part==="¿"){ if(!enQ){ enQ = true; out += '<span class="preg">'; } out += "¿"; }
+      else if(part==="?"){ out += "?"; if(enQ){ out += "</span>"; enQ = false; } }
+      else out += marcaNum(part);
+    });
+    if(enQ) out += "</span>";
+    return out;
+  }).join("");
+}
+TEMA.marcar = marcar;
+
+/* ---------- Cuadro de la compuesta: un arco de cada magnitud hasta la de la x, con D o I ---------- */
+function prepArcos(root, comoPaso){
+  root.querySelectorAll("table.cmp").forEach(t=>{
+    if(t.parentNode.classList.contains("arcos-w")) return;
+    const fila = t.querySelector("tr.rel");
+    const rel = t.dataset.rel ? t.dataset.rel.split(",") : fila ? [...fila.querySelectorAll("span")].map(x=>x.textContent.trim()[0]).filter(x=>x==="D"||x==="I") : [];
+    if(fila) fila.remove();
+    if(!rel.length) return;
+    const w = document.createElement("div"); w.className = "arcos-w"; w.dataset.rel = rel.join(",");
+    w.style.paddingTop = (1.25 + 0.9*(rel.length-1)) + "em";
+    t.parentNode.insertBefore(w, t); w.appendChild(t);
+    const sv = document.createElementNS("http://www.w3.org/2000/svg","svg");
+    sv.setAttribute("class", "arcos" + (comoPaso ? " paso" : "")); if(comoPaso) sv.setAttribute("data-g", GUIA_ARCO);
+    w.insertBefore(sv, t);
+  });
+  dibujaArcos(root);
+}
+function dibujaArcos(root){
+  (root||document).querySelectorAll(".arcos-w").forEach(w=>{
+    const sv = w.querySelector("svg.arcos"), t = w.querySelector("table"); if(!sv||!t) return;
+    const ths = [...t.querySelectorAll("tr:first-child th")]; if(ths.length<2) return;
+    const rel = w.dataset.rel.split(","), W = w.getBoundingClientRect(), em = parseFloat(getComputedStyle(w).fontSize);
+    const cx = th => { const r = th.getBoundingClientRect(); return {x:r.left - W.left + r.width/2, w:r.width}; };
+    const y0 = t.getBoundingClientRect().top - W.top + 2, X = cx(ths[ths.length-1]), n = rel.length;
+    sv.setAttribute("width", W.width); sv.setAttribute("height", W.height); sv.setAttribute("viewBox", `0 0 ${W.width} ${W.height}`);
+    let h = "";
+    rel.forEach((r,j)=>{
+      const d = n - j, s = cx(ths[j]).x, e = X.x - X.w*0.28 + (n>1 ? X.w*0.56*(d-1)/(n-1) : X.w*0.28);
+      const alto = em*(0.75 + 0.9*(d-1)), c = r==="I" ? "#e11d48" : "#16a34a", my = y0 - alto, mx = (s+e)/2;
+      h += `<path d="M${s},${y0} C${s},${y0-alto*1.33} ${e},${y0-alto*1.33} ${e},${y0-3}" fill="none" stroke="${c}" stroke-width="${em*0.13}" stroke-linecap="round"/>
+        <path d="M${e-em*0.28},${y0-em*0.42} L${e},${y0-2} L${e+em*0.28},${y0-em*0.42}" fill="none" stroke="${c}" stroke-width="${em*0.13}" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="${mx}" cy="${my}" r="${em*0.48}" fill="${c}"/><text x="${mx}" y="${my+em*0.2}" text-anchor="middle" font-size="${em*0.62}" font-weight="900" fill="#fff" font-family="Nunito,system-ui,sans-serif">${r}</text>`;
+    });
+    sv.innerHTML = h;
+  });
+}
+if(window.ResizeObserver){ const ro = new ResizeObserver(()=>dibujaArcos()); window.addEventListener("load", ()=>ro.observe(document.body)); }
 
 /* ---------- Ejercicios «Compruébalo» (solo en modo estudiar) ---------- */
 let nComp = 0;
@@ -135,6 +249,51 @@ function hablar(t){
   speechSynthesis.speak(u);
 }
 if("speechSynthesis" in window && speechSynthesis.addEventListener) speechSynthesis.addEventListener("voiceschanged", ()=>{ VOZ = null; });
+let VOZ_ON = true; try{ VOZ_ON = localStorage.getItem("voz") !== "no"; }catch(e){}
+function asistenteHTML(){
+  return `<button class="asis" id="asis" hidden aria-label="La profe te dice algo"><img src="${AVATAR}" alt=""><span class="asis-n" id="asisN"></span></button>
+    <div class="bocadillo" id="boca" hidden role="status" aria-label="La profe dice"><div class="boca-cab"><b>💬 La profe dice</b><span class="sp"></span><button class="pb" id="bocaVoz" aria-label="Voz encendida o apagada" title="Voz encendida / apagada">${VOZ_ON?"🔊":"🔇"}</button><button class="pb" id="bocaX" aria-label="Cerrar">✕</button></div><div id="bocaC"></div></div>`;
+}
+// La profe: antes de cada paso dice lo que hay que hacer; al terminar la pantalla dice el «Fíjate».
+function asistente($){
+  let notas = [], guia = "", actual = null, hubo = false;
+  const decir = t => { if(VOZ_ON) hablar(t); };
+  function abrir(tipo, voz){
+    actual = tipo;
+    if(tipo==="guia"){ $("bocaC").innerHTML = `<p class="guia">👉 ${tx(guia)}</p>`; if(voz) decir(aVoz(guia)); }
+    else { $("bocaC").innerHTML = notas.map(b=>bloque(b,"proyectar")).join(""); if(voz) decir(aVoz(notas.map(textoBloque).join(". "))); }
+    $("boca").classList.toggle("es-guia", tipo==="guia");
+    $("boca").hidden = false;
+  }
+  function cerrar(){ $("boca").hidden = true; actual = null; if("speechSynthesis" in window) speechSynthesis.cancel(); }
+  function visible(){ $("asis").hidden = !(guia || notas.length); $("asisN").textContent = notas.length > 1 ? notas.length : ""; }
+  $("asis").onclick = ()=>{ if(!$("boca").hidden) return cerrar(); if(guia) abrir("guia", true); else if(notas.length) abrir("notas", true); };
+  $("bocaX").onclick = cerrar;
+  $("bocaVoz").onclick = ()=>{
+    VOZ_ON = !VOZ_ON; try{ localStorage.setItem("voz", VOZ_ON ? "si" : "no"); }catch(e){}
+    $("bocaVoz").textContent = VOZ_ON ? "🔊" : "🔇";
+    if(!VOZ_ON){ if("speechSynthesis" in window) speechSynthesis.cancel(); } else if(actual) abrir(actual, true);
+  };
+  return {
+    // nueva pantalla: notas que dirá al final y primer elemento que falta por salir
+    pantalla(n, sigEl){
+      notas = n || []; hubo = !!sigEl; cerrar();
+      guia = sigEl && sigEl.dataset.g ? sigEl.dataset.g : "";
+      visible();
+      $("asis").classList.remove("salta"); void $("asis").offsetWidth; if(!$("asis").hidden) $("asis").classList.add("salta");
+      if(guia) abrir("guia", true);
+    },
+    // después de cada paso
+    paso(sigEl){
+      guia = sigEl && sigEl.dataset.g ? sigEl.dataset.g : "";
+      visible();
+      if(guia) abrir("guia", true);
+      else if(!sigEl && hubo && notas.length) abrir("notas", true);
+      else cerrar();
+    },
+    cerrar
+  };
+}
 const AVATAR = (window.TEMA_AVATAR || (document.querySelector('script[src*="tema.js"]')||{src:""}).src.replace(/tema\.js.*$/,"avatar.svg"));
 
 /* ---------- Carga de un apartado ---------- */
@@ -161,10 +320,12 @@ function encajar(z, lam){
   const alto = z.clientHeight - parseFloat(getComputedStyle(z).paddingTop) - 12;
   const cabe = f => { lam.style.fontSize = f+"px"; return lam.offsetHeight <= alto && z.scrollWidth <= z.clientWidth + 1; };
   const max = Math.min(56, Math.max(18, z.clientHeight/17, z.clientWidth/40));
-  if(cabe(max)) return;
-  let lo = 8, hi = max;
-  for(let k=0;k<14;k++){ const m=(lo+hi)/2; cabe(m) ? lo=m : hi=m; }
-  cabe(lo);
+  if(!cabe(max)){
+    let lo = 8, hi = max;
+    for(let k=0;k<14;k++){ const m=(lo+hi)/2; cabe(m) ? lo=m : hi=m; }
+    cabe(lo);
+  }
+  dibujaArcos(lam);
 }
 
 
@@ -225,7 +386,7 @@ function estudiar(ap){
   h += camino(ap, "estudiar") + `</div>`;
   h += `<a class="arriba" href="#" aria-label="Volver arriba">↑</a>`;
   if(ap.autoeval) h += `<div class="marcador" id="marc"></div>`;
-  document.body.innerHTML = h;
+  document.body.innerHTML = h; prepArcos(document.body, false);
   if(ap.autoeval){
     const N = Object.keys(TEMA._comp||{}).length;
     TEMA.marcador = ()=>{
@@ -257,8 +418,7 @@ function proyectar(ap){
       <button class="pb" id="fs" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button>
       <button class="pb" id="menu" aria-label="Índice de pantallas" title="Índice de pantallas">☰</button>
     </div></div>
-    <button class="asis" id="asis" hidden aria-label="La profe te dice algo"><img src="${AVATAR}" alt=""><span class="asis-n" id="asisN"></span></button>
-    <div class="bocadillo" id="boca" hidden role="dialog" aria-label="La profe dice"><div class="boca-cab"><b>💬 La profe dice</b><span class="sp"></span><button class="pb" id="bocaVoz" aria-label="Escuchar otra vez" title="Escuchar">🔊</button><button class="pb" id="bocaX" aria-label="Cerrar">✕</button></div><div id="bocaC"></div></div>
+    ${asistenteHTML()}
     <div class="velo" id="velo" hidden></div>
     <div class="menu-p" id="menuP" hidden><div class="menu-c"><div class="menu-h"><b>Pantallas del apartado</b><button class="pb" id="cerrar" aria-label="Cerrar">✕</button></div>
       <ol>${L.map((l,k)=>`<li><button data-k="${k}">${l.portada?"Portada":tx(l.titulo)}</button></li>`).join("")}</ol>
@@ -266,14 +426,7 @@ function proyectar(ap){
   const $ = id=>document.getElementById(id);
   // orden de aparición: data-o (texto y capas de una gráfica sincronizados) o, si no hay, el orden del documento
   function pasosOcultos(){ return [...$("lam").querySelectorAll(".paso.oculto")].map((e,k)=>[e, e.dataset.o!==undefined ? +e.dataset.o : 1000+k]).sort((a,b)=>a[1]-b[1]).map(x=>x[0]); }
-  let NOTAS_L = [];
-  function abrirBoca(){
-    if(!NOTAS_L.length) return;
-    $("bocaC").innerHTML = NOTAS_L.map(b=>bloque(b,"proyectar")).join("");
-    $("boca").hidden = false;
-    hablar(aVoz(NOTAS_L.map(textoBloque).join(". ")));
-  }
-  function cerrarBoca(){ $("boca").hidden = true; if("speechSynthesis" in window) speechSynthesis.cancel(); }
+  const A = asistente($);
   function pintar(){
     const l = L[i];
     $("tit").innerHTML = l.portada ? TEMA.info.tema : tx(l.titulo);
@@ -281,12 +434,9 @@ function proyectar(ap){
     $("lam").innerHTML = l.portada
       ? `<div class="portada"><h2>${ap._numSpan}${ap.titulo}</h2>${sep.main.map(b=>bloque(b,"proyectar")).join("")}</div>`
       : sep.main.map(b=>bloque(b,"proyectar")).join("");
-    NOTAS_L = sep.notas;
-    cerrarBoca();
-    $("asis").hidden = !NOTAS_L.length;
-    $("asisN").textContent = NOTAS_L.length > 1 ? NOTAS_L.length : "";
-    $("asis").classList.remove("salta"); void $("asis").offsetWidth; if(NOTAS_L.length) $("asis").classList.add("salta");
+    prepArcos($("lam"), true);
     $("lam").querySelectorAll(".paso").forEach(p=>p.classList.add("oculto"));
+    A.pantalla(sep.notas, pasosOcultos()[0]);
     $("zona").scrollTop = 0;
     ajustar();
     $("cont").textContent = `${i+1} / ${L.length}`;
@@ -302,10 +452,12 @@ function proyectar(ap){
     const alto = z.clientHeight - parseFloat(getComputedStyle(z).paddingTop) - 12;
     const cabe = f => { lam.style.fontSize = f+"px"; return lam.offsetHeight <= alto && z.scrollWidth <= z.clientWidth + 1; };
     const max = Math.min(54, Math.max(18, z.clientHeight/19, z.clientWidth/42));
-    if(cabe(max)) return;
-    let lo = 8, hi = max;
-    for(let k=0;k<14;k++){ const m=(lo+hi)/2; cabe(m) ? lo=m : hi=m; }
-    cabe(lo);
+    if(!cabe(max)){
+      let lo = 8, hi = max;
+      for(let k=0;k<14;k++){ const m=(lo+hi)/2; cabe(m) ? lo=m : hi=m; }
+      cabe(lo);
+    }
+    dibujaArcos(lam);
   }
   if(window.ResizeObserver) new ResizeObserver(()=>ajustar()).observe(document.getElementById("zona")); else addEventListener("resize", ajustar);
   if(document.fonts && document.fonts.ready){ document.fonts.ready.then(ajustar); if(document.fonts.addEventListener) document.fonts.addEventListener("loadingdone", ajustar); } setTimeout(ajustar, 800);
@@ -326,15 +478,12 @@ function proyectar(ap){
     // los elementos con el mismo número de orden salen a la vez (el paso escrito y su dibujo)
     const grupo = p.dataset.o!==undefined ? pasosOcultos().filter(q=>q.dataset.o===p.dataset.o) : [p];
     grupo.forEach(q=>{ q.classList.remove("oculto"); q.classList.add("nuevo"); if(q.tagName==="LI") q.classList.add("actual"); });
-    actualizar(); return true;
+    actualizar(); A.paso(pasosOcultos()[0]); return true;
   }
   function sig(){ if(i<L.length-1){ i++; pintar(); } else if(fin) location.href = fin.u; }
   function ant(){ if(i>0){ i--; pintar(); } }
   function avanzar(){ if(!verPaso()) sig(); }
   $("sig").onclick = sig; $("ant").onclick = ant; $("paso").onclick = verPaso;
-  $("asis").onclick = ()=>{ $("boca").hidden ? abrirBoca() : cerrarBoca(); };
-  $("bocaX").onclick = cerrarBoca;
-  $("bocaVoz").onclick = ()=>hablar(aVoz(NOTAS_L.map(textoBloque).join(". ")));
   $("fs").onclick = pantallaCompleta;
   document.addEventListener("keydown", e=>{
     if(e.target.closest("input,textarea")) return;
@@ -405,8 +554,9 @@ function clase(ap){
       <button class="pb ver-sol" id="verTodo">👁 Ver toda la solución</button>
       <button class="pb prim" id="sig" aria-label="Siguiente">▶</button>
       <button class="pb" id="fs" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button>
-    </div></div>`;
+    </div></div>${asistenteHTML()}`;
   const $ = id=>document.getElementById(id), z=$("zona"), lam=$("lam");
+  const A = asistente($);
 
   /* --- cronómetro (uno para toda la sesión): cuenta atrás orientativa; al llegar a 0 sigue sumando --- */
   const T = {total:0, quedan:0, va:false, iv:null};
@@ -439,12 +589,15 @@ function clase(ap){
     } else {
       const e = E[i];
       $("tit").innerHTML = `Corrección · Ejercicio ${ap._pre}${i+1} ${nivel(e)}`;
-      lam.innerHTML = `<div class="enun-act">${tx(e.enun)}</div>
+      lam.innerHTML = `<div class="enun-act paso oculto marca" data-g="${esc(GUIA_LEER)}">${tx(marcar(e.enun))}</div>
         <div class="sol-act"><span class="etq">✅ Solución</span>
-          <ol class="pasos">${(e.pasos||[]).map(p=>`<li class="paso oculto"><span>${tx(p)}</span></li>`).join("")}</ol>
-          ${e.res?`<div class="res paso oculto">${tx(e.res)}</div>`:""}</div>`;
+          <ol class="pasos${e.lineal?" lineal":""}">${pasosHTML(e.pasos, true)}</ol>
+          ${e.res?`<div class="res paso oculto" data-g="${esc(GUIA_RES)}">${tx(e.res)}</div>`:""}</div>`;
+      prepArcos(lam, true);
+      lam.querySelectorAll("svg.arcos").forEach(x=>x.classList.add("oculto"));
     }
     actualizar(); encajar(z, lam);
+    if(i>=0 && i<E.length) A.pantalla([], ocultos()[0]); else A.pantalla([], null);
   }
   function actualizar(){
     const corr = i>=0 && i<E.length, n = ocultos().length;
@@ -462,11 +615,11 @@ function clase(ap){
     const p = ocultos()[0]; if(!p) return false;
     lam.querySelectorAll(".actual").forEach(x=>x.classList.remove("actual"));
     // los elementos con el mismo número de orden salen a la vez (el paso escrito y su dibujo)
-    const grupo = p.dataset.o!==undefined ? pasosOcultos().filter(q=>q.dataset.o===p.dataset.o) : [p];
+    const grupo = p.dataset.o!==undefined ? ocultos().filter(q=>q.dataset.o===p.dataset.o) : [p];
     grupo.forEach(q=>{ q.classList.remove("oculto"); q.classList.add("nuevo"); if(q.tagName==="LI") q.classList.add("actual"); });
-    actualizar(); return true;
+    actualizar(); A.paso(ocultos()[0]); return true;
   }
-  function verTodo(){ lam.querySelectorAll(".actual").forEach(x=>x.classList.remove("actual")); ocultos().forEach(p=>p.classList.remove("oculto")); actualizar(); }
+  function verTodo(){ lam.querySelectorAll(".actual").forEach(x=>x.classList.remove("actual")); ocultos().forEach(p=>p.classList.remove("oculto")); actualizar(); A.cerrar(); }
   const sig = ()=>{ if(i<E.length){ i++; pintar(); } }, ant = ()=>{ if(i>=0){ i--; pintar(); } };
   $("sig").onclick = sig; $("ant").onclick = ant; $("paso").onclick = verPaso; $("verTodo").onclick = verTodo;
   $("todos").onclick = ()=>{ i=-1; pintar(); };
@@ -479,6 +632,7 @@ function clase(ap){
     else if(e.key==="s"||e.key==="S"){ verTodo(); }
     else if(e.key==="t"||e.key==="T"){ playT(); }
     else if(e.key==="f"||e.key==="F"){ $("fs").click(); }
+    else if(e.key==="p"||e.key==="P"){ $("asis").click(); }
   });
   if(window.ResizeObserver) new ResizeObserver(()=>encajar(z, lam)).observe(z); else addEventListener("resize", ()=>encajar(z, lam));
   if(document.fonts && document.fonts.ready){ document.fonts.ready.then(()=>encajar(z, lam)); if(document.fonts.addEventListener) document.fonts.addEventListener("loadingdone", ()=>encajar(z, lam)); } setTimeout(()=>encajar(z, lam), 800);
@@ -506,10 +660,10 @@ function casa(ap){
     h += `<section class="est-sec"><h2>${t}</h2>` + L.map(e=>{ n++; return `<div class="tarea" id="t${n}">
       <div class="t-enun"><span class="t-num">${ap._pre}${n}</span><div>${tx(e.enun)}</div></div>
       <div class="t-bot"><button class="btn t-paso" data-t="${n}">👣 Ver el primer paso</button><button class="btn t-todo" data-t="${n}">Ver toda la solución</button></div>
-      <div class="t-sol" hidden><ol class="pasos">${(e.pasos||[]).map(p=>`<li class="paso oculto"><span>${tx(p)}</span></li>`).join("")}</ol>${e.res?`<div class="res paso oculto">${tx(e.res)}</div>`:""}</div></div>`; }).join("") + `</section>`;
+      <div class="t-sol" hidden><ol class="pasos">${pasosHTML(e.pasos, true)}</ol>${e.res?`<div class="res paso oculto">${tx(e.res)}</div>`:""}</div></div>`; }).join("") + `</section>`;
   });
   h += camino(ap, "casa") + `</div><a class="arriba" href="#" aria-label="Volver arriba">↑</a>`;
-  document.body.innerHTML = h;
+  document.body.innerHTML = h; prepArcos(document.body, false);
   document.addEventListener("click", ev=>{
     const b = ev.target.closest(".t-paso,.t-todo"); if(!b) return;
     const t = document.getElementById("t"+b.dataset.t), box = t.querySelector(".t-sol"); box.hidden = false;
