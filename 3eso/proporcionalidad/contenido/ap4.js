@@ -19,23 +19,22 @@ TEMA.registrar({
   ],
 
   clase: [
-    { nivel:"Aplicación", min:5,
-      enun:"En una granja, 5 vacas comen 150 kg de pienso en 6 días. ¿Cuántos kilos de pienso comerán 8 vacas en 10 días?",
+    { nivel:"Aplicación", min:6,
+      enun:"En una granja, 23 cerdos se comen 2990 kg de pienso en 50 días. ¿Cuántos días durarán 6240 kg de pienso para 75 cerdos?",
       pasos:[
-        cuadro(["Vacas","Días","Pienso (kg)"],["5","6","150"],["8","10","x"],["D","D"]),
-        "Vacas → Pienso: doble de vacas, doble de pienso: <b>D</b>. Días → Pienso: doble de días, doble de pienso: <b>D</b>.",
-        R`Las D se dejan igual: $\dfrac{5}{8} \cdot \dfrac{6}{10} = \dfrac{150}{x} \;\Rightarrow\; \dfrac{30}{80} = \dfrac{150}{x}$`,
-        R`$x = \dfrac{150 \cdot 80}{30} = 400$`
-      ],
-      res:"8 vacas comerán <b>400 kg</b> de pienso en 10 días." },
+        cuadro(["Cerdos","Pienso (kg)","Días"],["23","2990","50"],["75","6240","x"],["I","D"]),
+        R`Más cerdos → el pienso dura menos: <b>I</b> → le damos la vuelta: $\dfrac{75}{23}$. Más pienso → dura más: <b>D</b> → $\dfrac{2990}{6240}$`,
+        R`$\dfrac{75}{23} \cdot \dfrac{2990}{6240} = \dfrac{50}{x} \;\Rightarrow\; \dfrac{224\,250}{143\,520} = \dfrac{50}{x}$`,
+        R`$x = \dfrac{50 \cdot 143\,520}{224\,250} = 32$`,
+        "¿Tiene sentido? Hay más del triple de cerdos y solo el doble de pienso: dura menos de 50 días ✓"],
+      res:"Los 6240 kg de pienso durarán <b>32 días</b> a los 75 cerdos." },
     { nivel:"Aplicación", min:5,
-      enun:"En el aula de Tecnología, 3 impresoras 3D fabrican 60 piezas en 4 horas. ¿Cuántas piezas fabricarán 5 impresoras en 6 horas?",
+      enun:"Cuatro mineros abren 15 m de galería en 9 días. ¿Cuántos metros abrirán 6 mineros en 15 días?",
       pasos:[
-        cuadro(["Impresoras","Horas","Piezas"],["3","4","60"],["5","6","x"],["D","D"]),
-        "Más impresoras → más piezas: <b>D</b>. Más horas → más piezas: <b>D</b>.",
-        R`$\dfrac{3}{5} \cdot \dfrac{4}{6} = \dfrac{60}{x} \;\Rightarrow\; \dfrac{12}{30} = \dfrac{60}{x} \;\Rightarrow\; x = \dfrac{60 \cdot 30}{12} = 150$`
-      ],
-      res:"5 impresoras fabricarán <b>150 piezas</b> en 6 horas." },
+        cuadro(["Mineros","Días","Metros"],["4","9","15"],["6","15","x"],["D","D"]),
+        "Más mineros → más metros: <b>D</b>. Más días → más metros: <b>D</b>.",
+        R`$\dfrac{4}{6} \cdot \dfrac{9}{15} = \dfrac{15}{x} \;\Rightarrow\; \dfrac{36}{90} = \dfrac{15}{x} \;\Rightarrow\; x = \dfrac{15 \cdot 90}{36} = 37,5$`],
+      res:"Seis mineros abrirán <b>37,5 m</b> de galería en 15 días." },
     { nivel:"Práctica", min:6,
       enun:"6 alumnos pintan un mural de 18 m² en el patio en 4 horas. ¿Cuánto tardarán 8 alumnos en pintar otro mural de 30 m²?",
       pasos:[

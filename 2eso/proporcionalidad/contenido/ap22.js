@@ -28,9 +28,9 @@ TEMA.registrar({
       {comp:{q:"En un reparto inverso, quien tiene el número más grande recibe más.", opciones:VF, ok:1, explic:"En el inverso, quien tiene más (faltas, tiempo…) recibe <b>menos</b>.", pista:"Piensa en un reparto según las faltas."}}
     ]},
     { titulo:"Porcentajes", cuerpo:[
-      {comp:{q:"¿Cuánto es el 30 % de 250?", sol:75, explic:"250 · 30 : 100 = 75", pista:"Multiplica por 30 y divide entre 100."}},
-      {comp:{q:"¿Qué porcentaje es 18 de 72?", sol:25, unidad:"%", explic:"18 · 100 : 72 = 25 %", pista:"Parte · 100 : total."}},
-      {comp:{q:"45 es el 15 % de una cantidad. ¿Cuál es?", sol:300, explic:"45 · 100 : 15 = 300", pista:"Si el 15 % es 45, el 1 % es 3."}},
+      {comp:{q:"¿Cuánto es el 30 % de 250?", sol:75, explic:"C_F = 250 · 0,30 = 75", pista:"Escribe el 30 % en decimal y multiplica."}},
+      {comp:{q:"¿Qué porcentaje es 18 de 72?", sol:25, unidad:"%", explic:"I_V = 18 : 72 = 0,25 → 25 %", pista:"I_V = C_F : C_I"}},
+      {comp:{q:"45 es el 15 % de una cantidad. ¿Cuál es?", sol:300, explic:"C_I = 45 : 0,15 = 300", pista:"C_I = C_F : I_V"}},
       {comp:{q:"El índice de variación de una bajada del 8 % es:", opciones:["0,92","1,08","0,08"], ok:0, explic:"Pago el 100 − 8 = 92 % → 0,92", pista:"¿Qué porcentaje pagas si te descuentan un 8 %?"}},
       {comp:{q:"¿Cuánto cuesta con el 21 % de IVA algo de 200 €?", sol:242, unidad:"€", explic:"200 · 1,21 = 242 €", pista:"Multiplica por 1,21."}},
       {comp:{q:"Con un 25 % de rebaja he pagado 60 €. ¿Cuánto costaba?", sol:80, unidad:"€", explic:"Pagué el 75 %: 60 : 0,75 = 80 €", pista:"Divide entre el índice de la rebaja."}},

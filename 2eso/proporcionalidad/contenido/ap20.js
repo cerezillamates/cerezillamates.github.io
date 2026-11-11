@@ -45,11 +45,11 @@ TEMA.registrar({
       res:"A los nietos les tocan <b>120 €</b>, <b>90 €</b> y <b>60 €</b>." },
     { nivel:"Problema", min:5,
       enun:"En 2.º hay 75 alumnos y 30 hacen deporte en un club. <b>a)</b> ¿Qué porcentaje hace deporte en un club? <b>b)</b> El 60 % de los que hacen deporte juega al fútbol. ¿Cuántos son?",
-      pasos:[R`<b>a)</b> $\dfrac{30 \cdot 100}{75} = 40\,\%$`, R`<b>b)</b> $60\,\%$ de $30 = 18$`],
+      pasos:[R`<b>a)</b> $I_V = 30 : 75 = 0,40$ → $40\,\%$`, R`<b>b)</b> $C_F = 30 \cdot 0,60 = 18$`],
       res:"a) Hace deporte en un club el <b>40 %</b>.<br>b) Juegan al fútbol <b>18 alumnos</b>." },
     { nivel:"Problema", min:6,
       enun:"En agosto un artículo costaba 125 € y en diciembre costaba un 40 % más. Al verano siguiente lo compré por 210 €. ¿El segundo cambio fue una subida o una bajada? ¿De qué porcentaje?",
-      pasos:[R`Diciembre: $40\,\%$ de $125 = 50$ → $175$ €`, "De 175 € a 210 €: subida de 35 €", R`$x\,\%$ de $175 = 35 \;\Rightarrow\; x = \dfrac{35 \cdot 100}{175} = 20$`],
+      pasos:[R`Diciembre: sube un 40 %, $125 \cdot 1,40 = 175$ €`, R`De 175 € a 210 €: $I_V = 210 : 175 = 1,20$`, "1,20 es mayor que 1: subida del 20 %"],
       res:"El segundo cambio fue una <b>subida del 20 %</b>." },
     { nivel:"Aplicación", min:4,
       enun:"¿Qué interés producen 6000 € al 2,5 % anual durante 9 meses?",
@@ -109,8 +109,8 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">🙃 Inversa</span><p>doble → mitad: le doy la vuelta a la fracción de la $x$ y multiplico en cruz</p></div>
         <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I a la x; a las I, la vuelta; multiplico</p></div>
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
-        <div class="b-prop"><span class="etq">％ Porcentajes</span><p>r % de C $= \\dfrac{C \\cdot r}{100}$ · ¿qué %? parte · 100 : total</p></div>
-        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>C.F. = C.I. · I.V. · antes: C.F. : I.V. · encadenados: se multiplican</p></div>
+        <div class="b-prop"><span class="etq">％ Porcentajes</span><p>el % en decimal: $C_F = C_I \\cdot I_V$ · ¿qué %? $I_V = C_F : C_I$</p></div>
+        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>$C_F = C_I \\cdot I_V$. Antes: $C_I = C_F : I_V$. Encadenados: se multiplican los índices.</p></div>
         <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12</p></div>
         <div class="b-prop"><span class="etq">🚰🚗 Grifos y móviles</span><p>$\\dfrac1a + \\dfrac1b$ y la vuelta · se acercan: sumo · se persiguen: resto</p></div></div>`}
     ]},

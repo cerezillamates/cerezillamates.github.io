@@ -32,7 +32,7 @@ TEMA.registrar({
       res:"a) Pagué <b>72 €</b> por el abrigo.<br>b) La bufanda me costó <b>15 €</b>." },
     { nivel:"1,25 puntos", min:5,
       enun:"Un pantalón costaba 70 € y lo he pagado a 56 €. ¿Qué porcentaje de descuento me han hecho?",
-      pasos:["Descuento: 70 − 56 = 14 €", R`$\dfrac{14 \cdot 100}{70} = 20\,\%$`, R`O: $56 : 70 = 0,80$ → pago el 80 %, descuento del 20 %`],
+      pasos:[R`$I_V = C_F : C_I = 56 : 70 = 0,80$`, "Pago el 80 %: el descuento es del 100 − 80 = 20 %"],
       res:"Me han hecho un descuento del <b>20 %</b>." },
     { nivel:"1 punto", min:4,
       enun:"Un ordenador cuesta 1200 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
