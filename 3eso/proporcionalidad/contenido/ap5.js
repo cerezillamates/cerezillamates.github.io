@@ -99,7 +99,7 @@ TEMA.registrar({
       enun:"Has pagado 290,40 € por una bici eléctrica con un 20 % de rebaja y después el 21 % de IVA. ¿Cuál era el precio inicial?",
       pasos:[R`$I_V$ total $= 0,80 \cdot 1,21 = 0,968$`, R`$C_I = C_F : I_V = 290,40 : 0,968 = 300$ €`,
              R`Comprueba: $300 \cdot 0,80 = 240$ y $240 \cdot 1,21 = 290,40$ ✓`],
-      res:"El precio inicial era <b>300 €</b>." },
+      res:"La bici costaba <b>300 €</b> al principio." },
     { nivel:"Para pensar",
       enun:"<b>a)</b> Si un precio sube un 20 % y después baja un 20 %, ¿vuelve a ser el mismo?<br><b>b)</b> Un precio ha subido un 25 %. ¿Qué rebaja hay que hacer para que vuelva al precio de antes?",
       pasos:[R`<b>a)</b> $1,20 \cdot 0,80 = 0,96$ → baja un $4\,\%$: <b>no</b> vuelve al mismo. El 20 % de bajada se calcula sobre un precio mayor.`,
@@ -204,7 +204,7 @@ TEMA.registrar({
         [{ej:{etq:"🧾 Hacia delante", enun:"Una factura de 350 € con un 20 % de descuento y después un 21 % de IVA.",
           pasos:[R`$I_V = 0,80 \cdot 1,21 = 0,968$`, R`$C_F = 350 \cdot 0,968 = 338,80$ €`], res:"Hay que pagar <b>338,80 €</b>."}}],
         [{ej:{etq:"📺 Hacia atrás", enun:"Pagamos 290,40 € con un 20 % de rebaja y un 21 % de IVA. ¿Precio inicial?",
-          pasos:[R`$I_V = 0,80 \cdot 1,21 = 0,968$`, R`$C_I = 290,40 : 0,968 = 300$ €`], res:"La bici costaba <b>300 €</b> al principio."}}]
+          pasos:[R`$I_V = 0,80 \cdot 1,21 = 0,968$`, R`$C_I = 290,40 : 0,968 = 300$ €`], res:"El precio inicial era <b>300 €</b>."}}]
       ]}
     ]},
 

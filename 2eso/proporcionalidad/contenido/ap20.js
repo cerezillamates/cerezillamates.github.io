@@ -74,8 +74,8 @@ TEMA.registrar({
       pasos:[R`$1,10 \cdot 0,90 = 0,99$ → menos de 1`], res:"En total el precio baja un <b>1 %</b>." },
     { nivel:"Problema", enun:"Un grifo llena un depósito en 10 horas y otro en 15 horas. ¿Cuánto tardan los dos juntos?",
       pasos:[R`$\dfrac{1}{10} + \dfrac{1}{15} = \dfrac{3}{30} + \dfrac{2}{30} = \dfrac{5}{30} = \dfrac16$`], res:"Los dos juntos tardan <b>6 horas</b>." },
-    { nivel:"Problema", enun:"Dos ciudades están a 360 km. A la vez sale un coche de cada una, uno hacia el otro, a 100 km/h y a 80 km/h. ¿Cuándo se cruzan? ¿A qué distancia de la primera?",
-      pasos:[R`$t = \dfrac{360}{180} = 2$ h`, R`$100 \cdot 2 = 200$ km`], res:"Se cruzan a las <b>2 horas</b>, a <b>200 km</b> de la primera ciudad." },
+    { nivel:"Problema", enun:"Un grifo llena un depósito en 3 horas y el desagüe lo vacía en 12 horas. Si se abren los dos, ¿cuánto tarda en llenarse?",
+      pasos:[R`El desagüe resta: $\dfrac13 - \dfrac{1}{12} = \dfrac{4}{12} - \dfrac{1}{12} = \dfrac{3}{12} = \dfrac14$`, "Le doy la vuelta: 4 horas"], res:"El depósito tarda <b>4 horas</b> en llenarse." },
     { nivel:"Problema", enun:"¿Qué dinero hay que depositar al 2 % para ganar 150 € de intereses en 3 años?",
       pasos:[R`$c = \dfrac{150}{0,02 \cdot 3} = \dfrac{150}{0,06} = 2500$ €`], res:"Hay que depositar <b>2500 €</b>." }
   ],
@@ -83,7 +83,7 @@ TEMA.registrar({
   laminas: [
     { portada:true, cuerpo:[
       {nota:[{lista:[
-        "Entra <b>todo el tema</b>: razón y proporción, D, I, compuesta, repartos, porcentajes, aumentos y disminuciones, interés, grifos y móviles.",
+        "Entra <b>todo el tema</b>: razón y proporción, D, I, compuesta, repartos, porcentajes, aumentos y disminuciones, interés y grifos.",
         "En clase: el <b>modelo de control 1</b>, con cronómetro y corrección uno a uno.",
         "En casa: los <b>ejercicios de repaso</b> y el <b>modelo de control 2</b>.",
         "Haz también la <b>autoevaluación</b>: te corrige al momento."
@@ -99,7 +99,7 @@ TEMA.registrar({
         <tr><th>«¿qué porcentaje…?», «el … %»</th><td><b>porcentajes</b></td></tr>
         <tr><th>IVA, rebaja, «costaba antes», «ha subido…»</th><td><b>aumentos y disminuciones</b></td></tr>
         <tr><th>banco, rédito, capital, préstamo</th><td><b>interés simple</b></td></tr>
-        <tr><th>«juntos», «a la vez», «se cruzan», «lo alcanza»</th><td><b>grifos y móviles</b></td></tr></table>`}
+        <tr><th>«juntos», «a la vez», «desagüe»</th><td><b>grifos y trabajo en común</b></td></tr></table>`}
     ]},
 
     { titulo:"🧠 Mapa del tema", cuerpo:[
@@ -112,7 +112,7 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">％ Porcentajes</span><p>el % en decimal: $C_F = C_I \\cdot I_V$ · ¿qué %? $I_V = C_F : C_I$</p></div>
         <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>$C_F = C_I \\cdot I_V$. Antes: $C_I = C_F : I_V$. Encadenados: se multiplican los índices.</p></div>
         <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12</p></div>
-        <div class="b-prop"><span class="etq">🚰🚗 Grifos y móviles</span><p>$\\dfrac1a + \\dfrac1b$ y la vuelta · se acercan: sumo · se persiguen: resto</p></div></div>`}
+        <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta</p></div></div>`}
     ]},
 
     { titulo:"✅ Antes de entregar el control", cuerpo:[

@@ -13,6 +13,6 @@ TEMA.info = {
     {num:6, titulo:"Porcentajes", desc:"El r % de una cantidad, qué % es y el total, con la regla de tres.", listo:true},
     {num:7, titulo:"Aumentos y disminuciones porcentuales", desc:"IVA, rebajas, precio de antes, índice de variación, encadenados y ofertas.", listo:true},
     {num:8, titulo:"Interés simple", desc:"Capital, rédito y tiempo. Años, meses y días.", listo:true},
-    {num:9, titulo:"Grifos y móviles", desc:"Trabajo en común; encuentro y alcance.", listo:true}
+    {num:9, titulo:"Grifos y trabajo en común", desc:"Grifos, desagües y trabajos que se hacen entre varios.", listo:true}
   ]
 };

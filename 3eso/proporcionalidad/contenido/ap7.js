@@ -52,7 +52,7 @@ TEMA.registrar({
 
   casa: [
     { nivel:"Básico", enun:"Tres grifos llenan un depósito en 4, 6 y 12 horas. ¿Cuánto tardan los tres juntos?",
-      pasos:[R`$\dfrac14 + \dfrac16 + \dfrac{1}{12} = \dfrac{3}{12} + \dfrac{2}{12} + \dfrac{1}{12} = \dfrac{6}{12} = \dfrac12$`], res:"Los dos grifos juntos tardan <b>2 horas</b> en llenar la piscina." },
+      pasos:[R`$\dfrac14 + \dfrac16 + \dfrac{1}{12} = \dfrac{3}{12} + \dfrac{2}{12} + \dfrac{1}{12} = \dfrac{6}{12} = \dfrac12$`], res:"Los tres grifos juntos tardan <b>2 horas</b>." },
     { nivel:"Básico", enun:"Lucía hace un mural en 4 horas y Pedro en 12 horas. ¿Cuánto tardan haciéndolo juntos?",
       pasos:[R`$\dfrac14 + \dfrac{1}{12} = \dfrac{4}{12} = \dfrac13$`], res:"Juntos tardan <b>3 horas</b> en hacer el mural." },
     { nivel:"Consolidación", enun:"Un grifo llena un depósito en 2 horas, pero una fuga lo vacía en 8 horas. ¿Cuánto tarda en llenarse?",
@@ -77,7 +77,7 @@ TEMA.registrar({
     { titulo:"🏊 Dos grifos a la vez", cuerpo:[
       {cols2:true, cols:[
         [{ej:{etq:"🏊 La piscina del pueblo", enun:"Un grifo la llena en 3 horas y el otro en 6 horas. ¿Cuánto tardan juntos?",
-          pasos:[R`$\dfrac13 + \dfrac16 = \dfrac26 + \dfrac16 = \dfrac36 = \dfrac12$`, "En 1 hora llenan la mitad: le doy la vuelta → 2 horas"], res:"Los tres grifos juntos tardan <b>2 horas</b>."}}],
+          pasos:[R`$\dfrac13 + \dfrac16 = \dfrac26 + \dfrac16 = \dfrac36 = \dfrac12$`, "En 1 hora llenan la mitad: le doy la vuelta → 2 horas"], res:"Los dos grifos juntos tardan <b>2 horas</b> en llenar la piscina."}}],
         [{html:deposito(6,[2,1],"En 1 hora: A llena 2/6 y B 1/6")}]
       ]}
     ]},

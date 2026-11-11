@@ -1,7 +1,6 @@
-/* 2.º ESO · Tema 3 · Apartado 9: Grifos y móviles
-   Apuntes de la web de la profesora: GRIFOS → ¿qué parte llena cada uno en 1 hora? 1/a + 1/b (el desagüe resta)
-   y al final se le da la vuelta. MÓVILES → se encuentran: suma de velocidades; uno alcanza al otro: resta;
-   si uno sale antes, primero su ventaja. */
+/* 2.º ESO · Tema 3 · Apartado 9: Grifos y trabajo en común
+   Apuntes de la web de la profesora: ¿qué parte llena cada uno en 1 hora? 1/a + 1/b (el desagüe resta)
+   y al final se le da la vuelta. Decisión de la profesora (11-nov-2026): los MÓVILES se dejan para el tema de álgebra. */
 (function(){
 const R = String.raw;
 // depósito dividido en n partes; llenas = [nº partes de A, nº partes de B]
@@ -11,20 +10,11 @@ const deposito = (n, llenas, pie) => {
     s += `<rect x="30" y="${y}" width="120" height="${h}" fill="${c}" stroke="#4338ca" stroke-width="1.5"/>`; }
   return `<figure class="dib"><svg viewBox="0 0 180 230" role="img" aria-label="Depósito dividido en ${n} partes">${s}<rect x="30" y="10" width="120" height="200" fill="none" stroke="#1e1b3a" stroke-width="4"/></svg>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
 };
-// carretera: tipo "enc" (uno hacia el otro) o "alc" (mismo sentido)
-const carretera = (tipo, t1, t2, centro) => `<figure class="dib" style="max-width:none"><svg viewBox="0 0 640 130" role="img" aria-label="Dibujo de la carretera" style="max-width:30em">
-  <rect x="20" y="70" width="600" height="26" rx="6" fill="#e5e7eb"/><line x1="30" y1="83" x2="610" y2="83" stroke="#fff" stroke-width="3" stroke-dasharray="18 12"/>
-  <text x="${tipo==="enc"?70:60}" y="60" font-size="34">${tipo==="enc"?"🚗":"🚲"}</text><text x="${tipo==="enc"?60:40}" y="122" font-size="18" font-weight="800" fill="#2350b8">${t1}</text>
-  <text x="${tipo==="enc"?530:250}" y="60" font-size="34">${tipo==="enc"?"🚙":"🏍️"}</text><text x="${tipo==="enc"?470:200}" y="122" font-size="18" font-weight="800" fill="#c0392b">${t2}</text>
-  <path d="${tipo==="enc"?"M130,40 h60 l-10,-8 M190,40 l-10,8 M510,40 h-60 l10,-8 M450,40 l10,8":"M110,40 h60 l-10,-8 M170,40 l-10,8 M330,40 h60 l-10,-8 M390,40 l-10,8"}" stroke="#1e1b3a" stroke-width="4" fill="none"/>
-  <text x="320" y="20" text-anchor="middle" font-size="18" font-weight="800" fill="#1e1b3a">${centro}</text></svg></figure>`;
-
 TEMA.registrar({
   num: 9,
-  titulo: "Grifos y móviles",
+  titulo: "Grifos y trabajo en común",
   videos: [
-    {t:"Problema de grifos: dos grifos llenando un depósito", url:"https://www.youtube.com/results?search_query=problema+de+grifos+dos+grifos+llenan+deposito"},
-    {t:"Problemas de móviles: encuentro y alcance", url:"https://www.youtube.com/results?search_query=problemas+de+moviles+encuentro+alcance+2+eso"}
+    {t:"Problema de grifos: dos grifos llenando un depósito", url:"https://www.youtube.com/results?search_query=problema+de+grifos+dos+grifos+llenan+deposito"}
   ],
 
   clase: [
@@ -40,18 +30,20 @@ TEMA.registrar({
       enun:"Para imprimir los apuntes del tema, una impresora tarda 20 minutos y otra 30 minutos. ¿Cuánto tardan si imprimen a la vez?",
       pasos:[R`En 1 minuto: $\dfrac{1}{20} + \dfrac{1}{30} = \dfrac{3}{60} + \dfrac{2}{60} = \dfrac{5}{60} = \dfrac{1}{12}$`, "Le doy la vuelta: 12 minutos"],
       res:"Imprimiendo a la vez tardan <b>12 minutos</b>." },
-    { nivel:"Práctica", min:6,
-      enun:"Dos ciudades están a 300 km. A la vez sale un coche de cada una, uno hacia el otro, a 80 km/h y a 70 km/h. ¿Cuándo se cruzan? ¿A qué distancia de la primera ciudad?",
-      pasos:["Se acercan: sumo velocidades: 80 + 70 = 150 km/h", R`$t = \dfrac{300}{150} = 2$ h`, R`El primero ha recorrido $80 \cdot 2 = 160$ km`],
-      res:"Se cruzan a las <b>2 horas</b>, a <b>160 km</b> de la primera ciudad." },
+    { nivel:"Práctica", min:5,
+      enun:"Para ordenar la biblioteca del aula, Lucía tarda 3 horas y Marcos 6 horas. ¿Cuánto tardan si la ordenan juntos?",
+      pasos:[R`En 1 hora: Lucía hace $\dfrac13$ y Marcos $\dfrac16$`, R`Juntos: $\dfrac13 + \dfrac16 = \dfrac26 + \dfrac16 = \dfrac36 = \dfrac12$`, "Le doy la vuelta: 2 horas"],
+      res:"Juntos tardan <b>2 horas</b> en ordenar la biblioteca." },
     { nivel:"Problema", min:6,
-      enun:"Un ciclista sale a 15 km/h. Una hora después sale una moto, por el mismo camino, a 45 km/h. ¿Cuánto tarda la moto en alcanzarlo? ¿A cuántos km de la salida?",
-      pasos:[R`Ventaja del ciclista: $15 \cdot 1 = 15$ km`, "La moto recorta 45 − 15 = 30 km cada hora", R`$t = \dfrac{15}{30} = 0,5$ h $= 30$ min`, R`Distancia: $45 \cdot 0,5 = 22,5$ km`],
-      res:"La moto tarda <b>30 minutos</b> en alcanzarlo, a <b>22,5 km</b> de la salida." },
-    { nivel:"Reto", min:8,
-      enun:"Adrián va andando al instituto, que está a 2 km, a 5 km/h. Su hermana sale de casa 6 minutos después en bici a 15 km/h. ¿Lo alcanza antes de llegar al instituto? ¿Dónde?",
-      pasos:[R`En 6 min (0,1 h) Adrián anda $5 \cdot 0,1 = 0,5$ km de ventaja`, R`La bici recorta $15 - 5 = 10$ km/h → $t = \dfrac{0,5}{10} = 0,05$ h $= 3$ min`, R`En ese tiempo la bici recorre $15 \cdot 0,05 = 0,75$ km < 2 km`],
-      res:"<b>Sí</b> lo alcanza: a los <b>3 minutos</b> de salir ella, a <b>750 m</b> de casa." }
+      enun:"Un grifo llena un aljibe en 6 horas, pero tiene una fuga que lo vacía en 12 horas. ¿Cuánto tarda en llenarse?",
+      pasos:[R`El grifo llena $\dfrac16$ cada hora; la fuga vacía $\dfrac{1}{12}$: <b>resta</b>`, R`$\dfrac16 - \dfrac{1}{12} = \dfrac{2}{12} - \dfrac{1}{12} = \dfrac{1}{12}$`, "Le doy la vuelta: 12 horas", "¿Tiene sentido? Con la fuga tarda más que las 6 horas del grifo solo ✓"],
+      res:"El aljibe tarda <b>12 horas</b> en llenarse." },
+    { nivel:"Reto", min:7,
+      enun:"Un grifo llena un depósito en 4 horas y otro en 12 horas. Primero se abre solo el primero durante 1 hora y después se abren los dos. ¿Cuánto tarda en llenarse en total?",
+      pasos:[R`En 1 hora el primero llena $\dfrac14$. Queda $1 - \dfrac14 = \dfrac34$ del depósito`,
+             R`Juntos, en 1 hora: $\dfrac14 + \dfrac{1}{12} = \dfrac{3}{12} + \dfrac{1}{12} = \dfrac{4}{12} = \dfrac13$`,
+             R`Para lo que queda: $\dfrac34 : \dfrac13 = \dfrac34 \cdot 3 = \dfrac94 = 2,25$ h`, "2,25 h = 2 h 15 min. En total: 1 h + 2 h 15 min"],
+      res:"El depósito tarda <b>3 h 15 min</b> en llenarse." }
   ],
 
   casa: [
@@ -63,17 +55,17 @@ TEMA.registrar({
       pasos:[R`$\dfrac16 + \dfrac13 = \dfrac16 + \dfrac26 = \dfrac36 = \dfrac12$`, "Le doy la vuelta: 2 horas"], res:"Juntos tardan <b>2 horas</b>." },
     { nivel:"Consolidación", enun:"Un grifo llena un depósito en 4 horas, pero el desagüe está abierto y lo vacía en 12 horas. ¿Cuánto tarda en llenarse?",
       pasos:[R`$\dfrac14 - \dfrac{1}{12} = \dfrac{3}{12} - \dfrac{1}{12} = \dfrac{2}{12} = \dfrac16$`], res:"El depósito tarda <b>6 horas</b> en llenarse." },
-    { nivel:"Consolidación", enun:"Dos pueblos están a 450 km. A la vez sale un coche de cada uno, uno hacia el otro, a 100 km/h y a 80 km/h. ¿Cuándo se encuentran?",
-      pasos:[R`Se acercan a $100 + 80 = 180$ km/h → $t = \dfrac{450}{180} = 2,5$ h`], res:"El autobús tarda <b>2 h 30 min</b>." },
-    { nivel:"Problema", enun:"Un coche sale a 90 km/h. Dos horas después sale otro por la misma carretera a 120 km/h. ¿Cuánto tarda el segundo en alcanzarlo?",
-      pasos:[R`Ventaja: $90 \cdot 2 = 180$ km`, R`Recorta $120 - 90 = 30$ km cada hora → $t = \dfrac{180}{30} = 6$ h`], res:"El depósito tarda <b>6 horas</b> en llenarse." },
+    { nivel:"Consolidación", enun:"Una bomba vacía una piscina en 8 horas y otra en 24 horas. ¿Cuánto tardan si funcionan las dos a la vez?",
+      pasos:[R`$\dfrac18 + \dfrac{1}{24} = \dfrac{3}{24} + \dfrac{1}{24} = \dfrac{4}{24} = \dfrac16$`, "Le doy la vuelta: 6 horas"], res:"Las dos bombas juntas tardan <b>6 horas</b> en vaciar la piscina." },
+    { nivel:"Problema", enun:"Tres pintores pintan la valla del patio: el primero solo tardaría 6 horas, el segundo 12 horas y el tercero 4 horas. ¿Cuánto tardan los tres juntos?",
+      pasos:[R`$\dfrac16 + \dfrac{1}{12} + \dfrac14 = \dfrac{2}{12} + \dfrac{1}{12} + \dfrac{3}{12} = \dfrac{6}{12} = \dfrac12$`, "Le doy la vuelta: 2 horas"], res:"Los tres pintores juntos tardan <b>2 horas</b>." },
     { nivel:"Para pensar", enun:"Un grifo tarda 4 horas en llenar un depósito. ¿Cuánto tardan dos grifos iguales? ¿Y sumando los tiempos (4 + 4 = 8 h)? ¿Qué está mal?",
       pasos:[R`$\dfrac14 + \dfrac14 = \dfrac24 = \dfrac12$ → 2 horas`, "Si sumas los tiempos, te sale que con dos grifos tardas más que con uno: ¡no tiene sentido!"], res:"Dos grifos tardan <b>2 horas</b>: los tiempos no se suman." }
   ],
 
   laminas: [
     { portada:true, cuerpo:[
-      {html:`<p class="gancho">Grifos que llenan juntos y coches que se encuentran.</p>`}
+      {html:`<p class="gancho">Si dos grifos llenan juntos, ¿tardan más o menos?</p>`}
     ]},
 
     { titulo:"Dos grifos juntos", cuerpo:[
@@ -94,45 +86,25 @@ TEMA.registrar({
 
     { titulo:"Con desagüe", cuerpo:[
       {ej:{enun:"Un grifo llena un depósito en 3 horas y el desagüe lo vacía en 6 horas. Si están abiertos los dos, ¿cuánto tarda en llenarse?",
-        pasos:[R`El grifo llena $\dfrac13$ cada hora; el desagüe vacía $\dfrac16$: <b>resta</b>`, R`$\dfrac13 - \dfrac16 = \dfrac26 - \dfrac16 = \dfrac16$`, "Le doy la vuelta: 6 horas"], res:"El segundo coche tarda <b>6 horas</b> en alcanzarlo."}},
+        pasos:[R`El grifo llena $\dfrac13$ cada hora; el desagüe vacía $\dfrac16$: <b>resta</b>`, R`$\dfrac13 - \dfrac16 = \dfrac26 - \dfrac16 = \dfrac16$`, "Le doy la vuelta: 6 horas"], res:"El depósito tarda <b>6 horas</b> en llenarse."}},
       {nota:["Sirve igual para cualquier <b>trabajo en común</b>: dos pintores, dos impresoras, dos amigos ordenando la clase…"]}
-    ]},
-
-    { titulo:"Móviles: la fórmula", cuerpo:[
-      {prop:[{formula:R`\text{distancia} = \text{velocidad} \cdot \text{tiempo} \qquad t = \frac{d}{v} \qquad v = \frac{d}{t}`}], etq:"Velocidad, distancia y tiempo"},
-      {ej:{enun:"Un autobús va a 80 km/h. ¿Cuánto tarda en recorrer 200 km?", pasos:[R`$t = \dfrac{200}{80} = 2,5$ h`, "0,5 h = 30 min"], res:"Se encuentran a las <b>2 h 30 min</b>."}},
-      {aviso:["Los minutos se pasan a horas dividiendo entre 60: 30 min = 0,5 h; 40 min = 2/3 h (¡no 0,40!)."]}
-    ]},
-
-    { titulo:"Se encuentran: van uno hacia el otro", cuerpo:[
-      {html:carretera("enc","80 km/h","70 km/h","300 km · se acercan 80 + 70 = 150 km cada hora")},
-      {ej:{enun:"Dos ciudades están a 300 km. A la vez sale un coche de cada una, uno hacia el otro, a 80 y 70 km/h. ¿Cuándo se cruzan?",
-        pasos:["Se acercan con la <b>suma</b> de las velocidades: 150 km/h", R`$t = \dfrac{300}{150} = 2$ h`, R`El primero ha hecho $80 \cdot 2 = 160$ km y el segundo $70 \cdot 2 = 140$ km (suman 300 ✓)`], res:"Se cruzan a las <b>2 horas</b>, a <b>160 km</b> de la primera ciudad."}}
-    ]},
-
-    { titulo:"Uno alcanza al otro: mismo sentido", cuerpo:[
-      {html:carretera("alc","15 km/h","45 km/h","la moto recorta 45 − 15 = 30 km cada hora")},
-      {ej:{enun:"Un ciclista sale a 15 km/h. Una hora después sale una moto por el mismo camino a 45 km/h. ¿Cuándo lo alcanza?",
-        pasos:["Primero la <b>ventaja</b>: en 1 hora el ciclista ha hecho 15 km", "La moto recorta con la <b>resta</b>: 45 − 15 = 30 km/h", R`$t = \dfrac{15}{30} = 0,5$ h $= 30$ min`], res:"La moto lo alcanza a los <b>30 minutos</b> de salir."}}
     ]},
 
     { titulo:"🪄 Trucos y ⚠️ errores", cuerpo:[
       {truco:["<b>Grifos</b>: sumo lo que hacen en 1 hora y <b>le doy la vuelta</b>. Juntos, siempre menos que el más rápido."], etq:"🪄 Truco"},
-      {truco:["<b>Móviles</b>: haz un dibujo. Hacia el otro → <b>suma</b>; detrás del otro → <b>resta</b>."], etq:"🪄 Truco"},
       {aviso:["Sumar los tiempos de los grifos o hacer la media."], etq:"⚠️ Error"},
-      {aviso:["Olvidar la <b>ventaja</b> del que sale antes."], etq:"⚠️ Error"}
+      {aviso:["Olvidar que el desagüe <b>resta</b>."], etq:"⚠️ Error"}
     ]},
 
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[{lista:[
         "Grifos y trabajos: $\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta.",
-        "Se encuentran: $t = \\dfrac{d}{v_1 + v_2}$.",
-        "Uno alcanza al otro: $t = \\dfrac{\\text{ventaja}}{v_1 - v_2}$.",
-        "Minutos a horas: divido entre 60."
+        "Juntos tardan siempre menos que el más rápido.",
+        "Horas en decimal a minutos: multiplico por 60 (0,25 h = 15 min)."
       ]}]},
       {estudio:[
         {comp:{q:"Dos grifos llenan un depósito en 3 h y en 6 h. ¿Cuántas horas tardan juntos?", sol:2, unidad:"h", explic:"1/3 + 1/6 = 1/2 → 2 h", pista:"Suma lo que llenan en 1 hora."}},
-        {comp:{q:"Dos coches a 200 km se acercan a 60 y 40 km/h. ¿Cuántas horas tardan en cruzarse?", sol:2, unidad:"h", explic:"200 : (60 + 40) = 2 h", pista:"Suma las velocidades."}}
+        {comp:{q:"Un grifo llena un depósito en 4 h y el desagüe lo vacía en 12 h. ¿Cuántas horas tarda en llenarse?", sol:6, unidad:"h", explic:"1/4 − 1/12 = 2/12 = 1/6 → 6 h", pista:"El desagüe resta."}}
       ]}
     ]}
   ]
