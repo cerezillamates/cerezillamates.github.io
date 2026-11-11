@@ -415,3 +415,24 @@ body.estudio .wrap{padding-bottom:110px}
 /* cada fórmula es un bloque: no se corta nunca entre dos filas */
 .katex{white-space:nowrap}
 :not(.katex-display)>.katex{display:inline-block}
+
+/* ---------- Situación de aprendizaje: trabajo en grupo ---------- */
+.sa-roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5em,1fr));gap:.5em}
+.sa-roles>div{background:var(--card);border-radius:16px;padding:.5em .7em;box-shadow:var(--sombra);text-align:center;line-height:1.25}
+.sa-roles b{display:block;font-size:1.05em;margin:.15em 0}
+.sa-roles i{font-style:normal;font-size:1.8em}
+.sa-roles small{color:var(--muted);font-size:.8em}
+.sa-fases{display:grid;gap:.4em}
+.sa-fases>div{display:grid;grid-template-columns:7.5em 1fr;gap:.6em;align-items:center;background:var(--card);border-radius:14px;padding:.4em .7em;box-shadow:var(--sombra)}
+.sa-fases>div>b{font-family:var(--f-d);color:var(--ind)}
+.sa-fases>div.casa>b{color:#b45309}
+.mision{background:var(--card);border-left:6px solid var(--ind);border-radius:14px;padding:.6em .9em;margin:.7em 0;box-shadow:var(--sombra)}
+.mision h4{margin:.1em 0 .4em;font-family:var(--f-d)}
+.mision ul{margin:.2em 0;padding-left:1.2em}
+.mision .check{list-style:none;padding-left:0}
+.mision .check li::before{content:"☐ ";color:var(--ind);font-weight:900}
+.mision details{margin-top:.4em;background:#f0fdf4;border-radius:10px;padding:.3em .6em}
+.mision summary{cursor:pointer;font-weight:800;color:#15803d}
+.sa-tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(15em,1fr));gap:.6em}
+.sa-tarjetas .mision{margin:0}
+.sa-btn{display:inline-block;font-size:1.15em;font-weight:800;padding:.55em 1em;border-radius:14px;background:#4f46e5;color:#fff!important;text-decoration:none;margin:.2em .3em 0 0}

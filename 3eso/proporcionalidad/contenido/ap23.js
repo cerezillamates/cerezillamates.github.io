@@ -2,7 +2,9 @@
    Situación de la profesora (página anterior del tema): mirar las etiquetas de los productos que se compran en casa
    y analizar con porcentajes los nutrientes que se toman. Producto final: una cartulina por grupo (tabla, gráfico,
    semáforo y conclusiones) que se expone en 2 minutos. La calculadora y la tabla de la cesta están en situacion.html.
-   Sustituye a «El mercadillo solidario» (decisión de la profesora, 11-nov-2026). */
+   Sustituye a «El mercadillo solidario» (decisión de la profesora, 11-nov-2026).
+   11-nov: la SA es TRABAJO EN GRUPO (en clase y en casa). No hay ejercicios individuales ni corrección en clase:
+   la presentación explica el reto de forma sencilla y el «dosier del grupo» (modo estudiar) tiene las misiones. */
 (function(){
 const R = String.raw;
 const etiqueta = `<table class="t" style="max-width:34em;border:3px solid #111;background:#fff;color:#111">
@@ -27,122 +29,123 @@ TEMA.registrar({
   titulo: "¿Es saludable nuestra cesta de la compra?",
   videos: [ {t:"Claves para leer las etiquetas nutricionales", url:"https://www.educaciontrespuntocero.com/familias/leer-etiquetas-nutricionales/"} ],
 
-  clase: [
-    { nivel:"Leer la etiqueta", min:4,
-      enun:"🍪 Unas galletas tienen 24 g de azúcares por cada 100 g y la ración es de 30 g. <b>a)</b> ¿Qué porcentaje de azúcar tienen? <b>b)</b> ¿Qué color les toca en el semáforo? <b>c)</b> ¿Cuánto azúcar tomas en una ración?",
-      pasos:["<b>a)</b> 24 g de cada 100 g → <b>24 %</b>", "<b>b)</b> 24 es más de 22,5 → 🔴 mucho azúcar", R`<b>c)</b> $C_F = C_I \cdot I_V = 30 \cdot 0,24 = 7,2$ g`],
-      res:"a) Las galletas tienen un <b>24 %</b> de azúcar.<br>b) Les toca el color <b>rojo</b>.<br>c) En una ración tomas <b>7,2 g</b> de azúcar." },
-    { nivel:"% del día", min:5,
-      enun:"🥛 Un yogur natural de 125 g tiene un 4,5 % de azúcares. Lo que se puede tomar al día son 90 g de azúcares. <b>a)</b> ¿Cuánto azúcar tiene el yogur? <b>b)</b> ¿Qué porcentaje del azúcar del día es?",
-      pasos:[R`<b>a)</b> $125 \cdot 0,045 = 5,625$ g ≈ 5,6 g`, R`<b>b)</b> $I_V = C_F : C_I = 5,625 : 90 = 0,0625$ → <b>6,25 %</b>`],
-      res:"a) El yogur tiene unos <b>5,6 g</b> de azúcar.<br>b) Es el <b>6,25 %</b> del azúcar del día." },
-    { nivel:"% del día", min:6,
-      enun:"🍫 Una crema de cacao tiene 56 g de azúcares por 100 g y la ración es de 15 g. <b>a)</b> ¿Qué porcentaje del azúcar del día (90 g) tomas en una ración? <b>b)</b> ¿Cuántas raciones hacen falta para llegar a todo el azúcar del día?",
-      pasos:[R`<b>a)</b> Azúcar de una ración: $15 \cdot 0,56 = 8,4$ g → $8,4 : 90 \approx 0,093$ → <b>9,3 %</b>`, R`<b>b)</b> $90 : 8,4 \approx 10,7$ → con 11 raciones ya te pasas`],
-      res:"a) En una ración tomas el <b>9,3 %</b> del azúcar del día.<br>b) Hacen falta unas <b>11 raciones</b> (10,7)." },
-    { nivel:"Hacia atrás", min:5,
-      enun:"🍟 En una bolsa de patatas fritas de 40 g pone que tiene 0,56 g de sal. ¿Qué porcentaje de sal tienen? ¿Qué color les toca en el semáforo?",
-      pasos:[R`$I_V = C_F : C_I = 0,56 : 40 = 0,014$ → <b>1,4 %</b>`, "Es 1,4 g por cada 100 g: está entre 0,3 y 1,5 → 🟡 medio (muy cerca del rojo)"],
-      res:"Las patatas tienen un <b>1,4 %</b> de sal: les toca el <b>amarillo</b>." },
-    { nivel:"¿Es equilibrado?", min:7,
-      enun:"🍞 El pan de molde integral tiene por cada 100 g: 42 g de hidratos, 4 g de grasas y 10 g de proteínas. Sabiendo que 1 g de hidratos o de proteínas da 4 kcal y 1 g de grasa da 9 kcal, ¿qué porcentaje de su energía viene de cada nutriente? ¿Se parece a lo recomendado (hidratos 50 – 55 %, grasas 30 – 35 %, proteínas 10 – 15 %)?",
-      pasos:[R`Hidratos $42 \cdot 4 = 168$ kcal, grasas $4 \cdot 9 = 36$ kcal, proteínas $10 \cdot 4 = 40$ kcal → total 244 kcal`,
-             R`Hidratos $168 : 244 \approx 0,689$ → 68,9 %, grasas $36 : 244 \approx 0,148$ → 14,8 %, proteínas $40 : 244 \approx 0,164$ → 16,4 %`,
-             "Tiene más hidratos y menos grasa de lo recomendado. Un solo alimento no tiene que estar equilibrado: lo que cuenta es todo el día."],
-      res:"La energía viene en un <b>68,9 %</b> de los hidratos, un <b>14,8 %</b> de las grasas y un <b>16,4 %</b> de las proteínas." },
-    { nivel:"Reto", min:6,
-      enun:"📉 Una marca cambia la receta de sus galletas: pasan de 24 g a 18 g de azúcares por cada 100 g. <b>a)</b> ¿En qué porcentaje ha bajado el azúcar? <b>b)</b> ¿Cambia su color en el semáforo?",
-      pasos:[R`<b>a)</b> $I_V = C_F : C_I = 18 : 24 = 0,75$ → <b>baja un 25 %</b>`, "<b>b)</b> 18 g está entre 5 y 22,5: pasa de 🔴 a 🟡"],
-      res:"a) El azúcar ha bajado un <b>25 %</b>.<br>b) <b>Sí</b> cambia: pasa de rojo a amarillo." }
-  ],
-
-  casa: [
-    { nivel:"Básico", enun:"🐟 Una lata de atún tiene 1 g de sal por cada 100 g. Si te comes 60 g, ¿cuánta sal tomas? ¿Qué porcentaje es de los 6 g de sal del día?",
-      pasos:[R`$60 \cdot 0,01 = 0,6$ g`, R`$0,6 : 6 = 0,1$ → 10 %`], res:"Tomas <b>0,6 g</b> de sal, el <b>10 %</b> de la sal del día." },
-    { nivel:"Básico", enun:"Una ración de 25 g de un aperitivo tiene 4 g de grasas. ¿Qué porcentaje de grasa tiene? ¿Qué color le toca?",
-      pasos:[R`$4 : 25 = 0,16$ → 16 %`, "16 g por cada 100 g: está entre 3 y 17,5 → 🟡 medio"], res:"El aperitivo tiene un <b>16 %</b> de grasa: le toca el <b>amarillo</b>." },
-    { nivel:"Consolidación", enun:"En el desayuno tomas 30 g de cereales con un 25 % de azúcar y un yogur de 125 g con un 4,5 % de azúcar. ¿Cuánto azúcar tomas en total? ¿Qué porcentaje es de los 90 g del día?",
-      pasos:[R`Cereales: $30 \cdot 0,25 = 7,5$ g; yogur: $125 \cdot 0,045 = 5,625$ g`, R`Total: $13,125$ g → $13,125 : 90 \approx 0,146$ → 14,6 %`], res:"Tomas unos <b>13,1 g</b> de azúcar, el <b>14,6 %</b> del azúcar del día." },
-    { nivel:"Problema", enun:"En una etiqueta pone que una ración aporta 228 kcal y que eso es el 11,4 % de la ingesta de referencia. ¿Cuántas kcal es la ingesta de referencia?",
-      pasos:[R`$C_I = C_F : I_V = 228 : 0,114 = 2000$ kcal`], res:"La ingesta de referencia es de <b>2000 kcal</b>." },
-    { nivel:"Para pensar", enun:"Lucía cambia sus 30 g de cereales (25 % de azúcar) por 30 g de copos de avena (1 % de azúcar). ¿Cuántos gramos de azúcar deja de tomar? ¿En qué porcentaje baja el azúcar de su desayuno de cereales?",
-      pasos:[R`Antes $30 \cdot 0,25 = 7,5$ g; ahora $30 \cdot 0,01 = 0,3$ g → deja de tomar 7,2 g`, R`$0,3 : 7,5 = 0,04$ → queda el 4 %, baja un 96 %`], res:"Lucía deja de tomar <b>7,2 g</b> de azúcar: baja un <b>96 %</b>." }
-  ],
-
   laminas: [
     { portada:true, cuerpo:[
-      {nota:["Mirad las etiquetas de los productos que compráis en casa y calculad sus <b>porcentajes</b>. ¿Comemos de forma <b>saludable y equilibrada</b>? ¿Qué cambiaríamos?"], etq:"🎯 El reto"},
+      {html:`<p class="gancho">🕵️ Detectives de etiquetas: ¿cuántos terrones de azúcar hay en tu desayuno?</p>`}
+    ]},
+
+    { titulo:"🎯 La misión", cuerpo:[
+      {prop:["Vais a investigar, <b>en grupo</b>, los productos que se compran en vuestras casas. Con los <b>porcentajes</b> de las etiquetas descubriréis si vuestra cesta es <b>saludable y equilibrada</b>… y propondréis un cambio para mejorarla."], etq:"La misión"},
       {cols:[
-        [{prop:["Una <b>cartulina por grupo</b> con la tabla de vuestra cesta, un gráfico, el semáforo y vuestras conclusiones. La presentáis en 2 minutos."], etq:"🖼 Producto final"}],
-        [{nota:["Grupos de 3 o 4. Cada alumno trae <b>3 etiquetas</b>: algo del desayuno, algo de la merienda y algo de la comida."], etq:"👥 Cómo"}]
+        [{nota:["Una <b>cartulina por grupo</b>: vuestra cesta con su tabla, un gráfico, el semáforo y vuestras conclusiones."], etq:"🖼 Producto final"}],
+        [{nota:["La <b>presentáis a la clase en 2 minutos</b>. ¡Habla todo el grupo!"], etq:"🎤 Y al final"}]
       ]}
     ]},
-    { titulo:"Paso a paso", cuerpo:[
-      {html:`<ol class="pasos-sa" style="display:grid;gap:.5em;padding-left:1.3em">
-        <li><b>En casa, recogemos etiquetas.</b> Haz una foto (o copia) de la tabla nutricional de 3 productos: la columna «por 100 g» y el tamaño de la ración.</li>
-        <li><b>Sesión 1, leemos una etiqueta.</b> Vemos qué significa cada fila y hacemos juntos el ejemplo de los cereales.</li>
-        <li><b>Sesión 2, calculamos los %.</b> Cada uno mete sus productos en la calculadora: % de azúcar, grasa y sal, semáforo y % de lo que puedes tomar al día.</li>
-        <li><b>Sesión 3, la cesta del grupo.</b> Juntamos los productos en la tabla de la cesta. ¿Cuántos rojos hay? ¿La energía se reparte como recomiendan?</li>
-        <li><b>Sesión 4, cartulina y exposición.</b> Pasamos la tabla y el gráfico a la cartulina, escribimos las conclusiones y lo contamos a la clase.</li></ol>`}
+
+    { titulo:"👥 Equipos de 4: cada uno, un papel", cuerpo:[
+      {html:`<div class="sa-roles">
+        <div><i>🕵️</i><b>Detective</b><small>revisa que los datos de las etiquetas estén bien copiados</small></div>
+        <div><i>🧮</i><b>Calculista</b><small>comprueba que todas las operaciones estén escritas y bien</small></div>
+        <div><i>🎨</i><b>Diseñador/a</b><small>organiza la tabla, el gráfico y la cartulina</small></div>
+        <div><i>🎤</i><b>Portavoz</b><small>organiza la exposición y el tiempo</small></div></div>`},
+      {nota:["Todos calculáis y todos opináis: el papel solo dice de qué se encarga cada uno."]}
     ]},
-    { titulo:"Cómo se lee una etiqueta", cuerpo:[
+
+    { titulo:"🗓 Cómo lo vamos a hacer", cuerpo:[
+      {html:`<div class="sa-fases">
+        <div class="casa"><b>🏠 Antes</b><span>Cada uno trae fotos de <b>3 etiquetas</b> de casa: algo del desayuno, de la merienda y de la comida.</span></div>
+        <div><b>Sesión 1</b><span>Aprendemos a leer una etiqueta y hacemos el <b>calentamiento</b> en grupo.</span></div>
+        <div><b>Sesión 2</b><span>Misiones 1, 2 y 3: los <b>%</b>, el <b>semáforo</b>, los <b>terrones</b> y el <b>% del día</b> de vuestros productos.</span></div>
+        <div class="casa"><b>🏠 En casa</b><span>Terminamos la <b>tabla de la cesta</b> (nos repartimos los productos).</span></div>
+        <div><b>Sesión 3</b><span>Misiones 4 y 5: ¿es <b>equilibrada</b>? y nuestro <b>cambio saludable</b>. Hacemos la cartulina.</span></div>
+        <div><b>Sesión 4</b><span><b>Exposiciones</b> de 2 minutos y votamos la cesta más sana.</span></div></div>`}
+    ]},
+
+    { titulo:"🔎 Cómo se lee una etiqueta", cuerpo:[
       {cols:[
         [{html:etiqueta}],
         [{nota:["25 g de azúcar <b>de cada 100 g</b> es lo mismo que <b>un 25 % de azúcar</b>. ¡Ya es un porcentaje!"], etq:"① «por 100 g» es un %"},
-         {nota:[R`Lo que te comes de una vez. Azúcar que tomas: ración × el % en decimal: $30 \cdot 0,25 = 7,5$ g`], etq:"② La ración"},
-         {nota:[R`Qué parte de lo que puedes tomar <b>en todo el día</b> te comes en esa ración: $7,5 : 90 \approx 0,083$ → 8 %`], etq:"③ % IR"}]
+         {nota:[R`Lo que te comes de una vez. Azúcar que tomas: $C_F = C_I \cdot I_V = 30 \cdot 0,25 = 7,5$ g`], etq:"② La ración"},
+         {nota:[R`Qué parte del azúcar de <b>todo el día</b> (90 g) te comes: $I_V = 7,5 : 90 \approx 0,083$ → 8 %`], etq:"③ % del día"}]
       ]}
     ]},
-    { titulo:"Lo que hay que saber", cuerpo:[
-      {html:semaforo},
-      {cols:[
-        [{nota:["Energía 2000 kcal, grasas 70 g (saturadas 20 g), hidratos 260 g (azúcares 90 g), proteínas 50 g, sal 6 g."], etq:"📅 Lo que puedes tomar al día (IR)"}],
-        [{nota:["De toda la energía del día: hidratos <b>50 – 55 %</b>, grasas <b>30 – 35 %</b>, proteínas <b>10 – 15 %</b>.", "1 g de hidratos o de proteínas = <b>4 kcal</b>; 1 g de grasa = <b>9 kcal</b>."], etq:"⚖ Dieta equilibrada"}]
-      ]}
+
+    { titulo:"🍬 ¿Cuántos terrones son?", cuerpo:[
+      {ej:{etq:"🥣 El ejemplo que haremos juntos", enun:"Lucía desayuna una ración de 30 g de los cereales de la etiqueta. Un terrón de azúcar pesa unos 4 g. ¿Cuántos terrones se come?",
+        pasos:["25 g de cada 100 g → 25 %. Como 25 es más de 22,5 → 🔴 mucho azúcar",
+               R`Azúcar de la ración: $30 \cdot 0,25 = 7,5$ g`,
+               R`Terrones: $7,5 : 4 \approx 1,9$ → casi 2 terrones`],
+        res:"Lucía se come casi <b>2 terrones</b> de azúcar en el desayuno."}},
+      {html:semaforo}
     ]},
-    { titulo:"Ejemplo resuelto: los cereales del desayuno", cuerpo:[
-      {ej:{etq:"🥣 Lucía desayuna una ración de 30 g de los cereales de la etiqueta",
-        enun:"¿Qué % de azúcar tienen? ¿Cuánto azúcar y cuánta sal toma? ¿De dónde sale la energía?",
-        pasos:["25 g de cada 100 g → <b>25 %</b>. Como 25 es más de 22,5 → 🔴 mucho azúcar",
-               R`Azúcar que toma: $30 \cdot 0,25 = 7,5$ g → $7,5 : 90 \approx 0,083$ → <b>8 %</b> del azúcar del día`,
-               R`Sal: 0,6 g por 100 g → 🟡 medio. En la ración: $30 \cdot 0,006 = 0,18$ g → $0,18 : 6 = 0,03$ → <b>3 %</b> del día`,
-               R`Energía: hidratos $80 \cdot 4 = 320$, grasas $3 \cdot 9 = 27$, proteínas $8 \cdot 4 = 32$ → 379 kcal. Hidratos $320 : 379 \approx 84\,\%$, grasas 7 %, proteínas 8 %`],
-        res:"Casi toda su energía viene de hidratos y tiene mucho azúcar: mejor cambiarlos a menudo por pan integral o copos de avena sin azúcar"}}
-    ]},
-    { titulo:"La calculadora y la tabla de la cesta", cuerpo:[
-      {html:`<p style="font-size:1.1em">Cada alumno copia los datos «por 100 g» de sus etiquetas en la <b>calculadora</b>: salen los %, el semáforo, el % del día y de dónde sale la energía. Después los añadís a la <b>tabla de la cesta</b> del grupo y la imprimís para la cartulina.</p>
-        <p><a href="situacion.html" target="_blank" rel="noopener" style="display:inline-block;font-size:1.3em;font-weight:800;padding:.6em 1.1em;border-radius:14px;background:#4f46e5;color:#fff;text-decoration:none">🧮 Abrir la calculadora y la cesta</a></p>`}
-    ]},
-    { titulo:"Así puede ser la cartulina", cuerpo:[
+
+    { titulo:"🖼 Así puede ser la cartulina", cuerpo:[
       {html:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5em;background:#fdf7e8;border:3px dashed #c9a24a;border-radius:16px;padding:.7em;max-width:40em">
-        <div style="grid-column:1/-1;text-align:center;background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">🏷 <b>Título</b>: «¿Es saludable nuestra cesta?» y los nombres del grupo</div>
-        <div style="grid-column:1/-1;background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">📋 <b>La tabla</b>: producto, ración, % de azúcar, grasa y sal, semáforo, azúcar y sal en una ración, % del día</div>
-        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">📊 <b>Gráfico</b>: barras con el % de azúcar de cada producto, con su color del semáforo</div>
-        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">⚖ <b>¿Equilibrada?</b> El % de energía de hidratos, grasas y proteínas y, al lado, lo recomendado</div>
+        <div style="grid-column:1/-1;text-align:center;background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">🏷 <b>Título</b> y los nombres del grupo</div>
+        <div style="grid-column:1/-1;background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">📋 <b>La tabla de la cesta</b>: producto, ración, % de azúcar, grasa y sal, semáforo, terrones, % del día</div>
+        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">📊 <b>Gráfico</b> de barras con el % de azúcar y los colores del semáforo</div>
+        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">⚖ <b>¿Equilibrada?</b> Vuestros % de energía al lado de los recomendados</div>
         <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">💬 <b>Conclusiones</b>: 3 frases con números</div>
-        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">🔄 <b>Nuestro cambio saludable</b>: qué producto cambiamos y cuánto bajan los %</div></div>`}
+        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">🔄 <b>Nuestro cambio saludable</b>: qué cambiamos y cuánto baja el %</div></div>`}
     ]},
-    { titulo:"Preguntas para las conclusiones", cuerpo:[
-      {prop:[{lista:[
-        "¿Qué producto tiene más azúcar <b>en %</b>? ¿Y en <b>una ración</b>? ¿Es el mismo? ¿Por qué?",
-        "¿Cuántos 🔴 tiene vuestra cesta? ¿En qué nutriente hay más rojos?",
-        "Si comierais una ración de cada producto, ¿qué % del azúcar y de la sal del día tomaríais?",
-        "¿La energía se reparte como recomiendan (hidratos 50 – 55 %, grasas 30 – 35 %, proteínas 10 – 15 %)?",
-        "Proponed <b>un cambio</b>: cambiad un producto por otro más sano y calculad cuánto baja el %."
-      ]}], etq:"💬 Las conclusiones"}
-    ]},
-    { titulo:"Rúbrica", cuerpo:[
+
+    { titulo:"⭐ Cómo se evalúa", cuerpo:[
       {html:`<table class="t"><tr><th>Criterio</th><th>4 Excelente</th><th>3 Bien</th><th>2 Regular</th><th>1 Hay que mejorar</th></tr>
         <tr><td><b>Lectura de etiquetas</b> (20 %)</td><td>Todos los datos bien copiados, con la ración</td><td>Algún dato sin ración</td><td>Varios datos mal copiados</td><td>Faltan etiquetas</td></tr>
         <tr><td><b>Cálculo de %</b> (30 %)</td><td>Todos los % bien, con la operación escrita</td><td>Algún error pequeño</td><td>Varios errores</td><td>No hay operaciones</td></tr>
         <tr><td><b>Tabla y gráfico</b> (20 %)</td><td>Claros, ordenados y con los colores del semáforo</td><td>Completos pero poco claros</td><td>Incompletos</td><td>No hay gráfico</td></tr>
-        <tr><td><b>Conclusiones y cambio</b> (20 %)</td><td>Responden con números y proponen un cambio calculado</td><td>Responden con números</td><td>Responden sin números</td><td>No hay conclusiones</td></tr>
+        <tr><td><b>Conclusiones y cambio</b> (20 %)</td><td>Con números y con un cambio calculado</td><td>Con números</td><td>Sin números</td><td>No hay conclusiones</td></tr>
         <tr><td><b>Exposición y equipo</b> (10 %)</td><td>Hablan todos y se explican bien</td><td>Hablan casi todos</td><td>Lee uno solo</td><td>No exponen</td></tr></table>`},
-      {nota:[R`La nota también es un porcentaje: cada criterio pesa lo que dice el paréntesis. Ejemplo: $(4 \cdot 0,2 + 3 \cdot 0,3 + 4 \cdot 0,2 + 3 \cdot 0,2 + 4 \cdot 0,1) : 4 = 0,875$ → <b>8,75</b>`]},
+      {nota:[R`La nota también es un porcentaje: cada criterio pesa lo que dice el paréntesis. Por ejemplo: $(4 \cdot 0,2 + 3 \cdot 0,3 + 4 \cdot 0,2 + 3 \cdot 0,2 + 4 \cdot 0,1) : 4 = 0,875$ → <b>8,75</b>`]}
+    ]},
+
+    { titulo:"🚀 ¡A trabajar!", cuerpo:[
+      {proy:[{html:`<p class="gancho">Abrid el <b>dosier del grupo</b>: ahí están todas las misiones.</p>`}]},
+      {html:`<p><a class="sa-btn" href="apuntes.html?ap=23" target="_blank" rel="noopener">📋 Dosier del grupo</a><a class="sa-btn" href="situacion.html" target="_blank" rel="noopener" style="background:#15803d">🧮 Calculadora y tabla de la cesta</a></p>`},
       {estudio:[
-        {nota:["<b>Saberes:</b> porcentajes (el % como decimal, $C_F = C_I \cdot I_V$, porcentaje de una cantidad, qué % representa, variación), proporcionalidad directa (de 100 g a la ración), lectura e interpretación de tablas y gráficos.",
-               "<b>Conexiones:</b> Biología y Geología (nutrición y dieta), Educación Física (hábitos saludables) y ODS 3 (salud y bienestar).",
-               "<b>Ideas:</b> una cartulina A3 por grupo; se pueden colgar en el pasillo. Las bebidas usan otros límites del semáforo: mejor dejarlas fuera. Los valores IR son de un adulto medio: sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
+        {html:R`<h2>📋 Dosier del grupo</h2>
+        <p>Todo se hace <b>en grupo</b>, en clase y en casa. Escribid siempre la operación: así sabéis de dónde sale cada número.</p>
+
+        <div class="mision"><h4>🔥 Calentamiento (sesión 1): resolvedlas entre todos</h4>
+        <div class="sa-tarjetas">
+          <div class="mision"><b>🍪 Galletas</b>: 24 g de azúcares por cada 100 g y la ración es de 30 g. ¿Qué % de azúcar tienen? ¿Qué color del semáforo? ¿Cuántos terrones hay en una ración?
+            <details><summary>Comprobad</summary>24 % → 🔴. Ración: $30 \cdot 0,24 = 7,2$ g → $7,2 : 4 = 1,8$ terrones.</details></div>
+          <div class="mision"><b>🥛 Yogur</b> natural de 125 g con un 4,5 % de azúcares. ¿Cuánto azúcar tiene? ¿Qué % del azúcar del día (90 g) es?
+            <details><summary>Comprobad</summary>$125 \cdot 0,045 \approx 5,6$ g → $5,625 : 90 = 0,0625$ → 6,25 %.</details></div>
+          <div class="mision"><b>🍫 Crema de cacao</b>: 56 g de azúcares por 100 g y la ración es de 15 g. ¿Qué % del azúcar del día tomas en una ración?
+            <details><summary>Comprobad</summary>$15 \cdot 0,56 = 8,4$ g → $8,4 : 90 \approx 0,093$ → 9,3 %.</details></div>
+          <div class="mision"><b>🍟 Patatas fritas</b>: una bolsa de 40 g tiene 0,56 g de sal. ¿Qué % de sal tienen? ¿Qué color?
+            <details><summary>Comprobad</summary>$I_V = 0,56 : 40 = 0,014$ → 1,4 % → 🟡 (muy cerca del rojo).</details></div>
+        </div></div>
+
+        <div class="mision"><h4>🕵️ Misión 1: los datos (sesión 2)</h4><ul class="check">
+          <li>Cada uno copia sus 3 etiquetas en la calculadora: los datos «por 100 g» y la ración.</li>
+          <li>El/la detective revisa que estén bien copiados.</li></ul></div>
+
+        <div class="mision"><h4>🚦 Misión 2: semáforo y terrones</h4><ul class="check">
+          <li>El % de azúcar, grasa y sal de cada producto y su color del semáforo.</li>
+          <li>El azúcar de una ración: $C_F = \text{ración} \cdot I_V$, y cuántos terrones son (1 terrón ≈ 4 g).</li>
+          <li>¿Qué producto tiene más azúcar <b>en %</b>? ¿Y en <b>una ración</b>? ¿Es el mismo? ¿Por qué?</li></ul></div>
+
+        <div class="mision"><h4>📅 Misión 3: el % del día</h4><ul class="check">
+          <li>Si comierais una ración de cada producto, ¿qué % del azúcar (90 g) y de la sal (6 g) del día tomaríais?</li>
+          <li>🏠 En casa: terminad la tabla de la cesta repartiéndoos los productos.</li></ul></div>
+
+        <div class="mision"><h4>⚖ Misión 4: ¿es equilibrada? (sesión 3)</h4><ul class="check">
+          <li>Energía: 1 g de hidratos o de proteínas = 4 kcal; 1 g de grasa = 9 kcal.</li>
+          <li>¿Qué % de la energía viene de hidratos, grasas y proteínas? Comparadlo con lo recomendado: hidratos 50 – 55 %, grasas 30 – 35 %, proteínas 10 – 15 %.</li></ul></div>
+
+        <div class="mision"><h4>🔄 Misión 5: nuestro cambio saludable</h4><ul class="check">
+          <li>Elegid el producto «más rojo» y buscad otro más sano que lo pueda sustituir.</li>
+          <li>Calculad cuánto baja el azúcar: $I_V = \text{nuevo} : \text{antiguo}$ y la bajada $1 - I_V$.</li>
+          <li>Ejemplo: cambiar 30 g de cereales (25 %) por 30 g de copos de avena (1 %): de 7,5 g a 0,3 g → $0,3 : 7,5 = 0,04$ → baja un 96 %.</li></ul></div>
+
+        <div class="mision"><h4>🖼 Cartulina y 🎤 exposición (sesiones 3 y 4)</h4><ul class="check">
+          <li>Tabla, gráfico de barras con colores, ¿equilibrada?, 3 conclusiones con números y vuestro cambio.</li>
+          <li>Exposición de 2 minutos: habla todo el grupo. Al final votamos la cesta más sana de la clase.</li></ul></div>`},
+        {nota:["<b>Saberes:</b> porcentajes (el % como decimal, $C_F = C_I \\cdot I_V$, qué % representa, variación), proporcionalidad directa (de 100 g a la ración), tablas y gráficos.",
+               "<b>Conexiones:</b> Biología y Geología (nutrición), Educación Física (hábitos saludables) y ODS 3 (salud y bienestar).",
+               "<b>Ideas:</b> cartulina A3; se pueden colgar en el pasillo. Las bebidas tienen otros límites del semáforo: mejor dejarlas fuera. Los valores del día son de un adulto medio: sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
       ]}
     ]}
   ]
