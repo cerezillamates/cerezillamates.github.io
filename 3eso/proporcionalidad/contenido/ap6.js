@@ -36,7 +36,7 @@ TEMA.registrar({
       res:"a) Producen <b>54 €</b> de interés.<br>b) Producen <b>60 €</b> de interés." },
     { nivel:"Práctica", min:7,
       enun:"Pedro quiere ganar 450 € <b>limpios</b> de intereses para pagarse un viaje. Su banco le ofrece un 3 % anual durante 5 años, pero Hacienda se queda el 20 % de los intereses. ¿Cuánto dinero tiene que depositar?",
-      pasos:[R`Le queda el 80 % de los intereses: $I_V = 0,80$. Intereses antes de Hacienda: $C_I = 450 : 0,80 = 562,50$ €`,
+      pasos:[R`Hacienda se queda el 20 %: $I_V = 1 - 0,20 = 0,80$. Intereses antes de Hacienda: $C_I = 450 : 0,80 = 562,50$ €`,
              R`Busco el capital: $c = \dfrac{I}{r \cdot t} = \dfrac{562,50}{0,03 \cdot 5} = \dfrac{562,50}{0,15} = 3750$ €`,
              R`Compruebo: $3750 \cdot 0,03 \cdot 5 = 562,50$ € y $562,50 \cdot 0,80 = 450$ € ✓`],
       res:"Pedro tiene que depositar <b>3750 €</b>." },

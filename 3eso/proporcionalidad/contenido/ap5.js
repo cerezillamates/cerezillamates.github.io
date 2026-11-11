@@ -37,8 +37,8 @@ TEMA.registrar({
       res:"a) El pantano tiene una capacidad de <b>2300 hm³</b>.<br>b) Ha ganado <b>414 hm³</b> de agua." },
     { nivel:"Aplicación", min:5,
       enun:"<b>a)</b> Un cartero ha repartido el 36 % de las cartas y todavía le quedan 1184. ¿Cuántas cartas tenía?<br><b>b)</b> Una goma elástica, al estirarla, aumenta su longitud un 30 % y mide 104 cm. ¿Cuánto mide sin estirar?",
-      pasos:[R`<b>a)</b> Le queda el $100 - 36 = 64\,\%$: $I_V = 0,64$`, R`$C_I = C_F : I_V = 1184 : 0,64 = 1850$ cartas`,
-             R`<b>b)</b> Sube un 30 %: $I_V = 1,30$`, R`$C_I = 104 : 1,30 = 80$ cm`],
+      pasos:[R`<b>a)</b> Reparte el 36 %, así que baja: $I_V = 1 - 0,36 = 0,64$`, R`$C_I = C_F : I_V = 1184 : 0,64 = 1850$ cartas`,
+             R`<b>b)</b> Sube un 30 %: $I_V = 1 + 0,30 = 1,30$`, R`$C_I = 104 : 1,30 = 80$ cm`],
       res:"a) El cartero tenía <b>1850 cartas</b>.<br>b) Sin estirar, la goma mide <b>80 cm</b>." },
     { nivel:"Práctica", min:6,
       enun:"<b>a)</b> En rebajas, con un 40 % de descuento, has pagado 27 € por una camiseta. ¿Cuánto costaba antes?<br><b>b)</b> Un móvil cuesta 242 € con el 21 % de IVA incluido. ¿Cuánto cuesta sin IVA?",
@@ -71,7 +71,7 @@ TEMA.registrar({
   casa: [
     { nivel:"Básico",
       enun:"El agua de un pantano baja un 20 % en julio y un 15 % en agosto. ¿Qué porcentaje ha bajado en total? (¡No es el 35 %!)",
-      pasos:[R`Índices: $0,80$ y $0,85$`, R`Índice total: $0,80 \cdot 0,85 = 0,68$`, R`Queda el $68\,\%$: ha bajado $100 - 68 = 32\,\%$`],
+      pasos:[R`Índices: $0,80$ y $0,85$`, R`Índice total: $0,80 \cdot 0,85 = 0,68$`, R`Ha bajado $1 - 0,68 = 0,32$ → $32\,\%$`],
       res:"En total el agua del pantano ha bajado un <b>32 %</b>." },
     { nivel:"Consolidación",
       enun:"Los espectadores de una serie suben un 23 % en octubre y bajan un 18 % en noviembre. En noviembre la ven 2 017 200 personas. ¿Cuántas la veían en septiembre?",
@@ -225,7 +225,7 @@ TEMA.registrar({
 
     { titulo:"🪄 Trucos para ir más rápido", cuerpo:[
       {truco:["<b>Porcentajes de cabeza:</b> 50 %, la mitad; 25 %, la cuarta parte; 10 %, quita un cero; 5 %, la mitad del 10 %."], etq:"🪄 Truco 1"},
-      {truco:["<b>«Te descuentan el 30 %» es «pagas el 70 %».</b> Piensa en lo que pagas: ese es el índice."], etq:"🪄 Truco 2"},
+      {truco:[R`<b>Descuento del 30 %:</b> $I_V = 1 - 0,30 = 0,70$. <b>Subida del 30 %:</b> $I_V = 1 + 0,30 = 1,30$.`], etq:"🪄 Truco 2"},
       {truco:[R`<b>El 15 % de propina, de cabeza:</b> el 10 % de 40 € son 4 €, la mitad son 2 € → $4 + 2 = 6$ €.`], etq:"🪄 Truco 3"}
     ]},
 

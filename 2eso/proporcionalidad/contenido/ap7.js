@@ -22,11 +22,11 @@ TEMA.registrar({
       res:"Con la rebaja cuesta <b>88,40 €</b> y con la segunda rebaja, <b>79,56 €</b>." },
     { nivel:"Aplicación", min:4,
       enun:"Un portátil cuesta 544,50 € con el 21 % de IVA incluido. ¿Cuál es su precio sin IVA?",
-      pasos:[R`Con IVA sube un 21 %: $I_V = 1,21$`, R`$C_I = C_F : I_V = 544,50 : 1,21 = 450$ €`],
+      pasos:[R`Con IVA sube un 21 %: $I_V = 1 + 0,21 = 1,21$`, R`$C_I = C_F : I_V = 544,50 : 1,21 = 450$ €`],
       res:"Sin IVA, el portátil cuesta <b>450 €</b>." },
     { nivel:"Práctica", min:5,
       enun:"Aprovechando el Black Friday me he comprado una sudadera por 28 € con una rebaja del 12 %. ¿Cuánto costaba antes de la rebaja?",
-      pasos:[R`He pagado el 100 − 12 = 88 %: $I_V = 0,88$`, R`$C_I = C_F : I_V = 28 : 0,88 \approx 31,82$ €`, R`Comprueba: $31,82 \cdot 0,88 \approx 28$ ✓`],
+      pasos:[R`Rebaja del 12 %: $I_V = 1 - 0,12 = 0,88$`, R`$C_I = C_F : I_V = 28 : 0,88 \approx 31,82$ €`, R`Comprueba: $31,82 \cdot 0,88 \approx 28$ ✓`],
       res:"La sudadera costaba unos <b>31,82 €</b>." },
     { nivel:"Práctica", min:5,
       enun:"Hace dos semanas una mochila costaba 120 € y hoy he pagado 138 €. ¿Ha subido o ha bajado? ¿Qué porcentaje?",
@@ -34,7 +34,7 @@ TEMA.registrar({
       res:"La mochila ha <b>subido un 15 %</b>." },
     { nivel:"Problema", min:6,
       enun:"En un curso de maquillaje hay 80 personas. Más tarde, el número aumenta un 20 %. Algunas se aburren y se van, y vuelven a quedar 80. ¿Qué porcentaje de personas se ha ido?",
-      pasos:[R`Aumenta un 20 %: $C_F = 80 \cdot 1,20 = 96$ personas`, R`Después pasan de 96 a 80: $I_V = 80 : 96 \approx 0,8333$`, R`Queda el $83,33\,\%$: se ha ido el $100 - 83,33 = 16,67\,\%$`, "¡No es el 20 %! El porcentaje se calcula sobre 96, no sobre 80."],
+      pasos:[R`Aumenta un 20 %: $C_F = 80 \cdot 1,20 = 96$ personas`, R`Después pasan de 96 a 80: $I_V = 80 : 96 \approx 0,8333$`, R`Se ha ido: $1 - 0,8333 = 0,1667$ → $16,67\,\%$`, "¡No es el 20 %! El porcentaje se calcula sobre 96, no sobre 80."],
       res:"Se ha ido el <b>16,67 %</b> de las personas." },
     { nivel:"Reto", min:7,
       enun:"Por el Black Friday, una videoconsola de 250 € tiene un descuento del 20 %. Después le aplican otro porcentaje, sin saber si es de subida o de bajada, y el precio final es 255 €. ¿Fue una subida o una bajada? ¿De cuánto?",
@@ -47,17 +47,17 @@ TEMA.registrar({
     { nivel:"Básico", enun:"Un ordenador cuesta 1200 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
       pasos:[R`Sube un 21 %: $I_V = 1,21$`, R`$C_F = 1200 \cdot 1,21 = 1452$ €`], res:"Con IVA, el ordenador cuesta <b>1452 €</b>." },
     { nivel:"Básico", enun:"Unas zapatillas costaban 80 € y las he comprado por 68 €. ¿Qué descuento me han hecho?",
-      pasos:[R`$I_V = C_F : C_I = 68 : 80 = 0,85$`, "Pago el 85 %: el descuento es del 100 − 85 = 15 %"], res:"Me han hecho un descuento del <b>15 %</b>." },
+      pasos:[R`$I_V = C_F : C_I = 68 : 80 = 0,85$`, R`Descuento: $1 - 0,85 = 0,15$ → $15\,\%$`], res:"Me han hecho un descuento del <b>15 %</b>." },
     { nivel:"Básico", enun:"Unos pantalones costaban 30 € y les aplican dos rebajas seguidas del 20 % y del 30 %. ¿Cuál es el precio final?",
       pasos:[R`$30 - 6 = 24$ € (20 % de 30 = 6)`, R`$24 - 7,20 = 16,80$ € (30 % de 24 = 7,20)`, R`Con índices: $30 \cdot 0,80 \cdot 0,70 = 16,80$ €`], res:"El precio final es <b>16,80 €</b>." },
     { nivel:"Consolidación", enun:"Un abrigo rebajado un 30 % me ha costado 63 €. ¿Cuánto costaba antes?",
-      pasos:[R`Pagué el 70 %: $I_V = 0,70$`, R`$C_I = 63 : 0,70 = 90$ €`], res:"El abrigo costaba <b>90 €</b>." },
+      pasos:[R`Rebaja del 30 %: $I_V = 1 - 0,30 = 0,70$`, R`$C_I = 63 : 0,70 = 90$ €`], res:"El abrigo costaba <b>90 €</b>." },
     { nivel:"Consolidación", enun:"Una tablet cuesta 280 €. La rebajan un 15 % y al pagar le añaden el 21 % de IVA. ¿Cuánto pago?",
       pasos:[R`$280 \cdot 0,85 = 238$ €`, R`$238 \cdot 1,21 = 287,98$ €`], res:"Pago <b>287,98 €</b> por la tablet." },
     { nivel:"Problema", enun:"Hace dos años había 150 alumnos en el conservatorio. El año pasado se matricularon un 10 % más y este año 110. ¿Subió o bajó este año? ¿Qué porcentaje?",
-      pasos:[R`El año pasado: $150 \cdot 1,10 = 165$ alumnos`, R`Este año: $110 : 165 = 0,666\ldots$ → menos de 1: ha bajado`, R`Bajada: $100 - 66,67 = 33,33\,\%$`], res:"Este año <b>bajó</b> un <b>33,33 %</b>." },
+      pasos:[R`El año pasado: $150 \cdot 1,10 = 165$ alumnos`, R`Este año: $110 : 165 = 0,666\ldots$ → menos de 1: ha bajado`, R`Bajada: $1 - 0,6667 = 0,3333$ → $33,33\,\%$`], res:"Este año <b>bajó</b> un <b>33,33 %</b>." },
     { nivel:"Problema", enun:"Antonio hereda una fortuna. Paga un 20 % de impuestos y, después, un 10 % de lo que le queda en otro impuesto. Si en total ha pagado 10 500 €, ¿cuánto era la herencia?",
-      pasos:["De cada 100 €: paga 20 € y le quedan 80 €; después paga el 10 % de 80 = 8 €", R`En total paga 20 + 8 = 28 € de cada 100: $I_V = 0,28$`, R`$C_I = C_F : I_V = 10\,500 : 0,28 = 37\,500$ €`], res:"La herencia era de <b>37 500 €</b>." },
+      pasos:[R`Le queda la herencia tras los dos impuestos: $I_V = 0,80 \cdot 0,90 = 0,72$`, R`Lo que ha pagado en impuestos: $1 - 0,72 = 0,28$ de la herencia, $I_V = 0,28$`, R`$C_I = C_F : I_V = 10\,500 : 0,28 = 37\,500$ €`], res:"La herencia era de <b>37 500 €</b>." },
     { nivel:"Para pensar", enun:"Un artículo sube un 20 % y después baja un 20 %. ¿Vuelve a su precio? Pruébalo con 100 €.",
       pasos:["100 → +20 % → 120 → −20 % de 120 = 24 → 96 €", R`Índices: $1,20 \cdot 0,80 = 0,96$ → baja un 4 %`], res:"<b>No</b> vuelve a su precio: queda un <b>4 %</b> más barato." },
     { nivel:"Problema", enun:"El año pasado sobró comida de Navidad para 6 días y éramos 30 personas. Este año somos un 20 % más de personas. ¿Para cuántos días sobrará comida si se compra la misma cantidad?",
@@ -77,8 +77,8 @@ TEMA.registrar({
 
     { titulo:"Subir y bajar un porcentaje", cuerpo:[
       {cols:[
-        [{ej:{etq:"📉 Rebaja", enun:"Unas zapatillas de 60 € tienen un 25 % de descuento. ¿Cuánto pagas?", pasos:[R`Baja un 25 %: pago el 75 % → $I_V = 0,75$`, R`$C_F = C_I \cdot I_V = 60 \cdot 0,75 = 45$ €`], res:"Pagas <b>45 €</b> por las zapatillas."}}],
-        [{ej:{etq:"📈 Subida", enun:"La entrada al parque acuático cuesta 20 € y sube un 10 %. ¿Cuánto cuesta ahora?", pasos:[R`Sube un 10 %: pago el 110 % → $I_V = 1,10$`, R`$C_F = 20 \cdot 1,10 = 22$ €`], res:"La entrada cuesta ahora <b>22 €</b>."}}]
+        [{ej:{etq:"📉 Rebaja", enun:"Unas zapatillas de 60 € tienen un 25 % de descuento. ¿Cuánto pagas?", pasos:[R`Baja un 25 %: $I_V = 1 - 0,25 = 0,75$`, R`$C_F = C_I \cdot I_V = 60 \cdot 0,75 = 45$ €`], res:"Pagas <b>45 €</b> por las zapatillas."}}],
+        [{ej:{etq:"📈 Subida", enun:"La entrada al parque acuático cuesta 20 € y sube un 10 %. ¿Cuánto cuesta ahora?", pasos:[R`Sube un 10 %: $I_V = 1 + 0,10 = 1,10$`, R`$C_F = 20 \cdot 1,10 = 22$ €`], res:"La entrada cuesta ahora <b>22 €</b>."}}]
       ]}
     ]},
 
@@ -98,7 +98,7 @@ TEMA.registrar({
     { titulo:"¿Cuánto costaba antes?", cuerpo:[
       {prop:["Si sé el precio final, <b>divido</b> entre el índice: <b>$C_I = C_F : I_V$</b>"], etq:"Hacia atrás"},
       {ej:{etq:"👚 Problema de examen", enun:"Por el Black Friday me he comprado una blusa por 24 €. Si estaba rebajada un 28 %, ¿cuánto costaba antes?",
-        pasos:[R`Pago el 100 − 28 = 72 % → $I_V = 0,72$`, R`$C_I = C_F : I_V = 24 : 0,72 \approx 33,33$ €`],
+        pasos:[R`Rebaja del 28 %: $I_V = 1 - 0,28 = 0,72$`, R`$C_I = C_F : I_V = 24 : 0,72 \approx 33,33$ €`],
         res:"La blusa costaba <b>33,33 €</b>."}},
       {aviso:["¡No vale sumar el 28 % de 24! (24 + 6,72 = 30,72 €, mal): el 28 % era del precio de antes."]}
     ]},
@@ -121,7 +121,7 @@ TEMA.registrar({
 
     { titulo:"Subida y bajada: ¿cuál fue?", cuerpo:[
       {ej:{etq:"🛍️ Problema de examen", enun:"Un artículo costaba 180 €. Primero subió un 20 % y después le aplicaron otro porcentaje. El precio final es 162 €. ¿Fue subida o bajada? ¿De cuánto?",
-        pasos:[R`Subida: $180 \cdot 1,20 = 216$ €`, R`De 216 € a 162 €: $I_V = 162 : 216 = 0,75$`, "0,75 es menor que 1: <b>bajada</b> del 100 − 75 = 25 %"],
+        pasos:[R`Subida: $180 \cdot 1,20 = 216$ €`, R`De 216 € a 162 €: $I_V = 162 : 216 = 0,75$`, R`0,75 es menor que 1: <b>bajada</b> de $1 - 0,75 = 0,25$ → $25\,\%$`],
         res:"Fue una <b>bajada del 25 %</b>."}}
     ]},
 
