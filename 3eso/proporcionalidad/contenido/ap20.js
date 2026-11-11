@@ -76,12 +76,37 @@ TEMA.registrar({
     { nivel:"Para pensar", enun:"Para pintar una valla, Ana tarda 4 horas, Bea 6 horas y Carlos 12 horas. Empiezan los tres juntos y, al cabo de 1 hora, Carlos se va. ¿Cuánto tardan Ana y Bea en terminar?",
       pasos:[R`Los tres, en 1 hora: $\dfrac14 + \dfrac16 + \dfrac{1}{12} = \dfrac{3 + 2 + 1}{12} = \dfrac12$ → queda $\dfrac12$ de la valla`, R`Ana y Bea, en 1 hora: $\dfrac14 + \dfrac16 = \dfrac{5}{12}$`, R`$\dfrac12 : \dfrac{5}{12} = \dfrac{12}{10} = 1,2$ h $= 1$ h $12$ min`], res:"Ana y Bea tardan <b>1 h 12 min</b> más en terminar (en total, 2 h 12 min)." },
     { nivel:"Para pensar", enun:"En una cesta, el pan pesa un 50 %, la luz un 30 % y el transporte un 20 %. El pan pasa de 10 € a 11 €, la luz de 20 € a 23 € y el transporte de 8 € a 9 €. ¿Cuánto han subido los precios en conjunto (el IPC)?",
-      pasos:["Subidas: pan 10 %, luz 15 %, transporte 12,5 %", R`Media ponderada: $0,10 \cdot 0,5 + 0,15 \cdot 0,3 + 0,125 \cdot 0,2 = 0,12$`], res:"En conjunto, los precios han subido un <b>12 %</b>." }
+      pasos:["Subidas: pan 10 %, luz 15 %, transporte 12,5 %", R`Media ponderada: $0,10 \cdot 0,5 + 0,15 \cdot 0,3 + 0,125 \cdot 0,2 = 0,12$`], res:"En conjunto, los precios han subido un <b>12 %</b>." },
+
+    { nivel:"Consolidación", enun:"Tres hermanos de 4, 6 y 9 años se reparten 1900 € de forma inversamente proporcional a sus edades. ¿Cuánto le toca a cada uno?",
+      pasos:[R`Doy la vuelta: $\dfrac14,\ \dfrac16,\ \dfrac19$ → m.c.m. = 36: $\dfrac{9}{36},\ \dfrac{6}{36},\ \dfrac{4}{36}$`, "Reparto directo a 9, 6 y 4: 19 partes → 1900 : 19 = 100 €", "9 · 100 = 900 €, 6 · 100 = 600 € y 4 · 100 = 400 €"],
+      res:"Al de 4 años le tocan <b>900 €</b>, al de 6 años <b>600 €</b> y al de 9 años <b>400 €</b>." },
+    { nivel:"Consolidación", enun:"Dos socios ponen 4500 € y 7500 € en un negocio y se reparten las ganancias de forma proporcional a lo que pusieron. El segundo gana 1200 € más que el primero. ¿Cuánto gana cada uno?",
+      pasos:[R`Razón: $\dfrac{4500}{7500} = \dfrac{3}{5}$ → el primero 3 partes y el segundo 5`, "La diferencia son 5 − 3 = 2 partes = 1200 € → 1 parte = 600 €", "Primero: 3 · 600 = 1800 €. Segundo: 5 · 600 = 3000 €"],
+      res:"El primero gana <b>1800 €</b> y el segundo <b>3000 €</b>." },
+    { nivel:"Consolidación", enun:"En un plano a escala 1 : 250, una parcela rectangular mide 8 cm de largo y 6 cm de ancho. ¿Cuál es su superficie real en m²?",
+      pasos:[R`Largo real: $8 \cdot 250 = 2000$ cm $= 20$ m`, R`Ancho real: $6 \cdot 250 = 1500$ cm $= 15$ m`, R`Superficie: $20 \cdot 15 = 300$ m²`, "¡Ojo! Se pasan primero las medidas y después se calcula el área."],
+      res:"La parcela tiene <b>300 m²</b>." },
+    { nivel:"Problema", enun:"Doce obreros, trabajando 8 horas al día, hacen 240 m de zanja en 5 días. Si se van 4 obreros y los demás trabajan 2 horas más cada día, ¿cuántos días tardarán en hacer 360 m?",
+      pasos:["Datos nuevos: 12 − 4 = 8 obreros y 8 + 2 = 10 horas al día.",
+             cmp(["Obreros","Horas/día","Metros","Días"],["12","8","240","5"],["8","10","360","x"],["I","I","D"]),
+             R`Obreros <b>I</b> → $\dfrac{8}{12}$. Horas al día <b>I</b> → $\dfrac{10}{8}$. Metros <b>D</b> → $\dfrac{240}{360}$`,
+             R`$\dfrac{8}{12} \cdot \dfrac{10}{8} \cdot \dfrac{240}{360} = \dfrac{5}{x} \Rightarrow \dfrac{19\,200}{34\,560} = \dfrac{5}{x} \Rightarrow x = \dfrac{5 \cdot 34\,560}{19\,200} = 9$`],
+      res:"Tardarán <b>9 días</b> en hacer los 360 m." },
+    { nivel:"Problema", enun:"Un capital de 12 000 € se ha convertido en 12 900 € en 18 meses con interés simple. ¿A qué rédito estaba?",
+      pasos:["Interés: 12 900 − 12 000 = 900 €. Tiempo: 18 meses = 1,5 años.", R`$r = \dfrac{I}{c \cdot t} = \dfrac{900}{12\,000 \cdot 1,5} = \dfrac{900}{18\,000} = 0,05$ → $5\,\%$`],
+      res:"Estaba al <b>5 %</b> anual." },
+    { nivel:"Problema", enun:"Un joyero funde 300 g de oro de ley 0,750 con 200 g de oro de ley 0,900. ¿Qué ley tiene el lingote que resulta?",
+      pasos:[R`Oro puro: $300 \cdot 0,750 = 225$ g y $200 \cdot 0,900 = 180$ g → $405$ g`, R`Ley: $405 : 500 = 0,81$`],
+      res:"El lingote tiene una ley de <b>0,810</b> (un 81 % de oro)." },
+    { nivel:"Para pensar", enun:"Dos grifos llenan un depósito en 6 y en 9 horas, y un desagüe lo vacía en 12 horas. Si se abren los tres a la vez, ¿cuánto tarda en llenarse? Da el resultado en horas y minutos.",
+      pasos:[R`En 1 hora: $\dfrac16 + \dfrac19 - \dfrac{1}{12} = \dfrac{6}{36} + \dfrac{4}{36} - \dfrac{3}{36} = \dfrac{7}{36}$`, R`Le doy la vuelta: $\dfrac{36}{7} \approx 5,14$ h`, R`$0,14$ h $\approx 0,14 \cdot 60 \approx 9$ min`],
+      res:"El depósito tarda unas <b>5 h 9 min</b> en llenarse." }
   ],
 
   laminas: [
     { portada:true, cuerpo:[
-      {html:`<p class="gancho">Entra todo el tema. En clase, el modelo de control 1.</p>`}
+      {html:`<p class="gancho">Los 20 ejercicios de repaso son la batería del control: hay que hacerlos todos.</p>`}
     ]},
     { titulo:"¿Qué me piden? Busca tu caja", cuerpo:[
       {html:`<div class="cols" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:.6em">
