@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
 <link rel="stylesheet" href="../../assets/tema.css">
 <link rel="icon" href="../../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <script src="info.js"></script>
 </head>
 <body>
@@ -31,6 +32,7 @@
 <script>
 const SECC = [
   {id:"apuntes", t:"📘 Apuntes"},
+  {id:"videos", t:"🎬 Vídeos", d:"Los vídeos de cada apartado, para volver a ver la explicación en casa."},
   {id:"pau", t:"🔎 Ejercicios de selectividad", d:"363 ejercicios de la PAU (2017-2026) para buscar, filtrar y proyectar en clase, con su solución."}
 ];
 const tabs = document.getElementById("tabs"), pan = document.getElementById("paneles");
@@ -42,7 +44,9 @@ SECC.forEach((s,i)=>{
       <div class="acts">${a.listo ? fn(a) : `<span class="prox-tag">En preparación</span>`}</div></div>`).join("") + `</div>`;
   if(s.id==="apuntes"){
     h = `<p class="guia">Cada apartado es una sesión: <b>📘 explicación</b> → <b>✏️ ejercicios de clase</b> → <b>🏠 tareas para casa</b>.</p>` + lista(a=>
-      `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Explicar</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a>`);
+      `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Explicación</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a>`);
+  } else if(s.id==="videos"){
+    h = `<p class="guia">${s.d}</p><div class="aps" id="lista-videos"><p style="color:var(--muted)">Cargando los vídeos…</p></div>`;
   } else if(s.id==="clase"){
     h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn verde" href="clase.html?ap=${a.num}">✏️ Proyectar ejercicios</a>`);
   } else if(s.id==="tareas"){
@@ -54,6 +58,19 @@ SECC.forEach((s,i)=>{
   }
   pan.insertAdjacentHTML("beforeend",`<div class="panel" role="tabpanel" id="p-${s.id}" aria-labelledby="t-${s.id}" ${i?"hidden":""}>${h}</div>`);
 });
+/* vídeos: se leen de cada apartado (contenido/apN.js) */
+(function(){
+  const aps = TEMA.info.apartados.filter(a=>a.listo), vids = {};
+  let n = 0;
+  TEMA.registrar = ap => { vids[ap.num] = ap.videos || []; };
+  const pinta = () => {
+    const el = document.getElementById("lista-videos"); if(!el) return;
+    el.innerHTML = aps.map(a=>`<div class="ap"><span class="n">${a.num}</span><div><h3>${a.titulo}</h3>${(vids[a.num]||[]).length ? "" : `<p>Sin vídeos todavía.</p>`}</div>
+      <div class="acts">${(vids[a.num]||[]).map(v=>`<a class="btn" href="${v.url}" target="_blank" rel="noopener">▶ ${v.t}</a>`).join("")}</div></div>`).join("");
+  };
+  aps.forEach(a=>{ const sc = document.createElement("script"); sc.src = `contenido/ap${a.num}.js`;
+    sc.onload = sc.onerror = () => { if(++n === aps.length) pinta(); }; document.head.appendChild(sc); });
+})();
 function abrir(id){
   SECC.forEach(s=>{ document.getElementById("t-"+s.id).setAttribute("aria-selected", s.id===id); document.getElementById("p-"+s.id).hidden = s.id!==id; });
   history.replaceState(null,"","#"+id);

@@ -30,11 +30,11 @@ TEMA.registrar({
   clase: [
     { nivel:"Leer la etiqueta", min:4,
       enun:"🍪 Unas galletas tienen 24 g de azúcares por cada 100 g y la ración es de 30 g. <b>a)</b> ¿Qué porcentaje de azúcar tienen? <b>b)</b> ¿Qué color les toca en el semáforo? <b>c)</b> ¿Cuánto azúcar tomas en una ración?",
-      pasos:["<b>a)</b> 24 g de cada 100 g → <b>24 %</b>", "<b>b)</b> 24 es más de 22,5 → 🔴 mucho azúcar", R`<b>c)</b> PARTE = TOTAL × decimal: $30 \cdot 0,24 = 7,2$ g`],
+      pasos:["<b>a)</b> 24 g de cada 100 g → <b>24 %</b>", "<b>b)</b> 24 es más de 22,5 → 🔴 mucho azúcar", R`<b>c)</b> $C_F = C_I \cdot I_V = 30 \cdot 0,24 = 7,2$ g`],
       res:"a) 24 %&ensp; b) rojo&ensp; c) 7,2 g" },
     { nivel:"% del día", min:5,
       enun:"🥛 Un yogur natural de 125 g tiene un 4,5 % de azúcares. Lo que se puede tomar al día son 90 g de azúcares. <b>a)</b> ¿Cuánto azúcar tiene el yogur? <b>b)</b> ¿Qué porcentaje del azúcar del día es?",
-      pasos:[R`<b>a)</b> $125 \cdot 0,045 = 5,625$ g ≈ 5,6 g`, R`<b>b)</b> decimal = PARTE : TOTAL: $5,625 : 90 = 0,0625$ → <b>6,25 %</b>`],
+      pasos:[R`<b>a)</b> $125 \cdot 0,045 = 5,625$ g ≈ 5,6 g`, R`<b>b)</b> $I_V = C_F : C_I = 5,625 : 90 = 0,0625$ → <b>6,25 %</b>`],
       res:"a) unos 5,6 g&ensp; b) 6,25 %" },
     { nivel:"% del día", min:6,
       enun:"🍫 Una crema de cacao tiene 56 g de azúcares por 100 g y la ración es de 15 g. <b>a)</b> ¿Qué porcentaje del azúcar del día (90 g) tomas en una ración? <b>b)</b> ¿Cuántas raciones hacen falta para llegar a todo el azúcar del día?",
@@ -42,7 +42,7 @@ TEMA.registrar({
       res:"a) 9,3 %&ensp; b) unas 11 raciones (10,7)" },
     { nivel:"Hacia atrás", min:5,
       enun:"🍟 En una bolsa de patatas fritas de 40 g pone que tiene 0,56 g de sal. ¿Qué porcentaje de sal tienen? ¿Qué color les toca en el semáforo?",
-      pasos:[R`decimal = PARTE : TOTAL: $0,56 : 40 = 0,014$ → <b>1,4 %</b>`, "Es 1,4 g por cada 100 g: está entre 0,3 y 1,5 → 🟡 medio (muy cerca del rojo)"],
+      pasos:[R`$I_V = C_F : C_I = 0,56 : 40 = 0,014$ → <b>1,4 %</b>`, "Es 1,4 g por cada 100 g: está entre 0,3 y 1,5 → 🟡 medio (muy cerca del rojo)"],
       res:"1,4 % de sal, amarillo" },
     { nivel:"¿Es equilibrado?", min:7,
       enun:"🍞 El pan de molde integral tiene por cada 100 g: 42 g de hidratos, 4 g de grasas y 10 g de proteínas. Sabiendo que 1 g de hidratos o de proteínas da 4 kcal y 1 g de grasa da 9 kcal, ¿qué porcentaje de su energía viene de cada nutriente? ¿Se parece a lo recomendado (hidratos 50 – 55 %, grasas 30 – 35 %, proteínas 10 – 15 %)?",
@@ -52,7 +52,7 @@ TEMA.registrar({
       res:"68,9 % hidratos, 14,8 % grasas y 16,4 % proteínas" },
     { nivel:"Reto", min:6,
       enun:"📉 Una marca cambia la receta de sus galletas: pasan de 24 g a 18 g de azúcares por cada 100 g. <b>a)</b> ¿En qué porcentaje ha bajado el azúcar? <b>b)</b> ¿Cambia su color en el semáforo?",
-      pasos:[R`<b>a)</b> Variación = FINAL : INICIAL: $18 : 24 = 0,75$ → queda el 75 %, <b>baja un 25 %</b>`, "<b>b)</b> 18 g está entre 5 y 22,5: pasa de 🔴 a 🟡"],
+      pasos:[R`<b>a)</b> $I_V = C_F : C_I = 18 : 24 = 0,75$ → <b>baja un 25 %</b>`, "<b>b)</b> 18 g está entre 5 y 22,5: pasa de 🔴 a 🟡"],
       res:"a) un 25 %&ensp; b) sí, de rojo a amarillo" }
   ],
 
@@ -64,7 +64,7 @@ TEMA.registrar({
     { nivel:"Consolidación", enun:"En el desayuno tomas 30 g de cereales con un 25 % de azúcar y un yogur de 125 g con un 4,5 % de azúcar. ¿Cuánto azúcar tomas en total? ¿Qué porcentaje es de los 90 g del día?",
       pasos:[R`Cereales: $30 \cdot 0,25 = 7,5$ g; yogur: $125 \cdot 0,045 = 5,625$ g`, R`Total: $13,125$ g → $13,125 : 90 \approx 0,146$ → 14,6 %`], res:"Unos 13,1 g, el 14,6 % del día" },
     { nivel:"Problema", enun:"En una etiqueta pone que una ración aporta 228 kcal y que eso es el 11,4 % de la ingesta de referencia. ¿Cuántas kcal es la ingesta de referencia?",
-      pasos:[R`TOTAL = PARTE : decimal: $228 : 0,114 = 2000$ kcal`], res:"2000 kcal" },
+      pasos:[R`$C_I = C_F : I_V = 228 : 0,114 = 2000$ kcal`], res:"2000 kcal" },
     { nivel:"Para pensar", enun:"Lucía cambia sus 30 g de cereales (25 % de azúcar) por 30 g de copos de avena (1 % de azúcar). ¿Cuántos gramos de azúcar deja de tomar? ¿En qué porcentaje baja el azúcar de su desayuno de cereales?",
       pasos:[R`Antes $30 \cdot 0,25 = 7,5$ g; ahora $30 \cdot 0,01 = 0,3$ g → deja de tomar 7,2 g`, R`$0,3 : 7,5 = 0,04$ → queda el 4 %, baja un 96 %`], res:"7,2 g menos, baja un 96 %" }
   ],
@@ -140,7 +140,7 @@ TEMA.registrar({
         <tr><td><b>Exposición y equipo</b> (10 %)</td><td>Hablan todos y se explican bien</td><td>Hablan casi todos</td><td>Lee uno solo</td><td>No exponen</td></tr></table>`},
       {nota:[R`La nota también es un porcentaje: cada criterio pesa lo que dice el paréntesis. Ejemplo: $(4 \cdot 0,2 + 3 \cdot 0,3 + 4 \cdot 0,2 + 3 \cdot 0,2 + 4 \cdot 0,1) : 4 = 0,875$ → <b>8,75</b>`]},
       {estudio:[
-        {nota:["<b>Saberes:</b> porcentajes (el % como decimal, PARTE = TOTAL × decimal, porcentaje de una cantidad, qué % representa, variación), proporcionalidad directa (de 100 g a la ración), lectura e interpretación de tablas y gráficos.",
+        {nota:["<b>Saberes:</b> porcentajes (el % como decimal, $C_F = C_I \cdot I_V$, porcentaje de una cantidad, qué % representa, variación), proporcionalidad directa (de 100 g a la ración), lectura e interpretación de tablas y gráficos.",
                "<b>Conexiones:</b> Biología y Geología (nutrición y dieta), Educación Física (hábitos saludables) y ODS 3 (salud y bienestar).",
                "<b>Ideas:</b> una cartulina A3 por grupo; se pueden colgar en el pasillo. Las bebidas usan otros límites del semáforo: mejor dejarlas fuera. Los valores IR son de un adulto medio: sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
       ]}

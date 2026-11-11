@@ -81,6 +81,62 @@ document.addEventListener("click", ev=>{
   fb.innerHTML = (ok ? "✅ <b>¡Bien!</b> " : "❌ <b>Todavía no.</b> ") + tx(ok ? c.explic : (c.pista || c.explic));
 });
 
+
+/* ---------- Asistente (la profe): en PROYECTAR los «Fíjate», trucos y avisos salen de la pantalla
+   y los dice el asistente (bocadillo + voz). Así cada pantalla queda solo con el enunciado y la solución. ---------- */
+const NOTAS = ["nota","truco","aviso"];
+function esNota(b){ return b && typeof b === "object" && NOTAS.some(k=>b[k]!==undefined) && !b.formula; }
+function separar(cuerpo){
+  const main = [], notas = [];
+  (cuerpo||[]).forEach(b=>{
+    if(esNota(b)){ notas.push(b); return; }
+    if(b && b.cols){
+      const cols = b.cols.map(c=>[].concat(c).filter(x=>{ if(esNota(x)){ notas.push(x); return false; } return true; })).filter(c=>c.length);
+      if(cols.length===1) cols[0].forEach(x=>main.push(x));
+      else if(cols.length) main.push(Object.assign({}, b, {cols}));
+      return;
+    }
+    main.push(b);
+  });
+  return main.length ? {main, notas} : {main: cuerpo, notas: []};
+}
+// texto para leer en voz alta (sin HTML y con las fórmulas en palabras)
+function aVoz(t){
+  return String(t)
+    .replace(/<[^>]+>/g," ")
+    .replace(/\$([^$]+)\$/g,(_,m)=>" "+m
+      .replace(/C_F/g,"ce efe").replace(/C_I/g,"ce i").replace(/I_V/g,"i uve")
+      .replace(/\\[dt]?frac\{([^}]*)\}\{([^}]*)\}/g,"$1 entre $2")
+      .replace(/\\cdot|\\times/g," por ").replace(/\\approx/g," aproximadamente ").replace(/\\,|\;|\\quad|\\qquad/g," ")
+      .replace(/\\text\{([^}]*)\}/g,"$1").replace(/\\overline\{([^}]*)\}/g,"$1 periódico")
+      .replace(/\\%/g," por ciento").replace(/[{}\\]/g," ")
+      .replace(/:/g," entre ").replace(/=/g," igual a ").replace(/−|-(?=\s*\d)/g," menos ")+" ")
+    .replace(/(\d)\s*%/g,"$1 por ciento").replace(/×/g," por ").replace(/→/g,", ").replace(/[⚠️💡🪄🛒🍕🚌⚽📈📉👟🔧🛴👕📱🎮🚲🎒🧾📺🫒🏷✓]/gu," ")
+    .replace(/&[a-z]+;/g," ").replace(/\s+/g," ").trim();
+}
+function textoBloque(b){
+  if(b==null) return "";
+  if(typeof b === "string") return b;
+  if(b.lista) return b.lista.map(textoBloque).join(". ");
+  if(b.html) return b.html;
+  if(b.formula) return "$"+b.formula+"$";
+  for(const k of NOTAS) if(b[k]!==undefined) return [].concat(b[k]).map(textoBloque).join(". ");
+  return "";
+}
+let VOZ = null;
+function hablar(t){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = "es-ES"; u.rate = 0.95;
+  const vs = speechSynthesis.getVoices();
+  VOZ = VOZ || vs.find(v=>/es-ES/i.test(v.lang) && /female|mujer|m[oó]nica|helena|elvira|lucia|paulina|google/i.test(v.name)) || vs.find(v=>/^es/i.test(v.lang));
+  if(VOZ) u.voice = VOZ;
+  speechSynthesis.speak(u);
+}
+if("speechSynthesis" in window && speechSynthesis.addEventListener) speechSynthesis.addEventListener("voiceschanged", ()=>{ VOZ = null; });
+const AVATAR = (window.TEMA_AVATAR || (document.querySelector('script[src*="tema.js"]')||{src:""}).src.replace(/tema\.js.*$/,"avatar.svg"));
+
 /* ---------- Carga de un apartado ---------- */
 const qs = new URLSearchParams(location.search);
 const AP = parseInt(qs.get("ap") || "1", 10);
@@ -201,19 +257,35 @@ function proyectar(ap){
       <button class="pb" id="fs" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button>
       <button class="pb" id="menu" aria-label="Índice de pantallas" title="Índice de pantallas">☰</button>
     </div></div>
+    <button class="asis" id="asis" hidden aria-label="La profe te dice algo"><img src="${AVATAR}" alt=""><span class="asis-n" id="asisN"></span></button>
+    <div class="bocadillo" id="boca" hidden role="dialog" aria-label="La profe dice"><div class="boca-cab"><b>💬 La profe dice</b><span class="sp"></span><button class="pb" id="bocaVoz" aria-label="Escuchar otra vez" title="Escuchar">🔊</button><button class="pb" id="bocaX" aria-label="Cerrar">✕</button></div><div id="bocaC"></div></div>
     <div class="velo" id="velo" hidden></div>
     <div class="menu-p" id="menuP" hidden><div class="menu-c"><div class="menu-h"><b>Pantallas del apartado</b><button class="pb" id="cerrar" aria-label="Cerrar">✕</button></div>
       <ol>${L.map((l,k)=>`<li><button data-k="${k}">${l.portada?"Portada":tx(l.titulo)}</button></li>`).join("")}</ol>
-      <p class="atajos">⌨️ <b>→</b> o <b>espacio</b>: siguiente paso / pantalla · <b>←</b>: atrás · <b>Inicio/Fin</b>: primera / última · <b>F</b>: pantalla completa · <b>B</b>: pantalla en blanco</p></div></div>`;
+      <p class="atajos">⌨️ <b>→</b> o <b>espacio</b>: siguiente paso / pantalla · <b>←</b>: atrás · <b>Inicio/Fin</b>: primera / última · <b>F</b>: pantalla completa · <b>B</b>: pantalla en blanco · <b>P</b>: la profe te dice algo (💬)</p></div></div>`;
   const $ = id=>document.getElementById(id);
   // orden de aparición: data-o (texto y capas de una gráfica sincronizados) o, si no hay, el orden del documento
   function pasosOcultos(){ return [...$("lam").querySelectorAll(".paso.oculto")].map((e,k)=>[e, e.dataset.o!==undefined ? +e.dataset.o : 1000+k]).sort((a,b)=>a[1]-b[1]).map(x=>x[0]); }
+  let NOTAS_L = [];
+  function abrirBoca(){
+    if(!NOTAS_L.length) return;
+    $("bocaC").innerHTML = NOTAS_L.map(b=>bloque(b,"proyectar")).join("");
+    $("boca").hidden = false;
+    hablar(aVoz(NOTAS_L.map(textoBloque).join(". ")));
+  }
+  function cerrarBoca(){ $("boca").hidden = true; if("speechSynthesis" in window) speechSynthesis.cancel(); }
   function pintar(){
     const l = L[i];
     $("tit").innerHTML = l.portada ? TEMA.info.tema : tx(l.titulo);
+    const sep = l.portada ? {main:l.cuerpo, notas:[]} : separar(l.cuerpo);
     $("lam").innerHTML = l.portada
-      ? `<div class="portada"><h2>${ap._numSpan}${ap.titulo}</h2>${l.cuerpo.map(b=>bloque(b,"proyectar")).join("")}</div>`
-      : l.cuerpo.map(b=>bloque(b,"proyectar")).join("");
+      ? `<div class="portada"><h2>${ap._numSpan}${ap.titulo}</h2>${sep.main.map(b=>bloque(b,"proyectar")).join("")}</div>`
+      : sep.main.map(b=>bloque(b,"proyectar")).join("");
+    NOTAS_L = sep.notas;
+    cerrarBoca();
+    $("asis").hidden = !NOTAS_L.length;
+    $("asisN").textContent = NOTAS_L.length > 1 ? NOTAS_L.length : "";
+    $("asis").classList.remove("salta"); void $("asis").offsetWidth; if(NOTAS_L.length) $("asis").classList.add("salta");
     $("lam").querySelectorAll(".paso").forEach(p=>p.classList.add("oculto"));
     $("zona").scrollTop = 0;
     ajustar();
@@ -260,6 +332,9 @@ function proyectar(ap){
   function ant(){ if(i>0){ i--; pintar(); } }
   function avanzar(){ if(!verPaso()) sig(); }
   $("sig").onclick = sig; $("ant").onclick = ant; $("paso").onclick = verPaso;
+  $("asis").onclick = ()=>{ $("boca").hidden ? abrirBoca() : cerrarBoca(); };
+  $("bocaX").onclick = cerrarBoca;
+  $("bocaVoz").onclick = ()=>hablar(aVoz(NOTAS_L.map(textoBloque).join(". ")));
   $("fs").onclick = pantallaCompleta;
   document.addEventListener("keydown", e=>{
     if(e.target.closest("input,textarea")) return;
@@ -272,6 +347,7 @@ function proyectar(ap){
     else if(["ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); ant(); }
     else if(e.key==="ArrowDown"){ e.preventDefault(); verPaso(); }
     else if(e.key==="f"||e.key==="F"){ $("fs").click(); }
+    else if(e.key==="p"||e.key==="P"){ $("asis").click(); }
   });
   // deslizar el dedo en tablet o pizarra táctil
   let x0=null; document.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
