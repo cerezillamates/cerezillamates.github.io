@@ -412,3 +412,6 @@ body.estudio .wrap{padding-bottom:110px}
 .pasos li>span .katex,.res .katex,.enun .katex,.enun-act .katex{white-space:nowrap}
 .pasos li>span .katex .katex-html,.res .katex .katex-html{white-space:nowrap}
 .entonces{display:inline-block;margin:.15em .2em 0 1.2em;font-family:"Caveat",cursive;font-weight:700}
+/* cada fórmula es un bloque: no se corta nunca entre dos filas */
+.katex{white-space:nowrap}
+:not(.katex-display)>.katex{display:inline-block}

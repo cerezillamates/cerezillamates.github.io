@@ -52,7 +52,7 @@ function ejemplo(e, modo){
   return `<div class="b-ej"><span class="etq">${e.etq||"✍️ Ejemplo resuelto"}</span>
     ${enun}
     ${pasos?`<ol class="pasos${e.lineal?" lineal":""}">${pasos}</ol>`:""}
-    ${e.res?`<div class="res paso" data-g="${esc(GUIA_RES)}">${tx(e.res)}</div>`:""}</div>`;
+    ${e.res?`<div class="res paso" data-g="${esc(GUIA_RES)}">${tx(cortarFlechas(e.res))}</div>`:""}</div>`;
 }
 
 /* ---------- Pasos: texto o {t:"…", g:"lo que dice la profe antes de este paso"} ---------- */
@@ -104,11 +104,19 @@ function guiaAuto(t){
 const pG = p => (p && typeof p==="object" && p.g!==undefined) ? p.g : guiaAuto(pT(p));
 // Una fórmula no se parte nunca en dos filas: las cadenas «… ⇒ … ⇒ …» se escriben una debajo de otra, empezando por ⇒.
 function cortarFlechas(t){
-  return String(t==null?"":t).replace(/\$([^$]+?)\$/g, (m, f)=>{
-    const trozos = f.split(/(?:\s|\\[;,!]|\\q?quad)*\\Rightarrow(?:\s|\\[;,!]|\\q?quad)*/);
-    if(trozos.length < 2) return m;
-    return trozos.map((x,k)=> (k ? '<br><span class="entonces">⇒</span> ' : '') + '$' + x.trim() + '$').join("");
-  });
+  const FLECHA = /(?:\s|\\[;,!:]|\\q?quad)*\\(?:Rightarrow|Longrightarrow|to|rightarrow|longrightarrow)(?:\s|\\[;,!:]|\\q?quad)*/;
+  const ENT = '<br><span class="entonces">⇒</span> ';
+  let s = String(t==null?"":t)
+    // 1) dentro de una fórmula: cada ⇒ (o →) empieza una fila nueva
+    .replace(/\$([^$]+?)\$/g, (m, f)=>{
+      const trozos = f.split(FLECHA);
+      return trozos.length < 2 ? m : trozos.map((x,k)=>(k ? ENT : "") + "$" + x.trim() + "$").join("");
+    })
+    // 2) entre dos fórmulas: «$…$ → $…$» o «$…$ ⇒ $…$» también en filas
+    .replace(/\$\s*(?:→|⟶|⇒|=>)\s*\$/g, "$" + ENT + "$")
+    // 3) «$…$. En cruz: $…$», «$…$ · $…$», «$…$; …»: cada operación en su fila
+    .replace(/\$\s*(?:[.;]|·|&nbsp;·&nbsp;)\s+(?=[^$<]{0,40}\$)/g, "$<br>");
+  return s;
 }
 TEMA.cortarFlechas = cortarFlechas;
 function pasosHTML(pasos, ocultar){
