@@ -30,9 +30,9 @@ TEMA.registrar({
       {comp:{q:"Una bici de 500 € se vende por 325 €. ¿Qué porcentaje ha bajado?", sol:35, unidad:"%", explic:"325 : 500 = 0,65 → 65 % → baja un 35 %", pista:"Divide FINAL : INICIAL."}},
       {comp:{q:"Con una rebaja del 20 % y un 21 % de IVA pagas 242 €. ¿Precio inicial?", sol:250, unidad:"€", explic:"Índice total 0,80 · 1,21 = 0,968 → 242 : 0,968 = 250 €", pista:"Multiplica los índices y divide."}}
     ]},
-    { titulo:"Grifos, móviles y mezclas", cuerpo:[
+    { titulo:"Grifos y mezclas", cuerpo:[
       {comp:{q:"Un grifo llena un depósito en 4 h y una fuga lo vacía en 12 h. ¿Cuántas horas tarda en llenarse?", sol:6, unidad:"h", explic:"1/4 − 1/12 = 2/12 = 1/6 → 6 h", pista:"La fuga resta."}},
-      {comp:{q:"Un ciclista sale a 15 km/h; 2 h después sale una moto a 45 km/h. ¿Cuántas horas tarda la moto en alcanzarlo?", sol:1, unidad:"h", explic:"Ventaja 30 km; recorta 30 km/h → 1 h", pista:"Primero la ventaja; después resta las velocidades."}},
+      {comp:{q:"Se funden 200 g de oro al 90 % con 300 g de oro al 70 %. ¿Qué porcentaje de oro tiene el lingote nuevo?", sol:78, unidad:"%", explic:"Oro: 200 · 0,90 + 300 · 0,70 = 180 + 210 = 390 g de 500 g → 0,78 → 78 %", pista:"Oro total entre gramos totales."}},
       {comp:{q:"Se mezclan 10 kg de café de 6 €/kg con 30 kg de 10 €/kg. ¿Precio del kilo de mezcla?", sol:9, unidad:"€/kg", explic:"(60 + 300) : 40 = 9 €/kg", pista:"Coste total entre kilos totales."}},
       {comp:{q:"Dos grifos juntos pueden tardar más que el más rápido de los dos.", opciones:VF, ok:1, explic:"Juntos siempre tardan menos que cualquiera de ellos solo.", pista:"Si abres otro grifo, ¿entra más o menos agua cada hora?"}}
     ]}

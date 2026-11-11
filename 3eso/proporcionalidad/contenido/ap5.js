@@ -1,196 +1,272 @@
-/* 3.º ESO · Tema 3 · Apartado 5: Repartos proporcionales
-   Método de la profesora: DIRECTO → ➊ sumo las partes ➋ divido ➌ multiplico.
-   INVERSO → ➊ doy la vuelta ➋ mismo denominador ➌ reparto directo con los numeradores.
-   Dibujo del reparto: cada casilla es una parte. */
+/* 3.º ESO · Tema 3 · Apartado 5: Porcentajes
+   Enfoque de la profesora: el % en DECIMAL; el triángulo PARTE / TOTAL × DECIMAL («tapa lo que buscas»);
+   el ÍNDICE (100 % ± el %): FINAL = INICIAL × índice, INICIAL = FINAL : índice; variación = FINAL : INICIAL;
+   encadenados: se multiplican los índices (los % NO se suman). */
 (function(){
 const R = String.raw;
-const COL = ["r","a","v","z"];
-// filas: [nombre, nº de partes, valor de una parte]
-const casillas = (filas, pie) => `<figure class="dib casillas reparto">${filas.map((f,k)=>`<div class="fila-c"><b>${f[0]}</b>${`<span class="c ${COL[k%4]}">${f[2]}</span>`.repeat(f[1])}<em>= ${f[3]}</em></div>`).join("")}${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
-const pasos3 = (a,b,c) => `<div class="tres-pasos"><div><span class="n3">➊</span>${a}</div><i>➜</i><div><span class="n3">➋</span>${b}</div><i>➜</i><div><span class="n3">➌</span>${c}</div></div>`;
+// triángulo de los porcentajes; tapa: "P" (parte), "T" (total), "D" (decimal) o ""
+const tri = (tapa, pie) => {
+  const v = (k,t) => tapa===k ? `<tspan fill="#f59e0b">?</tspan>` : t;
+  return `<figure class="dib tri"><svg viewBox="0 0 260 170" role="img" aria-label="Triángulo: PARTE arriba; TOTAL por DECIMAL abajo">
+    <polygon points="130,8 252,160 8,160" fill="#eef0ff" stroke="#4338ca" stroke-width="4" stroke-linejoin="round"/>
+    <line x1="70" y1="86" x2="190" y2="86" stroke="#4338ca" stroke-width="3"/>
+    <text x="130" y="72" text-anchor="middle" font-size="24" font-weight="800" fill="#1e1b3a">${v("P","PARTE")}</text>
+    <text x="130" y="136" text-anchor="middle" font-size="20" font-weight="800" fill="#1e1b3a">${v("T","TOTAL")} × ${v("D","DECIMAL")}</text>
+  </svg>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
+};
+// barra de porcentajes: trozos [ancho %, texto, clase]
+const barra = (trozos, pie) => `<figure class="dib"><div class="barra-pct">${trozos.map(t=>`<span class="${t[2]||""}" style="flex:${t[0]}">${t[1]}</span>`).join("")}</div>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
+// flecha de un cambio: [antes, operación, después]
+const flecha = (pasos) => `<div class="cadena">${pasos.map((p,k)=>k%2 ? `<div class="op">${p}<i>━━━►</i></div>` : `<div class="caja">${p}</div>`).join("")}</div>`;
 
 TEMA.registrar({
   num: 5,
-  titulo: "Repartos proporcionales",
+  titulo: "Porcentajes",
   videos: [
-    {t:"Reparto proporcional directo", url:"https://www.youtube.com/watch?v=jIBuPE60tVg"},
-    {t:"Reparto proporcional inverso", url:"https://www.youtube.com/watch?v=yOoVgGdtSDw"}
+    {t:"Problemas con porcentajes (3.º ESO)", url:"https://www.youtube.com/watch?v=9T7w7iaMrjQ"},
+    {t:"Aumentos y disminuciones porcentuales", url:"https://www.youtube.com/watch?v=sh0ytvn8Y4M"},
+    {t:"Porcentajes: subidas y bajadas encadenadas", url:"https://www.youtube.com/watch?v=ynSBIu_6zSE"}
   ],
 
   clase: [
     { nivel:"Aplicación", min:5,
-      enun:"Irene, Sara y Noa compran juntas un décimo de lotería de Navidad: Irene pone 5 €, Sara 7 € y Noa 8 €. ¡Les tocan 1000 €! Repártelos de forma justa.",
-      pasos:["Quien puso más, recibe más: reparto <b>directo</b>.",
-             "➊ Sumo las partes: 5 + 7 + 8 = 20 partes",
-             "➋ Divido: 1000 : 20 = <b>50 €</b> cada parte",
-             "➌ Multiplico: Irene 5 · 50 = 250 € · Sara 7 · 50 = 350 € · Noa 8 · 50 = 400 €",
-             "Comprueba: 250 + 350 + 400 = 1000 € ✓"],
-      res:"Irene 250 €&ensp;·&ensp;Sara 350 €&ensp;·&ensp;Noa 400 €" },
+      enun:"En tu clase hay 28 alumnos.<br><b>a)</b> El 25 % viene al instituto en bici. ¿Cuántos son?<br><b>b)</b> 21 alumnos tienen móvil propio. ¿Qué porcentaje es?<br><b>c)</b> En otra clase, 9 alumnos son el 30 %. ¿Cuántos alumnos hay en esa clase?",
+      pasos:[R`<b>a)</b> Busco la PARTE: $28 \cdot 0,25 = 7$ alumnos`,
+             R`<b>b)</b> Busco el DECIMAL: $21 : 28 = 0,75$ → $75\,\%$`,
+             R`<b>c)</b> Busco el TOTAL: $9 : 0,30 = 30$ alumnos`],
+      res:"a) 7 alumnos&ensp;·&ensp;b) 75 %&ensp;·&ensp;c) 30 alumnos" },
     { nivel:"Aplicación", min:5,
-      enun:"Un grupo de música del instituto gana 840 € en un concurso. Lo reparten según las canciones que ha compuesto cada miembro: 2, 5 y 7 canciones. ¿Cuánto recibe cada uno?",
-      pasos:["Más canciones → más dinero: <b>directo</b>.",
-             "➊ 2 + 5 + 7 = 14 partes &nbsp;➋ 840 : 14 = 60 €",
-             "➌ 2 · 60 = 120 € · 5 · 60 = 300 € · 7 · 60 = 420 €",
-             "Comprueba: 120 + 300 + 420 = 840 ✓"],
-      res:"120 €&ensp;·&ensp;300 €&ensp;·&ensp;420 €" },
+      enun:"¿Cuánto pagas?<br><b>a)</b> Unas zapatillas de 85 € con un 30 % de descuento en el Black Friday.<br><b>b)</b> Una entrada de concierto de 40 € a la que se suma un 15 % de gastos de gestión.",
+      pasos:[R`<b>a)</b> Baja: índice $= 100\,\% - 30\,\% = 70\,\% = 0,70$ → $85 \cdot 0,70 = 59,50$ €`,
+             R`<b>b)</b> Sube: índice $= 100\,\% + 15\,\% = 115\,\% = 1,15$ → $40 \cdot 1,15 = 46$ €`],
+      res:"a) 59,50 €&ensp;·&ensp;b) 46 €" },
     { nivel:"Práctica", min:6,
-      enun:"Tres hermanos pasean al perro del vecino y se reparten lo que les paga según los días que lo ha sacado cada uno: 4, 6 y 10 días. Al pequeño, que lo sacó 4 días, le tocan 36 €. ¿Cuánto les toca a los otros? ¿Cuánto les pagó el vecino?",
-      pasos:["Conozco lo que le toca a uno: <b>4 partes = 36 €</b>",
-             "Una parte: 36 : 4 = <b>9 €</b>",
-             "Los otros: 6 · 9 = 54 € y 10 · 9 = 90 €",
-             "Total: 4 + 6 + 10 = 20 partes → 20 · 9 = 180 €"],
-      res:"54 € y 90 €&ensp;·&ensp;total 180 €" },
+      enun:"<b>a)</b> En rebajas, con un 40 % de descuento, has pagado 27 € por una camiseta. ¿Cuánto costaba antes?<br><b>b)</b> Un móvil cuesta 242 € con el 21 % de IVA incluido. ¿Cuánto cuesta sin IVA?",
+      pasos:["Me dan el precio FINAL y busco el INICIAL: voy <b>hacia atrás</b>, divido entre el índice.",
+             R`<b>a)</b> Índice $= 0,60$ → $27 : 0,60 = 45$ €. Comprueba: $45 \cdot 0,60 = 27$ ✓`,
+             R`<b>b)</b> Índice $= 1,21$ → $242 : 1,21 = 200$ €`],
+      res:"a) 45 €&ensp;·&ensp;b) 200 €" },
     { nivel:"Práctica", min:6,
-      enun:"Una tienda reparte 390 € en vales de regalo entre tres empleados de forma inversamente proporcional a los días que han faltado: 2, 3 y 4 días. ¿Cuánto recibe cada uno?",
-      pasos:["Quien falta más, recibe menos: reparto <b>inverso</b>.",
-             R`➊ Doy la vuelta: $\dfrac{1}{2}, \dfrac{1}{3}, \dfrac{1}{4}$ &nbsp; ➋ Mismo denominador (m.c.m. = 12): $\dfrac{6}{12}, \dfrac{4}{12}, \dfrac{3}{12}$`,
-             "➌ Reparto directo a 6, 4 y 3: 13 partes; 390 : 13 = 30 €",
-             "6 · 30 = 180 € · 4 · 30 = 120 € · 3 · 30 = 90 € &nbsp;(180 + 120 + 90 = 390 ✓)"],
-      res:"180 €&ensp;·&ensp;120 €&ensp;·&ensp;90 €" },
+      enun:"<b>a)</b> El bono mensual de transporte pasa de 20 € a 23 €. ¿Qué porcentaje ha subido?<br><b>b)</b> Una consola baja de 350 € a 280 €. ¿Qué porcentaje ha bajado?",
+      pasos:["Índice = FINAL : INICIAL",
+             R`<b>a)</b> $23 : 20 = 1,15 = 115\,\%$ → más de 100 %: <b>sube un 15 %</b>`,
+             R`<b>b)</b> $280 : 350 = 0,80 = 80\,\%$ → menos de 100 %: <b>baja un 20 %</b>`],
+      res:"a) Sube un 15 %&ensp;·&ensp;b) Baja un 20 %" },
     { nivel:"Problema", min:7,
-      enun:"En Educación Física se reparten 27 balones entre tres equipos de forma inversamente proporcional a los minutos que tardaron en una carrera de relevos: 3, 4 y 6 minutos. ¿Cuántos balones recibe cada equipo?",
-      pasos:["El más rápido (menos minutos) recibe más: <b>inverso</b>.",
-             R`➊ $\dfrac{1}{3}, \dfrac{1}{4}, \dfrac{1}{6}$ &nbsp; ➋ m.c.m. = 12: $\dfrac{4}{12}, \dfrac{3}{12}, \dfrac{2}{12}$`,
-             "➌ Reparto directo a 4, 3 y 2: 9 partes; 27 : 9 = 3 balones",
-             "4 · 3 = 12 · 3 · 3 = 9 · 2 · 3 = 6 &nbsp;(12 + 9 + 6 = 27 ✓)"],
-      res:"12, 9 y 6 balones" },
+      enun:"Una sudadera cuesta 40 €. En septiembre sube un 10 % y en enero la rebajan un 20 %.<br><b>a)</b> ¿Cuánto cuesta al final?<br><b>b)</b> En total, ¿ha subido o ha bajado? ¿Cuánto?",
+      pasos:[R`Índices: sube 10 % → $1,10$; baja 20 % → $0,80$`,
+             R`<b>a)</b> Índice total $= 1,10 \cdot 0,80 = 0,88$ → $40 \cdot 0,88 = 35,20$ €`,
+             R`<b>b)</b> $0,88 = 88\,\%$: menos de 100 % → <b>ha bajado un 12 %</b> (¡no un 10 %!)`],
+      res:"a) 35,20 €&ensp;·&ensp;b) Ha bajado un 12 %" },
     { nivel:"Reto", min:8,
-      enun:"Álex, Bea y Carlos compraron un videojuego de 50 €: Álex puso 10 €, Bea 15 € y Carlos 25 €. Ya lo han terminado y lo venden de segunda mano por 30 €. ¿Cómo deben repartir los 30 € para que sea justo?",
-      pasos:["Lo justo es repartir según lo que puso cada uno: <b>directo</b> a 10, 15 y 25.",
-             "➊ 10 + 15 + 25 = 50 partes &nbsp;➋ 30 : 50 = 0,60 € cada parte",
-             "➌ Álex 10 · 0,60 = 6 € · Bea 15 · 0,60 = 9 € · Carlos 25 · 0,60 = 15 €",
-             "Atajo: recuperan el 60 % (30 de 50) de lo que puso cada uno."],
-      res:"Álex 6 €&ensp;·&ensp;Bea 9 €&ensp;·&ensp;Carlos 15 €" }
+      enun:"Necesitas 3 botes de champú que cuestan 4 € cada uno. ¿Dónde pagas menos?<br><b>Tienda A:</b> oferta 3x2.<br><b>Tienda B:</b> 2.ª unidad al 50 % (la oferta solo vale para 2 botes).<br><b>Tienda C:</b> 30 % de descuento en todo.",
+      pasos:["<b>A:</b> te llevas 3 y pagas 2 → 2 · 4 = <b>8 €</b>",
+             "<b>B:</b> 4 + 2 (al 50 %) + 4 (el tercero, sin oferta) = <b>10 €</b>",
+             R`<b>C:</b> $12 \cdot 0,70 = $ <b>8,40 €</b>`,
+             R`El 3x2 es un descuento del $33,3\,\%$ (pagas $\dfrac{2}{3}$): es la mejor oferta.`],
+      res:"En la tienda A: 8 €" }
   ],
 
   casa: [
     { nivel:"Básico",
-      enun:"Tres amigos montan un puesto en el mercadillo solidario del instituto y recaudan 1350 €. Lo reparten entre tres ONG de forma directamente proporcional a las horas que trabajó cada amigo: 3, 4 y 8 horas. ¿Cuánto recibe cada ONG?",
-      pasos:["➊ 3 + 4 + 8 = 15 partes &nbsp;➋ 1350 : 15 = 90 €", "➌ 3 · 90 = 270 € · 4 · 90 = 360 € · 8 · 90 = 720 €"],
-      res:"270 €, 360 € y 720 €" },
+      enun:"Escribe en forma decimal: <b>a)</b> 8 % &nbsp;<b>b)</b> 45 % &nbsp;<b>c)</b> 3 % &nbsp;<b>d)</b> 150 % &nbsp;<b>e)</b> 12,5 %",
+      pasos:["Divido entre 100: la coma se mueve dos lugares a la izquierda.",
+             "a) 0,08 · b) 0,45 · c) 0,03 · d) 1,50 · e) 0,125"],
+      res:"0,08 · 0,45 · 0,03 · 1,50 · 0,125" },
     { nivel:"Básico",
-      enun:"Una abuela reparte 780 € entre sus tres nietos de forma inversamente proporcional a sus edades: 2, 3 y 4 años (el pequeño recibe más). ¿Cuánto le toca a cada uno?",
-      pasos:[R`➊ Doy la vuelta: $\dfrac{1}{2}, \dfrac{1}{3}, \dfrac{1}{4}$ ➋ con denominador 12: $\dfrac{6}{12}, \dfrac{4}{12}, \dfrac{3}{12}$`,
-             "➌ 6 + 4 + 3 = 13 partes; 780 : 13 = 60 € → 360 €, 240 € y 180 €"],
-      res:"360 €, 240 € y 180 €" },
+      enun:"Un instituto tiene 650 alumnos.<br><b>a)</b> El 12 % se queda al comedor. ¿Cuántos son?<br><b>b)</b> 117 alumnos hacen deporte federado. ¿Qué porcentaje representan?",
+      pasos:[R`<b>a)</b> PARTE $= 650 \cdot 0,12 = 78$ alumnos`, R`<b>b)</b> DECIMAL $= 117 : 650 = 0,18$ → $18\,\%$`],
+      res:"a) 78 alumnos&ensp;·&ensp;b) 18 %" },
     { nivel:"Consolidación",
-      enun:"En la lotería de clase, tres amigos juegan 2 €, 3 € y 5 €. Al que puso 3 € le tocan 360 €. ¿Cuánto les toca a los otros? ¿Cuál era el premio?",
-      pasos:["3 partes = 360 € → 1 parte = 120 €", "2 · 120 = 240 € y 5 · 120 = 600 €", "Premio: (2 + 3 + 5) · 120 = 1200 €"],
-      res:"240 € y 600 €&ensp;·&ensp;premio 1200 €" },
+      enun:"<b>a)</b> Arreglar la bici en el taller cuesta 180 € más el 21 % de IVA. ¿Cuánto pagas?<br><b>b)</b> Un pantalón de 55 € tiene un 35 % de descuento. ¿Cuánto pagas?",
+      pasos:[R`<b>a)</b> Sube 21 % → $180 \cdot 1,21 = 217,80$ €`, R`<b>b)</b> Baja 35 % → índice $0,65$ → $55 \cdot 0,65 = 35,75$ €`],
+      res:"a) 217,80 €&ensp;·&ensp;b) 35,75 €" },
     { nivel:"Consolidación",
-      enun:"Los ángulos de un triángulo son directamente proporcionales a 2, 3 y 4. ¿Cuánto mide cada ángulo? (Los tres ángulos de un triángulo suman 180°.)",
-      pasos:["➊ 2 + 3 + 4 = 9 partes &nbsp;➋ 180 : 9 = 20°", "➌ 2 · 20 = 40° · 3 · 20 = 60° · 4 · 20 = 80°"],
-      res:"40°, 60° y 80°" },
+      enun:"<b>a)</b> Tras subir un 12 %, el abono del gimnasio cuesta 33,60 €. ¿Cuánto costaba antes?<br><b>b)</b> Un portátil cuesta 605 € con el 21 % de IVA incluido. ¿Cuánto cuesta sin IVA?",
+      pasos:[R`<b>a)</b> Hacia atrás: $33,60 : 1,12 = 30$ €`, R`<b>b)</b> $605 : 1,21 = 500$ €`],
+      res:"a) 30 €&ensp;·&ensp;b) 500 €" },
     { nivel:"Problema",
-      enun:"Tres estudiantes comparten piso. La factura de la luz del trimestre es de 90 € y la reparten según los días que ha estado cada uno: 20, 25 y 30 días. ¿Cuánto paga cada uno?",
-      pasos:["Más días → paga más: directo. ➊ 20 + 25 + 30 = 75 partes", "➋ 90 : 75 = 1,20 € por día", "➌ 20 · 1,20 = 24 € · 25 · 1,20 = 30 € · 30 · 1,20 = 36 €"],
-      res:"24 €, 30 € y 36 €" },
+      enun:"<b>a)</b> La población de un pueblo pasa de 2500 a 2350 habitantes. ¿Qué porcentaje ha variado?<br><b>b)</b> Una cuenta de una red social pasa de 800 a 1100 seguidores. ¿Qué porcentaje ha subido?",
+      pasos:[R`<b>a)</b> $2350 : 2500 = 0,94 = 94\,\%$ → ha bajado un $6\,\%$`, R`<b>b)</b> $1100 : 800 = 1,375 = 137,5\,\%$ → ha subido un $37,5\,\%$`],
+      res:"a) Baja un 6 %&ensp;·&ensp;b) Sube un 37,5 %" },
     { nivel:"Problema",
-      enun:"En una carrera popular se reparte un premio de 1100 € entre los tres primeros, de forma inversamente proporcional al puesto en el que llegaron (1.º, 2.º y 3.º). ¿Cuánto recibe cada uno?",
-      pasos:[R`➊ Doy la vuelta: $\dfrac{1}{1}, \dfrac{1}{2}, \dfrac{1}{3}$ ➋ con denominador 6: $\dfrac{6}{6}, \dfrac{3}{6}, \dfrac{2}{6}$`,
-             "➌ 6 + 3 + 2 = 11 partes; 1100 : 11 = 100 € → 600 €, 300 € y 200 €"],
-      res:"1.º 600 €&ensp;·&ensp;2.º 300 €&ensp;·&ensp;3.º 200 €" },
+      enun:"Unos auriculares de 200 € suben un 10 % y después bajan un 25 %. ¿Cuánto cuestan al final? ¿Cuánto han variado en total?",
+      pasos:[R`Índices: $1,10$ y $0,75$. Índice total $= 1,10 \cdot 0,75 = 0,825$`,
+             R`Final $= 200 \cdot 0,825 = 165$ €`,
+             R`$0,825 = 82,5\,\%$ → han bajado un $17,5\,\%$ (no un 15 %)`],
+      res:"165 €; bajan un 17,5 %" },
     { nivel:"Para pensar",
-      enun:"Dos hermanos de 12 y 15 años se reparten un dinero de forma directamente proporcional a sus edades. El mayor recibe 18 € más que el pequeño. ¿Cuánto recibe cada uno?",
-      pasos:["El mayor tiene 15 partes y el pequeño 12: la diferencia son <b>3 partes</b>.",
-             "3 partes = 18 € → 1 parte = 6 €",
-             "Pequeño: 12 · 6 = 72 € · Mayor: 15 · 6 = 90 € &nbsp;(90 − 72 = 18 ✓)"],
-      res:"72 € y 90 €" },
+      enun:"Has pagado 290,40 € por una bici eléctrica con un 20 % de rebaja y después el 21 % de IVA. ¿Cuál era el precio inicial?",
+      pasos:[R`Índice total $= 0,80 \cdot 1,21 = 0,968$`, R`Hacia atrás: $290,40 : 0,968 = 300$ €`,
+             R`Comprueba: $300 \cdot 0,80 = 240$ y $240 \cdot 1,21 = 290,40$ ✓`],
+      res:"300 €" },
     { nivel:"Para pensar",
-      enun:"Un instituto da un premio a la asistencia de 950 € entre tres alumnos, inversamente proporcional a sus faltas: 4, 6 y 9 faltas. ¿Cuánto recibe cada uno?",
-      pasos:[R`➊ $\dfrac{1}{4}, \dfrac{1}{6}, \dfrac{1}{9}$ ➋ m.c.m.(4, 6, 9) = 36: $\dfrac{9}{36}, \dfrac{6}{36}, \dfrac{4}{36}$`,
-             "➌ 9 + 6 + 4 = 19 partes; 950 : 19 = 50 €",
-             "9 · 50 = 450 € · 6 · 50 = 300 € · 4 · 50 = 200 €"],
-      res:"450 €, 300 € y 200 €" }
+      enun:"<b>a)</b> Si un precio sube un 20 % y después baja un 20 %, ¿vuelve a ser el mismo?<br><b>b)</b> Un precio ha subido un 25 %. ¿Qué rebaja hay que hacer para que vuelva al precio de antes?",
+      pasos:[R`<b>a)</b> $1,20 \cdot 0,80 = 0,96$ → baja un $4\,\%$: <b>no</b> vuelve al mismo. El 20 % de bajada se calcula sobre un precio mayor.`,
+             R`<b>b)</b> Busco un índice que deshaga el 1,25: $1 : 1,25 = 0,80$ → rebaja del $20\,\%$`,
+             R`Comprueba con 100 €: sube a 125 € y $125 \cdot 0,80 = 100$ € ✓`],
+      res:"a) No, baja un 4 %&ensp;·&ensp;b) Una rebaja del 20 %" }
   ],
 
   laminas: [
     { portada:true, cuerpo:[
       {nota:[{lista:[
-        "Repartir una cantidad de forma <b>justa</b>: reparto <b>directo</b> e <b>inverso</b>.",
-        "El método: <b>sumo → divido → multiplico</b>.",
-        "Resolver repartos cuando conocemos lo que le toca a uno.",
-        "Comprobar siempre que la suma da el total."
+        "Escribir un porcentaje en <b>decimal</b> y usar el <b>triángulo</b>: parte, total y porcentaje.",
+        "Calcular <b>aumentos y disminuciones</b> con el <b>índice</b>: IVA, rebajas, ganancias…",
+        "Ir <b>hacia atrás</b> (precio antes) y calcular el <b>% de variación</b>.",
+        "Resolver <b>porcentajes encadenados</b> y comparar <b>ofertas</b>."
       ]}], etq:"🎯 En este apartado vas a aprender"}
     ]},
 
-    { titulo:"Repartir de forma justa: ¿directo o inverso?", cuerpo:[
-      {cols:[
-        [{def:["Quien tiene <b>más</b>, recibe <b>más</b>.", "Dinero que pone, horas que trabaja, canciones que compone…", "<b>Sumo → divido → multiplico</b>"], etq:"😀 Reparto DIRECTO"}],
-        [{aviso:["Quien tiene <b>más</b>, recibe <b>menos</b>.", "Faltas, edad, minutos que tarda, puesto en una carrera…", "<b>Primero doy la vuelta</b> y luego reparto directo"], etq:"🙃 Reparto INVERSO"}]
+    { titulo:"El porcentaje en forma decimal", cuerpo:[
+      {def:[R`Un porcentaje es una razón sobre 100: $35\,\% = \dfrac{35}{100} = 0,35$`, "Para calcular, el porcentaje se escribe en <b>decimal</b>: se divide entre 100 (la coma se mueve <b>dos lugares</b> a la izquierda)."], etq:"Porcentaje"},
+      {html:`<div class="dec-cards">${[["50 %","0,50","la mitad"],["25 %","0,25","la cuarta parte"],["21 %","0,21","el IVA"],["5 %","0,05","¡ojo con el 0!"],["120 %","1,20","más que el total"]].map(c=>`<div><b>${c[0]}</b><i>▼</i><span>${c[1]}</span><small>${c[2]}</small></div>`).join("")}</div>`},
+      {html:barra([[25,"25 %","pct-a"],[75,"75 %",""]],"De 20 casillas, 5 son el 25 %: la cuarta parte")}
+    ]},
+
+    { titulo:"Los tres cálculos básicos: el triángulo", cuerpo:[
+      {cols2:true, cols:[
+        [{prop:["<b>PARTE</b>: el trozo que me preguntan.", "<b>TOTAL</b>: todo (es el 100 %).", "<b>DECIMAL</b>: el % escrito en decimal.",
+                "➡ Lo que está <b>al lado</b> se <b>multiplica</b>. ⬇ Lo que está <b>arriba y abajo</b> se <b>divide</b>.", "☝ <b>Tapa con el dedo lo que buscas.</b>"], etq:"Cómo se usa"}],
+        [{html:tri("")}]
+      ]}
+    ]},
+
+    { titulo:"🍕 Busco la parte", cuerpo:[
+      {cols2:true, cols:[
+        [{ej:{enun:"En una clase de 25 alumnos, al 40 % le gusta la pizza. ¿A cuántos?",
+          pasos:["Tapo la PARTE: PARTE = TOTAL × DECIMAL", R`$25 \cdot 0,40 = 10$`], res:"A 10 alumnos"}}],
+        [{html:tri("P")}]
       ]},
-      {nota:["La pregunta clave: <b>¿lo justo es que quien tiene más reciba más, o menos?</b>"]}
+      {html:barra([[40,"40 % → 10 alumnos 🍕","pct-a"],[60,"60 % → 15 alumnos",""]])}
     ]},
 
-    { titulo:"Reparto directamente proporcional", cuerpo:[
-      {ej:{etq:"🎟 Situación", enun:"Ana, Beto y Carla compran juntos un décimo de lotería. Ana pone 2 €, Beto 3 € y Carla 5 €. ¡Les tocan 15 000 €! Lo justo es que quien puso más, reciba más.",
-        pasos:[pasos3("<b>SUMO</b> las partes<br>2 + 3 + 5 = 10 partes","<b>DIVIDO</b><br>15 000 : 10 = 1500 € cada parte","<b>MULTIPLICO</b><br>cada uno por sus partes"),
-               "Ana 2 · 1500 = 3000 € · Beto 3 · 1500 = 4500 € · Carla 5 · 1500 = 7500 €"],
-        res:"3000 €, 4500 € y 7500 €"}}
+    { titulo:"🚌 Busco el total", cuerpo:[
+      {cols2:true, cols:[
+        [{ej:{enun:"12 alumnos van en autobús y son el 40 % de la clase. ¿Cuántos alumnos hay en la clase?",
+          pasos:["Tapo el TOTAL: TOTAL = PARTE : DECIMAL", R`$12 : 0,40 = 30$`, R`Comprueba: $30 \cdot 0,40 = 12$ ✓`], res:"30 alumnos"}}],
+        [{html:tri("T")}]
+      ]}
     ]},
 
-    { titulo:"El dibujo del reparto", cuerpo:[
-      {p:"Cada casilla es <b>una parte</b> de 1500 €. Cada uno se lleva tantas casillas como euros puso."},
-      {html:casillas([["Ana (2)",2,"1500","3000 €"],["Beto (3)",3,"1500","4500 €"],["Carla (5)",5,"1500","7500 €"]],"10 partes de 1500 € = 15 000 €")},
-      {prop:["<b>Comprueba siempre:</b> 3000 + 4500 + 7500 = 15 000 € ✓ &nbsp;y Carla, que puso más, recibe más ✓"], etq:"✅ Comprueba"}
+    { titulo:"⚽ Busco el porcentaje", cuerpo:[
+      {cols2:true, cols:[
+        [{ej:{enun:"9 de los 36 alumnos juegan al fútbol. ¿Qué porcentaje es?",
+          pasos:["Tapo el DECIMAL: DECIMAL = PARTE : TOTAL", R`$9 : 36 = 0,25$`, R`Lo paso a %: $0,25 \cdot 100 = 25\,\%$`], res:"El 25 %"}}],
+        [{html:tri("D")}]
+      ]},
+      {aviso:["No te quedes en 0,25: el resultado se da en <b>porcentaje</b> (25 %)."]}
     ]},
 
-    { titulo:"Si conocemos lo que le toca a uno", cuerpo:[
-      {ej:{etq:"🛠 Situación", enun:"Tres hermanos ayudan en la tienda de sus padres 3, 5 y 7 horas y reparten el dinero según las horas. Al segundo (5 horas) le tocan 2200 €. ¿Cuánto les toca a los otros y cuánto había en total?",
-        pasos:["5 partes = 2200 € → 1 parte = 2200 : 5 = <b>440 €</b>",
-               "1.º: 3 · 440 = 1320 € · 3.º: 7 · 440 = 3080 €",
-               "Total: 3 + 5 + 7 = 15 partes → 15 · 440 = 6600 €"],
-        res:"1320 € y 3080 €&ensp;·&ensp;total 6600 €"}},
-      {html:casillas([["1.º (3 h)",3,"440","1320 €"],["2.º (5 h)",5,"440","2200 €"],["3.º (7 h)",7,"440","3080 €"]])}
+    { titulo:"¿El precio sube o baja? El índice", cuerpo:[
+      {cols:[
+        [{def:["Aumento, IVA, ganancia, recargo…", "<b>100 % + el %</b>", "+25 % → 125 % → <b>1,25</b>", "IVA +21 % → 121 % → <b>1,21</b>"], etq:"📈 SUBE"}],
+        [{aviso:["Descuento, rebaja, pérdida…", "<b>100 % − el %</b>", "−20 % → 80 % → <b>0,80</b>", "−5 % → 95 % → <b>0,95</b>"], etq:"📉 BAJA"}]
+      ]},
+      {prop:[{formula:R`\text{FINAL} = \text{INICIAL} \times \text{ÍNDICE}`}], etq:"Ese número es el ÍNDICE"},
+      {html:barra([[100,"100 % (lo que había)",""],[25,"+25 %","pct-s"]])}
     ]},
 
-    { titulo:"Reparto inversamente proporcional", cuerpo:[
-      {ej:{etq:"🏆 Situación", enun:"El instituto da un premio de 1300 € a tres alumnos, de forma inversamente proporcional a sus faltas: Eva tiene 2 faltas, Hugo 3 e Iker 4. Quien falta menos, recibe más.",
-        pasos:[pasos3(R`<b>DOY LA VUELTA</b><br>$\dfrac{1}{2} \quad \dfrac{1}{3} \quad \dfrac{1}{4}$`,R`<b>MISMO DENOMINADOR</b><br>m.c.m. = 12: $\dfrac{6}{12} \; \dfrac{4}{12} \; \dfrac{3}{12}$`,"<b>REPARTO DIRECTO</b><br>a 6, 4 y 3: 13 partes"),
-               "1300 : 13 = <b>100 €</b> cada parte",
-               "Eva 6 · 100 = 600 € · Hugo 4 · 100 = 400 € · Iker 3 · 100 = 300 €"],
-        res:"600 €, 400 € y 300 €"}}
+    { titulo:"👟 Un descuento", cuerpo:[
+      {ej:{enun:"Unas zapatillas cuestan 60 € y tienen un 20 % de descuento. ¿Cuánto pagas?",
+        pasos:["¿Sube o baja? Es un descuento: <b>BAJA 📉</b>",
+               R`Índice: $100\,\% - 20\,\% = 80\,\% = 0,80$`,
+               R`Multiplico: $60 \cdot 0,80 = 48$ €`,
+               R`Comprueba: te ahorras $60 - 48 = 12$ € y el 20 % de 60 es $60 \cdot 0,20 = 12$ ✓`],
+        res:"Pagas 48 €"}},
+      {html:flecha(["<b>60 €</b><small>antes</small>","−20 % → × 0,80","<b>48 €</b><small>pagas</small>"])}
     ]},
 
-    { titulo:"El dibujo del reparto inverso", cuerpo:[
-      {html:casillas([["Eva (2 faltas)",6,"100","600 €"],["Hugo (3 faltas)",4,"100","400 €"],["Iker (4 faltas)",3,"100","300 €"]],"Cada casilla es una parte de 100 €")},
-      {prop:["600 + 400 + 300 = 1300 € ✓ &nbsp;y Eva, que falta menos, recibe más ✓"], etq:"✅ Comprueba"},
-      {aviso:["Si repartes directamente a 2, 3 y 4, ¡Iker, que falta más, se llevaría más! En el inverso <b>siempre</b> se da la vuelta primero."]}
+    { titulo:"🔧 El IVA y 🛴 la ganancia", cuerpo:[
+      {cols:[
+        [{ej:{etq:"🔧 IVA", enun:"Arreglar la moto cuesta 168 € y hay que sumar un 21 % de IVA. ¿Cuánto se paga?",
+          pasos:["Sube: índice 1,21", R`$168 \cdot 1,21 = 203,28$`], res:"203,28 €"}}],
+        [{ej:{etq:"🛴 Ganancia", enun:"Una tienda compra un patinete por 145 € y lo vende ganando un 30 %. ¿A qué precio lo vende?",
+          pasos:["Sube: índice 1,30", R`$145 \cdot 1,30 = 188,50$`], res:"188,50 €"}}]
+      ]}
     ]},
 
-    { titulo:"Problema: el concurso de cortos", cuerpo:[
-      {ej:{etq:"✍️ Problema resuelto", enun:"Lía, Marco y Omar ganan 450 € en un concurso de cortometrajes del instituto. Lo reparten según las horas que dedicó cada uno a grabar y montar: 4, 6 y 5 horas. ¿Cuánto recibe cada uno?",
-        pasos:["Más horas → más dinero: <b>directo</b>.",
-               "➊ 4 + 6 + 5 = 15 partes &nbsp;➋ 450 : 15 = 30 €",
-               "➌ Lía 4 · 30 = 120 € · Marco 6 · 30 = 180 € · Omar 5 · 30 = 150 €",
-               "Comprueba: 120 + 180 + 150 = 450 ✓"],
-        res:"120 €, 180 € y 150 €"}}
+    { titulo:"Ir hacia atrás: la cantidad inicial", cuerpo:[
+      {html:flecha(["<b>INICIAL</b><small>lo de antes</small>","➡ × ÍNDICE &nbsp;·&nbsp; ⬅ : ÍNDICE","<b>FINAL</b><small>lo de después</small>"])},
+      {ej:{etq:"👕 Ejemplo", enun:"En rebajas, con un 20 % de descuento, has pagado 48 € por una sudadera. ¿Cuánto costaba antes?",
+        pasos:[R`Índice de la rebaja: $0,80$`, "Sé el FINAL (48 €) y busco el INICIAL: voy <b>hacia atrás ⬅</b>, divido.", R`$48 : 0,80 = 60$ €. Comprueba: $60 \cdot 0,80 = 48$ ✓`],
+        res:"Costaba 60 €"}}
+    ]},
+
+    { titulo:"Hacia atrás con el IVA", cuerpo:[
+      {ej:{etq:"📱 Ejemplo", enun:"Un móvil cuesta 363 € con el 21 % de IVA. ¿Cuánto cuesta sin IVA?",
+        pasos:["363 € es el FINAL (con IVA). Índice 1,21.", R`$363 : 1,21 = 300$ €`], res:"300 € sin IVA"}},
+      {aviso:[R`<b>Error típico:</b> sumar el 20 % a 48 € (sale $57,60$ €) o restar el 21 % a 363 €. ¡Está mal! El porcentaje se calculó sobre el precio de <b>antes</b>, no sobre el final.`]}
+    ]},
+
+    { titulo:"¿Cuánto ha subido o bajado en %?", cuerpo:[
+      {prop:[{formula:R`\text{ÍNDICE} = \text{FINAL} : \text{INICIAL}`}, "Lo paso a % (× 100). <b>Más de 100 %</b> → sube lo que pasa de 100. <b>Menos de 100 %</b> → baja lo que falta hasta 100."], etq:"Porcentaje de variación"},
+      {cols:[
+        [{ej:{etq:"🎮 Sube", enun:"Un videojuego costaba 40 € y ahora cuesta 46 €.",
+          pasos:[R`$46 : 40 = 1,15 = 115\,\%$`, R`$115 - 100 = 15$`], res:"Ha subido un 15 %"}}],
+        [{ej:{etq:"🚲 Baja", enun:"Una bici de 500 € se vende de segunda mano por 325 €.",
+          pasos:[R`$325 : 500 = 0,65 = 65\,\%$`, R`$100 - 65 = 35$`], res:"Ha bajado un 35 %"}}]
+      ]},
+      {nota:["🛒 <b>El IPC</b> hace esto con la cesta de la compra: si pasa de 400 € a 420 €, 420 : 400 = 1,05 → los precios han subido un 5 %."]}
+    ]},
+
+    { titulo:"Porcentajes encadenados", cuerpo:[
+      {ej:{etq:"🎒 Situación", enun:"Una mochila cuesta 50 €. En septiembre sube un 20 % y en enero la rebajan un 25 %. ¿Cuánto cuesta al final? ¿Cuánto ha cambiado en total?",
+        pasos:[flecha(["<b>50 €</b>","+20 % × 1,20","<b>60 €</b>","−25 % × 0,75","<b>45 €</b>"]),
+               R`Todo de una vez: multiplico los índices: $1,20 \cdot 0,75 = 0,90$ → $50 \cdot 0,90 = 45$ €`,
+               R`$0,90 = 90\,\%$ → ha <b>bajado un 10 %</b>`],
+        res:"45 €; baja un 10 %"}},
+      {aviso:["<b>Los porcentajes NO se suman.</b> Subir un 20 % y bajar un 25 % no es bajar un 5 %: es bajar un 10 %. El 25 % se calcula sobre 60 €, no sobre 50 €."]}
+    ]},
+
+    { titulo:"Encadenados con IVA", cuerpo:[
+      {ej:{etq:"🧾 Hacia delante", enun:"Una factura de 350 € con un 20 % de descuento y después un 21 % de IVA.",
+        pasos:[flecha(["<b>350 €</b>","−20 % × 0,80","<b>280 €</b>","+21 % × 1,21","<b>338,80 €</b>"])], res:"Se pagan 338,80 €"}},
+      {ej:{etq:"📺 Hacia atrás", enun:"Pagamos 290,40 € por un televisor con un 20 % de rebaja y un 21 % de IVA. ¿Cuál era el precio inicial?",
+        pasos:[R`Índice total: $0,80 \cdot 1,21 = 0,968$`, R`$290,40 : 0,968 = 300$ €`], res:"Costaba 300 €"}}
+    ]},
+
+    { titulo:"🛒 Compras inteligentes: el precio unitario", cuerpo:[
+      {def:["Para saber qué compra sale mejor, compara el <b>precio unitario</b>: lo que cuesta 1 kg, 1 L o 1 unidad.", {formula:R`\text{precio unitario} = \text{precio} : \text{cantidad}`}], etq:"Precio unitario"},
+      {ej:{etq:"🫒 Ejemplo", enun:"Aceite: botella de 1 L a 9,20 € o garrafa de 5 L a 43 €. ¿Qué sale más barato?",
+        pasos:["Botella: 9,20 €/L", R`Garrafa: $43 : 5 = 8,60$ €/L`, "La garrafa: ahorras 0,60 € en cada litro."], res:"La garrafa"}},
+      {nota:["Consumo responsable: lo más barato por litro no siempre es lo mejor si se va a estropear o no lo necesitas."]}
+    ]},
+
+    { titulo:"🏷 ¿Cuánto descuento es de verdad una oferta?", cuerpo:[
+      {p:"Para comparar ofertas, calcula <b>qué porcentaje pagas</b> de lo que te llevas."},
+      {cols:[
+        [{ej:{etq:"3x2", enun:"Te llevas 3 y pagas 2.", pasos:[R`Pagas $\dfrac{2}{3} = 0,667 = 66,7\,\%$`], res:"Descuento del 33,3 %"}}],
+        [{ej:{etq:"2.ª unidad al 50 %", enun:"Compras 2 y la segunda va a mitad de precio.", pasos:[R`Pagas $1 + 0,5 = 1,5$ de 2 → $1,5 : 2 = 0,75$`], res:"Descuento del 25 % (¡no del 50 %!)"}}]
+      ]}
     ]},
 
     { titulo:"🪄 Trucos para ir más rápido", cuerpo:[
-      {truco:["<b>Antes de empezar, adivina quién se lleva más.</b> Si al final el resultado no coincide con tu intuición, revisa si era directo o inverso."], etq:"🪄 Truco 1"},
-      {truco:[R`<b>Inverso con 2 y 3:</b> no hace falta buscar el m.c.m. de memoria: <b>cruza los números</b>. Inverso a 2 y 3 es lo mismo que directo a 3 y 2.`], etq:"🪄 Truco 2"},
-      {truco:["<b>La diferencia también son partes.</b> Si uno tiene 15 partes y otro 12, la diferencia (3 partes) te dice cuánto vale una parte."], etq:"🪄 Truco 3"}
+      {truco:["<b>Porcentajes de cabeza:</b> 50 % → la mitad · 25 % → la cuarta parte · 10 % → quita un cero · 5 % → la mitad del 10 % · 1 % → divide entre 100."], etq:"🪄 Truco 1"},
+      {truco:["<b>«Te descuentan el 30 %» = «pagas el 70 %».</b> Piensa siempre en lo que pagas: ese es el índice."], etq:"🪄 Truco 2"},
+      {truco:[R`<b>El 15 % de propina, de cabeza:</b> el 10 % de 40 € son 4 €, la mitad son 2 € → $4 + 2 = 6$ €.`], etq:"🪄 Truco 3"}
     ]},
 
     { titulo:"⚠️ Errores típicos", cuerpo:[
-      {aviso:["<b>En el inverso, repartir directamente</b> a los números del enunciado (¡el que más falta se llevaría más!)."], etq:"⚠️ Error 1"},
-      {aviso:["<b>Olvidar sumar las partes:</b> se divide el total entre la <b>suma</b> de las partes, no entre el número de personas."], etq:"⚠️ Error 2"},
-      {aviso:["<b>No comprobar</b> que la suma de lo que recibe cada uno da el total."], etq:"⚠️ Error 3"}
+      {aviso:["<b>Escribir 5 % como 0,5</b> (es 0,05)."], etq:"⚠️ Error 1"},
+      {aviso:["<b>Para volver atrás, restar el porcentaje</b> al precio final: hay que <b>dividir</b> entre el índice."], etq:"⚠️ Error 2"},
+      {aviso:["<b>Sumar los porcentajes encadenados</b> (10 % y 25 % no es 15 %): se multiplican los índices."], etq:"⚠️ Error 3"},
+      {aviso:["<b>En la variación, dividir al revés</b> (antes : ahora). Es FINAL : INICIAL."], etq:"⚠️ Error 4"}
     ]},
 
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[{cols:[
-        ["😀 <b>Directo</b> (más → más):", "➊ sumo las partes ➋ divido el total ➌ multiplico"],
-        ["🙃 <b>Inverso</b> (más → menos):", "➊ doy la vuelta ➋ mismo denominador ➌ reparto directo con los numeradores"]
-      ]}, "✅ Comprueba: la suma da el total y quien debe recibir más, recibe más."]},
+        ["🔺 <b>Triángulo:</b> PARTE = TOTAL × decimal · TOTAL = PARTE : decimal · decimal = PARTE : TOTAL",
+         "📈📉 <b>Índice</b> = 100 % ± el %"],
+        ["➡ FINAL = INICIAL × índice · ⬅ INICIAL = FINAL : índice",
+         "🔍 Variación: FINAL : INICIAL",
+         "⛓ Encadenados: se multiplican los índices (los % no se suman)"]
+      ]}]},
       {estudio:[
-        {comp:{q:"Reparte 100 € de forma directamente proporcional a 1 y 4. ¿Cuánto recibe el segundo?", sol:80, unidad:"€",
-          explic:"1 + 4 = 5 partes; 100 : 5 = 20 € → 20 € y 80 €.", pista:"Suma las partes y divide 100 entre ese número."}},
-        {comp:{q:"Reparte 90 € de forma inversamente proporcional a 1 y 2. ¿Cuánto recibe el primero?", sol:60, unidad:"€",
-          explic:R`Doy la vuelta: $\dfrac{1}{1}, \dfrac{1}{2}$ → con denominador 2: 2 y 1 → 3 partes de 30 € → 60 € y 30 €.`, pista:"Inverso: el que tiene 1 recibe más. Dale la vuelta a 1 y 2."}},
-        {comp:{q:"Un premio se reparte según las faltas de cada alumno. ¿Qué tipo de reparto es justo?", opciones:["Directo","Inverso"], ok:1,
-          explic:"Quien falta más debe recibir menos: inverso.", pista:"¿Debe recibir más el que más falta?"}}
+        {comp:{q:"Calcula el 15 % de 320.", sol:48, explic:R`$320 \cdot 0,15 = 48$`, pista:"PARTE = TOTAL × DECIMAL; 15 % = 0,15."}},
+        {comp:{q:"12 alumnos son el 40 % de una clase. ¿Cuántos alumnos hay?", sol:30, unidad:"alumnos", explic:R`$12 : 0,40 = 30$`, pista:"Busco el TOTAL: PARTE : DECIMAL."}},
+        {comp:{q:"El índice de una rebaja del 30 % es…", opciones:["0,30","0,70","1,30"], ok:1, explic:"Pagas el 100 % − 30 % = 70 % → 0,70.", pista:"¿Qué porcentaje pagas?"}},
+        {comp:{q:"Tras una rebaja del 25 % pagas 30 €. ¿Cuánto costaba?", sol:40, unidad:"€", explic:R`$30 : 0,75 = 40$ €`, pista:"Hacia atrás: divide entre el índice 0,75."}}
       ]}
     ]}
   ]

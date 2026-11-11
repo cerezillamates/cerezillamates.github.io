@@ -73,8 +73,8 @@ TEMA.registrar({
       pasos:["<b>a)</b> 50 · 160 = 8000 yenes", R`<b>b)</b> $4800 : 160 = 30$ € → $30 \cdot 0,98 = 29,40$ €`], res:"a) 8000 yenes · b) 29,40 €" },
     { nivel:"Problema", enun:"Se mezclan 30 L de aceite de 5 €/L con 20 L de 3,50 €/L. <b>a)</b> ¿A cuánto sale el litro de mezcla? <b>b)</b> Si se vende ganando un 20 %, ¿a qué precio?",
       pasos:[R`<b>a)</b> $\dfrac{150 + 70}{50} = 4,40$ €/L`, R`<b>b)</b> $4,40 \cdot 1,20 = 5,28$ €/L`], res:"a) 4,40 €/L · b) 5,28 €/L" },
-    { nivel:"Para pensar", enun:"Dos ciudades A y B están a 270 km. Un coche sale de A a las 10:00 a 60 km/h y otro sale de B a las 11:00 a 90 km/h, hacia A. ¿A qué hora se cruzan? ¿A qué distancia de A?",
-      pasos:["A las 11:00 el primero lleva 60 km: faltan 210 km", R`$t = \dfrac{210}{150} = 1,4$ h $= 1$ h $24$ min → 12:24`, R`Distancia a A: $60 + 60 \cdot 1,4 = 144$ km`], res:"A las 12:24, a 144 km de A" },
+    { nivel:"Para pensar", enun:"Para pintar una valla, Ana tarda 4 horas, Bea 6 horas y Carlos 12 horas. Empiezan los tres juntos y, al cabo de 1 hora, Carlos se va. ¿Cuánto tardan Ana y Bea en terminar?",
+      pasos:[R`Los tres, en 1 hora: $\dfrac14 + \dfrac16 + \dfrac{1}{12} = \dfrac{3 + 2 + 1}{12} = \dfrac12$ → queda $\dfrac12$ de la valla`, R`Ana y Bea, en 1 hora: $\dfrac14 + \dfrac16 = \dfrac{5}{12}$`, R`$\dfrac12 : \dfrac{5}{12} = \dfrac{12}{10} = 1,2$ h $= 1$ h $12$ min`], res:"1 h 12 min más (en total, 2 h 12 min)" },
     { nivel:"Para pensar", enun:"En una cesta, el pan pesa un 50 %, la luz un 30 % y el transporte un 20 %. El pan pasa de 10 € a 11 €, la luz de 20 € a 23 € y el transporte de 8 € a 9 €. ¿Cuánto han subido los precios en conjunto (el IPC)?",
       pasos:["Subidas: pan 10 %, luz 15 %, transporte 12,5 %", R`Media ponderada: $0,10 \cdot 0,5 + 0,15 \cdot 0,3 + 0,125 \cdot 0,2 = 0,12$`], res:"Un 12 %" }
   ],
@@ -82,7 +82,7 @@ TEMA.registrar({
   laminas: [
     { portada:true, cuerpo:[
       {nota:[{lista:[
-        "Entra todo el tema: razones y proporciones, proporcionalidad simple y compuesta, interés, repartos, porcentajes, grifos, móviles y mezclas.",
+        "Entra todo el tema: razones y proporciones, proporcionalidad simple, repartos, proporcionalidad compuesta, porcentajes, interés, grifos y mezclas.",
         "En clase: el <b>modelo de control 1</b> (el examen de la profe), con cronómetro y corrección paso a paso.",
         "En casa: los <b>ejercicios de repaso</b> y el <b>modelo de control 2</b>. Y la <b>autoevaluación</b>."
       ]}], etq:"📋 Preparamos el control"}
@@ -90,13 +90,13 @@ TEMA.registrar({
     { titulo:"¿Qué me piden? Busca tu caja", cuerpo:[
       {html:`<div class="cols" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:.6em">
         <div class="b-prop"><span class="etq">🔁 Regla de tres</span><p>D: la fracción igual · I: le doy la vuelta (o el producto se mantiene)</p></div>
-        <div class="b-prop"><span class="etq">🔺 Porcentajes</span><p>PARTE = TOTAL × decimal · TOTAL = PARTE : decimal · decimal = PARTE : TOTAL</p></div>
-        <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12 · días: entre 360</p></div>
-        <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I a la x; a las I, la vuelta; multiplico</p></div>
-        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>FINAL = INICIAL × índice · INICIAL = FINAL : índice · variación: FINAL : INICIAL</p></div>
-        <div class="b-prop"><span class="etq">🚰🚗 Grifos y móviles</span><p>$\\dfrac1a + \\dfrac1b$ y la vuelta · se acercan: sumo · se persiguen: resto</p></div>
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
+        <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I a la x; a las I, la vuelta; multiplico</p></div>
+        <div class="b-prop"><span class="etq">🔺 Porcentajes</span><p>PARTE = TOTAL × decimal · TOTAL = PARTE : decimal · decimal = PARTE : TOTAL</p></div>
+        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>FINAL = INICIAL × índice · INICIAL = FINAL : índice · variación: FINAL : INICIAL</p></div>
         <div class="b-prop"><span class="etq">⛓ Varios cambios</span><p>multiplico los índices · los % NO se suman</p></div>
+        <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12 · días: entre 360</p></div>
+        <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y la vuelta</p></div>
         <div class="b-prop"><span class="etq">🥣 Mezclas</span><p>total (€ u oro) : cantidad total</p></div></div>`}
     ]},
     { titulo:"✅ Antes de entregar el control", cuerpo:[

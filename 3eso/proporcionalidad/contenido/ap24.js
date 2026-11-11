@@ -11,10 +11,6 @@ TEMA.registrar({
       enun:"🚰 El grifo A llena un depósito en 2 h y el B en 3 h; el desagüe C lo vacía en 6 h. Se abren A y B y, una hora después, alguien abre C sin darse cuenta. ¿Cuánto tarda en total en llenarse?",
       pasos:[R`En la 1.ª hora: $\tfrac12 + \tfrac13 = \tfrac56$ → falta $\tfrac16$`, R`Con los tres: $\tfrac12 + \tfrac13 - \tfrac16 = \tfrac{3 + 2 - 1}{6} = \tfrac23$ por hora`, R`$\tfrac16 : \tfrac23 = \tfrac14$ h $= 15$ min`],
       res:"<b>1 h 15 min</b>" },
-    { nivel:"Reto", min:8,
-      enun:"🕒 ¿A qué hora, entre las 3 y las 4, coinciden la aguja de las horas y la de los minutos?",
-      pasos:["¡Es un problema de alcance! El minutero gira 6° por minuto y el horario 0,5° por minuto.", "A las 3:00 el horario lleva 90° de ventaja.", R`El minutero recorta $6 - 0,5 = 5,5$° por minuto: $t = \dfrac{90}{5,5} = 16,\overline{36}$ min`, "0,36 min ≈ 22 s"],
-      res:"A las <b>3 h 16 min 22 s</b> (aprox.)" },
     { nivel:"Reto", min:6,
       enun:"🚗 Voy al pueblo a 60 km/h y vuelvo por el mismo camino a 40 km/h. ¿Cuál ha sido mi velocidad media? (¡No es 50 km/h!)",
       pasos:["Supongo que el pueblo está a 120 km (vale cualquier distancia).", "Ida: 120 : 60 = 2 h · vuelta: 120 : 40 = 3 h", R`Media: $\dfrac{240 \text{ km}}{5 \text{ h}} = 48$ km/h`],
@@ -38,8 +34,8 @@ TEMA.registrar({
       pasos:["Cada máquina hace 1 pieza en 5 minutos.", "100 máquinas hacen 100 piezas a la vez: también en 5 minutos."], res:"5 minutos" },
     { nivel:"Reto", enun:"Un capital al 4 % de interés simple se ha convertido en 5400 € en 2 años. ¿Cuál era el capital inicial?",
       pasos:[R`En 2 años gana el 8 %: capital final $= c \cdot 1,08$`, R`$c = 5400 : 1,08 = 5000$ €`], res:"5000 €" },
-    { nivel:"Reto", enun:"Dos trenes de 150 m y 100 m de largo van por vías paralelas en sentidos contrarios, a 72 km/h y a 54 km/h. ¿Cuánto tardan en cruzarse por completo?",
-      pasos:[R`72 km/h = 20 m/s; 54 km/h = 15 m/s → se acercan a 35 m/s`, R`Tienen que recorrer entre los dos $150 + 100 = 250$ m → $250 : 35 \approx 7,14$ s`], res:"≈ 7,1 segundos" },
+    { nivel:"Reto", enun:"Un grifo llena un depósito en 6 horas. A las 2 horas de abrirlo, abrimos otro grifo igual. ¿Cuánto tarda en total en llenarse?",
+      pasos:[R`En 2 horas llena $\dfrac26 = \dfrac13$ → queda $\dfrac23$`, R`Los dos juntos: $\dfrac16 + \dfrac16 = \dfrac13$ por hora → $\dfrac23 : \dfrac13 = 2$ h`, "Total: 2 + 2 = 4 horas"], res:"4 horas" },
     { nivel:"Reto", enun:"Un comerciante sube un 20 % sus precios y después anuncia: «¡Rebaja del 20 %!». ¿Los precios quedan como al principio?",
       pasos:[R`$1,20 \cdot 0,80 = 0,96$`], res:"No: quedan un 4 % más baratos que al principio" },
     { nivel:"Reto", enun:"En una clase, el 40 % son chicos. Se van 3 chicas y entonces los chicos pasan a ser el 50 %. ¿Cuántos alumnos había?",
@@ -56,7 +52,7 @@ TEMA.registrar({
       {cols:[
         [{truco:["<b>Pon un número</b> cuando falte un dato: 100 € para los porcentajes; 120 km para la velocidad media."], etq:"💯 Inventa un valor"}],
         [{truco:["<b>Busca lo que no cambia</b>: el alcohol puro al añadir agua; el gasto al subir el precio."], etq:"🔒 Lo invariante"}],
-        [{truco:["<b>Reconoce el modelo</b>: las agujas del reloj son un problema de alcance."], etq:"🔁 Es como…"}]
+        [{truco:["<b>Reconoce el modelo</b>: una aleación es lo mismo que una mezcla: total de oro entre total de metal."], etq:"🔁 Es como…"}]
       ]},
       {aviso:["La media de las velocidades, la suma de porcentajes o «10 días para el caracol» suelen ser <b>trampas</b>."]}
     ]}

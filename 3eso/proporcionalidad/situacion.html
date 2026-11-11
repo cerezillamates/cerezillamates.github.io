@@ -1,0 +1,669 @@
+<!doctype html><html lang="es"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Situación de aprendizaje: ¿es saludable nuestra cesta de la compra? · 3.º ESO</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Lexend:wght@400;500;600&display=swap">
+<style>
+/* Layout: cuaderno de cuadrícula; pestañas arriba, una herramienta por vista, tarjetas como fichas de rotulador */
+:root{
+  --paper:#fbfcfe; --grid:#e3e9f3; --ink:#1d2433; --muted:#5b6478; --line:#c9d2e2;
+  --card:#ffffff; --soft:#f1f4fa;
+  --d:#1e8a4c; --d-bg:#dff3e6; --i:#c8362e; --i-bg:#fbe1de;
+  --blue:#1d64d8; --blue-bg:#dce8fb; --purple:#8a2fb0; --purple-bg:#efdff6;
+  --orange:#c96a08; --orange-bg:#fde8cf; --yellow:#e0a800; --yellow-bg:#fff3c4;
+  --cover:#2b3346;
+  --f-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Lexend","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141923; --grid:#1f2633; --ink:#e8ecf4; --muted:#a3acbf; --line:#38425a;
+  --card:#1b2230; --soft:#232b3b;
+  --d:#5fd08c; --d-bg:#1d3a2a; --i:#ff7e74; --i-bg:#43221f;
+  --blue:#7fb0ff; --blue-bg:#1e2f4f; --purple:#d59cf0; --purple-bg:#37244a;
+  --orange:#ffb15c; --orange-bg:#45311a; --yellow:#ffd34d; --yellow-bg:#41381a;
+  --cover:#cfd6e4; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --paper:#141923; --grid:#1f2633; --ink:#e8ecf4; --muted:#a3acbf; --line:#38425a;
+  --card:#1b2230; --soft:#232b3b;
+  --d:#5fd08c; --d-bg:#1d3a2a; --i:#ff7e74; --i-bg:#43221f;
+  --blue:#7fb0ff; --blue-bg:#1e2f4f; --purple:#d59cf0; --purple-bg:#37244a;
+  --orange:#ffb15c; --orange-bg:#45311a; --yellow:#ffd34d; --yellow-bg:#41381a;
+  --cover:#cfd6e4; color-scheme:dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:800}
+h2{font-size:clamp(1.5rem,3.2vw,2rem);font-weight:800}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+.lead{color:var(--muted);max-width:62ch}
+header.top{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.tag{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:8px 0;background:var(--paper);border-bottom:2px solid var(--line);margin-bottom:22px;scrollbar-width:thin}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+nav.tabs a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem;padding:7px 12px;border-radius:999px;border:2px solid var(--line);background:var(--card)}
+nav.tabs a[aria-current="page"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+nav.tabs a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+section.view{display:flex;flex-direction:column;gap:18px}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:16px}
+.row{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
+.row>*{min-width:0}
+.grow{flex:1 1 300px}
+.muted{color:var(--muted)}
+.big{font-family:var(--f-display);font-size:1.6rem;font-weight:800}
+.num{font-variant-numeric:tabular-nums}
+
+/* fracción con raya horizontal */
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .2em;line-height:1.2}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 .25em}
+.fr>span:last-child{padding:0 .25em}
+
+/* controles */
+.ctrls{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--muted);font-weight:500}
+input.n,select{font:inherit;font-size:1.1rem;color:var(--ink);background:var(--soft);border:2px solid var(--line);border-radius:10px;padding:6px 10px;width:7.5em}
+input.t{font:inherit;color:var(--ink);background:var(--soft);border:2px solid var(--line);border-radius:10px;padding:6px 10px;width:8em}
+input[type=range]{width:min(260px,100%);accent-color:var(--blue)}
+button{font:inherit;cursor:pointer}
+.seg{display:inline-flex;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{border:0;background:var(--card);color:var(--ink);padding:8px 14px;font-weight:600}
+.seg button[aria-pressed="true"].up{background:var(--d);color:var(--paper)}
+.seg button[aria-pressed="true"].down{background:var(--i);color:var(--paper)}
+.seg button[aria-pressed="true"].neu{background:var(--ink);color:var(--paper)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px dashed var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:5px 12px;font-size:.88rem}
+.chip:hover{border-style:solid}
+.btn{border:2px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:10px;padding:7px 14px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+/* cajas de mapa */
+.node{border:3px solid var(--c,var(--line));background:var(--cb,var(--card));border-radius:16px;padding:12px 14px;text-align:center}
+.node h3{color:var(--c,var(--ink))}
+.c-d{--c:var(--d);--cb:var(--d-bg)} .c-i{--c:var(--i);--cb:var(--i-bg)} .c-b{--c:var(--blue);--cb:var(--blue-bg)}
+.c-p{--c:var(--purple);--cb:var(--purple-bg)} .c-o{--c:var(--orange);--cb:var(--orange-bg)} .c-y{--c:var(--yellow);--cb:var(--yellow-bg)}
+.c-g{--c:var(--line);--cb:var(--soft)}
+.down-arrows{display:flex;justify-content:space-around;color:var(--muted);font-size:1.6rem;line-height:1;margin:4px 0}
+.dim{opacity:.35;filter:saturate(.4)}
+.glow{box-shadow:0 0 0 4px var(--c)}
+
+/* mapa resumen */
+.map-root{max-width:520px;margin:0 auto}
+.map-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.map-col{display:flex;flex-direction:column;gap:10px;position:relative}
+.map-col .stem{display:flex;flex-direction:column;gap:10px;border-left:4px solid var(--c);margin-left:18px;padding-left:12px}
+.card-btn{display:flex;align-items:center;gap:10px;text-align:left;border:2px solid var(--c);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 12px;width:100%}
+.card-btn .ico{font-size:1.5rem}
+.card-btn b{font-family:var(--f-display);font-size:1.12rem}
+.card-btn[aria-expanded="true"]{background:var(--cb)}
+.detail{border:2px solid var(--c);border-top:0;margin-top:-12px;border-radius:0 0 12px 12px;background:var(--cb);padding:14px 12px 12px;display:flex;flex-direction:column;gap:8px;font-size:.95rem}
+.detail a{color:var(--c);font-weight:600}
+@media (max-width:760px){.map-cols{grid-template-columns:1fr}}
+
+/* cadena de flechas */
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;justify-content:center}
+.box{border:3px solid var(--c,var(--line));background:var(--cb,var(--soft));border-radius:12px;padding:8px 14px;text-align:center;min-width:5.5em}
+.box .v{font-family:var(--f-display);font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums}
+.box .s{font-size:.78rem;color:var(--muted)}
+.arr{display:flex;flex-direction:column;align-items:center;color:var(--c,var(--muted));font-weight:700;font-size:.9rem;padding:0 4px}
+.arr .a{font-size:1.6rem;line-height:1}
+
+/* barras */
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:flex;align-items:center;gap:10px}
+.bar .lbl{flex:0 0 7.5em;font-size:.85rem;color:var(--muted);text-align:right}
+.bar .track{flex:1;height:30px;position:relative;border-radius:8px;background:repeating-linear-gradient(90deg,transparent 0 calc(5% - 1px),var(--line) calc(5% - 1px) 5%)}
+.seg-b{position:absolute;top:0;bottom:0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--ink);overflow:hidden;white-space:nowrap;transition:left .35s,width .35s}
+.seg-b.base{background:var(--blue-bg);border:2px solid var(--blue)}
+.seg-b.plus{background:var(--d-bg);border:2px solid var(--d)}
+.seg-b.minus{background:repeating-linear-gradient(45deg,var(--i-bg) 0 6px,transparent 6px 12px);border:2px dashed var(--i)}
+@media (prefers-reduced-motion:reduce){.seg-b{transition:none}}
+
+/* triángulo */
+.tri-wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.tri-wrap svg{width:min(360px,100%);height:auto;flex:0 0 auto}
+.tri-reg{cursor:pointer;transition:fill .2s;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.tri-txt{font-family:var(--f-display);font-weight:800;pointer-events:none}
+.op{font-family:var(--f-display);font-weight:800;font-size:26px;fill:var(--ink);pointer-events:none}
+.formula{font-size:1.25rem;font-weight:600;display:flex;align-items:center;flex-wrap:wrap;gap:.3em}
+.ex{background:var(--soft);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.result{font-family:var(--f-display);font-size:1.7rem;font-weight:800;color:var(--blue)}
+.note{background:var(--yellow-bg);border:2px solid var(--yellow);border-radius:12px;padding:10px 12px;font-size:.95rem}
+.steps{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.steps li{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.steps .k{flex:0 0 auto;width:1.8em;height:1.8em;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+
+/* bloques de reparto */
+.blocks{display:flex;flex-direction:column;gap:10px}
+.brow{display:grid;grid-template-columns:8em 1fr auto;gap:10px;align-items:center}
+.cells{display:flex;flex-wrap:wrap;gap:4px}
+.cell{min-width:2.9em;height:2.1em;padding:0 4px;border-radius:6px;display:grid;place-items:center;font-size:.72rem;font-weight:600;border:2px solid var(--c);background:var(--cb)}
+@media (max-width:520px){.brow{grid-template-columns:1fr}.bar .lbl{flex-basis:5em}}
+
+/* regla de tres */
+.r3{display:grid;grid-template-columns:auto auto auto;gap:6px 18px;justify-content:center;align-items:center;font-variant-numeric:tabular-nums}
+.r3 .h{font-weight:700;text-align:center}
+.r3 .v{font-family:var(--f-display);font-size:1.5rem;font-weight:800;text-align:center}
+.r3 .mid{text-align:center;font-weight:800;font-size:1.05rem}
+.tbl-scroll{overflow-x:auto}
+.vids{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.vids a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:600;font-size:.9rem;color:var(--i);border:2px solid var(--i);border-radius:999px;padding:4px 12px;background:var(--card)}
+.vids a:hover{background:var(--i-bg)}
+.track{position:relative;height:86px;margin:8px 4px 0;border-bottom:4px solid var(--ink)}
+.track .car{position:absolute;bottom:4px;font-size:1.9rem;transform:translateX(-50%);transition:left .15s}
+.track .car.flip{transform:translateX(-50%) scaleX(-1)}
+.track .mk{position:absolute;bottom:-26px;font-size:.78rem;color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.track .meet{position:absolute;top:0;bottom:0;border-left:3px dashed var(--purple)}
+.cmpgrid svg{width:min(640px,100%);height:auto}
+footer{margin-top:30px;color:var(--muted);font-size:.85rem}
+
+.exhead{display:flex;flex-direction:column;gap:12px}
+.prog{display:flex;align-items:center;gap:12px}
+.pbar{flex:1;height:14px;border-radius:999px;background:var(--soft);border:2px solid var(--line);overflow:hidden}
+.pbar span{display:block;height:100%;width:0;background:var(--d);transition:width .3s}
+.exlist{display:flex;flex-direction:column;gap:14px}
+.excard{background:var(--card);border:2px solid var(--line);border-left:8px solid var(--c);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.excard.ok{border-color:var(--d);border-left-color:var(--d)}
+.excard header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.exn{font-family:var(--f-display);font-weight:800;font-size:1.4rem;min-width:1.6em}
+.temachip{font-size:.78rem;font-weight:600;border-radius:999px;padding:2px 10px;background:var(--cb);color:var(--c);border:2px solid var(--c)}
+.stt{margin-left:auto;font-weight:700}
+.stmt{font-size:1.05rem}
+.stmt table.t{border-collapse:collapse;margin-top:8px}
+.stmt table.t td{border:2px solid var(--line);padding:4px 12px;text-align:center;min-width:3em}
+.ansrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;background:var(--soft);border-radius:10px;padding:8px 10px}
+.ansrow input{font:inherit;font-size:1.05rem;width:6em;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+.ansrow input.good{border-color:var(--d);background:var(--d-bg)}
+.ansrow input.bad{border-color:var(--i);background:var(--i-bg)}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.fb{font-weight:600}
+.fb.good{color:var(--d)} .fb.bad{color:var(--i)}
+.hintbox{display:flex;flex-wrap:wrap;gap:8px}
+.hintbox .node{flex:1 1 180px;text-align:left;font-size:.92rem}
+.hintbox .pista{flex:1 1 100%;margin:0;padding:10px 14px;border-radius:12px;background:var(--yellow-bg);border:2px solid var(--line);font-size:1.02rem}
+.hintbox .pista::before{content:'💡 ';}
+.solbox{background:var(--blue-bg);border:2px solid var(--blue);border-radius:12px;padding:10px 12px;font-size:1.02rem;line-height:2}
+.solbox .res{color:var(--blue)}
+.ptchip{font-size:.8rem;font-weight:700;border-radius:8px;padding:2px 8px;background:var(--yellow-bg,#fff3c4);color:var(--ink);border:2px solid var(--line)}
+.ansrow select{font:inherit;font-size:1.05rem;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+.ansrow select.good{border-color:var(--d);background:var(--d-bg)} .ansrow select.bad{border-color:var(--i);background:var(--i-bg)}
+.nota{font-size:1.1rem;background:var(--soft);border-radius:10px;padding:8px 12px}
+.rate{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rate .chip.on{border-style:solid;background:var(--d-bg);border-color:var(--d)}
+.aesk{font-size:1.05rem}
+.sem{font-size:1.8rem}
+.aecols{display:flex;flex-wrap:wrap;gap:10px}
+.aecols .node{flex:1 1 200px;text-align:left}
+.aecols .chips{margin-top:6px}
+@media print{nav,.btns,.rate .chip:not(.on),.vids,header.top{display:none!important}}
+.tipochip{font-size:.85rem;font-weight:700;border-radius:8px;padding:2px 10px;background:var(--purple-bg);color:var(--purple);border:2px solid var(--purple)}
+.pj-ex .tipochip{font-size:.6em}
+.btn.big{font-size:1.05rem;padding:10px 16px}
+.aph{margin:10px 0 0;font-family:var(--f-display);font-size:1.25rem;border-bottom:3px solid var(--line);padding-bottom:4px}
+.proj{position:fixed;inset:0;z-index:1000;background:var(--paper);color:var(--ink);display:flex;flex-direction:column;gap:10px;padding:14px clamp(14px,3vw,40px)}
+.pj-top{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
+.pj-info{display:flex;flex-direction:column;font-size:1rem}
+.pj-timer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:6px 12px}
+.pj-clock{font-family:var(--f-display);font-weight:800;font-size:clamp(2.2rem,6vw,4rem);font-variant-numeric:tabular-nums;line-height:1;min-width:3.2em;text-align:center}
+.pj-clock.warn{color:var(--orange)} .pj-clock.end{color:var(--i);animation:pjb 1s steps(2) infinite}
+@keyframes pjb{50%{opacity:.25}}
+.pj-tb{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pj-pre{display:flex;flex-wrap:wrap;gap:4px}
+.pj-pre .chip.on{border-style:solid;background:var(--blue-bg);border-color:var(--blue)}
+.pj-title{margin:0;font-size:clamp(1.6rem,3.5vw,2.6rem)}
+.pj-body{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:16px;font-size:clamp(1.15rem,2.2vw,1.9rem);line-height:1.5}
+.pj-dot{width:2em!important;height:2em!important;font-size:.8rem!important}
+.pj-dot.newap{margin-left:10px}
+.pj-ex{background:var(--card);border:2px solid var(--line);border-left:10px solid var(--blue);border-radius:16px;padding:14px 18px}
+.pj-h{display:flex;gap:10px;align-items:center}
+.pj-ex .exn{font-size:1.4em}
+.pj-ex .solbox{font-size:.9em;margin-top:10px}
+.pj-bot{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pj-bot .btn{font-size:1.05rem;padding:10px 18px}
+.pj-dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.pj-dot{width:2.2em;height:2.2em;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.pj-dot.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.cmap{overflow-x:auto;background:#ffffff;border-radius:14px;border:2px solid var(--line);padding:10px}
+.cmap svg{max-width:none;height:auto;display:block}
+
+.sa-hero,.sa-ref{display:flex;flex-wrap:wrap;gap:12px}
+.sa-hero .node,.sa-ref .node{flex:1 1 240px;text-align:left}
+.sa-h{margin:22px 0 10px;font-family:var(--f-display);font-size:1.3rem}
+.sa-steps{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.sa-steps li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 12px}
+.sa-steps .k{flex:none;width:2.2em;height:2.2em;border-radius:50%;display:grid;place-items:center;background:var(--blue-bg);border:2px solid var(--blue);font-weight:800}
+.sa-steps p{margin:2px 0 0}
+.sa-label-wrap{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
+.sa-label{flex:1 1 300px;max-width:440px;background:#fff;color:#111;border:3px solid #111;border-radius:6px;padding:8px 10px;font-size:.9rem}
+.sa-lt{font-weight:800;font-size:1.15rem;border-bottom:6px solid #111;padding-bottom:4px;margin-bottom:4px}
+.sa-lr{display:grid;grid-template-columns:1.8fr 1fr 1.2fr .7fr;gap:4px;border-bottom:1px solid #111;padding:3px 0}
+.sa-lr span:not(:first-child){text-align:right}
+.sa-lhead{font-weight:700;font-size:.78rem}
+.sa-sub span:first-child{padding-left:12px;font-style:italic}
+.sa-hl{background:#ffe9a8}
+.sa-lfoot{font-size:.72rem;margin-top:4px}
+.sa-callouts{flex:1 1 260px;display:flex;flex-direction:column;gap:10px}
+.sa-callouts .node{text-align:left}
+.sa-tl .sa-tlrow{display:grid;grid-template-columns:5.5em 1fr 1fr 1fr;gap:6px;align-items:center;margin:4px 0}
+.tl{display:inline-block;border-radius:999px;padding:2px 8px;font-weight:700;font-size:.85rem;text-align:center;border:2px solid}
+.tl.g{background:#dff3e6;color:#14663a;border-color:#1e8a4c}
+.tl.a{background:#fff1c7;color:#7a5200;border-color:#e0a800}
+.tl.r{background:#fbe1de;color:#9b231c;border-color:#c8362e}
+.sa-form{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:10px 0}
+.sa-form .sa-wide{grid-column:1/-1}
+.sa-form input{width:100%;box-sizing:border-box}
+.sa-res{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.sa-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sa-ir{display:grid;grid-template-columns:7.5em 1fr 4.2em;gap:6px 10px;align-items:center}
+.sa-ir .tr{height:16px;border-radius:999px;background:var(--soft);border:2px solid var(--line);overflow:hidden}
+.sa-ir .tr span{display:block;height:100%;background:var(--blue)}
+.sa-en{display:flex;height:34px;border-radius:10px;overflow:hidden;border:2px solid var(--line)}
+.sa-en div{display:grid;place-items:center;font-size:.8rem;font-weight:700;color:#1d2433;white-space:nowrap;overflow:hidden}
+.sa-en .hc{background:#ffe3a8}.sa-en .gr{background:#f6c7c2}.sa-en .pr{background:#c9e8d4}
+.sa-tbl-wrap{overflow-x:auto}
+.sa-tbl{border-collapse:collapse;width:100%;font-size:.92rem}
+.sa-tbl th,.sa-tbl td{border:2px solid var(--line);padding:5px 7px;text-align:center}
+.sa-tbl th{background:var(--soft)}
+.sa-tbl td:first-child{text-align:left;font-weight:700}
+.sa-tbl tfoot td{font-weight:700;background:var(--yellow-bg)}
+.sa-x{background:none;border:none;color:var(--i);font-size:1.1rem;cursor:pointer}
+.sa-ptitle{font-family:var(--f-display);font-size:1.2rem;font-weight:800;margin-bottom:8px}
+.sa-gin{font:inherit;border:none;border-bottom:2px dashed var(--line);background:transparent;color:var(--ink);min-width:8em}
+.sa-chart{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.sa-bar{display:grid;grid-template-columns:9em 1fr;gap:8px;align-items:center}
+.sa-bar .tr{height:22px;background:var(--soft);border-radius:6px;border:2px solid var(--line);overflow:hidden}
+.sa-bar .tr span{min-width:3.4em;box-sizing:border-box;display:flex;align-items:center;height:100%;padding-left:6px;font-size:.78rem;font-weight:700;color:#1d2433}
+.sa-verdict{margin-top:10px;padding:10px 12px;border-radius:12px;border:2px solid var(--line);background:var(--card)}
+.sa-card{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto auto;gap:8px;background:#fdf7e8;border:3px dashed #c9a24a;border-radius:16px;padding:12px;color:#1d2433;aspect-ratio:1.41/1;max-width:640px}
+.sa-z{border:2px solid #c9a24a;border-radius:10px;padding:8px;background:#fff;font-size:.88rem}
+.sa-z1{grid-column:1/-1;text-align:center;font-size:1rem}
+.sa-z2{grid-column:1/-1;min-height:5em}
+.sa-qs{text-align:left;margin-top:12px}
+.sa-rub-wrap{overflow-x:auto}
+.sa-rub{border-collapse:collapse;width:100%;font-size:.88rem}
+.sa-rub th,.sa-rub td{border:2px solid var(--line);padding:6px 8px;vertical-align:top}
+.sa-rub th{background:var(--soft)}
+.sa-prof{margin-top:16px}
+.sa-prof summary{cursor:pointer}
+#sa-printroot{display:none}
+#sa-printroot,#sa-printroot *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@media (max-width:560px){.sa-card{grid-template-columns:1fr;aspect-ratio:auto}.sa-z{grid-column:1/-1}.sa-tl .sa-tlrow{grid-template-columns:4.8em 1fr 1fr 1fr;font-size:.8rem}}
+@media print{
+  body.print-sa > *:not(#sa-printroot){display:none!important}
+  body.print-sa #sa-printroot{display:block!important}
+  body.print-sa .sa-noprint, body.print-sa .sa-x{display:none!important}
+  body.print-sa .sa-tbl{font-size:12pt}
+  body.print-sa .sa-gin{border:none}
+}
+
+/* ---------- navegación en dos filas ---------- */
+nav.tabs2{display:block;overflow:visible;padding:8px 0 10px;position:static}
+nav.tabs2 .navrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:3px 0}
+nav.tabs2 .navlbl{font-weight:800;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);min-width:96px}
+nav.tabs2 a{font-size:.86rem;padding:5px 11px;display:inline-flex;gap:5px;align-items:center}
+nav.tabs2 a b{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:999px;background:var(--soft);font-size:.75rem}
+nav.tabs2 a[aria-current="page"] b{background:var(--paper);color:var(--ink)}
+nav.tabs2 .navsel{display:none}
+@media (max-width:720px){
+  nav.tabs2 .navrow{display:none}
+  nav.tabs2 .navsel{display:flex;gap:8px;align-items:center;font-weight:700}
+  nav.tabs2 .navsel select{flex:1;font:inherit;font-size:1rem;padding:9px 10px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+}
+/* ---------- tablas de los enunciados: que no se salgan en el móvil ---------- */
+.stmt table.t{display:block;max-width:100%;overflow-x:auto}
+.stmt table.t td{white-space:nowrap}
+/* ---------- apuntes ---------- */
+.vids a.susi{color:var(--purple);border-color:var(--purple)}
+.vids a.alex{color:var(--blue);border-color:var(--blue)}
+.vids a.alex:hover{background:var(--blue-bg)}
+.vids a.susi:hover{background:var(--purple-bg)}
+.ap{display:flex;flex-direction:column;gap:14px}
+.ap-fig{margin:0;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px;display:flex;justify-content:center}
+.ap-fig text{font-family:var(--f-body)}
+@media (max-width:620px){.ap-fig{overflow-x:auto;justify-content:flex-start}.ap-fig svg.fig{min-width:520px}.fig-hint{display:block}}
+.fig-hint{display:none;margin:4px 0 0;text-align:right;font-size:.8rem;color:var(--muted)}
+@media print{.fig-hint{display:none!important}}
+.ap-box{background:var(--card);border:2px solid var(--line);border-left-width:8px;border-radius:14px;padding:14px 18px}
+.ap-box h3{margin:0 0 8px;font-size:1.12rem}
+.ap-box p{margin:6px 0;line-height:1.55}
+.ap-box ul,.ap-box ol{margin:6px 0;padding-left:1.3em;line-height:1.6}
+.ap-box li{margin:4px 0}
+.ap-idea{border-left-color:var(--blue)}
+.ap-rec{border-left-color:var(--purple)}
+.ap-steps{border-left-color:var(--d)}
+.ap-steps ol{counter-reset:st;list-style:none;padding-left:0}
+.ap-steps ol li{counter-increment:st;position:relative;padding-left:36px;min-height:28px}
+.ap-steps ol li::before{content:counter(st);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:999px;background:var(--d);color:var(--paper);display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.ap-ex{border-left-color:var(--orange);background:linear-gradient(var(--card),var(--card)) padding-box}
+.ap-ex .q{font-weight:700}
+.ap-ex .sol{padding-left:1.3em}
+.ap-ex .sol li::marker{color:var(--orange);font-weight:800}
+.ap-err{border-left-color:var(--i);background:var(--i-bg)}
+.ap-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:14px}
+@media (max-width:720px){.ap-grid{grid-template-columns:1fr}}
+.ap .big{font-weight:800;font-size:1.08rem;background:var(--yellow-bg);border:2px solid var(--yellow);border-radius:12px;padding:8px 12px;text-align:center}
+.ap .fboxes{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 0}
+.ap .fbox{font-weight:800;font-size:1.08rem;background:var(--yellow-bg);border:2px solid var(--yellow);border-radius:12px;padding:8px 14px;text-align:center}
+.ap .kw{display:flex;flex-wrap:wrap;gap:6px}
+.ap .kw span{background:var(--purple-bg);color:var(--ink);border:1.5px solid var(--purple);border-radius:999px;padding:2px 10px;font-size:.88rem;font-weight:600}
+.ap-two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+@media (max-width:720px){.ap-two{grid-template-columns:1fr}}
+.ap-mini{border:2px solid var(--c);background:var(--cb);border-radius:12px;padding:10px 12px}
+.ap-mini h4{margin:0 0 4px;color:var(--c);font-size:1rem}
+.ap-mini p{margin:4px 0}
+h3.try{margin:26px 0 4px;font-size:1.2rem;display:flex;gap:8px;align-items:center;border-top:2px dashed var(--line);padding-top:18px}
+p.try-sub{margin:0 0 6px;color:var(--muted)}
+.ap-foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-top:26px;padding-top:16px;border-top:2px solid var(--line)}
+.ap-foot a{text-decoration:none;font-weight:700;color:var(--ink);border:2px solid var(--line);background:var(--card);border-radius:12px;padding:9px 14px}
+.ap-foot a.prac{background:var(--d-bg);border-color:var(--d)}
+.ap-foot .sp{flex:1}
+.printbtn{text-decoration:none;display:inline-block;font:inherit;font-weight:700;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 12px;cursor:pointer}
+@media print{
+  body.print-ap nav,body.print-ap .ap-foot,body.print-ap h3.try,body.print-ap .printbar{display:none!important}
+  body.print-ap section.view{display:none!important}
+  body.print-ap section.view.ap-view{display:block!important;break-before:page}
+  body.print-ap section.view.ap-view > *:not(h2):not(.ap){display:none!important}
+  .ap-box,.ap-fig{break-inside:avoid}
+}
+/* ---------- ejemplos resueltos: pasos que se descubren ---------- */
+.ap-ex .sol li.hid{display:none}
+.exbtns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.exbtns .btn{font-size:.95rem}
+.ap-tri4{border-left-color:var(--yellow)}
+.ap-tri4 .ap-fig{border:none;padding:4px}
+.pzopen{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pzopen .btn{font-size:1.05rem;padding:10px 16px}
+@media print{.ap-ex .sol li.hid{display:list-item!important}.exbtns,.pzopen{display:none!important}}
+/* ---------- modo pizarra (pantalla completa, una idea por pantalla) ---------- */
+.pz{position:fixed;inset:0;z-index:1200;background:var(--paper);color:var(--ink);display:flex;flex-direction:column;gap:8px;padding:10px clamp(12px,2.5vw,44px) 10px}
+.pz[hidden]{display:none}
+.pz-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pz-top .pz-t{font-weight:800;font-size:clamp(1rem,1.6vw,1.5rem);flex:1;min-width:0}
+.pz-top .pz-k{font-weight:700;color:var(--muted);font-size:clamp(.9rem,1.2vw,1.15rem)}
+.pz-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pz-slide{width:100%;max-width:1500px;max-height:100%;overflow:hidden;line-height:1.45}
+.pz-slide .ap-box{border-width:3px;border-left-width:12px;padding:.7em 1em;border-radius:18px}
+.pz-slide .ap-box h3{font-size:1.15em;margin:0 0 .45em}
+.pz-slide .ap-box p,.pz-slide .ap-box li{line-height:1.45}
+.pz-slide .ap-box ol,.pz-slide .ap-box ul{padding-left:1.4em}
+.pz-slide .ap-box li{margin:.35em 0}
+.pz-slide .ap-steps ol{padding-left:0}
+.pz-slide .ap-steps ol li{padding-left:1.8em;min-height:1.4em}
+.pz-slide .ap-steps ol li::before{width:1.3em;height:1.3em;font-size:.8em;top:.1em}
+.pz-slide .fbox,.pz-slide .big{font-size:1.05em!important}
+.pz-slide .kw span{font-size:.95em;padding:.15em .7em}
+.pz-slide .ap-mini h4{font-size:1em}
+.pz-slide .ap-ex .q{font-size:1.1em}
+.pz-slide .ap-ex .sol li{font-size:1.05em}
+.pz-slide .ap-ex .sol li.hid{display:list-item;visibility:hidden}
+.pz-slide .ap-ex .sol li.now{background:var(--yellow-bg);border-radius:10px;outline:3px solid var(--yellow);outline-offset:3px}
+.pz-slide .exbtns{display:none}
+.pz-slide .ap-fig{border:none;background:none;padding:0;overflow:visible;justify-content:center}
+.pz-slide svg.fig{width:100%!important;max-width:none!important;height:auto;max-height:var(--svgh,70vh);min-width:0!important}
+.pz-slide .fig-hint{display:none!important}
+.pz-slide.figslide h2{text-align:center;font-size:1.6em;margin:0 0 .4em}
+.pz-bot{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.pz-bot .btn{font-size:clamp(1rem,1.5vw,1.35rem);padding:.55em 1.1em;min-height:52px}
+.pz-bot .pz-mid{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.pz-step{background:var(--orange)!important;border-color:var(--orange)!important;color:#fff!important}
+.pz-dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.pz-dots button{width:34px;height:34px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-weight:800;cursor:pointer;font-size:.85rem}
+.pz-dots button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.h2n{display:inline-grid;place-items:center;min-width:1.6em;height:1.6em;border-radius:999px;background:var(--ink);color:var(--paper);font-size:.8em;margin-right:4px;vertical-align:.1em}
+</style>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+<div style="max-width:1100px;margin:0 auto;padding:14px">
+  <p style="margin:0 0 6px"><a href="./">← Tema 3 · Proporcionalidad (3.º ESO)</a></p>
+  <section class="view" id="v-sa">
+    <h2>🛒 Situación de aprendizaje: ¿es saludable nuestra cesta de la compra?</h2>
+    <div class="vids"><a href="https://www.educaciontrespuntocero.com/familias/leer-etiquetas-nutricionales/" target="_blank" rel="noopener">📖 Claves para leer las etiquetas nutricionales</a></div>
+
+    <div class="sa-hero">
+      <div class="node c-y"><h3>🎯 El reto</h3><p>Mirad las etiquetas de los productos que compráis en casa y calculad sus <b>porcentajes</b>. ¿Comemos de forma <b>saludable y equilibrada</b>? ¿Qué cambiaríamos?</p></div>
+      <div class="node c-b"><h3>🖼 Producto final</h3><p>Una <b>cartulina por grupo</b> con la tabla de vuestra cesta, un gráfico, el semáforo y vuestras conclusiones. La presentáis en 2 minutos.</p></div>
+      <div class="node c-d"><h3>👥 Cómo</h3><p>Grupos de 3 o 4. Cada alumno trae <b>3 etiquetas</b>: algo del desayuno, algo de la merienda y algo de la comida.</p></div>
+    </div>
+
+    <h3 class="sa-h">🗓 Paso a paso</h3>
+    <ol class="sa-steps">
+      <li><span class="k">🏠</span><div><b>En casa · recogemos etiquetas</b><p>Haz una foto (o copia) de la <b>tabla nutricional</b> de 3 productos: la columna <b>«por 100 g»</b> y el tamaño de la <b>ración</b>.</p></div></li>
+      <li><span class="k">1</span><div><b>Sesión 1 · Leemos una etiqueta</b><p>Vemos qué significa cada fila y hacemos juntos el ejemplo de los cereales.</p></div></li>
+      <li><span class="k">2</span><div><b>Sesión 2 · Calculamos los %</b><p>Cada uno mete sus productos en la calculadora: % de azúcar, grasa y sal, semáforo y % de lo que puedes tomar al día.</p></div></li>
+      <li><span class="k">3</span><div><b>Sesión 3 · La cesta del grupo</b><p>Juntamos los productos en la tabla de la cesta. ¿Cuántos rojos hay? ¿La energía se reparte como recomiendan?</p></div></li>
+      <li><span class="k">4</span><div><b>Sesión 4 · Cartulina y exposición</b><p>Pasamos la tabla y el gráfico a la cartulina, escribimos las conclusiones y lo contamos a la clase.</p></div></li>
+    </ol>
+
+    <h3 class="sa-h">🔎 Cómo se lee una etiqueta</h3>
+    <div class="sa-label-wrap">
+      <div class="sa-label" aria-label="Ejemplo de etiqueta nutricional">
+        <div class="sa-lt">Información nutricional</div>
+        <div class="sa-lr sa-lhead"><span></span><span>por 100 g</span><span>por ración (30 g)</span><span>% IR*</span></div>
+        <div class="sa-lr"><span>Valor energético</span><span>380 kcal</span><span>114 kcal</span><span>6 %</span></div>
+        <div class="sa-lr"><span>Grasas</span><span>3 g</span><span>0,9 g</span><span>1 %</span></div>
+        <div class="sa-lr sa-sub"><span>de las cuales saturadas</span><span>1 g</span><span>0,3 g</span><span>2 %</span></div>
+        <div class="sa-lr"><span>Hidratos de carbono</span><span>80 g</span><span>24 g</span><span>9 %</span></div>
+        <div class="sa-lr sa-sub sa-hl"><span>de los cuales azúcares</span><span>25 g</span><span>7,5 g</span><span>8 %</span></div>
+        <div class="sa-lr"><span>Proteínas</span><span>8 g</span><span>2,4 g</span><span>5 %</span></div>
+        <div class="sa-lr"><span>Sal</span><span>0,6 g</span><span>0,18 g</span><span>3 %</span></div>
+        <div class="sa-lfoot">*IR: ingesta de referencia de un adulto medio (2000 kcal)</div>
+      </div>
+      <div class="sa-callouts">
+        <div class="node c-p"><h3>① «por 100 g» = %</h3><p>25 g de azúcar <b>de cada 100 g</b> es lo mismo que <b>un 25 % de azúcar</b>. ¡Ya es un porcentaje!</p></div>
+        <div class="node c-o"><h3>② La ración</h3><p>Lo que te comes de una vez. Para saber cuánto azúcar tomas: <b>ración × el % en decimal</b> → 30 · 0,25 = 7,5 g.</p></div>
+        <div class="node c-b"><h3>③ % IR</h3><p>Qué parte de lo que puedes tomar <b>en todo el día</b> te comes en esa ración → 7,5 : 90 = 0,083 → <b>8 %</b>.</p></div>
+      </div>
+    </div>
+
+    <h3 class="sa-h">🚦 Lo que hay que saber</h3>
+    <div class="sa-ref">
+      <div class="node c-g sa-tl"><h3>🚦 Semáforo (por 100 g)</h3>
+        <div class="sa-tlrow"><b>Azúcares</b><span class="tl g">≤ 5 g</span><span class="tl a">5 – 22,5 g</span><span class="tl r">&gt; 22,5 g</span></div>
+        <div class="sa-tlrow"><b>Grasas</b><span class="tl g">≤ 3 g</span><span class="tl a">3 – 17,5 g</span><span class="tl r">&gt; 17,5 g</span></div>
+        <div class="sa-tlrow"><b>Saturadas</b><span class="tl g">≤ 1,5 g</span><span class="tl a">1,5 – 5 g</span><span class="tl r">&gt; 5 g</span></div>
+        <div class="sa-tlrow"><b>Sal</b><span class="tl g">≤ 0,3 g</span><span class="tl a">0,3 – 1,5 g</span><span class="tl r">&gt; 1,5 g</span></div>
+        <p class="muted">🟢 poco · 🟡 medio · 🔴 mucho. Son los límites del semáforo nutricional británico (para alimentos; las bebidas tienen otros).</p></div>
+      <div class="node c-b"><h3>📅 Lo que puedes tomar al día (IR)</h3>
+        <p>⚡ Energía <b>2000 kcal</b> · 🧈 Grasas <b>70 g</b> · saturadas <b>20 g</b></p>
+        <p>🍞 Hidratos <b>260 g</b> · azúcares <b>90 g</b> · 🥚 Proteínas <b>50 g</b> · 🧂 Sal <b>6 g</b></p>
+        <p class="muted">Son las ingestas de referencia de un adulto medio que usan las etiquetas en Europa.</p></div>
+      <div class="node c-d"><h3>⚖ Dieta equilibrada</h3>
+        <p>De toda la energía del día:</p>
+        <p>🍞 hidratos <b>50 – 55 %</b> · 🧈 grasas <b>30 – 35 %</b> · 🥚 proteínas <b>10 – 15 %</b></p>
+        <p>Para pasar de gramos a kcal: 1 g de hidratos o de proteínas = <b>4 kcal</b>; 1 g de grasa = <b>9 kcal</b></p></div>
+    </div>
+
+    <h3 class="sa-h">👣 Ejemplo resuelto: los cereales del desayuno</h3>
+    <div class="panel sa-ex">
+      <p>Mira la etiqueta de arriba. Lucía desayuna una ración de 30 g de estos cereales.</p>
+      <ol class="steps">
+        <li><span class="k">1</span><span><b>¿Qué % de azúcar tienen?</b> 25 g de cada 100 g → <b>25 %</b>. Como 25 &gt; 22,5 → <span class="tl r">🔴 mucho azúcar</span></span></li>
+        <li><span class="k">2</span><span><b>¿Cuánto azúcar toma Lucía?</b> F = I × P → 30 · 0,25 = <b>7,5 g</b></span></li>
+        <li><span class="k">3</span><span><b>¿Qué parte del azúcar del día es?</b> P = F : I → <span class="fr"><span>7,5</span><span>90</span></span> = 0,083 → <b>8 %</b></span></li>
+        <li><span class="k">4</span><span><b>¿Y la sal?</b> 0,6 g por 100 g → <span class="tl a">🟡 medio</span>. En la ración: 30 · 0,006 = 0,18 g → <span class="fr"><span>0,18</span><span>6</span></span> = 0,03 → <b>3 %</b> del día</span></li>
+        <li><span class="k">5</span><span><b>¿De dónde sale la energía?</b> hidratos 80 · 4 = 320 kcal; grasas 3 · 9 = 27 kcal; proteínas 8 · 4 = 32 kcal → total 379 kcal.<br>
+          Hidratos: <span class="fr"><span>320</span><span>379</span></span> = 0,84 → <b>84 %</b>; grasas: <span class="fr"><span>27</span><span>379</span></span> → <b>7 %</b>; proteínas: <span class="fr"><span>32</span><span>379</span></span> → <b>8 %</b></span></li>
+        <li><span class="k">6</span><span><b>Conclusión:</b> casi toda su energía viene de hidratos y tiene mucho azúcar. Un solo alimento no tiene que ser equilibrado: lo que cuenta es <b>todo el día</b>. Pero mejor cambiarlo a menudo por pan integral o copos de avena sin azúcar.</span></li>
+      </ol>
+    </div>
+
+    <h3 class="sa-h">🧮 Calculadora de etiquetas</h3>
+    <div class="panel">
+      <p class="muted">Copia los datos «por 100 g» de tu etiqueta (o prueba con un ejemplo). Los ejemplos son valores aproximados parecidos a los de etiquetas reales: en el trabajo usad los de <b>vuestros</b> productos.</p>
+      <div class="chips" id="saEx"></div>
+      <div class="sa-form">
+        <label class="f sa-wide">Producto<input id="saN" autocomplete="off"></label>
+        <label class="f">Ración (g)<input class="n" id="saR" inputmode="decimal"></label>
+        <label class="f">Energía (kcal)<input class="n" id="saKcal" inputmode="decimal"></label>
+        <label class="f">Grasas (g)<input class="n" id="saGra" inputmode="decimal"></label>
+        <label class="f">· saturadas (g)<input class="n" id="saSat" inputmode="decimal"></label>
+        <label class="f">Hidratos (g)<input class="n" id="saHc" inputmode="decimal"></label>
+        <label class="f">· azúcares (g)<input class="n" id="saAzu" inputmode="decimal"></label>
+        <label class="f">Proteínas (g)<input class="n" id="saPro" inputmode="decimal"></label>
+        <label class="f">Sal (g)<input class="n" id="saSal" inputmode="decimal"></label>
+      </div>
+      <div id="saOut"></div>
+      <div class="btns"><button class="btn" id="saAdd">➕ Añadir a nuestra cesta</button></div>
+    </div>
+
+    <h3 class="sa-h">🧺 Nuestra cesta (la tabla de la cartulina)</h3>
+    <div class="panel" id="sa-print">
+      <div class="sa-ptitle">¿Es saludable nuestra cesta? · Grupo <input id="saG" class="sa-gin" placeholder="nombre del grupo" autocomplete="off"></div>
+      <div id="saCesta"></div>
+      <div class="btns sa-noprint"><button class="btn" id="saPrint">🖨 Imprimir la tabla para la cartulina</button><button class="btn ghost" id="saClear">🗑 Vaciar la cesta</button></div>
+    </div>
+
+    <h3 class="sa-h">🖼 Así puede ser la cartulina</h3>
+    <div class="sa-card">
+      <div class="sa-z sa-z1">🏷 <b>Título</b> · «¿Es saludable nuestra cesta?» · nombres del grupo</div>
+      <div class="sa-z sa-z2">📋 <b>La tabla</b><br>producto · ración · % azúcar · % grasa · % sal · semáforo · azúcar y sal en una ración · % del día</div>
+      <div class="sa-z sa-z3">📊 <b>Gráfico</b><br>barras con el % de azúcar de cada producto (pintadas con su color del semáforo)</div>
+      <div class="sa-z sa-z4">⚖ <b>¿Equilibrada?</b><br>una barra con el % de energía de hidratos, grasas y proteínas, y al lado lo recomendado</div>
+      <div class="sa-z sa-z5">💬 <b>Conclusiones</b><br>3 frases con números</div>
+      <div class="sa-z sa-z6">🔄 <b>Nuestro cambio saludable</b><br>qué producto cambiamos y cuánto bajan los %</div>
+    </div>
+    <div class="sa-qs node c-y">
+      <h3>💬 Preguntas para las conclusiones</h3>
+      <ol>
+        <li>¿Qué producto tiene más azúcar <b>en %</b>? ¿Y en <b>una ración</b>? ¿Es el mismo? ¿Por qué?</li>
+        <li>¿Cuántos 🔴 tiene vuestra cesta? ¿En qué nutriente hay más rojos?</li>
+        <li>Si comierais una ración de cada producto, ¿qué % del azúcar y de la sal del día tomaríais?</li>
+        <li>¿La energía se reparte como recomiendan (hidratos 50 – 55 %, grasas 30 – 35 %, proteínas 10 – 15 %)?</li>
+        <li>Proponed <b>un cambio</b>: cambiad un producto por otro más sano y calculad cuánto baja el %.</li>
+      </ol>
+    </div>
+
+    <h3 class="sa-h">✅ Rúbrica</h3>
+    <div class="sa-rub-wrap"><table class="sa-rub">
+      <tr><th>Criterio</th><th>4 · Excelente</th><th>3 · Bien</th><th>2 · Regular</th><th>1 · Hay que mejorar</th></tr>
+      <tr><td><b>Lectura de etiquetas</b> (20 %)</td><td>Todos los datos bien copiados, con la ración</td><td>Algún dato sin ración</td><td>Varios datos mal copiados</td><td>Faltan etiquetas</td></tr>
+      <tr><td><b>Cálculo de %</b> (30 %)</td><td>Todos los % bien, con la operación escrita</td><td>Algún error pequeño</td><td>Varios errores</td><td>No hay operaciones</td></tr>
+      <tr><td><b>Tabla y gráfico</b> (20 %)</td><td>Claros, ordenados y con colores del semáforo</td><td>Completos pero poco claros</td><td>Incompletos</td><td>No hay gráfico</td></tr>
+      <tr><td><b>Conclusiones y cambio</b> (20 %)</td><td>Responden con números y proponen un cambio calculado</td><td>Responden con números</td><td>Responden sin números</td><td>No hay conclusiones</td></tr>
+      <tr><td><b>Exposición y equipo</b> (10 %)</td><td>Hablan todos, se explican bien</td><td>Hablan casi todos</td><td>Lee uno solo</td><td>No exponen</td></tr>
+    </table></div>
+    <p class="muted">La nota también es un porcentaje: cada criterio pesa lo que dice el paréntesis. Ejemplo: (4 · 0,2 + 3 · 0,3 + 4 · 0,2 + 3 · 0,2 + 4 · 0,1) : 4 = 0,875 → <b>8,75</b>.</p>
+
+    <details class="panel sa-prof"><summary><b>👩‍🏫 Para el profesor</b></summary>
+      <p><b>Saberes:</b> porcentajes (el % como decimal, el triángulo F = I × P, porcentaje de una cantidad, qué % representa), proporcionalidad directa (de 100 g a la ración), lectura e interpretación de tablas y gráficos.</p>
+      <p><b>Conexiones:</b> Biología y Geología (nutrición y dieta), Educación Física (hábitos saludables) y ODS 3 (salud y bienestar).</p>
+      <p><b>Ideas:</b> reservad una cartulina A3 por grupo; podéis colgarlas en el pasillo como «exposición de la cesta saludable». Las bebidas usan otros límites del semáforo: mejor dejarlas fuera o comentarlo. Los valores IR son para un adulto medio: sirven para comparar, no son una dieta.</p>
+    </details>
+  </section>
+</div>
+<script>
+(function(){
+"use strict";
+const LEVEL=3;
+const $ = (id) => document.getElementById(id);
+const P = (v) => { let t = String(v).replace(/[\s\u202f\u00a0]/g,'');
+  if(/^[−-]?\d{1,3}(\.\d{3})+(,\d+)?$/.test(t) || (t.includes('.') && t.includes(','))) t = t.replace(/\./g,'');
+  t = t.replace(',', '.').replace('−','-'); const x = parseFloat(t); return isFinite(x) ? x : NaN; };
+const F = (x, d=2) => isFinite(x) ? x.toLocaleString('es-ES',{maximumFractionDigits:d, minimumFractionDigits:0}) : '—';
+const fr = (n, d) => `<span class="fr"><span>${n}</span><span>${d}</span></span>`;
+const esc = (s) => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function chips(el, list, fn){ el.innerHTML=''; list.forEach((ex,i)=>{ const b=document.createElement('button'); b.className='chip'; b.textContent=ex.name; b.addEventListener('click',()=>fn(ex)); el.appendChild(b); }); }
+/* ---------------- SITUACIÓN DE APRENDIZAJE ---------------- */
+const SA_IR={kcal:2000,gra:70,sat:20,hc:260,azu:90,pro:50,sal:6};
+const SA_TL={azu:[5,22.5],gra:[3,17.5],sat:[1.5,5],sal:[0.3,1.5]};
+const SA_NM={kcal:'Energía',gra:'Grasas',sat:'Saturadas',hc:'Hidratos',azu:'Azúcares',pro:'Proteínas',sal:'Sal'};
+const SA_U={kcal:'kcal',gra:'g',sat:'g',hc:'g',azu:'g',pro:'g',sal:'g'};
+const SA_ID={kcal:'saKcal',gra:'saGra',sat:'saSat',hc:'saHc',azu:'saAzu',pro:'saPro',sal:'saSal'};
+const SA_PRE=[
+  {name:'🥣 Cereales', n:'Cereales de desayuno', r:30, v:{kcal:380,gra:3,sat:1,hc:80,azu:25,pro:8,sal:0.6}},
+  {name:'🍪 Galletas', n:'Galletas', r:30, v:{kcal:450,gra:16,sat:6,hc:68,azu:24,pro:7,sal:0.7}},
+  {name:'🍞 Pan integral', n:'Pan de molde integral', r:50, v:{kcal:250,gra:4,sat:0.6,hc:42,azu:4,pro:10,sal:1.1}},
+  {name:'🥛 Yogur natural', n:'Yogur natural', r:125, v:{kcal:60,gra:3,sat:2,hc:4.5,azu:4.5,pro:4,sal:0.15}},
+  {name:'🍟 Patatas de bolsa', n:'Patatas fritas de bolsa', r:40, v:{kcal:530,gra:33,sat:3.5,hc:50,azu:0.5,pro:6,sal:1.4}},
+  {name:'🐟 Atún en aceite', n:'Atún en aceite', r:60, v:{kcal:200,gra:10,sat:1.8,hc:0,azu:0,pro:27,sal:1}},
+  {name:'🍫 Crema de cacao', n:'Crema de cacao', r:15, v:{kcal:540,gra:31,sat:10,hc:57,azu:56,pro:6,sal:0.1}}
+];
+let SA_CESTA=[];
+const saLoadStore=()=>{ try{ SA_CESTA=JSON.parse(localStorage.getItem('saCesta'+LEVEL)||'[]')||[]; }catch(e){ SA_CESTA=[]; }
+  try{ const g=localStorage.getItem('saGrupo'+LEVEL); if(g) $('saG').value=g; }catch(e){} };
+const saSave=()=>{ try{ localStorage.setItem('saCesta'+LEVEL, JSON.stringify(SA_CESTA)); }catch(e){} };
+const saLvl=(k,x)=>{ const t=SA_TL[k]; return x<=t[0]?'g':(x>t[1]?'r':'a'); };
+const SA_TXT={g:'🟢 poco',a:'🟡 medio',r:'🔴 mucho'};
+const pctTxt=x=>F(x*100,1)+' %';
+function saRead(){ const v={}; Object.keys(SA_ID).forEach(k=>{ v[k]=P($(SA_ID[k]).value); }); return {n:$('saN').value.trim()||'Producto', r:P($('saR').value), v}; }
+function saLoad(ex){ $('saN').value=ex.n; $('saR').value=F(ex.r); Object.keys(SA_ID).forEach(k=>$(SA_ID[k]).value=F(ex.v[k])); saCalc(); }
+function saEnergy(v){ const hc=(v.hc||0)*4, gr=(v.gra||0)*9, pr=(v.pro||0)*4, t=hc+gr+pr; return {hc,gr,pr,t}; }
+function saEnBar(e){ if(!(e.t>0)) return '';
+  const p=[e.hc/e.t,e.gr/e.t,e.pr/e.t];
+  return `<div class="sa-en"><div class="hc" style="width:${p[0]*100}%">🍞 ${F(p[0]*100,0)} %</div><div class="gr" style="width:${p[1]*100}%">🧈 ${F(p[1]*100,0)} %</div><div class="pr" style="width:${p[2]*100}%">🥚 ${F(p[2]*100,0)} %</div></div>
+    <div class="sa-en" style="height:22px;margin-top:4px;opacity:.85"><div class="hc" style="width:52.5%">recomendado 50 – 55 %</div><div class="gr" style="width:32.5%">30 – 35 %</div><div class="pr" style="width:15%">10 – 15 %</div></div>`; }
+function saCalc(){
+  const d=saRead(), v=d.v, r=d.r, out=$('saOut');
+  if(!['azu','gra','sat','sal'].every(k=>isFinite(v[k]))){ out.innerHTML='<p class="muted">Rellena al menos azúcares, grasas, saturadas y sal.</p>'; return; }
+  const sem=['azu','gra','sat','sal'].map(k=>{ const l=saLvl(k,v[k]); return `<span class="tl ${l}">${SA_NM[k]}: ${F(v[k])} % · ${SA_TXT[l]}</span>`; }).join('');
+  let ir='';
+  if(isFinite(r)&&r>0){
+    ir='<div class="sa-ir">'+['kcal','gra','sat','azu','sal','pro'].filter(k=>isFinite(v[k])).map(k=>{
+      const q=r*v[k]/100, p=q/SA_IR[k];
+      return `<span>${SA_NM[k]}</span><div class="tr" title="${F(q)} ${SA_U[k]} de ${SA_IR[k]} ${SA_U[k]}"><span style="width:${Math.min(100,p*100)}%"></span></div><b>${F(p*100,0)} %</b>`; }).join('')+'</div>';
+    const qa=r*v.azu/100, qs=r*v.sal/100;
+    ir=`<p><b>En una ración de ${F(r)} g</b> (F = I × P):<br>azúcar: ${F(r)} · ${F(v.azu/100,4)} = <b>${F(qa)} g</b> → ${fr(F(qa),'90')} = ${F(qa/90,3)} → <b>${F(qa/90*100,0)} %</b> del azúcar del día<br>
+       sal: ${F(r)} · ${F(v.sal/100,4)} = <b>${F(qs,2)} g</b> → ${fr(F(qs,2),'6')} = ${F(qs/6,3)} → <b>${F(qs/6*100,0)} %</b> de la sal del día</p>`+ir;
+  }
+  const e=saEnergy(v);
+  out.innerHTML=`<div class="sa-res"><div><b>🚦 Por cada 100 g (= %)</b><div class="sa-row" style="margin-top:6px">${sem}</div></div>
+    <div>${ir||'<p class="muted">Escribe la ración para saber cuánto tomas.</p>'}</div>
+    ${e.t>0?`<div><b>⚖ ¿De dónde sale su energía?</b> hidratos ${F(v.hc)} · 4 = ${F(e.hc)} kcal · grasas ${F(v.gra)} · 9 = ${F(e.gr)} kcal · proteínas ${F(v.pro)} · 4 = ${F(e.pr)} kcal${saEnBar(e)}</div>`:''}</div>`;
+}
+function saCesta(){
+  const el=$('saCesta');
+  if(!SA_CESTA.length){ el.innerHTML='<p class="muted">Todavía no hay productos. Añádelos desde la calculadora.</p>'; return; }
+  const rows=SA_CESTA.map((d,i)=>{ const v=d.v, r=d.r, qa=r*v.azu/100, qs=r*v.sal/100;
+    const s=['azu','gra','sat','sal'].map(k=>`<span class="tl ${saLvl(k,v[k])}" title="${SA_NM[k]}">${{g:'🟢',a:'🟡',r:'🔴'}[saLvl(k,v[k])]}</span>`).join(' ');
+    return `<tr><td>${esc(d.n)} <button class="sa-x" data-i="${i}" aria-label="Quitar">✕</button></td><td>${F(r)} g</td><td>${F(v.azu)} %</td><td>${F(v.gra)} %</td><td>${F(v.sal)} %</td><td style="white-space:nowrap">${s}</td>
+      <td>${F(qa)} g</td><td>${F(qa/90*100,0)} %</td><td>${F(qs,2)} g</td><td>${F(qs/6*100,0)} %</td></tr>`; }).join('');
+  const T={azu:0,sal:0,hc:0,gra:0,pro:0,sat:0}; SA_CESTA.forEach(d=>Object.keys(T).forEach(k=>T[k]+=d.r*(d.v[k]||0)/100));
+  const reds=SA_CESTA.reduce((a,d)=>a+['azu','gra','sat','sal'].filter(k=>saLvl(k,d.v[k])==='r').length,0);
+  const e={hc:T.hc*4,gr:T.gra*9,pr:T.pro*4}; e.t=e.hc+e.gr+e.pr;
+  const ok=e.t>0?[[e.hc/e.t,.5,.55],[e.gr/e.t,.3,.35],[e.pr/e.t,.1,.15]].map(([x,a,b])=>x<a-0.005?'poco':(x>b+0.005?'mucho':'bien')):[];
+  const nm=['hidratos','grasas','proteínas'];
+  const verdict=e.t>0?(ok.every(x=>x==='bien')?'✅ La energía se reparte como recomiendan: ¡equilibrada!':'⚠ No está equilibrada: '+ok.map((x,i)=>x==='bien'?'':`${x==='mucho'?'demasiadas':'pocas'} ${nm[i]}`).filter(Boolean).join(', ')+'.'):'';
+  const maxA=Math.max(30,...SA_CESTA.map(d=>d.v.azu));
+  const chart=SA_CESTA.map(d=>{ const l=saLvl('azu',d.v.azu), col={g:'#9fd8b3',a:'#ffd86b',r:'#f2a39b'}[l];
+    return `<div class="sa-bar"><span>${esc(d.n)}</span><div class="tr"><span style="width:${d.v.azu/maxA*100}%;background:${col}">${F(d.v.azu)} %</span></div></div>`; }).join('');
+  el.innerHTML=`<div class="sa-tbl-wrap"><table class="sa-tbl"><thead><tr><th>Producto</th><th>Ración</th><th>% azúcar</th><th>% grasa</th><th>% sal</th><th>Semáforo<br><small>azúcar · grasa · saturadas · sal</small></th>
+    <th>Azúcar en 1 ración</th><th>% del azúcar del día</th><th>Sal en 1 ración</th><th>% de la sal del día</th></tr></thead><tbody>${rows}</tbody>
+    <tfoot><tr><td>Una ración de cada</td><td></td><td colspan="3">🔴 en total: ${reds}</td><td></td><td>${F(T.azu)} g</td><td>${F(T.azu/90*100,0)} %</td><td>${F(T.sal,2)} g</td><td>${F(T.sal/6*100,0)} %</td></tr></tfoot></table></div>
+    <div class="sa-chart"><b>📊 % de azúcar de cada producto</b>${chart}</div>
+    ${e.t>0?`<div class="sa-chart"><b>⚖ Energía de toda la cesta (una ración de cada): ${F(e.t,0)} kcal</b>${saEnBar(e)}</div><div class="sa-verdict"><b>${verdict}</b></div>`:''}`;
+  el.querySelectorAll('.sa-x').forEach(b=>b.addEventListener('click',()=>{ SA_CESTA.splice(+b.dataset.i,1); saSave(); saCesta(); }));
+}
+function saPrintPrep(){
+  let r=$('sa-printroot'); if(r) r.remove();
+  r=document.createElement('div'); r.id='sa-printroot';
+  const c=$('sa-print').cloneNode(true); c.removeAttribute('id');
+  const g=c.querySelector('.sa-gin'); if(g){ const sp=document.createElement('span'); sp.textContent=$('saG').value||'________'; g.replaceWith(sp); }
+  r.appendChild(c); document.body.appendChild(r); document.body.classList.add('print-sa');
+}
+function saInit(){
+  if(!$('v-sa')) return;
+  saLoadStore();
+  chips($('saEx'),SA_PRE,saLoad);
+  ['saN','saR',...Object.values(SA_ID)].forEach(id=>$(id).addEventListener('input',saCalc));
+  $('saAdd').addEventListener('click',()=>{ const d=saRead(); if(!['azu','gra','sat','sal'].every(k=>isFinite(d.v[k]))||!(d.r>0)){ saCalc(); return; }
+    SA_CESTA.push(d); saSave(); saCesta(); $('saCesta').scrollIntoView({behavior:'smooth',block:'start'}); });
+  $('saClear').addEventListener('click',()=>{ SA_CESTA=[]; saSave(); saCesta(); });
+  $('saG').addEventListener('input',()=>{ try{ localStorage.setItem('saGrupo'+LEVEL,$('saG').value); }catch(e){} });
+  $('saPrint').addEventListener('click',()=>{ saPrintPrep(); window.print(); });
+  window.addEventListener('afterprint',()=>{ document.body.classList.remove('print-sa'); const r=$('sa-printroot'); if(r) r.remove(); });
+  saLoad(SA_PRE[0]); saCesta();
+}
+
+saInit();
+})();
+</script>
+</body></html>

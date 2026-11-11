@@ -1,8 +1,8 @@
-/* 3.º ESO · Tema 3 · Apartado 7: Grifos, móviles y mezclas
-   Apuntes 2 de la profesora (7.1 y 7.2): GRIFOS ➊ ¿qué llena en 1 hora? 1/a ➋ sumo (el desagüe resta) ➌ le doy la vuelta;
-   grifos iguales → regla de tres inversa. MÓVILES: encuentro → suma de velocidades; alcance → resta; distinta hora → ventaja.
-   Su «Repaso de proporcionalidad» (3.º ESO, 06-07): mezcla de carne, ciclistas que se cruzan, coches que salen a las 9 h,
-   aleación de dos lingotes de oro y dos bombas que llenan un pilón. */
+/* 3.º ESO · Tema 3 · Apartado 7: Grifos y mezclas
+   Apuntes 2 de la profesora (7.1): GRIFOS ➊ ¿qué llena en 1 hora? 1/a ➋ sumo (el desagüe resta) ➌ le doy la vuelta;
+   grifos iguales → regla de tres inversa. Su «Repaso de proporcionalidad» (3.º ESO, 06-07): mezcla de carne,
+   aleación de dos lingotes de oro y dos bombas que llenan un pilón.
+   Los MÓVILES se han quitado de este tema: la profesora los deja para el tema de álgebra (11-nov-2026). */
 (function(){
 const R = String.raw;
 const pasos3 = (a,b,c) => `<div class="tres-pasos"><div><span class="n3">➊</span>${a}</div><i>➜</i><div><span class="n3">➋</span>${b}</div><i>➜</i><div><span class="n3">➌</span>${c}</div></div>`;
@@ -12,23 +12,13 @@ const deposito = (n, llenas, pie) => {
     s += `<rect x="30" y="${y}" width="120" height="${h}" fill="${c}" stroke="#4338ca" stroke-width="1.5"/>`; }
   return `<figure class="dib"><svg viewBox="0 0 180 230" role="img" aria-label="Depósito dividido en ${n} partes">${s}<rect x="30" y="10" width="120" height="200" fill="none" stroke="#1e1b3a" stroke-width="4"/></svg>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
 };
-// carretera entre A y B: encuentro (enc) o alcance (alc)
-const via = (tipo, izq, der, centro) => `<figure class="dib" style="max-width:none"><svg viewBox="0 0 640 140" role="img" aria-label="Dibujo de la carretera" style="max-width:30em">
-  <rect x="20" y="74" width="600" height="26" rx="6" fill="#e5e7eb"/><line x1="30" y1="87" x2="610" y2="87" stroke="#fff" stroke-width="3" stroke-dasharray="18 12"/>
-  ${tipo==="enc"?`<text x="22" y="132" font-size="22" font-weight="900">A</text><text x="602" y="132" font-size="22" font-weight="900">B</text>`:""}
-  <text x="${tipo==="enc"?60:40}" y="62" font-size="34">${tipo==="enc"?"🚗":"🚲"}</text><text x="${tipo==="enc"?60:40}" y="130" font-size="18" font-weight="800" fill="#2350b8">${izq}</text>
-  <text x="${tipo==="enc"?530:250}" y="62" font-size="34">${tipo==="enc"?"🚙":"🏍️"}</text><text x="${tipo==="enc"?440:210}" y="130" font-size="18" font-weight="800" fill="#c0392b">${der}</text>
-  <path d="${tipo==="enc"?"M120,44 h60 l-10,-8 M180,44 l-10,8 M520,44 h-60 l10,-8 M460,44 l10,8":"M100,44 h60 l-10,-8 M160,44 l-10,8 M310,44 h60 l-10,-8 M370,44 l-10,8"}" stroke="#1e1b3a" stroke-width="4" fill="none"/>
-  <text x="320" y="20" text-anchor="middle" font-size="18" font-weight="800" fill="#1e1b3a">${centro}</text></svg></figure>`;
 
 TEMA.registrar({
   num: 7,
-  titulo: "Grifos, móviles y mezclas",
+  titulo: "Grifos y mezclas",
   videos: [
     {t:"Tiempo que tardan dos grifos en llenar un depósito", url:"https://www.youtube.com/watch?v=jYguMJ23x5M"},
-    {t:"Problema de los grifos (3.º ESO)", url:"https://www.youtube.com/watch?v=9c18fSRqgBE"},
-    {t:"Problemas de móviles", url:"https://www.youtube.com/watch?v=QkmbUmqt84Y"},
-    {t:"Problemas de móviles 1", url:"https://www.youtube.com/watch?v=IlQf0ScdyY0"}
+    {t:"Problema de los grifos (3.º ESO)", url:"https://www.youtube.com/watch?v=9c18fSRqgBE"}
   ],
 
   clase: [
@@ -43,21 +33,21 @@ TEMA.registrar({
              R`Le doy la vuelta: $\dfrac{12}{5} = 2,4$ h $= 2$ h $24$ min`],
       res:"a) 2 h&ensp;·&ensp;b) 2 h 24 min" },
     { nivel:"Práctica", min:6,
-      enun:"Un ciclista sale de A hacia B a 18 km/h y, a la vez, otro sale de B hacia A a 22 km/h. A y B están a 48 km. <b>a)</b> ¿Cuánto tardan en cruzarse? <b>b)</b> ¿A qué distancia de A?",
-      pasos:["Van uno hacia el otro: se acercan a 18 + 22 = 40 km/h", R`<b>a)</b> $t = \dfrac{48}{40} = 1,2$ h $= 1$ h $12$ min`, R`<b>b)</b> El de A recorre $18 \cdot 1,2 = 21,6$ km`],
-      res:"a) 1 h 12 min&ensp;·&ensp;b) a 21,6 km de A" },
-    { nivel:"Práctica", min:6,
-      enun:"A las 9 h sale un coche de A hacia B a 70 km/h y, a la vez, otro de B hacia A a 80 km/h. Entre A y B hay 250 km. <b>a)</b> ¿A qué hora se cruzan? <b>b)</b> ¿A qué distancia de A?",
-      pasos:["Se acercan a 70 + 80 = 150 km/h", R`$t = \dfrac{250}{150} = \dfrac53$ h $= 1$ h $40$ min → se cruzan a las 10:40`, R`<b>b)</b> $70 \cdot \dfrac53 = \dfrac{350}{3} \approx 116,67$ km`],
-      res:"a) A las 10 h 40 min&ensp;·&ensp;b) a unos 116,67 km de A" },
+      enun:"Con 5 grifos iguales se llena una piscina en 12 horas. <b>a)</b> ¿Cuánto tardan 3 grifos? <b>b)</b> ¿Cuántos grifos hacen falta para llenarla en 6 horas?",
+      pasos:["Grifos iguales: más grifos → menos tiempo: <b>I</b>", R`<b>a)</b> $5 \cdot 12 = 3 \cdot x \Rightarrow x = \dfrac{60}{3} = 20$ h`, R`<b>b)</b> $5 \cdot 12 = x \cdot 6 \Rightarrow x = \dfrac{60}{6} = 10$ grifos`],
+      res:"a) 20 horas&ensp;·&ensp;b) 10 grifos" },
     { nivel:"Problema", min:5,
       enun:"Una carnicería mezcla 50 kg de carne de 4,20 €/kg con 25 kg de carne de 7 €/kg para hacer hamburguesas. ¿A cuánto sale el kilo de mezcla?",
       pasos:[R`Coste: $50 \cdot 4,20 + 25 \cdot 7 = 210 + 175 = 385$ €`, "Kilos: 50 + 25 = 75 kg", R`Precio de la mezcla: $385 : 75 \approx 5,13$ €/kg`, "Está entre 4,20 y 7, más cerca de 4,20 porque hay más carne barata ✓"],
       res:"Unos <b>5,13 €/kg</b>" },
+    { nivel:"Práctica", min:5,
+      enun:"Un joyero funde 300 g de plata con una riqueza del 90 % con 200 g de plata del 80 %. ¿Qué riqueza en plata tiene la pieza que resulta?",
+      pasos:[R`Plata del primero: $300 \cdot 0,90 = 270$ g`, R`Plata del segundo: $200 \cdot 0,80 = 160$ g`, R`Total: $430$ g de plata en $500$ g → $\dfrac{430}{500} = 0,86$`, "Está entre 80 % y 90 %, más cerca del 90 % porque hay más de esa ✓"],
+      res:"Un <b>86 %</b> de plata" },
     { nivel:"Reto", min:8,
-      enun:"Un autobús sale de Granada a las 8:00 a 80 km/h. A las 9:30 sale un coche del mismo sitio y por la misma carretera a 120 km/h. ¿A qué hora lo alcanza? ¿A cuántos km de Granada?",
-      pasos:[R`Ventaja del autobús (1 h 30 min = 1,5 h): $80 \cdot 1,5 = 120$ km`, "El coche recorta 120 − 80 = 40 km cada hora", R`$t = \dfrac{120}{40} = 3$ h → a las 9:30 + 3 h = 12:30`, R`Distancia: $120 \cdot 3 = 360$ km (el autobús: $80 \cdot 4,5 = 360$ ✓)`],
-      res:"A las <b>12:30</b>, a <b>360 km</b> de Granada" }
+      enun:"Un pintor pinta una casa en 6 horas y su ayudante en 12 horas. Empiezan juntos, pero a las 2 horas el ayudante se marcha. ¿Cuánto tardan en total en pintar la casa?",
+      pasos:[R`Juntos, en 1 hora: $\dfrac16 + \dfrac{1}{12} = \dfrac{2}{12} + \dfrac{1}{12} = \dfrac{3}{12} = \dfrac14$`, R`En 2 horas pintan $2 \cdot \dfrac14 = \dfrac12$ de la casa: queda $\dfrac12$`, R`El pintor solo hace $\dfrac16$ cada hora: $\dfrac12 : \dfrac16 = 3$ h`, "Total: 2 + 3 = 5 horas"],
+      res:"<b>5 horas</b>" }
   ],
 
   casa: [
@@ -69,10 +59,10 @@ TEMA.registrar({
       pasos:[R`$\dfrac12 - \dfrac18 = \dfrac48 - \dfrac18 = \dfrac38$ → $\dfrac83$ h`, R`$\dfrac83$ h $= 2$ h $+ \dfrac23$ h $= 2$ h $40$ min`], res:"2 h 40 min" },
     { nivel:"Consolidación", enun:"Con 4 grifos iguales un depósito se llena en 15 horas. ¿Cuánto tarda con 6 grifos?",
       pasos:["Grifos iguales: regla de tres <b>inversa</b>.", R`$4 \cdot 15 = 6 \cdot x \Rightarrow x = 10$ h`], res:"10 horas" },
-    { nivel:"Consolidación", enun:"Dos ciudades están a 420 km. A la vez sale un coche de cada una, uno hacia el otro, a 110 y 100 km/h. ¿Cuándo y dónde se cruzan?",
-      pasos:[R`$t = \dfrac{420}{110 + 100} = 2$ h`, R`El primero: $110 \cdot 2 = 220$ km`], res:"A las 2 h, a 220 km de la primera ciudad" },
-    { nivel:"Problema", enun:"Un ciclista sale a 20 km/h. Media hora después sale una moto del mismo sitio a 60 km/h. ¿Cuánto tarda la moto en alcanzarlo?",
-      pasos:[R`Ventaja: $20 \cdot 0,5 = 10$ km`, R`$t = \dfrac{10}{60 - 20} = 0,25$ h $= 15$ min`], res:"15 minutos" },
+    { nivel:"Consolidación", enun:"Un depósito tiene dos grifos que lo llenan en 3 y en 6 horas, y un desagüe que lo vacía en 4 horas. Si se abren los tres a la vez, ¿cuánto tarda en llenarse?",
+      pasos:[R`$\dfrac13 + \dfrac16 - \dfrac14 = \dfrac{4}{12} + \dfrac{2}{12} - \dfrac{3}{12} = \dfrac{3}{12} = \dfrac14$`, "Le doy la vuelta: 4 horas"], res:"4 horas" },
+    { nivel:"Problema", enun:"Se funde un lingote de 400 g con un 75 % de oro con otro de 600 g con un 90 % de oro. ¿Qué porcentaje de oro tiene el lingote nuevo?",
+      pasos:[R`Oro: $400 \cdot 0,75 + 600 \cdot 0,90 = 300 + 540 = 840$ g`, R`$\dfrac{840}{1000} = 0,84$`], res:"84 %" },
     { nivel:"Problema", enun:"Se mezclan 30 L de aceite de 4 €/L con 20 L de aceite de 6,50 €/L. ¿A cuánto sale el litro de mezcla?",
       pasos:[R`$\dfrac{30 \cdot 4 + 20 \cdot 6,50}{50} = \dfrac{120 + 130}{50} = 5$ €/L`], res:"5 €/L" },
     { nivel:"Para pensar", enun:"Queremos 20 kg de café a 9 €/kg mezclando café de 8 €/kg y de 12 €/kg. ¿Cuántos kilos de cada uno?",
@@ -83,7 +73,6 @@ TEMA.registrar({
     { portada:true, cuerpo:[
       {nota:[{lista:[
         "Problemas de <b>grifos</b> y de <b>trabajo en común</b>.",
-        "Problemas de <b>móviles</b>: encuentro y alcance, también si salen a distinta hora.",
         "Problemas de <b>mezclas</b> y <b>aleaciones</b>: el precio (o la riqueza) de la mezcla."
       ]}], etq:"🎯 En este apartado vas a aprender"}
     ]},
@@ -115,35 +104,6 @@ TEMA.registrar({
         res:"En total, 1 + 2 = <b>3 horas</b>"}}
     ]},
 
-    { titulo:"Móviles: velocidad, distancia y tiempo", cuerpo:[
-      {prop:[{formula:R`d = v \cdot t \qquad t = \frac{d}{v} \qquad v = \frac{d}{t}`}, "Con km/h, el tiempo va en <b>horas</b>: 30 min = 0,5 h · 15 min = 0,25 h · 40 min = $\\tfrac23$ h · 12 min = 0,2 h"], etq:"La fórmula"},
-      {cols:[
-        [{nota:["<b>➡ ⬅ ENCUENTRO</b>: van uno hacia el otro; se acercan con la <b>suma</b>: $t = \\dfrac{d}{v_1 + v_2}$"]}],
-        [{nota:["<b>➡ ➡ ALCANCE</b>: uno persigue al otro; le recorta con la <b>resta</b>: $t = \\dfrac{\\text{ventaja}}{v_1 - v_2}$"]}]
-      ]}
-    ]},
-
-    { titulo:"Encuentro", cuerpo:[
-      {html:via("enc","80 km/h","70 km/h","300 km")},
-      {ej:{etq:"🚂 Dos trenes", enun:"Dos trenes salen a la vez de A y de B, separadas 300 km, uno hacia el otro: el de A a 80 km/h y el de B a 70 km/h. ¿Cuándo se cruzan?",
-        pasos:[R`$t = \dfrac{300}{80 + 70} = \dfrac{300}{150} = 2$ h`, R`El de A recorre $80 \cdot 2 = 160$ km; el de B, $140$ km (suman 300 ✓)`], res:"A las 2 horas, a 160 km de A"}}
-    ]},
-
-    { titulo:"Encuentro saliendo a distinta hora", cuerpo:[
-      {ej:{etq:"🚗 De los apuntes", enun:"Un coche sale de A a las 9:00 a 60 km/h. Otro sale de B a las 10:00 a 90 km/h, hacia A. Entre A y B hay 330 km. ¿Cuándo y dónde se cruzan?",
-        pasos:["A las 10:00 el primero ya ha recorrido 60 · 1 = 60 km: quedan 330 − 60 = 270 km",
-               R`Desde las 10:00 se acercan a $60 + 90 = 150$ km/h: $\;t = \dfrac{270}{150} = 1,8$ h $= 1$ h $48$ min`,
-               R`Se cruzan a las 11:48. El primero lleva $1 + 1,8 = 2,8$ h → $60 \cdot 2,8 = 168$ km`],
-        res:"A las <b>11:48</b>, a <b>168 km</b> de A"}},
-      {truco:["Si salen a distinta hora, calcula <b>dónde está cada uno cuando sale el segundo</b>; desde ahí, como si salieran a la vez."]}
-    ]},
-
-    { titulo:"Alcance", cuerpo:[
-      {html:via("alc","15 km/h","45 km/h","ventaja 30 km · recorta 45 − 15 = 30 km cada hora")},
-      {ej:{etq:"🏍️ La moto y el ciclista", enun:"Un ciclista sale a 15 km/h. 2 horas después sale una moto del mismo sitio a 45 km/h. ¿Cuándo lo alcanza?",
-        pasos:[R`Ventaja: $15 \cdot 2 = 30$ km`, R`$t = \dfrac{30}{45 - 15} = 1$ h`, R`Lo alcanza a $45 \cdot 1 = 45$ km de la salida`], res:"1 hora después de salir la moto, a 45 km"}}
-    ]},
-
     { titulo:"Mezclas: el precio de la mezcla", cuerpo:[
       {prop:["Precio de la mezcla = <b>coste total : cantidad total</b>", {formula:R`p = \frac{c_1 \cdot p_1 + c_2 \cdot p_2}{c_1 + c_2}`}], etq:"Mezclas"},
       {ej:{etq:"🍔 Del repaso de la profe", enun:"Se mezclan 50 kg de carne de 4,20 €/kg con 25 kg de carne de 7 €/kg. ¿A cuánto sale el kilo de mezcla?",
@@ -159,21 +119,21 @@ TEMA.registrar({
     ]},
 
     { titulo:"🪄 Trucos y ⚠️ errores", cuerpo:[
-      {truco:["<b>Grifos</b>: lo que hacen en 1 hora; suma; vuelta. <b>Móviles</b>: dibujo; hacia el otro, suma; detrás, resta."], etq:"🪄 Truco"},
+      {truco:["<b>Grifos</b>: lo que hacen en 1 hora; suma; vuelta. Juntos tardan siempre <b>menos</b> que el más rápido."], etq:"🪄 Truco"},
       {truco:["<b>Mezclas</b>: el precio de la mezcla está siempre <b>entre</b> los dos precios, más cerca del que hay más cantidad."], etq:"🪄 Truco"},
       {aviso:["Mezclar minutos y horas: 1 h 40 min = 1,67 h, no 1,40 h."], etq:"⚠️ Error"},
-      {aviso:["Olvidar la ventaja del que sale antes."], etq:"⚠️ Error"}
+      {aviso:["En las aleaciones, hacer la media de los porcentajes sin tener en cuenta los gramos de cada lingote."], etq:"⚠️ Error"}
     ]},
 
     { titulo:"🧠 Mapa del tema: ¿qué me piden?", cuerpo:[
       {html:`<div class="cols" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:.6em">
         <div class="b-prop"><span class="etq">🔁 Regla de tres</span><p>doble → doble: <b>D</b>, la fracción igual · doble → mitad: <b>I</b>, le doy la vuelta</p></div>
-        <div class="b-prop"><span class="etq">🔺 Porcentajes</span><p>PARTE = TOTAL × decimal · TOTAL = PARTE : decimal · decimal = PARTE : TOTAL</p></div>
-        <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12 · días: entre 360</p></div>
-        <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I de cada columna a la x; a las I, la vuelta</p></div>
-        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>FINAL = INICIAL × índice · INICIAL = FINAL : índice · encadenados: se multiplican</p></div>
-        <div class="b-prop"><span class="etq">🚰🚗 Grifos y móviles</span><p>$\\dfrac1a + \\dfrac1b$ y la vuelta · se acercan: sumo · se persiguen: resto</p></div>
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
+        <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I de cada columna a la x; a las I, la vuelta</p></div>
+        <div class="b-prop"><span class="etq">🔺 Porcentajes</span><p>PARTE = TOTAL × decimal · TOTAL = PARTE : decimal · decimal = PARTE : TOTAL</p></div>
+        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>FINAL = INICIAL × índice · INICIAL = FINAL : índice · encadenados: se multiplican</p></div>
+        <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12 · días: entre 360</p></div>
+        <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y la vuelta</p></div>
         <div class="b-prop"><span class="etq">🥣 Mezclas</span><p>precio = coste total : cantidad total</p></div>
         <div class="b-nota"><span class="etq">✅ ¿Tiene sentido?</span><p>Más obreros → menos días. Juntos → menos tiempo.</p></div></div>`}
     ]},
@@ -181,7 +141,6 @@ TEMA.registrar({
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[{lista:[
         "<b>Grifos</b>: $\\dfrac1a + \\dfrac1b$ (desagüe, resta) y le doy la vuelta. Grifos iguales: regla de tres inversa.",
-        "<b>Encuentro</b>: $t = \\dfrac{d}{v_1 + v_2}$. <b>Alcance</b>: $t = \\dfrac{\\text{ventaja}}{v_1 - v_2}$. Distinta hora: primero, dónde está cada uno.",
         "<b>Mezclas y aleaciones</b>: total (€ u oro) : cantidad total."
       ]}]},
       {estudio:[

@@ -1,272 +1,221 @@
-/* 3.º ESO · Tema 3 · Apartado 6: Porcentajes
-   Enfoque de la profesora: el % en DECIMAL; el triángulo PARTE / TOTAL × DECIMAL («tapa lo que buscas»);
-   el ÍNDICE (100 % ± el %): FINAL = INICIAL × índice, INICIAL = FINAL : índice; variación = FINAL : INICIAL;
-   encadenados: se multiplican los índices (los % NO se suman). */
+/* 3.º ESO · Tema 3 · Apartado 6: Interés simple
+   Basado en los apuntes de la profesora: los tres datos (c, r, t), I = c · r · t,
+   el triángulo del interés («tapa con el dedo lo que buscas») y el tiempo en meses (: 12) o días (: 360). */
 (function(){
 const R = String.raw;
-// triángulo de los porcentajes; tapa: "P" (parte), "T" (total), "D" (decimal) o ""
+// triángulo del interés; tapa: "I", "c", "r", "t" o "" para ninguno
 const tri = (tapa, pie) => {
-  const v = (k,t) => tapa===k ? `<tspan fill="#f59e0b">?</tspan>` : t;
-  return `<figure class="dib tri"><svg viewBox="0 0 260 170" role="img" aria-label="Triángulo: PARTE arriba; TOTAL por DECIMAL abajo">
-    <polygon points="130,8 252,160 8,160" fill="#eef0ff" stroke="#4338ca" stroke-width="4" stroke-linejoin="round"/>
-    <line x1="70" y1="86" x2="190" y2="86" stroke="#4338ca" stroke-width="3"/>
-    <text x="130" y="72" text-anchor="middle" font-size="24" font-weight="800" fill="#1e1b3a">${v("P","PARTE")}</text>
-    <text x="130" y="136" text-anchor="middle" font-size="20" font-weight="800" fill="#1e1b3a">${v("T","TOTAL")} × ${v("D","DECIMAL")}</text>
+  const v = k => tapa===k ? `<tspan fill="#f59e0b">?</tspan>` : k;
+  return `<figure class="dib tri"><svg viewBox="0 0 240 170" role="img" aria-label="Triángulo del interés: I arriba; c por r por t abajo">
+    <polygon points="120,8 232,160 8,160" fill="#eef0ff" stroke="#4338ca" stroke-width="4" stroke-linejoin="round"/>
+    <line x1="64" y1="84" x2="176" y2="84" stroke="#4338ca" stroke-width="3"/>
+    <text x="120" y="70" text-anchor="middle" font-size="34" font-weight="800" fill="#1e1b3a">${v("I")}</text>
+    <text x="120" y="138" text-anchor="middle" font-size="28" font-weight="800" fill="#1e1b3a">${v("c")} × ${v("r")} × ${v("t")}</text>
   </svg>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
 };
-// barra de porcentajes: trozos [ancho %, texto, clase]
-const barra = (trozos, pie) => `<figure class="dib"><div class="barra-pct">${trozos.map(t=>`<span class="${t[2]||""}" style="flex:${t[0]}">${t[1]}</span>`).join("")}</div>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
-// flecha de un cambio: [antes, operación, después]
-const flecha = (pasos) => `<div class="cadena">${pasos.map((p,k)=>k%2 ? `<div class="op">${p}<i>━━━►</i></div>` : `<div class="caja">${p}</div>`).join("")}</div>`;
 
 TEMA.registrar({
   num: 6,
-  titulo: "Porcentajes",
+  titulo: "Interés simple",
   videos: [
-    {t:"Problemas con porcentajes (3.º ESO)", url:"https://www.youtube.com/watch?v=9T7w7iaMrjQ"},
-    {t:"Aumentos y disminuciones porcentuales", url:"https://www.youtube.com/watch?v=sh0ytvn8Y4M"},
-    {t:"Porcentajes: subidas y bajadas encadenadas", url:"https://www.youtube.com/watch?v=ynSBIu_6zSE"}
+    {t:"Calcular el interés simple, capital, rédito y tiempo", url:"https://www.youtube.com/watch?v=G7FGDfv9E1w"}
   ],
 
   clase: [
     { nivel:"Aplicación", min:5,
-      enun:"En tu clase hay 28 alumnos.<br><b>a)</b> El 25 % viene al instituto en bici. ¿Cuántos son?<br><b>b)</b> 21 alumnos tienen móvil propio. ¿Qué porcentaje es?<br><b>c)</b> En otra clase, 9 alumnos son el 30 %. ¿Cuántos alumnos hay en esa clase?",
-      pasos:[R`<b>a)</b> Busco la PARTE: $28 \cdot 0,25 = 7$ alumnos`,
-             R`<b>b)</b> Busco el DECIMAL: $21 : 28 = 0,75$ → $75\,\%$`,
-             R`<b>c)</b> Busco el TOTAL: $9 : 0,30 = 30$ alumnos`],
-      res:"a) 7 alumnos&ensp;·&ensp;b) 75 %&ensp;·&ensp;c) 30 alumnos" },
+      enun:"Ana deposita 3000 € en una cuenta de ahorro al 2 % anual durante 4 años.<br><b>a)</b> ¿Qué interés obtiene?<br><b>b)</b> ¿Cuánto dinero tendrá al final?",
+      pasos:["Datos: $c = 3000$ €, $r = 2\\,\\% = 0,02$, $t = 4$ años.".replace(/\\\\/g,"\\"),
+             R`<b>a)</b> $I = c \cdot r \cdot t = 3000 \cdot 0,02 \cdot 4 = 240$ €`,
+             R`<b>b)</b> Capital final $= 3000 + 240 = 3240$ €`],
+      res:"a) 240 €&ensp;·&ensp;b) 3240 €" },
     { nivel:"Aplicación", min:5,
-      enun:"¿Cuánto pagas?<br><b>a)</b> Unas zapatillas de 85 € con un 30 % de descuento en el Black Friday.<br><b>b)</b> Una entrada de concierto de 40 € a la que se suma un 15 % de gastos de gestión.",
-      pasos:[R`<b>a)</b> Baja: índice $= 100\,\% - 30\,\% = 70\,\% = 0,70$ → $85 \cdot 0,70 = 59,50$ €`,
-             R`<b>b)</b> Sube: índice $= 100\,\% + 15\,\% = 115\,\% = 1,15$ → $40 \cdot 1,15 = 46$ €`],
-      res:"a) 59,50 €&ensp;·&ensp;b) 46 €" },
+      enun:"Calcula el interés que producen:<br><b>a)</b> 5400 € al 2 % durante 6 meses.<br><b>b)</b> 3600 € al 5 % durante 120 días.",
+      pasos:["El tiempo no está en años: en meses divido entre 12; en días, entre 360.",
+             R`<b>a)</b> $I = \dfrac{5400 \cdot 0,02 \cdot 6}{12} = \dfrac{648}{12} = 54$ €`,
+             R`<b>b)</b> $I = \dfrac{3600 \cdot 0,05 \cdot 120}{360} = \dfrac{21\,600}{360} = 60$ €`],
+      res:"a) 54 €&ensp;·&ensp;b) 60 €" },
     { nivel:"Práctica", min:6,
-      enun:"<b>a)</b> En rebajas, con un 40 % de descuento, has pagado 27 € por una camiseta. ¿Cuánto costaba antes?<br><b>b)</b> Un móvil cuesta 242 € con el 21 % de IVA incluido. ¿Cuánto cuesta sin IVA?",
-      pasos:["Me dan el precio FINAL y busco el INICIAL: voy <b>hacia atrás</b>, divido entre el índice.",
-             R`<b>a)</b> Índice $= 0,60$ → $27 : 0,60 = 45$ €. Comprueba: $45 \cdot 0,60 = 27$ ✓`,
-             R`<b>b)</b> Índice $= 1,21$ → $242 : 1,21 = 200$ €`],
-      res:"a) 45 €&ensp;·&ensp;b) 200 €" },
+      enun:"Pedro quiere ganar 450 € de intereses para pagarse un viaje. Su banco le ofrece un 3 % anual durante 5 años. ¿Cuánto dinero tiene que depositar?",
+      pasos:["Busco el <b>capital</b>: tapo la c en el triángulo → $c = \\dfrac{I}{r \\cdot t}$".replace(/\\\\/g,"\\"),
+             R`$c = \dfrac{450}{0,03 \cdot 5} = \dfrac{450}{0,15} = 3000$ €`,
+             R`Comprueba: $3000 \cdot 0,03 \cdot 5 = 450$ ✓`],
+      res:"Tiene que depositar <b>3000 €</b>" },
     { nivel:"Práctica", min:6,
-      enun:"<b>a)</b> El bono mensual de transporte pasa de 20 € a 23 €. ¿Qué porcentaje ha subido?<br><b>b)</b> Una consola baja de 350 € a 280 €. ¿Qué porcentaje ha bajado?",
-      pasos:["Índice = FINAL : INICIAL",
-             R`<b>a)</b> $23 : 20 = 1,15 = 115\,\%$ → más de 100 %: <b>sube un 15 %</b>`,
-             R`<b>b)</b> $280 : 350 = 0,80 = 80\,\%$ → menos de 100 %: <b>baja un 20 %</b>`],
-      res:"a) Sube un 15 %&ensp;·&ensp;b) Baja un 20 %" },
+      enun:"En un banco, 8000 € depositados durante 3 años han producido 600 € de intereses. ¿Qué rédito (porcentaje anual) paga ese banco?",
+      pasos:["Busco el <b>rédito</b>: $r = \\dfrac{I}{c \\cdot t}$".replace(/\\\\/g,"\\"),
+             R`$r = \dfrac{600}{8000 \cdot 3} = \dfrac{600}{24\,000} = 0,025$`,
+             R`En porcentaje: $0,025 \cdot 100 = 2,5\,\%$`],
+      res:"Paga un <b>2,5 %</b> anual" },
     { nivel:"Problema", min:7,
-      enun:"Una sudadera cuesta 40 €. En septiembre sube un 10 % y en enero la rebajan un 20 %.<br><b>a)</b> ¿Cuánto cuesta al final?<br><b>b)</b> En total, ¿ha subido o ha bajado? ¿Cuánto?",
-      pasos:[R`Índices: sube 10 % → $1,10$; baja 20 % → $0,80$`,
-             R`<b>a)</b> Índice total $= 1,10 \cdot 0,80 = 0,88$ → $40 \cdot 0,88 = 35,20$ €`,
-             R`<b>b)</b> $0,88 = 88\,\%$: menos de 100 % → <b>ha bajado un 12 %</b> (¡no un 10 %!)`],
-      res:"a) 35,20 €&ensp;·&ensp;b) Ha bajado un 12 %" },
+      enun:"¿Cuántos meses hay que dejar 6000 € al 2 % anual para ganar 70 € de intereses?",
+      pasos:["Busco el <b>tiempo</b> y me lo piden en <b>meses</b>: uso la fórmula con el 12.",
+             R`$70 = \dfrac{6000 \cdot 0,02 \cdot t}{12} = \dfrac{120\,t}{12} = 10\,t$`,
+             R`$t = \dfrac{70}{10} = 7$ meses`],
+      res:"<b>7 meses</b>" },
     { nivel:"Reto", min:8,
-      enun:"Necesitas 3 botes de champú que cuestan 4 € cada uno. ¿Dónde pagas menos?<br><b>Tienda A:</b> oferta 3x2.<br><b>Tienda B:</b> 2.ª unidad al 50 % (la oferta solo vale para 2 botes).<br><b>Tienda C:</b> 30 % de descuento en todo.",
-      pasos:["<b>A:</b> te llevas 3 y pagas 2 → 2 · 4 = <b>8 €</b>",
-             "<b>B:</b> 4 + 2 (al 50 %) + 4 (el tercero, sin oferta) = <b>10 €</b>",
-             R`<b>C:</b> $12 \cdot 0,70 = $ <b>8,40 €</b>`,
-             R`El 3x2 es un descuento del $33,3\,\%$ (pagas $\dfrac{2}{3}$): es la mejor oferta.`],
-      res:"En la tienda A: 8 €" }
+      enun:"Tienes 10 000 € para ahorrar. El banco A paga un 1,8 % anual durante 2 años. El banco B paga un 2,2 % anual durante 18 meses. ¿Qué banco te da más intereses? ¿Cuánto más?",
+      pasos:[R`<b>Banco A:</b> $I = 10\,000 \cdot 0,018 \cdot 2 = 360$ €`,
+             R`<b>Banco B:</b> $I = \dfrac{10\,000 \cdot 0,022 \cdot 18}{12} = \dfrac{3960}{12} = 330$ €`,
+             "Aunque B paga un % mayor, el dinero está menos tiempo.",
+             R`Diferencia: $360 - 330 = 30$ €`],
+      res:"El banco A, <b>30 € más</b>" }
   ],
 
   casa: [
     { nivel:"Básico",
-      enun:"Escribe en forma decimal: <b>a)</b> 8 % &nbsp;<b>b)</b> 45 % &nbsp;<b>c)</b> 3 % &nbsp;<b>d)</b> 150 % &nbsp;<b>e)</b> 12,5 %",
-      pasos:["Divido entre 100: la coma se mueve dos lugares a la izquierda.",
-             "a) 0,08 · b) 0,45 · c) 0,03 · d) 1,50 · e) 0,125"],
-      res:"0,08 · 0,45 · 0,03 · 1,50 · 0,125" },
+      enun:"Calcula el interés y el capital final de 2500 € al 4 % anual durante 3 años.",
+      pasos:[R`$I = 2500 \cdot 0,04 \cdot 3 = 300$ €`, R`Capital final $= 2500 + 300 = 2800$ €`],
+      res:"I = 300 €; capital final 2800 €" },
     { nivel:"Básico",
-      enun:"Un instituto tiene 650 alumnos.<br><b>a)</b> El 12 % se queda al comedor. ¿Cuántos son?<br><b>b)</b> 117 alumnos hacen deporte federado. ¿Qué porcentaje representan?",
-      pasos:[R`<b>a)</b> PARTE $= 650 \cdot 0,12 = 78$ alumnos`, R`<b>b)</b> DECIMAL $= 117 : 650 = 0,18$ → $18\,\%$`],
-      res:"a) 78 alumnos&ensp;·&ensp;b) 18 %" },
+      enun:"¿Qué interés producen 1800 € al 3,5 % anual durante 8 meses?",
+      pasos:[R`Meses → divido entre 12: $I = \dfrac{1800 \cdot 0,035 \cdot 8}{12} = \dfrac{504}{12} = 42$ €`],
+      res:"42 €" },
     { nivel:"Consolidación",
-      enun:"<b>a)</b> Arreglar la bici en el taller cuesta 180 € más el 21 % de IVA. ¿Cuánto pagas?<br><b>b)</b> Un pantalón de 55 € tiene un 35 % de descuento. ¿Cuánto pagas?",
-      pasos:[R`<b>a)</b> Sube 21 % → $180 \cdot 1,21 = 217,80$ €`, R`<b>b)</b> Baja 35 % → índice $0,65$ → $55 \cdot 0,65 = 35,75$ €`],
-      res:"a) 217,80 €&ensp;·&ensp;b) 35,75 €" },
+      enun:"Marina quiere ganar 270 € en 2 años en una cuenta al 1,5 % anual. ¿Cuánto tiene que depositar?",
+      pasos:[R`$c = \dfrac{I}{r \cdot t} = \dfrac{270}{0,015 \cdot 2} = \dfrac{270}{0,03} = 9000$ €`],
+      res:"9000 €" },
     { nivel:"Consolidación",
-      enun:"<b>a)</b> Tras subir un 12 %, el abono del gimnasio cuesta 33,60 €. ¿Cuánto costaba antes?<br><b>b)</b> Un portátil cuesta 605 € con el 21 % de IVA incluido. ¿Cuánto cuesta sin IVA?",
-      pasos:[R`<b>a)</b> Hacia atrás: $33,60 : 1,12 = 30$ €`, R`<b>b)</b> $605 : 1,21 = 500$ €`],
-      res:"a) 30 €&ensp;·&ensp;b) 500 €" },
+      enun:"¿A qué rédito hay que depositar 4800 € durante 15 meses para obtener 180 € de intereses?",
+      pasos:[R`$180 = \dfrac{4800 \cdot r \cdot 15}{12} = 6000\,r$`, R`$r = \dfrac{180}{6000} = 0,03 \;\to\; 3\,\%$`],
+      res:"3 %" },
     { nivel:"Problema",
-      enun:"<b>a)</b> La población de un pueblo pasa de 2500 a 2350 habitantes. ¿Qué porcentaje ha variado?<br><b>b)</b> Una cuenta de una red social pasa de 800 a 1100 seguidores. ¿Qué porcentaje ha subido?",
-      pasos:[R`<b>a)</b> $2350 : 2500 = 0,94 = 94\,\%$ → ha bajado un $6\,\%$`, R`<b>b)</b> $1100 : 800 = 1,375 = 137,5\,\%$ → ha subido un $37,5\,\%$`],
-      res:"a) Baja un 6 %&ensp;·&ensp;b) Sube un 37,5 %" },
+      enun:"Para comprarse un ordenador, Carlos pide un préstamo de 1500 € al 6 % anual y lo devuelve a los 10 meses. ¿Cuánto dinero devuelve en total?",
+      pasos:["En un préstamo, el interés lo <b>pagas</b> tú al banco.",
+             R`$I = \dfrac{1500 \cdot 0,06 \cdot 10}{12} = \dfrac{900}{12} = 75$ €`,
+             R`Devuelve $1500 + 75 = 1575$ €`],
+      res:"1575 €" },
     { nivel:"Problema",
-      enun:"Unos auriculares de 200 € suben un 10 % y después bajan un 25 %. ¿Cuánto cuestan al final? ¿Cuánto han variado en total?",
-      pasos:[R`Índices: $1,10$ y $0,75$. Índice total $= 1,10 \cdot 0,75 = 0,825$`,
-             R`Final $= 200 \cdot 0,825 = 165$ €`,
-             R`$0,825 = 82,5\,\%$ → han bajado un $17,5\,\%$ (no un 15 %)`],
-      res:"165 €; bajan un 17,5 %" },
+      enun:"¿Cuántos días tienen que estar 7200 € al 2,5 % anual para producir 90 € de intereses?",
+      pasos:[R`Días → divido entre 360: $90 = \dfrac{7200 \cdot 0,025 \cdot t}{360} = \dfrac{180\,t}{360} = 0,5\,t$`,
+             R`$t = \dfrac{90}{0,5} = 180$ días (medio año)`],
+      res:"180 días" },
     { nivel:"Para pensar",
-      enun:"Has pagado 290,40 € por una bici eléctrica con un 20 % de rebaja y después el 21 % de IVA. ¿Cuál era el precio inicial?",
-      pasos:[R`Índice total $= 0,80 \cdot 1,21 = 0,968$`, R`Hacia atrás: $290,40 : 0,968 = 300$ €`,
-             R`Comprueba: $300 \cdot 0,80 = 240$ y $240 \cdot 1,21 = 290,40$ ✓`],
-      res:"300 €" },
+      enun:"Con interés simple al 4 % anual, ¿cuántos años tarda un capital en duplicarse?",
+      pasos:["Duplicarse quiere decir que el interés es igual al capital: $I = c$.",
+             R`$c \cdot 0,04 \cdot t = c \;\Rightarrow\; 0,04 \cdot t = 1 \;\Rightarrow\; t = \dfrac{1}{0,04} = 25$ años`,
+             R`Compruébalo con 100 €: $100 \cdot 0,04 \cdot 25 = 100$ € de interés ✓`],
+      res:"25 años" },
     { nivel:"Para pensar",
-      enun:"<b>a)</b> Si un precio sube un 20 % y después baja un 20 %, ¿vuelve a ser el mismo?<br><b>b)</b> Un precio ha subido un 25 %. ¿Qué rebaja hay que hacer para que vuelva al precio de antes?",
-      pasos:[R`<b>a)</b> $1,20 \cdot 0,80 = 0,96$ → baja un $4\,\%$: <b>no</b> vuelve al mismo. El 20 % de bajada se calcula sobre un precio mayor.`,
-             R`<b>b)</b> Busco un índice que deshaga el 1,25: $1 : 1,25 = 0,80$ → rebaja del $20\,\%$`,
-             R`Comprueba con 100 €: sube a 125 € y $125 \cdot 0,80 = 100$ € ✓`],
-      res:"a) No, baja un 4 %&ensp;·&ensp;b) Una rebaja del 20 %" }
+      enun:"Raúl deposita un capital al 3 % anual durante 4 años y al final tiene 6720 €. ¿Qué capital depositó?",
+      pasos:[R`En 4 años gana el $3 \cdot 4 = 12\,\%$ del capital: al final tiene el $112\,\%$, es decir, $1,12 \cdot c$`,
+             R`$1,12 \cdot c = 6720 \;\Rightarrow\; c = \dfrac{6720}{1,12} = 6000$ €`,
+             R`Comprueba: $I = 6000 \cdot 0,03 \cdot 4 = 720$ y $6000 + 720 = 6720$ ✓`],
+      res:"6000 €" }
   ],
 
   laminas: [
     { portada:true, cuerpo:[
       {nota:[{lista:[
-        "Escribir un porcentaje en <b>decimal</b> y usar el <b>triángulo</b>: parte, total y porcentaje.",
-        "Calcular <b>aumentos y disminuciones</b> con el <b>índice</b>: IVA, rebajas, ganancias…",
-        "Ir <b>hacia atrás</b> (precio antes) y calcular el <b>% de variación</b>.",
-        "Resolver <b>porcentajes encadenados</b> y comparar <b>ofertas</b>."
+        "Qué es el <b>interés simple</b> y sus datos: capital, rédito y tiempo.",
+        "Calcular el interés con $I = c \\cdot r \\cdot t$ y el <b>capital final</b>.".replace(/\\\\/g,"\\"),
+        "Buscar el capital, el rédito o el tiempo con el <b>triángulo</b>.",
+        "Trabajar con el tiempo en <b>meses</b> o en <b>días</b>, y con <b>préstamos</b>."
       ]}], etq:"🎯 En este apartado vas a aprender"}
     ]},
 
-    { titulo:"El porcentaje en forma decimal", cuerpo:[
-      {def:[R`Un porcentaje es una razón sobre 100: $35\,\% = \dfrac{35}{100} = 0,35$`, "Para calcular, el porcentaje se escribe en <b>decimal</b>: se divide entre 100 (la coma se mueve <b>dos lugares</b> a la izquierda)."], etq:"Porcentaje"},
-      {html:`<div class="dec-cards">${[["50 %","0,50","la mitad"],["25 %","0,25","la cuarta parte"],["21 %","0,21","el IVA"],["5 %","0,05","¡ojo con el 0!"],["120 %","1,20","más que el total"]].map(c=>`<div><b>${c[0]}</b><i>▼</i><span>${c[1]}</span><small>${c[2]}</small></div>`).join("")}</div>`},
-      {html:barra([[25,"25 %","pct-a"],[75,"75 %",""]],"De 20 casillas, 5 son el 25 %: la cuarta parte")}
+    { titulo:"El banco te paga por guardar tu dinero", cuerpo:[
+      {ej:{etq:"🏦 Situación", enun:"Lucía guarda 9000 € en el banco durante 3 años. El banco le paga un 1,5 % cada año por tenerlo allí. ¿Cuánto dinero gana?",
+        pasos:["Cada año gana el 1,5 % de 9000 €: $9000 \\cdot 0,015 = 135$ €".replace(/\\\\/g,"\\"),
+               R`En 3 años: $135 \cdot 3 = 405$ €`,
+               R`Al final tiene $9000 + 405 = 9405$ €`],
+        res:"Gana <b>405 €</b>"}},
+      {html:`<div class="anios">${[0,1,2,3].map(a=>`<div><b>año ${a}</b><span class="cap">9000</span>${"<span class='int'>+135</span>".repeat(a)}</div>`).join("")}</div>`},
+      {nota:["En el <b>interés simple</b> se gana <b>lo mismo cada año</b>."]}
     ]},
 
-    { titulo:"Los tres cálculos básicos: el triángulo", cuerpo:[
+    { titulo:"Los datos y la fórmula", cuerpo:[
+      {cols:[
+        [{def:["💰 <b>Capital (c)</b>: el dinero que guardas (o que pides prestado)."], etq:"c"}],
+        [{def:[R`📊 <b>Rédito (r)</b>: el % que paga el banco cada año, <b>en decimal</b>: 1,5 % → 0,015`], etq:"r"}],
+        [{def:["⏳ <b>Tiempo (t)</b>: cuánto tiempo lo dejas, <b>en años</b>."], etq:"t"}]
+      ]},
+      {prop:[{formula:R`I = c \cdot r \cdot t`}, "🎁 <b>Interés (I)</b>: lo que ganas. <b>Capital final</b> = capital + interés."], etq:"Interés simple"},
+      {ej:{enun:"Lucía: 9000 € al 1,5 % durante 3 años.", pasos:[R`$I = 9000 \cdot 0,015 \cdot 3 = 405$ €`], res:"405 €; capital final 9405 €"}}
+    ]},
+
+    { titulo:"El triángulo del interés", cuerpo:[
       {cols2:true, cols:[
-        [{prop:["<b>PARTE</b>: el trozo que me preguntan.", "<b>TOTAL</b>: todo (es el 100 %).", "<b>DECIMAL</b>: el % escrito en decimal.",
-                "➡ Lo que está <b>al lado</b> se <b>multiplica</b>. ⬇ Lo que está <b>arriba y abajo</b> se <b>divide</b>.", "☝ <b>Tapa con el dedo lo que buscas.</b>"], etq:"Cómo se usa"}],
+        [{prop:["<b>Arriba</b>: lo que ganas (I). <b>Abajo</b>: los tres datos multiplicados.",
+                "Lo que está <b>al lado</b> se <b>multiplica</b> (×). Lo que está <b>arriba y abajo</b> se <b>divide</b>.",
+                "☝ <b>Tapa con el dedo lo que buscas</b> y mira lo que queda."], etq:"Cómo se usa"}],
         [{html:tri("")}]
-      ]}
+      ]},
+      {formula:R`I = c \cdot r \cdot t \qquad c = \frac{I}{r \cdot t} \qquad r = \frac{I}{c \cdot t} \qquad t = \frac{I}{c \cdot r}`}
     ]},
 
-    { titulo:"🍕 Busco la parte", cuerpo:[
+    { titulo:"Busco el capital", cuerpo:[
       {cols2:true, cols:[
-        [{ej:{enun:"En una clase de 25 alumnos, al 40 % le gusta la pizza. ¿A cuántos?",
-          pasos:["Tapo la PARTE: PARTE = TOTAL × DECIMAL", R`$25 \cdot 0,40 = 10$`], res:"A 10 alumnos"}}],
-        [{html:tri("P")}]
-      ]},
-      {html:barra([[40,"40 % → 10 alumnos 🍕","pct-a"],[60,"60 % → 15 alumnos",""]])}
+        [{ej:{etq:"💰 Busco el CAPITAL", enun:"Marta quiere ganar 400 € en 2 años al 2,5 %. ¿Cuánto tiene que guardar?",
+          pasos:[R`Tapo la c: $c = \dfrac{I}{r \cdot t}$`, R`$c = \dfrac{400}{0,025 \cdot 2} = \dfrac{400}{0,05}$`],
+          res:"c = 8000 €"}}],
+        [{html:tri("c","Tapo la c: queda I arriba y r × t abajo")}]
+      ]}
     ]},
 
-    { titulo:"🚌 Busco el total", cuerpo:[
+    { titulo:"Busco el rédito", cuerpo:[
       {cols2:true, cols:[
-        [{ej:{enun:"12 alumnos van en autobús y son el 40 % de la clase. ¿Cuántos alumnos hay en la clase?",
-          pasos:["Tapo el TOTAL: TOTAL = PARTE : DECIMAL", R`$12 : 0,40 = 30$`, R`Comprueba: $30 \cdot 0,40 = 12$ ✓`], res:"30 alumnos"}}],
-        [{html:tri("T")}]
+        [{ej:{etq:"📊 Busco el RÉDITO", enun:"Jorge guardó 5000 € durante 3 años y ganó 450 €. ¿Qué % le pagaban?",
+          pasos:[R`Tapo la r: $r = \dfrac{I}{c \cdot t}$`, R`$r = \dfrac{450}{5000 \cdot 3} = \dfrac{450}{15\,000} = 0,03$`, "Lo paso a %: 0,03 · 100 = 3 %"],
+          res:"r = 3 %"}}],
+        [{html:tri("r","Tapo la r: queda I arriba y c × t abajo")}]
       ]}
     ]},
 
-    { titulo:"⚽ Busco el porcentaje", cuerpo:[
+    { titulo:"Busco el tiempo", cuerpo:[
       {cols2:true, cols:[
-        [{ej:{enun:"9 de los 36 alumnos juegan al fútbol. ¿Qué porcentaje es?",
-          pasos:["Tapo el DECIMAL: DECIMAL = PARTE : TOTAL", R`$9 : 36 = 0,25$`, R`Lo paso a %: $0,25 \cdot 100 = 25\,\%$`], res:"El 25 %"}}],
-        [{html:tri("D")}]
-      ]},
-      {aviso:["No te quedes en 0,25: el resultado se da en <b>porcentaje</b> (25 %)."]}
-    ]},
-
-    { titulo:"¿El precio sube o baja? El índice", cuerpo:[
-      {cols:[
-        [{def:["Aumento, IVA, ganancia, recargo…", "<b>100 % + el %</b>", "+25 % → 125 % → <b>1,25</b>", "IVA +21 % → 121 % → <b>1,21</b>"], etq:"📈 SUBE"}],
-        [{aviso:["Descuento, rebaja, pérdida…", "<b>100 % − el %</b>", "−20 % → 80 % → <b>0,80</b>", "−5 % → 95 % → <b>0,95</b>"], etq:"📉 BAJA"}]
-      ]},
-      {prop:[{formula:R`\text{FINAL} = \text{INICIAL} \times \text{ÍNDICE}`}], etq:"Ese número es el ÍNDICE"},
-      {html:barra([[100,"100 % (lo que había)",""],[25,"+25 %","pct-s"]])}
-    ]},
-
-    { titulo:"👟 Un descuento", cuerpo:[
-      {ej:{enun:"Unas zapatillas cuestan 60 € y tienen un 20 % de descuento. ¿Cuánto pagas?",
-        pasos:["¿Sube o baja? Es un descuento: <b>BAJA 📉</b>",
-               R`Índice: $100\,\% - 20\,\% = 80\,\% = 0,80$`,
-               R`Multiplico: $60 \cdot 0,80 = 48$ €`,
-               R`Comprueba: te ahorras $60 - 48 = 12$ € y el 20 % de 60 es $60 \cdot 0,20 = 12$ ✓`],
-        res:"Pagas 48 €"}},
-      {html:flecha(["<b>60 €</b><small>antes</small>","−20 % → × 0,80","<b>48 €</b><small>pagas</small>"])}
-    ]},
-
-    { titulo:"🔧 El IVA y 🛴 la ganancia", cuerpo:[
-      {cols:[
-        [{ej:{etq:"🔧 IVA", enun:"Arreglar la moto cuesta 168 € y hay que sumar un 21 % de IVA. ¿Cuánto se paga?",
-          pasos:["Sube: índice 1,21", R`$168 \cdot 1,21 = 203,28$`], res:"203,28 €"}}],
-        [{ej:{etq:"🛴 Ganancia", enun:"Una tienda compra un patinete por 145 € y lo vende ganando un 30 %. ¿A qué precio lo vende?",
-          pasos:["Sube: índice 1,30", R`$145 \cdot 1,30 = 188,50$`], res:"188,50 €"}}]
+        [{ej:{etq:"⏳ Busco el TIEMPO", enun:"Lucía ganó 405 € guardando 9000 € al 1,5 %. ¿Cuántos años?",
+          pasos:[R`Tapo la t: $t = \dfrac{I}{c \cdot r}$`, R`$t = \dfrac{405}{9000 \cdot 0,015} = \dfrac{405}{135}$`],
+          res:"t = 3 años"}}],
+        [{html:tri("t","Tapo la t: queda I arriba y c × r abajo")}]
       ]}
     ]},
 
-    { titulo:"Ir hacia atrás: la cantidad inicial", cuerpo:[
-      {html:flecha(["<b>INICIAL</b><small>lo de antes</small>","➡ × ÍNDICE &nbsp;·&nbsp; ⬅ : ÍNDICE","<b>FINAL</b><small>lo de después</small>"])},
-      {ej:{etq:"👕 Ejemplo", enun:"En rebajas, con un 20 % de descuento, has pagado 48 € por una sudadera. ¿Cuánto costaba antes?",
-        pasos:[R`Índice de la rebaja: $0,80$`, "Sé el FINAL (48 €) y busco el INICIAL: voy <b>hacia atrás ⬅</b>, divido.", R`$48 : 0,80 = 60$ €. Comprueba: $60 \cdot 0,80 = 48$ ✓`],
-        res:"Costaba 60 €"}}
-    ]},
-
-    { titulo:"Hacia atrás con el IVA", cuerpo:[
-      {ej:{etq:"📱 Ejemplo", enun:"Un móvil cuesta 363 € con el 21 % de IVA. ¿Cuánto cuesta sin IVA?",
-        pasos:["363 € es el FINAL (con IVA). Índice 1,21.", R`$363 : 1,21 = 300$ €`], res:"300 € sin IVA"}},
-      {aviso:[R`<b>Error típico:</b> sumar el 20 % a 48 € (sale $57,60$ €) o restar el 21 % a 363 €. ¡Está mal! El porcentaje se calculó sobre el precio de <b>antes</b>, no sobre el final.`]}
-    ]},
-
-    { titulo:"¿Cuánto ha subido o bajado en %?", cuerpo:[
-      {prop:[{formula:R`\text{ÍNDICE} = \text{FINAL} : \text{INICIAL}`}, "Lo paso a % (× 100). <b>Más de 100 %</b> → sube lo que pasa de 100. <b>Menos de 100 %</b> → baja lo que falta hasta 100."], etq:"Porcentaje de variación"},
+    { titulo:"¿Y si el tiempo no está en años?", cuerpo:[
       {cols:[
-        [{ej:{etq:"🎮 Sube", enun:"Un videojuego costaba 40 € y ahora cuesta 46 €.",
-          pasos:[R`$46 : 40 = 1,15 = 115\,\%$`, R`$115 - 100 = 15$`], res:"Ha subido un 15 %"}}],
-        [{ej:{etq:"🚲 Baja", enun:"Una bici de 500 € se vende de segunda mano por 325 €.",
-          pasos:[R`$325 : 500 = 0,65 = 65\,\%$`, R`$100 - 65 = 35$`], res:"Ha bajado un 35 %"}}]
+        [{def:[{formula:R`I = c \cdot r \cdot t`}], etq:"📅 En años"}],
+        [{def:[{formula:R`I = \frac{c \cdot r \cdot t}{12}`}, "Un año tiene 12 meses."], etq:"🗓 En meses"}],
+        [{def:[{formula:R`I = \frac{c \cdot r \cdot t}{360}`}, "El banco cuenta 360 días."], etq:"☀ En días"}]
       ]},
-      {nota:["🛒 <b>El IPC</b> hace esto con la cesta de la compra: si pasa de 400 € a 420 €, 420 : 400 = 1,05 → los precios han subido un 5 %."]}
+      {ej:{etq:"🎮 Ejemplo", enun:"Pablo guarda 2500 € al 3 % durante 9 meses para comprarse una consola. ¿Cuánto gana?",
+        pasos:[R`$I = \dfrac{2500 \cdot 0,03 \cdot 9}{12} = \dfrac{675}{12} = 56,25$ €`], res:"56,25 €"}}
     ]},
 
-    { titulo:"Porcentajes encadenados", cuerpo:[
-      {ej:{etq:"🎒 Situación", enun:"Una mochila cuesta 50 €. En septiembre sube un 20 % y en enero la rebajan un 25 %. ¿Cuánto cuesta al final? ¿Cuánto ha cambiado en total?",
-        pasos:[flecha(["<b>50 €</b>","+20 % × 1,20","<b>60 €</b>","−25 % × 0,75","<b>45 €</b>"]),
-               R`Todo de una vez: multiplico los índices: $1,20 \cdot 0,75 = 0,90$ → $50 \cdot 0,90 = 45$ €`,
-               R`$0,90 = 90\,\%$ → ha <b>bajado un 10 %</b>`],
-        res:"45 €; baja un 10 %"}},
-      {aviso:["<b>Los porcentajes NO se suman.</b> Subir un 20 % y bajar un 25 % no es bajar un 5 %: es bajar un 10 %. El 25 % se calcula sobre 60 €, no sobre 50 €."]}
-    ]},
-
-    { titulo:"Encadenados con IVA", cuerpo:[
-      {ej:{etq:"🧾 Hacia delante", enun:"Una factura de 350 € con un 20 % de descuento y después un 21 % de IVA.",
-        pasos:[flecha(["<b>350 €</b>","−20 % × 0,80","<b>280 €</b>","+21 % × 1,21","<b>338,80 €</b>"])], res:"Se pagan 338,80 €"}},
-      {ej:{etq:"📺 Hacia atrás", enun:"Pagamos 290,40 € por un televisor con un 20 % de rebaja y un 21 % de IVA. ¿Cuál era el precio inicial?",
-        pasos:[R`Índice total: $0,80 \cdot 1,21 = 0,968$`, R`$290,40 : 0,968 = 300$ €`], res:"Costaba 300 €"}}
-    ]},
-
-    { titulo:"🛒 Compras inteligentes: el precio unitario", cuerpo:[
-      {def:["Para saber qué compra sale mejor, compara el <b>precio unitario</b>: lo que cuesta 1 kg, 1 L o 1 unidad.", {formula:R`\text{precio unitario} = \text{precio} : \text{cantidad}`}], etq:"Precio unitario"},
-      {ej:{etq:"🫒 Ejemplo", enun:"Aceite: botella de 1 L a 9,20 € o garrafa de 5 L a 43 €. ¿Qué sale más barato?",
-        pasos:["Botella: 9,20 €/L", R`Garrafa: $43 : 5 = 8,60$ €/L`, "La garrafa: ahorras 0,60 € en cada litro."], res:"La garrafa"}},
-      {nota:["Consumo responsable: lo más barato por litro no siempre es lo mejor si se va a estropear o no lo necesitas."]}
-    ]},
-
-    { titulo:"🏷 ¿Cuánto descuento es de verdad una oferta?", cuerpo:[
-      {p:"Para comparar ofertas, calcula <b>qué porcentaje pagas</b> de lo que te llevas."},
+    { titulo:"Capital final y préstamos", cuerpo:[
       {cols:[
-        [{ej:{etq:"3x2", enun:"Te llevas 3 y pagas 2.", pasos:[R`Pagas $\dfrac{2}{3} = 0,667 = 66,7\,\%$`], res:"Descuento del 33,3 %"}}],
-        [{ej:{etq:"2.ª unidad al 50 %", enun:"Compras 2 y la segunda va a mitad de precio.", pasos:[R`Pagas $1 + 0,5 = 1,5$ de 2 → $1,5 : 2 = 0,75$`], res:"Descuento del 25 % (¡no del 50 %!)"}}]
-      ]}
+        [{ej:{etq:"💰 Ahorro", enun:"Deposito 4000 € al 3 % durante 2 años. ¿Cuánto tengo al final?",
+          pasos:[R`$I = 4000 \cdot 0,03 \cdot 2 = 240$ €`, R`Capital final $= 4000 + 240$`], res:"4240 €"}}],
+        [{ej:{etq:"💳 Préstamo", enun:"Pido 1200 € prestados al 8 % y los devuelvo a los 6 meses. ¿Cuánto devuelvo?",
+          pasos:[R`$I = \dfrac{1200 \cdot 0,08 \cdot 6}{12} = 48$ €`, R`Devuelvo $1200 + 48$`], res:"1248 €"}}]
+      ]},
+      {nota:["Cuando <b>ahorras</b>, el banco te paga intereses. Cuando <b>pides un préstamo</b>, los intereses los pagas tú."]}
     ]},
 
     { titulo:"🪄 Trucos para ir más rápido", cuerpo:[
-      {truco:["<b>Porcentajes de cabeza:</b> 50 % → la mitad · 25 % → la cuarta parte · 10 % → quita un cero · 5 % → la mitad del 10 % · 1 % → divide entre 100."], etq:"🪄 Truco 1"},
-      {truco:["<b>«Te descuentan el 30 %» = «pagas el 70 %».</b> Piensa siempre en lo que pagas: ese es el índice."], etq:"🪄 Truco 2"},
-      {truco:[R`<b>El 15 % de propina, de cabeza:</b> el 10 % de 40 € son 4 €, la mitad son 2 € → $4 + 2 = 6$ €.`], etq:"🪄 Truco 3"}
+      {truco:[R`<b>El 1 % de cabeza:</b> el 1 % de 9000 € es 90 € (quita dos ceros). El 1,5 % es la mitad más: $90 + 45 = 135$ €.`], etq:"🪄 Truco 1"},
+      {truco:[R`<b>Meses a años:</b> 6 meses = 0,5 años · 3 meses = 0,25 años · 18 meses = 1,5 años. Así puedes usar siempre $I = c \cdot r \cdot t$.`], etq:"🪄 Truco 2"},
+      {truco:[R`<b>Capital final de golpe:</b> al 3 % durante 4 años ganas el 12 %, así que tienes el 112 %: multiplica por <b>1,12</b>.`], etq:"🪄 Truco 3"}
     ]},
 
     { titulo:"⚠️ Errores típicos", cuerpo:[
-      {aviso:["<b>Escribir 5 % como 0,5</b> (es 0,05)."], etq:"⚠️ Error 1"},
-      {aviso:["<b>Para volver atrás, restar el porcentaje</b> al precio final: hay que <b>dividir</b> entre el índice."], etq:"⚠️ Error 2"},
-      {aviso:["<b>Sumar los porcentajes encadenados</b> (10 % y 25 % no es 15 %): se multiplican los índices."], etq:"⚠️ Error 3"},
-      {aviso:["<b>En la variación, dividir al revés</b> (antes : ahora). Es FINAL : INICIAL."], etq:"⚠️ Error 4"}
+      {aviso:["<b>Poner el rédito en % (3) en lugar de en decimal (0,03).</b>"], etq:"⚠️ Error 1"},
+      {aviso:["<b>No dividir entre 12 o entre 360</b> cuando el tiempo está en meses o en días."], etq:"⚠️ Error 2"},
+      {aviso:["<b>Confundir el interés</b> (lo que ganas) <b>con el capital final</b> (lo que tienes al final)."], etq:"⚠️ Error 3"}
     ]},
 
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[{cols:[
-        ["🔺 <b>Triángulo:</b> PARTE = TOTAL × decimal · TOTAL = PARTE : decimal · decimal = PARTE : TOTAL",
-         "📈📉 <b>Índice</b> = 100 % ± el %"],
-        ["➡ FINAL = INICIAL × índice · ⬅ INICIAL = FINAL : índice",
-         "🔍 Variación: FINAL : INICIAL",
-         "⛓ Encadenados: se multiplican los índices (los % no se suman)"]
+        [R`$I = c \cdot r \cdot t$ &nbsp;(r en decimal, t en años)`,
+         R`Meses: $\dfrac{c \cdot r \cdot t}{12}$ &nbsp;·&nbsp; Días: $\dfrac{c \cdot r \cdot t}{360}$`,
+         "Capital final = capital + interés"],
+        [{html:tri("","☝ Tapa lo que buscas")}]
       ]}]},
       {estudio:[
-        {comp:{q:"Calcula el 15 % de 320.", sol:48, explic:R`$320 \cdot 0,15 = 48$`, pista:"PARTE = TOTAL × DECIMAL; 15 % = 0,15."}},
-        {comp:{q:"12 alumnos son el 40 % de una clase. ¿Cuántos alumnos hay?", sol:30, unidad:"alumnos", explic:R`$12 : 0,40 = 30$`, pista:"Busco el TOTAL: PARTE : DECIMAL."}},
-        {comp:{q:"El índice de una rebaja del 30 % es…", opciones:["0,30","0,70","1,30"], ok:1, explic:"Pagas el 100 % − 30 % = 70 % → 0,70.", pista:"¿Qué porcentaje pagas?"}},
-        {comp:{q:"Tras una rebaja del 25 % pagas 30 €. ¿Cuánto costaba?", sol:40, unidad:"€", explic:R`$30 : 0,75 = 40$ €`, pista:"Hacia atrás: divide entre el índice 0,75."}}
+        {comp:{q:"¿Qué interés dan 2000 € al 3 % durante 2 años?", sol:120, unidad:"€",
+          explic:R`$2000 \cdot 0,03 \cdot 2 = 120$ €`, pista:"Rédito en decimal: 3 % = 0,03."}},
+        {comp:{q:"¿Qué interés dan 1200 € al 5 % durante 6 meses?", sol:30, unidad:"€",
+          explic:R`$\dfrac{1200 \cdot 0,05 \cdot 6}{12} = 30$ €`, pista:"El tiempo está en meses: divide entre 12."}},
+        {comp:{q:"Un 4,5 % escrito en decimal es…", opciones:["0,45","0,045","4,5"], ok:1,
+          explic:"Divido entre 100: la coma se mueve dos lugares a la izquierda → 0,045.", pista:"Divide entre 100."}}
       ]}
     ]}
   ]
