@@ -408,3 +408,7 @@ body.estudio .wrap{padding-bottom:110px}
 /* la profe habla: un aro que late mientras hay algo que decir (el bocadillo solo si se pincha) */
 .asis.habla{box-shadow:0 0 0 0 rgba(251,191,36,.7),0 8px 24px rgba(30,27,58,.28);animation:aro 1.6s ease-out 2}
 @keyframes aro{0%{box-shadow:0 0 0 0 rgba(251,191,36,.75),0 8px 24px rgba(30,27,58,.28)}100%{box-shadow:0 0 0 18px rgba(251,191,36,0),0 8px 24px rgba(30,27,58,.28)}}
+/* una fórmula nunca se parte en dos filas; si no cabe, se corta en ⇒ y sigue debajo */
+.pasos li>span .katex,.res .katex,.enun .katex,.enun-act .katex{white-space:nowrap}
+.pasos li>span .katex .katex-html,.res .katex .katex-html{white-space:nowrap}
+.entonces{display:inline-block;margin:.15em .2em 0 1.2em;font-family:"Caveat",cursive;font-weight:700}

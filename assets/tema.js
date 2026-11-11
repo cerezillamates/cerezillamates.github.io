@@ -102,8 +102,17 @@ function guiaAuto(t){
   return "";
 }
 const pG = p => (p && typeof p==="object" && p.g!==undefined) ? p.g : guiaAuto(pT(p));
+// Una fórmula no se parte nunca en dos filas: las cadenas «… ⇒ … ⇒ …» se escriben una debajo de otra, empezando por ⇒.
+function cortarFlechas(t){
+  return String(t==null?"":t).replace(/\$([^$]+?)\$/g, (m, f)=>{
+    const trozos = f.split(/(?:\s|\\[;,!]|\\q?quad)*\\Rightarrow(?:\s|\\[;,!]|\\q?quad)*/);
+    if(trozos.length < 2) return m;
+    return trozos.map((x,k)=> (k ? '<br><span class="entonces">⇒</span> ' : '') + '$' + x.trim() + '$').join("");
+  });
+}
+TEMA.cortarFlechas = cortarFlechas;
 function pasosHTML(pasos, ocultar){
-  return (pasos||[]).map(p=>{ const g = pG(p); return `<li class="paso${ocultar?" oculto":""}"${g?` data-g="${esc(g)}"`:""}><span>${tx(pT(p))}</span></li>`; }).join("");
+  return (pasos||[]).map(p=>{ const g = pG(p); return `<li class="paso${ocultar?" oculto":""}"${g?` data-g="${esc(g)}"`:""}><span>${tx(cortarFlechas(pT(p)))}</span></li>`; }).join("");
 }
 TEMA.pasosHTML = pasosHTML;
 // Enunciado: datos en azul, datos de la pregunta en verde y la pregunta subrayada (se ve al pulsar el primer paso)
@@ -313,7 +322,7 @@ const MODO = ["proyectar","estudiar","clase","casa"].includes(qs.get("modo")) ? 
 TEMA.registrar = function(ap){ TEMA.ap = ap; arrancar(); };
 function cargar(){
   const s = document.createElement("script");
-  s.src = `contenido/ap${AP}.js`;
+  s.src = `contenido/ap${AP}.js?v=${(document.querySelector('script[src*="tema.js"]')||{src:""}).src.split("v=")[1]||""}`;
   s.onerror = ()=>{ document.body.innerHTML = `<div class="wrap"><p>Este apartado todavía no está disponible.</p><p><a href="./">← Volver al tema</a></p></div>`; };
   document.head.appendChild(s);
 }
