@@ -43,7 +43,7 @@ SECC.forEach((s,i)=>{
       <span class="n">${a.num}</span><div><h3>${a.titulo}</h3><p>${a.desc}</p></div>
       <div class="acts">${a.listo ? fn(a) : `<span class="prox-tag">En preparación</span>`}</div></div>`).join("") + `</div>`;
   if(s.id==="apuntes"){
-    h = `<p class="guia">Cada apartado es una sesión: <b>📘 explicación</b> → <b>✏️ ejercicios de clase</b> → <b>🏠 tareas para casa</b>.</p>` + lista(a=>
+    h = `` + lista(a=>
       `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Explicación</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a>`);
   } else if(s.id==="videos"){
     h = `<p class="guia">${s.d}</p><div class="aps" id="lista-videos"><p style="color:var(--muted)">Cargando los vídeos…</p></div>`;
