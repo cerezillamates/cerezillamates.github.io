@@ -1,6 +1,6 @@
 /* 2.º ESO · Tema 3 · Apartado 6: Porcentajes
    Decisión de la profesora (11-nov-2026): igual que en 3.º, TODO con la fórmula C_F = C_I · I_V
-   (el % en decimal). Despejando: C_I = C_F : I_V, I_V = C_F : C_I. El triángulo solo como TRUCO.
+   (el % en decimal). Siempre se escribe la fórmula, se pone x en lo que se busca y se despeja (13-nov-2026). El triángulo solo como TRUCO.
    Problemas de sus exámenes: hotel (italianos, franceses…), rotuladores, globos, portugueses y alemanes. */
 (function(){
 const R = String.raw;
@@ -35,7 +35,7 @@ TEMA.registrar({
       res:"Han aprobado todo <b>9 alumnos</b>." },
     { nivel:"Práctica", min:6,
       enun:"En un hotel hay 325 personas: 39 italianas, 117 francesas, 78 alemanas y el resto rusas. ¿Qué porcentaje representa cada grupo?",
-      pasos:["Busco el porcentaje: $I_V = C_F : C_I$, con $C_I = 325$.",
+      pasos:[R`Busco el porcentaje: $C_F = C_I \cdot I_V$ → parte $= 325 \cdot x \;\Rightarrow\; x = \dfrac{\text{parte}}{325}$`,
              R`Italianas: $39 : 325 = 0,12$ → $12\,\%$. Francesas: $117 : 325 = 0,36$ → $36\,\%$`,
              R`Alemanas: $78 : 325 = 0,24$ → $24\,\%$`,
              R`Rusas: $325 - 234 = 91$ → $91 : 325 = 0,28$ → $28\,\%$ (y $12 + 36 + 24 + 28 = 100$ ✓)`],
@@ -47,11 +47,11 @@ TEMA.registrar({
       res:"Hay un <b>35 %</b> de globos rojos, un <b>25 %</b> azules, un <b>15 %</b> verdes y un <b>25 %</b> amarillos." },
     { nivel:"Problema", min:5,
       enun:"En una encuesta del instituto, 54 alumnos, que son el 45 % de los encuestados, prefieren el baloncesto. ¿Cuántos alumnos respondieron la encuesta?",
-      pasos:["Ahora busco el <b>total</b>, la cantidad inicial.", R`$C_F = 54$, $I_V = 0,45$`, R`$C_I = C_F : I_V = 54 : 0,45 = 120$`, R`Comprueba: $120 \cdot 0,45 = 54$ ✓`],
+      pasos:["Ahora busco el <b>total</b>, la cantidad inicial.", R`$C_F = C_I \cdot I_V$ → $54 = x \cdot 0,45 \;\Rightarrow\; x = \dfrac{54}{0,45} = 120$`, R`Comprueba: $120 \cdot 0,45 = 54$ ✓`],
       res:"Respondieron la encuesta <b>120 alumnos</b>." },
     { nivel:"Reto", min:6,
       enun:"<b>a)</b> «Tres de cada siete alumnos se dan cuenta de que dos ejercicios del examen están resueltos en el libro». Exprésalo en porcentaje.<br><b>b)</b> En un pueblo, el 60 % son adultos y, de ellos, el 25 % está jubilado. ¿Qué porcentaje del pueblo está jubilado?",
-      pasos:[R`<b>a)</b> $I_V = 3 : 7 = 0,4285\ldots$ → $\approx 42,86\,\%$`, R`<b>b)</b> El 25 % del 60 %: $0,60 \cdot 0,25 = 0,15$ → $15\,\%$`, "Con 100 personas: 60 adultos y 15 jubilados → 15 de cada 100."],
+      pasos:[R`<b>a)</b> $3 = 7 \cdot x \;\Rightarrow\; x = \dfrac{3}{7} = 0,4285\ldots$ → $\approx 42,86\,\%$`, R`<b>b)</b> El 25 % del 60 %: $0,60 \cdot 0,25 = 0,15$ → $15\,\%$`, "Con 100 personas: 60 adultos y 15 jubilados → 15 de cada 100."],
       res:"a) Se dan cuenta aproximadamente el <b>42,86 %</b> de los alumnos.<br>b) Está jubilado el <b>15 %</b> del pueblo." }
   ],
 
@@ -65,9 +65,9 @@ TEMA.registrar({
     { nivel:"Consolidación", enun:"En un hotel hay 120 personas: 24 portuguesas, 36 alemanas y el resto españolas. Calcula el porcentaje de cada nacionalidad.",
       pasos:[R`Portuguesas: $24 : 120 = 0,20$. Alemanas: $36 : 120 = 0,30$`, "Españolas: 100 − 20 − 30 = 50 %"], res:"Hay un <b>20 %</b> de portugueses, un <b>30 %</b> de alemanes y un <b>50 %</b> de españoles." },
     { nivel:"Consolidación", enun:"En un centro de 680 alumnos han aprobado matemáticas 476. ¿Qué porcentaje ha aprobado?",
-      pasos:[R`$I_V = C_F : C_I = 476 : 680 = 0,70$`], res:"Ha aprobado el <b>70 %</b> de los alumnos." },
+      pasos:[R`$C_F = C_I \cdot I_V$ → $476 = 680 \cdot x \;\Rightarrow\; x = \dfrac{476}{680} = 0,70$`], res:"Ha aprobado el <b>70 %</b> de los alumnos." },
     { nivel:"Problema", enun:"18 alumnos de 2.º, que son el 60 % del curso, van a la excursión. ¿Cuántos alumnos hay en 2.º?",
-      pasos:[R`$C_F = 18$, $I_V = 0,60$`, R`$C_I = C_F : I_V = 18 : 0,60 = 30$`], res:"En 2.º hay <b>30 alumnos</b>." },
+      pasos:[R`$C_F = C_I \cdot I_V$ → $18 = x \cdot 0,60 \;\Rightarrow\; x = \dfrac{18}{0,60} = 30$`], res:"En 2.º hay <b>30 alumnos</b>." },
     { nivel:"Para pensar", enun:"¿Es lo mismo el 20 % de 50 que el 50 % de 20? ¿Por qué? Usa la idea para calcular de cabeza el 8 % de 25.",
       pasos:[R`$50 \cdot 0,20 = 10$ y $20 \cdot 0,50 = 10$: se multiplican los mismos números.`, R`$8\,\%$ de $25 = 25\,\%$ de $8 = 8 : 4 = 2$`], res:"<b>Sí</b> es lo mismo, y el 8 % de 25 es <b>2</b>." }
   ],
@@ -109,7 +109,7 @@ TEMA.registrar({
 
     { titulo:"¿Qué porcentaje es?", cuerpo:[
       {ej:{etq:"🏨 Problema de examen", enun:"En un hotel hay 120 personas y 24 son portuguesas. ¿Qué porcentaje son?",
-        pasos:[R`$C_I = 120$, $C_F = 24$`, R`$I_V = C_F : C_I = 24 : 120 = 0,20$`, "0,20 → 20 %"],
+        pasos:[R`$C_I = 120$, $C_F = 24$ y la $x$ es el porcentaje`, R`$C_F = C_I \cdot I_V$ → $24 = 120 \cdot x \;\Rightarrow\; x = \dfrac{24}{120} = 0,20$`, "0,20 → 20 %"],
         res:"El <b>20 %</b> son portuguesas."}},
       {aviso:["No te quedes en 0,20: el resultado se da en <b>porcentaje</b> (20 %)."]}
     ]},
@@ -124,12 +124,13 @@ TEMA.registrar({
 
     { titulo:"Calcular el total", cuerpo:[
       {ej:{enun:"9 alumnos de mi clase vienen en bici, que son el 30 % de la clase. ¿Cuántos alumnos somos?",
-        pasos:[R`$C_F = 9$, $I_V = 0,30$`, R`$C_I = C_F : I_V = 9 : 0,30 = 30$`, R`Comprueba: $30 \cdot 0,30 = 9$ ✓`],
+        pasos:[R`$C_F = 9$, $I_V = 0,30$ y la $x$ es el total`, R`$C_F = C_I \cdot I_V$ → $9 = x \cdot 0,30 \;\Rightarrow\; x = \dfrac{9}{0,30} = 30$`, R`Comprueba: $30 \cdot 0,30 = 9$ ✓`],
         res:"En la clase somos <b>30 alumnos</b>."}}
     ]},
 
-    { titulo:"Despejar: busco $C_I$ o $I_V$", cuerpo:[
-      {html:R`<div class="cfiv desp"><div>¿Busco $C_F$? <b>$C_F = C_I \cdot I_V$</b></div><div>¿Busco $C_I$? <b>$C_I = C_F : I_V$</b></div><div>¿Busco $I_V$? <b>$I_V = C_F : C_I$</b></div></div>`},
+    { titulo:"Lo que busco es la $x$", cuerpo:[
+      {html:R`<div class="cfiv desp"><div>Siempre la misma fórmula: <b>$C_F = C_I \cdot I_V$</b></div><div>Pongo una <b>$x$</b> en lo que busco</div><div>y <b>despejo</b> la $x$</div></div>`},
+      {ej:{enun:"El 30 % de una cantidad es 12. ¿Cuál es la cantidad?", pasos:[R`La $x$ es la cantidad inicial: $C_F = C_I \cdot I_V$`, R`$12 = x \cdot 0,30 \;\Rightarrow\; x = \dfrac{12}{0,30} = 40$`], res:"La cantidad es <b>40</b>."}},
       {truco:[{html:tri("")}, "Tapa con el dedo lo que buscas: lo que queda al lado se multiplica, lo que queda arriba y abajo se divide."], etq:"🪄 Truco: el triángulo"}
     ]},
 
@@ -155,13 +156,13 @@ TEMA.registrar({
       {resumen:[{lista:[
         "$r\\,\\%$ = $r$ de cada 100 → en decimal, divido entre 100.",
         "La fórmula: $C_F = C_I \\cdot I_V$.",
-        "¿Qué % es? $I_V = C_F : C_I$. ¿El total? $C_I = C_F : I_V$.",
+        "Siempre $C_F = C_I \\cdot I_V$: pongo una $x$ en lo que busco y despejo.",
         "De cabeza: 50 % mitad, 25 % cuarta parte, 10 % entre 10."
       ]}]},
       {estudio:[
         {comp:{q:"¿Cuánto es el 40 % de 65?", sol:26, explic:"C_F = 65 · 0,40 = 26", pista:"Escribe el 40 % en decimal (0,40) y multiplica."}},
-        {comp:{q:"En un grupo de 80 personas, 12 son zurdas. ¿Qué porcentaje?", sol:15, unidad:"%", explic:"I_V = 12 : 80 = 0,15 → 15 %", pista:"I_V = C_F : C_I"}},
-        {comp:{q:"El 25 % de una cantidad es 14. ¿Cuál es la cantidad?", sol:56, explic:"C_I = 14 : 0,25 = 56", pista:"C_I = C_F : I_V"}}
+        {comp:{q:"En un grupo de 80 personas, 12 son zurdas. ¿Qué porcentaje?", sol:15, unidad:"%", explic:"12 = 80 · x → x = 12 : 80 = 0,15 → 15 %", pista:"C_F = C_I · I_V: pon x en lo que buscas."}},
+        {comp:{q:"El 25 % de una cantidad es 14. ¿Cuál es la cantidad?", sol:56, explic:"14 = x · 0,25 → x = 14 : 0,25 = 56", pista:"C_F = C_I · I_V: pon x en lo que buscas."}}
       ]}
     ]}
   ]

@@ -66,7 +66,7 @@ TEMA.registrar({
         [{html:etiqueta}],
         [{nota:["25 g de azúcar <b>de cada 100 g</b> es lo mismo que <b>un 25 % de azúcar</b>. ¡Ya es un porcentaje!"], etq:"① «por 100 g» es un %"},
          {nota:[R`Lo que te comes de una vez. Azúcar que tomas: $C_F = C_I \cdot I_V = 30 \cdot 0,25 = 7,5$ g`], etq:"② La ración"},
-         {nota:[R`Qué parte del azúcar de <b>todo el día</b> (90 g) te comes: $I_V = 7,5 : 90 \approx 0,083$ → 8 %`], etq:"③ % del día"}]
+         {nota:[R`Qué parte del azúcar de <b>todo el día</b> (90 g) te comes: $7,5 = 90 \cdot x \;\Rightarrow\; x = \dfrac{7,5}{90} \approx 0,083$ → 8 %`], etq:"③ % del día"}]
       ]}
     ]},
 
@@ -115,7 +115,7 @@ TEMA.registrar({
           <div class="mision"><b>🍫 Crema de cacao</b>: 56 g de azúcares por 100 g y la ración es de 15 g. ¿Qué % del azúcar del día tomas en una ración?
             <details><summary>Comprobad</summary>$15 \cdot 0,56 = 8,4$ g → $8,4 : 90 \approx 0,093$ → 9,3 %.</details></div>
           <div class="mision"><b>🍟 Patatas fritas</b>: una bolsa de 40 g tiene 0,56 g de sal. ¿Qué % de sal tienen? ¿Qué color?
-            <details><summary>Comprobad</summary>$I_V = 0,56 : 40 = 0,014$ → 1,4 % → 🟡 (muy cerca del rojo).</details></div>
+            <details><summary>Comprobad</summary>$0,56 = 40 \cdot x \;\Rightarrow\; x = 0,56 : 40 = 0,014$ → 1,4 % → 🟡 (muy cerca del rojo).</details></div>
         </div></div>
 
         <div class="mision"><h4>🕵️ Misión 1: los datos (sesión 2)</h4><ul class="check">

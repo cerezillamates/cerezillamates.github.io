@@ -98,8 +98,8 @@ TEMA.registrar({
              R`$\dfrac{80}{220} \cdot \dfrac{30}{24} = \dfrac{10}{x} \;\Rightarrow\; \dfrac{2400}{5280} = \dfrac{10}{x} \;\Rightarrow\; x = \dfrac{10 \cdot 5280}{2400} = 22$`],
       res:"Harán falta <b>22 obreros</b>." },
     { nivel:"Consolidación",
-      enun:"En una fábrica de bicicletas, 9 máquinas trabajando 6 horas al día tardan 8 días en terminar un pedido. ¿Cuántos días tardarán 12 máquinas trabajando 9 horas al día?",
-      pasos:["Máquinas → Días: <b>I</b>. Horas al día → Días: <b>I</b>. Les damos la vuelta a las dos.",
+      enun:"En una fábrica de bicicletas, 9 máquinas trabajando 6 horas al día tardan 8 días en terminar un pedido. Compran 3 máquinas más y trabajan un 50 % más de horas cada día. ¿Cuántos días tardarán?",
+      pasos:[R`Datos nuevos: $9 + 3 = 12$ máquinas y $6 \cdot 1,50 = 9$ horas al día`, "Máquinas → Días: <b>I</b>. Horas al día → Días: <b>I</b>. Les damos la vuelta a las dos.",
              R`$\dfrac{12}{9} \cdot \dfrac{9}{6} = \dfrac{8}{x} \;\Rightarrow\; \dfrac{108}{54} = \dfrac{8}{x} \;\Rightarrow\; x = \dfrac{8 \cdot 54}{108} = 4$`],
       res:"12 máquinas tardarán <b>4 días</b> en terminar el pedido." },
     { nivel:"Problema",
@@ -117,14 +117,14 @@ TEMA.registrar({
              "¿Por qué sale lo mismo? Hay 1,5 veces más personas, pero también 1,5 veces más dinero."],
       res:"El dinero les llega para <b>15 días</b>." },
     { nivel:"Para pensar",
-      enun:"En una imprenta, 5 máquinas, trabajando 8 horas al día, imprimen 20 000 libros en 6 días. ¿Cuántas máquinas hacen falta para imprimir 30 000 libros en 5 días trabajando 9 horas al día?",
-      pasos:["Cuatro magnitudes. La <i>x</i> está en las máquinas.",
+      enun:"En una imprenta, 5 máquinas, trabajando 8 horas al día, imprimen 20 000 libros en 6 días. El siguiente pedido es un 50 % mayor, hay un día menos de plazo y se trabaja 1 hora más al día. ¿Cuántas máquinas hacen falta?",
+      pasos:[R`Datos nuevos: $20\,000 \cdot 1,50 = 30\,000$ libros, $6 - 1 = 5$ días y $8 + 1 = 9$ horas al día`, "Cuatro magnitudes. La <i>x</i> está en las máquinas.",
              "A las <b>I</b> les damos la vuelta. Libros → Máquinas: <b>D</b> → $\\dfrac{20\\,000}{30\\,000}$. Días → Máquinas: <b>I</b> → $\\dfrac{5}{6}$. Horas/día → Máquinas: <b>I</b> → $\\dfrac{9}{8}$.".replace(/\\\\/g,"\\"),
              R`$\dfrac{2}{3} \cdot \dfrac{5}{6} \cdot \dfrac{9}{8} = \dfrac{5}{x} \;\Rightarrow\; \dfrac{90}{144} = \dfrac{5}{x} \;\Rightarrow\; x = \dfrac{5 \cdot 144}{90} = 8$`],
       res:"Hacen falta <b>8 máquinas</b>." },
     { nivel:"Problema",
-      enun:"En el comedor del instituto, 120 alumnos gastan 900 litros de leche en 30 días. Quedan 600 litros y el próximo mes comerán 150 alumnos durante 20 días. ¿Habrá leche suficiente?",
-      pasos:[cuadro(["Alumnos","Días","Leche (L)"],["120","30","900"],["150","20","x"],["D","D"]),
+      enun:"En el comedor del instituto, 120 alumnos gastan 900 litros de leche en 30 días. Quedan 600 litros. El próximo mes se apunta un 25 % más de alumnos, pero hay 10 días menos de comedor. ¿Habrá leche suficiente?",
+      pasos:[R`Datos nuevos: $120 \cdot 1,25 = 150$ alumnos y $30 - 10 = 20$ días`, cuadro(["Alumnos","Días","Leche (L)"],["120","30","900"],["150","20","x"],["D","D"]),
              R`Más alumnos → más leche: <b>D</b>. Menos días → menos leche: <b>D</b>.`,
              R`$\dfrac{120}{150} \cdot \dfrac{30}{20} = \dfrac{900}{x} \;\Rightarrow\; \dfrac{3600}{3000} = \dfrac{900}{x} \;\Rightarrow\; x = \dfrac{900 \cdot 3000}{3600} = 750$ L`,
              "Hacen falta 750 L y solo hay 600 L: faltan 750 − 600 = 150 L."],
@@ -179,8 +179,8 @@ TEMA.registrar({
     ]},
 
     { titulo:"Ejemplo 3: inversa e inversa", cuerpo:[
-      {ej:{enun:"10 obreros, trabajando 8 horas al día, tardan 12 días en hacer una obra. ¿Cuántos días tardarán 12 obreros trabajando 10 horas al día?",
-        pasos:[cuadro(["Obreros","Horas/día","Días"],["10","8","12"],["12","10","x"],["I","I"]),
+      {ej:{enun:"10 obreros, trabajando 8 horas al día, tardan 12 días en hacer una obra. Si se incorporan 2 obreros más y todos trabajan 2 horas más cada día, ¿cuántos días tardarán?",
+        pasos:["Lo primero, los datos nuevos: 10 + 2 = 12 obreros y 8 + 2 = 10 horas al día.", cuadro(["Obreros","Horas/día","Días"],["10","8","12"],["12","10","x"],["I","I"]),
                "Doble de obreros → mitad de días: <b>I</b>. Doble de horas al día → mitad de días: <b>I</b>.",
                R`$\dfrac{12}{10} \cdot \dfrac{10}{8} = \dfrac{12}{x} \;\Rightarrow\; \dfrac{120}{80} = \dfrac{12}{x} \;\Rightarrow\; x = \dfrac{12 \cdot 80}{120} = 8$`,
                "Comprueba: más obreros y más horas al día → menos de 12 días ✓"],
@@ -188,8 +188,8 @@ TEMA.registrar({
     ]},
 
     { titulo:"Con cuatro magnitudes", cuerpo:[
-      {ej:{etq:"✍️ Problema resuelto", enun:"8 obreros, trabajando 6 horas al día, construyen 120 m de valla en 5 días. ¿Cuántos días tardarán 10 obreros, trabajando 8 horas al día, en construir 240 m?",
-        pasos:[cuadro(["Obreros","Horas/día","Metros","Días"],["8","6","120","5"],["10","8","240","x"],["I","I","D"]),
+      {ej:{etq:"✍️ Problema resuelto", enun:"8 obreros, trabajando 6 horas al día, construyen 120 m de valla en 5 días. Para otra valla el doble de larga contratan a 2 obreros más y todos trabajan 2 horas más al día. ¿Cuántos días tardarán?",
+        pasos:["Lo primero, los datos nuevos: 8 + 2 = 10 obreros, 6 + 2 = 8 horas al día y 120 · 2 = 240 m.", cuadro(["Obreros","Horas/día","Metros","Días"],["8","6","120","5"],["10","8","240","x"],["I","I","D"]),
                R`A las <b>I</b> les damos la vuelta. Obreros: <b>I</b> → $\dfrac{10}{8}$. Horas al día: <b>I</b> → $\dfrac{8}{6}$. Metros: <b>D</b> → $\dfrac{120}{240}$`,
                R`$\dfrac{10}{8} \cdot \dfrac{8}{6} \cdot \dfrac{120}{240} = \dfrac{5}{x} \;\Rightarrow\; \dfrac{9600}{11\,520} = \dfrac{5}{x}$`,
                R`$x = \dfrac{5 \cdot 11\,520}{9600} = 6$`],
@@ -198,8 +198,8 @@ TEMA.registrar({
 
     { titulo:"Cuando la x no está en los días", cuerpo:[
       {p:"La columna de la <i>x</i> siempre va a la derecha, sea cual sea la magnitud."},
-      {ej:{enun:"10 obreros asfaltan 80 km en 24 días. ¿Cuántos obreros harán falta para asfaltar 220 km en 30 días?",
-        pasos:[cuadro(["Km","Días","Obreros"],["80","24","10"],["220","30","x"],["D","I"]),
+      {ej:{enun:"10 obreros asfaltan 80 km en 24 días. Ahora hay que asfaltar 140 km más y dan 6 días más de plazo. ¿Cuántos obreros harán falta?",
+        pasos:["Lo primero, los datos nuevos: 80 + 140 = 220 km y 24 + 6 = 30 días.", cuadro(["Km","Días","Obreros"],["80","24","10"],["220","30","x"],["D","I"]),
                R`Km → Obreros: más km, más obreros: <b>D</b> → $\dfrac{80}{220}$. Días → Obreros: más días, menos obreros: <b>I</b> → $\dfrac{30}{24}$`,
                R`$\dfrac{80}{220} \cdot \dfrac{30}{24} = \dfrac{10}{x} \;\Rightarrow\; \dfrac{2400}{5280} = \dfrac{10}{x} \;\Rightarrow\; x = 22$`],
         res:"Harán falta <b>22 obreros</b>."}}

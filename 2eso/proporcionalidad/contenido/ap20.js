@@ -45,11 +45,11 @@ TEMA.registrar({
       res:"A los nietos les tocan <b>120 €</b>, <b>90 €</b> y <b>60 €</b>." },
     { nivel:"Problema", min:5,
       enun:"En 2.º hay 75 alumnos y 30 hacen deporte en un club. <b>a)</b> ¿Qué porcentaje hace deporte en un club? <b>b)</b> El 60 % de los que hacen deporte juega al fútbol. ¿Cuántos son?",
-      pasos:[R`<b>a)</b> $I_V = 30 : 75 = 0,40$ → $40\,\%$`, R`<b>b)</b> $C_F = 30 \cdot 0,60 = 18$`],
+      pasos:[R`<b>a)</b> $C_F = C_I \cdot I_V$ → $30 = 75 \cdot x \;\Rightarrow\; x = \dfrac{30}{75} = 0,40$ → $40\,\%$`, R`<b>b)</b> $C_F = 30 \cdot 0,60 = 18$`],
       res:"a) Hace deporte en un club el <b>40 %</b>.<br>b) Juegan al fútbol <b>18 alumnos</b>." },
     { nivel:"Problema", min:6,
       enun:"En agosto un artículo costaba 125 € y en diciembre costaba un 40 % más. Al verano siguiente lo compré por 210 €. ¿El segundo cambio fue una subida o una bajada? ¿De qué porcentaje?",
-      pasos:[R`Diciembre: sube un 40 %, $125 \cdot 1,40 = 175$ €`, R`De 175 € a 210 €: $I_V = 210 : 175 = 1,20$`, "1,20 es mayor que 1: subida del 20 %"],
+      pasos:[R`Diciembre: sube un 40 %, $125 \cdot 1,40 = 175$ €`, R`De 175 € a 210 €: $C_F = C_I \cdot I_V$ → $210 = 175 \cdot x \;\Rightarrow\; x = \dfrac{210}{175} = 1,20$`, "1,20 es mayor que 1: subida del 20 %"],
       res:"El segundo cambio fue una <b>subida del 20 %</b>." },
     { nivel:"Aplicación", min:4,
       enun:"¿Qué interés producen 6000 € al 2,5 % anual durante 9 meses?",
@@ -87,16 +87,16 @@ TEMA.registrar({
       pasos:["Más horas → más dinero: <b>D</b>.", R`$\dfrac{8}{30} = \dfrac{76}{x} \Rightarrow 8 \cdot x = 30 \cdot 76 = 2280 \Rightarrow x = 285$`], res:"Por 30 horas cobrará <b>285 €</b>." },
     { nivel:"Básico", enun:"Seis pintores tardan 10 días en pintar un colegio. ¿Cuánto tardarán cuatro pintores?",
       pasos:["Menos pintores → más días: <b>I</b>.", R`Le damos la vuelta: $\dfrac{6}{4} = \dfrac{x}{10}$`, R`En cruz: $4 \cdot x = 6 \cdot 10 = 60 \Rightarrow x = 15$`], res:"Cuatro pintores tardarán <b>15 días</b>." },
-    { nivel:"Consolidación", enun:"Ocho grifos iguales llenan 2 piscinas en 9 horas. Si se cierran 2 grifos y hay que llenar 1 piscina más, ¿cuánto tardarán?",
-      pasos:["Datos nuevos: 8 − 2 = 6 grifos y 2 + 1 = 3 piscinas.", "Menos grifos → más horas: <b>I</b>, le doy la vuelta: 6/8. Más piscinas → más horas: <b>D</b>: 2/3.",
+    { nivel:"Consolidación", enun:"Ocho grifos iguales llenan 2 piscinas en 9 horas. ¿Cuánto tardarán 6 grifos en llenar 3 piscinas?",
+      pasos:["Menos grifos → más horas: <b>I</b>, le doy la vuelta: 6/8. Más piscinas → más horas: <b>D</b>: 2/3.",
              R`$\dfrac{6}{8} \cdot \dfrac{2}{3} = \dfrac{9}{x} \Rightarrow \dfrac{12}{24} = \dfrac{9}{x} \Rightarrow x = \dfrac{24 \cdot 9}{12} = 18$`], res:"Tardarán <b>18 horas</b>." },
     { nivel:"Consolidación", enun:"Reparte 1600 € de forma inversamente proporcional a 2, 5 y 10.",
       pasos:[R`Doy la vuelta: $\dfrac12,\ \dfrac15,\ \dfrac{1}{10}$ → mismo denominador: $\dfrac{5}{10},\ \dfrac{2}{10},\ \dfrac{1}{10}$`, "Reparto directo a 5, 2 y 1: 8 partes → 1600 : 8 = 200 €", "5 · 200 = 1000 €, 2 · 200 = 400 € y 1 · 200 = 200 €"],
       res:"Las partes son <b>1000 €</b>, <b>400 €</b> y <b>200 €</b>." },
     { nivel:"Consolidación", enun:"En un instituto de 840 alumnos:<br><b>a)</b> El 35 % hace deporte por las tardes. ¿Cuántos alumnos son?<br><b>b)</b> 126 alumnos vienen en autobús. ¿Qué porcentaje es?",
-      pasos:[R`<b>a)</b> $C_F = 840 \cdot 0,35 = 294$`, R`<b>b)</b> $I_V = C_F : C_I = 126 : 840 = 0,15$ → $15\,\%$`], res:"a) Hacen deporte <b>294 alumnos</b>.<br>b) Viene en autobús el <b>15 %</b>." },
+      pasos:[R`<b>a)</b> $C_F = 840 \cdot 0,35 = 294$`, R`<b>b)</b> $C_F = C_I \cdot I_V$ → $126 = 840 \cdot x \;\Rightarrow\; x = \dfrac{126}{840} = 0,15$ → $15\,\%$`], res:"a) Hacen deporte <b>294 alumnos</b>.<br>b) Viene en autobús el <b>15 %</b>." },
     { nivel:"Problema", enun:"Después de una rebaja del 15 %, unas zapatillas cuestan 68 €. ¿Cuánto costaban antes?",
-      pasos:[R`Rebaja del 15 %: $I_V = 1 - 0,15 = 0,85$`, R`$C_I = C_F : I_V = 68 : 0,85 = 80$ €`], res:"Las zapatillas costaban <b>80 €</b>." },
+      pasos:[R`Rebaja del 15 %: $I_V = 1 - 0,15 = 0,85$`, R`$C_F = C_I \cdot I_V$ → $68 = x \cdot 0,85 \;\Rightarrow\; x = \dfrac{68}{0,85} = 80$ €`], res:"Las zapatillas costaban <b>80 €</b>." },
     { nivel:"Problema", enun:"Una lavadora cuesta 350 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
       pasos:[R`Sube un 21 %: $I_V = 1 + 0,21 = 1,21$`, R`$C_F = 350 \cdot 1,21 = 423,50$ €`], res:"Con IVA, la lavadora cuesta <b>423,50 €</b>." },
     { nivel:"Problema", enun:"¿Qué interés producen 4000 € al 3 % anual durante 8 meses?",
@@ -127,8 +127,8 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">🙃 Inversa</span><p>doble → mitad: le doy la vuelta a la fracción de la $x$ y multiplico en cruz</p></div>
         <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I a la x; a las I, la vuelta; multiplico</p></div>
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
-        <div class="b-prop"><span class="etq">％ Porcentajes</span><p>el % en decimal: $C_F = C_I \\cdot I_V$ · ¿qué %? $I_V = C_F : C_I$</p></div>
-        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>$C_F = C_I \\cdot I_V$. Antes: $C_I = C_F : I_V$. Encadenados: se multiplican los índices.</p></div>
+        <div class="b-prop"><span class="etq">％ Porcentajes</span><p>el % en decimal: $C_F = C_I \\cdot I_V$. Lo que busco es la $x$ y despejo.</p></div>
+        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>$C_F = C_I \\cdot I_V$ con $I_V = 1 \\pm$ el %. Lo que busco es la $x$. Encadenados: se multiplican los índices.</p></div>
         <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12</p></div>
         <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta</p></div></div>`}
     ]},

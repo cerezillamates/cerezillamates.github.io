@@ -1,7 +1,7 @@
 /* 3.º ESO · Tema 3 · Apartado 5: Porcentajes
    Método de la profesora (11-nov-2026): TODO con una sola fórmula, C_F = C_I · I_V
    (cantidad final = cantidad inicial × índice de variación). El % se escribe en decimal;
-   sube → I_V = 1 + el %; baja → I_V = 1 − el %. Despejando: C_I = C_F : I_V, I_V = C_F : C_I.
+   sube → I_V = 1 + el %; baja → I_V = 1 − el %. Siempre se escribe la fórmula, se pone x en lo que se busca y se despeja (13-nov-2026).
    Encadenados: se multiplican los índices (los % NO se suman). El triángulo queda solo como TRUCO. */
 (function(){
 const R = String.raw;
@@ -32,24 +32,24 @@ TEMA.registrar({
   clase: [
     { nivel:"Aplicación", min:6,
       enun:"Un pantano está al 43 % de su capacidad y tiene 989 hm³ de agua.<br><b>a)</b> ¿Cuál es su capacidad total?<br><b>b)</b> Después de las lluvias está al 61 %. ¿Cuántos hm³ de agua ha ganado?",
-      pasos:[R`<b>a)</b> Busco la cantidad inicial (el 100 %): $C_F = 989$, $I_V = 0,43$`, R`$C_I = C_F : I_V = 989 : 0,43 = 2300$ hm³`,
+      pasos:[R`<b>a)</b> La $x$ es la capacidad total (el 100 %)`, R`$C_F = C_I \cdot I_V$ → $989 = x \cdot 0,43 \;\Rightarrow\; x = \dfrac{989}{0,43} = 2300$ hm³`,
              R`<b>b)</b> $C_F = 2300 \cdot 0,61 = 1403$ hm³`, R`Ha ganado $1403 - 989 = 414$ hm³`],
       res:"a) El pantano tiene una capacidad de <b>2300 hm³</b>.<br>b) Ha ganado <b>414 hm³</b> de agua." },
     { nivel:"Aplicación", min:5,
       enun:"<b>a)</b> Un cartero ha repartido el 36 % de las cartas y todavía le quedan 1184. ¿Cuántas cartas tenía?<br><b>b)</b> Una goma elástica, al estirarla, aumenta su longitud un 30 % y mide 104 cm. ¿Cuánto mide sin estirar?",
-      pasos:[R`<b>a)</b> Reparte el 36 %, así que baja: $I_V = 1 - 0,36 = 0,64$`, R`$C_I = C_F : I_V = 1184 : 0,64 = 1850$ cartas`,
-             R`<b>b)</b> Sube un 30 %: $I_V = 1 + 0,30 = 1,30$`, R`$C_I = 104 : 1,30 = 80$ cm`],
+      pasos:[R`<b>a)</b> Reparte el 36 %, así que baja: $I_V = 1 - 0,36 = 0,64$`, R`$C_F = C_I \cdot I_V$ → $1184 = x \cdot 0,64 \;\Rightarrow\; x = \dfrac{1184}{0,64} = 1850$ cartas`,
+             R`<b>b)</b> Sube un 30 %: $I_V = 1 + 0,30 = 1,30$`, R`$C_F = C_I \cdot I_V$ → $104 = x \cdot 1,30 \;\Rightarrow\; x = \dfrac{104}{1,30} = 80$ cm`],
       res:"a) El cartero tenía <b>1850 cartas</b>.<br>b) Sin estirar, la goma mide <b>80 cm</b>." },
     { nivel:"Práctica", min:6,
       enun:"<b>a)</b> En rebajas, con un 40 % de descuento, has pagado 27 € por una camiseta. ¿Cuánto costaba antes?<br><b>b)</b> Un móvil cuesta 242 € con el 21 % de IVA incluido. ¿Cuánto cuesta sin IVA?",
-      pasos:[R`Busco la cantidad inicial: $C_I = C_F : I_V$`,
-             R`<b>a)</b> $I_V = 1 - 0,40 = 0,60$ → $C_I = 27 : 0,60 = 45$ €. Comprueba: $45 \cdot 0,60 = 27$ ✓`,
-             R`<b>b)</b> $I_V = 1,21$ → $C_I = 242 : 1,21 = 200$ €`],
+      pasos:[R`Busco el precio de antes: es la $x$ de $C_F = C_I \cdot I_V$`,
+             R`<b>a)</b> $I_V = 1 - 0,40 = 0,60$ → $27 = x \cdot 0,60 \;\Rightarrow\; x = \dfrac{27}{0,60} = 45$ €. Comprueba: $45 \cdot 0,60 = 27$ ✓`,
+             R`<b>b)</b> $I_V = 1,21$ → $242 = x \cdot 1,21 \;\Rightarrow\; x = \dfrac{242}{1,21} = 200$ €`],
       res:"a) La camiseta costaba <b>45 €</b>.<br>b) El móvil cuesta <b>200 €</b> sin IVA." },
     { nivel:"Práctica", min:6,
       enun:"En un campamento de verano hay 120 participantes. En julio el número aumenta un 25 %. En agosto algunos se marchan y vuelven a quedar 120. ¿Qué porcentaje de los participantes de julio se ha marchado?",
       pasos:[R`Julio: sube un 25 %, $I_V = 1 + 0,25 = 1,25$ → $C_F = 120 \cdot 1,25 = 150$ participantes`,
-             R`Agosto: de 150 pasan a 120 → $I_V = C_F : C_I = 120 : 150 = 0,80$`,
+             R`Agosto: de 150 pasan a 120 → $120 = 150 \cdot x \;\Rightarrow\; x = \dfrac{120}{150} = 0,80$`,
              R`Se han marchado: $1 - 0,80 = 0,20$ → $20\,\%$`,
              "¡No es el 25 %! El porcentaje de agosto se calcula sobre 150, no sobre 120."],
       res:"Se ha marchado el <b>20 %</b> de los participantes de julio." },
@@ -57,7 +57,7 @@ TEMA.registrar({
       enun:"Los ingresos de una tienda suben un 20 % en octubre y un 30 % en noviembre, y bajan un 25 % en diciembre. En diciembre ingresa 14 040 €.<br><b>a)</b> ¿Cuánto ingresaba en septiembre?<br><b>b)</b> En total, ¿han subido o bajado? ¿Qué porcentaje?",
       pasos:[R`Índices: sube 20 % → $1,20$; sube 30 % → $1,30$; baja 25 % → $0,75$`,
              R`Índice total: $I_V = 1,20 \cdot 1,30 \cdot 0,75 = 1,17$`,
-             R`<b>a)</b> Hacia atrás: $C_I = 14\,040 : 1,17 = 12\,000$ €`,
+             R`<b>a)</b> Hacia atrás: $14\,040 = x \cdot 1,17 \;\Rightarrow\; x = \dfrac{14\,040}{1,17} = 12\,000$ €`,
              R`<b>b)</b> $1,17$ es mayor que 1: han <b>subido</b> un $17\,\%$`],
       res:"a) En septiembre ingresaba <b>12 000 €</b>.<br>b) En total los ingresos han <b>subido un 17 %</b>." },
     { nivel:"Reto", min:8,
@@ -76,7 +76,7 @@ TEMA.registrar({
       res:"En total el agua del pantano ha bajado un <b>32 %</b>." },
     { nivel:"Consolidación",
       enun:"Los espectadores de una serie suben un 23 % en octubre y bajan un 18 % en noviembre. En noviembre la ven 2 017 200 personas. ¿Cuántas la veían en septiembre?",
-      pasos:[R`Índices: $1,23$ y $0,82$ → índice total $1,23 \cdot 0,82 = 1,0086$`, R`Hacia atrás: $C_I = 2\,017\,200 : 1,0086 = 2\,000\,000$`],
+      pasos:[R`Índices: $1,23$ y $0,82$ → índice total $1,23 \cdot 0,82 = 1,0086$`, R`Hacia atrás: $2\,017\,200 = x \cdot 1,0086 \;\Rightarrow\; x = \dfrac{2\,017\,200}{1,0086} = 2\,000\,000$`],
       res:"En septiembre veían la serie <b>2 000 000</b> de personas." },
     { nivel:"Consolidación",
       enun:"<b>a)</b> Arreglar la bici en el taller cuesta 180 € más el 21 % de IVA. ¿Cuánto pagas?<br><b>b)</b> Un pantalón de 55 € tiene un 35 % de descuento. ¿Cuánto pagas?",
@@ -84,11 +84,11 @@ TEMA.registrar({
       res:"a) Pagas <b>217,80 €</b> por arreglar la bici.<br>b) Pagas <b>35,75 €</b> por el pantalón." },
     { nivel:"Consolidación",
       enun:"<b>a)</b> Tras subir un 12 %, el abono del gimnasio cuesta 33,60 €. ¿Cuánto costaba antes?<br><b>b)</b> Un portátil cuesta 605 € con el 21 % de IVA incluido. ¿Cuánto cuesta sin IVA?",
-      pasos:[R`<b>a)</b> $C_I = C_F : I_V = 33,60 : 1,12 = 30$ €`, R`<b>b)</b> $C_I = 605 : 1,21 = 500$ €`],
+      pasos:[R`<b>a)</b> $33,60 = x \cdot 1,12 \;\Rightarrow\; x = \dfrac{33,60}{1,12} = 30$ €`, R`<b>b)</b> $605 = x \cdot 1,21 \;\Rightarrow\; x = \dfrac{605}{1,21} = 500$ €`],
       res:"a) El abono costaba <b>30 €</b>.<br>b) El portátil cuesta <b>500 €</b> sin IVA." },
     { nivel:"Problema",
       enun:"<b>a)</b> La población de un pueblo pasa de 2500 a 2350 habitantes. ¿Qué porcentaje ha variado?<br><b>b)</b> Una cuenta de una red social pasa de 800 a 1100 seguidores. ¿Qué porcentaje ha subido?",
-      pasos:[R`<b>a)</b> $I_V = 2350 : 2500 = 0,94$ → ha bajado un $6\,\%$`, R`<b>b)</b> $I_V = 1100 : 800 = 1,375$ → ha subido un $37,5\,\%$`],
+      pasos:[R`<b>a)</b> $2350 = 2500 \cdot x \;\Rightarrow\; x = 0,94$ → baja $1 - 0,94 = 0,06$ → $6\,\%$`, R`<b>b)</b> $1100 = 800 \cdot x \;\Rightarrow\; x = 1,375$ → sube $0,375$ → $37,5\,\%$`],
       res:"a) La población ha bajado un <b>6 %</b>.<br>b) Los seguidores han subido un <b>37,5 %</b>." },
     { nivel:"Problema",
       enun:"Unos auriculares de 200 € suben un 10 % y después bajan un 25 %. ¿Cuánto cuestan al final? ¿Cuánto han variado en total?",
@@ -100,13 +100,13 @@ TEMA.registrar({
       enun:"Lucía gana un premio. Hacienda se queda el 20 % y, de lo que le queda, Lucía dona un 10 % a una ONG. Entre Hacienda y la ONG se han ido 5600 €.<br><b>a)</b> ¿Cuánto era el premio?<br><b>b)</b> ¿Cuánto dinero le queda a Lucía?",
       pasos:[R`Le queda después de las dos cosas: $I_V = 0,80 \cdot 0,90 = 0,72$`,
              R`Lo que se ha ido: $1 - 0,72 = 0,28$ del premio → $I_V = 0,28$`,
-             R`<b>a)</b> $C_I = C_F : I_V = 5600 : 0,28 = 20\,000$ €`,
+             R`<b>a)</b> $5600 = x \cdot 0,28 \;\Rightarrow\; x = \dfrac{5600}{0,28} = 20\,000$ €`,
              R`<b>b)</b> $C_F = 20\,000 \cdot 0,72 = 14\,400$ €`,
              R`Compruebo: $20\,000 - 14\,400 = 5600$ ✓`],
       res:"a) El premio era de <b>20 000 €</b>.<br>b) A Lucía le quedan <b>14 400 €</b>." },
     { nivel:"Para pensar",
       enun:"Has pagado 290,40 € por una bici eléctrica con un 20 % de rebaja y después el 21 % de IVA. ¿Cuál era el precio inicial?",
-      pasos:[R`$I_V$ total $= 0,80 \cdot 1,21 = 0,968$`, R`$C_I = C_F : I_V = 290,40 : 0,968 = 300$ €`,
+      pasos:[R`$I_V$ total $= 0,80 \cdot 1,21 = 0,968$`, R`$C_F = C_I \cdot I_V$ → $290,40 = x \cdot 0,968 \;\Rightarrow\; x = \dfrac{290,40}{0,968} = 300$ €`,
              R`Comprueba: $300 \cdot 0,80 = 240$ y $240 \cdot 1,21 = 290,40$ ✓`],
       res:"La bici costaba <b>300 €</b> al principio." },
     { nivel:"Para pensar",
@@ -141,18 +141,19 @@ TEMA.registrar({
 
     { titulo:"🚌 Busco la cantidad inicial", cuerpo:[
       {ej:{enun:"12 alumnos van en autobús y son el 40 % de la clase. ¿Cuántos alumnos hay en la clase?",
-        pasos:[R`$C_F = 12$, $I_V = 0,40$`, R`$C_I = C_F : I_V = 12 : 0,40 = 30$`], res:"En la clase hay <b>30 alumnos</b>."}},
+        pasos:[R`$C_F = 12$, $I_V = 0,40$ y la $x$ es el total`, R`$C_F = C_I \cdot I_V$ → $12 = x \cdot 0,40 \;\Rightarrow\; x = \dfrac{12}{0,40} = 30$`], res:"En la clase hay <b>30 alumnos</b>."}},
       {nota:[R`Comprueba: $30 \cdot 0,40 = 12$ ✓`]}
     ]},
 
     { titulo:"⚽ Busco el porcentaje", cuerpo:[
       {ej:{enun:"9 de los 36 alumnos juegan al fútbol. ¿Qué porcentaje es?",
-        pasos:[R`$C_I = 36$, $C_F = 9$`, R`$I_V = C_F : C_I = 9 : 36 = 0,25$`], res:"El <b>25 %</b> de los alumnos juega al fútbol."}},
+        pasos:[R`$C_I = 36$, $C_F = 9$ y la $x$ es el porcentaje`, R`$C_F = C_I \cdot I_V$ → $9 = 36 \cdot x \;\Rightarrow\; x = \dfrac{9}{36} = 0,25$`], res:"El <b>25 %</b> de los alumnos juega al fútbol."}},
       {aviso:["No te quedes en 0,25: el resultado se da en <b>porcentaje</b> (25 %)."]}
     ]},
 
-    { titulo:"Despejar: busco $C_I$ o $I_V$", cuerpo:[
-      {html:R`<div class="cfiv desp"><div>¿Busco $C_F$? <b>$C_F = C_I \cdot I_V$</b></div><div>¿Busco $C_I$? <b>$C_I = C_F : I_V$</b></div><div>¿Busco $I_V$? <b>$I_V = C_F : C_I$</b></div></div>`},
+    { titulo:"Lo que busco es la $x$", cuerpo:[
+      {html:R`<div class="cfiv desp"><div>Siempre la misma fórmula: <b>$C_F = C_I \cdot I_V$</b></div><div>Pongo una <b>$x$</b> en lo que busco</div><div>y <b>despejo</b> la $x$</div></div>`},
+      {ej:{enun:"El 30 % de una cantidad es 12. ¿Cuál es la cantidad?", pasos:[R`La $x$ es la cantidad inicial: $C_F = C_I \cdot I_V$`, R`$12 = x \cdot 0,30 \;\Rightarrow\; x = \dfrac{12}{0,30} = 40$`], res:"La cantidad es <b>40</b>."}},
       {truco:[{html:tri("")}, "Tapa con el dedo lo que buscas: lo que queda al lado se multiplica, lo que queda arriba y abajo se divide."], etq:"🪄 Truco: el triángulo"}
     ]},
     { titulo:"¿Sube o baja? El índice de variación", cuerpo:[
@@ -180,22 +181,22 @@ TEMA.registrar({
 
     { titulo:"Hacia atrás: la cantidad inicial", cuerpo:[
       {ej:{etq:"👕", enun:"En rebajas, con un 20 % de descuento, has pagado 48 € por una sudadera. ¿Cuánto costaba antes?",
-        pasos:[R`$C_F = 48$, $I_V = 0,80$`, R`$C_I = C_F : I_V = 48 : 0,80 = 60$ €`], res:"La sudadera costaba <b>60 €</b>."}},
+        pasos:[R`$C_F = C_I \cdot I_V$ → $48 = x \cdot 0,80 \;\Rightarrow\; x = \dfrac{48}{0,80} = 60$ €`], res:"La sudadera costaba <b>60 €</b>."}},
       {aviso:[R`No sumes el 20 % a 48 €: el 20 % se calculó sobre el precio de <b>antes</b>. Se divide entre $I_V$.`]}
     ]},
 
     { titulo:"Hacia atrás con el IVA", cuerpo:[
       {ej:{etq:"📱", enun:"Un móvil cuesta 363 € con el 21 % de IVA. ¿Cuánto cuesta sin IVA?",
-        pasos:[R`$C_F = 363$, $I_V = 1,21$`, R`$C_I = 363 : 1,21 = 300$ €`], res:"El móvil cuesta <b>300 €</b> sin IVA."}},
+        pasos:[R`$C_F = C_I \cdot I_V$ → $363 = x \cdot 1,21 \;\Rightarrow\; x = \dfrac{363}{1,21} = 300$ €`], res:"El móvil cuesta <b>300 €</b> sin IVA."}},
       {aviso:["Restar el 21 % a 363 € está mal: se divide entre 1,21."]}
     ]},
 
     { titulo:"¿Cuánto ha subido o bajado?", cuerpo:[
       {cols:[
         [{ej:{etq:"🎮 Sube", enun:"Un videojuego costaba 40 € y ahora cuesta 46 €.",
-          pasos:[R`$I_V = C_F : C_I = 46 : 40 = 1,15$`], res:"El videojuego ha subido un <b>15 %</b>."}}],
+          pasos:[R`$C_F = C_I \cdot I_V$ → $46 = 40 \cdot x \;\Rightarrow\; x = \dfrac{46}{40} = 1,15$`], res:"El videojuego ha subido un <b>15 %</b>."}}],
         [{ej:{etq:"🚲 Baja", enun:"Una bici de 500 € se vende por 325 €.",
-          pasos:[R`$I_V = 325 : 500 = 0,65$`], res:"La bici ha bajado un <b>35 %</b>."}}]
+          pasos:[R`$C_F = C_I \cdot I_V$ → $325 = 500 \cdot x \;\Rightarrow\; x = \dfrac{325}{500} = 0,65$`], res:"La bici ha bajado un <b>35 %</b>."}}]
       ]},
       {nota:[R`Si $I_V$ es mayor que 1, sube lo que pasa de 1 ($1,15$ → 15 %). Si es menor que 1, baja lo que le falta ($0,65$ → 35 %).`]},
       {nota:["🛒 El IPC hace esto con la cesta de la compra: si pasa de 400 € a 420 €, 420 : 400 = 1,05 → los precios han subido un 5 %."]}
@@ -213,7 +214,7 @@ TEMA.registrar({
         [{ej:{etq:"🧾 Hacia delante", enun:"Una factura de 350 € con un 20 % de descuento y después un 21 % de IVA.",
           pasos:[R`$I_V = 0,80 \cdot 1,21 = 0,968$`, R`$C_F = 350 \cdot 0,968 = 338,80$ €`], res:"Hay que pagar <b>338,80 €</b>."}}],
         [{ej:{etq:"📺 Hacia atrás", enun:"Pagamos 290,40 € con un 20 % de rebaja y un 21 % de IVA. ¿Precio inicial?",
-          pasos:[R`$I_V = 0,80 \cdot 1,21 = 0,968$`, R`$C_I = 290,40 : 0,968 = 300$ €`], res:"El precio inicial era <b>300 €</b>."}}]
+          pasos:[R`$I_V = 0,80 \cdot 1,21 = 0,968$`, R`$290,40 = x \cdot 0,968 \;\Rightarrow\; x = \dfrac{290,40}{0,968} = 300$ €`], res:"El precio inicial era <b>300 €</b>."}}]
       ]}
     ]},
 
@@ -226,8 +227,8 @@ TEMA.registrar({
 
     { titulo:"🏷 ¿Cuánto descuento es de verdad una oferta?", cuerpo:[
       {cols:[
-        [{ej:{etq:"3x2", enun:"Te llevas 3 y pagas 2.", pasos:[R`$I_V = 2 : 3 \approx 0,667$`], res:"Llevarte 3 y pagar 2 es un descuento del <b>33,3 %</b>."}}],
-        [{ej:{etq:"2.ª unidad al 50 %", enun:"Compras 2 y la segunda va a mitad de precio.", pasos:[R`$I_V = 1,5 : 2 = 0,75$`], res:"La segunda a mitad de precio es un descuento del <b>25 %</b> (¡no del 50 %!)."}}]
+        [{ej:{etq:"3x2", enun:"Te llevas 3 y pagas 2.", pasos:[R`$2 = 3 \cdot x \;\Rightarrow\; x = \dfrac{2}{3} \approx 0,667$ → baja $1 - 0,667 = 0,333$`], res:"Llevarte 3 y pagar 2 es un descuento del <b>33,3 %</b>."}}],
+        [{ej:{etq:"2.ª unidad al 50 %", enun:"Compras 2 y la segunda va a mitad de precio.", pasos:[R`$1,5 = 2 \cdot x \;\Rightarrow\; x = \dfrac{1,5}{2} = 0,75$ → baja $1 - 0,75 = 0,25$`], res:"La segunda a mitad de precio es un descuento del <b>25 %</b> (¡no del 50 %!)."}}]
       ]},
       {nota:["Para comparar ofertas, calcula qué parte pagas de lo que te llevas: ese es el índice."]}
     ]},
@@ -240,23 +241,23 @@ TEMA.registrar({
 
     { titulo:"⚠️ Errores típicos", cuerpo:[
       {aviso:["<b>Escribir 5 % como 0,5</b> (es 0,05)."], etq:"⚠️ Error 1"},
-      {aviso:[R`<b>Para volver atrás, restar el porcentaje</b>: hay que dividir, $C_I = C_F : I_V$.`], etq:"⚠️ Error 2"},
+      {aviso:[R`<b>Para volver atrás, restar el porcentaje</b>: hay que poner la $x$ en $C_I$ y despejar: se divide entre el índice.`], etq:"⚠️ Error 2"},
       {aviso:["<b>Sumar los porcentajes encadenados</b>: se multiplican los índices."], etq:"⚠️ Error 3"},
-      {aviso:[R`<b>En la variación, dividir al revés</b>: es $I_V = C_F : C_I$.`], etq:"⚠️ Error 4"}
+      {aviso:[R`<b>En la variación, dividir al revés</b>: en $C_F = C_I \cdot x$ se despeja $x = \dfrac{C_F}{C_I}$.`], etq:"⚠️ Error 4"}
     ]},
 
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[
-        {formula:R`C_F = C_I \cdot I_V \qquad C_I = C_F : I_V \qquad I_V = C_F : C_I`},
+        {formula:R`C_F = C_I \cdot I_V`}, R`Pongo una $x$ en lo que busco y despejo.`,
         {lista:[R`Sube: $I_V = 1 + $ el %. Baja: $I_V = 1 - $ el %.`,
-                R`Variación: $I_V = C_F : C_I$; si pasa de 1 sube, si no llega a 1 baja.`,
+                R`Variación: $C_F = C_I \cdot x$ y despejo; si $x$ pasa de 1 sube, si no llega a 1 baja.`,
                 "Encadenados: se multiplican los índices (los % no se suman)."]}
       ]},
       {estudio:[
         {comp:{q:"Calcula el 15 % de 320.", sol:48, explic:R`$C_F = 320 \cdot 0,15 = 48$`, pista:"C_F = C_I · I_V con I_V = 0,15."}},
-        {comp:{q:"12 alumnos son el 40 % de una clase. ¿Cuántos alumnos hay?", sol:30, unidad:"alumnos", explic:R`$C_I = 12 : 0,40 = 30$`, pista:"C_I = C_F : I_V."}},
+        {comp:{q:"12 alumnos son el 40 % de una clase. ¿Cuántos alumnos hay?", sol:30, unidad:"alumnos", explic:R`$12 = x \cdot 0,40 \Rightarrow x = 12 : 0,40 = 30$`, pista:"C_F = C_I · I_V: la x es el total."}},
         {comp:{q:"El índice de variación de una rebaja del 30 % es…", opciones:["0,30","0,70","1,30"], ok:1, explic:"1 − 0,30 = 0,70.", pista:"¿Qué parte pagas?"}},
-        {comp:{q:"Tras una rebaja del 25 % pagas 30 €. ¿Cuánto costaba?", sol:40, unidad:"€", explic:R`$C_I = 30 : 0,75 = 40$ €`, pista:"C_I = C_F : I_V con I_V = 0,75."}}
+        {comp:{q:"Tras una rebaja del 25 % pagas 30 €. ¿Cuánto costaba?", sol:40, unidad:"€", explic:R`$30 = x \cdot 0,75 \Rightarrow x = 30 : 0,75 = 40$ €`, pista:"C_F = C_I · I_V con I_V = 0,75: la x es el precio de antes."}}
       ]}
     ]}
   ]

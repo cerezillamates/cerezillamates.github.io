@@ -129,7 +129,7 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">🔁 Regla de tres</span><p>doble → doble: <b>D</b>, la fracción igual · doble → mitad: <b>I</b>, le doy la vuelta</p></div>
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
         <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I de cada columna a la x; a las I, la vuelta</p></div>
-        <div class="b-prop"><span class="etq">🔺 Porcentajes</span><p>$C_F = C_I \\cdot I_V$, $C_I = C_F : I_V$, $I_V = C_F : C_I$</p></div>
+        <div class="b-prop"><span class="etq">🔺 Porcentajes</span><p>$C_F = C_I \\cdot I_V$: pongo la $x$ en lo que busco y despejo</p></div>
         <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>sube: $I_V = 1 +$ el %; baja: $I_V = 1 -$ el %; encadenados: se multiplican los $I_V$</p></div>
         <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12 · días: entre 360</p></div>
         <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y la vuelta</p></div>
