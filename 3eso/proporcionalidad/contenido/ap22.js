@@ -13,7 +13,7 @@ TEMA.registrar({
     { titulo:"Razones y proporcionalidad", cuerpo:[
       {comp:{q:"Medio proporcional positivo de 4 y 25: $\\;\\dfrac{4}{x} = \\dfrac{x}{25}$", sol:10, explic:"$x^2 = 100 \\Rightarrow x = 10$ (o −10)", pista:"En cruz queda $x \\cdot x$."}},
       {comp:{q:"5 libretas cuestan 6,50 €. ¿Cuánto cuestan 12?", sol:15.6, unidad:"€", explic:"1 libreta: 1,30 € → 12 · 1,30 = 15,60 €", pista:"Reducción a la unidad."}},
-      {comp:{q:"Una rueda de 30 dientes gira a 100 vueltas por minuto y engrana con otra de 75 dientes. ¿Cuántas vueltas da la segunda?", sol:40, unidad:"vueltas/min", explic:"Inversa: 30 · 100 = 75 · x → x = 40", pista:"Más dientes, menos vueltas."}},
+      {comp:{q:"Una rueda de 30 dientes gira a 100 vueltas por minuto y engrana con otra de 75 dientes. ¿Cuántas vueltas da la segunda?", sol:40, unidad:"vueltas/min", explic:"Inversa: 30 · 100 = x · 75 → x = 40", pista:"Más dientes, menos vueltas."}},
       {comp:{q:"En una proporcionalidad inversa, el cociente de las cantidades correspondientes es constante.", opciones:VF, ok:1, explic:"En la inversa es constante el <b>producto</b>; el cociente es constante en la directa.", pista:"Piensa en 2 obreros · 12 días y 4 obreros · 6 días."}}
     ]},
     { titulo:"Compuesta e interés", cuerpo:[
@@ -24,10 +24,10 @@ TEMA.registrar({
     ]},
     { titulo:"Repartos y porcentajes", cuerpo:[
       {comp:{q:"Reparte 1300 € de forma inversamente proporcional a 2, 3 y 4. ¿Cuánto le toca al que tiene 4?", sol:300, unidad:"€", explic:"6, 4 y 3 partes (13) → 100 € cada parte → 3 · 100 = 300 €", pista:"Da la vuelta y pon denominador 12."}},
-      {comp:{q:"He pagado 27 € de señal, que son el 45 % del precio. ¿Cuánto cuesta?", sol:60, unidad:"€", explic:"27 = x · 0,45 → x = 27 : 0,45 = 60 €", pista:"C_F = C_I · I_V: la x es la cantidad inicial."}},
-      {comp:{q:"Un portátil cuesta 605 € con el 21 % de IVA. ¿Y sin IVA?", sol:500, unidad:"€", explic:"605 = x · 1,21 → x = 605 : 1,21 = 500 €", pista:"C_F = C_I · I_V con I_V = 1,21."}},
+      {comp:{q:"He pagado 27 € de señal, que son el 45 % del precio. ¿Cuánto cuesta?", sol:60, unidad:"€", explic:"27 = 0,45 · x → x = 27 : 0,45 = 60 €", pista:"C_F = I_V · C_I: la x es la cantidad inicial."}},
+      {comp:{q:"Un portátil cuesta 605 € con el 21 % de IVA. ¿Y sin IVA?", sol:500, unidad:"€", explic:"605 = 1,21 · x → x = 605 : 1,21 = 500 €", pista:"C_F = I_V · C_I con I_V = 1,21."}},
       {comp:{q:"Un precio sube un 20 % y luego baja un 25 %. En total…", opciones:["baja un 5 %","baja un 10 %","no cambia"], ok:1, explic:"1,20 · 0,75 = 0,90 → baja un 10 %", pista:"Multiplica los índices."}},
-      {comp:{q:"Una bici de 500 € se vende por 325 €. ¿Qué porcentaje ha bajado?", sol:35, unidad:"%", explic:"325 = 500 · x → x = 0,65 → baja 1 − 0,65 = 0,35 → 35 %", pista:"C_F = C_I · I_V: la x es el índice."}},
+      {comp:{q:"Una bici de 500 € se vende por 325 €. ¿Qué porcentaje ha bajado?", sol:35, unidad:"%", explic:"325 = x · 500 → x = 0,65 → baja 1 − 0,65 = 0,35 → 35 %", pista:"C_F = I_V · C_I: la x es el índice."}},
       {comp:{q:"Con una rebaja del 20 % y un 21 % de IVA pagas 242 €. ¿Precio inicial?", sol:250, unidad:"€", explic:"Índice total 0,80 · 1,21 = 0,968 → 242 : 0,968 = 250 €", pista:"Multiplica los índices y divide."}}
     ]},
     { titulo:"Grifos y mezclas", cuerpo:[

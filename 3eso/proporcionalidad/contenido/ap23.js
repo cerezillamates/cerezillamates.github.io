@@ -65,8 +65,8 @@ TEMA.registrar({
       {cols:[
         [{html:etiqueta}],
         [{nota:["25 g de azúcar <b>de cada 100 g</b> es lo mismo que <b>un 25 % de azúcar</b>. ¡Ya es un porcentaje!"], etq:"① «por 100 g» es un %"},
-         {nota:[R`Lo que te comes de una vez. Azúcar que tomas: $C_F = C_I \cdot I_V = 30 \cdot 0,25 = 7,5$ g`], etq:"② La ración"},
-         {nota:[R`Qué parte del azúcar de <b>todo el día</b> (90 g) te comes: $7,5 = 90 \cdot x \;\Rightarrow\; x = \dfrac{7,5}{90} \approx 0,083$ → 8 %`], etq:"③ % del día"}]
+         {nota:[R`Lo que te comes de una vez. Azúcar que tomas: $C_F = I_V \cdot C_I = 30 \cdot 0,25 = 7,5$ g`], etq:"② La ración"},
+         {nota:[R`Qué parte del azúcar de <b>todo el día</b> (90 g) te comes: $7,5 = x \cdot 90 \;\Rightarrow\; x = \dfrac{7,5}{90} \approx 0,083$ → 8 %`], etq:"③ % del día"}]
       ]}
     ]},
 
@@ -115,7 +115,7 @@ TEMA.registrar({
           <div class="mision"><b>🍫 Crema de cacao</b>: 56 g de azúcares por 100 g y la ración es de 15 g. ¿Qué % del azúcar del día tomas en una ración?
             <details><summary>Comprobad</summary>$15 \cdot 0,56 = 8,4$ g → $8,4 : 90 \approx 0,093$ → 9,3 %.</details></div>
           <div class="mision"><b>🍟 Patatas fritas</b>: una bolsa de 40 g tiene 0,56 g de sal. ¿Qué % de sal tienen? ¿Qué color?
-            <details><summary>Comprobad</summary>$0,56 = 40 \cdot x \;\Rightarrow\; x = 0,56 : 40 = 0,014$ → 1,4 % → 🟡 (muy cerca del rojo).</details></div>
+            <details><summary>Comprobad</summary>$0,56 = x \cdot 40 \;\Rightarrow\; x = 0,56 : 40 = 0,014$ → 1,4 % → 🟡 (muy cerca del rojo).</details></div>
         </div></div>
 
         <div class="mision"><h4>🕵️ Misión 1: los datos (sesión 2)</h4><ul class="check">
@@ -143,7 +143,7 @@ TEMA.registrar({
         <div class="mision"><h4>🖼 Cartulina y 🎤 exposición (sesiones 3 y 4)</h4><ul class="check">
           <li>Tabla, gráfico de barras con colores, ¿equilibrada?, 3 conclusiones con números y vuestro cambio.</li>
           <li>Exposición de 2 minutos: habla todo el grupo. Al final votamos la cesta más sana de la clase.</li></ul></div>`},
-        {nota:["<b>Saberes:</b> porcentajes (el % como decimal, $C_F = C_I \\cdot I_V$, qué % representa, variación), proporcionalidad directa (de 100 g a la ración), tablas y gráficos.",
+        {nota:["<b>Saberes:</b> porcentajes (el % como decimal, $C_F = I_V \\cdot C_I$, qué % representa, variación), proporcionalidad directa (de 100 g a la ración), tablas y gráficos.",
                "<b>Conexiones:</b> Biología y Geología (nutrición), Educación Física (hábitos saludables) y ODS 3 (salud y bienestar).",
                "<b>Ideas:</b> cartulina A3; se pueden colgar en el pasillo. Las bebidas tienen otros límites del semáforo: mejor dejarlas fuera. Los valores del día son de un adulto medio: sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
       ]}

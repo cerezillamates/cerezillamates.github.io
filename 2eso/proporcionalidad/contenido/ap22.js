@@ -29,11 +29,11 @@ TEMA.registrar({
     ]},
     { titulo:"Porcentajes", cuerpo:[
       {comp:{q:"¿Cuánto es el 30 % de 250?", sol:75, explic:"C_F = 250 · 0,30 = 75", pista:"Escribe el 30 % en decimal y multiplica."}},
-      {comp:{q:"¿Qué porcentaje es 18 de 72?", sol:25, unidad:"%", explic:"18 = 72 · x → x = 18 : 72 = 0,25 → 25 %", pista:"C_F = C_I · I_V: pon x en lo que buscas."}},
-      {comp:{q:"45 es el 15 % de una cantidad. ¿Cuál es?", sol:300, explic:"45 = x · 0,15 → x = 45 : 0,15 = 300", pista:"C_F = C_I · I_V: pon x en lo que buscas."}},
+      {comp:{q:"¿Qué porcentaje es 18 de 72?", sol:25, unidad:"%", explic:"18 = x · 72 → x = 18 : 72 = 0,25 → 25 %", pista:"C_F = I_V · C_I: pon x en lo que buscas."}},
+      {comp:{q:"45 es el 15 % de una cantidad. ¿Cuál es?", sol:300, explic:"45 = 0,15 · x → x = 45 : 0,15 = 300", pista:"C_F = I_V · C_I: pon x en lo que buscas."}},
       {comp:{q:"El índice de variación de una bajada del 8 % es:", opciones:["0,92","1,08","0,08"], ok:0, explic:"Baja: I_V = 1 − 0,08 = 0,92", pista:"¿Qué porcentaje pagas si te descuentan un 8 %?"}},
       {comp:{q:"¿Cuánto cuesta con el 21 % de IVA algo de 200 €?", sol:242, unidad:"€", explic:"200 · 1,21 = 242 €", pista:"Multiplica por 1,21."}},
-      {comp:{q:"Con un 25 % de rebaja he pagado 60 €. ¿Cuánto costaba?", sol:80, unidad:"€", explic:"I_V = 1 − 0,25 = 0,75 → 60 = x · 0,75 → x = 60 : 0,75 = 80 €", pista:"C_F = C_I · I_V con I_V = 0,75: pon x en lo que buscas."}},
+      {comp:{q:"Con un 25 % de rebaja he pagado 60 €. ¿Cuánto costaba?", sol:80, unidad:"€", explic:"I_V = 1 − 0,25 = 0,75 → 60 = 0,75 · x → x = 60 : 0,75 = 80 €", pista:"C_F = I_V · C_I con I_V = 0,75: pon x en lo que buscas."}},
       {comp:{q:"Subir un 10 % y después bajar un 10 % deja el precio igual.", opciones:VF, ok:1, explic:"1,10 · 0,90 = 0,99: queda un 1 % más barato.", pista:"Prueba con 100 €."}}
     ]},
     { titulo:"Interés y grifos", cuerpo:[

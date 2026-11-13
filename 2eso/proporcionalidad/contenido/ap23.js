@@ -101,7 +101,7 @@ TEMA.registrar({
         <div class="mision"><h4>🖼 El cartel y 🎤 la presentación</h4><ul class="check">
           <li>Nombre y logo de la agencia, el plan de los dos días, la tabla del presupuesto y lo que paga cada alumno.</li>
           <li>Presentación de 2 minutos: habla toda la agencia. Al final votamos el mejor viaje.</li></ul></div>`},
-        {nota:["<b>Saberes:</b> proporcionalidad directa e inversa, reducción a la unidad, porcentajes ($C_F = C_I \\cdot I_V$), escalas y repartos directos.",
+        {nota:["<b>Saberes:</b> proporcionalidad directa e inversa, reducción a la unidad, porcentajes ($C_F = I_V \\cdot C_I$), escalas y repartos directos.",
                "<b>Basada</b> en la situación de aprendizaje de la profesora (niveles N1 y N2)."], etq:"👩‍🏫 Para el profesor"}
       ]}
     ]}

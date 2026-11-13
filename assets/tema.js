@@ -343,6 +343,13 @@ function url(modo, extra){
   return `apuntes.html?ap=${AP}&modo=${modo}${extra||""}`;
 }
 TEMA.url = url;
+/* Despeje paso a paso, con letras: filas alternas [fórmula TeX, "lo que hago", fórmula TeX, …].
+   Cada fórmula en su fila y, entre medias, una flecha hacia abajo con palabras. */
+window.despeje = function(filas){
+  return `<div class="despeje">${filas.map((f,k)=> k%2
+    ? `<div class="dsp-a"><i>⬇</i><span>${f}</span></div>`
+    : `<div class="dsp-f${k===filas.length-1?" fin":""}">$${f}$</div>`).join("")}</div>`;
+};
 function siguienteAp(){ const L = TEMA.info.apartados||[], i = L.findIndex(a=>String(a.num)===AP); const s = i>=0 ? L[i+1] : null; return s && s.listo ? s : null; }
 
 /* Encaja el contenido en la pantalla sin scroll: ajusta el tamaño de letra */

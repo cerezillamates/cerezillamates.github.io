@@ -45,11 +45,11 @@ TEMA.registrar({
       res:"A los nietos les tocan <b>120 €</b>, <b>90 €</b> y <b>60 €</b>." },
     { nivel:"Problema", min:5,
       enun:"En 2.º hay 75 alumnos y 30 hacen deporte en un club. <b>a)</b> ¿Qué porcentaje hace deporte en un club? <b>b)</b> El 60 % de los que hacen deporte juega al fútbol. ¿Cuántos son?",
-      pasos:[R`<b>a)</b> $C_F = C_I \cdot I_V$ → $30 = 75 \cdot x \;\Rightarrow\; x = \dfrac{30}{75} = 0,40$ → $40\,\%$`, R`<b>b)</b> $C_F = 30 \cdot 0,60 = 18$`],
+      pasos:[R`<b>a)</b> $C_F = I_V \cdot C_I$ → $30 = x \cdot 75 \;\Rightarrow\; x = \dfrac{30}{75} = 0,40$ → $40\,\%$`, R`<b>b)</b> $C_F = 0,60 \cdot 30 = 18$`],
       res:"a) Hace deporte en un club el <b>40 %</b>.<br>b) Juegan al fútbol <b>18 alumnos</b>." },
     { nivel:"Problema", min:6,
       enun:"En agosto un artículo costaba 125 € y en diciembre costaba un 40 % más. Al verano siguiente lo compré por 210 €. ¿El segundo cambio fue una subida o una bajada? ¿De qué porcentaje?",
-      pasos:[R`Diciembre: sube un 40 %, $125 \cdot 1,40 = 175$ €`, R`De 175 € a 210 €: $C_F = C_I \cdot I_V$ → $210 = 175 \cdot x \;\Rightarrow\; x = \dfrac{210}{175} = 1,20$`, "1,20 es mayor que 1: subida del 20 %"],
+      pasos:[R`Diciembre: sube un 40 %, $125 \cdot 1,40 = 175$ €`, R`De 175 € a 210 €: $C_F = I_V \cdot C_I$ → $210 = x \cdot 175 \;\Rightarrow\; x = \dfrac{210}{175} = 1,20$`, "1,20 es mayor que 1: subida del 20 %"],
       res:"El segundo cambio fue una <b>subida del 20 %</b>." },
     { nivel:"Aplicación", min:4,
       enun:"¿Qué interés producen 6000 € al 2,5 % anual durante 9 meses?",
@@ -94,11 +94,11 @@ TEMA.registrar({
       pasos:[R`Doy la vuelta: $\dfrac12,\ \dfrac15,\ \dfrac{1}{10}$ → mismo denominador: $\dfrac{5}{10},\ \dfrac{2}{10},\ \dfrac{1}{10}$`, "Reparto directo a 5, 2 y 1: 8 partes → 1600 : 8 = 200 €", "5 · 200 = 1000 €, 2 · 200 = 400 € y 1 · 200 = 200 €"],
       res:"Las partes son <b>1000 €</b>, <b>400 €</b> y <b>200 €</b>." },
     { nivel:"Consolidación", enun:"En un instituto de 840 alumnos:<br><b>a)</b> El 35 % hace deporte por las tardes. ¿Cuántos alumnos son?<br><b>b)</b> 126 alumnos vienen en autobús. ¿Qué porcentaje es?",
-      pasos:[R`<b>a)</b> $C_F = 840 \cdot 0,35 = 294$`, R`<b>b)</b> $C_F = C_I \cdot I_V$ → $126 = 840 \cdot x \;\Rightarrow\; x = \dfrac{126}{840} = 0,15$ → $15\,\%$`], res:"a) Hacen deporte <b>294 alumnos</b>.<br>b) Viene en autobús el <b>15 %</b>." },
+      pasos:[R`<b>a)</b> $C_F = 0,35 \cdot 840 = 294$`, R`<b>b)</b> $C_F = I_V \cdot C_I$ → $126 = x \cdot 840 \;\Rightarrow\; x = \dfrac{126}{840} = 0,15$ → $15\,\%$`], res:"a) Hacen deporte <b>294 alumnos</b>.<br>b) Viene en autobús el <b>15 %</b>." },
     { nivel:"Problema", enun:"Después de una rebaja del 15 %, unas zapatillas cuestan 68 €. ¿Cuánto costaban antes?",
-      pasos:[R`Rebaja del 15 %: $I_V = 1 - 0,15 = 0,85$`, R`$C_F = C_I \cdot I_V$ → $68 = x \cdot 0,85 \;\Rightarrow\; x = \dfrac{68}{0,85} = 80$ €`], res:"Las zapatillas costaban <b>80 €</b>." },
+      pasos:[R`Rebaja del 15 %: $I_V = 1 - 0,15 = 0,85$`, R`$C_F = I_V \cdot C_I$ → $68 = 0,85 \cdot x \;\Rightarrow\; x = \dfrac{68}{0,85} = 80$ €`], res:"Las zapatillas costaban <b>80 €</b>." },
     { nivel:"Problema", enun:"Una lavadora cuesta 350 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
-      pasos:[R`Sube un 21 %: $I_V = 1 + 0,21 = 1,21$`, R`$C_F = 350 \cdot 1,21 = 423,50$ €`], res:"Con IVA, la lavadora cuesta <b>423,50 €</b>." },
+      pasos:[R`Sube un 21 %: $I_V = 1 + 0,21 = 1,21$`, R`$C_F = 1,21 \cdot 350 = 423,50$ €`], res:"Con IVA, la lavadora cuesta <b>423,50 €</b>." },
     { nivel:"Problema", enun:"¿Qué interés producen 4000 € al 3 % anual durante 8 meses?",
       pasos:[R`El tiempo en meses: divido entre 12`, R`$I = \dfrac{4000 \cdot 0,03 \cdot 8}{12} = \dfrac{960}{12} = 80$ €`], res:"Producen <b>80 €</b> de interés." }
   ],
@@ -127,8 +127,8 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">🙃 Inversa</span><p>doble → mitad: le doy la vuelta a la fracción de la $x$ y multiplico en cruz</p></div>
         <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I a la x; a las I, la vuelta; multiplico</p></div>
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
-        <div class="b-prop"><span class="etq">％ Porcentajes</span><p>el % en decimal: $C_F = C_I \\cdot I_V$. Lo que busco es la $x$ y despejo.</p></div>
-        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>$C_F = C_I \\cdot I_V$ con $I_V = 1 \\pm$ el %. Lo que busco es la $x$. Encadenados: se multiplican los índices.</p></div>
+        <div class="b-prop"><span class="etq">％ Porcentajes</span><p>el % en decimal: $C_F = I_V \\cdot C_I$. Lo que busco es la $x$ y despejo.</p></div>
+        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>$C_F = I_V \\cdot C_I$ con $I_V = 1 \\pm$ el %. Lo que busco es la $x$. Encadenados: se multiplican los índices.</p></div>
         <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12</p></div>
         <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta</p></div></div>`}
     ]},
