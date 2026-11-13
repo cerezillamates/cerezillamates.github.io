@@ -52,6 +52,10 @@ a{color:var(--ind)}
 .ap:not(.prox):hover{border-color:var(--ind-bg)}
 .ap .n{font:800 1.4rem var(--f-d);color:#fff;background:linear-gradient(135deg,var(--ind),var(--ind2));width:2.2em;height:2.2em;border-radius:14px;display:grid;place-items:center}
 .ap h3{font-size:1.15rem}
+.ap-grupo{font:800 1.2rem var(--f-d);color:var(--ind);margin:8px 0 -4px;padding-left:4px}
+.ap.sub{margin-left:28px;border-left:5px solid var(--ind2)}
+.ap.sub .n{font-size:1.05rem}
+@media (max-width:640px){.ap.sub{margin-left:10px}}
 .ap p{margin:2px 0 0;color:var(--muted);font-size:.93rem}
 .ap .acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .ap.prox{opacity:.55} .ap.prox .n{background:#a3a8bf}

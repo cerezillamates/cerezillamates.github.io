@@ -325,7 +325,10 @@ const AVATAR = (window.TEMA_AVATAR || (document.querySelector('script[src*="tema
 
 /* ---------- Carga de un apartado ---------- */
 const qs = new URLSearchParams(location.search);
-const AP = parseInt(qs.get("ap") || "1", 10);
+// el apartado puede tener subapartados: ap=5.1, 5.2… (si se pide ap=5 y existe 5.1, se va al 5.1)
+let AP = (qs.get("ap") || "1").replace(/[^0-9.]/g, "") || "1";
+(function(){ const L = (TEMA.info && TEMA.info.apartados) || [];
+  if(!L.some(a=>String(a.num)===AP) && L.some(a=>String(a.num)===AP+".1")) AP = AP + ".1"; })();
 const MODO = ["proyectar","estudiar","clase","casa"].includes(qs.get("modo")) ? qs.get("modo") : (window.PAGINA || "estudiar");
 TEMA.registrar = function(ap){ TEMA.ap = ap; arrancar(); };
 function cargar(){
@@ -340,7 +343,7 @@ function url(modo, extra){
   return `apuntes.html?ap=${AP}&modo=${modo}${extra||""}`;
 }
 TEMA.url = url;
-function siguienteAp(){ return (TEMA.info.apartados||[]).find(a=>a.num===AP+1 && a.listo); }
+function siguienteAp(){ const L = TEMA.info.apartados||[], i = L.findIndex(a=>String(a.num)===AP); const s = i>=0 ? L[i+1] : null; return s && s.listo ? s : null; }
 
 /* Encaja el contenido en la pantalla sin scroll: ajusta el tamaño de letra */
 function encajar(z, lam){
@@ -378,7 +381,7 @@ function avisoPantalla(){
 function arrancar(){
   const ap = TEMA.ap;
   // apartados numerados (1, 2…) o secciones especiales (repaso, autoevaluación…) con num de texto
-  const esNum = typeof ap.num === "number";
+  const esNum = typeof ap.num === "number" || /^\d+(\.\d+)?$/.test(ap.num);
   ap._nt = esNum ? `${ap.num}. ${ap.titulo}` : ap.titulo;
   ap._ap = esNum ? `Apartado ${ap.num}` : (ap.seccion || ap.titulo);
   ap._del = esNum ? `del apartado ${ap.num}` : `de «${ap.titulo}»`;

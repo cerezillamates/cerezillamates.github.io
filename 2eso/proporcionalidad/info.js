@@ -10,9 +10,10 @@ TEMA.info = {
     {num:3, titulo:"Proporcionalidad inversa", desc:"Constante (el producto), regla de tres inversa, reducción a la unidad y D, I o ninguna.", listo:true},
     {num:4, titulo:"Proporcionalidad compuesta", desc:"Tres magnitudes: cuadro con flechas D o I y reducción a la unidad.", listo:true},
     {num:5, titulo:"Repartos proporcionales", desc:"Reparto directo e inverso.", listo:true},
-    {num:6, titulo:"Porcentajes", desc:"El r % de una cantidad, qué % es y el total, con la regla de tres.", listo:true},
-    {num:7, titulo:"Aumentos y disminuciones porcentuales", desc:"IVA, rebajas, precio de antes, índice de variación, encadenados y ofertas.", listo:true},
-    {num:8, titulo:"Interés simple", desc:"Capital, rédito y tiempo. Años, meses y días.", listo:true},
-    {num:9, titulo:"Grifos y trabajo en común", desc:"Grifos, desagües y trabajos que se hacen entre varios.", listo:true}
+    {num:"6.1", grupo:"6. Porcentajes", titulo:"Tipo 1: calcular un %, un descuento o un incremento", desc:"Conozco el total y el %: multiplico. De cabeza, IVA, rebajas y encadenados.", listo:true},
+    {num:"6.2", grupo:"6. Porcentajes", titulo:"Tipo 2: calcular el total", desc:"Dado el precio rebajado, el descuento, el IVA o el precio con IVA: divido.", listo:true},
+    {num:"6.3", grupo:"6. Porcentajes", titulo:"Tipo 3: calcular el % dadas la cantidad inicial y la final", desc:"Qué porcentaje es, cuánto ha subido o bajado y las ofertas.", listo:true},
+    {num:7, titulo:"Interés simple", desc:"Capital, rédito y tiempo. Años, meses y días.", listo:true},
+    {num:8, titulo:"Grifos y trabajo en común", desc:"Grifos, desagües y trabajos que se hacen entre varios.", listo:true}
   ]
 };

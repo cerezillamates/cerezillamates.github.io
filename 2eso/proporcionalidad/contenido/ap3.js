@@ -1,7 +1,7 @@
 /* 2.º ESO · Tema 3 · Apartado 3: Proporcionalidad inversa
    Método de la profesora: cuadro con las dos magnitudes e «I». Decisión de la profesora (11-nov-2026): en la inversa SOLO se usa dar la vuelta a la fracción de la x y multiplicar en cruz.
    Problemas de sus exámenes: vacas y pienso, barco, regalo entre amigos, brigada de constructores.
-   Los problemas con % (coche −40 %, comida de Navidad, bolígrafos +25 %) están en el apartado 7, después de los %. */
+   Los problemas con % (coche −40 %, comida de Navidad, bolígrafos +25 %) están en el apartado 6.1, después de los %. */
 (function(){
 const R = String.raw;
 const tabla = (filas) => `<table class="t tprop">${filas.map(f=>`<tr>${f.map((c,k)=>k===0?`<th>${c}</th>`:(k%2===0?`<td class="op">${c}</td>`:`<td>${c}</td>`)).join("")}</tr>`).join("")}</table>`;

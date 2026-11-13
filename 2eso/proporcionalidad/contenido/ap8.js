@@ -1,141 +1,110 @@
-/* 2.º ESO · Tema 3 · Apartado 8: Interés simple
-   Apuntes de la web de la profesora: I = c · r · t (r en decimal, t en años; meses → : 12; días → : 360),
-   capital final = capital + interés, y despejar c, r o t. En 2.º se trabaja sobre todo con años y meses. */
+/* 2.º ESO · Tema 3 · Apartado 8: Grifos y trabajo en común
+   Apuntes de la web de la profesora: ¿qué parte llena cada uno en 1 hora? 1/a + 1/b (el desagüe resta)
+   y al final se le da la vuelta. Decisión de la profesora (11-nov-2026): los MÓVILES se dejan para el tema de álgebra. */
 (function(){
 const R = String.raw;
-const tri = (tapa, pie) => {
-  const v = k => tapa===k ? `<tspan fill="#f59e0b">?</tspan>` : k;
-  return `<figure class="dib tri"><svg viewBox="0 0 240 170" role="img" aria-label="Triángulo del interés: I arriba; c por r por t abajo">
-    <polygon points="120,8 232,160 8,160" fill="#eef0ff" stroke="#4338ca" stroke-width="4" stroke-linejoin="round"/>
-    <line x1="64" y1="84" x2="176" y2="84" stroke="#4338ca" stroke-width="3"/>
-    <text x="120" y="70" text-anchor="middle" font-size="34" font-weight="800" fill="#1e1b3a">${v("I")}</text>
-    <text x="120" y="138" text-anchor="middle" font-size="28" font-weight="800" fill="#1e1b3a">${v("c")} × ${v("r")} × ${v("t")}</text>
-  </svg>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
+// depósito dividido en n partes; llenas = [nº partes de A, nº partes de B]
+const deposito = (n, llenas, pie) => {
+  const h = 200 / n; let s = "";
+  for(let k=0;k<n;k++){ const y = 210 - (k+1)*h; const c = k < llenas[0] ? "#93c5fd" : k < llenas[0]+llenas[1] ? "#fdba74" : "#fff";
+    s += `<rect x="30" y="${y}" width="120" height="${h}" fill="${c}" stroke="#4338ca" stroke-width="1.5"/>`; }
+  return `<figure class="dib"><svg viewBox="0 0 180 230" role="img" aria-label="Depósito dividido en ${n} partes">${s}<rect x="30" y="10" width="120" height="200" fill="none" stroke="#1e1b3a" stroke-width="4"/></svg>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
 };
-
 TEMA.registrar({
   num: 8,
-  titulo: "Interés simple",
+  titulo: "Grifos y trabajo en común",
   videos: [
-    {t:"Interés simple: qué es y cómo se calcula", url:"https://www.youtube.com/watch?v=G7FGDfv9E1w"}
+    {t:"Problema de grifos: dos grifos llenando un depósito", url:"https://www.youtube.com/results?search_query=problema+de+grifos+dos+grifos+llenan+deposito"}
   ],
 
   clase: [
-    { nivel:"Aplicación", min:4,
-      enun:"Dejo 2000 € en el banco al 3 % anual durante 2 años. <b>a)</b> ¿Qué interés me dan? <b>b)</b> ¿Cuánto dinero tendré al final?",
-      pasos:[R`$c = 2000$, $r = 3\,\% = 0,03$, $t = 2$`, R`<b>a)</b> $I = 2000 \cdot 0,03 \cdot 2 = 120$ €`, R`<b>b)</b> $2000 + 120 = 2120$ €`],
-      res:"a) Me dan <b>120 €</b> de interés.<br>b) Al final tendré <b>2120 €</b>." },
-    { nivel:"Aplicación", min:4,
-      enun:"¿Qué interés producen 4800 € al 3 % durante 8 meses?",
-      pasos:["El tiempo está en <b>meses</b>: divido entre 12.", R`$I = \dfrac{4800 \cdot 0,03 \cdot 8}{12} = \dfrac{1152}{12} = 96$ €`],
-      res:"Producen <b>96 €</b> de interés." },
+    { nivel:"Aplicación", min:5,
+      enun:"Un grifo llena un depósito en 4 horas y otro en 12 horas. ¿Cuánto tardan los dos juntos?",
+      pasos:[R`En 1 hora: $\dfrac14 + \dfrac{1}{12} = \dfrac{3}{12} + \dfrac{1}{12} = \dfrac{4}{12} = \dfrac13$ del depósito`, R`Le doy la vuelta: $3$ horas`, "Comprueba: tardan menos que el más rápido (4 h) ✓"],
+      res:"Los dos juntos tardan <b>3 horas</b>." },
+    { nivel:"Aplicación", min:5,
+      enun:"Un grifo llena un depósito en 3 horas y el desagüe lo vacía en 6 horas. Si están abiertos los dos, ¿cuánto tarda en llenarse?",
+      pasos:[R`El desagüe resta: $\dfrac13 - \dfrac16 = \dfrac26 - \dfrac16 = \dfrac16$`, "Le doy la vuelta: 6 horas"],
+      res:"El depósito tarda <b>6 horas</b> en llenarse." },
     { nivel:"Práctica", min:5,
-      enun:"Unos ahorros de 5000 € han producido 450 € en 3 años. ¿A qué rédito (porcentaje anual) estaban?",
-      pasos:["Tapo la r en el triángulo: $r = \\dfrac{I}{c \\cdot t}$", R`$r = \dfrac{450}{5000 \cdot 3} = \dfrac{450}{15\,000} = 0,03$`, "En porcentaje: 3 %"],
-      res:"Estaban al <b>3 %</b> anual." },
+      enun:"Para imprimir los apuntes del tema, una impresora tarda 20 minutos y otra 30 minutos. ¿Cuánto tardan si imprimen a la vez?",
+      pasos:[R`En 1 minuto: $\dfrac{1}{20} + \dfrac{1}{30} = \dfrac{3}{60} + \dfrac{2}{60} = \dfrac{5}{60} = \dfrac{1}{12}$`, "Le doy la vuelta: 12 minutos"],
+      res:"Imprimiendo a la vez tardan <b>12 minutos</b>." },
     { nivel:"Práctica", min:5,
-      enun:"¿Cuántos años tengo que dejar 1500 € al 4 % para ganar 180 € de intereses?",
-      pasos:["Tapo la t: $t = \\dfrac{I}{c \\cdot r}$", R`$t = \dfrac{180}{1500 \cdot 0,04} = \dfrac{180}{60} = 3$`],
-      res:"Tengo que dejarlos <b>3 años</b>." },
-    { nivel:"Problema", min:5,
-      enun:"Quiero ganar 300 € de intereses en 2 años y el banco me paga un 2,5 % anual. ¿Cuánto dinero tengo que depositar?",
-      pasos:["Tapo la c: $c = \\dfrac{I}{r \\cdot t}$", R`$c = \dfrac{300}{0,025 \cdot 2} = \dfrac{300}{0,05} = 6000$ €`, R`Comprueba: $6000 \cdot 0,025 \cdot 2 = 300$ ✓`],
-      res:"Tengo que depositar <b>6000 €</b>." },
+      enun:"Para ordenar la biblioteca del aula, Lucía tarda 3 horas y Marcos 6 horas. ¿Cuánto tardan si la ordenan juntos?",
+      pasos:[R`En 1 hora: Lucía hace $\dfrac13$ y Marcos $\dfrac16$`, R`Juntos: $\dfrac13 + \dfrac16 = \dfrac26 + \dfrac16 = \dfrac36 = \dfrac12$`, "Le doy la vuelta: 2 horas"],
+      res:"Juntos tardan <b>2 horas</b> en ordenar la biblioteca." },
+    { nivel:"Problema", min:6,
+      enun:"Un grifo llena un aljibe en 6 horas, pero tiene una fuga que lo vacía en 12 horas. ¿Cuánto tarda en llenarse?",
+      pasos:[R`El grifo llena $\dfrac16$ cada hora; la fuga vacía $\dfrac{1}{12}$: <b>resta</b>`, R`$\dfrac16 - \dfrac{1}{12} = \dfrac{2}{12} - \dfrac{1}{12} = \dfrac{1}{12}$`, "Le doy la vuelta: 12 horas", "¿Tiene sentido? Con la fuga tarda más que las 6 horas del grifo solo ✓"],
+      res:"El aljibe tarda <b>12 horas</b> en llenarse." },
     { nivel:"Reto", min:7,
-      enun:"Mi hermano pide un préstamo de 3000 € para una moto al 6 % de interés simple anual y lo devuelve en 18 meses. <b>a)</b> ¿Cuánto paga de intereses? <b>b)</b> ¿Cuánto devuelve en total? <b>c)</b> Si paga lo mismo cada mes, ¿cuánto es cada cuota?",
-      pasos:[R`<b>a)</b> $I = \dfrac{3000 \cdot 0,06 \cdot 18}{12} = \dfrac{3240}{12} = 270$ €`, R`<b>b)</b> $3000 + 270 = 3270$ €`, R`<b>c)</b> $3270 : 18 \approx 181,67$ € al mes`],
-      res:"a) Paga <b>270 €</b> de interés.<br>b) Devuelve <b>3270 €</b> en total.<br>c) Paga unos <b>181,67 €</b> al mes." }
+      enun:"Un grifo llena un depósito en 4 horas y otro en 12 horas. Primero se abre solo el primero durante 1 hora y después se abren los dos. ¿Cuánto tarda en llenarse en total?",
+      pasos:[R`En 1 hora el primero llena $\dfrac14$. Queda $1 - \dfrac14 = \dfrac34$ del depósito`,
+             R`Juntos, en 1 hora: $\dfrac14 + \dfrac{1}{12} = \dfrac{3}{12} + \dfrac{1}{12} = \dfrac{4}{12} = \dfrac13$`,
+             R`Para lo que queda: $\dfrac34 : \dfrac13 = \dfrac34 \cdot 3 = \dfrac94 = 2,25$ h`, "2,25 h = 2 h 15 min. En total: 1 h + 2 h 15 min"],
+      res:"El depósito tarda <b>3 h 15 min</b> en llenarse." }
   ],
 
   casa: [
-    { nivel:"Básico", enun:"Calcula el interés y el capital final de 1200 € al 2 % durante 5 años.",
-      pasos:[R`$I = 1200 \cdot 0,02 \cdot 5 = 120$ €`, "Capital final: 1320 €"], res:"El interés es de <b>120 €</b> y el capital final, <b>1320 €</b>." },
-    { nivel:"Básico", enun:"¿Qué interés dan 6000 € al 1,5 % durante 6 meses?",
-      pasos:[R`$I = \dfrac{6000 \cdot 0,015 \cdot 6}{12} = \dfrac{540}{12} = 45$ €`], res:"Dan <b>45 €</b> de interés." },
-    { nivel:"Consolidación", enun:"Calcula el interés de 12 000 € durante 18 meses al 3,5 % anual.",
-      pasos:[R`$I = \dfrac{12\,000 \cdot 0,035 \cdot 18}{12} = 630$ €`], res:"El interés es de <b>630 €</b>." },
-    { nivel:"Consolidación", enun:"Unos ahorros de 3000 € han producido 360 € en 4 años. ¿A qué rédito?",
-      pasos:[R`$r = \dfrac{360}{3000 \cdot 4} = 0,03$`], res:"Estaban al <b>3 %</b>." },
-    { nivel:"Consolidación", enun:"¿Cuánto tiempo deben estar 8000 € al 5 % para ganar 600 €? Da el resultado en años y en meses.",
-      pasos:[R`$t = \dfrac{600}{8000 \cdot 0,05} = \dfrac{600}{400} = 1,5$ años`, "1,5 años = 18 meses"], res:"Deben estar <b>1,5 años</b>, es decir, <b>18 meses</b>." },
-    { nivel:"Problema", enun:"Si dejo 2400 € al 4 % durante 90 días, ¿qué interés gano? (En los bancos, el año comercial tiene 360 días.)",
-      pasos:["En días, divido entre 360.", R`$I = \dfrac{2400 \cdot 0,04 \cdot 90}{360} = \dfrac{8640}{360} = 24$ €`], res:"Gano <b>24 €</b> de interés." },
-    { nivel:"Para pensar", enun:"Tengo 5000 €. El banco A me paga un 2 % durante 3 años y el banco B un 2,5 % durante 2 años. ¿Cuál me interesa más?",
-      pasos:[R`A: $5000 \cdot 0,02 \cdot 3 = 300$ €`, R`B: $5000 \cdot 0,025 \cdot 2 = 250$ €`, "Aunque B paga un % mayor, A me da más porque el dinero está más tiempo."], res:"Me interesa más <b>el banco A</b>: 50 € más." }
+    { nivel:"Básico", enun:"Un grifo llena una bañera en 2 horas y otro en 6 horas. ¿Cuánto tardan juntos?",
+      pasos:[R`$\dfrac12 + \dfrac16 = \dfrac36 + \dfrac16 = \dfrac46 = \dfrac23$`, R`Le doy la vuelta: $\dfrac32$ h $= 1,5$ h`], res:"Juntos tardan <b>1 h 30 min</b>." },
+    { nivel:"Básico", enun:"Tres grifos llenan un depósito en 2, 3 y 6 horas. ¿Cuánto tardan los tres juntos?",
+      pasos:[R`$\dfrac12 + \dfrac13 + \dfrac16 = \dfrac36 + \dfrac26 + \dfrac16 = \dfrac66 = 1$`], res:"Los tres juntos tardan <b>1 hora</b>." },
+    { nivel:"Consolidación", enun:"Ana pinta su habitación en 6 horas y Luis en 3 horas. ¿Cuánto tardan si la pintan juntos?",
+      pasos:[R`$\dfrac16 + \dfrac13 = \dfrac16 + \dfrac26 = \dfrac36 = \dfrac12$`, "Le doy la vuelta: 2 horas"], res:"Juntos tardan <b>2 horas</b>." },
+    { nivel:"Consolidación", enun:"Un grifo llena un depósito en 4 horas, pero el desagüe está abierto y lo vacía en 12 horas. ¿Cuánto tarda en llenarse?",
+      pasos:[R`$\dfrac14 - \dfrac{1}{12} = \dfrac{3}{12} - \dfrac{1}{12} = \dfrac{2}{12} = \dfrac16$`], res:"El depósito tarda <b>6 horas</b> en llenarse." },
+    { nivel:"Consolidación", enun:"Una bomba vacía una piscina en 8 horas y otra en 24 horas. ¿Cuánto tardan si funcionan las dos a la vez?",
+      pasos:[R`$\dfrac18 + \dfrac{1}{24} = \dfrac{3}{24} + \dfrac{1}{24} = \dfrac{4}{24} = \dfrac16$`, "Le doy la vuelta: 6 horas"], res:"Las dos bombas juntas tardan <b>6 horas</b> en vaciar la piscina." },
+    { nivel:"Problema", enun:"Tres pintores pintan la valla del patio: el primero solo tardaría 6 horas, el segundo 12 horas y el tercero 4 horas. ¿Cuánto tardan los tres juntos?",
+      pasos:[R`$\dfrac16 + \dfrac{1}{12} + \dfrac14 = \dfrac{2}{12} + \dfrac{1}{12} + \dfrac{3}{12} = \dfrac{6}{12} = \dfrac12$`, "Le doy la vuelta: 2 horas"], res:"Los tres pintores juntos tardan <b>2 horas</b>." },
+    { nivel:"Para pensar", enun:"Un grifo tarda 4 horas en llenar un depósito. ¿Cuánto tardan dos grifos iguales? ¿Y sumando los tiempos (4 + 4 = 8 h)? ¿Qué está mal?",
+      pasos:[R`$\dfrac14 + \dfrac14 = \dfrac24 = \dfrac12$ → 2 horas`, "Si sumas los tiempos, te sale que con dos grifos tardas más que con uno: ¡no tiene sentido!"], res:"Dos grifos tardan <b>2 horas</b>: los tiempos no se suman." }
   ],
 
   laminas: [
     { portada:true, cuerpo:[
-      {html:`<p class="gancho">¿Cuánto te paga el banco por guardar tu dinero?</p>`}
+      {html:`<p class="gancho">Si dos grifos llenan juntos, ¿tardan más o menos?</p>`}
     ]},
 
-    { titulo:"El banco te paga por guardar tu dinero", cuerpo:[
-      {ej:{etq:"🐷 La hucha del banco", enun:"Sara guarda en el banco 6000 € durante 3 años. El banco le paga un 2 % cada año. ¿Cuánto gana?",
-        pasos:[R`Cada año gana el 2 % de 6000: $6000 \cdot 0,02 = 120$ €`, R`En 3 años: $120 \cdot 3 = 360$ €`, R`Al final tiene $6000 + 360 = 6360$ €`], res:"Sara gana <b>360 €</b>."}},
-      {html:`<div class="anios">${[0,1,2,3].map(a=>`<div><b>año ${a}</b><span class="cap">6000</span>${"<span class='int'>+120</span>".repeat(a)}</div>`).join("")}</div>`},
-      {nota:["En el <b>interés simple</b> se gana <b>lo mismo cada año</b>."]}
-    ]},
-
-    { titulo:"Los datos y la fórmula", cuerpo:[
-      {cols:[
-        [{def:["💰 <b>Capital (c)</b>: el dinero que guardas o que pides prestado."], etq:"c"}],
-        [{def:["📊 <b>Rédito (r)</b>: el % anual, <b>en decimal</b>: 2 % → 0,02 · 3,5 % → 0,035"], etq:"r"}],
-        [{def:["⏳ <b>Tiempo (t)</b>: en <b>años</b>."], etq:"t"}]
-      ]},
-      {prop:[{formula:R`I = c \cdot r \cdot t`}, "<b>Capital final</b> = capital + interés."], etq:"Interés simple"}
-    ]},
-
-    { titulo:"¿Y si el tiempo está en meses?", cuerpo:[
-      {prop:["Un mes es la doceava parte de un año: si el tiempo está en <b>meses</b>, divido entre 12.", {formula:R`I = \frac{c \cdot r \cdot t}{12}`}], etq:"Meses"},
-      {ej:{enun:"¿Qué interés producen 4800 € al 3 % durante 8 meses?", pasos:[R`$I = \dfrac{4800 \cdot 0,03 \cdot 8}{12} = \dfrac{1152}{12} = 96$ €`], res:"Producen <b>96 €</b> de interés."}},
-      {nota:["Si fuera en <b>días</b>, se divide entre 360 (el año de los bancos)."]}
-    ]},
-
-    { titulo:"Busco el rédito", cuerpo:[
+    { titulo:"Dos grifos juntos", cuerpo:[
       {cols2:true, cols:[
-        [{ej:{enun:"5000 € han producido 450 € en 3 años. ¿A qué rédito estaban?", pasos:[R`$r = \dfrac{450}{5000 \cdot 3} = \dfrac{450}{15\,000} = 0,03$`, "0,03 → 3 %"], res:"Estaban al <b>3 %</b>."}}],
-        [{html:tri("r","Tapo la r")}]
+        [{ej:{enun:"Un grifo llena un depósito en 4 horas y otro en 12 horas. ¿Cuánto tardan juntos?",
+          pasos:[R`En 1 hora: $\dfrac14 + \dfrac{1}{12} = \dfrac{3}{12} + \dfrac{1}{12} = \dfrac{4}{12} = \dfrac13$`, "Si en 1 hora llenan 1/3, el depósito entero en <b>3 horas</b>: <b>le doy la vuelta</b>."], res:"Juntos tardan <b>3 horas</b>."}}],
+        [{html:deposito(12,[3,1],"Juntos llenan 4 de 12 partes cada hora")}]
       ]}
     ]},
 
-    { titulo:"Busco el capital o el tiempo", cuerpo:[
-      {cols:[
-        [{ej:{etq:"Capital", enun:"¿Cuánto hay que depositar al 2 % para ganar 90 € en 3 años?", pasos:[R`$c = \dfrac{90}{0,02 \cdot 3} = \dfrac{90}{0,06} = 1500$ €`], res:"Hay que depositar <b>1500 €</b>."}}],
-        [{ej:{etq:"Tiempo", enun:"¿Cuántos años hay que dejar 2500 € al 4 % para ganar 300 €?", pasos:[R`$t = \dfrac{300}{2500 \cdot 0,04} = \dfrac{300}{100} = 3$`], res:"Hay que dejarlos <b>3 años</b>."}}]
+    { titulo:"La clave (lo que hemos hecho): ¿qué parte se hace en 1 hora?", cuerpo:[
+      {cols2:true, cols:[
+        [{prop:["Si un grifo tarda <b>4 horas</b> en llenar un depósito, en 1 hora llena $\\dfrac14$ del depósito.", "Si tarda <b>12 horas</b>, en 1 hora llena $\\dfrac{1}{12}$."], etq:"La idea"},
+         {aviso:["Los tiempos <b>no se suman</b>: dos grifos juntos tardan <b>menos</b> que cada uno."]}],
+        [{html:deposito(12,[3,1],"En 1 hora: A llena 3/12 y B 1/12")}]
       ]}
     ]},
 
-    { titulo:"El triángulo del interés (lo que hemos hecho)", cuerpo:[
-      {cols2:true, cols:[
-        [{prop:["<b>Arriba</b>: el interés (I). <b>Abajo</b>: c × r × t.", "Lo de <b>abajo</b> se multiplica; de arriba a abajo se <b>divide</b>.", "☝ <b>Tapa con el dedo lo que buscas</b>."], etq:"Cómo se usa"}],
-        [{html:tri("")}]
-      ]},
-      {formula:R`c = \frac{I}{r \cdot t} \qquad r = \frac{I}{c \cdot t} \qquad t = \frac{I}{c \cdot r}`}
-    ]},
-
-    { titulo:"Pedir un préstamo", cuerpo:[
-      {ej:{etq:"💳 Al revés: ahora pagas tú", enun:"Pides 2000 € prestados al 5 % durante 2 años para un ordenador. ¿Cuánto devuelves?",
-        pasos:[R`$I = 2000 \cdot 0,05 \cdot 2 = 200$ €`, R`Devuelves $2000 + 200 = 2200$ €`], res:"Devuelves <b>2200 €</b>: el préstamo te cuesta 200 €."}},
-      {nota:["Cuando ahorras, el interés lo ganas tú; cuando pides prestado, lo pagas tú."]}
+    { titulo:"Con desagüe", cuerpo:[
+      {ej:{enun:"Un grifo llena un depósito en 3 horas y el desagüe lo vacía en 6 horas. Si están abiertos los dos, ¿cuánto tarda en llenarse?",
+        pasos:[R`El grifo llena $\dfrac13$ cada hora; el desagüe vacía $\dfrac16$: <b>resta</b>`, R`$\dfrac13 - \dfrac16 = \dfrac26 - \dfrac16 = \dfrac16$`, "Le doy la vuelta: 6 horas"], res:"El depósito tarda <b>6 horas</b> en llenarse."}},
+      {nota:["Sirve igual para cualquier <b>trabajo en común</b>: dos pintores, dos impresoras, dos amigos ordenando la clase…"]}
     ]},
 
     { titulo:"🪄 Trucos y ⚠️ errores", cuerpo:[
-      {truco:["<b>El % en decimal</b>: divide entre 100 (moviendo la coma): 2,5 % → 0,025."], etq:"🪄 Truco"},
-      {truco:["<b>Comprueba</b> sustituyendo el resultado en $I = c \\cdot r \\cdot t$."], etq:"🪄 Truco"},
-      {aviso:["Poner <b>3 en vez de 0,03</b> para el 3 %: ¡saldría un interés gigante!"], etq:"⚠️ Error"},
-      {aviso:["Olvidar <b>dividir entre 12</b> cuando el tiempo está en meses."], etq:"⚠️ Error"}
+      {truco:["<b>Grifos</b>: sumo lo que hacen en 1 hora y <b>le doy la vuelta</b>. Juntos, siempre menos que el más rápido."], etq:"🪄 Truco"},
+      {aviso:["Sumar los tiempos de los grifos o hacer la media."], etq:"⚠️ Error"},
+      {aviso:["Olvidar que el desagüe <b>resta</b>."], etq:"⚠️ Error"}
     ]},
 
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[{lista:[
-        "$I = c \\cdot r \\cdot t$ (r en decimal, t en años).",
-        "En meses: $I = \\dfrac{c \\cdot r \\cdot t}{12}$. En días: entre 360.",
-        "Capital final = capital + interés.",
-        "Para buscar c, r o t: tapa en el triángulo lo que buscas."
+        "Grifos y trabajos: $\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta.",
+        "Juntos tardan siempre menos que el más rápido.",
+        "Horas en decimal a minutos: multiplico por 60 (0,25 h = 15 min)."
       ]}]},
       {estudio:[
-        {comp:{q:"¿Qué interés dan 3000 € al 4 % durante 2 años?", sol:240, unidad:"€", explic:"3000 · 0,04 · 2 = 240 €", pista:"I = c · r · t con r = 0,04."}},
-        {comp:{q:"¿Y durante 6 meses?", sol:60, unidad:"€", explic:"3000 · 0,04 · 6 : 12 = 60 €", pista:"Divide entre 12."}}
+        {comp:{q:"Dos grifos llenan un depósito en 3 h y en 6 h. ¿Cuántas horas tardan juntos?", sol:2, unidad:"h", explic:"1/3 + 1/6 = 1/2 → 2 h", pista:"Suma lo que llenan en 1 hora."}},
+        {comp:{q:"Un grifo llena un depósito en 4 h y el desagüe lo vacía en 12 h. ¿Cuántas horas tarda en llenarse?", sol:6, unidad:"h", explic:"1/4 − 1/12 = 2/12 = 1/6 → 6 h", pista:"El desagüe resta."}}
       ]}
     ]}
   ]

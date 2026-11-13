@@ -11,10 +11,10 @@
 <title>Tema 3 · Proporcionalidad · 3.º ESO · Mercedes Cerezo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="../../assets/tema.css?v=20261113a">
+<link rel="stylesheet" href="../../assets/tema.css?v=20261113b">
 <link rel="icon" href="../../assets/favicon.svg">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
-<script src="info.js?v=20261113a"></script>
+<script src="info.js?v=20261113b"></script>
 </head>
 <body>
 <header class="hero"><div class="wrap">
@@ -51,7 +51,7 @@ const tabs = document.getElementById("tabs"), pan = document.getElementById("pan
 SECC.forEach((s,i)=>{
   tabs.insertAdjacentHTML("beforeend",`<button role="tab" id="t-${s.id}" aria-controls="p-${s.id}" aria-selected="${i===0}">${s.t}</button>`);
   let h;
-  const lista = (fn) => `<div class="aps">` + TEMA.info.apartados.map(a=>`<div class="ap ${a.listo?"":"prox"}">
+  const lista = (fn) => `<div class="aps">` + TEMA.info.apartados.map((a,k,L)=>(a.grupo && (k===0 || L[k-1].grupo!==a.grupo) ? `<div class="ap-grupo">${a.grupo}</div>` : "") + `<div class="ap ${a.listo?"":"prox"}${a.grupo?" sub":""}">
       <span class="n">${a.num}</span><div><h3>${a.titulo}</h3><p>${a.desc}</p></div>
       <div class="acts">${a.listo ? fn(a) : `<span class="prox-tag">En preparación</span>`}</div></div>`).join("") + `</div>`;
   if(s.id==="apuntes"){
@@ -77,7 +77,7 @@ SECC.forEach((s,i)=>{
   TEMA.registrar = ap => { vids[ap.num] = ap.videos || []; };
   const pinta = () => {
     const el = document.getElementById("lista-videos"); if(!el) return;
-    el.innerHTML = aps.map(a=>`<div class="ap"><span class="n">${a.num}</span><div><h3>${a.titulo}</h3>${(vids[a.num]||[]).length ? "" : `<p>Sin vídeos todavía.</p>`}</div>
+    el.innerHTML = aps.map((a,k,L)=>(a.grupo && (k===0 || L[k-1].grupo!==a.grupo) ? `<div class="ap-grupo">${a.grupo}</div>` : "") + `<div class="ap${a.grupo?" sub":""}"><span class="n">${a.num}</span><div><h3>${a.titulo}</h3>${(vids[a.num]||[]).length ? "" : `<p>Sin vídeos todavía.</p>`}</div>
       <div class="acts">${(vids[a.num]||[]).map(v=>`<a class="btn" href="${v.url}" target="_blank" rel="noopener">▶ ${v.t}</a>`).join("")}</div></div>`).join("");
   };
   aps.forEach(a=>{ const sc = document.createElement("script"); sc.src = `contenido/ap${a.num}.js`;
