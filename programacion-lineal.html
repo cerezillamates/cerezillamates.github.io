@@ -569,15 +569,7 @@ Misiones y programas son enteros: es lo mismo que \(2x+y\ge 21\).<br>El máximo 
 <div class="note"><b>Si aparece un mensaje</b> (sin solución o infinitas soluciones), las rectas son <b>paralelas o coincidentes</b>: no se cortan en un punto y <b>no hay vértice</b>. Ejemplo: \(2x+3y=60\) y \(4x+6y=100\).</div>
 <div class="good">En el examen <b>escribo el sistema</b> y cómo lo resuelvo; la calculadora me da (o me confirma) la solución en segundos. <a href="#teoria" data-go="calc" data-calc="eq">Practícalo en el simulador</a>.</div>
 <p class="calc-nota">Comprueba las teclas en tu calculadora: los nombres de los menús pueden variar ligeramente.</p>
-<details class="mas"><summary>Otra forma: con matrices, \(X=A^{-1}\cdot B\)</summary><div class="mb">
-<p style="margin:0">El sistema se escribe \(A\cdot X=B\): A es la matriz de los <b>coeficientes</b> y B la columna de los <b>términos independientes</b>.</p>
-<div class="tw">\[A=\begin{pmatrix}2&amp;3\\2&amp;1\end{pmatrix},\qquad B=\begin{pmatrix}60\\28\end{pmatrix},\qquad X=\begin{pmatrix}x\\y\end{pmatrix}=A^{-1}\cdot B\]</div>
-<p style="margin:0"><b>Las cuentas, para comprobar:</b> \(|A|=2\cdot 1-3\cdot 2=-4\).</p>
-<div class="tw">\[A^{-1}=\frac{1}{-4}\begin{pmatrix}1&amp;-3\\-2&amp;2\end{pmatrix}=\begin{pmatrix}-\frac14&amp;\frac34\\[3pt]\frac12&amp;-\frac12\end{pmatrix}\]</div>
-<div class="tw">\[X=\begin{pmatrix}-\frac14\cdot 60+\frac34\cdot 28\\[3pt]\frac12\cdot 60-\frac12\cdot 28\end{pmatrix}=\begin{pmatrix}-15+21\\30-14\end{pmatrix}=\begin{pmatrix}6\\16\end{pmatrix}\]</div>
-<p style="margin:0">Arriba sale la x y abajo la y: <b>C(6, 16)</b>.</p>
-<p style="margin:0">En la calculadora: aplicación <b>Matriz</b>, MatA de 2 × 2 con los coeficientes, MatB de 2 × 1 con los términos independientes, y se calcula MatA<sup>−1</sup> × MatB (las matrices se definen como en el <a href="#teoria" data-go="p4">Paso 4</a>).</p>
-<div class="note"><b>Si \(|A|=0\)</b>, la matriz no tiene inversa y la calculadora da error: las rectas son paralelas o coincidentes y no hay vértice. Ejemplo: \(2x+3y=60\) y \(4x+6y=100\) → \(|A|=2\cdot 6-3\cdot 4=0\).</div></div></details></article>
+</article>
 <article class="card paso" id="p4"><h2><span class="n">PASO 4</span>Valor de la función objetivo en cada vértice</h2>
 <p>«Evaluamos la función objetivo en los vértices»: sustituyo cada vértice en F.</p>
 <div class="tryit"><div class="ctl">
