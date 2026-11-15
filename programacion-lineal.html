@@ -462,14 +462,50 @@ Misiones y programas son enteros: es lo mismo que \(2x+y\ge 21\).<br>El máximo 
 <svg class="plot" id="plotS" viewBox="0 0 400 320" role="img" aria-label="Región con una recta discontinua"></svg></div>
 </article>
 <article class="card paso" id="p2"><h2><span class="n">PASO 2</span>¿La región factible es acotada o no acotada?</h2>
+<h3>1. Qué significa la región factible</h3>
+<p>La región factible no es solo un dibujo: es el conjunto de <b>todas las decisiones posibles</b>.</p>
+<div class="two"><div class="good"><b>Cada punto (x, y) es una decisión:</b> confeccionar x pañuelos e y corbatas a la semana.<br><b>Está en la región</b> = cumple <b>todas</b> las restricciones a la vez = <b>se puede hacer</b>.</div>
+<div class="bad"><b>Está fuera</b> = incumple <b>al menos una</b> restricción = <b>no se puede hacer</b> (faltan horas, no se cumple el compromiso…).<br>Entre todos los puntos de la región, busco el que da el mejor valor de F.</div></div>
+<div class="tw"><table class="t"><tr><th>Punto</th><th>Horas: \(2x+3y\le 60\)</th><th>Compromiso: \(2x+y\ge 28\)</th><th>¿Qué significa?</th></tr>
+<tr><td>(20, 5)</td><td>\(2\cdot 20+3\cdot 5=55\le 60\) ✓</td><td>\(2\cdot 20+5=45\ge 28\) ✓</td><td><b>Posible:</b> se pueden hacer 20 pañuelos y 5 corbatas.</td></tr>
+<tr><td>(10, 5)</td><td>\(2\cdot 10+3\cdot 5=35\le 60\) ✓</td><td>\(2\cdot 10+5=25\ge 28\) ✗</td><td><b>No es posible:</b> no llega al compromiso mínimo.</td></tr>
+<tr><td>(20, 10)</td><td>\(2\cdot 20+3\cdot 10=70\le 60\) ✗</td><td>\(2\cdot 20+10=50\ge 28\) ✓</td><td><b>No es posible:</b> harían falta 70 horas y solo hay 60.</td></tr></table></div>
+<div class="theo"><b>Te lo pueden preguntar.</b> <a href="https://www.ebaumatematicas.com/wp-content/uploads/2026/06/2oBachCCSS_EBAU_Asturias_2026-Ordinaria_Resuelto_JuanAntonioMG.pdf" target="_blank" rel="noopener">Asturias Ordinaria 2026</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="8" data-l="G P" title="Abrir el enunciado">nº 8</button>: un furgón lleva mesas (x) y sillas (y). Peso: \(25x+8y\le 800\). Volumen: \(0{,}6x+0{,}2y\le 15\). Al menos 2 sillas por mesa: \(y\ge 2x\).<br>
+«¿Cuántas mesas y sillas puede enviar la empresa en ese furgón?» no pide un punto: pide <b>la región factible entera</b> (todos los envíos posibles).<br>
+• (10, 30): \(250+240=490\le 800\) ✓, \(6+6=12\le 15\) ✓, \(30\ge 20\) ✓ → se puede enviar.<br>
+• (20, 30): \(12+6=18\le 15\) ✗ → no cabe en el furgón.<br>
+• «Explica si (1,15; 2,3) tiene sentido»: cumple las tres inecuaciones (\(28{,}75+18{,}4=47{,}15\le 800\); \(0{,}69+0{,}46=1{,}15\le 15\); \(2{,}3\ge 2\cdot 1{,}15\)), pero <b>no tiene sentido</b>: no se pueden enviar 1,15 mesas. Solo valen los puntos de la región con <b>coordenadas enteras</b>.<br>
+<span class="mini">Otro: <a href="https://www.ebaumatematicas.com/wp-content/uploads/2026/08/2oBachCCSS_EBAU_Asturias_2026-Extraordinaria_Resuelto_JuanAntonioMG.pdf" target="_blank" rel="noopener">Asturias Extraordinaria 2026</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="9" data-l="G C" title="Abrir el enunciado">nº 9</button> («¿Cuántas bicicletas y patinetes puede producir la empresa en un día?»).</span></div>
+<h3>2. ¿Acotada, no acotada o vacía?</h3>
 <div class="theo"><b>Teorema fundamental de la programación lineal.</b> Si la función objetivo alcanza su máximo (o su mínimo) en la región factible, lo alcanza en <b>al menos uno de sus vértices</b>. Si lo alcanza en <b>dos vértices</b>, lo alcanza también en <b>todos los puntos del segmento</b> que los une.<br>Si la región factible es <b>acotada</b> (y no vacía), el máximo y el mínimo <b>existen siempre</b>: basta con calcular F en los vértices.</div>
-<div class="tw"><table class="t"><tr><th></th><th>Región acotada</th><th>Región no acotada</th><th>Sin región (vacía)</th></tr><tr><td>Cómo es</td><td>Cerrada: es un polígono.</td><td>Abierta: se va al infinito por algún lado.</td><td>Las restricciones no tienen ninguna zona común.</td></tr><tr><td>¿Hay óptimo?</td><td><b>Siempre</b> (máximo y mínimo), en algún vértice.</td><td><b>Puede que no.</b> Normalmente falla el máximo.</td><td><b>No</b>: no hay ningún punto posible.</td></tr><tr><td>Qué hago</td><td>Calculo F en los vértices (Pasos 3 y 4).</td><td>Calculo F en los vértices y <b>dibujo la recta F(x, y) = valor</b>: si solo <b>toca</b> la región, ese valor es el óptimo; si la <b>corta</b>, no existe.</td><td>Lo justifico con el dibujo.</td></tr><tr><td>Cómo se escribe</td><td>«La región factible es acotada; por el teorema fundamental, el máximo y el mínimo se alcanzan en alguno de sus vértices.»</td><td>«La región factible no está acotada, así que el máximo (o el mínimo) puede no existir.» Después se comprueba con la recta de F.</td><td>«No existe región factible: el problema no tiene solución.»</td></tr></table></div>
-<h3>Ejemplo: minimizar \(F(x,y)=x+y\) con \(x+2y\ge 8,\ 3x+y\ge 9,\ x,y\ge 0\)</h3>
+<div class="tw"><table class="t"><tr><th></th><th>Región acotada</th><th>Región no acotada</th><th>Sin región (vacía)</th></tr><tr><td>Cómo es</td><td>Cerrada: es un polígono.</td><td>Abierta: se va al infinito por algún lado.</td><td>Las restricciones no tienen ninguna zona común.</td></tr><tr><td>¿Hay óptimo?</td><td><b>Siempre</b> (máximo y mínimo), en algún vértice.</td><td><b>Puede que no.</b> Normalmente falla el máximo.</td><td><b>No</b>: no hay ningún punto posible.</td></tr><tr><td>Qué hago</td><td>Calculo F en los vértices (Pasos 3 y 4).</td><td>Calculo F en los vértices y <b>dibujo la recta F(x, y) = Valor óptimo</b>: si la región queda <b>entera a un lado</b>, ese valor es el óptimo; si la recta la <b>corta</b>, no existe (apartado 3).</td><td>Lo justifico con el dibujo.</td></tr><tr><td>Cómo se escribe</td><td>«La región factible es acotada; por el teorema fundamental, el máximo y el mínimo se alcanzan en alguno de sus vértices.»</td><td>«La región factible no está acotada, así que el máximo (o el mínimo) puede no existir.» Y lo compruebo con la recta F(x, y) = Valor óptimo (apartado 3).</td><td>«No existe región factible: el problema no tiene solución.»</td></tr></table></div>
+<h3>3. Región no acotada: ¿existe el óptimo?</h3>
+<div class="theo"><b>Qué hago</b><ol class="pasos" style="margin-top:6px">
+<li>Calculo F en los vértices y me quedo con el mejor: el <b>mayor</b> si maximizo, el <b>menor</b> si minimizo. Ese es el <b>Valor óptimo</b>… si existe.</li>
+<li><b>Dibujo la recta F(x, y) = Valor óptimo.</b></li>
+<li>Miro dónde queda la región factible:<br>
+• Queda <b>entera a un lado</b> de la recta (el lado en el que F es menor, si maximizo; mayor, si minimizo) y la recta solo la toca en ese vértice o en un lado → <b>ese valor es el óptimo</b>.<br>
+• La recta <b>corta</b> la región (hay región a los dos lados) → hay puntos de la región con F mayor (o menor) → <b>no existe máximo</b> (o mínimo).</li></ol></div>
+<details class="mas"><summary>¿Cómo sé hacia qué lado aumenta F?</summary><div class="mb"><p style="margin:0">Calculo F en un punto de cada lado de la recta. Ejemplo con \(x+y=5\): en (0, 0), \(F=0&lt;5\); en (5, 5), \(F=10&gt;5\). F aumenta hacia arriba y hacia la derecha.</p></div></details>
+<h3>Ejemplo: \(F(x,y)=x+y\) con \(x+2y\ge 8,\ 3x+y\ge 9,\ x,y\ge 0\)</h3>
 <div class="tryit"><svg class="plot" id="plot2" viewBox="0 0 400 330" role="img" aria-label="Región no acotada"></svg>
 <div class="ctl"><p style="margin:0">Las dos restricciones son «≥»: la región queda por encima de las rectas y no se cierra.<br>Vértices: A(0, 9), B(2, 3), C(8, 0).<br>F(A) = 9<br>F(B) = 5<br>F(C) = 8</p>
+<div class="row" role="radiogroup" aria-label="Qué se busca"><label><input type="radio" name="m2" id="m2min" checked> Minimizar</label><label><input type="radio" name="m2" id="m2max"> Maximizar</label><button type="button" class="proy-btn" id="b2">Poner la recta en el Valor óptimo</button></div>
 <div class="row"><label for="k2">Mueve la recta \(x+y=k\):</label><input type="range" id="k2" min="0" max="20" step="0.5" value="5"><span class="out" id="k2o"></span></div>
 <div class="verdict" id="v2"></div>
-<div class="bad"><b>Cómo se escribe cuando no hay máximo:</b> «La región no está acotada y la función objetivo puede tomar valores tan grandes como queramos: <b>el problema no tiene solución óptima</b> (no existe máximo).» Ejemplo: <a href="https://www.ebaumatematicas.com/wp-content/uploads/2024/08/2oBachCCSS_EBAU_Castilla-Leon_2024-ExtraordinariaFG_Resuelto_JuanAntonioMG.pdf" target="_blank" rel="noopener">Castilla y León Extraordinaria 2024</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="202" data-l="N" title="Abrir el enunciado">nº 202</button>.</div></div></div></article>
+</div></div>
+<h3>4. Cómo se justifica que no existe máximo</h3>
+<div class="pau"><b>Por reducción al absurdo.</b> <span class="say">«Si existiera el máximo, se alcanzaría en un vértice (teorema fundamental). El mayor valor de F en los vértices es F(…) = … Pero el punto P(…) pertenece a la región factible y F(P) = … es mayor. ¡Absurdo! Luego no existe máximo.»</span><br><span class="mini">Para un mínimo, igual: busco un punto P de la región con F(P) menor que el menor de los vértices.</span></div>
+<div class="tw"><table class="t"><tr><th>Paso</th><th>Ejemplo real: <a href="https://www.ebaumatematicas.com/wp-content/uploads/2024/08/2oBachCCSS_EBAU_Castilla-Leon_2024-ExtraordinariaFG_Resuelto_JuanAntonioMG.pdf" target="_blank" rel="noopener">Castilla y León Extraordinaria 2024</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="202" data-l="N" title="Abrir el enunciado">nº 202</button></th></tr>
+<tr><td>Planteamiento</td><td style="font-weight:400">x = estudiantes de A1, y = estudiantes de A2. \(F(x,y)=145x+150y\) → MAXIMIZAR, con \(x\le 66,\ y\ge 60,\ x\le\frac{2}{3}y,\ x\ge 0\). La región no está acotada: no hay tope para y.</td></tr>
+<tr><td>F en los vértices</td><td style="font-weight:400">F(0, 60) = 9000<br>F(40, 60) = 5800 + 9000 = 14 800<br>F(66, 99) = 9570 + 14 850 = <b>24 420</b> (el mayor)</td></tr>
+<tr><td>Busco un punto P</td><td style="font-weight:400">P(66, 100). Está en la región: \(66\le 66\) ✓, \(100\ge 60\) ✓, \(66\le\frac{2}{3}\cdot 100\approx 66{,}67\) ✓.<br>F(P) = 9570 + 15 000 = <b>24 570 &gt; 24 420</b>.</td></tr>
+<tr><td>Conclusión</td><td style="font-weight:400">¡Absurdo! El máximo tendría que estar en un vértice y P lo supera. <b>No existe máximo.</b></td></tr></table></div>
+<div class="pau"><b>La frase final.</b> <span class="say">«Como la región factible no está acotada en la dirección en que F aumenta, podemos tomar puntos de la región tan alejados como queramos, con un beneficio tan grande como queramos: no existe máximo. El problema no tiene solución óptima.»</span></div>
+<div class="bad"><b>Cuándo NO se puede escribir esa frase</b><ol class="pasos" style="margin-top:6px">
+<li><b>No basta con que la región sea no acotada.</b> En el ejemplo de arriba, al <b>minimizar</b>, la región no está acotada y el mínimo <b>sí existe</b> (5, en B): la región se abre hacia donde F aumenta, no hacia donde disminuye.</li>
+<li><b>No vale cualquier punto alejado.</b> Solo los que siguen dentro de la región y en la dirección en que F mejora.</li>
+<li><b>No digas que «el máximo está fuera de los vértices».</b> Si el máximo existe, está en un vértice. Aquí, sencillamente, no existe.</li></ol></div></article>
 <article class="card paso" id="p3"><h2><span class="n">PASO 3</span>Calcular los vértices</h2><p>Cada vértice es una <b>esquina</b> de la región: el punto donde se cortan dos de sus rectas. Escribo el <b>sistema</b>, lo resuelvo y escribo el punto.</p>
 <div class="tw"><table class="t"><tr><th>Vértice</th><th>Sistema</th><th>Resolución</th></tr><tr><td>A</td><td>\(\left\{\begin{array}{ll}\mathbf{r_2}: &amp; 2x+y=28\\ \text{eje }X: &amp; y=0\end{array}\right.\)</td><td>\(2x=28\Rightarrow x=14\) → <b>A(14, 0)</b></td></tr><tr><td>B</td><td>\(\left\{\begin{array}{ll}\mathbf{r_1}: &amp; 2x+3y=60\\ \text{eje }X: &amp; y=0\end{array}\right.\)</td><td>\(2x=60\Rightarrow x=30\) → <b>B(30, 0)</b></td></tr><tr><td>C</td><td>\(\left\{\begin{array}{ll}\mathbf{r_1}: &amp; 2x+3y=60\\ \mathbf{r_2}: &amp; 2x+y=28\end{array}\right.\)</td><td>Restando: \(2y=32\Rightarrow y=16\)<br>\(2x+16=28\Rightarrow x=6\) → <b>C(6, 16)</b></td></tr></table></div>
 <div class="note"><b>¡Cuidado! No todos los puntos de corte son vértices.</b> Un vértice tiene que ser una esquina de la zona sombreada y cumplir <b>todas</b> las restricciones.<br>• (0, 20): \(2\cdot 0+20=20\ge 28\) ✗ → fuera: <b>no es vértice</b>.<br>• (0, 28): \(3\cdot 28=84\le 60\) ✗ → fuera: <b>no es vértice</b>.<br>• C(6, 16): \(12+48=60\le 60\) ✓ y \(12+16=28\ge 28\) ✓ → <b>sí es vértice</b>.</div></article>
@@ -835,18 +871,22 @@ function draw1(){
 }
 ['#s_r1','#s_r2','#s_reg','#s_cut'].forEach(id => $(id).addEventListener('input', draw1));
 function draw2(){
-  const k = +$('#k2').value; $('#k2o').textContent = 'k = ' + k;
+  const k = +$('#k2').value, mx = $('#m2max').checked; $('#k2o').textContent = 'k = ' + k;
   const p = Plot($('#plot2'), 11, 11, 1);
   p.poly([[0,11],[0,9],[2,3],[8,0],[11,0],[11,11]], 'var(--acc)', .35);
   p.line(1, 2, 8, 'var(--r1)'); p.line(3, 1, 9, 'var(--r2)');
   p.line(1, 1, k, 'var(--amb)', 3, '6 4');
   p.dot(0, 9, 'A(0, 9)'); p.dot(2, 3, 'B(2, 3)'); p.dot(8, 0, 'C(8, 0)', 'var(--ink)', -10, -10);
+  if (mx){ p.dot(6, 6, 'P(6, 6): F = 12', 'var(--r2)'); p.arrow(8, 8, 1.6, 1.6, 'var(--amb)'); p.text(7.9, 9.9, 'F aumenta', 'var(--amb)', 'end'); }
   const v = $('#v2');
   if (k < 5) v.textContent = 'x + y = ' + k + ' no toca la región: ningún punto da ese valor.';
-  else if (k === 5) v.innerHTML = 'x + y = 5 solo toca la región en B: <b>el mínimo existe y vale 5 en B(2, 3)</b>.';
-  else v.innerHTML = 'x + y = ' + k + ' <b>corta</b> la región: hay puntos con F = ' + k + ' y con valores mayores. Por mucho que subas k, siempre corta: <b>no hay máximo</b>.';
+  else if (!mx && k === 5) v.innerHTML = 'x + y = 5 es la recta F(x, y) = Valor óptimo (el menor de los vértices). Solo toca la región en B y toda la región queda en el lado en que F es mayor: <b>el mínimo existe y vale 5 en B(2, 3)</b>.';
+  else if (!mx) v.innerHTML = 'x + y = ' + k + ' <b>corta</b> la región: hay puntos con F = ' + k + ', pero también con F menor. Baja la recta hasta el último punto que toca.';
+  else if (k === 9) v.innerHTML = 'x + y = 9 es la recta F(x, y) = Valor óptimo (el mayor de los vértices, en A). Pero <b>corta</b> la región: P(6, 6) está en la región y F(P) = 12 &gt; 9. <b>No existe máximo.</b>';
+  else v.innerHTML = 'x + y = ' + k + ' <b>corta</b> la región: hay puntos con F = ' + k + ' y con valores mayores. Por mucho que subas k, siempre la corta: <b>no hay máximo</b>.';
 }
-$('#k2').addEventListener('input', draw2);
+['#k2','#m2min','#m2max'].forEach(id => $(id).addEventListener('input', draw2));
+$('#b2').addEventListener('click', () => { $('#k2').value = $('#m2max').checked ? 9 : 5; draw2(); });
 function draw4(){
   const a = +$('#fa').value || 0, b = +$('#fb').value || 0, k = +$('#k4').value;
   const V = [['A',14,0],['B',30,0],['C',6,16]].map(([n,x,y]) => [n, x, y, a * x + b * y]);
