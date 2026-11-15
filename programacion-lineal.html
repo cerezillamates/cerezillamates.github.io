@@ -303,6 +303,11 @@ table.t td.si{color:var(--acc);font-weight:700} table.t td.no{color:var(--r2);fo
 .pau .say{color:var(--ink)}
 .esp{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:center;background:var(--amb-bg)}
 @media (max-width:760px){.esp{grid-template-columns:1fr}.esp>img{max-width:320px;margin:0 auto}}
+kbd{display:inline-block;font:700 .78rem var(--f-mono);line-height:1.5;border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:0 6px;margin:1px 0;background:var(--card);color:var(--ink);white-space:nowrap}
+.calc-nota{font-size:.86rem;color:var(--muted);margin:0;border-left:3px solid var(--line);padding-left:10px}
+.teclas{line-height:2}
+.paso,details.mas>.mb,.sit{grid-template-columns:minmax(0,1fr)}
+.paso mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:2px 0}
 </style>
 
 </head>
@@ -418,7 +423,7 @@ table.t td.si{color:var(--acc);font-weight:700} table.t td.no{color:var(--r2);fo
  <div class="tw"><table class="t" style="text-align:center"><tr><th colspan="2" style="background:var(--r2-bg);color:var(--r2)"><b>r<sub>2</sub></b>: \(2x+y=28\)</th></tr><tr><th>x</th><th>y</th></tr><tr><td>0</td><td>28</td></tr><tr><td>14</td><td>0</td></tr>
  <tr><td colspan="2" style="font-weight:400">\(x=0\Rightarrow y=28\)<br>\(y=0\Rightarrow 2x=28\Rightarrow x=14\)</td></tr></table></div>
 </div>
-<div class="theo"><b>Con la calculadora</b> (Casio ClassWiz, la blanca): menú → <b>Tabla</b> → escribo la recta despejada, por ejemplo \(f(x)=\frac{60-2x}{3}\) → Rango de tabla: inicio, final y paso → ejecutar. Vídeo: <a href="https://www.edu-casio.es/recurso/tabla-de-valores-de-una-funcion/" target="_blank" rel="noopener">Tabla de valores de una función (Casio Educación)</a>.</div>
+<div class="theo"><b>Con la calculadora</b> (Casio fx-991SP CW): <kbd>HOME</kbd> → <b>Tabla</b> → <kbd>OK</kbd> → escribo la recta despejada, por ejemplo \(f(x)=\frac{60-2x}{3}\) → <kbd>TOOLS</kbd> → <b>Rango tabla</b>: inicio, final y paso → <b>Ejecutar</b> (los pasos, en el <a href="#teoria" data-go="p5">Paso 5</a>). Vídeo: <a href="https://www.edu-casio.es/recurso/tabla-de-valores-de-una-funcion/" target="_blank" rel="noopener">Tabla de valores de una función (Casio Educación)</a>.</div>
 <div class="good"><b>Trucos para que el dibujo salga bien</b><ol class="pasos" style="margin-top:6px">
 <li><b>Escala.</b> Miro el número más grande de las tablas (aquí, 30 en x y 28 en y) y elijo una escala en la que <b>quepan todos los puntos</b>.</li>
 <li>Si cabe en el papel, <b>1 unidad = 1 cm</b> (o 1 cuadro). Si no cabe, un número redondo: 1 cm = 2, 5, 10, 100… unidades. Aquí, 1 cm = 5 unidades: el dibujo ocupa unos 6 cm × 6 cm.</li>
@@ -506,9 +511,44 @@ Misiones y programas son enteros: es lo mismo que \(2x+y\ge 21\).<br>El máximo 
 <li><b>No basta con que la región sea no acotada.</b> En el ejemplo de arriba, al <b>minimizar</b>, la región no está acotada y el mínimo <b>sí existe</b> (5, en B): la región se abre hacia donde F aumenta, no hacia donde disminuye.</li>
 <li><b>No vale cualquier punto alejado.</b> Solo los que siguen dentro de la región y en la dirección en que F mejora.</li>
 <li><b>No digas que «el máximo está fuera de los vértices».</b> Si el máximo existe, está en un vértice. Aquí, sencillamente, no existe.</li></ol></div></article>
-<article class="card paso" id="p3"><h2><span class="n">PASO 3</span>Calcular los vértices</h2><p>Cada vértice es una <b>esquina</b> de la región: el punto donde se cortan dos de sus rectas. Escribo el <b>sistema</b>, lo resuelvo y escribo el punto.</p>
-<div class="tw"><table class="t"><tr><th>Vértice</th><th>Sistema</th><th>Resolución</th></tr><tr><td>A</td><td>\(\left\{\begin{array}{ll}\mathbf{r_2}: &amp; 2x+y=28\\ \text{eje }X: &amp; y=0\end{array}\right.\)</td><td>\(2x=28\Rightarrow x=14\) → <b>A(14, 0)</b></td></tr><tr><td>B</td><td>\(\left\{\begin{array}{ll}\mathbf{r_1}: &amp; 2x+3y=60\\ \text{eje }X: &amp; y=0\end{array}\right.\)</td><td>\(2x=60\Rightarrow x=30\) → <b>B(30, 0)</b></td></tr><tr><td>C</td><td>\(\left\{\begin{array}{ll}\mathbf{r_1}: &amp; 2x+3y=60\\ \mathbf{r_2}: &amp; 2x+y=28\end{array}\right.\)</td><td>Restando: \(2y=32\Rightarrow y=16\)<br>\(2x+16=28\Rightarrow x=6\) → <b>C(6, 16)</b></td></tr></table></div>
-<div class="note"><b>¡Cuidado! No todos los puntos de corte son vértices.</b> Un vértice tiene que ser una esquina de la zona sombreada y cumplir <b>todas</b> las restricciones.<br>• (0, 20): \(2\cdot 0+20=20\ge 28\) ✗ → fuera: <b>no es vértice</b>.<br>• (0, 28): \(3\cdot 28=84\le 60\) ✗ → fuera: <b>no es vértice</b>.<br>• C(6, 16): \(12+48=60\le 60\) ✓ y \(12+16=28\ge 28\) ✓ → <b>sí es vértice</b>.</div></article>
+<article class="card paso" id="p3"><h2><span class="n">PASO 3</span>Calcular los vértices</h2><p>Cada vértice es una <b>esquina</b> de la región: el punto donde se cortan dos de sus rectas.</p>
+<h3>1. Un sistema por vértice</h3>
+<p>Miro el dibujo: ¿qué dos rectas se cortan en cada vértice? Escribo <b>ese sistema</b>, lo resuelvo y escribo el punto. Nada más.</p>
+<div class="tw"><table class="t"><tr><th>Vértice</th><th>Sistema</th><th>Resolución</th></tr><tr><td>A</td><td>\(\left\{\begin{array}{ll}\mathbf{r_2}: &amp; 2x+y=28\\ \text{eje }X: &amp; y=0\end{array}\right.\)</td><td>Sustituyo \(y=0\): \(2x=28\Rightarrow x=14\) → <b>A(14, 0)</b></td></tr><tr><td>B</td><td>\(\left\{\begin{array}{ll}\mathbf{r_1}: &amp; 2x+3y=60\\ \text{eje }X: &amp; y=0\end{array}\right.\)</td><td>Sustituyo \(y=0\): \(2x=60\Rightarrow x=30\) → <b>B(30, 0)</b></td></tr><tr><td>C</td><td>\(\left\{\begin{array}{ll}\mathbf{r_1}: &amp; 2x+3y=60\\ \mathbf{r_2}: &amp; 2x+y=28\end{array}\right.\)</td><td>Resto las ecuaciones: \(2y=32\Rightarrow y=16\)<br>Sustituyo en <b>r<sub>2</sub></b>: \(2x+16=28\Rightarrow 2x=12\Rightarrow x=6\) → <b>C(6, 16)</b></td></tr></table></div>
+<div class="good"><b>Directo al sistema.</b> No hace falta despejar la y de cada recta ni calcular los cortes de todas las rectas con todas. Solo resuelvo los sistemas de las <b>esquinas de la región</b>. Todas las cuentas, paso a paso, están en el apartado 5 del <a href="#teoria" data-go="pex">Examen</a>.</div>
+<h3>2. Si tienes tiempo en el examen, comprueba que son vértices</h3>
+<div class="two"><div class="theo"><b>Punto factible</b><br>Cumple <b>todas</b> las restricciones: está en la región.</div>
+<div class="good"><b>Vértice</b><br>Es factible y, además, cumple <b>con igualdad dos restricciones independientes</b>: está en dos rectas no paralelas. Es una esquina.</div></div>
+<div class="tw"><table class="t"><tr><th>Punto</th><th>¿Cumple todas las restricciones?</th><th>¿Está en dos rectas?</th><th>Conclusión</th></tr>
+<tr><td>C(6, 16)</td><td>\(2\cdot 6+3\cdot 16=60\le 60\) ✓<br>\(2\cdot 6+16=28\ge 28\) ✓</td><td>Sí: igualdad en <b>r<sub>1</sub></b> y en <b>r<sub>2</sub></b>.</td><td class="si">Vértice</td></tr>
+<tr><td>A(14, 0)</td><td>\(2\cdot 14+3\cdot 0=28\le 60\) ✓<br>\(2\cdot 14+0=28\ge 28\) ✓</td><td>Sí: igualdad en <b>r<sub>2</sub></b> y en el eje X (\(y=0\)).</td><td class="si">Vértice</td></tr>
+<tr><td>B(30, 0)</td><td>\(2\cdot 30+3\cdot 0=60\le 60\) ✓<br>\(2\cdot 30+0=60\ge 28\) ✓</td><td>Sí: igualdad en <b>r<sub>1</sub></b> y en el eje X (\(y=0\)).</td><td class="si">Vértice</td></tr>
+<tr><td>(0, 20)</td><td>\(2\cdot 0+20=20\ge 28\) ✗</td><td>Sí: <b>r<sub>1</sub></b> y eje Y. Pero no es factible.</td><td class="no">No es vértice: está fuera</td></tr>
+<tr><td>(0, 28)</td><td>\(2\cdot 0+3\cdot 28=84\le 60\) ✗</td><td>Sí: <b>r<sub>2</sub></b> y eje Y. Pero no es factible.</td><td class="no">No es vértice: está fuera</td></tr>
+<tr><td>(18, 8)</td><td>\(2\cdot 18+3\cdot 8=60\le 60\) ✓<br>\(2\cdot 18+8=44\ge 28\) ✓</td><td>No: solo en <b>r<sub>1</sub></b>.</td><td>Factible, pero no es vértice: está en un lado</td></tr>
+<tr><td>(20, 5)</td><td>\(2\cdot 20+3\cdot 5=55\le 60\) ✓<br>\(2\cdot 20+5=45\ge 28\) ✓</td><td>No: en ninguna.</td><td>Factible, pero no es vértice: está dentro</td></tr></table></div>
+<div class="note"><b>¡Cuidado! No todos los puntos de corte son vértices.</b> (0, 20) y (0, 28) salen en las tablas de valores, pero están fuera de la zona sombreada. Las dos comprobaciones hacen falta: <b>factible</b> y <b>en dos rectas</b>.</div>
+<h3>3. Resolver el sistema con la calculadora</h3>
+<p>La calculadora (Casio fx-991SP CW) resuelve el sistema con la aplicación <b>Ecuación</b>. Antes, escribo las dos ecuaciones <b>ordenadas</b>: \(ax+by=c\).</p>
+<div class="two"><div class="card" style="background:var(--soft)"><b>Vértice C</b>\[\left\{\begin{array}{l}2x+3y=60\\2x+y=28\end{array}\right.\]<div class="tw"><table class="grid" style="min-width:0;margin:0 auto"><tr><th></th><th>a</th><th>b</th><th>c</th></tr><tr><th>1.ª ecuación</th><td>2</td><td>3</td><td>60</td></tr><tr><th>2.ª ecuación</th><td>2</td><td>1</td><td>28</td></tr></table></div><p class="mini" style="margin-top:8px">Si falta una letra, su coeficiente es 0. El eje X, \(y=0\), es \(0x+1y=0\).</p></div>
+<ol class="pasos teclas">
+<li><kbd>HOME</kbd> → <b>Ecuación</b> → <kbd>OK</kbd></li>
+<li><b>Sist ec lineal</b> → <kbd>OK</kbd> → <b>2 incógnitas</b> → <kbd>OK</kbd></li>
+<li>Coeficientes, cada uno con <kbd>EXE</kbd>: <kbd>2</kbd> <kbd>EXE</kbd> <kbd>3</kbd> <kbd>EXE</kbd> <kbd>6</kbd><kbd>0</kbd> <kbd>EXE</kbd> y <kbd>2</kbd> <kbd>EXE</kbd> <kbd>1</kbd> <kbd>EXE</kbd> <kbd>2</kbd><kbd>8</kbd> <kbd>EXE</kbd></li>
+<li><kbd>EXE</kbd> → aparece <b>x = 6</b> → <kbd>EXE</kbd> → <b>y = 16</b></li>
+<li>Escribo el vértice: <b>C(6, 16)</b>.</li></ol></div>
+<div class="note"><b>Si aparece un mensaje</b> (sin solución o infinitas soluciones), las rectas son <b>paralelas o coincidentes</b>: no se cortan en un punto y <b>no hay vértice</b>. Ejemplo: \(2x+3y=60\) y \(4x+6y=100\).</div>
+<div class="good">En el examen <b>escribo el sistema</b> y cómo lo resuelvo; la calculadora me da (o me confirma) la solución en segundos. <a href="#teoria" data-go="calc" data-calc="eq">Practícalo en el simulador</a>.</div>
+<p class="calc-nota">Comprueba las teclas en tu calculadora: los nombres de los menús pueden variar ligeramente.</p>
+<details class="mas"><summary>Otra forma: con matrices, \(X=A^{-1}\cdot B\)</summary><div class="mb">
+<p style="margin:0">El sistema se escribe \(A\cdot X=B\): A es la matriz de los <b>coeficientes</b> y B la columna de los <b>términos independientes</b>.</p>
+<div class="tw">\[A=\begin{pmatrix}2&amp;3\\2&amp;1\end{pmatrix},\qquad B=\begin{pmatrix}60\\28\end{pmatrix},\qquad X=\begin{pmatrix}x\\y\end{pmatrix}=A^{-1}\cdot B\]</div>
+<p style="margin:0"><b>Las cuentas, para comprobar:</b> \(|A|=2\cdot 1-3\cdot 2=-4\).</p>
+<div class="tw">\[A^{-1}=\frac{1}{-4}\begin{pmatrix}1&amp;-3\\-2&amp;2\end{pmatrix}=\begin{pmatrix}-\frac14&amp;\frac34\\[3pt]\frac12&amp;-\frac12\end{pmatrix}\]</div>
+<div class="tw">\[X=\begin{pmatrix}-\frac14\cdot 60+\frac34\cdot 28\\[3pt]\frac12\cdot 60-\frac12\cdot 28\end{pmatrix}=\begin{pmatrix}-15+21\\30-14\end{pmatrix}=\begin{pmatrix}6\\16\end{pmatrix}\]</div>
+<p style="margin:0">Arriba sale la x y abajo la y: <b>C(6, 16)</b>.</p>
+<p style="margin:0">En la calculadora: aplicación <b>Matriz</b>, MatA de 2 × 2 con los coeficientes, MatB de 2 × 1 con los términos independientes, y se calcula MatA<sup>−1</sup> × MatB (las matrices se definen como en el <a href="#teoria" data-go="p4">Paso 4</a>).</p>
+<div class="note"><b>Si \(|A|=0\)</b>, la matriz no tiene inversa y la calculadora da error: las rectas son paralelas o coincidentes y no hay vértice. Ejemplo: \(2x+3y=60\) y \(4x+6y=100\) → \(|A|=2\cdot 6-3\cdot 4=0\).</div></div></details></article>
 <article class="card paso" id="p4"><h2><span class="n">PASO 4</span>Valor de la función objetivo en cada vértice</h2>
 <p>«Evaluamos la función objetivo en los vértices»: sustituyo cada vértice en F.</p>
 <div class="tryit"><div class="ctl">
@@ -516,25 +556,61 @@ Misiones y programas son enteros: es lo mismo que \(2x+y\ge 21\).<br>El máximo 
 <div class="tw"><table class="t" id="ftab"></table></div><div class="verdict" id="fv"></div>
 <p class="count" style="margin:0">Cambia los coeficientes para ver qué pasa si cambia un precio (Pregunta 10).</p></div>
 <svg class="plot" id="plot4" viewBox="0 0 400 330" role="img" aria-label="Rectas de nivel"></svg></div>
-<div class="ctl"><div class="row"><label for="k4">Recta de nivel \(F=k\):</label><input type="range" id="k4" min="0" max="200" step="2" value="90"><span class="out" id="k4o"></span></div></div><div class="note"><b>Si F tiene un término constante</b>, por ejemplo \(F(x,y)=2x+3y-2\) (<a href="https://www.ebaumatematicas.com/wp-content/uploads/2026/09/2oBachCCSS_EBAU_Andalucia_2026-Extraordinaria_Suplente2_Resuelto_JuanAntonioMG.pdf" target="_blank" rel="noopener">Andalucía Extraordinaria Suplente 2 2026</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="5" data-l="R P" title="Abrir el enunciado">nº 5</button>), el número <b>no cambia el punto óptimo</b>, pero <b>sí el valor</b>: lo sumo o resto al evaluar cada vértice. Por ejemplo, \(F(3,1)=2\cdot 3+3\cdot 1-2=7\). Más ejemplos en el Paso 0.</div></article>
+<div class="ctl"><div class="row"><label for="k4">Recta de nivel \(F=k\):</label><input type="range" id="k4" min="0" max="200" step="2" value="90"><span class="out" id="k4o"></span></div></div><h3>Con la calculadora: F en todos los vértices a la vez</h3>
+<p>Con matrices. <b>V</b> es la matriz de los vértices (una fila por vértice: x, y) y <b>C</b> la columna con los coeficientes de F. El producto <b>V · C</b> da una columna con el valor de F en cada vértice.</p>
+<div class="tw">\[V\cdot C=\begin{pmatrix}14&amp;0\\30&amp;0\\6&amp;16\end{pmatrix}\cdot\begin{pmatrix}4\\6\end{pmatrix}=\begin{pmatrix}56\\120\\120\end{pmatrix}\begin{array}{l}\leftarrow F(A)\\\leftarrow F(B)\\\leftarrow F(C)\end{array}\]</div>
+<p style="margin:0">Las cuentas que hace: \(14\cdot 4+0\cdot 6=56\); \(30\cdot 4+0\cdot 6=120\); \(6\cdot 4+16\cdot 6=24+96=120\).</p>
+<ol class="pasos teclas">
+<li><kbd>HOME</kbd> → <b>Matriz</b> → <kbd>OK</kbd></li>
+<li><kbd>TOOLS</kbd> → <b>MatA</b> → <kbd>OK</kbd> → «Dimensión matriz?»: filas = <b>n.º de vértices</b> (3), columnas = <b>2</b> → <b>Confirmar</b> → <kbd>OK</kbd></li>
+<li>Elementos, cada uno con <kbd>EXE</kbd>: 14, 0, 30, 0, 6, 16 → <kbd>BACK</kbd></li>
+<li>Igual con <b>MatB</b>: 2 filas, 1 columna, con los coeficientes de F: 4, 6 → <kbd>BACK</kbd></li>
+<li>En la pantalla de cálculo: <kbd>CATALOG</kbd> → Matriz → <b>MatA</b>, <kbd>×</kbd>, <kbd>CATALOG</kbd> → Matriz → <b>MatB</b>, <kbd>EXE</kbd></li>
+<li>Leo la columna: 56, 120, 120. <b>El orden es el de los vértices.</b></li></ol>
+<div class="note"><b>Más de 4 vértices:</b> la calculadora admite matrices de hasta 4 × 4. Lo hago en dos tandas (primero 4 vértices, luego el resto).<br><b>Si F tiene un término constante</b>, por ejemplo \(F(x,y)=2x+3y-2\): V · C da \(2x+3y\) y el −2 lo sumo después a cada valor. El número no cambia el punto óptimo, solo el valor (<a href="#teoria" data-go="p0">Paso 0</a>, apartado 4).</div>
+<div class="good">En el examen escribo las tres cuentas (F(A), F(B), F(C)); la calculadora las confirma. <a href="#teoria" data-go="calc" data-calc="mat">Practícalo en el simulador</a>.</div>
+<p class="calc-nota">Comprueba las teclas en tu calculadora: los nombres de los menús pueden variar ligeramente.</p></article>
 <article class="card paso" id="p5"><h2><span class="n">PASO 5</span>Responder: cuánto vale, dónde se alcanza y qué significa</h2>
 <div class="tw"><table class="t"><tr><th>Caso</th><th>Frase de la respuesta</th></tr><tr><td>Óptimo en un vértice</td><td>«El máximo valor es 120 y se alcanza en el vértice C(6, 16), <b>es decir</b>, confeccionando 6 pañuelos y 16 corbatas a la semana se obtiene el beneficio máximo de 120 €.»</td></tr><tr><td>Óptimo en dos vértices</td><td>«El máximo vale 120 y se alcanza en B y en C, y por tanto en <b>todos los puntos del segmento BC</b>.» Después, una solución concreta.</td></tr><tr><td>Incógnitas enteras</td><td>Solo valen los puntos con <b>coordenadas enteras</b>.</td></tr><tr><td>No acotada sin máximo</td><td>«<b>No existe máximo</b>: el problema no tiene solución óptima.»</td></tr></table></div>
 <div class="good"><b>En el ejemplo:</b> F(B) = F(C) = 120. La recta \(4x+6y=120\), dividiendo entre 2, es \(2x+3y=60\): la misma recta <b>r<sub>1</sub></b>. Por eso el máximo está en <b>todo el lado BC</b>.</div>
-<h3>Puntos enteros de un segmento con la tabla de la calculadora</h3><p>En el lado BC despejo la y: \(y=\frac{60-2x}{3}\). La x va <b>desde 6 (vértice C) hasta 30 (vértice B)</b>. Calculadora → <b>Tabla</b> → \(f(x)=\frac{60-2x}{3}\) → inicio <b>6</b>, final <b>30</b>, paso <b>1</b> → me quedo con las filas en que f(x) es <b>entero</b>:</p>
+<h3>Puntos enteros de un segmento con la tabla de la calculadora</h3><p>En el lado BC despejo la y: \(y=\frac{60-2x}{3}\). La x va <b>desde 6 (vértice C) hasta 30 (vértice B)</b>. La aplicación <b>Tabla</b> calcula todos los valores:</p>
+<ol class="pasos teclas">
+<li><kbd>HOME</kbd> → <b>Tabla</b> → <kbd>OK</kbd></li>
+<li>Defino la función: \(f(x)=\frac{60-2x}{3}\) (la x, con la tecla <kbd>x</kbd>)</li>
+<li><kbd>TOOLS</kbd> → <b>Rango tabla</b>: Inic. <b>6</b>, Final <b>30</b>, Paso <b>1</b> → <b>Ejecutar</b> → <kbd>EXE</kbd></li>
+<li>Me quedo con las filas en que f(x) es <b>entero</b>:</li></ol>
 <div class="tw"><table class="grid"><tr><th>x</th><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td></tr><tr><th>y</th><td style="background:var(--acc-bg);font-weight:700">16</td><td style="color:var(--muted)">15,33</td><td style="color:var(--muted)">14,67</td><td style="background:var(--acc-bg);font-weight:700">14</td><td style="color:var(--muted)">13,33</td><td style="color:var(--muted)">12,67</td><td style="background:var(--acc-bg);font-weight:700">12</td><td style="color:var(--muted)">11,33</td><td style="color:var(--muted)">10,67</td><td style="background:var(--acc-bg);font-weight:700">10</td><td style="color:var(--muted)">9,33</td><td style="color:var(--muted)">8,67</td><td style="background:var(--acc-bg);font-weight:700">8</td><td style="color:var(--muted)">7,33</td><td style="color:var(--muted)">6,67</td><td style="background:var(--acc-bg);font-weight:700">6</td><td style="color:var(--muted)">5,33</td><td style="color:var(--muted)">4,67</td><td style="background:var(--acc-bg);font-weight:700">4</td><td style="color:var(--muted)">3,33</td><td style="color:var(--muted)">2,67</td><td style="background:var(--acc-bg);font-weight:700">2</td><td style="color:var(--muted)">1,33</td><td style="color:var(--muted)">0,67</td><td style="background:var(--acc-bg);font-weight:700">0</td></tr></table></div>
-<p>Soluciones enteras: (6, 16), (9, 14), (12, 12), (15, 10), (18, 8), (21, 6), (24, 4), (27, 2) y (30, 0).</p><div class="good"><b>Respuesta:</b> <span class="say">«El beneficio máximo es de 120 € y se alcanza en todos los puntos del segmento BC con coordenadas enteras; por ejemplo, confeccionando 6 pañuelos y 16 corbatas a la semana.»</span></div></article>
+<p>Soluciones enteras: (6, 16), (9, 14), (12, 12), (15, 10), (18, 8), (21, 6), (24, 4), (27, 2) y (30, 0). <a href="#teoria" data-go="calc" data-calc="tab">Practícalo en el simulador</a>.</p><p class="calc-nota">Comprueba las teclas en tu calculadora: los nombres de los menús pueden variar ligeramente.</p><div class="good"><b>Respuesta:</b> <span class="say">«El beneficio máximo es de 120 € y se alcanza en todos los puntos del segmento BC con coordenadas enteras; por ejemplo, confeccionando 6 pañuelos y 16 corbatas a la semana.»</span></div></article>
 <article class="card paso" id="pex"><h2><span class="n">EXAMEN</span>Cómo se escribe el ejercicio en el examen</h2>
 <div class="theo">En los criterios de corrección de Andalucía (2023, ejercicio de 2,5 puntos) se dan <b>hasta 2,1 puntos por el planteamiento, la región factible y los vértices</b>, y <b>hasta 0,4 por evaluar F y dar la solución óptima</b>. Casi toda la nota está en plantear, dibujar y calcular bien los vértices.</div><div class="exam">
 <div class="ln"><div><b class="s">1. Incógnitas</b>«Sean x = n.º de pañuelos e y = n.º de corbatas que se confeccionan a la semana.»</div><div>Incógnitas definidas con unidades y periodo.</div></div>
 <div class="ln"><div><b class="s">2. Función objetivo</b>«Beneficio (en €): \(F(x,y)=4x+6y\) → MAXIMIZAR»</div><div>Qué representa F y si se maximiza o minimiza.</div></div>
 <div class="ln"><div><b class="s">3. Restricciones</b>\(\left\{\begin{array}{ll}2x+3y\le 60 &amp; \text{(horas)}\\ 2x+y\ge 28 &amp; \text{(compromiso)}\\ x\ge 0,\ y\ge 0 &amp; \text{(no negatividad)}\end{array}\right.\)</div><div>Una inecuación por condición, con el sentido correcto. Si x e y son cantidades, \(x,y\ge 0\).</div></div>
 <div class="ln"><div><b class="s">4. Región factible</b>Tablas de valores de <b>r<sub>1</sub></b> y <b>r<sub>2</sub></b>.<br>«Sustituyo O(0, 0) en \(2x+3y\le 60\): \(0\le 60\), se cumple → el semiplano solución contiene al origen.»<br>«Sustituyo O(0, 0) en \(2x+y\ge 28\): \(0\ge 28\), no se cumple → el semiplano solución no contiene al origen.»<br>+ el <b>dibujo</b>.</div><div>Con regla: ejes con escala, rectas con nombre, flechas hacia el semiplano, región sombreada, vértices con letra.</div></div>
-<div class="ln"><div><b class="s">5. Vértices</b>A = <b>r<sub>2</sub></b> ∩ eje X → A(14, 0); B = <b>r<sub>1</sub></b> ∩ eje X → B(30, 0); C: \(\left\{\begin{array}{l}2x+3y=60\\2x+y=28\end{array}\right.\) → C(6, 16)</div><div>Cada vértice calculado con su sistema, no leído del dibujo.</div></div>
-<div class="ln"><div><b class="s">6. Justificación</b>«La región factible es acotada; por el teorema fundamental, F alcanza su máximo en alguno de sus vértices.»</div><div>Por qué basta con mirar los vértices.</div></div>
+<div class="ln" style="grid-template-columns:minmax(0,1fr)"><div><b class="s">5. Vértices</b>«Calculo cada vértice resolviendo el sistema de las dos rectas que se cortan en él.»
+<div class="tw" style="margin-top:8px"><table class="t"><tr><th>Vértice</th><th>Sistema</th><th>Rectas que se cortan</th></tr>
+<tr><td>A</td><td style="font-weight:400">\(\left\{\begin{array}{l}2x+y=28\\y=0\end{array}\right.\)<br><b>Sustitución.</b> Sustituyo \(y=0\) en la primera:<br>\(2x+0=28\Rightarrow x=\frac{28}{2}=14\)<br><b>A(14, 0)</b><br>Comprobación: \(2\cdot 14+0=28\) ✓</td><td><b>r<sub>2</sub></b> y eje X</td></tr>
+<tr><td>B</td><td style="font-weight:400">\(\left\{\begin{array}{l}2x+3y=60\\y=0\end{array}\right.\)<br><b>Sustitución.</b> Sustituyo \(y=0\) en la primera:<br>\(2x+3\cdot 0=60\Rightarrow x=\frac{60}{2}=30\)<br><b>B(30, 0)</b><br>Comprobación: \(2\cdot 30+3\cdot 0=60\) ✓</td><td><b>r<sub>1</sub></b> y eje X</td></tr>
+<tr><td>C</td><td style="font-weight:400">\(\left\{\begin{array}{l}2x+3y=60\\2x+y=28\end{array}\right.\)<br><b>Reducción.</b> Resto las dos ecuaciones (la primera menos la segunda):<br>\(\begin{array}{rrcl}&amp;2x+3y&amp;=&amp;60\\-&amp;2x+\phantom{3}y&amp;=&amp;28\\\hline&amp;2y&amp;=&amp;32\end{array}\ \Rightarrow\ y=\frac{32}{2}=16\)<br>Sustituyo \(y=16\) en la segunda:<br>\(2x+16=28\Rightarrow 2x=28-16=12\Rightarrow x=\frac{12}{2}=6\)<br><b>C(6, 16)</b><br>Comprobación: \(2\cdot 6+3\cdot 16=12+48=60\) ✓ y \(2\cdot 6+16=12+16=28\) ✓</td><td><b>r<sub>1</sub></b> y <b>r<sub>2</sub></b></td></tr></table></div>
+<p class="mini" style="margin-top:6px">Cada vértice calculado con su sistema, no leído del dibujo: qué dos ecuaciones, cómo se resuelve, cada coordenada y la comprobación.</p></div></div>
+<div class="ln"><div><b class="s">6. Justificación</b>«La región factible es acotada; por el teorema fundamental, F alcanza su máximo en alguno de sus vértices.»</div><div>Por qué basta con mirar los vértices (explicado debajo).</div></div>
 <div class="ln"><div><b class="s">7. Evaluar F</b>F(A) = F(14, 0) = 56<br>F(B) = F(30, 0) = 120<br>F(C) = F(6, 16) = 120</div><div>Todas las cuentas a la vista.</div></div>
 <div class="ln"><div><b class="s">8. Solución con una frase</b>«El máximo vale 120 y se alcanza en todo el segmento BC; por ejemplo, confeccionando 6 pañuelos y 16 corbatas a la semana se obtiene el beneficio máximo de 120 €.»</div><div>Punto + valor + unidades, contestando a la pregunta.</div></div>
-</div><h3>Antes de entregar, comprueba</h3><div class="check" id="checklist"></div><h3 style="color:var(--r2)">Errores que más puntos quitan</h3>
-<div class="tw"><table class="t"><tr><th>Error</th><th>Cómo evitarlo</th></tr><tr><td>Poner ≤ cuando es ≥ («al menos» es ≥)</td><td>Leer la condición con las letras: «x es mayor o igual que…»</td></tr><tr><td>Olvidar \(x\ge 0,\ y\ge 0\) cuando x e y son cantidades</td><td>Escribirlas siempre como última línea de las restricciones.</td></tr><tr><td>Leer los vértices del dibujo</td><td>Escribir y resolver el sistema de cada vértice.</td></tr><tr><td>Tomar como vértice un corte que está fuera de la región</td><td>Comprobar todas las restricciones (Paso 3).</td></tr><tr><td>Dar el punto sin el valor de F (o al revés)</td><td>La respuesta lleva las dos cosas.</td></tr><tr><td>Decir que hay máximo en una región no acotada</td><td>Dibujar la recta de F con ese valor: si corta la región, no hay máximo.</td></tr><tr><td>Dar decimales con personas, cajas…</td><td>Buscar las soluciones enteras (Pregunta 11).</td></tr><tr><td>Equivocarse con −y al despejar</td><td>Al dividir entre un número negativo, la desigualdad cambia de sentido.</td></tr><tr><td>No contestar a la pregunta</td><td>Terminar con una frase: «Debe fabricar… y obtendrá…».</td></tr></table></div></article>
+</div><h3>¿Por qué basta con mirar los vértices?</h3>
+<ol class="pasos">
+<li>Todos los puntos que dan <b>el mismo beneficio k</b> están en una recta: \(F(x,y)=k\). Es una <b>recta de nivel</b>.</li>
+<li>Si cambio k, sale otra recta <b>paralela</b> (los coeficientes de x y de y son los mismos). Al <b>aumentar k</b>, la recta se desplaza.</li>
+<li>Subo k mientras la recta siga tocando la región. La <b>última</b> que la toca da el máximo. ¿Dónde la toca? En una <b>esquina</b>: una recta no puede salir de un polígono por el medio.</li>
+<li>Si la recta es <b>paralela a un lado</b>, la última toca <b>todo ese lado</b>: dos vértices y el segmento que los une.</li></ol>
+<div class="two"><div><svg class="plot" id="plotJ1" viewBox="0 0 400 330" role="img" aria-label="Rectas de nivel: la última toca un vértice"></svg><p class="mini" style="margin-top:4px">\(F(x,y)=6x+4y\) (otra función, para comparar). F(A) = 84, F(B) = 180, F(C) = 100. La última recta que toca la región es \(F=180\), y solo la toca en <b>B</b>.</p></div>
+<div><svg class="plot" id="plotJ2" viewBox="0 0 400 330" role="img" aria-label="Rectas de nivel: la última toca un lado entero"></svg><p class="mini" style="margin-top:4px">\(F(x,y)=4x+6y\) (la del ejemplo). Sus rectas son paralelas al lado BC. La última, \(F=120\), toca <b>todo el lado BC</b>.</p></div></div>
+<div class="good"><b>Conclusión:</b> el máximo (o el mínimo), si existe, está siempre en un vértice. Por eso solo calculo F en los vértices y me quedo con el mayor (o el menor). Mueve tú la recta en el <a href="#teoria" data-go="p4">Paso 4</a>.</div>
+<h3>Dos comprobaciones para no fallar en los vértices</h3>
+<div class="two"><div class="theo"><b>1. ¿Es factible?</b> Sustituyo el punto en <b>todas</b> las restricciones. Si falla una, está fuera de la región: no vale.</div>
+<div class="good"><b>2. ¿Es un vértice?</b> (si queda tiempo) Además, tiene que cumplir <b>con igualdad dos restricciones</b> de rectas no paralelas. Ejemplos en el <a href="#teoria" data-go="p3">Paso 3</a>, apartado 2.</div></div>
+<div class="pau err"><b>Al dividir (o multiplicar) una desigualdad entre un número negativo, la desigualdad cambia de sentido.</b><br>\(-2y\le 4-x\ \Rightarrow\ y\ge\frac{x-4}{2}\). Compruebo con (0, 0): \(0\ge -2\) ✓. El dibujo, en el <a href="#teoria" data-go="errneg">Paso 1</a>.</div>
+<h3>Antes de entregar, comprueba</h3><div class="check" id="checklist"></div><h3 style="color:var(--r2)">Errores que más puntos quitan</h3>
+<div class="tw"><table class="t"><tr><th>Error</th><th>Cómo evitarlo</th></tr><tr><td>Poner ≤ cuando es ≥ («al menos» es ≥)</td><td>Leer la condición con las letras: «x es mayor o igual que…»</td></tr><tr><td>Olvidar \(x\ge 0,\ y\ge 0\) cuando x e y son cantidades</td><td>Escribirlas siempre como última línea de las restricciones.</td></tr><tr><td>Leer los vértices del dibujo</td><td>Escribir y resolver el sistema de cada vértice, con las cuentas.</td></tr><tr><td>Tomar como vértice un corte que está fuera de la región</td><td>Comprobar todas las restricciones en cada punto (Paso 3, apartado 2).</td></tr><tr><td>Dar el punto sin el valor de F (o al revés)</td><td>La respuesta lleva las dos cosas.</td></tr><tr><td>Decir que hay máximo en una región no acotada</td><td>Dibujar la recta F(x, y) = Valor óptimo: si corta la región, no hay máximo (Paso 2).</td></tr><tr><td>Dar decimales con personas, cajas…</td><td>Buscar las soluciones enteras (Pregunta 11).</td></tr><tr><td>Equivocarse con −y al despejar</td><td>Al dividir entre un número negativo, la desigualdad cambia de sentido.</td></tr><tr><td>No contestar a la pregunta</td><td>Terminar con una frase: «Debe fabricar… y obtendrá…».</td></tr></table></div></article>
 </section>
 
 <!-- ================= PROBLEMAS TIPO ================= -->
@@ -850,6 +926,20 @@ function drawS(){
   p.dot(6, 12, ''); p.dot(4, 16, '(4, 16): máximo', 'var(--acc)', 8, -8);
 }
 const TRI = [[14,0],[30,0],[6,16]];
+function drawJ(){
+  const mk = (id, a, b, ks, lab) => { const p = Plot($(id), 33, 31, 5);
+    p.poly(TRI, 'var(--acc)', .4);
+    ks.forEach((k, i) => { const last = i === ks.length - 1; p.line(a, b, k, 'var(--amb)', last ? 3.2 : 1.8, last ? '' : '6 4'); const [x, y] = lab(k); p.text(x, y, 'F = ' + k, 'var(--amb)'); });
+    p.dot(14, 0, 'A', 'var(--ink)', -4, -8); p.dot(30, 0, 'B', 'var(--ink)', 4, -8); p.dot(6, 16, 'C', 'var(--ink)', -4, -9);
+    return p; };
+  const p1 = mk('#plotJ1', 6, 4, [100, 140, 180], k => [(k - 88) / 6 + .5, 22]);
+  p1.arrow(19, 24, 3, 2, 'var(--amb)'); p1.text(18.5, 27.5, 'k aumenta', 'var(--amb)');
+  p1.el('circle', {cx:p1.X(30), cy:p1.Y(0), r:9, fill:'none', stroke:'var(--acc)', 'stroke-width':2.6});
+  const p2 = mk('#plotJ2', 4, 6, [60, 90, 120], k => [1, (k - 4) / 6 + 1.3]);
+  p2.arrow(20, 14, 2, 3, 'var(--amb)'); p2.text(20.5, 19, 'k aumenta', 'var(--amb)');
+  p2.el('line', {x1:p2.X(30), y1:p2.Y(0), x2:p2.X(6), y2:p2.Y(16), stroke:'var(--acc)', 'stroke-width':6, 'stroke-linecap':'round', 'stroke-opacity':.75});
+}
+
 function drawHero(){
   const p = Plot($('#heroPlot'), 33, 31, 5);
   p.poly(TRI, 'var(--acc)', .4); p.line(2, 3, 60, 'var(--r1)'); p.line(2, 1, 28, 'var(--r2)');
@@ -904,7 +994,7 @@ function draw4(){
 }
 ['#fa','#fb','#k4'].forEach(id => $(id).addEventListener('input', draw4));
 
-drawHero(); draw0(); draw1(); drawE(); drawS(); draw2(); draw4(); route(); refreshDone();
+drawHero(); draw0(); draw1(); drawE(); drawS(); drawJ(); draw2(); draw4(); route(); refreshDone();
 </script>
 
 
