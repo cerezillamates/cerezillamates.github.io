@@ -300,6 +300,9 @@ ol.pasos{margin:0;padding-left:1.3em;display:grid;gap:6px}
 .sit>h4{margin:0;font:700 1rem var(--f-display);color:var(--acc)}
 .mini{font-size:.9rem;color:var(--muted);margin:0}
 table.t td.si{color:var(--acc);font-weight:700} table.t td.no{color:var(--r2);font-weight:700}
+.pau .say{color:var(--ink)}
+.esp{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:center;background:var(--amb-bg)}
+@media (max-width:760px){.esp{grid-template-columns:1fr}.esp>img{max-width:320px;margin:0 auto}}
 </style>
 
 </head>
@@ -416,11 +419,25 @@ table.t td.si{color:var(--acc);font-weight:700} table.t td.no{color:var(--r2);fo
  <tr><td colspan="2" style="font-weight:400">\(x=0\Rightarrow y=28\)<br>\(y=0\Rightarrow 2x=28\Rightarrow x=14\)</td></tr></table></div>
 </div>
 <div class="theo"><b>Con la calculadora</b> (Casio ClassWiz, la blanca): menú → <b>Tabla</b> → escribo la recta despejada, por ejemplo \(f(x)=\frac{60-2x}{3}\) → Rango de tabla: inicio, final y paso → ejecutar. Vídeo: <a href="https://www.edu-casio.es/recurso/tabla-de-valores-de-una-funcion/" target="_blank" rel="noopener">Tabla de valores de una función (Casio Educación)</a>.</div>
-<p>Dibujo cada recta uniendo los dos puntos de su tabla, con una escala en la que quepan todos los puntos y los <b>ejes con su nombre</b>.</p>
+<div class="good"><b>Trucos para que el dibujo salga bien</b><ol class="pasos" style="margin-top:6px">
+<li><b>Escala.</b> Miro el número más grande de las tablas (aquí, 30 en x y 28 en y) y elijo una escala en la que <b>quepan todos los puntos</b>.</li>
+<li>Si cabe en el papel, <b>1 unidad = 1 cm</b> (o 1 cuadro). Si no cabe, un número redondo: 1 cm = 2, 5, 10, 100… unidades. Aquí, 1 cm = 5 unidades: el dibujo ocupa unos 6 cm × 6 cm.</li>
+<li><b>Ejes con nombre</b> (x, y) y con los números de la escala. Dentro de un eje, siempre la misma escala.</li>
+<li>Uno con regla los dos puntos de cada tabla y <b>prolongo</b> la recta.</li>
+<li>Sobre cada recta escribo <b>su nombre y su ecuación</b>: «r<sub>1</sub>: 2x + 3y = 60».</li></ol></div>
 <h3>2. Elegir el semiplano de cada restricción</h3>
 <p>Ahora se trabaja con la <b>restricción</b> (la inecuación), no con la recta: cada recta divide el plano en dos semiplanos y la restricción se cumple solo en uno. Lo marco con <b>flechas</b> en el dibujo.</p>
+<div class="pau"><span class="say">«Elijo el semiplano correspondiente a cada restricción comprobando el punto (0, 0).»</span><br>Y debajo, la cuenta de cada restricción:</div>
 <div class="tw"><table class="t"><tr><th>Restricción</th><th>Lo que escribo en el examen</th><th>Semiplano</th></tr><tr><td>\(2x+3y\le 60\)</td><td>Sustituyo O(0, 0): \(2\cdot 0+3\cdot 0=0\le 60\). <b>Sí se cumple</b>, luego el semiplano solución es el que <b>contiene al origen</b>.</td><td>Por debajo de <b>r<sub>1</sub></b></td></tr><tr><td>\(2x+y\ge 28\)</td><td>Sustituyo O(0, 0): \(2\cdot 0+0=0\ge 28\). <b>No se cumple</b>, luego el semiplano solución es el que <b>no contiene al origen</b>.</td><td>Por encima de <b>r<sub>2</sub></b></td></tr><tr><td>\(x\ge 0,\ y\ge 0\)</td><td>Juntas dejan el primer cuadrante.</td><td>Primer cuadrante</td></tr></table></div>
-<div class="note"><b>Truco: despeja la y.</b> Si queda \(y\le\ldots\), el semiplano es el de <b>abajo</b>; si queda \(y\ge\ldots\), el de <b>arriba</b>.<br><b>Cuidado con −y:</b> al pasar dividiendo un número negativo, <b>la desigualdad cambia de sentido</b>. Ejemplo: \(x-2y\le 4\Rightarrow -2y\le 4-x\Rightarrow y\ge\frac{x-4}{2}\) → semiplano de <b>arriba</b> (aunque al principio ponía ≤).</div>
+<div class="note"><b>¿Por qué el (0, 0)?</b> Porque las cuentas salen solas. Vale cualquier punto que <b>no esté en la recta</b>.<br><b>Si la recta pasa por el origen</b> (por ejemplo \(y\le 2x\)), el (0, 0) no sirve: sale \(0\le 0\) y no distingue un lado del otro. Uso otro punto que no esté en la recta, como (1, 0) o (0, 1), y lo escribo así:</div>
+<div class="pau"><span class="say">«Como la recta pasa por el origen, compruebo el punto (1, 0): \(0\le 2\cdot 1=2\), se cumple → el semiplano solución es el que contiene al punto (1, 0).»</span></div>
+<div class="note"><b>Truco: despeja la y.</b> Si queda \(y\le\ldots\), el semiplano es el de <b>abajo</b>; si queda \(y\ge\ldots\), el de <b>arriba</b>. Pero cuidado al despejar:</div>
+<div class="pau err" id="errneg"><b>Al dividir (o multiplicar) una desigualdad entre un número negativo, la desigualdad cambia de sentido.</b>
+<div class="tryit" style="margin-top:8px"><div style="display:grid;gap:8px">
+<div><b>Con números:</b> \(2&lt;6\). Divido los dos entre −2: \(-1&gt;-3\). Ha cambiado.</div>
+<div><b>Con una restricción:</b> \[x-2y\le 4\ \Rightarrow\ -2y\le 4-x\ \Rightarrow\ y\ \boldsymbol{\ge}\ \frac{x-4}{2}\] Semiplano de <b>arriba</b>, aunque al principio ponía ≤.</div>
+<div><b>Lo compruebo con un punto</b>, el (0, 0):<br>En la original: \(0-2\cdot 0=0\le 4\) ✓<br>En la despejada: \(0\ge\frac{0-4}{2}=-2\) ✓ Coinciden.<br>Si no cambio el sentido: \(0\le -2\) ✗. No coinciden: hay un error.</div></div>
+<svg class="plot" id="plotE" viewBox="0 0 400 240" role="img" aria-label="Semiplano de x − 2y ≤ 4"></svg></div></div>
 <h3>3. La región factible</h3><p>Es la zona común a todos los semiplanos. La <b>sombreo</b> y pongo una letra a cada vértice.</p>
 <div class="tryit"><svg class="plot" id="plot1" viewBox="0 0 400 330" role="img" aria-label="Construcción de la región factible"></svg>
 <div class="ctl"><b>Pruébalo:</b> enciende cada paso y mira cómo aparece la región.
@@ -429,10 +446,20 @@ table.t td.si{color:var(--acc);font-weight:700} table.t td.no{color:var(--r2);fo
 <label class="row"><input type="checkbox" id="s_reg" checked> Región factible (zona común)</label>
 <label class="row"><input type="checkbox" id="s_cut"> Cortes con los ejes que <b>no</b> son vértices</label></div></div>
 <h3>4. Casos especiales al dibujar</h3>
-<div class="card" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:center;background:var(--amb-bg)"><div><h3 style="color:var(--amb)">Recta que pasa por el origen</h3>No tiene término independiente: \(ax+by=0\) (por ejemplo \(y=2x\) o \(x-3y=0\)). Los dos cortes con los ejes dan el mismo punto (0, 0), así que <b>doy otro valor a x</b>; si puedo, uno que ya salga en las tablas de las otras rectas, para que el punto quede dentro del dibujo.<br>Para el semiplano <b>no puedo usar el (0, 0)</b>, porque está en la recta: pruebo con otro punto, por ejemplo (1, 0).<br><b>Ejemplo:</b> \(y\le 2x\) con otras rectas que llegan hasta x = 10:<div class="tw"><table class="t" style="width:auto;text-align:center"><tr><th>x</th><th>y = 2x</th><th>Punto</th></tr><tr><td>0</td><td>0</td><td>(0, 0)</td></tr><tr><td>10</td><td>20</td><td>(10, 20)</td></tr></table></div>Semiplano con (1, 0): \(0\le 2\cdot 1=2\) ✓ → el semiplano que contiene a (1, 0): <b>por debajo</b> de la recta.</div><img src="assets/pl/teoria1.png" loading="lazy" alt="Recta que pasa por el origen" style="width:100%;background:#fff;border-radius:6px"></div>
-<div class="card" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:center;background:var(--amb-bg)"><div><h3 style="color:var(--amb)">Recta vertical u horizontal</h3>\(x=k\) es una recta <b>vertical</b> que pasa por (k, 0): \(x\le k\) es el semiplano de la <b>izquierda</b> y \(x\ge k\) el de la <b>derecha</b>.<br>\(y=k\) es una recta <b>horizontal</b> que pasa por (0, k): \(y\le k\) es el semiplano de <b>abajo</b> y \(y\ge k\) el de <b>arriba</b>.<br><b>Ejemplo:</b> «no más de 12 lavadoras» → \(x\le 12\)<br>«al menos 1 viaje en el gran loop» → \(y\ge 1\)</div><img src="assets/pl/teoria2.png" loading="lazy" alt="Recta vertical u horizontal" style="width:100%;background:#fff;border-radius:6px"></div>
-<div class="card" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:center;background:var(--amb-bg)"><div><h3 style="color:var(--amb)">Región fuera del primer cuadrante</h3>Si el ejercicio solo da inecuaciones (sin contexto) y <b>no</b> incluye \(x\ge 0,\ y\ge 0\), la región puede tener puntos con coordenadas negativas: dibujo los <b>cuatro cuadrantes</b>.<br><b>Ejemplo:</b> <a href="https://www.emestrada.org/2013-ejercicios-resueltos-selectividad-programacion-lineal-sociales/" target="_blank" rel="noopener">Andalucía Reserva 2 2013</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="99" data-l="K" title="Abrir el enunciado">nº 99</button>: vértices A(2, −1), B(−1, 2), C(1, 4) y D(5, 0).</div><img src="assets/pl/teoria3.png" loading="lazy" alt="Región fuera del primer cuadrante" style="width:100%;background:#fff;border-radius:6px"></div>
-<div class="card" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:center;background:var(--amb-bg)"><div><h3 style="color:var(--amb)">Desigualdad estricta (< o >)</h3>La recta se dibuja <b>discontinua</b>: sus puntos no pertenecen a la región. Si las incógnitas son enteras, «más de 30» es lo mismo que \(\ge 31\).<br><b>Ejemplo:</b> «más de 30 unidades en total» → \(x+y&gt;30\)</div><div></div></div>
+<div class="card esp"><div><h3 style="color:var(--amb)">Recta que pasa por el origen</h3>No tiene término independiente: \(ax+by=0\) (por ejemplo \(y=2x\) o \(x-3y=0\)). Los dos cortes con los ejes dan el mismo punto (0, 0), así que <b>doy otro valor a x</b>; si puedo, uno que ya salga en las tablas de las otras rectas, para que el punto quede dentro del dibujo.<br>Para el semiplano <b>no puedo usar el (0, 0)</b>, porque está en la recta: pruebo con otro punto, por ejemplo (1, 0).<br><b>Ejemplo:</b> \(y\le 2x\) con otras rectas que llegan hasta x = 10:<div class="tw"><table class="t" style="width:auto;text-align:center"><tr><th>x</th><th>y = 2x</th><th>Punto</th></tr><tr><td>0</td><td>0</td><td>(0, 0)</td></tr><tr><td>10</td><td>20</td><td>(10, 20)</td></tr></table></div>Semiplano con (1, 0): \(0\le 2\cdot 1=2\) ✓ → el semiplano que contiene a (1, 0): <b>por debajo</b> de la recta.<br>En el examen lo escribo así: <span class="say">«Como la recta pasa por el origen, compruebo el punto (1, 0).»</span></div><img src="assets/pl/teoria1.png" loading="lazy" alt="Recta que pasa por el origen" style="width:100%;background:#fff;border-radius:6px"></div>
+<div class="card esp"><div><h3 style="color:var(--amb)">Recta vertical u horizontal</h3>\(x=k\) es una recta <b>vertical</b> que pasa por (k, 0): \(x\le k\) es el semiplano de la <b>izquierda</b> y \(x\ge k\) el de la <b>derecha</b>.<br>\(y=k\) es una recta <b>horizontal</b> que pasa por (0, k): \(y\le k\) es el semiplano de <b>abajo</b> y \(y\ge k\) el de <b>arriba</b>.<br><b>Ejemplo:</b> «no más de 12 lavadoras» → \(x\le 12\)<br>«al menos 1 viaje en el gran loop» → \(y\ge 1\)</div><img src="assets/pl/teoria2.png" loading="lazy" alt="Recta vertical u horizontal" style="width:100%;background:#fff;border-radius:6px"></div>
+<div class="card esp"><div><h3 style="color:var(--amb)">Región fuera del primer cuadrante</h3>Si el ejercicio solo da inecuaciones (sin contexto) y <b>no</b> incluye \(x\ge 0,\ y\ge 0\), la región puede tener puntos con coordenadas negativas: dibujo los <b>cuatro cuadrantes</b>.<br><b>Ejemplo:</b> <a href="https://www.emestrada.org/2013-ejercicios-resueltos-selectividad-programacion-lineal-sociales/" target="_blank" rel="noopener">Andalucía Reserva 2 2013</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="99" data-l="K" title="Abrir el enunciado">nº 99</button>: vértices A(2, −1), B(−1, 2), C(1, 4) y D(5, 0).</div><img src="assets/pl/teoria3.png" loading="lazy" alt="Región fuera del primer cuadrante" style="width:100%;background:#fff;border-radius:6px"></div>
+<div class="card esp"><div><h3 style="color:var(--amb)">Desigualdad estricta (&lt; o &gt;)</h3>
+«Más de», «menos de», «superar», «inferior a»: la igualdad <b>no</b> vale.
+<ol class="pasos" style="margin:6px 0">
+<li>La recta se dibuja <b>discontinua</b>: sus puntos <b>no pertenecen</b> a la región.</li>
+<li>Si el mejor vértice cae en esa recta, <b>el óptimo no se alcanza</b>: me puedo acercar todo lo que quiera, pero no llegar.</li>
+<li>Si x e y son <b>enteras</b>, la convierto en una normal: \(x+y&gt;30\) es lo mismo que \(x+y\ge 31\).</li></ol>
+<b>Ejemplo real:</b> <a href="https://www.emestrada.org/wp-content/uploads/2021/06/MCCSS-T3-2021.pdf" target="_blank" rel="noopener">Andalucía Reserva 1 2021</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="69" data-l="B" title="Abrir el enunciado">nº 69</button>. «La inversión total debe <b>superar</b> los 2 millones»:
+\[200\,000x+100\,000y&gt;2\,000\,000\ \Rightarrow\ 2x+y&gt;20\]
+Misiones y programas son enteros: es lo mismo que \(2x+y\ge 21\).<br>El máximo sale en (4, 16), que está en la otra recta (\(2x+y=24\)): aquí la recta discontinua no cambia la respuesta.<br>
+<span class="mini">Otro: <a href="https://www.ebaumatematicas.com/wp-content/uploads/2019/10/2%C2%BABachCCSS_EBAU_Extremadura_2018-Junio_Resuelto_JuanAntonioMG.pdf" target="_blank" rel="noopener">Extremadura Ordinaria 2018</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="241" data-l="B" title="Abrir el enunciado">nº 241</button> («el número de botellas de vino blanco debe ser inferior al de tinto» → \(x&lt;y\)).</span></div>
+<svg class="plot" id="plotS" viewBox="0 0 400 320" role="img" aria-label="Región con una recta discontinua"></svg></div>
 </article>
 <article class="card paso" id="p2"><h2><span class="n">PASO 2</span>¿La región factible es acotada o no acotada?</h2>
 <div class="theo"><b>Teorema fundamental de la programación lineal.</b> Si la función objetivo alcanza su máximo (o su mínimo) en la región factible, lo alcanza en <b>al menos uno de sus vértices</b>. Si lo alcanza en <b>dos vértices</b>, lo alcanza también en <b>todos los puntos del segmento</b> que los une.<br>Si la región factible es <b>acotada</b> (y no vacía), el máximo y el mínimo <b>existen siempre</b>: basta con calcular F en los vértices.</div>
@@ -770,6 +797,22 @@ function draw0(){
   p.el('circle', {cx:p.X(5), cy:p.Y(1), r:7.5, fill:'none', stroke:'var(--acc)', 'stroke-width':2.4});
   p.dot(5, 1, '(5, 1): F = 13', 'var(--acc)', -34, -14);
 }
+function drawE(){
+  const p = Plot($('#plotE'), 8, 4, 1);
+  p.poly([[0,0],[4,0],[8,2],[8,4],[0,4]], 'var(--acc)', .3);
+  p.line(1, -2, 4, 'var(--r1)'); p.text(4.9, 1.3, 'x − 2y = 4', 'var(--r1)', 'end');
+  p.text(.4, 3.3, 'x − 2y ≤ 4  →  y ≥ (x − 4)/2: arriba', 'var(--acc)');
+  p.dot(0, 0, '(0, 0) ✓', 'var(--acc)', 8, -8); p.dot(6, 0, '(6, 0) ✗', 'var(--r2)', 8, -8);
+}
+function drawS(){
+  const p = Plot($('#plotS'), 12, 26, 2);
+  p.poly([[4,16],[6,12],[5,10],[4,12]], 'var(--acc)', .4);
+  p.line(2, 1, 24, 'var(--r1)'); p.line(2, 1, 20, 'var(--r2)', 2.2, '7 5'); p.line(1, 0, 4, 'var(--muted)', 1.6); p.line(2, -1, 0, 'var(--vio)', 1.6);
+  p.text(6.3, 13.6, '2x + y = 24', 'var(--r1)'); p.text(6.2, 23.4, '2x + y > 20', 'var(--r2)'); p.text(6.2, 21.5, '(recta discontinua)', 'var(--r2)');
+  p.text(4.15, 1.2, 'x = 4', 'var(--muted)'); p.text(9.6, 17.6, 'y = 2x', 'var(--vio)', 'end');
+  [[5,10],[4,12]].forEach(([x, y]) => p.el('circle', {cx:p.X(x), cy:p.Y(y), r:4.5, fill:'var(--card)', stroke:'var(--r2)', 'stroke-width':2}));
+  p.dot(6, 12, ''); p.dot(4, 16, '(4, 16): máximo', 'var(--acc)', 8, -8);
+}
 const TRI = [[14,0],[30,0],[6,16]];
 function drawHero(){
   const p = Plot($('#heroPlot'), 33, 31, 5);
@@ -784,8 +827,8 @@ function draw1(){
   if (r1) p.poly([[0,0],[30,0],[0,20]], 'var(--r1)', .12);
   if (r2) p.poly([[14,0],[33,0],[33,31],[0,31],[0,28]], 'var(--r2)', .1);
   if (rg) p.poly(TRI, 'var(--acc)', .45);
-  if (r1) { p.line(2, 3, 60, 'var(--r1)'); p.text(20, 8.5, 'r₁', 'var(--r1)'); p.arrow(24, 4, -1.1, -1.65, 'var(--r1)'); p.arrow(15, 10, -1.1, -1.65, 'var(--r1)'); }
-  if (r2) { p.line(2, 1, 28, 'var(--r2)'); p.text(3, 24, 'r₂', 'var(--r2)'); p.arrow(10, 8, 1.9, 0.95, 'var(--r2)'); p.arrow(6.5, 15, 1.9, 0.95, 'var(--r2)'); }
+  if (r1) { p.line(2, 3, 60, 'var(--r1)'); p.text(17.5, 10.6, 'r₁: 2x + 3y = 60', 'var(--r1)'); p.arrow(24, 4, -1.1, -1.65, 'var(--r1)'); p.arrow(15, 10, -1.1, -1.65, 'var(--r1)'); }
+  if (r2) { p.line(2, 1, 28, 'var(--r2)'); p.text(3.2, 24, 'r₂: 2x + y = 28', 'var(--r2)'); p.arrow(10, 8, 1.9, 0.95, 'var(--r2)'); p.arrow(6.5, 15, 1.9, 0.95, 'var(--r2)'); }
   if (rg) { p.dot(14, 0, 'A(14, 0)', 'var(--ink)', -20, -10); p.dot(30, 0, 'B(30, 0)', 'var(--ink)', -48, -10); p.dot(6, 16, 'C(6, 16)'); }
   if (cut) { p.dot(0, 20, '(0, 20) ✗', 'var(--r2)'); p.dot(0, 28, '(0, 28) ✗', 'var(--r2)'); }
   p.dot(0, 0, '', 'var(--vio)');
@@ -821,7 +864,7 @@ function draw4(){
 }
 ['#fa','#fb','#k4'].forEach(id => $(id).addEventListener('input', draw4));
 
-drawHero(); draw0(); draw1(); draw2(); draw4(); route(); refreshDone();
+drawHero(); draw0(); draw1(); drawE(); drawS(); draw2(); draw4(); route(); refreshDone();
 </script>
 
 
