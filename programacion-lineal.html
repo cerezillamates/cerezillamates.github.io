@@ -308,6 +308,35 @@ kbd{display:inline-block;font:700 .78rem var(--f-mono);line-height:1.5;border:1p
 .teclas{line-height:2}
 .paso,details.mas>.mb,.sit{grid-template-columns:minmax(0,1fr)}
 .paso mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;padding:2px 0}
+/* ---------- simulador de calculadora ---------- */
+.cs{display:grid;gap:12px}
+.cs-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.cs-tabs button{font:700 .88rem var(--f-body);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;min-height:40px}
+.cs-tabs button[aria-selected="true"]{background:var(--acc);border-color:var(--acc);color:var(--card)}
+.cs-body{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:760px){.cs-body{grid-template-columns:minmax(0,1fr)}}
+.cs-dev{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:10px}
+.cs-screen{font:600 clamp(.82rem,3.6vw,1.02rem)/1.45 var(--f-mono);white-space:pre;overflow:hidden;min-height:9.2em;padding:10px 12px;border-radius:10px;background:#e8eee4;color:#16202f;border:1px solid #b9c4b4}
+.cs-hi{background:#16202f;color:#e8eee4;border-radius:3px}
+.cs-keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.cs-k{min-height:44px;font:700 1rem var(--f-mono);border-radius:9px;border:1px solid var(--line);border-bottom-width:3px;background:var(--card);color:var(--ink);cursor:pointer;padding:0;touch-action:manipulation}
+.cs-k.fn{font-size:.74rem;color:var(--r1)}
+.cs-k.exe,.cs-k.ok{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.cs-k.next{outline:3px solid var(--amb);outline-offset:1px;box-shadow:0 0 0 6px var(--amb-bg)}
+.cs-k.flash{animation:csf .5s 3}
+@keyframes csf{50%{transform:scale(1.12)}}
+.cs-k:active{transform:translateY(1px)}
+.cs-side{display:grid;gap:10px;align-content:start}
+.cs-intro{margin:0;font-weight:600}
+.cs-msg{padding:8px 12px;border-radius:8px;background:var(--amb-bg);border-left:4px solid var(--amb);min-height:4.4em;font-size:.95rem}
+.cs-warn{font-weight:700;color:var(--r2)}
+.cs-guion{margin:0;padding-left:1.4em;display:grid;gap:4px;color:var(--muted)}
+.cs-guion li.now{color:var(--ink);font-weight:700}
+.cs-guion li.ok{color:var(--acc)}
+.cs-extra{margin:0;font-weight:600}
+.cs-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cs-btns .proy-btn{min-height:40px}
+#calc{scroll-margin-top:calc(var(--hh,56px) + 12px)}
 </style>
 
 </head>
@@ -368,7 +397,7 @@ kbd{display:inline-block;font:700 .78rem var(--f-mono);line-height:1.5;border:1p
   <div class="vh"><span class="eyebrow">El método</span><h1>Cómo se resuelve</h1></div>
   <div class="seg" role="tablist" aria-label="Método"><a href="#teoria" data-v="teoria">Pasos</a><a href="#tipos" data-v="tipos">Problemas tipo</a></div>
   <nav class="steps" aria-label="Pasos">
-    <a href="#teoria" data-go="p0">Paso 0</a><a href="#teoria" data-go="p1">Paso 1</a><a href="#teoria" data-go="p2">Paso 2</a><a href="#teoria" data-go="p3">Paso 3</a><a href="#teoria" data-go="p4">Paso 4</a><a href="#teoria" data-go="p5">Paso 5</a><a href="#teoria" data-go="pex">Examen</a><a href="#tipos">Problemas tipo →</a>
+    <a href="#teoria" data-go="p0">Paso 0</a><a href="#teoria" data-go="p1">Paso 1</a><a href="#teoria" data-go="p2">Paso 2</a><a href="#teoria" data-go="p3">Paso 3</a><a href="#teoria" data-go="p4">Paso 4</a><a href="#teoria" data-go="p5">Paso 5</a><a href="#teoria" data-go="calc">Calculadora</a><a href="#teoria" data-go="pex">Examen</a><a href="#tipos">Problemas tipo →</a>
   </nav>
 <div class="card theo"><b>Ejemplo guía:</b> <a href="https://www.ebaumatematicas.com/wp-content/uploads/2025/10/2oBachCCSS_EBAU_Andalucia_2026-Modelo_Resuelto_JuanAntonioMG.pdf" target="_blank" rel="noopener">Andalucía Modelo 2026</a> <button class="ex-chip" style="display:inline-block;margin:1px" data-n="38" data-l="S" title="Abrir el enunciado">nº 38</button> (también en los Modelos 2024 y 2025). Un taller confecciona pañuelos y corbatas. Dispone como máximo de <b>60 horas</b> semanales. Cada pañuelo necesita <b>2 h</b> y da <b>4 €</b> de beneficio; cada corbata, <b>3 h</b> y <b>6 €</b>. El número de corbatas más el doble del de pañuelos debe ser, <b>como mínimo, 28</b>. ¿Cuántas unidades de cada prenda hay que confeccionar para obtener el <b>máximo beneficio</b>?</div>
 <div class="card"><div class="tw"><table class="t"><tr><th>Paso</th><th>Qué hago</th><th>En el ejemplo</th></tr><tr><td>0</td><td>Ordenar los datos y <b>plantear</b>: incógnitas, función objetivo y restricciones</td><td>\(F(x,y)=4x+6y\) → MAXIMIZAR</td></tr><tr><td>1</td><td>Dibujar las rectas con su tabla de valores, elegir el semiplano de cada restricción y sombrear la <b>región factible</b></td><td>Triángulo ABC</td></tr><tr><td>2</td><td>¿La región es <b>acotada</b> o <b>no acotada</b>?</td><td>Acotada → el máximo está en un vértice</td></tr><tr><td>3</td><td>Calcular los <b>vértices</b> (sistema de dos rectas)</td><td>A(14, 0), B(30, 0), C(6, 16)</td></tr><tr><td>4</td><td>Calcular el <b>valor de F en cada vértice</b></td><td>F(A) = 56, F(B) = 120, F(C) = 120</td></tr><tr><td>5</td><td><b>Responder</b>: cuánto vale el óptimo, dónde se alcanza y qué significa</td><td>Máximo 120 € en el segmento BC</td></tr><tr><td>6</td><td>Contestar las <b>preguntas</b> del ejercicio</td><td><a href="#tipos">Problemas tipo 1 a 13</a></td></tr></table></div></div>
@@ -581,6 +610,11 @@ Misiones y programas son enteros: es lo mismo que \(2x+y\ge 21\).<br>El máximo 
 <li>Me quedo con las filas en que f(x) es <b>entero</b>:</li></ol>
 <div class="tw"><table class="grid"><tr><th>x</th><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td></tr><tr><th>y</th><td style="background:var(--acc-bg);font-weight:700">16</td><td style="color:var(--muted)">15,33</td><td style="color:var(--muted)">14,67</td><td style="background:var(--acc-bg);font-weight:700">14</td><td style="color:var(--muted)">13,33</td><td style="color:var(--muted)">12,67</td><td style="background:var(--acc-bg);font-weight:700">12</td><td style="color:var(--muted)">11,33</td><td style="color:var(--muted)">10,67</td><td style="background:var(--acc-bg);font-weight:700">10</td><td style="color:var(--muted)">9,33</td><td style="color:var(--muted)">8,67</td><td style="background:var(--acc-bg);font-weight:700">8</td><td style="color:var(--muted)">7,33</td><td style="color:var(--muted)">6,67</td><td style="background:var(--acc-bg);font-weight:700">6</td><td style="color:var(--muted)">5,33</td><td style="color:var(--muted)">4,67</td><td style="background:var(--acc-bg);font-weight:700">4</td><td style="color:var(--muted)">3,33</td><td style="color:var(--muted)">2,67</td><td style="background:var(--acc-bg);font-weight:700">2</td><td style="color:var(--muted)">1,33</td><td style="color:var(--muted)">0,67</td><td style="background:var(--acc-bg);font-weight:700">0</td></tr></table></div>
 <p>Soluciones enteras: (6, 16), (9, 14), (12, 12), (15, 10), (18, 8), (21, 6), (24, 4), (27, 2) y (30, 0). <a href="#teoria" data-go="calc" data-calc="tab">Practícalo en el simulador</a>.</p><p class="calc-nota">Comprueba las teclas en tu calculadora: los nombres de los menús pueden variar ligeramente.</p><div class="good"><b>Respuesta:</b> <span class="say">«El beneficio máximo es de 120 € y se alcanza en todos los puntos del segmento BC con coordenadas enteras; por ejemplo, confeccionando 6 pañuelos y 16 corbatas a la semana.»</span></div></article>
+<article class="card paso" id="calc"><h2><span class="n">CALCULADORA</span>Simulador para practicar las teclas</h2>
+<p>La calculadora ayuda en tres momentos: resolver el sistema de un <b>vértice</b> (Paso 3), calcular <b>F en todos los vértices</b> (Paso 4) y buscar los <b>puntos enteros de un segmento</b> (Paso 5). Elige uno y pulsa las teclas: la tecla que toca está resaltada. Los números los escribes tú: prueba primero con el ejemplo guía y después con otros datos.</p>
+<div id="calcsim"></div>
+<p class="calc-nota">Comprueba las teclas en tu calculadora: los nombres de los menús pueden variar ligeramente. Esto es un simulador para aprender el orden de las teclas, con las pantallas simplificadas: no es la calculadora real.</p>
+</article>
 <article class="card paso" id="pex"><h2><span class="n">EXAMEN</span>Cómo se escribe el ejercicio en el examen</h2>
 <div class="theo">En los criterios de corrección de Andalucía (2023, ejercicio de 2,5 puntos) se dan <b>hasta 2,1 puntos por el planteamiento, la región factible y los vértices</b>, y <b>hasta 0,4 por evaluar F y dar la solución óptima</b>. Casi toda la nota está en plantear, dibujar y calcular bien los vértices.</div><div class="exam">
 <div class="ln"><div><b class="s">1. Incógnitas</b>«Sean x = n.º de pañuelos e y = n.º de corbatas que se confeccionan a la semana.»</div><div>Incógnitas definidas con unidades y periodo.</div></div>
@@ -993,6 +1027,224 @@ function draw4(){
   p.text(1, 29, `F = ${k}: ${st}`, 'var(--amb)');
 }
 ['#fa','#fb','#k4'].forEach(id => $(id).addEventListener('input', draw4));
+
+/* ---------- simulador de calculadora (fase 4): componente reutilizable, diseño propio ---------- */
+function CalcSim(root, start){
+  const KEYS = [['HOME','HOME','fn'],['BACK','BACK','fn'],['UP','▲','ar'],['OK','OK','ok'],['TOOLS','TOOLS','fn'],
+    ['CATALOG','CATALOG','fn'],['LEFT','◀','ar'],['DOWN','▼','ar'],['RIGHT','▶','ar'],['AC','AC','fn'],
+    ['7','7'],['8','8'],['9','9'],['(','('],[')',')'],
+    ['4','4'],['5','5'],['6','6'],['×','×'],['÷','÷'],
+    ['1','1'],['2','2'],['3','3'],['+','+'],['−','−'],
+    ['0','0'],['.',','],['NEG','(−)'],['x','x'],['EXE','EXE','exe']];
+  const NAME = Object.fromEntries(KEYS.map(k => [k[0], k[1]]));
+  const APPS = ['Calcular','Tabla','Ecuación','Matriz'];
+  const hi = s => '<span class="cs-hi">' + s + '</span>';
+  const pad = (s, n) => { s = String(s); return ' '.repeat(Math.max(0, n - s.length)) + s; };
+  const dec = v => { const r = Math.round(v * 1e6) / 1e6; return String(r).replace('.', ',').replace('-', '−'); };
+  const show = b => b.replace('.', ',').replace('-', '−');
+  const isNum = b => /^-?\d+(\.\d+)?$/.test(b);
+  const menu = (title, items, cur) => [title, ...items.map((t, i) => i === cur ? hi('▸ ' + t) : '  ' + t)];
+  /* fracciones exactas (enteros pequeños) */
+  const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a || 1; };
+  const fr = (n, d=1) => { if (d < 0){ n = -n; d = -d; } const g = gcd(n, d); return [n / g, d / g]; };
+  const fparse = b => { const i = b.indexOf('.'); return i < 0 ? fr(+b) : fr(Math.round(+b * 10 ** (b.length - i - 1)), 10 ** (b.length - i - 1)); };
+  const fmul = (a, b) => fr(a[0] * b[0], a[1] * b[1]), fsub = (a, b) => fr(a[0] * b[1] - b[0] * a[1], a[1] * b[1]), fdiv = (a, b) => fr(a[0] * b[1], a[1] * b[0]);
+  const fstr = f => (f[1] === 1 ? String(f[0]) : f[0] + '/' + f[1]).replace('-', '−');
+  /* expresiones de f(x): + − × ÷ ( ) y producto implícito (2x) */
+  function compile(src){
+    const tk = src.match(/\d+(?:\.\d+)?|[x()+−×÷-]/g) || []; if (tk.join('') !== src || !tk.length) return null;
+    let i = 0;
+    const prim = () => { const t = tk[i]; if (t === undefined) throw 0;
+      if (t === '('){ i++; const e = expr(); if (tk[i] !== ')') throw 0; i++; return e; }
+      if (t === 'x'){ i++; return x => x; }
+      if (/^\d/.test(t)){ i++; const v = +t; return () => v; } throw 0; };
+    const unary = () => { if (tk[i] === '-' || tk[i] === '−'){ i++; const e = unary(); return x => -e(x); } return prim(); };
+    const term = () => { let a = unary();
+      for (;;){ const t = tk[i];
+        if (t === '×'){ i++; const b = unary(), p = a; a = x => p(x) * b(x); }
+        else if (t === '÷'){ i++; const b = unary(), p = a; a = x => p(x) / b(x); }
+        else if (t === 'x' || t === '(' || (t !== undefined && /^\d/.test(t))){ const b = prim(), p = a; a = x => p(x) * b(x); }
+        else return a; } };
+    const expr = () => { let a = term();
+      for (;;){ const t = tk[i];
+        if (t === '+'){ i++; const b = term(), p = a; a = x => p(x) + b(x); }
+        else if (t === '−' || t === '-'){ i++; const b = term(), p = a; a = x => p(x) - b(x); }
+        else return a; } };
+    try { const f = expr(); return i === tk.length ? f : null; } catch(e){ return null; }
+  }
+  let S, mode = start || 'eq', warn = '', hint = true;
+  /* entrada de números: dígitos, coma, (−) y AC */
+  const numKey = k => { if (/^\d$/.test(k)){ if (S.buf.replace('-', '').length < 7) S.buf += k; return true; }
+    if (k === '.'){ if (!S.buf.includes('.')) S.buf += (/\d$/.test(S.buf) ? '' : '0') + '.'; return true; }
+    if (k === 'NEG'){ S.buf = S.buf.startsWith('-') ? S.buf.slice(1) : '-' + S.buf; return true; }
+    if (k === 'AC'){ S.buf = ''; return true; } return false; };
+  const wantNum = ex => { const b = S.buf; if (ex != null && ex !== b && ex.startsWith(b)){ const c = ex[b.length]; return c === '-' ? 'NEG' : c; } return isNum(b) ? 'EXE' : null; };
+  const cell = (v, on) => on ? hi(pad(S.buf ? show(S.buf) : '_', 5)) : pad(v == null ? '·' : show(v), 5);
+  const appsView = (target, stage) => ({stage, scr: ['MENÚ PRINCIPAL', '', APPS.map((a, i) => i === S.cur ? hi(a) : a).join(' '), '', '◀ ▶ para moverte · OK para abrir'],
+    want: S.cur < target ? 'RIGHT' : S.cur > target ? 'LEFT' : 'OK', tip: 'Ve a «' + APPS[target] + '» con las flechas y pulsa OK.'});
+  const appsKey = (k, target, next) => { if (k === 'RIGHT' || k === 'LEFT'){ S.cur = Math.max(0, Math.min(APPS.length - 1, S.cur + (k === 'RIGHT' ? 1 : -1))); return true; }
+    if (k === 'OK'){ if (S.cur !== target) return 'Esa es otra aplicación. Aquí practicamos «' + APPS[target] + '».'; next(); return true; } return false; };
+  const listKey = (k, n) => { if (k === 'DOWN' || k === 'UP'){ S.cur = Math.max(0, Math.min(n - 1, S.cur + (k === 'DOWN' ? 1 : -1))); return true; } return false; };
+  const wantList = t => S.cur < t ? 'DOWN' : S.cur > t ? 'UP' : 'OK';
+
+  const MODES = {
+    /* ===== 1. vértices: aplicación Ecuación ===== */
+    eq: { tab: 'Vértices (Ecuación)', ex: ['2','3','60','2','1','28'],
+      stages: ['HOME y abrir «Ecuación»', '«Sist ec lineal» → «2 incógnitas»', 'Coeficientes a, b, c de cada ecuación (cada uno con EXE)', 'EXE: resolver', 'Leer x e y: es el vértice'],
+      intro: 'Sistema del vértice C: 2x + 3y = 60 y 2x + y = 28. Puedes escribir otros coeficientes.',
+      init(){ return {st: 'home', cur: 0, buf: '', co: [], idx: 0}; },
+      grid(on){ const c = S.co, row = r => (r + 1) + ' ' + [0, 1, 2].map(j => cell(c[r * 3 + j], on && S.idx === r * 3 + j)).join(' '); return ['      a     b     c', row(0), row(1)]; },
+      view(){ const s = S.st;
+        if (s === 'home') return {stage: 0, scr: ['', '  Pulsa HOME para ver', '  las aplicaciones'], want: 'HOME', tip: 'Pulsa HOME.'};
+        if (s === 'apps') return appsView(2, 0);
+        if (s === 'sub') return {stage: 1, scr: menu('ECUACIÓN', ['Sist ec lineal', 'Polinómica', 'Solver'], S.cur), want: wantList(0), tip: 'Elige «Sist ec lineal» y pulsa OK.'};
+        if (s === 'n') return {stage: 1, scr: menu('Número de incógnitas?', ['2 incógnitas', '3 incógnitas', '4 incógnitas'], S.cur), want: wantList(0), tip: 'Elige «2 incógnitas» y pulsa OK.'};
+        if (s === 'coef') return {stage: 2, scr: ['ax + by = c', ...this.grid(true)], want: wantNum(this.ex[S.idx]), tip: 'Escribe el coeficiente ' + 'abc'[S.idx % 3] + ' de la ' + (S.idx < 3 ? '1.ª' : '2.ª') + ' ecuación y pulsa EXE.'};
+        if (s === 'ready') return {stage: 3, scr: ['ax + by = c', ...this.grid(false), '', 'EXE: resolver'], want: 'EXE', tip: 'Pulsa EXE para resolver el sistema.'};
+        if (s === 'x' || s === 'y'){ const f = S.sol[s === 'x' ? 0 : 1], l = [s + ' =', pad(fstr(f), 22)]; if (f[1] !== 1) l.push(pad('= ' + dec(f[0] / f[1]), 22));
+          return {stage: 4, scr: l, want: s === 'x' ? 'EXE' : null, done: s === 'y', tip: s === 'x' ? 'Apunta la x y pulsa EXE para ver la y.' : 'Vértice: (' + fstr(S.sol[0]) + '; ' + fstr(S.sol[1]) + '). Arriba la x, luego la y. Pulsa Reiniciar para probar con otros datos.'}; }
+        return {stage: 4, scr: ['', '  ' + S.none], want: null, done: true, tip: S.none === 'Sin solución' ? 'Las rectas son paralelas: no se cortan. No hay vértice.' : 'Las dos ecuaciones son la misma recta (coincidentes): no hay un único punto de corte. No hay vértice.'}; },
+      key(k){ const s = S.st;
+        if (k === 'HOME'){ Object.assign(S, this.init(), {st: 'apps'}); return true; }
+        if (s === 'apps') return appsKey(k, 2, () => { S.st = 'sub'; S.cur = 0; });
+        if (s === 'sub' || s === 'n'){ if (listKey(k, 3)) return true; if (k === 'BACK'){ S.st = s === 'n' ? 'sub' : 'apps'; S.cur = s === 'n' ? 0 : 2; return true; }
+          if (k === 'OK'){ if (S.cur !== 0) return s === 'sub' ? 'Para los vértices hace falta «Sist ec lineal».' : 'Las incógnitas son dos: x e y.'; S.st = s === 'sub' ? 'n' : 'coef'; S.cur = 0; return true; } return false; }
+        if (s === 'coef'){ if (numKey(k)) return true;
+          if (k === 'BACK'){ if (S.buf) S.buf = ''; else if (S.idx > 0) S.idx--; return true; }
+          if (k === 'EXE'){ if (!isNum(S.buf)) return 'Escribe primero el número.'; S.co[S.idx] = S.buf; S.buf = ''; if (++S.idx === 6) S.st = 'ready'; return true; } return false; }
+        if (s === 'ready'){ if (k === 'BACK'){ S.st = 'coef'; S.idx = 5; S.buf = ''; return true; } if (k !== 'EXE') return false;
+          const [a1, b1, c1, a2, b2, c2] = S.co.map(fparse), det = fsub(fmul(a1, b2), fmul(a2, b1));
+          if (det[0] === 0){ const z = f => f[0] === 0; S.none = z(fsub(fmul(a1, c2), fmul(a2, c1))) && z(fsub(fmul(b1, c2), fmul(b2, c1))) ? 'Infinitas soluciones' : 'Sin solución'; S.st = 'none'; }
+          else { S.sol = [fdiv(fsub(fmul(c1, b2), fmul(c2, b1)), det), fdiv(fsub(fmul(a1, c2), fmul(a2, c1)), det)]; S.st = 'x'; } return true; }
+        if (s === 'x' || s === 'y'){ if (k === 'EXE' || k === 'DOWN' || k === 'UP'){ S.st = s === 'x' ? 'y' : 'x'; return true; } if (k === 'BACK' || k === 'AC'){ S.st = 'ready'; return true; } return false; }
+        if (s === 'none' && (k === 'BACK' || k === 'AC' || k === 'OK')){ S.st = 'ready'; return true; }
+        return false; } },
+
+    /* ===== 2. F en los vértices: V · C con matrices ===== */
+    mat: { tab: 'F en los vértices (Matriz V·C)', exA: {d: ['3','2'], v: ['14','0','30','0','6','16']}, exB: {d: ['2','1'], v: ['4','6']},
+      stages: ['HOME y abrir «Matriz»', 'TOOLS → MatA: una fila por vértice (x, y)', 'TOOLS → MatB: columna con los coeficientes de F', 'CATALOG → MatA, ×, CATALOG → MatB', 'EXE: leer F en cada vértice'],
+      intro: 'Vértices A(14, 0), B(30, 0), C(6, 16) y F(x, y) = 4x + 6y. Puedes usar otros vértices (hasta 4) y otra F.',
+      init(){ return {st: 'home', cur: 0, buf: '', M: {}, expr: [], idx: 0}; },
+      exOf(){ const e = S.ed === 'A' ? this.exA : S.ed === 'B' ? this.exB : null; return e; },
+      stg(){ return !S.M.A || (S.ed === 'A' && S.st !== 'main') ? 1 : !S.M.B || (S.ed === 'B' && S.st !== 'main') ? 2 : 3; },
+      gridM(m, on){ const out = []; for (let r = 0; r < m.r; r++) out.push('  ' + Array.from({length: m.c}, (_, j) => cell(m.v[r * m.c + j], on && S.idx === r * m.c + j)).join(' ')); return out; },
+      view(){ const s = S.st, M = S.M, defs = 'ABCD'.split('').filter(l => M[l]).map(l => 'Mat' + l + ' ' + M[l].r + '×' + M[l].c).join('  ') || '(sin matrices)';
+        if (s === 'home') return {stage: 0, scr: ['', '  Pulsa HOME para ver', '  las aplicaciones'], want: 'HOME', tip: 'Pulsa HOME.'};
+        if (s === 'apps') return appsView(3, 0);
+        if (s === 'main'){ const n = S.expr.length, w = !M.A || !M.B ? 'TOOLS' : n === 0 ? 'CATALOG' : n === 1 ? '×' : n === 2 ? 'CATALOG' : 'EXE';
+          return {stage: this.stg(), scr: ['MATRIZ', defs, '', S.expr.join('') + hi('_')], want: w,
+            tip: !M.A ? 'Pulsa TOOLS para definir MatA (los vértices).' : !M.B ? 'Pulsa TOOLS para definir MatB (los coeficientes de F).' : n === 0 ? 'Pulsa CATALOG para escribir MatA.' : n === 1 ? 'Pulsa × (multiplicar).' : n === 2 ? 'Pulsa CATALOG para escribir MatB.' : 'Pulsa EXE para calcular el producto.'}; }
+        if (s === 'tools'){ const t = !M.A ? 0 : 1; return {stage: this.stg(), scr: menu('Definir matriz', ['MatA', 'MatB', 'MatC', 'MatD'], S.cur), want: wantList(t), tip: 'Elige Mat' + 'AB'[t] + ' y pulsa OK.'}; }
+        if (s === 'dimr' || s === 'dimc' || s === 'dimok'){ const e = this.exOf(), d = S.dim;
+          return {stage: this.stg(), scr: ['Dimensión matriz?  Mat' + S.ed, 'Filas     ' + (s === 'dimr' ? hi(pad(S.buf || '_', 3)) : pad(d[0], 3)), 'Columnas  ' + (s === 'dimc' ? hi(pad(S.buf || '_', 3)) : pad(d[1] == null ? '·' : d[1], 3)), s === 'dimok' ? hi('▸ Confirmar') : '  Confirmar'],
+            want: s === 'dimok' ? 'OK' : wantNum(e && e.d[s === 'dimr' ? 0 : 1]),
+            tip: s === 'dimok' ? 'Pulsa OK para confirmar.' : s === 'dimr' ? (S.ed === 'A' ? 'Filas = número de vértices. Escríbelo y pulsa EXE.' : 'Filas = 2 (los dos coeficientes de F). Escríbelo y pulsa EXE.') : (S.ed === 'A' ? 'Columnas = 2 (x, y). Escríbelo y pulsa EXE.' : 'Columnas = 1. Escríbelo y pulsa EXE.')}; }
+        if (s === 'elem'){ const m = M[S.ed], full = S.idx >= m.r * m.c, e = this.exOf(), exv = e && e.d[0] == m.r && e.d[1] == m.c ? e.v[S.idx] : null;
+          return {stage: this.stg(), scr: ['Mat' + S.ed + ' =', ...this.gridM(m, !full), full ? 'BACK: volver' : ''], want: full ? 'BACK' : wantNum(exv),
+            tip: full ? 'Matriz completa. Pulsa BACK para volver.' : 'Escribe el elemento de la fila ' + (Math.floor(S.idx / m.c) + 1) + ', columna ' + (S.idx % m.c + 1) + ' y pulsa EXE.'}; }
+        if (s === 'cat') return {stage: 3, scr: menu('CATALOG', ['Matriz'], 0), want: 'OK', tip: 'Pulsa OK para entrar en «Matriz».'};
+        if (s === 'catm'){ const t = S.expr.length === 0 ? 0 : 1; return {stage: 3, scr: menu('CATALOG · Matriz', ['MatA', 'MatB', 'MatC', 'MatD'], S.cur), want: wantList(t), tip: 'Elige Mat' + 'AB'[t] + ' y pulsa OK.'}; }
+        if (s === 'res'){ const m = S.res; return {stage: 4, scr: [S.expr.join('') + ' =', ...Array.from({length: m.r}, (_, r) => '  ' + Array.from({length: m.c}, (_, j) => pad(dec(m.v[r * m.c + j]), 7)).join(' '))], want: null, done: true,
+            tip: 'Cada fila es el valor de F en un vértice, en el mismo orden en que los escribiste. Si F tiene un término constante, súmalo ahora.'}; }
+        return {stage: 4, scr: ['', '  ERROR de dimensión', '', '  AC: borrar'], want: 'AC', tip: S.errmsg}; },
+      key(k){ const s = S.st, M = S.M;
+        if (k === 'HOME'){ Object.assign(S, this.init(), {st: 'apps'}); return true; }
+        if (s === 'apps') return appsKey(k, 3, () => { S.st = 'main'; });
+        if (s === 'main'){ if (k === 'TOOLS'){ S.st = 'tools'; S.cur = !M.A ? 0 : 1; return true; }
+          if (k === 'CATALOG'){ if (S.expr.length % 2) return 'Entre dos matrices va la tecla ×.'; if (S.expr.length > 2) return 'Ya está escrito: pulsa EXE.'; S.st = 'cat'; return true; }
+          if (k === '×'){ if (S.expr.length !== 1) return S.expr.length ? 'Ahora toca elegir la segunda matriz con CATALOG.' : 'Primero escribe MatA con CATALOG.'; S.expr.push('×'); return true; }
+          if (k === 'AC'){ S.expr = []; return true; } if (k === 'BACK'){ S.expr.pop(); return true; }
+          if (k === 'EXE'){ if (S.expr.length !== 3) return 'Escribe antes el producto: MatA × MatB.';
+            const a = M[S.expr[0][3]], b = M[S.expr[2][3]];
+            if (!a || !b){ S.st = 'err'; S.errmsg = 'Has usado una matriz que no está definida. Pulsa AC y defínela con TOOLS.'; return true; }
+            if (a.c !== b.r){ S.st = 'err'; S.errmsg = 'No se pueden multiplicar: las columnas de la primera (' + a.c + ') tienen que ser las filas de la segunda (' + b.r + '). Pulsa AC.'; return true; }
+            const v = []; for (let i = 0; i < a.r; i++) for (let j = 0; j < b.c; j++){ let t = 0; for (let q = 0; q < a.c; q++) t += +a.v[i * a.c + q] * +b.v[q * b.c + j]; v.push(t); }
+            S.res = {r: a.r, c: b.c, v}; S.st = 'res'; return true; } return false; }
+        if (s === 'tools'){ if (listKey(k, 4)) return true; if (k === 'BACK'){ S.st = 'main'; return true; }
+          if (k === 'OK'){ S.ed = 'ABCD'[S.cur]; S.dim = []; S.buf = ''; S.st = 'dimr'; return true; } return false; }
+        if (s === 'dimr' || s === 'dimc'){ if (numKey(k)) return true; if (k === 'BACK'){ S.st = 'tools'; S.cur = 'ABCD'.indexOf(S.ed); return true; }
+          if (k === 'EXE'){ if (!/^[1-4]$/.test(S.buf)) return 'La dimensión tiene que ser 1, 2, 3 o 4 (la calculadora llega hasta 4 × 4).'; S.dim.push(+S.buf); S.buf = ''; S.st = s === 'dimr' ? 'dimc' : 'dimok'; return true; } return false; }
+        if (s === 'dimok'){ if (k === 'OK' || k === 'EXE'){ M[S.ed] = {r: S.dim[0], c: S.dim[1], v: []}; S.idx = 0; S.buf = ''; S.st = 'elem'; return true; } if (k === 'BACK'){ S.dim = []; S.st = 'dimr'; return true; } return false; }
+        if (s === 'elem'){ const m = M[S.ed], full = S.idx >= m.r * m.c;
+          if (k === 'BACK'){ if (!full) return 'Faltan elementos: escribe cada uno y pulsa EXE.'; S.st = 'main'; return true; }
+          if (full) return false; if (numKey(k)) return true;
+          if (k === 'EXE'){ if (!isNum(S.buf)) return 'Escribe primero el número.'; m.v[S.idx++] = S.buf; S.buf = ''; return true; } return false; }
+        if (s === 'cat'){ if (k === 'OK'){ S.st = 'catm'; S.cur = S.expr.length === 0 ? 0 : 1; return true; } if (k === 'BACK'){ S.st = 'main'; return true; } return false; }
+        if (s === 'catm'){ if (listKey(k, 4)) return true; if (k === 'BACK'){ S.st = 'cat'; return true; } if (k === 'OK'){ S.expr.push('Mat' + 'ABCD'[S.cur]); S.st = 'main'; return true; } return false; }
+        if (s === 'res'){ if (k === 'AC' || k === 'BACK'){ S.expr = []; S.st = 'main'; return true; } return false; }
+        if (s === 'err' && k === 'AC'){ S.expr = []; S.st = 'main'; return true; }
+        return false; } },
+
+    /* ===== 3. segmento: aplicación Tabla ===== */
+    tab: { tab: 'Segmento (Tabla)', exF: '(60−2x)÷3', exR: ['6','30','1'],
+      stages: ['HOME y abrir «Tabla»', 'Escribir f(x) y pulsar EXE', 'TOOLS → «Rango tabla»: Inic., Final y Paso', 'Ejecutar', 'Buscar las filas con f(x) entero'],
+      intro: 'Lado BC: y = (60 − 2x)/3, con x desde 6 hasta 30. Puedes escribir otra función y otro rango.',
+      init(){ return {st: 'home', cur: 0, buf: '', fx: '', rg: [], top: 0}; },
+      view(){ const s = S.st, R = ['Inic.', 'Final', 'Paso'];
+        if (s === 'home') return {stage: 0, scr: ['', '  Pulsa HOME para ver', '  las aplicaciones'], want: 'HOME', tip: 'Pulsa HOME.'};
+        if (s === 'apps') return appsView(1, 0);
+        if (s === 'fx'){ const e = this.exF, f = S.fx; let w = 'EXE'; if (e !== f && e.startsWith(f)) w = e[f.length]; else if (!f) w = null;
+          return {stage: 1, scr: ['Definir f(x)', '', 'f(x)=' + f.replace(/\./g, ',') + hi('_')], want: w, tip: 'Escribe la función con las teclas (la x, con la tecla x; la fracción, con paréntesis y ÷) y pulsa EXE. BACK borra el último símbolo.'}; }
+        if (s === 'main') return {stage: 2, scr: ['TABLA', 'f(x)=' + S.fx.replace(/\./g, ','), '', 'TOOLS: rango de la tabla'], want: 'TOOLS', tip: 'Pulsa TOOLS para elegir el rango de la tabla.'};
+        if (s === 'tools') return {stage: 2, scr: menu('TOOLS', ['Rango tabla', 'Definir f(x)'], S.cur), want: wantList(0), tip: 'Elige «Rango tabla» y pulsa OK.'};
+        if (s === 'rg' || s === 'run') return {stage: s === 'run' ? 3 : 2, scr: ['Rango tabla', ...R.map((n, i) => n.padEnd(7) + (s === 'rg' && S.idx === i ? hi(pad(S.buf ? show(S.buf) : '_', 6)) : pad(S.rg[i] == null ? '·' : show(S.rg[i]), 6))), s === 'run' ? hi('▸ Ejecutar') : '  Ejecutar'],
+          want: s === 'run' ? 'EXE' : wantNum(this.exR[S.idx]), tip: s === 'run' ? 'Pulsa EXE para ejecutar la tabla.' : ['Inicio: la x del primer vértice del segmento.', 'Final: la x del otro vértice.', 'Paso: 1, para ver todos los enteros.'][S.idx] + ' Escríbelo y pulsa EXE.'};
+        const rows = S.rows, vis = rows.slice(S.top, S.top + 5), ent = rows.filter(r => r[2]);
+        return {stage: 4, scr: ['     x      f(x)', ...vis.map(r => (r[2] ? hi : (t => t))(pad(dec(r[0]), 6) + pad(isFinite(r[1]) ? dec(Math.round(r[1] * 1e4) / 1e4) : 'ERROR', 10) + (r[2] ? ' ←' : '  '))), S.top + 5 < rows.length ? '        ▼' : ''],
+          want: S.top + 5 < rows.length ? 'DOWN' : null, done: true, tip: 'Baja con ▼ y quédate con las filas en que f(x) es entero.',
+          extra: ent.length ? 'Puntos de coordenadas enteras (' + ent.length + '): ' + ent.map(r => '(' + dec(r[0]) + ', ' + dec(Math.round(r[1])) + ')').join(', ') + '.' : 'En este rango no hay ningún punto con las dos coordenadas enteras.'}; },
+      key(k){ const s = S.st;
+        if (k === 'HOME'){ Object.assign(S, this.init(), {st: 'apps'}); return true; }
+        if (s === 'apps') return appsKey(k, 1, () => { S.st = 'fx'; });
+        if (s === 'fx'){ if (/^\d$/.test(k) || ['x', '(', ')', '+', '−', '×', '÷'].includes(k)){ if (S.fx.length < 18) S.fx += k; return true; }
+          if (k === '.'){ S.fx += '.'; return true; } if (k === 'NEG'){ S.fx += '-'; return true; }
+          if (k === 'AC'){ S.fx = ''; return true; } if (k === 'BACK'){ S.fx = S.fx.slice(0, -1); return true; }
+          if (k === 'EXE'){ const f = compile(S.fx); if (!f) return 'La expresión no está bien escrita. Revisa los paréntesis y los signos.'; S.f = f; S.st = 'main'; return true; } return false; }
+        if (s === 'main'){ if (k === 'TOOLS'){ S.st = 'tools'; S.cur = 0; return true; } return false; }
+        if (s === 'tools'){ if (listKey(k, 2)) return true; if (k === 'BACK'){ S.st = 'main'; return true; }
+          if (k === 'OK'){ if (S.cur === 1){ S.st = 'fx'; return true; } S.st = 'rg'; S.idx = 0; S.rg = []; S.buf = ''; return true; } return false; }
+        if (s === 'rg'){ if (numKey(k)) return true; if (k === 'BACK'){ if (S.buf) S.buf = ''; else if (S.idx > 0) S.idx--; else S.st = 'tools'; return true; }
+          if (k === 'EXE'){ if (!isNum(S.buf)) return 'Escribe primero el número.'; S.rg[S.idx] = S.buf; S.buf = ''; if (++S.idx === 3) S.st = 'run'; return true; } return false; }
+        if (s === 'run'){ if (k === 'BACK'){ S.st = 'rg'; S.idx = 2; return true; } if (k !== 'EXE' && k !== 'OK') return false;
+          const [a, b, h] = S.rg.map(Number), n = Math.floor((b - a) / h + 1e-9) + 1;
+          if (!(h > 0) || b < a || n > 45){ S.st = 'rg'; S.idx = 0; S.rg = []; return !(h > 0) ? 'El paso tiene que ser mayor que 0. Escribe otra vez el rango.' : b < a ? 'El final tiene que ser mayor o igual que el inicio. Escribe otra vez el rango.' : 'Salen demasiadas filas para este simulador (máximo 45). Escribe otra vez el rango.'; }
+          S.rows = Array.from({length: n}, (_, i) => { const x = Math.round((a + i * h) * 1e6) / 1e6, y = S.f(x); return [x, y, Number.isInteger(x) && isFinite(y) && Math.abs(y - Math.round(y)) < 1e-9]; });
+          S.top = 0; S.st = 'table'; return true; }
+        if (s === 'table'){ if (k === 'DOWN' || k === 'UP'){ S.top = Math.max(0, Math.min(Math.max(0, S.rows.length - 5), S.top + (k === 'DOWN' ? 1 : -1))); return true; }
+          if (k === 'BACK' || k === 'AC'){ S.st = 'main'; return true; } return false; }
+        return false; } }
+  };
+
+  root.classList.add('cs');
+  root.innerHTML = '<div class="cs-tabs" role="tablist" aria-label="Qué quieres practicar">' + Object.entries(MODES).map(([id, m]) => `<button type="button" role="tab" data-mode="${id}">${m.tab}</button>`).join('') + '</div>'
+    + '<div class="cs-body"><div class="cs-dev"><div class="cs-screen" aria-live="polite"></div><div class="cs-msg" role="status"></div><div class="cs-keys">' + KEYS.map(k => `<button type="button" class="cs-k ${k[2] || ''}" data-k="${k[0]}"${k[1].length > 5 ? ' style="font-size:.62em"' : ''}>${k[1]}</button>`).join('') + '</div></div>'
+    + '<div class="cs-side"><p class="cs-intro"></p><ol class="cs-guion"></ol><p class="cs-extra"></p>'
+    + '<div class="cs-btns"><button type="button" class="proy-btn" data-act="next">Ver la siguiente tecla</button><button type="button" class="proy-btn" data-act="reset">Reiniciar</button><label><input type="checkbox" data-act="hint" checked> Resaltar la siguiente tecla</label></div></div></div>';
+  const q = s => root.querySelector(s);
+  function render(flash){
+    const M = MODES[mode], v = M.view();
+    root.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-selected', b.dataset.mode === mode));
+    q('.cs-screen').innerHTML = v.scr.join('\n');
+    q('.cs-intro').textContent = M.intro;
+    q('.cs-guion').innerHTML = M.stages.map((t, i) => `<li class="${i < v.stage || (v.done && i === v.stage) ? 'ok' : i === v.stage ? 'now' : ''}">${t}</li>`).join('');
+    q('.cs-msg').innerHTML = (warn ? '<span class="cs-warn">' + warn + '</span> ' : '') + (v.done ? '<b>Hecho.</b> ' : '') + v.tip + (flash && v.want ? ' <b>Tecla: ' + NAME[v.want] + '</b>' : '');
+    q('.cs-extra').textContent = v.extra || '';
+    root.querySelectorAll('.cs-k').forEach(b => { b.classList.toggle('next', !!(hint || flash) && b.dataset.k === v.want); b.classList.toggle('flash', !!flash && b.dataset.k === v.want); });
+    root.dataset.state = S.st; root.dataset.want = v.want || '';
+  }
+  function setMode(m){ if (!MODES[m]) return; mode = m; S = MODES[m].init(); warn = ''; render(); }
+  function press(k){ const M = MODES[mode], v = M.view(), r = M.key(k);
+    warn = r === true ? '' : typeof r === 'string' ? r : 'Ahora toca ' + (v.want ? 'la tecla ' + NAME[v.want] + '.' : 'otra cosa:');
+    render(); }
+  root.addEventListener('click', ev => { const t = ev.target.closest('button, input'); if (!t) return;
+    if (t.dataset.k) press(t.dataset.k); else if (t.dataset.mode) setMode(t.dataset.mode);
+    else if (t.dataset.act === 'reset') setMode(mode); else if (t.dataset.act === 'next'){ warn = ''; render(true); }
+    else if (t.dataset.act === 'hint'){ hint = t.checked; render(); } });
+  setMode(mode);
+  return {setMode, press, get state(){ return S; }};
+}
+const CALC = CalcSim($('#calcsim'));
+document.addEventListener('click', ev => { const a = ev.target.closest('[data-calc]'); if (a) CALC.setMode(a.dataset.calc); });
 
 drawHero(); draw0(); draw1(); drawE(); drawS(); drawJ(); draw2(); draw4(); route(); refreshDone();
 </script>
