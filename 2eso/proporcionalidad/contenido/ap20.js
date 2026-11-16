@@ -53,7 +53,7 @@ TEMA.registrar({
       res:"El segundo cambio fue una <b>subida del 20 %</b>." },
     { nivel:"Aplicación", min:4,
       enun:"¿Qué interés producen 6000 € al 2,5 % anual durante 9 meses?",
-      pasos:[R`En meses: $I = \dfrac{6000 \cdot 0,025 \cdot 9}{12} = \dfrac{1350}{12} = 112,50$ €`],
+      pasos:[R`1 año (D): 100 € → 2,5 €; 6000 € → $x = \dfrac{6000 \cdot 2,5}{100} = 150$ €`, R`12 meses → 150 €; 9 meses → $x = \dfrac{9 \cdot 150}{12} = \dfrac{1350}{12} = 112,50$ €`],
       res:"Producen <b>112,50 €</b> de interés." }
   ],
 
@@ -77,7 +77,7 @@ TEMA.registrar({
     { nivel:"Problema", enun:"Un grifo llena un depósito en 3 horas y el desagüe lo vacía en 12 horas. Si se abren los dos, ¿cuánto tarda en llenarse?",
       pasos:[R`El desagüe resta: $\dfrac13 - \dfrac{1}{12} = \dfrac{4}{12} - \dfrac{1}{12} = \dfrac{3}{12} = \dfrac14$`, "Le doy la vuelta: 4 horas"], res:"El depósito tarda <b>4 horas</b> en llenarse." },
     { nivel:"Problema", enun:"¿Qué dinero hay que depositar al 2 % para ganar 150 € de intereses en 3 años?",
-      pasos:[R`$c = \dfrac{150}{0,02 \cdot 3} = \dfrac{150}{0,06} = 2500$ €`], res:"Hay que depositar <b>2500 €</b>." },
+      pasos:[R`1 año: 3 años → 150 €; 1 año → $150 : 3 = 50$ €`, R`100 € → 2 €; $x$ → 50 €: $x = \dfrac{100 \cdot 50}{2} = 2500$ €`], res:"Hay que depositar <b>2500 €</b>." },
 
     { nivel:"Básico", enun:"La razón entre los chicos y las chicas de una clase es 4 : 5. En la clase hay 27 alumnos. ¿Cuántos chicos y cuántas chicas hay?",
       pasos:["4 + 5 = 9 partes", "27 : 9 = 3 alumnos cada parte", "Chicos: 4 · 3 = 12. Chicas: 5 · 3 = 15"], res:"Hay <b>12 chicos</b> y <b>15 chicas</b>." },
@@ -100,7 +100,7 @@ TEMA.registrar({
     { nivel:"Problema", enun:"Una lavadora cuesta 350 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
       pasos:[R`Sube un 21 %: $I_V = 1 + 0,21 = 1,21$`, R`$C_F = 1,21 \cdot 350 = 423,50$ €`], res:"Con IVA, la lavadora cuesta <b>423,50 €</b>." },
     { nivel:"Problema", enun:"¿Qué interés producen 4000 € al 3 % anual durante 8 meses?",
-      pasos:[R`El tiempo en meses: divido entre 12`, R`$I = \dfrac{4000 \cdot 0,03 \cdot 8}{12} = \dfrac{960}{12} = 80$ €`], res:"Producen <b>80 €</b> de interés." }
+      pasos:[R`1 año (D): $x = \dfrac{4000 \cdot 3}{100} = 120$ €`, R`12 meses → 120 €; 8 meses → $x = \dfrac{8 \cdot 120}{12} = \dfrac{960}{12} = 80$ €`], res:"Producen <b>80 €</b> de interés." }
   ],
 
   laminas: [
@@ -129,7 +129,7 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
         <div class="b-prop"><span class="etq">％ Porcentajes</span><p>el % en decimal: $C_F = I_V \\cdot C_I$. Lo que busco es la $x$ y despejo.</p></div>
         <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>$C_F = I_V \\cdot C_I$ con $I_V = 1 \\pm$ el %. Lo que busco es la $x$. Encadenados: se multiplican los índices.</p></div>
-        <div class="b-prop"><span class="etq">🏦 Interés</span><p>$I = c \\cdot r \\cdot t$ · meses: entre 12</p></div>
+        <div class="b-prop"><span class="etq">🏦 Interés</span><p>dos reglas de tres D: 100 € → el % (1 año) y 1 año (12 meses) → todo el tiempo</p></div>
         <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta</p></div></div>`}
     ]},
 

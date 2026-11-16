@@ -14,7 +14,7 @@ TEMA.info = {
     {num:"6.2", ico:"➗", corto:"Tipo 2", grupo:"6. Porcentajes", tipo:"Tipo 2", titulo:"Calcular el total", desc:"Dado el precio rebajado, el descuento, el IVA o el precio con IVA: divido.", listo:true},
     {num:"6.3", ico:"🔍", corto:"Tipo 3", grupo:"6. Porcentajes", tipo:"Tipo 3", titulo:"Calcular el %", desc:"Dadas la cantidad inicial y la final: cuánto ha subido o bajado.", listo:true},
     {num:"6.4", ico:"🔗", corto:"Encadenados", grupo:"6. Porcentajes", tipo:"Varios cambios", titulo:"Encadenados y ofertas", desc:"Subidas y bajadas seguidas: se multiplican los índices. Ofertas 3x2, 2.ª unidad…", listo:true},
-    {num:7, ico:"🏦", corto:"Interés", titulo:"Interés simple", desc:"Capital, rédito y tiempo. Años, meses y días.", listo:true},
+    {num:7, ico:"🏦", corto:"Interés", titulo:"Interés simple", desc:"Con dos reglas de tres: el interés de 1 año y el de todo el tiempo.", listo:true},
     {num:8, ico:"🚰", corto:"Grifos", titulo:"Grifos y trabajo en común", desc:"Grifos, desagües y trabajos que se hacen entre varios.", listo:true}
   ]
 };

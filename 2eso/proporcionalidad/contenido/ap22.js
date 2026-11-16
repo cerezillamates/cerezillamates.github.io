@@ -37,7 +37,7 @@ TEMA.registrar({
       {comp:{q:"Subir un 10 % y después bajar un 10 % deja el precio igual.", opciones:VF, ok:1, explic:"1,10 · 0,90 = 0,99: queda un 1 % más barato.", pista:"Prueba con 100 €."}}
     ]},
     { titulo:"Interés y grifos", cuerpo:[
-      {comp:{q:"¿Qué interés dan 1000 € al 3 % durante 2 años?", sol:60, unidad:"€", explic:"1000 · 0,03 · 2 = 60 €", pista:"I = c · r · t con r = 0,03."}},
+      {comp:{q:"¿Qué interés dan 1000 € al 3 % durante 2 años?", sol:60, unidad:"€", explic:"1 año: 100 € → 3 €, 1000 € → 30 €. 2 años: 60 €", pista:"Primero el interés de 1 año (regla de tres: 100 € → 3 €)."}},
       {comp:{q:"Dos grifos iguales tardan cada uno 2 h en llenar un depósito. ¿Cuántas horas tardan juntos?", sol:1, unidad:"h", explic:"½ + ½ = 1 → 1 hora", pista:"Suma lo que llena cada uno en 1 hora."}},
       {comp:{q:"Un grifo llena un depósito en 2 h y el desagüe lo vacía en 6 h. ¿Cuántas horas tarda en llenarse?", sol:3, unidad:"h", explic:"1/2 − 1/6 = 2/6 = 1/3 → 3 horas", pista:"El desagüe resta; después, la vuelta."}}
     ]}
