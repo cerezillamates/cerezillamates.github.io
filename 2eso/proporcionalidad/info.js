@@ -10,9 +10,9 @@ TEMA.info = {
     {num:3, ico:"📉", corto:"Inversa", titulo:"Proporcionalidad inversa", desc:"Constante (el producto), regla de tres inversa, reducción a la unidad y D, I o ninguna.", listo:true},
     {num:4, ico:"🧮", corto:"Compuesta", titulo:"Proporcionalidad compuesta", desc:"Tres magnitudes: cuadro con flechas D o I y reducción a la unidad.", listo:true},
     {num:5, ico:"🍰", corto:"Repartos", titulo:"Repartos proporcionales", desc:"Reparto directo e inverso.", listo:true},
-    {num:"6.1", ico:"✖️", corto:"Tipo 1", grupo:"6. Porcentajes", grupoDesc:"Tres tipos de problemas y los encadenados, siempre con la misma fórmula: C<sub>F</sub> = I<sub>V</sub> · C<sub>I</sub>.", tipo:"Tipo 1", titulo:"Calcular un %, un descuento o un incremento", desc:"Conozco lo que había y el %: multiplico.", listo:true},
-    {num:"6.2", ico:"➗", corto:"Tipo 2", grupo:"6. Porcentajes", tipo:"Tipo 2", titulo:"Calcular el total", desc:"Dado el precio rebajado, el descuento, el IVA o el precio con IVA: divido.", listo:true},
-    {num:"6.3", ico:"🔍", corto:"Tipo 3", grupo:"6. Porcentajes", tipo:"Tipo 3", titulo:"Calcular el %", desc:"Dadas la cantidad inicial y la final: cuánto ha subido o bajado.", listo:true},
+    {num:"6.1", ico:"✖️", corto:"Tipo 1", grupo:"6. Porcentajes", grupoDesc:"Tres tipos de problemas y los encadenados: el tipo 1 y los encadenados con la fórmula C<sub>F</sub> = I<sub>V</sub> · C<sub>I</sub>; los tipos 2 y 3, con regla de tres.", tipo:"Tipo 1", titulo:"Calcular un %, un descuento o un incremento", desc:"Conozco lo que había y el %: multiplico.", listo:true},
+    {num:"6.2", ico:"➗", corto:"Tipo 2", grupo:"6. Porcentajes", tipo:"Tipo 2", titulo:"Calcular el total", desc:"Dado el precio rebajado, el descuento, el IVA o el precio con IVA: regla de tres, porque el total es el 100 %.", listo:true},
+    {num:"6.3", ico:"🔍", corto:"Tipo 3", grupo:"6. Porcentajes", tipo:"Tipo 3", titulo:"Calcular el %", desc:"Dadas la cantidad inicial y la final: regla de tres para saber cuánto ha subido o bajado.", listo:true},
     {num:"6.4", ico:"🔗", corto:"Encadenados", grupo:"6. Porcentajes", tipo:"Varios cambios", titulo:"Encadenados y ofertas", desc:"Subidas y bajadas seguidas: se multiplican los índices. Ofertas 3x2, 2.ª unidad…", listo:true},
     {num:7, ico:"🏦", corto:"Interés", titulo:"Interés simple", desc:"Con dos reglas de tres: el interés de 1 año y el de todo el tiempo.", listo:true},
     {num:8, ico:"🚰", corto:"Grifos", titulo:"Grifos y trabajo en común", desc:"Grifos, desagües y trabajos que se hacen entre varios.", listo:true}

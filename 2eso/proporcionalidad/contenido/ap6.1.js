@@ -1,4 +1,6 @@
 /* 2.º ESO · Tema 3 · Apartado 6.1: Porcentajes. Tipo 1: calcular un %, un descuento o un incremento (MULTIPLICANDO)
+   Cambio pedido por la profesora (16-11-2026): los descuentos y los incrementos se hacen calculando el % y
+   sumando o restando; el índice de variación se queda como TRUCO para ir más rápido (−20 % = pagar el 80 %).
    Organización de la profesora (13-nov-2026): porcentajes en 3 subapartados (6.1 multiplicando, 6.2 calcular el total
    dividiendo, 6.3 calcular el % dadas la cantidad inicial y la final). Siempre C_F = I_V · C_I, % en decimal, x en lo que se busca.
    2.º: datos directos y contextos sencillos. */
@@ -37,12 +39,16 @@ TEMA.registrar({
       res:"Han aprobado todo <b>9 alumnos</b>." },
     { nivel:"Práctica", min:5,
       enun:"<b>a)</b> Una camiseta cuesta 15 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?<br><b>b)</b> Un balón de 24 € tiene un 25 % de descuento. ¿Cuánto pago?",
-      pasos:[R`<b>a)</b> Sube un 21 %: $I_V = 1 + 0,21 = 1,21$`, R`$C_F = I_V \cdot C_I = 15 \cdot 1,21 = 18,15$ €`,
-             R`<b>b)</b> Baja un 25 %: $I_V = 1 - 0,25 = 0,75$`, R`$C_F = 0,75 \cdot 24 = 18$ €`],
+      pasos:[R`<b>a)</b> El IVA es el 21 % de 15 €: $C_F = I_V \cdot C_I = 0,21 \cdot 15 = 3,15$ €`,
+             R`Se <b>suma</b> al precio: $15 + 3,15 = 18,15$ €`,
+             R`<b>b)</b> El descuento es el 25 % de 24 €: $0,25 \cdot 24 = 6$ €`,
+             R`Se <b>resta</b>: $24 - 6 = 18$ €`,
+             R`🪄 Más rápido: pago el $100 - 25 = 75\,\%$ → $0,75 \cdot 24 = 18$ €`],
       res:"a) Con IVA, la camiseta cuesta <b>18,15 €</b>.<br>b) Por el balón pago <b>18 €</b>." },
     { nivel:"Práctica", min:4,
       enun:"En un curso de baile hay 60 personas. Al mes siguiente se apuntan un 20 % más. ¿Cuántas personas hay ahora?",
-      pasos:[R`Sube un 20 %: $I_V = 1 + 0,20 = 1,20$`, R`$C_F = I_V \cdot C_I = 60 \cdot 1,20 = 72$`],
+      pasos:[R`Lo que sube: el 20 % de 60 $= 0,20 \cdot 60 = 12$ personas`, R`Se suma: $60 + 12 = 72$`,
+             R`🪄 Más rápido: hay el $100 + 20 = 120\,\%$ → $1,20 \cdot 60 = 72$`],
       res:"Ahora hay <b>72 personas</b> en el curso de baile." },
     { nivel:"Problema", min:5,
       enun:"En un instituto de 480 alumnos, el 35 % viene en autobús y el 15 % en bici. El resto viene andando. ¿Cuántos alumnos vienen de cada forma?",
@@ -54,17 +60,19 @@ TEMA.registrar({
     { nivel:"Básico", enun:"Calcula: <b>a)</b> 30 % de 90 &nbsp; <b>b)</b> 5 % de 240 &nbsp; <b>c)</b> 75 % de 60 &nbsp; <b>d)</b> 1 % de 3500",
       pasos:[R`a) $90 \cdot 0,30 = 27$`, R`b) $240 \cdot 0,05 = 12$`, R`c) $60 \cdot 0,75 = 45$`, R`d) $3500 \cdot 0,01 = 35$`], res:"a) 27 b) 12 c) 45 d) 35" },
     { nivel:"Básico", enun:"Un ordenador cuesta 1200 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
-      pasos:[R`Sube un 21 %: $I_V = 1 + 0,21 = 1,21$`, R`$C_F = 1,21 \cdot 1200 = 1452$ €`], res:"Con IVA, el ordenador cuesta <b>1452 €</b>." },
+      pasos:[R`IVA: el 21 % de 1200 $= 0,21 \cdot 1200 = 252$ €`, R`$1200 + 252 = 1452$ €`,
+             R`🪄 Más rápido: el $121\,\%$ → $1,21 \cdot 1200 = 1452$ €`], res:"Con IVA, el ordenador cuesta <b>1452 €</b>." },
     { nivel:"Básico", enun:"En una clase de 30 alumnos, el 40 % lleva gafas. ¿Cuántos alumnos llevan gafas?",
       pasos:[R`$C_I = 30$ e $I_V = 0,40$`, R`$C_F = I_V \cdot C_I = 30 \cdot 0,40 = 12$`], res:"Llevan gafas <b>12 alumnos</b>." },
     { nivel:"Consolidación", enun:"Un patinete de 250 € tiene un 30 % de descuento. ¿Cuánto pago?",
-      pasos:[R`Baja un 30 %: $I_V = 1 - 0,30 = 0,70$`, R`$C_F = I_V \cdot C_I = 0,70 \cdot 250 = 175$ €`], res:"Por el patinete pago <b>175 €</b>." },
+      pasos:[R`Descuento: el 30 % de 250 $= 0,30 \cdot 250 = 75$ €`, R`$250 - 75 = 175$ €`,
+             R`🪄 Más rápido: pago el $70\,\%$ → $0,70 \cdot 250 = 175$ €`], res:"Por el patinete pago <b>175 €</b>." },
     { nivel:"Problema", enun:"El año pasado sobró comida de Navidad para 6 días y éramos 30 personas. Este año somos un 20 % más de personas. ¿Para cuántos días sobrará comida si se compra la misma cantidad?",
-      pasos:[R`Personas este año: $30 \cdot 1,20 = 36$`, cuadro("Personas","Días",["30","6"],["36","x"]),
+      pasos:[R`Lo que sube: el 20 % de 30 $= 6$ personas → este año somos $30 + 6 = 36$`, cuadro("Personas","Días",["30","6"],["36","x"]),
              "Más personas → la comida dura menos: <b>I</b>.", R`Le damos la vuelta: $\dfrac{30}{36} = \dfrac{x}{6}$`, R`En cruz: $36 \cdot x = 30 \cdot 6 \;\Rightarrow\; x = \dfrac{180}{36} = 5$`],
       res:"Este año sobrará comida para <b>5 días</b>." },
     { nivel:"Problema", enun:"Con un dinero ahorrado puedo comprar 20 bolígrafos a 60 céntimos cada uno. Si el precio sube un 25 %, ¿cuántos bolígrafos podré comprar con el mismo dinero?",
-      pasos:[R`Precio nuevo: $0,60 \cdot 1,25 = 0,75$ €`, cuadro("Precio (€)","Bolígrafos",["0,60","20"],["0,75","x"]),
+      pasos:[R`Lo que sube: el 25 % de 0,60 $= 0,15$ € → precio nuevo $0,60 + 0,15 = 0,75$ €`, cuadro("Precio (€)","Bolígrafos",["0,60","20"],["0,75","x"]),
              "Más caros → compro menos: <b>I</b>.", R`Le damos la vuelta: $\dfrac{0,60}{0,75} = \dfrac{x}{20}$`, R`En cruz: $0,75 \cdot x = 0,60 \cdot 20 \;\Rightarrow\; x = \dfrac{12}{0,75} = 16$`],
       res:"Podré comprar <b>16 bolígrafos</b>." },
     { nivel:"Para pensar", enun:"¿Es lo mismo el 20 % de 50 que el 50 % de 20? ¿Por qué? Usa la idea para calcular de cabeza el 8 % de 25.",
@@ -103,24 +111,31 @@ TEMA.registrar({
       {nota:["<b>Tipo 1:</b> conozco lo que había y el %: <b>multiplico</b>."]}
     ]},
     { titulo:"Subir y bajar un porcentaje", cuerpo:[
+      {prop:["<b>Paso 1.</b> Calculo el % (lo que sube o lo que me descuentan).", "<b>Paso 2.</b> Lo <b>sumo</b> si sube y lo <b>resto</b> si baja."], etq:"Dos pasos"},
       {cols:[
-        [{ej:{etq:"📉 Rebaja", enun:"Unas zapatillas de 60 € tienen un 25 % de descuento. ¿Cuánto pagas?", pasos:[R`Baja un 25 %: $I_V = 1 - 0,25 = 0,75$`, R`$C_F = I_V \cdot C_I = 60 \cdot 0,75 = 45$ €`], res:"Pagas <b>45 €</b> por las zapatillas."}}],
-        [{ej:{etq:"📈 Subida", enun:"La entrada al parque acuático cuesta 20 € y sube un 10 %. ¿Cuánto cuesta ahora?", pasos:[R`Sube un 10 %: $I_V = 1 + 0,10 = 1,10$`, R`$C_F = 1,10 \cdot 20 = 22$ €`], res:"La entrada cuesta ahora <b>22 €</b>."}}]
+        [{ej:{etq:"📉 Rebaja", enun:"Unas zapatillas de 60 € tienen un 25 % de descuento. ¿Cuánto pagas?", pasos:[R`Descuento: el 25 % de 60 $= 0,25 \cdot 60 = 15$ €`, R`Se resta: $60 - 15 = 45$ €`], res:"Pagas <b>45 €</b> por las zapatillas."}}],
+        [{ej:{etq:"📈 Subida", enun:"La entrada al parque acuático cuesta 20 € y sube un 10 %. ¿Cuánto cuesta ahora?", pasos:[R`Sube: el 10 % de 20 $= 2$ €`, R`Se suma: $20 + 2 = 22$ €`], res:"La entrada cuesta ahora <b>22 €</b>."}}]
       ]}
     ]},
-    { titulo:"¿Sube o baja? El índice de variación $I_V$", cuerpo:[
-      {html:R`<div class="ivs"><div><b class="t">📊 El % de una cantidad</b><span class="f">$I_V = $ el % en decimal</span><small>El 40 %: $I_V = 0,40$</small></div><div class="sube"><b class="t">📈 Sube</b><span class="f">$I_V = 1 + $ el %</span><small>IVA del 21 %: $I_V = 1 + 0,21 = 1,21$</small></div><div class="baja"><b class="t">📉 Baja</b><span class="f">$I_V = 1 - $ el %</span><small>Descuento del 20 %: $I_V = 1 - 0,20 = 0,80$</small></div></div>`},
+    { titulo:"🪄 Truco para ir más rápido: el índice", cuerpo:[
+      {truco:["Si me descuentan un <b>20 %</b>, <b>pago el 80 %</b> ($100 - 20$). Si suben un <b>21 %</b>, <b>pago el 121 %</b> ($100 + 21$).",
+              "Ese porcentaje en decimal es el <b>índice de variación</b> $I_V$, y con él sale todo <b>de una vez</b>."], etq:"🪄 Truco"},
+      {html:R`<div class="ivs"><div><b class="t">📊 El % de una cantidad</b><span class="f">$I_V = $ el % en decimal</span><small>El 40 %: $I_V = 0,40$</small></div><div class="sube"><b class="t">📈 Sube un 21 %</b><span class="f">pago el $121\,\%$</span><small>$I_V = 1 + 0,21 = 1,21$</small></div><div class="baja"><b class="t">📉 Baja un 20 %</b><span class="f">pago el $80\,\%$</span><small>$I_V = 1 - 0,20 = 0,80$</small></div></div>`},
+      {ej:{enun:"Unas zapatillas de 60 € con un 25 % de descuento.",
+        pasos:[R`Pago el $100 - 25 = 75\,\%$ → $I_V = 0,75$`, R`$C_F = I_V \cdot C_I = 0,75 \cdot 60 = 45$ €`, "Sale lo mismo que restando, pero en un solo paso."],
+        res:"Pago <b>45 €</b>."}},
       {nota:["Sube: aumento, IVA, ganancia, se apuntan más. Baja: descuento, rebaja, pérdida, se van."]}
     ]},
     { titulo:"El IVA", cuerpo:[
       {def:["El <b>IVA</b> es un impuesto que se suma al precio. El general es del <b>21 %</b> (en alimentos básicos y medicinas es menor)."], etq:"IVA"},
       {ej:{enun:"Un portátil cuesta 450 € sin IVA. ¿Cuánto pago con el 21 %?",
-        pasos:[R`Sube un 21 %: $I_V = 1 + 0,21 = 1,21$`, R`$C_F = 1,21 \cdot 450 = 544,50$ €`], res:"Con IVA pago <b>544,50 €</b>."}},
-      {html:flecha(["450 €","× 1,21","544,50 €"])}
+        pasos:[R`IVA: el 21 % de 450 $= 0,21 \cdot 450 = 94,50$ €`, R`$450 + 94,50 = 544,50$ €`,
+               R`🪄 Más rápido: pago el $121\,\%$ → $1,21 \cdot 450 = 544,50$ €`], res:"Con IVA pago <b>544,50 €</b>."}},
+      {html:flecha(["450 €","+ 94,50 €","544,50 €"])}
     ]},
     { titulo:"Problema: el coche reduce un 40 %", cuerpo:[
       {ej:{etq:"🚗 Problema de examen", enun:"Un coche a 80 km/h tarda 5 horas en un trayecto. Si disminuye su velocidad un 40 %, ¿cuánto tardará en el mismo trayecto?",
-        pasos:[R`Nueva velocidad: baja un 40 %, $I_V = 1 - 0,40 = 0,60$ → $80 \cdot 0,60 = 48$ km/h`,
+        pasos:[R`Lo que baja: el 40 % de 80 $= 32$ km/h → nueva velocidad $80 - 32 = 48$ km/h`,
                cuadro("Velocidad (km/h)","Horas",["80","5"],["48","x"]),
                R`Menos velocidad → más tiempo: <b>I</b>. Le damos la vuelta: $\dfrac{80}{48} = \dfrac{x}{5}$`,
                R`En cruz: $48 \cdot x = 80 \cdot 5 \;\Rightarrow\; x = \dfrac{400}{48} \approx 8,33$ h`,
@@ -135,20 +150,20 @@ TEMA.registrar({
     ]},
     { titulo:"⚠️ Errores típicos", cuerpo:[
       {aviso:["<b>Escribir mal el decimal</b>: 5 % es 0,05, no 0,5."], etq:"⚠️ Error 1"},
-      {aviso:[R`<b>En un descuento del 25 %, multiplicar por 0,25</b>: eso es lo que te ahorras. Lo que pagas es $I_V = 1 - 0,25 = 0,75$.`], etq:"⚠️ Error 2"},
+      {aviso:[R`<b>Dar como respuesta el descuento</b>: el 25 % de 60 son los 15 € que te ahorras; lo que pagas es $60 - 15 = 45$ €.`], etq:"⚠️ Error 2"},
       {aviso:["<b>Sumar los porcentajes</b> encadenados: −20 % y −30 % no es −50 %."], etq:"⚠️ Error 3"}
     ]},
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[{lista:[
         "$r\\,\\%$ = $r$ de cada 100 → en decimal, divido entre 100.",
         "La fórmula: $C_F = I_V \\cdot C_I$. Tipo 1: conozco el total y el %: <b>multiplico</b>.",
-        "Sube → $I_V$ = 1 + el %. Baja → $I_V$ = 1 − el %.",
-        "Encadenados: se multiplican los índices."
+        "Sube o baja: calculo el % y lo <b>sumo</b> o lo <b>resto</b>.",
+        "🪄 Truco: $-20\\,\\%$ es pagar el $80\\,\\%$ ($I_V = 0,80$) y $+21\\,\\%$ es pagar el $121\\,\\%$ ($I_V = 1,21$): sale en un paso."
       ]}]},
       {estudio:[
         {comp:{q:"¿Cuánto es el 40 % de 65?", sol:26, explic:"C_F = 65 · 0,40 = 26", pista:"Escribe el 40 % en decimal (0,40) y multiplica."}},
-        {comp:{q:"Una camiseta de 18 € tiene un 15 % de descuento. ¿Cuánto pago?", sol:15.3, unidad:"€", explic:"18 · 0,85 = 15,30 €", pista:"El índice de una bajada del 15 % es 0,85."}},
-        {comp:{q:"Un libro de 20 € con un 4 % de IVA. ¿Cuánto cuesta?", sol:20.8, unidad:"€", explic:"20 · 1,04 = 20,80 €", pista:"Sube un 4 %: I_V = 1,04."}}
+        {comp:{q:"Una camiseta de 18 € tiene un 15 % de descuento. ¿Cuánto pago?", sol:15.3, unidad:"€", explic:"El 15 % de 18 es 2,70 €; 18 − 2,70 = 15,30 € (o 18 · 0,85)", pista:"Calcula el descuento y réstalo."}},
+        {comp:{q:"Un libro de 20 € con un 4 % de IVA. ¿Cuánto cuesta?", sol:20.8, unidad:"€", explic:"El 4 % de 20 es 0,80 €; 20 + 0,80 = 20,80 € (o 20 · 1,04)", pista:"Calcula el IVA y súmalo."}}
       ]}
     ]}
   ]
