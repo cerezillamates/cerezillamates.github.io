@@ -14,11 +14,17 @@ const R = String.raw;
 const CSS = `<style>
 .sa2-etqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(17em,1fr));gap:.6em}
 .sa2-etq{background:#fff;color:#111;border:3px solid #111;border-radius:6px;padding:.35em .55em;font-size:.86em;line-height:1.25}
+.sa2-etq img{width:100%;max-height:150px;object-fit:contain;object-position:top;border-radius:4px;margin-bottom:.25em;display:block;background:#f4f4f4}
+.sa2-foto{max-width:100%;max-height:52vh;width:auto;border-radius:8px;border:2px solid #111;box-shadow:0 3px 10px #0003;display:block;margin:0 auto}
+.sa2-foto.chica{max-height:19vh}
+.sa2-cap{font-size:.86em;margin:.25em 0 .6em;line-height:1.25}
+.sa2-cap b{color:#b45309}
 .sa2-etq h4{margin:0 0 .1em;font:800 1.08em var(--f-d,system-ui)}
 .sa2-etq .m{font-size:.85em;color:#444;margin-bottom:.25em}
-.sa2-etq table{border-collapse:collapse;width:100%}
+.sa2-etq table{border-collapse:collapse;width:100%;table-layout:fixed}
+.sa2-etq td:first-child,.sa2-etq th:first-child{width:46%;overflow-wrap:anywhere}
 .sa2-etq th{font-size:.78em;text-align:left;border-bottom:4px solid #111;padding:.1em 0}
-.sa2-etq th:not(:first-child),.sa2-etq td:not(:first-child){text-align:right;white-space:nowrap;padding-left:.6em}
+.sa2-etq th:not(:first-child),.sa2-etq td:not(:first-child){text-align:right;padding-left:.4em;overflow-wrap:anywhere}
 .sa2-etq td{border-bottom:1px solid #999;padding:.12em 0}
 .sa2-etq td.s{padding-left:1em}
 .sa2-etq td.mia{font-weight:800;color:#1d4ed8;background:#eff6ff}
@@ -60,9 +66,9 @@ const CSS = `<style>
 </style>`;
 
 /* --- etiqueta real: filas = [nombre, por 100, mi ración, sangría] --- */
-function etq(nombre, marca, col100, colRac, filas, racion){
+function etq(nombre, marca, col100, colRac, filas, racion, foto){
   const tr = filas.map(f=>`<tr><td${f[3]?' class="s"':''}>${f[0]}</td><td>${f[1]}</td><td class="mia">${f[2]}</td></tr>`).join('');
-  return `<div class="sa2-etq"><h4>${nombre}</h4><div class="m">${marca}</div>
+  return `<div class="sa2-etq">${foto?`<img src="img/${foto}.jpg" alt="Etiqueta de ${nombre}" loading="lazy">`:''}<h4>${nombre}</h4><div class="m">${marca}</div>
   <table><tr><th>Información nutricional</th><th>${col100}</th><th class="mia">${colRac}</th></tr>${tr}</table>
   <div class="rac">Yo tomo: ${racion}</div></div>`;
 }
@@ -72,28 +78,28 @@ const desayuno = `${CSS}
 <div class="sa2-etqs">
   ${etq("🍫 ColaCao Original","Idilia Foods","por 100 g","mis 14 g",
     [["Energía","377 kcal","52,8 kcal"],["Grasas","2,5 g","0,35 g"],["de las cuales saturadas","1,6 g","0,22 g",1],
-     ["Azúcares","70 g","9,8 g"],["Sal","0,10 g","0,01 g"]],"2 cucharadas = 14 g")}
+     ["Azúcares","70 g","9,8 g"],["Sal","0,10 g","0,01 g"]],"2 cucharadas = 14 g","colacao")}
   ${etq("🥛 Leche entera UHT","COVAP","por 100 ml","mis 200 ml",
     [["Energía","63 kcal","126 kcal"],["Grasas","3,6 g","7,2 g"],["de las cuales saturadas","2,4 g","4,8 g",1],
-     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg (14 % VRN)","220 mg"]],"1 taza = 200 ml")}
+     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg","220 mg"]],"1 taza = 200 ml","leche")}
   ${etq("🍪 Galletas María","900 g · 141 galletas","por galleta (6,4 g)","mis 5 galletas",
     [["Energía","31 kcal","155 kcal"],["Grasas","1,2 g","6 g"],["de las cuales saturadas","0,2 g","1 g",1],
-     ["Azúcares","1,3 g","6,5 g"],["Sal","0,05 g","0,25 g"]],"5 galletas")}
+     ["Azúcares","1,3 g","6,5 g"],["Sal","0,05 g","0,25 g"]],"5 galletas","galletas")}
 </div>
-<p style="font-size:.9em;margin-top:.4em">👉 Las galletas traen la columna <b>por galleta</b>: ahí solo hay que <b>multiplicar por 5</b>. En las otras dos hay que pasar <b>de 100 a mi ración</b>.</p>`;
+<p style="font-size:.9em;margin-top:.4em">👉 Las galletas traen la columna <b>por galleta</b>: ahí solo hay que <b>multiplicar por 5</b>. En las otras dos hay que pasar <b>de 100 a mi ración</b>. La leche trae además <b>calcio</b>: 110 mg por 100 ml, que es el <b>14 % del VRN</b>.</p>`;
 
 const merienda = `${CSS}
 <div class="sa2-comida">🥪 Mi merienda: una torta de aceite con mantequilla y un vaso de leche</div>
 <div class="sa2-etqs">
   ${etq("🥐 Torta de aceite","Inés Rosales · 180 g (6 tortas)","por 100 g","mis 30 g",
     [["Energía","511 kcal","153 kcal"],["Grasas","26 g","7,8 g"],["de las cuales saturadas","2,8 g","0,8 g",1],
-     ["Azúcares","17 g","5,1 g"],["Sal","0,15 g","0,05 g"]],"1 torta = 30 g")}
+     ["Azúcares","17 g","5,1 g"],["Sal","0,15 g","0,05 g"]],"1 torta = 30 g","tortas")}
   ${etq("🧈 Tulipán","materia grasa para untar 59 %","por 100 g","mis 10 g",
     [["Energía","530 kcal","53 kcal"],["Grasas","59 g","5,9 g"],["de las cuales saturadas","16 g","1,6 g",1],
-     ["Azúcares","menos de 0,5 g","≈ 0 g"],["Sal","0,90 g","0,09 g"]],"lo que unto: 10 g")}
+     ["Azúcares","menos de 0,5 g","≈ 0 g"],["Sal","0,90 g","0,09 g"]],"lo que unto: 10 g","tulipan")}
   ${etq("🥛 Leche entera UHT","COVAP","por 100 ml","mis 200 ml",
     [["Energía","63 kcal","126 kcal"],["Grasas","3,6 g","7,2 g"],["de las cuales saturadas","2,4 g","4,8 g",1],
-     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg (14 % VRN)","220 mg"]],"1 vaso = 200 ml")}
+     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg","220 mg"]],"1 vaso = 200 ml","leche")}
 </div>
 <p style="font-size:.9em;margin-top:.4em">👉 La leche aparece <b>dos veces</b>, en el desayuno y en la merienda: hay que contarla las dos veces.</p>`;
 
@@ -126,6 +132,35 @@ const queEsIR = R`${CSS}
 <div class="sa2-paso"><b>El «%IR» de la etiqueta</b> dice qué parte del día entero te comes con <b>una ración</b></div>
 <div class="sa2-paso"><b>Lo compruebo</b>: la etiqueta del ColaCao dice que una taza tiene 19 g de azúcares y es el <b>21 %</b>
   <span class="f">$19 : 90 = 0,211... \to 21\,\%$ → ¡me sale lo mismo! ✔</span></div>
+<div class="sa2-paso"><b>Ojo</b>
+  <span class="f">Es una <b>referencia para comparar</b>, no una norma: cada persona necesita una cantidad distinta.</span>
+  <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b> (la leche: 110 mg de calcio = 14 %). Es lo mismo, pero para ellos.</span></div>`;
+
+
+/* --- dónde está el IR en la etiqueta --- */
+const dondeIR = `${CSS}
+<div class="sa2-etqs" style="grid-template-columns:1.15fr 1fr">
+  <div>
+    <img class="sa2-foto" src="img/colacao_tabla.jpg" alt="Tabla nutricional del ColaCao" loading="lazy">
+    <p class="sa2-cap"><b>① La columna «%IR por taza».</b> Qué parte del día entero te comes con <b>una taza</b>: azúcares <b>21 %</b>, saturadas 12 %, sal 4 %…</p>
+  </div>
+  <div>
+    <img class="sa2-foto chica" src="img/colacao_ir.jpg" alt="Nota de la etiqueta: IR, ingesta de referencia" loading="lazy">
+    <p class="sa2-cap"><b>② La nota de abajo.</b> Dice qué es: <b>IR = Ingesta de Referencia de un adulto medio (8400 kJ / 2000 kcal)</b>. Todas las etiquetas la llevan.</p>
+    <img class="sa2-foto chica" src="img/galletas_ir.jpg" alt="Nota del paquete de galletas" loading="lazy">
+    <p class="sa2-cap"><b>③ En las galletas</b> está la nota… pero <b>no hay columna de %IR</b>. Entonces lo calculo yo.</p>
+  </div>
+</div>`;
+
+const comoIR = R`${CSS}
+<div class="sa2-paso"><b>⚠️ Lo que la etiqueta NO te dice</b>
+  <span class="f">Cuántos <b>gramos</b> son el día entero. Solo pone las 2000 kcal. Los gramos están en la <b>norma europea</b>, y son estos 👉</span></div>
+<div class="sa2-paso"><b>La cuenta</b> es siempre la misma
+  <span class="f">$\% = \dfrac{\text{lo que tomo}}{\text{lo de todo el día}} \cdot 100$</span></div>
+<div class="sa2-paso"><b>Lo compruebo con la etiqueta</b>: una taza tiene 19 g de azúcares
+  <span class="f">$19 : 90 = 0,211... \to 21\,\%$ → ¡es justo lo que pone el bote! ✔</span></div>
+<div class="sa2-paso"><b>Y donde no viene</b> (5 galletas, 6,5 g de azúcares)
+  <span class="f">$6,5 : 90 = 0,072... \to 7\,\%$ del azúcar del día</span></div>
 <div class="sa2-paso"><b>Ojo</b>
   <span class="f">Es una <b>referencia para comparar</b>, no una norma: cada persona necesita una cantidad distinta.</span>
   <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b> (la leche: 110 mg de calcio = 14 %). Es lo mismo, pero para ellos.</span></div>`;
@@ -237,8 +272,12 @@ TEMA.registrar({
       {html:merienda}
     ]},
 
-    { titulo:"❓ ¿Qué es eso del «%IR» de la etiqueta?", cuerpo:[
-      {cols:[ [{html:queEsIR}], [{html:`${ir}<p style="font-size:.85em;margin-top:.4em">Lo que debería tomar al día un adulto medio. Viene en el <b>Reglamento europeo de etiquetado</b>, y es lo que usan todas las etiquetas.</p>`}] ]}
+    { titulo:"🔍 ¿Dónde está el IR en la etiqueta?", cuerpo:[
+      {html:dondeIR}
+    ]},
+
+    { titulo:"🧮 ¿Y cómo se calcula el %IR?", cuerpo:[
+      {cols:[ [{html:comoIR}], [{html:`${ir}<p style="font-size:.85em;margin-top:.4em">Lo que debería tomar <b>en todo el día</b> un adulto medio de 2000 kcal. Viene en el <b>Reglamento europeo de etiquetado</b> y es la tabla con la que comparamos siempre.</p>`}] ]}
     ]},
 
     { titulo:"✍️ Paso 3: de los 100 g a mi ración", cuerpo:[
