@@ -9,6 +9,8 @@
    IR (ingesta de referencia de un adulto medio, 8400 kJ / 2000 kcal): Reglamento (UE) 1169/2011, anexo XIII. */
 (function(){
 const R = String.raw;
+const td = v => v === "x" ? `<td class="x">x</td>` : `<td>${v}</td>`;
+const cuadro = (m1, m2, a, b) => `<table class="t cuadro"><tr><th>${m1}</th><th class="fl">(D) ⟶</th><th>${m2}</th></tr><tr>${td(a[0])}<td></td>${td(a[1])}</tr><tr>${td(b[0])}<td></td>${td(b[1])}</tr></table>`;
 
 /* --- estilos propios de esta SA --- */
 const CSS = `<style>
@@ -37,6 +39,11 @@ const CSS = `<style>
 .sa2-paso{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.45em .7em;margin-bottom:.45em}
 .sa2-paso b.n{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#4f46e5;color:#fff;margin-right:.35em}
 .sa2-paso .f{display:block;margin:.25em 0 0 2em;padding:.2em .6em;background:#eef2ff;border-radius:10px;width:fit-content;max-width:100%}
+.sa2-rt{display:grid;grid-template-columns:repeat(auto-fit,minmax(13.5em,1fr));gap:.6em;align-items:start}
+.sa2-rt .scaja{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.5em .7em}
+.sa2-rt .scaja h4{margin:0 0 .25em;font:800 1.05em var(--f-d,system-ui)}
+.sa2-rt .scaja p{margin:.25em 0}
+.truquito{font-size:.9em;color:#6b21a8}
 .sa2-mia{border-collapse:collapse;width:100%;font-size:.95em}
 .sa2-mia th,.sa2-mia td{border:1.5px solid var(--line,#ccc);padding:.18em .5em;text-align:center}
 .sa2-mia td:first-child,.sa2-mia th:first-child{text-align:left}
@@ -105,18 +112,20 @@ const merienda = `${CSS}
 
 /* --- los pasos del proyecto --- */
 const pasosProyecto = R`${CSS}
-<div class="sa2-paso"><b class="n">1</b><b>Apunto lo que tomo y cuánto</b>
-  <span class="f">«2 cucharadas de ColaCao (14 g), 200 ml de leche, 5 galletas…». Sin la cantidad no se puede calcular nada.</span></div>
-<div class="sa2-paso"><b class="n">2</b><b>Foto de la etiqueta</b> de cada producto
-  <span class="f">Me fijo en la columna <b>por 100 g</b> o <b>por 100 ml</b>, y en si trae columna de <b>ración</b> (por taza, por galleta…).</span></div>
-<div class="sa2-paso"><b class="n">3</b><b>Paso de 100 g a mi ración</b> (proporcionalidad directa)
-  <span class="f">$\text{mi ración} = \text{valor por 100 g} \cdot \dfrac{\text{gramos que tomo}}{100}$</span></div>
-<div class="sa2-paso"><b class="n">4</b><b>Sumo</b> todos los productos del desayuno y de la merienda</div>
-<div class="sa2-paso"><b class="n">5</b><b>Comparo con la IR</b> y saco el <b>% del día</b>
-  <span class="f">$\% = \dfrac{\text{lo que tomo}}{\text{lo de todo el día}} \cdot 100$</span></div>
+<div class="sa2-paso"><b class="n">1</b><b>Apunto qué tomo y cuánta cantidad</b>
+  <span class="f">Ejemplo: «2 cucharadas de ColaCao = <b>14 g</b>». Sin la cantidad no se puede calcular nada.</span></div>
+<div class="sa2-paso"><b class="n">2</b><b>Foto de la etiqueta</b> y busco la columna de <b>100 g</b> o <b>100 ml</b>
+  <span class="f">Ejemplo: el ColaCao tiene <b>70 g de azúcar por cada 100 g</b>.</span></div>
+<div class="sa2-paso"><b class="n">3</b><b>Regla de tres: de 100 g a mis 14 g</b> (más ColaCao → más azúcar: <b>D</b>)
+  ${cuadro("ColaCao (g)", "Azúcar (g)", ["100","70"], ["14","x"])}
+  <span class="f">El azúcar de <b>1 gramo</b>: $70 : 100 = 0,7$ · y de mis 14 g: $0,7 \cdot 14 = 9,8$ g</span></div>
+<div class="sa2-paso"><b class="n">4</b><b>Sumo</b> todos los productos
+  <span class="f">Ejemplo (azúcares): $9,8 + 9,2 + 6,5 + 5,1 = 30,6$ g… hasta llegar a los <b>39,8 g</b> del día.</span></div>
+<div class="sa2-paso"><b class="n">5</b><b>¿Qué % del día es?</b> Si 90 g de azúcar es el 100 %…
+  <span class="f">$39,8 : 90 = 0,442... \to$ <b>44 %</b> del azúcar del día</span></div>
 <div class="sa2-paso"><b class="n">6</b><b>Semáforo, terrones y conclusiones</b>
-  <span class="f">🟢 menos del 25 % · 🟡 del 25 % al 50 % · 🔴 más del 50 % · 1 terrón = 4 g de azúcar</span></div>
-<div class="sa2-paso"><b class="n">7</b><b>Cartulina y exposición</b> de 2 minutos</div>`;
+  <span class="f">🟢 menos del 25 % · 🟡 del 25 % al 50 % · 🔴 más del 50 % · $39,8 : 4 \approx 10$ terrones</span></div>
+<div class="sa2-paso"><b class="n">7</b><b>Cartulina</b> y exposición de 2 minutos</div>`;
 
 /* --- qué es el IR --- */
 const ir = `${CSS}<table class="sa2-ir">
@@ -128,13 +137,13 @@ const ir = `${CSS}<table class="sa2-ir">
 
 const queEsIR = R`${CSS}
 <div class="sa2-paso"><b>IR = Ingesta de Referencia</b>
-  <span class="f">Lo que debería tomar <b>en todo el día</b> un adulto medio (2000 kcal).</span></div>
+  <span class="f">La <b>cantidad de todo el día</b> para un adulto medio de 2000 kcal: 90 g de azúcares, 70 g de grasas, 6 g de sal…</span></div>
 <div class="sa2-paso"><b>El «%IR» de la etiqueta</b> dice qué parte del día entero te comes con <b>una ración</b></div>
 <div class="sa2-paso"><b>Lo compruebo</b>: la etiqueta del ColaCao dice que una taza tiene 19 g de azúcares y es el <b>21 %</b>
   <span class="f">$19 : 90 = 0,211... \to 21\,\%$ → ¡me sale lo mismo! ✔</span></div>
 <div class="sa2-paso"><b>Ojo</b>
   <span class="f">Es una <b>referencia para comparar</b>, no una norma: cada persona necesita una cantidad distinta.</span>
-  <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b> (la leche: 110 mg de calcio = 14 %). Es lo mismo, pero para ellos.</span></div>`;
+  <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b> (la leche: 110 mg de calcio = 14 %). El VRN funciona igual, pero con vitaminas y minerales.</span></div>`;
 
 
 /* --- dónde está el IR en la etiqueta --- */
@@ -153,28 +162,37 @@ const dondeIR = `${CSS}
 </div>`;
 
 const comoIR = R`${CSS}
-<div class="sa2-paso"><b>⚠️ Lo que la etiqueta NO te dice</b>
-  <span class="f">Cuántos <b>gramos</b> son el día entero. Solo pone las 2000 kcal. Los gramos están en la <b>norma europea</b>, y son estos 👉</span></div>
+<div class="sa2-paso"><b>⚠️ La etiqueta NO dice los gramos del día</b>
+  <span class="f">Solo pone las 2000 kcal de energía. Los gramos de azúcar, grasa y sal de todo el día están en la <b>norma europea</b>, y son estos 👉</span></div>
 <div class="sa2-paso"><b>La cuenta</b> es siempre la misma
-  <span class="f">$\% = \dfrac{\text{lo que tomo}}{\text{lo de todo el día}} \cdot 100$</span></div>
+  <span class="f">$\% = \dfrac{\text{gramos que tomo}}{\text{gramos de todo el día}} \cdot 100$</span></div>
 <div class="sa2-paso"><b>Lo compruebo con la etiqueta</b>: una taza tiene 19 g de azúcares
   <span class="f">$19 : 90 = 0,211... \to 21\,\%$ → ¡es justo lo que pone el bote! ✔</span></div>
 <div class="sa2-paso"><b>Y donde no viene</b> (5 galletas, 6,5 g de azúcares)
   <span class="f">$6,5 : 90 = 0,072... \to 7\,\%$ del azúcar del día</span></div>
 <div class="sa2-paso"><b>Ojo</b>
   <span class="f">Es una <b>referencia para comparar</b>, no una norma: cada persona necesita una cantidad distinta.</span>
-  <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b> (la leche: 110 mg de calcio = 14 %). Es lo mismo, pero para ellos.</span></div>`;
+  <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b> (la leche: 110 mg de calcio = 14 %). El VRN funciona igual, pero con vitaminas y minerales.</span></div>`;
 
 /* --- mis cuentas --- */
 const cuentas = R`${CSS}
-<div class="sa2-paso"><b class="n">1</b><b>🍫 ColaCao, 14 g</b> de los 100 g de la etiqueta
-  <span class="f">Azúcares: $70 \cdot \dfrac{14}{100} = 70 \cdot 0,14 = 9,8$ g</span></div>
-<div class="sa2-paso"><b class="n">2</b><b>🥛 Leche, 200 ml</b>: 200 es el doble de 100
-  <span class="f">Azúcares: $4,6 \cdot 2 = 9,2$ g · Saturadas: $2,4 \cdot 2 = 4,8$ g</span></div>
-<div class="sa2-paso"><b class="n">3</b><b>🍪 Galletas</b>: la etiqueta ya da el valor de una
-  <span class="f">Azúcares: $5 \cdot 1,3 = 6,5$ g</span></div>
-<div class="sa2-paso"><b class="n">4</b><b>🥐 Torta, 30 g</b> · <b>🧈 Tulipán, 10 g</b>
-  <span class="f">Torta: $17 \cdot 0,30 = 5,1$ g de azúcares · Tulipán: $16 \cdot 0,10 = 1,6$ g de saturadas</span></div>`;
+<div class="sa2-rt">
+  <div class="scaja"><h4>🍫 ColaCao: 14 g</h4>
+    ${cuadro("ColaCao (g)", "Azúcar (g)", ["100","70"], ["14","x"])}
+    <p>$x = \dfrac{70}{100} \cdot 14 = 0,7 \cdot 14 = 9,8$ g</p>
+    <p class="truquito">🪄 Es dividir entre 100 y multiplicar por los gramos</p></div>
+  <div class="scaja"><h4>🥛 Leche: 200 ml</h4>
+    ${cuadro("Leche (ml)", "Azúcar (g)", ["100","4,6"], ["200","x"])}
+    <p>$x = \dfrac{4,6}{100} \cdot 200 = 0,046 \cdot 200 = 9,2$ g</p>
+    <p class="truquito">200 ml es el <b>doble</b> de 100 ml</p></div>
+  <div class="scaja"><h4>🥐 Torta: 30 g</h4>
+    ${cuadro("Torta (g)", "Azúcar (g)", ["100","17"], ["30","x"])}
+    <p>$x = \dfrac{17}{100} \cdot 30 = 0,17 \cdot 30 = 5,1$ g</p></div>
+  <div class="scaja"><h4>🍪 Galletas: 5</h4>
+    <p>La etiqueta ya da el valor de <b>una</b>: 1,3 g</p>
+    <p>$5 \cdot 1,3 = 6,5$ g</p>
+    <p class="truquito">Aquí no hace falta regla de tres</p></div>
+</div>`;
 
 /* --- mis tablas --- */
 function tabla(tit, filas, totales){
@@ -197,7 +215,7 @@ const totalDia = R`${CSS}<table class="sa2-mia">
   <tr><td>☕ Desayuno</td><td>334</td><td>13,6</td><td>6</td><td>25,5</td><td>0,52</td></tr>
   <tr><td>🥪 Merienda</td><td>332</td><td>20,9</td><td>7,2</td><td>14,3</td><td>0,40</td></tr>
   <tr class="tot"><td>TOTAL</td><td>666 kcal</td><td>34,5 g</td><td>13,2 g</td><td>39,8 g</td><td>0,92 g</td></tr>
-  <tr class="ir"><td>Todo el día (IR)</td><td>2000</td><td>70</td><td>20</td><td>90</td><td>6</td></tr>
+  <tr class="ir"><td>Cantidad del día (IR)</td><td>2000</td><td>70</td><td>20</td><td>90</td><td>6</td></tr>
   <tr class="pc"><td>% del día</td><td>33 %</td><td>49 %</td><td>66 %</td><td>44 %</td><td>15 %</td></tr>
   </tbody></table>
   <p style="margin-top:.4em">Ejemplo: saturadas $13,2 : 20 = 0,66 \to$ <b>66 %</b> · azúcares $39,8 : 90 = 0,442... \to$ <b>44 %</b></p>`;
@@ -210,13 +228,13 @@ const cartulina = R`${CSS}<div class="sa2-cart">
   <h3>¿Qué desayuna y merienda la profe? ☕🥪</h3>
   <div class="grupo">Grupo de la profe · 3.º ESO</div>
   <div class="zona">
-    <div class="pieza"><h5>📋 Nuestra tabla (lo que tomo)</h5>
+    <div class="pieza"><h5>📋 Nuestra tabla (mis cantidades)</h5>
       <table>
         <tr><th>Comida</th><th>Energía</th><th>Grasas</th><th>Saturadas</th><th>Azúcares</th><th>Sal</th></tr>
         <tr><td>☕ Desayuno</td><td>334</td><td>13,6</td><td>6</td><td>25,5</td><td>0,52</td></tr>
         <tr><td>🥪 Merienda</td><td>332</td><td>20,9</td><td>7,2</td><td>14,3</td><td>0,40</td></tr>
         <tr class="tot"><td>TOTAL</td><td>666</td><td>34,5</td><td>13,2</td><td>39,8</td><td>0,92</td></tr>
-        <tr><td>Todo el día (IR)</td><td>2000</td><td>70</td><td>20</td><td>90</td><td>6</td></tr>
+        <tr><td>Cantidad del día (IR)</td><td>2000</td><td>70</td><td>20</td><td>90</td><td>6</td></tr>
         <tr class="pc"><td>% del día</td><td>33 %</td><td>49 %</td><td>66 %</td><td>44 %</td><td>15 %</td></tr>
       </table>
       <div style="margin-top:.3em">Ejemplo: saturadas $13,2 : 20 = 0,66 \to 66\,\%$</div>
@@ -277,12 +295,12 @@ TEMA.registrar({
     ]},
 
     { titulo:"🧮 ¿Y cómo se calcula el %IR?", cuerpo:[
-      {cols:[ [{html:comoIR}], [{html:`${ir}<p style="font-size:.85em;margin-top:.4em">Lo que debería tomar <b>en todo el día</b> un adulto medio de 2000 kcal. Viene en el <b>Reglamento europeo de etiquetado</b> y es la tabla con la que comparamos siempre.</p>`}] ]}
+      {cols:[ [{html:comoIR}], [{html:`${ir}<p style="font-size:.85em;margin-top:.4em">Cantidades de <b>todo el día</b> para un adulto medio de 2000 kcal. Vienen en el <b>Reglamento europeo de etiquetado</b> y son las cantidades con las que comparamos siempre.</p>`}] ]}
     ]},
 
     { titulo:"✍️ Paso 3: de los 100 g a mi ración", cuerpo:[
       {html:cuentas},
-      {nota:["Con las demás filas se hace igual: energía, grasas, saturadas y sal. <b>Siempre la misma operación.</b>"]}
+      {nota:["Lo mismo con las demás filas (energía, grasas, saturadas y sal) y con el Tulipán: $x = \\dfrac{16}{100} \\cdot 10 = 1,6$ g de saturadas. <b>Siempre la misma regla de tres.</b>"]}
     ]},
 
     { titulo:"➕ Pasos 4 y 5: mis tablas", cuerpo:[

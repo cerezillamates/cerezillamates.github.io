@@ -35,8 +35,8 @@ const CSS = `<style>
 .sa2-paso b.n{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#4f46e5;color:#fff;margin-right:.35em}
 .sa2-paso .f{display:block;margin:.25em 0 0 2em;padding:.2em .6em;background:#eef2ff;border-radius:10px;width:fit-content;max-width:100%}
 .sa2-rt{display:grid;grid-template-columns:repeat(auto-fit,minmax(15em,1fr));gap:.6em;align-items:start}
-.sa2-rt .caja{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.5em .7em}
-.sa2-rt .caja h4{margin:0 0 .25em;font:800 1.05em var(--f-d,system-ui)}
+.sa2-rt .scaja{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.5em .7em}
+.sa2-rt .scaja h4{margin:0 0 .25em;font:800 1.05em var(--f-d,system-ui)}
 .sa2-mia{border-collapse:collapse;width:100%;font-size:1em}
 .sa2-mia th,.sa2-mia td{border:1.5px solid var(--line,#ccc);padding:.2em .5em;text-align:center}
 .sa2-mia td:first-child,.sa2-mia th:first-child{text-align:left}
@@ -91,8 +91,8 @@ const dondeIR = `${CSS}
   </div>
   <div>
     <img class="sa2-foto chica" src="img/colacao_ir.jpg" alt="Nota de la etiqueta sobre el IR" loading="lazy">
-    <p class="sa2-cap"><b>② La nota de abajo.</b> Dice qué es: <b>IR = Ingesta de Referencia de un adulto medio (2000 kcal al día)</b>. Todas las etiquetas la llevan.</p>
-    <p class="sa2-cap">⚠️ Lo que la etiqueta <b>no</b> dice: cuántos <b>gramos</b> son el día entero. Esos los pone la <b>norma europea</b> 👉 los tenéis en la lámina siguiente.</p>
+    <p class="sa2-cap"><b>② La nota de abajo.</b> Dice qué significa: <b>IR = Ingesta de Referencia de un adulto medio (2000 kcal al día)</b>. Todas las etiquetas llevan esta nota.</p>
+    <p class="sa2-cap">⚠️ La etiqueta <b>no</b> dice los <b>gramos</b> de todo el día. Esos gramos están en la <b>norma europea</b> 👉 en la lámina siguiente.</p>
   </div>
 </div>`;
 
@@ -105,7 +105,7 @@ const ir = `${CSS}<table class="sa2-ir">
 
 const comoIR = R`${CSS}
 <div class="sa2-paso"><b>La pregunta es siempre la misma</b>
-  <span class="f">Si <b>90 g</b> de azúcar es <b>todo el día (100 %)</b>, lo que yo tomo ¿qué % es?</span></div>
+  <span class="f">Si <b>90 g</b> de azúcar es la cantidad de <b>todo el día (el 100 %)</b>, mis gramos ¿qué % son?</span></div>
 <div class="sa2-paso"><b>Y se resuelve con una regla de tres</b> (más azúcar → más %: <b>D</b>)
   ${cuadro("Azúcar (g)", "Porcentaje", ["90","100"], ["19","x"])}
   <span class="f">$\dfrac{90}{19} = \dfrac{100}{x} \;\Rightarrow\; x = \dfrac{19 \cdot 100}{90} = 21,1... \approx 21\,\%$</span></div>
@@ -120,23 +120,23 @@ const pasosProyecto = R`${CSS}
   <span class="f">Me fijo en la columna de <b>100 g</b> o <b>100 ml</b>.</span></div>
 <div class="sa2-paso"><b class="n">3</b><b>Regla de tres</b>: de 100 g a lo que yo tomo</div>
 <div class="sa2-paso"><b class="n">4</b><b>Sumo</b> los tres productos</div>
-<div class="sa2-paso"><b class="n">5</b><b>Otra regla de tres</b>: ¿qué % del día es?
+<div class="sa2-paso"><b class="n">5</b><b>Otra regla de tres</b>: ¿qué % del día son esos gramos?
   <span class="f">Y los <b>terrones</b> de azúcar: 1 terrón = 4 g</span></div>
 <div class="sa2-paso"><b class="n">6</b><b>Cartulina</b> y exposición de 2 minutos</div>`;
 
 /* --- mis cuentas --- */
 const cuentas1 = R`${CSS}
 <div class="sa2-rt">
-  <div class="caja"><h4>🍫 El ColaCao: 14 g</h4>
+  <div class="scaja"><h4>🍫 El ColaCao: 14 g</h4>
     <p>Menos ColaCao → menos azúcar: <b>D</b></p>
     ${cuadro("ColaCao (g)", "Azúcar (g)", ["100","70"], ["14","x"])}
     <p>$\dfrac{100}{14} = \dfrac{70}{x}$</p>
-    <p>$x = \dfrac{14 \cdot 70}{100} = 9,8$ g</p></div>
-  <div class="caja"><h4>🥛 La leche: 200 ml</h4>
+    <p>$x = \dfrac{70}{100} \cdot 14 = 0,7 \cdot 14 = 9,8$ g</p></div>
+  <div class="scaja"><h4>🥛 La leche: 200 ml</h4>
     <p>Más leche → más azúcar: <b>D</b></p>
     ${cuadro("Leche (ml)", "Azúcar (g)", ["100","4,6"], ["200","x"])}
-    <p>$x = \dfrac{200 \cdot 4,6}{100} = 9,2$ g</p></div>
-  <div class="caja"><h4>🍪 Las galletas: 5</h4>
+    <p>$x = \dfrac{4,6}{100} \cdot 200 = 0,046 \cdot 200 = 9,2$ g</p></div>
+  <div class="scaja"><h4>🍪 Las galletas: 5</h4>
     <p>La etiqueta ya dice lo de <b>una</b>: 1,3 g</p>
     <p>$5 \cdot 1,3 = 6,5$ g</p>
     <p class="muted">Aquí no hace falta regla de tres.</p></div>
@@ -145,7 +145,7 @@ const cuentas1 = R`${CSS}
 const cuentas2 = R`${CSS}
 <div class="sa2-paso"><b class="n">4</b><b>Sumo el azúcar del desayuno</b>
   <span class="f">$9,8 + 9,2 + 6,5 = 25,5$ g de azúcar</span></div>
-<div class="sa2-paso"><b class="n">5</b><b>¿Qué % del día es?</b> Si 90 g es el 100 %…
+<div class="sa2-paso"><b class="n">5</b><b>¿Qué % del día es?</b> Si 90 g de azúcar es el 100 %…
   ${cuadro("Azúcar (g)", "Porcentaje", ["90","100"], ["25,5","x"])}
   <span class="f">$x = \dfrac{25,5 \cdot 100}{90} = 28,3... \approx 28\,\%$</span></div>
 <div class="sa2-paso"><b class="n">6</b><b>Los terrones</b> (1 terrón = 4 g)
@@ -159,7 +159,7 @@ const tabla = R`${CSS}<table class="sa2-mia">
   <tr><td>🥛 Leche 200 ml</td><td>126</td><td>7,2</td><td>9,2</td><td>0,26</td></tr>
   <tr><td>🍪 5 galletas</td><td>155</td><td>6</td><td>6,5</td><td>0,25</td></tr>
   <tr class="tot"><td>TOTAL</td><td>334 kcal</td><td>13,6 g</td><td>25,5 g</td><td>0,52 g</td></tr>
-  <tr><td>Todo el día (IR)</td><td>2000</td><td>70</td><td>90</td><td>6</td></tr>
+  <tr><td>Cantidad del día (IR)</td><td>2000</td><td>70</td><td>90</td><td>6</td></tr>
   <tr class="pc"><td>% del día</td><td>17 %</td><td>19 %</td><td>28 %</td><td>9 %</td></tr>
   </tbody></table>
   <p style="margin-top:.4em">Cada % con su regla de tres. Grasas: si 70 g es el 100 %, $x = \dfrac{13,6 \cdot 100}{70} = 19,4... \approx 19\,\%$</p>`;
@@ -179,7 +179,7 @@ const cartulina = R`${CSS}<div class="sa2-cart">
         <tr><td>🥛 Leche 200 ml</td><td>126</td><td>7,2</td><td>9,2</td><td>0,26</td></tr>
         <tr><td>🍪 5 galletas</td><td>155</td><td>6</td><td>6,5</td><td>0,25</td></tr>
         <tr class="tot"><td>TOTAL</td><td>334</td><td>13,6</td><td>25,5</td><td>0,52</td></tr>
-        <tr><td>Todo el día</td><td>2000</td><td>70</td><td>90</td><td>6</td></tr>
+        <tr><td>Cantidad del día</td><td>2000</td><td>70</td><td>90</td><td>6</td></tr>
         <tr class="pc"><td>% del día</td><td>17 %</td><td>19 %</td><td>28 %</td><td>9 %</td></tr>
       </table>
       <div style="margin-top:.3em">Ejemplo: azúcar $x = \dfrac{25,5 \cdot 100}{90} \approx 28\,\%$</div>
@@ -235,7 +235,7 @@ TEMA.registrar({
     ]},
 
     { titulo:"🧮 ¿Y cómo se calcula el %IR?", cuerpo:[
-      {cols:[ [{html:comoIR}], [{html:`${ir}<p style="font-size:.88em;margin-top:.4em">Lo que debería tomar <b>en todo el día</b> un adulto medio. Es la tabla con la que comparamos siempre.</p>`}] ]}
+      {cols:[ [{html:comoIR}], [{html:`${ir}<p style="font-size:.88em;margin-top:.4em">Cantidades de <b>todo el día</b> para un adulto medio de 2000 kcal. Son las cantidades con las que comparamos siempre.</p>`}] ]}
     ]},
 
     { titulo:"✍️ Paso 3: de 100 g a lo que yo tomo", cuerpo:[
