@@ -14,7 +14,7 @@ const cuadro = (m1, m2, a, b) => `<table class="t cuadro"><tr><th>${m1}</th><th 
 const CSS = `<style>
 .sa2-etqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(17em,1fr));gap:.6em}
 .sa2-etq{background:#fff;color:#111;border:3px solid #111;border-radius:6px;padding:.35em .55em;font-size:.88em;line-height:1.25}
-.sa2-etq img{width:100%;max-height:150px;object-fit:contain;object-position:top;border-radius:4px;margin-bottom:.25em;display:block;background:#f4f4f4}
+.sa2-etq img{width:100%;max-height:112px;object-fit:contain;object-position:top;border-radius:4px;margin-bottom:.25em;display:block;background:#f4f4f4}
 .sa2-foto{max-width:100%;max-height:52vh;width:auto;border-radius:8px;border:2px solid #111;box-shadow:0 3px 10px #0003;display:block;margin:0 auto}
 .sa2-foto.chica{max-height:19vh}
 .sa2-cap{font-size:.88em;margin:.25em 0 .6em;line-height:1.25}
@@ -26,6 +26,9 @@ const CSS = `<style>
 .sa2-etq th{font-size:.8em;text-align:left;border-bottom:4px solid #111;padding:.1em 0}
 .sa2-etq th:not(:first-child),.sa2-etq td:not(:first-child){text-align:right;padding-left:.4em;overflow-wrap:anywhere}
 .sa2-etq td{border-bottom:1px solid #999;padding:.12em 0}
+.sa2-mano{font-family:"Caveat","Comic Sans MS",cursive;font-size:1.22em;color:#1d4ed8;line-height:1.1;margin:.35em 0 .1em;transform:rotate(-.7deg)}
+.sa2-mano .mini{font-size:.82em;color:#6b21a8}
+.sa2-manot{font-family:"Caveat","Comic Sans MS",cursive;font-size:1.7em;color:#b91c1c;line-height:1.15;transform:rotate(-1deg);display:inline-block;margin-top:.3em}
 .sa2-etq .rac{margin-top:.35em;background:#fff3c4;border-radius:6px;padding:.15em .4em;font-weight:800;text-align:center}
 .sa2-comida{font:800 1.05em var(--f-d,system-ui);margin:.1em 0 .25em}
 .sa2-ir{border-collapse:collapse;font-size:1.05em;width:100%}
@@ -64,21 +67,21 @@ const CSS = `<style>
 </style>`;
 
 /* --- etiqueta real --- */
-function etq(nombre, marca, col, filas, racion, foto){
+function etq(nombre, marca, col, filas, racion, foto, mano){
   const tr = filas.map(f=>`<tr><td${f[2]?' class="s"':''}>${f[0]}</td><td>${f[1]}</td></tr>`).join('');
   return `<div class="sa2-etq"><img src="img/${foto}.jpg" alt="Etiqueta de ${nombre}" loading="lazy"><h4>${nombre}</h4><div class="m">${marca}</div>
   <table><tr><th>Información nutricional</th><th>${col}</th></tr>${tr}</table>
-  <div class="rac">Yo tomo: ${racion}</div></div>`;
+  <div class="rac">Yo tomo: ${racion}</div>${mano?`<div class="sa2-mano">${mano}</div>`:''}</div>`;
 }
 const etiquetas = `${CSS}
 <div class="sa2-comida">☕ Mi desayuno: una taza de ColaCao con leche y 5 galletas</div>
 <div class="sa2-etqs">
   ${etq("🍫 ColaCao Original","Idilia Foods","por 100 g",
-    [["Energía","377 kcal"],["Grasas","2,5 g"],["Azúcares","70 g"],["Sal","0,10 g"]],"2 cucharadas = 14 g","colacao")}
+    [["Energía","377 kcal"],["Grasas","2,5 g"],["Azúcares","70 g"],["Sal","0,10 g"]],"2 cucharadas = 14 g","colacao",`100 g → 70 g de azúcar<br>14 g → x<br>x = 70 : 100 · 14 = <b>9,8 g</b>`)}
   ${etq("🥛 Leche entera UHT","COVAP","por 100 ml",
-    [["Energía","63 kcal"],["Grasas","3,6 g"],["Azúcares","4,6 g"],["Sal","0,13 g"]],"1 taza = 200 ml","leche")}
+    [["Energía","63 kcal"],["Grasas","3,6 g"],["Azúcares","4,6 g"],["Sal","0,13 g"]],"1 taza = 200 ml","leche",`100 ml → 4,6 g de azúcar<br>200 ml → x<br>x = 4,6 · 2 = <b>9,2 g</b><br><span class="mini">200 es el doble de 100</span>`)}
   ${etq("🍪 Galletas María","900 g · 141 galletas","por galleta (6,4 g)",
-    [["Energía","31 kcal"],["Grasas","1,2 g"],["Azúcares","1,3 g"],["Sal","0,05 g"]],"5 galletas","galletas")}
+    [["Energía","31 kcal"],["Grasas","1,2 g"],["Azúcares","1,3 g"],["Sal","0,05 g"]],"5 galletas","galletas",`La etiqueta ya da <b>1 galleta</b><br>Azúcar: 1,3 · 5 = <b>6,5 g</b><br><span class="mini">aquí no hace falta regla de tres</span>`)}
 </div>
 <p style="font-size:.92em;margin-top:.4em">👉 Las galletas dan el valor <b>de una galleta</b>: ahí solo hay que <b>multiplicar por 5</b>. En las otras dos hay que pasar <b>de 100 a lo que yo tomo</b>.</p>`;
 
@@ -125,23 +128,6 @@ const pasosProyecto = R`${CSS}
 <div class="sa2-paso"><b class="n">6</b><b>Cartulina</b> y exposición de 2 minutos</div>`;
 
 /* --- mis cuentas --- */
-const cuentas1 = R`${CSS}
-<div class="sa2-rt">
-  <div class="scaja"><h4>🍫 El ColaCao: 14 g</h4>
-    <p>Menos ColaCao → menos azúcar: <b>D</b></p>
-    ${cuadro("ColaCao (g)", "Azúcar (g)", ["100","70"], ["14","x"])}
-    <p>$\dfrac{100}{14} = \dfrac{70}{x}$</p>
-    <p>$x = \dfrac{70}{100} \cdot 14 = 0,7 \cdot 14 = 9,8$ g</p></div>
-  <div class="scaja"><h4>🥛 La leche: 200 ml</h4>
-    <p>Más leche → más azúcar: <b>D</b></p>
-    ${cuadro("Leche (ml)", "Azúcar (g)", ["100","4,6"], ["200","x"])}
-    <p>$x = \dfrac{4,6}{100} \cdot 200 = 0,046 \cdot 200 = 9,2$ g</p></div>
-  <div class="scaja"><h4>🍪 Las galletas: 5</h4>
-    <p>La etiqueta ya dice lo de <b>una</b>: 1,3 g</p>
-    <p>$5 \cdot 1,3 = 6,5$ g</p>
-    <p class="muted">Aquí no hace falta regla de tres.</p></div>
-</div>`;
-
 const cuentas2 = R`${CSS}
 <div class="sa2-paso"><b class="n">4</b><b>Sumo el azúcar del desayuno</b>
   <span class="f">$9,8 + 9,2 + 6,5 = 25,5$ g de azúcar</span></div>
@@ -162,7 +148,10 @@ const tabla = R`${CSS}<table class="sa2-mia">
   <tr><td>Cantidad del día (IR)</td><td>2000</td><td>70</td><td>90</td><td>6</td></tr>
   <tr class="pc"><td>% del día</td><td>17 %</td><td>19 %</td><td>28 %</td><td>9 %</td></tr>
   </tbody></table>
-  <p style="margin-top:.4em">Cada % con su regla de tres. Grasas: si 70 g es el 100 %, $x = \dfrac{13,6 \cdot 100}{70} = 19,4... \approx 19\,\%$</p>`;
+  <p class="sa2-manot">↑ ¿De dónde sale el 28 %?<br>
+  90 g → 100 % · 25,5 g → x<br>
+  x = 25,5 · 100 : 90 = 28,33…<br>
+  Redondeo: 28,33… ≈ <b>28 %</b></p>`;
 
 /* --- la cartulina --- */
 function barra(nombre, pc, color){
@@ -238,11 +227,7 @@ TEMA.registrar({
       {cols:[ [{html:comoIR}], [{html:`${ir}<p style="font-size:.88em;margin-top:.4em">Cantidades de <b>todo el día</b> para un adulto medio de 2000 kcal. Son las cantidades con las que comparamos siempre.</p>`}] ]}
     ]},
 
-    { titulo:"✍️ Paso 3: de 100 g a lo que yo tomo", cuerpo:[
-      {html:cuentas1}
-    ]},
-
-    { titulo:"✍️ Pasos 4, 5 y 6: sumar y el % del día", cuerpo:[
+    { titulo:"✍️ Sumar y sacar el % del día", cuerpo:[
       {html:cuentas2}
     ]},
 

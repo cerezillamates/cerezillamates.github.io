@@ -16,7 +16,7 @@ const cuadro = (m1, m2, a, b) => `<table class="t cuadro"><tr><th>${m1}</th><th 
 const CSS = `<style>
 .sa2-etqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(17em,1fr));gap:.6em}
 .sa2-etq{background:#fff;color:#111;border:3px solid #111;border-radius:6px;padding:.35em .55em;font-size:.86em;line-height:1.25}
-.sa2-etq img{width:100%;max-height:150px;object-fit:contain;object-position:top;border-radius:4px;margin-bottom:.25em;display:block;background:#f4f4f4}
+.sa2-etq img{width:100%;max-height:112px;object-fit:contain;object-position:top;border-radius:4px;margin-bottom:.25em;display:block;background:#f4f4f4}
 .sa2-foto{max-width:100%;max-height:52vh;width:auto;border-radius:8px;border:2px solid #111;box-shadow:0 3px 10px #0003;display:block;margin:0 auto}
 .sa2-foto.chica{max-height:19vh}
 .sa2-cap{font-size:.86em;margin:.25em 0 .6em;line-height:1.25}
@@ -31,6 +31,9 @@ const CSS = `<style>
 .sa2-etq td.s{padding-left:1em}
 .sa2-etq td.mia{font-weight:800;color:#1d4ed8;background:#eff6ff}
 .sa2-etq th.mia{color:#1d4ed8}
+.sa2-mano{font-family:"Caveat","Comic Sans MS",cursive;font-size:1.22em;color:#1d4ed8;line-height:1.1;margin:.35em 0 .1em;transform:rotate(-.7deg)}
+.sa2-mano .mini{font-size:.82em;color:#6b21a8}
+.sa2-manot{font-family:"Caveat","Comic Sans MS",cursive;font-size:1.65em;color:#b91c1c;line-height:1.15;transform:rotate(-1deg);display:inline-block;margin-top:.3em}
 .sa2-etq .rac{margin-top:.35em;background:#fff3c4;border-radius:6px;padding:.15em .4em;font-weight:800;text-align:center}
 .sa2-comida{font:800 1.05em var(--f-d,system-ui);margin:.1em 0 .25em}
 .sa2-ir{border-collapse:collapse;font-size:1.05em;width:100%}
@@ -73,11 +76,11 @@ const CSS = `<style>
 </style>`;
 
 /* --- etiqueta real: filas = [nombre, por 100, mi ración, sangría] --- */
-function etq(nombre, marca, col100, colRac, filas, racion, foto){
+function etq(nombre, marca, col100, colRac, filas, racion, foto, mano){
   const tr = filas.map(f=>`<tr><td${f[3]?' class="s"':''}>${f[0]}</td><td>${f[1]}</td><td class="mia">${f[2]}</td></tr>`).join('');
   return `<div class="sa2-etq">${foto?`<img src="img/${foto}.jpg" alt="Etiqueta de ${nombre}" loading="lazy">`:''}<h4>${nombre}</h4><div class="m">${marca}</div>
   <table><tr><th>Información nutricional</th><th>${col100}</th><th class="mia">${colRac}</th></tr>${tr}</table>
-  <div class="rac">Yo tomo: ${racion}</div></div>`;
+  <div class="rac">Yo tomo: ${racion}</div>${mano?`<div class="sa2-mano">${mano}</div>`:''}</div>`;
 }
 
 const desayuno = `${CSS}
@@ -85,13 +88,13 @@ const desayuno = `${CSS}
 <div class="sa2-etqs">
   ${etq("🍫 ColaCao Original","Idilia Foods","por 100 g","mis 14 g",
     [["Energía","377 kcal","52,8 kcal"],["Grasas","2,5 g","0,35 g"],["de las cuales saturadas","1,6 g","0,22 g",1],
-     ["Azúcares","70 g","9,8 g"],["Sal","0,10 g","0,01 g"]],"2 cucharadas = 14 g","colacao")}
+     ["Azúcares","70 g","9,8 g"],["Sal","0,10 g","0,01 g"]],"2 cucharadas = 14 g","colacao",`Azúcar de 1 g: 70 : 100 = 0,7<br>Mis 14 g: 0,7 · 14 = <b>9,8 g</b><br><span class="mini">igual con las demás filas</span>`)}
   ${etq("🥛 Leche entera UHT","COVAP","por 100 ml","mis 200 ml",
     [["Energía","63 kcal","126 kcal"],["Grasas","3,6 g","7,2 g"],["de las cuales saturadas","2,4 g","4,8 g",1],
-     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg","220 mg"]],"1 taza = 200 ml","leche")}
+     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg","220 mg"]],"1 taza = 200 ml","leche",`200 ml es el <b>doble</b> de 100 ml<br>Azúcar: 4,6 · 2 = <b>9,2 g</b><br><span class="mini">todo multiplicado por 2</span>`)}
   ${etq("🍪 Galletas María","900 g · 141 galletas","por galleta (6,4 g)","mis 5 galletas",
     [["Energía","31 kcal","155 kcal"],["Grasas","1,2 g","6 g"],["de las cuales saturadas","0,2 g","1 g",1],
-     ["Azúcares","1,3 g","6,5 g"],["Sal","0,05 g","0,25 g"]],"5 galletas","galletas")}
+     ["Azúcares","1,3 g","6,5 g"],["Sal","0,05 g","0,25 g"]],"5 galletas","galletas",`La etiqueta ya da <b>1 galleta</b><br>Azúcar: 1,3 · 5 = <b>6,5 g</b><br><span class="mini">aquí no hace falta regla de tres</span>`)}
 </div>
 <p style="font-size:.9em;margin-top:.4em">👉 Las galletas traen la columna <b>por galleta</b>: ahí solo hay que <b>multiplicar por 5</b>. En las otras dos hay que pasar <b>de 100 a mi ración</b>. La leche trae además <b>calcio</b>: 110 mg por 100 ml, que es el <b>14 % del VRN</b>.</p>`;
 
@@ -100,13 +103,13 @@ const merienda = `${CSS}
 <div class="sa2-etqs">
   ${etq("🥐 Torta de aceite","Inés Rosales · 180 g (6 tortas)","por 100 g","mis 30 g",
     [["Energía","511 kcal","153 kcal"],["Grasas","26 g","7,8 g"],["de las cuales saturadas","2,8 g","0,8 g",1],
-     ["Azúcares","17 g","5,1 g"],["Sal","0,15 g","0,05 g"]],"1 torta = 30 g","tortas")}
+     ["Azúcares","17 g","5,1 g"],["Sal","0,15 g","0,05 g"]],"1 torta = 30 g","tortas",`Azúcar de 1 g: 17 : 100 = 0,17<br>Mis 30 g: 0,17 · 30 = <b>5,1 g</b>`)}
   ${etq("🧈 Tulipán","materia grasa para untar 59 %","por 100 g","mis 10 g",
     [["Energía","530 kcal","53 kcal"],["Grasas","59 g","5,9 g"],["de las cuales saturadas","16 g","1,6 g",1],
-     ["Azúcares","menos de 0,5 g","≈ 0 g"],["Sal","0,90 g","0,09 g"]],"lo que unto: 10 g","tulipan")}
+     ["Azúcares","menos de 0,5 g","≈ 0 g"],["Sal","0,90 g","0,09 g"]],"lo que unto: 10 g","tulipan",`Saturadas de 1 g: 16 : 100 = 0,16<br>Mis 10 g: 0,16 · 10 = <b>1,6 g</b>`)}
   ${etq("🥛 Leche entera UHT","COVAP","por 100 ml","mis 200 ml",
     [["Energía","63 kcal","126 kcal"],["Grasas","3,6 g","7,2 g"],["de las cuales saturadas","2,4 g","4,8 g",1],
-     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg","220 mg"]],"1 vaso = 200 ml","leche")}
+     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg","220 mg"]],"1 vaso = 200 ml","leche",`Otra vez · 2: azúcar <b>9,2 g</b><br><span class="mini">la leche cuenta dos veces</span>`)}
 </div>
 <p style="font-size:.9em;margin-top:.4em">👉 La leche aparece <b>dos veces</b>, en el desayuno y en la merienda: hay que contarla las dos veces.</p>`;
 
@@ -174,26 +177,6 @@ const comoIR = R`${CSS}
   <span class="f">Es una <b>referencia para comparar</b>, no una norma: cada persona necesita una cantidad distinta.</span>
   <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b> (la leche: 110 mg de calcio = 14 %). El VRN funciona igual, pero con vitaminas y minerales.</span></div>`;
 
-/* --- mis cuentas --- */
-const cuentas = R`${CSS}
-<div class="sa2-rt">
-  <div class="scaja"><h4>🍫 ColaCao: 14 g</h4>
-    ${cuadro("ColaCao (g)", "Azúcar (g)", ["100","70"], ["14","x"])}
-    <p>$x = \dfrac{70}{100} \cdot 14 = 0,7 \cdot 14 = 9,8$ g</p>
-    <p class="truquito">🪄 Es dividir entre 100 y multiplicar por los gramos</p></div>
-  <div class="scaja"><h4>🥛 Leche: 200 ml</h4>
-    ${cuadro("Leche (ml)", "Azúcar (g)", ["100","4,6"], ["200","x"])}
-    <p>$x = \dfrac{4,6}{100} \cdot 200 = 0,046 \cdot 200 = 9,2$ g</p>
-    <p class="truquito">200 ml es el <b>doble</b> de 100 ml</p></div>
-  <div class="scaja"><h4>🥐 Torta: 30 g</h4>
-    ${cuadro("Torta (g)", "Azúcar (g)", ["100","17"], ["30","x"])}
-    <p>$x = \dfrac{17}{100} \cdot 30 = 0,17 \cdot 30 = 5,1$ g</p></div>
-  <div class="scaja"><h4>🍪 Galletas: 5</h4>
-    <p>La etiqueta ya da el valor de <b>una</b>: 1,3 g</p>
-    <p>$5 \cdot 1,3 = 6,5$ g</p>
-    <p class="truquito">Aquí no hace falta regla de tres</p></div>
-</div>`;
-
 /* --- mis tablas --- */
 function tabla(tit, filas, totales){
   const tr = filas.map(f=>`<tr><td>${f[0]}</td><td>${f[1]}</td><td>${f[2]}</td><td>${f[3]}</td><td>${f[4]}</td><td>${f[5]}</td></tr>`).join('');
@@ -218,7 +201,10 @@ const totalDia = R`${CSS}<table class="sa2-mia">
   <tr class="ir"><td>Cantidad del día (IR)</td><td>2000</td><td>70</td><td>20</td><td>90</td><td>6</td></tr>
   <tr class="pc"><td>% del día</td><td>33 %</td><td>49 %</td><td>66 %</td><td>44 %</td><td>15 %</td></tr>
   </tbody></table>
-  <p style="margin-top:.4em">Ejemplo: saturadas $13,2 : 20 = 0,66 \to$ <b>66 %</b> · azúcares $39,8 : 90 = 0,442... \to$ <b>44 %</b></p>`;
+  <p class="sa2-manot">↑ ¿De dónde sale el 44 %?<br>
+  Azúcares: 39,8 : 90 = 0,4422…<br>
+  Redondeo: 0,4422… ≈ 0,44 → <b>44 %</b><br>
+  Saturadas: 13,2 : 20 = 0,66 → <b>66 %</b></p>`;
 
 /* --- la cartulina --- */
 function barra(nombre, pc, color){
@@ -298,12 +284,7 @@ TEMA.registrar({
       {cols:[ [{html:comoIR}], [{html:`${ir}<p style="font-size:.85em;margin-top:.4em">Cantidades de <b>todo el día</b> para un adulto medio de 2000 kcal. Vienen en el <b>Reglamento europeo de etiquetado</b> y son las cantidades con las que comparamos siempre.</p>`}] ]}
     ]},
 
-    { titulo:"✍️ Paso 3: de los 100 g a mi ración", cuerpo:[
-      {html:cuentas},
-      {nota:["Lo mismo con las demás filas (energía, grasas, saturadas y sal) y con el Tulipán: $x = \\dfrac{16}{100} \\cdot 10 = 1,6$ g de saturadas. <b>Siempre la misma regla de tres.</b>"]}
-    ]},
-
-    { titulo:"➕ Pasos 4 y 5: mis tablas", cuerpo:[
+    { titulo:"➕ Paso 4: mis tablas", cuerpo:[
       {html:tablas}
     ]},
 
