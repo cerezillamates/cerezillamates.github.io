@@ -1,174 +1,274 @@
-/* 2.º ESO · Tema 3 · SITUACIÓN DE APRENDIZAJE «Organizamos un viaje»
-   19-nov-2026 (versión corta, decisión de la profesora): sin misiones ni ejercicios de explicación.
-   Solo un ejemplo concreto: el presupuesto del viaje hecho entero por la profesora, con todas las
-   cuentas escritas, y el cartel terminado presentado como si fuera el trabajo de una agencia.
-   Datos del viaje: autobús 500 €, bocadillos 3 por 7,50 €, parque de aventura 18 € con 20 % de
-   descuento de grupo, albergue 1200 € con subida del 15 %, mapa 1 : 200 000 y rifa de 360 €. */
+/* 2.º ESO · Tema 3 · SITUACIÓN DE APRENDIZAJE «¿Qué desayunamos?»
+   19-nov-2026 (decisión de la profesora): sustituye a «Organizamos un viaje».
+   Versión sencilla de la SA de 3.º ESO: solo el DESAYUNO, tres productos y
+   TODO con reglas de tres (también el porcentaje), que es el método de 2.º ESO.
+   Etiquetas reales (fotos de la profesora): ColaCao Original (Idilia Foods),
+   leche entera UHT COVAP y galletas María (900 g, 141 galletas, columna «por galleta» de 6,4 g).
+   IR (ingesta de referencia de un adulto medio, 8400 kJ / 2000 kcal): Reglamento (UE) 1169/2011, anexo XIII. */
 (function(){
 const R = String.raw;
+const td = v => v === "x" ? `<td class="x">x</td>` : `<td>${v}</td>`;
+const cuadro = (m1, m2, a, b) => `<table class="t cuadro"><tr><th>${m1}</th><th class="fl">(D) ⟶</th><th>${m2}</th></tr><tr>${td(a[0])}<td></td>${td(a[1])}</tr><tr>${td(b[0])}<td></td>${td(b[1])}</tr></table>`;
 
 /* --- estilos propios de esta SA --- */
 const CSS = `<style>
-.sav-datos{border-collapse:collapse;width:100%;font-size:1.02em}
-.sav-datos th{text-align:left;background:var(--card,#fff);border-bottom:2px solid var(--line,#ddd);padding:.3em .6em;white-space:nowrap}
-.sav-datos td{border-bottom:2px solid var(--line,#ddd);padding:.3em .6em}
-.sav-datos td b{font-size:1.1em}
-.sav-paso{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.45em .7em;margin-bottom:.45em}
-.sav-paso b.n{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#4f46e5;color:#fff;margin-right:.35em}
-.sav-paso .f{display:block;margin:.25em 0 0 2em;padding:.2em .6em;background:#eef2ff;border-radius:10px;width:fit-content;max-width:100%}
-.sav-paso .di{float:right;font-weight:800;color:#b91c1c}
-/* cartel de la agencia */
-.sav-cart{background:#fdf3d7;border-radius:10px;padding:.8em;box-shadow:0 6px 18px #0003;color:#222;font-family:"Caveat","Comic Sans MS",cursive;font-size:1.22em;line-height:1.15;transform:rotate(-.4deg)}
-.sav-cart h3{font-family:"Caveat",cursive;font-size:2em;text-align:center;margin:0;color:#b91c1c}
-.sav-cart .grupo{text-align:center;color:#444;margin-bottom:.4em}
-.sav-cart .zona{display:grid;grid-template-columns:1.25fr 1fr;gap:.6em}
-.sav-cart .pieza{background:#fff;border-radius:8px;padding:.4em .55em;box-shadow:0 2px 6px #0002}
-.sav-cart .pieza h5{margin:0 0 .2em;font:700 1.15em "Caveat",cursive;color:#1d4ed8}
-.sav-cart table{border-collapse:collapse;width:100%;font-size:.92em}
-.sav-cart td,.sav-cart th{border:1.5px solid #555;padding:.05em .3em;text-align:center}
-.sav-cart td:first-child{text-align:left}
-.sav-cart tr.tot td{font-weight:700;background:#fef9c3}
-.sav-cart tr.pc td{font-weight:700;background:#fde2e1;color:#b91c1c}
-.sav-cart ol{margin:.1em 0 0 1.1em;padding:0}
-.sav-cart li{margin:.1em 0}
-@media (max-width:700px){.sav-cart .zona{grid-template-columns:1fr}}
+.sa2-etqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(17em,1fr));gap:.6em}
+.sa2-etq{background:#fff;color:#111;border:3px solid #111;border-radius:6px;padding:.35em .55em;font-size:.88em;line-height:1.25}
+.sa2-etq img{width:100%;max-height:150px;object-fit:contain;object-position:top;border-radius:4px;margin-bottom:.25em;display:block;background:#f4f4f4}
+.sa2-foto{max-width:100%;max-height:52vh;width:auto;border-radius:8px;border:2px solid #111;box-shadow:0 3px 10px #0003;display:block;margin:0 auto}
+.sa2-foto.chica{max-height:19vh}
+.sa2-cap{font-size:.88em;margin:.25em 0 .6em;line-height:1.25}
+.sa2-cap b{color:#b45309}
+.sa2-etq h4{margin:0 0 .1em;font:800 1.08em var(--f-d,system-ui)}
+.sa2-etq .m{font-size:.85em;color:#444;margin-bottom:.25em}
+.sa2-etq table{border-collapse:collapse;width:100%;table-layout:fixed}
+.sa2-etq td:first-child,.sa2-etq th:first-child{width:50%;overflow-wrap:anywhere}
+.sa2-etq th{font-size:.8em;text-align:left;border-bottom:4px solid #111;padding:.1em 0}
+.sa2-etq th:not(:first-child),.sa2-etq td:not(:first-child){text-align:right;padding-left:.4em;overflow-wrap:anywhere}
+.sa2-etq td{border-bottom:1px solid #999;padding:.12em 0}
+.sa2-etq .rac{margin-top:.35em;background:#fff3c4;border-radius:6px;padding:.15em .4em;font-weight:800;text-align:center}
+.sa2-comida{font:800 1.05em var(--f-d,system-ui);margin:.1em 0 .25em}
+.sa2-ir{border-collapse:collapse;font-size:1.05em;width:100%}
+.sa2-ir td{padding:.26em .7em;border-bottom:2px solid var(--line,#ddd)}
+.sa2-ir td:last-child{font:800 1.2em var(--f-d,system-ui);text-align:right}
+.sa2-paso{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.45em .7em;margin-bottom:.45em}
+.sa2-paso b.n{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#4f46e5;color:#fff;margin-right:.35em}
+.sa2-paso .f{display:block;margin:.25em 0 0 2em;padding:.2em .6em;background:#eef2ff;border-radius:10px;width:fit-content;max-width:100%}
+.sa2-rt{display:grid;grid-template-columns:repeat(auto-fit,minmax(15em,1fr));gap:.6em;align-items:start}
+.sa2-rt .caja{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.5em .7em}
+.sa2-rt .caja h4{margin:0 0 .25em;font:800 1.05em var(--f-d,system-ui)}
+.sa2-mia{border-collapse:collapse;width:100%;font-size:1em}
+.sa2-mia th,.sa2-mia td{border:1.5px solid var(--line,#ccc);padding:.2em .5em;text-align:center}
+.sa2-mia td:first-child,.sa2-mia th:first-child{text-align:left}
+.sa2-mia thead th{background:#4f46e5;color:#fff}
+.sa2-mia tr.tot td{font-weight:800;background:#fef9c3}
+.sa2-mia tr.pc td{font-weight:800;background:#fde2e1;color:#b91c1c}
+/* cartulina */
+.sa2-cart{background:#fdf3d7;border-radius:10px;padding:.8em;box-shadow:0 6px 18px #0003;color:#222;font-family:"Caveat","Comic Sans MS",cursive;font-size:1.25em;line-height:1.15;transform:rotate(-.4deg)}
+.sa2-cart h3{font-family:"Caveat",cursive;font-size:2em;text-align:center;margin:0;color:#b91c1c}
+.sa2-cart .grupo{text-align:center;color:#444;margin-bottom:.4em}
+.sa2-cart .zona{display:grid;grid-template-columns:1.2fr 1fr;gap:.6em}
+.sa2-cart .pieza{background:#fff;border-radius:8px;padding:.4em .55em;box-shadow:0 2px 6px #0002}
+.sa2-cart .pieza h5{margin:0 0 .2em;font:700 1.15em "Caveat",cursive;color:#1d4ed8}
+.sa2-cart table{border-collapse:collapse;width:100%;font-size:.92em}
+.sa2-cart td,.sa2-cart th{border:1.5px solid #555;padding:.05em .3em;text-align:center}
+.sa2-cart td:first-child{text-align:left}
+.sa2-cart tr.tot td{font-weight:700;background:#fef9c3}
+.sa2-cart tr.pc td{font-weight:700;background:#fde2e1;color:#b91c1c}
+.sa2-bar{display:grid;grid-template-columns:5.2em 1fr 2.8em;align-items:center;gap:.3em;margin:.15em 0}
+.sa2-bar .b{height:1em;background:#eee;border:1.5px solid #555;border-radius:4px;overflow:hidden}
+.sa2-bar .b i{display:block;height:100%}
+.sa2-cart .terr{letter-spacing:.05em}
+.sa2-cart ol{margin:.1em 0 0 1.1em;padding:0}
+@media (max-width:700px){.sa2-cart .zona{grid-template-columns:1fr}}
 </style>`;
 
-/* --- los datos del viaje --- */
-const datos = `${CSS}<table class="sav-datos">
-  <tr><th>🚌 Autobús</th><td><b>500 €</b> en total, vaya el que vaya</td></tr>
-  <tr><th>🥪 Bocadillos</th><td><b>3 por 7,50 €</b> · 2 para cada alumno</td></tr>
-  <tr><th>🧗 Parque de aventura</th><td><b>18 €</b> por persona, con un <b>20 % de descuento</b> para grupos</td></tr>
-  <tr><th>🏨 Albergue</th><td><b>1200 €</b> por el grupo, pero este año <b>sube un 15 %</b></td></tr>
-  <tr><th>🗺️ El mapa</th><td>escala <b>1 : 200 000</b> · el albergue está a <b>7,5 cm</b> del instituto</td></tr>
-  <tr><th>🎟️ Rifa del curso</th><td><b>360 €</b> para repartir · apuntados: 2.º A <b>24</b>, 2.º B <b>26</b>, 2.º C <b>22</b></td></tr>
-  <tr><th>👥 Mi clase</th><td>vamos <b>28 alumnos</b></td></tr></table>`;
+/* --- etiqueta real --- */
+function etq(nombre, marca, col, filas, racion, foto){
+  const tr = filas.map(f=>`<tr><td${f[2]?' class="s"':''}>${f[0]}</td><td>${f[1]}</td></tr>`).join('');
+  return `<div class="sa2-etq"><img src="img/${foto}.jpg" alt="Etiqueta de ${nombre}" loading="lazy"><h4>${nombre}</h4><div class="m">${marca}</div>
+  <table><tr><th>Información nutricional</th><th>${col}</th></tr>${tr}</table>
+  <div class="rac">Yo tomo: ${racion}</div></div>`;
+}
+const etiquetas = `${CSS}
+<div class="sa2-comida">☕ Mi desayuno: una taza de ColaCao con leche y 5 galletas</div>
+<div class="sa2-etqs">
+  ${etq("🍫 ColaCao Original","Idilia Foods","por 100 g",
+    [["Energía","377 kcal"],["Grasas","2,5 g"],["Azúcares","70 g"],["Sal","0,10 g"]],"2 cucharadas = 14 g","colacao")}
+  ${etq("🥛 Leche entera UHT","COVAP","por 100 ml",
+    [["Energía","63 kcal"],["Grasas","3,6 g"],["Azúcares","4,6 g"],["Sal","0,13 g"]],"1 taza = 200 ml","leche")}
+  ${etq("🍪 Galletas María","900 g · 141 galletas","por galleta (6,4 g)",
+    [["Energía","31 kcal"],["Grasas","1,2 g"],["Azúcares","1,3 g"],["Sal","0,05 g"]],"5 galletas","galletas")}
+</div>
+<p style="font-size:.92em;margin-top:.4em">👉 Las galletas dan el valor <b>de una galleta</b>: ahí solo hay que <b>multiplicar por 5</b>. En las otras dos hay que pasar <b>de 100 a lo que yo tomo</b>.</p>`;
 
-/* --- mis cuentas, una por una --- */
+/* --- dónde está el IR --- */
+const dondeIR = `${CSS}
+<div class="sa2-etqs" style="grid-template-columns:1.15fr 1fr">
+  <div>
+    <img class="sa2-foto" src="img/colacao_tabla.jpg" alt="Tabla nutricional del ColaCao" loading="lazy">
+    <p class="sa2-cap"><b>① La columna «%IR por taza».</b> Qué parte de <b>todo el día</b> te comes con una taza: azúcares <b>21 %</b>, sal 4 %…</p>
+  </div>
+  <div>
+    <img class="sa2-foto chica" src="img/colacao_ir.jpg" alt="Nota de la etiqueta sobre el IR" loading="lazy">
+    <p class="sa2-cap"><b>② La nota de abajo.</b> Dice qué es: <b>IR = Ingesta de Referencia de un adulto medio (2000 kcal al día)</b>. Todas las etiquetas la llevan.</p>
+    <p class="sa2-cap">⚠️ Lo que la etiqueta <b>no</b> dice: cuántos <b>gramos</b> son el día entero. Esos los pone la <b>norma europea</b> 👉 los tenéis en la lámina siguiente.</p>
+  </div>
+</div>`;
+
+/* --- la tabla del día --- */
+const ir = `${CSS}<table class="sa2-ir">
+  <tr><td>⚡ Energía</td><td>2000 kcal</td></tr>
+  <tr><td>🧈 Grasas</td><td>70 g</td></tr>
+  <tr><td>🍬 Azúcares</td><td>90 g</td></tr>
+  <tr><td>🧂 Sal</td><td>6 g</td></tr></table>`;
+
+const comoIR = R`${CSS}
+<div class="sa2-paso"><b>La pregunta es siempre la misma</b>
+  <span class="f">Si <b>90 g</b> de azúcar es <b>todo el día (100 %)</b>, lo que yo tomo ¿qué % es?</span></div>
+<div class="sa2-paso"><b>Y se resuelve con una regla de tres</b> (más azúcar → más %: <b>D</b>)
+  ${cuadro("Azúcar (g)", "Porcentaje", ["90","100"], ["19","x"])}
+  <span class="f">$\dfrac{90}{19} = \dfrac{100}{x} \;\Rightarrow\; x = \dfrac{19 \cdot 100}{90} = 21,1... \approx 21\,\%$</span></div>
+<div class="sa2-paso"><b>¡Es lo que pone el bote!</b> ✔
+  <span class="f">La etiqueta dice que la taza tiene 19 g de azúcares y es el <b>21 % del IR</b>. Nos ha salido lo mismo.</span></div>`;
+
+/* --- los pasos del proyecto --- */
+const pasosProyecto = R`${CSS}
+<div class="sa2-paso"><b class="n">1</b><b>Apunto qué desayuno y cuánto</b>
+  <span class="f">«2 cucharadas de ColaCao (14 g), 200 ml de leche, 5 galletas». Sin la cantidad no se puede calcular nada.</span></div>
+<div class="sa2-paso"><b class="n">2</b><b>Guardo la etiqueta</b> (o le hago una foto)
+  <span class="f">Me fijo en la columna de <b>100 g</b> o <b>100 ml</b>.</span></div>
+<div class="sa2-paso"><b class="n">3</b><b>Regla de tres</b>: de 100 g a lo que yo tomo</div>
+<div class="sa2-paso"><b class="n">4</b><b>Sumo</b> los tres productos</div>
+<div class="sa2-paso"><b class="n">5</b><b>Otra regla de tres</b>: ¿qué % del día es?
+  <span class="f">Y los <b>terrones</b> de azúcar: 1 terrón = 4 g</span></div>
+<div class="sa2-paso"><b class="n">6</b><b>Cartulina</b> y exposición de 2 minutos</div>`;
+
+/* --- mis cuentas --- */
 const cuentas1 = R`${CSS}
-<div class="sav-paso"><b class="n">1</b><b>🚌 El autobús</b> <span class="di">I</span>
-  <span class="f">Cuantos más vamos, menos paga cada uno → <b>inversa</b></span>
-  <span class="f">$500 : 28 = 17,857... \approx 17,86$ € por alumno</span></div>
-<div class="sav-paso"><b class="n">2</b><b>🥪 Los bocadillos</b> <span class="di">D</span>
-  <span class="f">Reduzco a la unidad: $7,50 : 3 = 2,50$ € un bocadillo</span>
-  <span class="f">Cada alumno quiere 2: $2 \cdot 2,50 = 5$ € por alumno</span>
-  <span class="f">Los 28: $28 \cdot 5 = 140$ €</span></div>
-<div class="sav-paso"><b class="n">3</b><b>🧗 El parque de aventura</b> (descuento del 20 %)
-  <span class="f">El 20 % de 18: $18 \cdot 0,20 = 3,60$ € → $18 - 3,60 = 14,40$ €</span>
-  <span class="f">🪄 Más rápido con el índice: pagar con un 20 % menos es pagar el 80 % → $18 \cdot 0,80 = 14,40$ €</span>
-  <span class="f">Los 28: $28 \cdot 14,40 = 403,20$ €</span></div>`;
+<div class="sa2-rt">
+  <div class="caja"><h4>🍫 El ColaCao: 14 g</h4>
+    <p>Menos ColaCao → menos azúcar: <b>D</b></p>
+    ${cuadro("ColaCao (g)", "Azúcar (g)", ["100","70"], ["14","x"])}
+    <p>$\dfrac{100}{14} = \dfrac{70}{x}$</p>
+    <p>$x = \dfrac{14 \cdot 70}{100} = 9,8$ g</p></div>
+  <div class="caja"><h4>🥛 La leche: 200 ml</h4>
+    <p>Más leche → más azúcar: <b>D</b></p>
+    ${cuadro("Leche (ml)", "Azúcar (g)", ["100","4,6"], ["200","x"])}
+    <p>$x = \dfrac{200 \cdot 4,6}{100} = 9,2$ g</p></div>
+  <div class="caja"><h4>🍪 Las galletas: 5</h4>
+    <p>La etiqueta ya dice lo de <b>una</b>: 1,3 g</p>
+    <p>$5 \cdot 1,3 = 6,5$ g</p>
+    <p class="muted">Aquí no hace falta regla de tres.</p></div>
+</div>`;
 
 const cuentas2 = R`${CSS}
-<div class="sav-paso"><b class="n">4</b><b>🏨 El albergue</b> (sube un 15 %) <span class="di">I</span>
-  <span class="f">El 15 % de 1200: $1200 \cdot 0,15 = 180$ € → $1200 + 180 = 1380$ €</span>
-  <span class="f">🪄 Con el índice: $1200 \cdot 1,15 = 1380$ €</span>
-  <span class="f">$1380 : 28 = 49,285... \approx 49,29$ € por alumno</span></div>
-<div class="sav-paso"><b class="n">5</b><b>🗺️ ¿A cuántos km está?</b> <span class="di">D</span>
-  <span class="f">1 cm del mapa son 200 000 cm de verdad</span>
-  <span class="f">$7,5 \cdot 200\,000 = 1\,500\,000$ cm $= 15$ km</span></div>
-<div class="sav-paso"><b class="n">6</b><b>🎟️ La rifa</b> (reparto directamente proporcional)
-  <span class="f">$24 + 26 + 22 = 72$ alumnos en total</span>
-  <span class="f">Constante: $360 : 72 = 5$ € por alumno apuntado</span>
-  <span class="f">2.º A: $24 \cdot 5 = 120$ € · 2.º B: $26 \cdot 5 = 130$ € · 2.º C: $22 \cdot 5 = 110$ €</span>
-  <span class="f">Comprobación: $120 + 130 + 110 = 360$ ✔</span></div>`;
+<div class="sa2-paso"><b class="n">4</b><b>Sumo el azúcar del desayuno</b>
+  <span class="f">$9,8 + 9,2 + 6,5 = 25,5$ g de azúcar</span></div>
+<div class="sa2-paso"><b class="n">5</b><b>¿Qué % del día es?</b> Si 90 g es el 100 %…
+  ${cuadro("Azúcar (g)", "Porcentaje", ["90","100"], ["25,5","x"])}
+  <span class="f">$x = \dfrac{25,5 \cdot 100}{90} = 28,3... \approx 28\,\%$</span></div>
+<div class="sa2-paso"><b class="n">6</b><b>Los terrones</b> (1 terrón = 4 g)
+  <span class="f">$25,5 : 4 = 6,3... \approx 6$ terrones</span></div>`;
 
-const total = R`${CSS}
-<div class="sav-paso"><b class="n">7</b><b>💶 Lo que paga cada alumno</b>
-  <span class="f">$17,86 + 5 + 14,40 + 49,29 = 86,55$ €</span>
-  <span class="f">De la rifa le tocan 5 € → $86,55 - 5 = 81,55$ €</span></div>
-<div class="sav-paso"><b class="n">8</b><b>🔄 Mi idea para que salga más barato</b>
-  <span class="f">Cambio el parque (14,40 €) por una ruta guiada de 6 €: $14,40 - 6 = 8,40$ € menos</span>
-  <span class="f">$81,55 - 8,40 = 73,15$ € por alumno</span></div>`;
+/* --- mi tabla --- */
+const tabla = R`${CSS}<table class="sa2-mia">
+  <thead><tr><th>☕ Mi desayuno</th><th>Energía</th><th>Grasas</th><th>Azúcares</th><th>Sal</th></tr></thead>
+  <tbody>
+  <tr><td>🍫 ColaCao 14 g</td><td>52,8</td><td>0,35</td><td>9,8</td><td>0,01</td></tr>
+  <tr><td>🥛 Leche 200 ml</td><td>126</td><td>7,2</td><td>9,2</td><td>0,26</td></tr>
+  <tr><td>🍪 5 galletas</td><td>155</td><td>6</td><td>6,5</td><td>0,25</td></tr>
+  <tr class="tot"><td>TOTAL</td><td>334 kcal</td><td>13,6 g</td><td>25,5 g</td><td>0,52 g</td></tr>
+  <tr><td>Todo el día (IR)</td><td>2000</td><td>70</td><td>90</td><td>6</td></tr>
+  <tr class="pc"><td>% del día</td><td>17 %</td><td>19 %</td><td>28 %</td><td>9 %</td></tr>
+  </tbody></table>
+  <p style="margin-top:.4em">Cada % con su regla de tres. Grasas: si 70 g es el 100 %, $x = \dfrac{13,6 \cdot 100}{70} = 19,4... \approx 19\,\%$</p>`;
 
-/* --- el cartel terminado --- */
-const cartel = R`${CSS}<div class="sav-cart">
-  <h3>Agencia «Sierra Express» 🚌</h3>
-  <div class="grupo">Agencia de la profe · 2.º ESO · 28 alumnos · 2 días en la sierra</div>
+/* --- la cartulina --- */
+function barra(nombre, pc, color){
+  return `<div class="sa2-bar"><span>${nombre}</span><span class="b"><i style="width:${pc}%;background:${color}"></i></span><b>${pc} %</b></div>`;
+}
+const cartulina = R`${CSS}<div class="sa2-cart">
+  <h3>¿Qué desayuna la profe? ☕</h3>
+  <div class="grupo">Grupo de la profe · 2.º ESO</div>
   <div class="zona">
-    <div class="pieza"><h5>💶 Nuestro presupuesto</h5>
+    <div class="pieza"><h5>📋 Nuestra tabla</h5>
       <table>
-        <tr><th>Concepto</th><th>Total</th><th>Por alumno</th></tr>
-        <tr><td>🚌 Autobús</td><td>500 €</td><td>17,86 €</td></tr>
-        <tr><td>🥪 Bocadillos (2)</td><td>140 €</td><td>5 €</td></tr>
-        <tr><td>🧗 Parque (−20 %)</td><td>403,20 €</td><td>14,40 €</td></tr>
-        <tr><td>🏨 Albergue (+15 %)</td><td>1380 €</td><td>49,29 €</td></tr>
-        <tr class="tot"><td>TOTAL</td><td>2423,20 €</td><td>86,55 €</td></tr>
-        <tr><td>🎟️ Nos toca de la rifa</td><td>−140 €</td><td>−5 €</td></tr>
-        <tr class="pc"><td>PAGA CADA UNO</td><td>2283,20 €</td><td>81,55 €</td></tr>
+        <tr><th>Producto</th><th>Energía</th><th>Grasas</th><th>Azúcares</th><th>Sal</th></tr>
+        <tr><td>🍫 ColaCao 14 g</td><td>52,8</td><td>0,35</td><td>9,8</td><td>0,01</td></tr>
+        <tr><td>🥛 Leche 200 ml</td><td>126</td><td>7,2</td><td>9,2</td><td>0,26</td></tr>
+        <tr><td>🍪 5 galletas</td><td>155</td><td>6</td><td>6,5</td><td>0,25</td></tr>
+        <tr class="tot"><td>TOTAL</td><td>334</td><td>13,6</td><td>25,5</td><td>0,52</td></tr>
+        <tr><td>Todo el día</td><td>2000</td><td>70</td><td>90</td><td>6</td></tr>
+        <tr class="pc"><td>% del día</td><td>17 %</td><td>19 %</td><td>28 %</td><td>9 %</td></tr>
       </table>
-      <div style="margin-top:.3em">Ejemplo: albergue $1200 \cdot 1,15 = 1380$ → $1380 : 28 = 49,29$ €</div>
+      <div style="margin-top:.3em">Ejemplo: azúcar $x = \dfrac{25,5 \cdot 100}{90} \approx 28\,\%$</div>
     </div>
-    <div class="pieza"><h5>🗺️ El plan</h5>
-      <b>Día 1:</b> salida a las 9:00, bocadillo en el mirador y parque de aventura por la tarde.<br>
-      <b>Día 2:</b> ruta hasta el río y vuelta a las 18:00.<br>
-      El albergue está a <b>15 km</b> (7,5 cm en el mapa 1 : 200 000).
-      <h5 style="margin-top:.4em">🧮 D o I</h5>
-      Autobús y albergue: <b>I</b> (se pagan entre todos).<br>
-      Bocadillos y entradas: <b>D</b> (cada uno el suyo).
+    <div class="pieza"><h5>📊 ¿Qué parte del día desayuno?</h5>
+      ${barra("Energía",17,"#16a34a")}
+      ${barra("Grasas",19,"#16a34a")}
+      ${barra("Azúcares",28,"#f59e0b")}
+      ${barra("Sal",9,"#16a34a")}
+      <div style="font-size:.85em">🟢 menos del 25 % · 🟡 del 25 % al 50 % · 🔴 más del 50 %</div>
+      <h5 style="margin-top:.4em">🍬 Mis terrones de azúcar</h5>
+      <div class="terr">🧊🧊🧊🧊🧊🧊 = 6 terrones</div>
     </div>
     <div class="pieza"><h5>💬 Conclusiones</h5><ol>
-      <li>El viaje cuesta <b>2423,20 €</b>: a <b>81,55 €</b> por alumno con la rifa descontada.</li>
-      <li>Lo más caro es el <b>albergue</b>: 49,29 € de los 86,55 € (más de la mitad).</li>
-      <li>Si fuéramos 30, el autobús bajaría de 17,86 € a <b>16,67 €</b>.</li></ol></div>
-    <div class="pieza"><h5>🔄 Nuestra oferta barata</h5>
-      Ruta guiada (6 €) en vez del parque de aventura.<br>
-      $81,55 - 8,40 = 73,15$ € por alumno. 👍</div>
+      <li>Solo desayunando tomo el <b>28 %</b> del azúcar del día: 6 terrones.</li>
+      <li>Lo demás está bien: energía 17 %, grasas 19 % y sal 9 %.</li>
+      <li>El azúcar viene casi todo del <b>ColaCao y la leche</b> (9,8 + 9,2 de los 25,5).</li></ol></div>
+    <div class="pieza"><h5>🔄 Nuestro cambio saludable</h5>
+      Pongo <b>la mitad de ColaCao</b>: 7 g en vez de 14 g.<br>
+      $x = \dfrac{7 \cdot 70}{100} = 4,9$ g de azúcar (antes 9,8)<br>
+      Azúcar: $25,5 - 4,9 = 20,6$ g → <b>23 %</b> y 5 terrones 👍</div>
   </div>
 </div>`;
 
 TEMA.registrar({
   num: "SA", pref: "SA", seccion: "Situación de aprendizaje",
-  titulo: "Organizamos un viaje",
+  titulo: "¿Qué desayunamos?",
+  videos: [ {t:"Claves para leer las etiquetas nutricionales", url:"https://www.educaciontrespuntocero.com/familias/leer-etiquetas-nutricionales/"} ],
 
   laminas: [
     { portada:true, cuerpo:[
-      {html:`<p class="gancho">🚌 Dos días en la sierra: ¿cuánto cuesta el viaje… y cuánto paga cada uno?</p>`}
+      {html:`<p class="gancho">🕵️ ¿Cuánto azúcar hay en el desayuno de la profe?</p>`}
     ]},
 
     { titulo:"🎯 La misión", cuerpo:[
-      {prop:["En <b>grupos de 4</b> sois una <b>agencia de viajes</b>. Preparad el <b>presupuesto</b> del viaje de 2.º de ESO: autobús, comida, actividad y albergue, y decid <b>cuánto paga cada alumno</b>."], etq:"La misión"},
+      {prop:["En <b>grupos de 4</b>, traed las <b>etiquetas</b> de lo que desayunáis. Calculad qué <b>% del día</b> os coméis y contadlo en una <b>cartulina</b>."], etq:"La misión"},
       {cols:[
-        [{nota:["Os enseño un ejemplo hecho: <b>mi presupuesto</b>, con todas las cuentas."], etq:"👀 Primero, mirad el mío"}],
-        [{nota:["Presentáis el <b>cartel</b> en <b>2 minutos</b>. ¡Habla toda la agencia!"], etq:"🎤 Al final"}]
+        [{nota:["Os enseño un ejemplo hecho: <b>mi desayuno</b>, con etiquetas de verdad."], etq:"👀 Primero, mirad el mío"}],
+        [{nota:["Presentáis la cartulina en <b>2 minutos</b>. ¡Habla todo el grupo!"], etq:"🎤 Al final"}]
       ]}
     ]},
 
-    { titulo:"📋 Los datos del viaje", cuerpo:[
-      {html:datos}
+    { titulo:"🧭 Los pasos del proyecto", cuerpo:[
+      {html:pasosProyecto}
     ]},
 
-    { titulo:"✍️ Mis cuentas (1): autobús, comida y actividad", cuerpo:[
+    { titulo:"🏷 Mis tres etiquetas", cuerpo:[
+      {html:etiquetas}
+    ]},
+
+    { titulo:"🔍 ¿Dónde está el IR en la etiqueta?", cuerpo:[
+      {html:dondeIR}
+    ]},
+
+    { titulo:"🧮 ¿Y cómo se calcula el %IR?", cuerpo:[
+      {cols:[ [{html:comoIR}], [{html:`${ir}<p style="font-size:.88em;margin-top:.4em">Lo que debería tomar <b>en todo el día</b> un adulto medio. Es la tabla con la que comparamos siempre.</p>`}] ]}
+    ]},
+
+    { titulo:"✍️ Paso 3: de 100 g a lo que yo tomo", cuerpo:[
       {html:cuentas1}
     ]},
 
-    { titulo:"✍️ Mis cuentas (2): albergue, mapa y rifa", cuerpo:[
+    { titulo:"✍️ Pasos 4, 5 y 6: sumar y el % del día", cuerpo:[
       {html:cuentas2}
     ]},
 
-    { titulo:"💶 El precio final y mi idea para abaratar", cuerpo:[
-      {html:total},
-      {nota:["Si sumo los totales y divido: $2423,20 : 28 = 86,54$ €. Sale un céntimo menos que sumando los precios por alumno, porque <b>había redondeado</b> cada uno. Es normal: lo digo en el cartel."]}
+    { titulo:"📊 Mi tabla del desayuno", cuerpo:[
+      {html:tabla}
     ]},
 
-    { titulo:"🖼 Mi cartel", cuerpo:[
-      {html:cartel}
+    { titulo:"🖼 Nuestra cartulina", cuerpo:[
+      {html:cartulina}
     ]},
 
     { titulo:"🚀 ¡Ahora vosotros!", cuerpo:[
       {html:`<div class="sa-fases">
-        <div><b>Sesión 1</b><span>Las <b>cuentas</b> del viaje como en el ejemplo, pero con <b>los alumnos de vuestra clase</b> y la actividad que elijáis.</span></div>
-        <div class="casa"><b>🏠 En casa</b><span>La <b>rifa</b>, el precio final por alumno y vuestra <b>idea para abaratar</b>.</span></div>
-        <div><b>Sesión 2</b><span>El <b>cartel</b> de la agencia, como el del ejemplo.</span></div>
-        <div><b>Sesión 3</b><span><b>Presentaciones</b> de 2 minutos y votamos el mejor viaje.</span></div></div>`},
+        <div class="casa"><b>🏠 Antes</b><span>Cada uno <b>guarda la etiqueta</b> (o le hace una foto) de lo que desayuna y apunta <b>cuánto toma</b>.</span></div>
+        <div><b>Sesión 1</b><span>Pasos 3 y 4: las <b>reglas de tres</b> de cada producto y la suma.</span></div>
+        <div><b>Sesión 2</b><span>Pasos 5 y 6: el <b>% del día</b>, los terrones y la <b>cartulina</b>.</span></div>
+        <div><b>Sesión 3</b><span><b>Exposiciones</b> de 2 minutos.</span></div></div>`},
       {html:`<table class="t"><tr><th>Se evalúa</th><th>Cuenta</th></tr>
-        <tr><td>Decir si cada cosa es <b>D</b> o <b>I</b> y por qué</td><td>20 %</td></tr>
-        <tr><td>Cuentas con la operación escrita</td><td>40 %</td></tr>
-        <tr><td>Cartel con la tabla y el precio por alumno</td><td>30 %</td></tr>
-        <tr><td>Presentación: habla toda la agencia</td><td>10 %</td></tr></table>`},
+        <tr><td>Etiquetas bien copiadas, con la cantidad que tomáis</td><td>20 %</td></tr>
+        <tr><td>Reglas de tres con el cuadro y la operación escrita</td><td>40 %</td></tr>
+        <tr><td>Tabla, semáforo y conclusiones con números</td><td>30 %</td></tr>
+        <tr><td>Exposición: habla todo el grupo</td><td>10 %</td></tr></table>`},
       {estudio:[
-        {nota:["<b>Saberes:</b> proporcionalidad directa e inversa, reducción a la unidad, porcentajes (aumentos y descuentos, con el truco del índice), escalas y repartos directamente proporcionales.",
-               "<b>Idea:</b> el presupuesto de arriba está resuelto entero para que lo copien como modelo; cada agencia repite los mismos pasos con el número de alumnos de su clase y la actividad que elija.",
-               "<b>Basada</b> en la situación de aprendizaje de la profesora (niveles N1 y N2)."], etq:"👩‍🏫 Para el profesor"}
+        {nota:["<b>Saberes:</b> proporcionalidad directa y regla de tres (de 100 g a la ración), el porcentaje como regla de tres (tipo 3: qué % representa una parte) y lectura de tablas.",
+               "<b>Idea:</b> es la misma situación que en 3.º ESO pero más sencilla: solo el desayuno, tres productos, sin grasas saturadas y <b>todo con reglas de tres</b>, sin fórmulas de porcentaje.",
+               "<b>Fuentes:</b> fotos reales de ColaCao Original (Idilia Foods), leche entera UHT COVAP y galletas María (envase de 900 g, 141 galletas, columna «por galleta» de 6,4 g). IR de un adulto medio (8400 kJ / 2000 kcal): Reglamento (UE) 1169/2011, anexo XIII. Sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
       ]}
     ]}
   ]
