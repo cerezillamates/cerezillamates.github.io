@@ -1,35 +1,43 @@
-/* 3.º ESO · Tema 3 · SITUACIÓN DE APRENDIZAJE «¿Es saludable nuestro desayuno?»
-   19-nov-2026 (versión corta y sencilla, decisión de la profesora): sin ejercicios de explicación.
-   Solo el desayuno de la profe con etiquetas REALES (fotos suyas), explicando qué es el %IR
-   de la etiqueta, los cálculos y la cartulina terminada como si fuera el trabajo de un grupo.
-   Etiquetas reales:
-     ColaCao Original (Idilia Foods) · columna «por taza» = 14 g de ColaCao + 200 ml de leche
-     Galletas María (900 g, 141 galletas) · columna «por galleta» = 6,4 g
-     Cereales de cacao · columna «por 30 g»
+/* 3.º ESO · Tema 3 · SITUACIÓN DE APRENDIZAJE «¿Es saludable nuestro desayuno y nuestra merienda?»
+   19-nov-2026 (versión de la profesora): sin ejercicios de explicación. El desayuno y la merienda
+   de la profe con etiquetas REALES (fotos suyas), los pasos del proyecto explicados uno a uno,
+   todas las tablas que se miran, qué es el %IR y la cartulina terminada.
+   Etiquetas reales (valores por 100 g / 100 ml):
+     ColaCao Original (Idilia Foods) · Leche entera UHT COVAP · Galletas María (900 g, 141 galletas,
+     columna «por galleta» de 6,4 g) · Tortas de aceite Inés Rosales (180 g, 6 tortas de 30 g) ·
+     Tulipán, materia grasa para untar 59 %.
    IR (ingesta de referencia de un adulto medio, 8400 kJ / 2000 kcal): Reglamento (UE) 1169/2011, anexo XIII. */
 (function(){
 const R = String.raw;
 
 /* --- estilos propios de esta SA --- */
 const CSS = `<style>
-.sa2-etqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(16em,1fr));gap:.6em}
+.sa2-etqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(17em,1fr));gap:.6em}
 .sa2-etq{background:#fff;color:#111;border:3px solid #111;border-radius:6px;padding:.35em .55em;font-size:.86em;line-height:1.25}
 .sa2-etq h4{margin:0 0 .1em;font:800 1.08em var(--f-d,system-ui)}
 .sa2-etq .m{font-size:.85em;color:#444;margin-bottom:.25em}
 .sa2-etq table{border-collapse:collapse;width:100%}
-.sa2-etq th{font-size:.8em;text-align:left;border-bottom:4px solid #111;padding:.1em 0}
+.sa2-etq th{font-size:.78em;text-align:left;border-bottom:4px solid #111;padding:.1em 0}
 .sa2-etq th:not(:first-child),.sa2-etq td:not(:first-child){text-align:right;white-space:nowrap;padding-left:.6em}
 .sa2-etq td{border-bottom:1px solid #999;padding:.12em 0}
 .sa2-etq td.s{padding-left:1em}
-.sa2-etq td.ir{font-weight:800;color:#b45309}
+.sa2-etq td.mia{font-weight:800;color:#1d4ed8;background:#eff6ff}
+.sa2-etq th.mia{color:#1d4ed8}
 .sa2-etq .rac{margin-top:.35em;background:#fff3c4;border-radius:6px;padding:.15em .4em;font-weight:800;text-align:center}
 .sa2-comida{font:800 1.05em var(--f-d,system-ui);margin:.1em 0 .25em}
 .sa2-ir{border-collapse:collapse;font-size:1.05em;width:100%}
-.sa2-ir td{padding:.28em .7em;border-bottom:2px solid var(--line,#ddd)}
+.sa2-ir td{padding:.26em .7em;border-bottom:2px solid var(--line,#ddd)}
 .sa2-ir td:last-child{font:800 1.2em var(--f-d,system-ui);text-align:right}
 .sa2-paso{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.45em .7em;margin-bottom:.45em}
 .sa2-paso b.n{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#4f46e5;color:#fff;margin-right:.35em}
 .sa2-paso .f{display:block;margin:.25em 0 0 2em;padding:.2em .6em;background:#eef2ff;border-radius:10px;width:fit-content;max-width:100%}
+.sa2-mia{border-collapse:collapse;width:100%;font-size:.95em}
+.sa2-mia th,.sa2-mia td{border:1.5px solid var(--line,#ccc);padding:.18em .5em;text-align:center}
+.sa2-mia td:first-child,.sa2-mia th:first-child{text-align:left}
+.sa2-mia thead th{background:#4f46e5;color:#fff}
+.sa2-mia tr.tot td{font-weight:800;background:#fef9c3}
+.sa2-mia tr.ir td{color:#555}
+.sa2-mia tr.pc td{font-weight:800;background:#fde2e1;color:#b91c1c}
 /* cartulina */
 .sa2-cart{background:#fdf3d7;border-radius:10px;padding:.8em;box-shadow:0 6px 18px #0003;color:#222;font-family:"Caveat","Comic Sans MS",cursive;font-size:1.22em;line-height:1.15;transform:rotate(-.4deg)}
 .sa2-cart h3{font-family:"Caveat",cursive;font-size:2em;text-align:center;margin:0;color:#b91c1c}
@@ -42,7 +50,7 @@ const CSS = `<style>
 .sa2-cart td:first-child{text-align:left}
 .sa2-cart tr.tot td{font-weight:700;background:#fef9c3}
 .sa2-cart tr.pc td{font-weight:700;background:#fde2e1;color:#b91c1c}
-.sa2-bar{display:grid;grid-template-columns:5.2em 1fr 2.8em;align-items:center;gap:.3em;margin:.15em 0}
+.sa2-bar{display:grid;grid-template-columns:5.6em 1fr 2.8em;align-items:center;gap:.3em;margin:.15em 0}
 .sa2-bar .b{height:1em;background:#eee;border:1.5px solid #555;border-radius:4px;overflow:hidden}
 .sa2-bar .b i{display:block;height:100%}
 .sa2-cart .terr{letter-spacing:.05em}
@@ -51,27 +59,58 @@ const CSS = `<style>
 @media (max-width:700px){.sa2-cart .zona{grid-template-columns:1fr}}
 </style>`;
 
-/* --- una etiqueta real: filas = [texto, valor, %IR, sangría] --- */
-function etq(nombre, marca, col, filas, racion){
-  const tr = filas.map(f=>`<tr><td${f[3]?' class="s"':''}>${f[0]}</td><td>${f[1]}</td><td class="ir">${f[2]}</td></tr>`).join('');
+/* --- etiqueta real: filas = [nombre, por 100, mi ración, sangría] --- */
+function etq(nombre, marca, col100, colRac, filas, racion){
+  const tr = filas.map(f=>`<tr><td${f[3]?' class="s"':''}>${f[0]}</td><td>${f[1]}</td><td class="mia">${f[2]}</td></tr>`).join('');
   return `<div class="sa2-etq"><h4>${nombre}</h4><div class="m">${marca}</div>
-  <table><tr><th>Información nutricional</th><th>${col}</th><th>%IR</th></tr>${tr}</table>
+  <table><tr><th>Información nutricional</th><th>${col100}</th><th class="mia">${colRac}</th></tr>${tr}</table>
   <div class="rac">Yo tomo: ${racion}</div></div>`;
 }
-const etiquetas = `${CSS}
-<div class="sa2-comida">☕ Mi desayuno de verdad</div>
+
+const desayuno = `${CSS}
+<div class="sa2-comida">☕ Mi desayuno: una taza de ColaCao con leche y 5 galletas</div>
 <div class="sa2-etqs">
-  ${etq("🥛 ColaCao con leche","Idilia Foods","por taza",
-    [["Energía","143 kcal","7 %"],["Grasas","3,6 g","5 %"],["de las cuales saturadas","2,4 g","12 %",1],
-     ["Azúcares","19 g","21 %"],["Sal","0,25 g","4 %"]],"1 taza = 14 g + 200 ml de leche")}
-  ${etq("🍪 Galletas María","900 g · 141 galletas","por galleta",
-    [["Energía","31 kcal","—"],["Grasas","1,2 g","—"],["de las cuales saturadas","0,2 g","—",1],
-     ["Azúcares","1,3 g","—"],["Sal","0,05 g","—"]],"5 galletas (1 galleta = 6,4 g)")}
-  ${etq("🥣 Cereales de cacao","con vitaminas","por 30 g",
-    [["Energía","116 kcal","6 %"],["Grasas","0,6 g","1 %"],["de las cuales saturadas","0,3 g","2 %",1],
-     ["Azúcares","5,1 g","6 %"],["Sal","0,2 g","3 %"]],"1 tazón = 30 g")}
+  ${etq("🍫 ColaCao Original","Idilia Foods","por 100 g","mis 14 g",
+    [["Energía","377 kcal","52,8 kcal"],["Grasas","2,5 g","0,35 g"],["de las cuales saturadas","1,6 g","0,22 g",1],
+     ["Azúcares","70 g","9,8 g"],["Sal","0,10 g","0,01 g"]],"2 cucharadas = 14 g")}
+  ${etq("🥛 Leche entera UHT","COVAP","por 100 ml","mis 200 ml",
+    [["Energía","63 kcal","126 kcal"],["Grasas","3,6 g","7,2 g"],["de las cuales saturadas","2,4 g","4,8 g",1],
+     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg (14 % VRN)","220 mg"]],"1 taza = 200 ml")}
+  ${etq("🍪 Galletas María","900 g · 141 galletas","por galleta (6,4 g)","mis 5 galletas",
+    [["Energía","31 kcal","155 kcal"],["Grasas","1,2 g","6 g"],["de las cuales saturadas","0,2 g","1 g",1],
+     ["Azúcares","1,3 g","6,5 g"],["Sal","0,05 g","0,25 g"]],"5 galletas")}
 </div>
-<p style="font-size:.9em;margin-top:.4em">Las galletas no traen la columna del %IR… así que <b>la calculo yo</b>.</p>`;
+<p style="font-size:.9em;margin-top:.4em">👉 Las galletas traen la columna <b>por galleta</b>: ahí solo hay que <b>multiplicar por 5</b>. En las otras dos hay que pasar <b>de 100 a mi ración</b>.</p>`;
+
+const merienda = `${CSS}
+<div class="sa2-comida">🥪 Mi merienda: una torta de aceite con mantequilla y un vaso de leche</div>
+<div class="sa2-etqs">
+  ${etq("🥐 Torta de aceite","Inés Rosales · 180 g (6 tortas)","por 100 g","mis 30 g",
+    [["Energía","511 kcal","153 kcal"],["Grasas","26 g","7,8 g"],["de las cuales saturadas","2,8 g","0,8 g",1],
+     ["Azúcares","17 g","5,1 g"],["Sal","0,15 g","0,05 g"]],"1 torta = 30 g")}
+  ${etq("🧈 Tulipán","materia grasa para untar 59 %","por 100 g","mis 10 g",
+    [["Energía","530 kcal","53 kcal"],["Grasas","59 g","5,9 g"],["de las cuales saturadas","16 g","1,6 g",1],
+     ["Azúcares","menos de 0,5 g","≈ 0 g"],["Sal","0,90 g","0,09 g"]],"lo que unto: 10 g")}
+  ${etq("🥛 Leche entera UHT","COVAP","por 100 ml","mis 200 ml",
+    [["Energía","63 kcal","126 kcal"],["Grasas","3,6 g","7,2 g"],["de las cuales saturadas","2,4 g","4,8 g",1],
+     ["Azúcares","4,6 g","9,2 g"],["Sal","0,13 g","0,26 g"],["Calcio","110 mg (14 % VRN)","220 mg"]],"1 vaso = 200 ml")}
+</div>
+<p style="font-size:.9em;margin-top:.4em">👉 La leche aparece <b>dos veces</b>, en el desayuno y en la merienda: hay que contarla las dos veces.</p>`;
+
+/* --- los pasos del proyecto --- */
+const pasosProyecto = R`${CSS}
+<div class="sa2-paso"><b class="n">1</b><b>Apunto lo que tomo y cuánto</b>
+  <span class="f">«2 cucharadas de ColaCao (14 g), 200 ml de leche, 5 galletas…». Sin la cantidad no se puede calcular nada.</span></div>
+<div class="sa2-paso"><b class="n">2</b><b>Foto de la etiqueta</b> de cada producto
+  <span class="f">Me fijo en la columna <b>por 100 g</b> o <b>por 100 ml</b>, y en si trae columna de <b>ración</b> (por taza, por galleta…).</span></div>
+<div class="sa2-paso"><b class="n">3</b><b>Paso de 100 g a mi ración</b> (proporcionalidad directa)
+  <span class="f">$\text{mi ración} = \text{valor por 100 g} \cdot \dfrac{\text{gramos que tomo}}{100}$</span></div>
+<div class="sa2-paso"><b class="n">4</b><b>Sumo</b> todos los productos del desayuno y de la merienda</div>
+<div class="sa2-paso"><b class="n">5</b><b>Comparo con la IR</b> y saco el <b>% del día</b>
+  <span class="f">$\% = \dfrac{\text{lo que tomo}}{\text{lo de todo el día}} \cdot 100$</span></div>
+<div class="sa2-paso"><b class="n">6</b><b>Semáforo, terrones y conclusiones</b>
+  <span class="f">🟢 menos del 25 % · 🟡 del 25 % al 50 % · 🔴 más del 50 % · 1 terrón = 4 g de azúcar</span></div>
+<div class="sa2-paso"><b class="n">7</b><b>Cartulina y exposición</b> de 2 minutos</div>`;
 
 /* --- qué es el IR --- */
 const ir = `${CSS}<table class="sa2-ir">
@@ -83,64 +122,88 @@ const ir = `${CSS}<table class="sa2-ir">
 
 const queEsIR = R`${CSS}
 <div class="sa2-paso"><b>IR = Ingesta de Referencia</b>
-  <span class="f">Es lo que debería tomar <b>en todo el día</b> un adulto medio (2000 kcal).</span></div>
-<div class="sa2-paso"><b>El %IR de la etiqueta</b> dice qué parte del día te comes con <b>una ración</b>
-  <span class="f">$\%\text{IR} = \dfrac{\text{lo que tomo}}{\text{lo del día entero}} \cdot 100$</span></div>
-<div class="sa2-paso"><b>Lo compruebo</b> con los azúcares de la taza de ColaCao
-  <span class="f">$19 : 90 = 0,211... \to 21\,\%$ → ¡es lo que pone la etiqueta! ✔</span></div>
+  <span class="f">Lo que debería tomar <b>en todo el día</b> un adulto medio (2000 kcal).</span></div>
+<div class="sa2-paso"><b>El «%IR» de la etiqueta</b> dice qué parte del día entero te comes con <b>una ración</b></div>
+<div class="sa2-paso"><b>Lo compruebo</b>: la etiqueta del ColaCao dice que una taza tiene 19 g de azúcares y es el <b>21 %</b>
+  <span class="f">$19 : 90 = 0,211... \to 21\,\%$ → ¡me sale lo mismo! ✔</span></div>
 <div class="sa2-paso"><b>Ojo</b>
   <span class="f">Es una <b>referencia para comparar</b>, no una norma: cada persona necesita una cantidad distinta.</span>
-  <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b>, que es lo mismo pero para ellos.</span></div>`;
+  <span class="f">En vitaminas y minerales la etiqueta pone <b>VRN</b> (la leche: 110 mg de calcio = 14 %). Es lo mismo, pero para ellos.</span></div>`;
 
-/* --- los cálculos --- */
-const calculos = R`${CSS}
-<div class="sa2-paso"><b class="n">1</b><b>Lo que no viene en la etiqueta, lo calculo</b>: 5 galletas
-  <span class="f">Azúcares: $5 \cdot 1,3 = 6,5$ g · Saturadas: $5 \cdot 0,2 = 1$ g</span></div>
-<div class="sa2-paso"><b class="n">2</b><b>Sumo</b> los tres productos
-  <span class="f">Azúcares: $19 + 6,5 + 5,1 = 30,6$ g</span></div>
-<div class="sa2-paso"><b class="n">3</b><b>Qué % del día</b> es: lo que tomo entre lo del día entero
-  <span class="f">$30,6 : 90 = 0,34 \to$ <b>34 %</b> del azúcar del día</span></div>
-<div class="sa2-paso"><b class="n">4</b><b>Terrones</b> de azúcar (1 terrón = 4 g)
-  <span class="f">$30,6 : 4 \approx 8$ terrones</span></div>`;
+/* --- mis cuentas --- */
+const cuentas = R`${CSS}
+<div class="sa2-paso"><b class="n">1</b><b>🍫 ColaCao, 14 g</b> de los 100 g de la etiqueta
+  <span class="f">Azúcares: $70 \cdot \dfrac{14}{100} = 70 \cdot 0,14 = 9,8$ g</span></div>
+<div class="sa2-paso"><b class="n">2</b><b>🥛 Leche, 200 ml</b>: 200 es el doble de 100
+  <span class="f">Azúcares: $4,6 \cdot 2 = 9,2$ g · Saturadas: $2,4 \cdot 2 = 4,8$ g</span></div>
+<div class="sa2-paso"><b class="n">3</b><b>🍪 Galletas</b>: la etiqueta ya da el valor de una
+  <span class="f">Azúcares: $5 \cdot 1,3 = 6,5$ g</span></div>
+<div class="sa2-paso"><b class="n">4</b><b>🥐 Torta, 30 g</b> · <b>🧈 Tulipán, 10 g</b>
+  <span class="f">Torta: $17 \cdot 0,30 = 5,1$ g de azúcares · Tulipán: $16 \cdot 0,10 = 1,6$ g de saturadas</span></div>`;
 
-/* --- la cartulina terminada --- */
+/* --- mis tablas --- */
+function tabla(tit, filas, totales){
+  const tr = filas.map(f=>`<tr><td>${f[0]}</td><td>${f[1]}</td><td>${f[2]}</td><td>${f[3]}</td><td>${f[4]}</td><td>${f[5]}</td></tr>`).join('');
+  return `<table class="sa2-mia"><thead><tr><th>${tit}</th><th>Energía</th><th>Grasas</th><th>Saturadas</th><th>Azúcares</th><th>Sal</th></tr></thead>
+  <tbody>${tr}<tr class="tot"><td>TOTAL</td><td>${totales[0]}</td><td>${totales[1]}</td><td>${totales[2]}</td><td>${totales[3]}</td><td>${totales[4]}</td></tr></tbody></table>`;
+}
+const tablas = `${CSS}
+${tabla("☕ Desayuno",[["🍫 ColaCao 14 g","52,8","0,35","0,22","9,8","0,01"],
+  ["🥛 Leche 200 ml","126","7,2","4,8","9,2","0,26"],
+  ["🍪 5 galletas","155","6","1","6,5","0,25"]],["334 kcal","13,6 g","6 g","25,5 g","0,52 g"])}
+<div style="height:.5em"></div>
+${tabla("🥪 Merienda",[["🥐 Torta 30 g","153","7,8","0,8","5,1","0,05"],
+  ["🧈 Tulipán 10 g","53","5,9","1,6","≈ 0","0,09"],
+  ["🥛 Leche 200 ml","126","7,2","4,8","9,2","0,26"]],["332 kcal","20,9 g","7,2 g","14,3 g","0,40 g"])}`;
+
+const totalDia = R`${CSS}<table class="sa2-mia">
+  <thead><tr><th>Desayuno + merienda</th><th>Energía</th><th>Grasas</th><th>Saturadas</th><th>Azúcares</th><th>Sal</th></tr></thead>
+  <tbody>
+  <tr><td>☕ Desayuno</td><td>334</td><td>13,6</td><td>6</td><td>25,5</td><td>0,52</td></tr>
+  <tr><td>🥪 Merienda</td><td>332</td><td>20,9</td><td>7,2</td><td>14,3</td><td>0,40</td></tr>
+  <tr class="tot"><td>TOTAL</td><td>666 kcal</td><td>34,5 g</td><td>13,2 g</td><td>39,8 g</td><td>0,92 g</td></tr>
+  <tr class="ir"><td>Todo el día (IR)</td><td>2000</td><td>70</td><td>20</td><td>90</td><td>6</td></tr>
+  <tr class="pc"><td>% del día</td><td>33 %</td><td>49 %</td><td>66 %</td><td>44 %</td><td>15 %</td></tr>
+  </tbody></table>
+  <p style="margin-top:.4em">Ejemplo: saturadas $13,2 : 20 = 0,66 \to$ <b>66 %</b> · azúcares $39,8 : 90 = 0,442... \to$ <b>44 %</b></p>`;
+
+/* --- la cartulina --- */
 function barra(nombre, pc, color){
   return `<div class="sa2-bar"><span>${nombre}</span><span class="b"><i style="width:${pc}%;background:${color}"></i></span><b>${pc} %</b></div>`;
 }
 const cartulina = R`${CSS}<div class="sa2-cart">
-  <h3>¿Qué desayuna la profe? ☕</h3>
+  <h3>¿Qué desayuna y merienda la profe? ☕🥪</h3>
   <div class="grupo">Grupo de la profe · 3.º ESO</div>
   <div class="zona">
     <div class="pieza"><h5>📋 Nuestra tabla (lo que tomo)</h5>
       <table>
-        <tr><th>Producto</th><th>Energía</th><th>Grasas</th><th>Saturadas</th><th>Azúcares</th><th>Sal</th></tr>
-        <tr><td>🥛 1 taza ColaCao</td><td>143</td><td>3,6</td><td>2,4</td><td>19</td><td>0,25</td></tr>
-        <tr><td>🍪 5 galletas</td><td>155</td><td>6</td><td>1</td><td>6,5</td><td>0,25</td></tr>
-        <tr><td>🥣 Cereales 30 g</td><td>116</td><td>0,6</td><td>0,3</td><td>5,1</td><td>0,2</td></tr>
-        <tr class="tot"><td>TOTAL</td><td>414</td><td>10,2</td><td>3,7</td><td>30,6</td><td>0,7</td></tr>
+        <tr><th>Comida</th><th>Energía</th><th>Grasas</th><th>Saturadas</th><th>Azúcares</th><th>Sal</th></tr>
+        <tr><td>☕ Desayuno</td><td>334</td><td>13,6</td><td>6</td><td>25,5</td><td>0,52</td></tr>
+        <tr><td>🥪 Merienda</td><td>332</td><td>20,9</td><td>7,2</td><td>14,3</td><td>0,40</td></tr>
+        <tr class="tot"><td>TOTAL</td><td>666</td><td>34,5</td><td>13,2</td><td>39,8</td><td>0,92</td></tr>
         <tr><td>Todo el día (IR)</td><td>2000</td><td>70</td><td>20</td><td>90</td><td>6</td></tr>
-        <tr class="pc"><td>% del día</td><td>21 %</td><td>15 %</td><td>19 %</td><td>34 %</td><td>12 %</td></tr>
+        <tr class="pc"><td>% del día</td><td>33 %</td><td>49 %</td><td>66 %</td><td>44 %</td><td>15 %</td></tr>
       </table>
-      <div style="margin-top:.3em">Ejemplo: azúcares $30,6 : 90 = 0,34 \to 34\,\%$</div>
+      <div style="margin-top:.3em">Ejemplo: saturadas $13,2 : 20 = 0,66 \to 66\,\%$</div>
     </div>
-    <div class="pieza"><h5>📊 ¿Qué parte del día desayuno?</h5>
-      ${barra("Energía",21,"#f59e0b")}
-      ${barra("Grasas",15,"#16a34a")}
-      ${barra("Saturadas",19,"#16a34a")}
-      ${barra("Azúcares",34,"#f59e0b")}
-      ${barra("Sal",12,"#16a34a")}
+    <div class="pieza"><h5>📊 ¿Qué parte del día me como?</h5>
+      ${barra("Energía",33,"#f59e0b")}
+      ${barra("Grasas",49,"#f59e0b")}
+      ${barra("Saturadas",66,"#dc2626")}
+      ${barra("Azúcares",44,"#f59e0b")}
+      ${barra("Sal",15,"#16a34a")}
       <div style="font-size:.85em">🟢 menos del 25 % · 🟡 del 25 % al 50 % · 🔴 más del 50 %</div>
       <h5 style="margin-top:.4em">🍬 Mis terrones de azúcar</h5>
-      <div class="terr">🧊🧊🧊🧊🧊🧊🧊🧊 = 8 terrones</div>
+      <div class="terr">🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊 = 10 terrones</div>
     </div>
     <div class="pieza"><h5>💬 Conclusiones</h5><ol>
-      <li>Solo desayunando tomo el <b>34 %</b> del azúcar de todo el día: 8 terrones.</li>
-      <li>La grasa y la sal están bien: <b>15 %</b> y <b>12 %</b>.</li>
-      <li>El azúcar casi todo viene de la <b>taza</b> (19 g de los 30,6).</li></ol></div>
+      <li>Con dos comidas tomo el <b>66 %</b> de las grasas saturadas del día: ¡dos tercios!</li>
+      <li>Tomo <b>39,8 g de azúcar</b>, 10 terrones: el <b>44 %</b> del día.</li>
+      <li>La sal está bien: solo el <b>15 %</b>. Y me llevo <b>440 mg de calcio</b> con los dos vasos de leche.</li></ol></div>
     <div class="pieza"><h5>🔄 Nuestro cambio saludable</h5>
-      Pongo <b>la mitad de ColaCao</b>: 7 g en vez de 14 g.<br>
-      Lleva 70 g de azúcar por 100 g → $7 \cdot 0,70 = 4,9$ g menos<br>
-      Azúcares: $30,6 - 4,9 = 25,7$ g → $25,7 : 90 = 0,29 \to$ <b>29 %</b> 👍</div>
+      Cambio la leche <b>entera</b> por <b>semidesnatada</b>.<br>
+      La etiqueta del ColaCao da la taza con semi: $2,4$ g de saturadas en vez de $5,0$.<br>
+      Saturadas: $13,2 - 5,2 = 8$ g → $8 : 20 = 0,4 \to$ <b>40 %</b> 👍</div>
   </div>
 </div>`;
 
@@ -151,28 +214,44 @@ TEMA.registrar({
 
   laminas: [
     { portada:true, cuerpo:[
-      {html:`<p class="gancho">🕵️ ¿Cuánto azúcar, grasa y sal hay en el desayuno de la profe?</p>`}
+      {html:`<p class="gancho">🕵️ ¿Cuánto azúcar, grasa y sal hay en el desayuno y la merienda de la profe?</p>`}
     ]},
 
     { titulo:"🎯 La misión", cuerpo:[
-      {prop:["En <b>grupos de 4</b>, traed las <b>etiquetas</b> de vuestro desayuno. Calculad qué <b>% del día</b> os coméis y contadlo en una <b>cartulina</b>."], etq:"La misión"},
+      {prop:["En <b>grupos de 4</b>, traed las <b>etiquetas</b> de vuestro desayuno y vuestra merienda. Calculad qué <b>% del día</b> os coméis y contadlo en una <b>cartulina</b>."], etq:"La misión"},
       {cols:[
-        [{nota:["Os enseño un ejemplo hecho: <b>mi desayuno</b>, con etiquetas de verdad."], etq:"👀 Primero, mirad el mío"}],
+        [{nota:["Os enseño un ejemplo hecho: <b>mi desayuno y mi merienda</b>, con etiquetas de verdad."], etq:"👀 Primero, mirad el mío"}],
         [{nota:["Presentáis la cartulina en <b>2 minutos</b>. ¡Habla todo el grupo!"], etq:"🎤 Al final"}]
       ]}
     ]},
 
-    { titulo:"🏷 Mis tres etiquetas", cuerpo:[
-      {html:etiquetas}
+    { titulo:"🧭 Los pasos del proyecto", cuerpo:[
+      {html:pasosProyecto}
+    ]},
+
+    { titulo:"🏷 Las etiquetas de mi desayuno", cuerpo:[
+      {html:desayuno}
+    ]},
+
+    { titulo:"🏷 Las etiquetas de mi merienda", cuerpo:[
+      {html:merienda}
     ]},
 
     { titulo:"❓ ¿Qué es eso del «%IR» de la etiqueta?", cuerpo:[
-      {cols:[ [{html:queEsIR}], [{html:`${ir}<p style="font-size:.85em;margin-top:.4em">Lo máximo que debería tomar al día un adulto medio. Viene en el <b>Reglamento europeo de etiquetado</b>, y es lo que usan todas las etiquetas.</p>`}] ]}
+      {cols:[ [{html:queEsIR}], [{html:`${ir}<p style="font-size:.85em;margin-top:.4em">Lo que debería tomar al día un adulto medio. Viene en el <b>Reglamento europeo de etiquetado</b>, y es lo que usan todas las etiquetas.</p>`}] ]}
     ]},
 
-    { titulo:"✍️ Mis cálculos", cuerpo:[
-      {html:calculos},
-      {nota:["Con las otras columnas se haría igual: saturadas $3,7 : 20 = 0,185 \\to 19\\,\\%$, sal $0,7 : 6 = 0,116 \\to 12\\,\\%$…"]}
+    { titulo:"✍️ Paso 3: de los 100 g a mi ración", cuerpo:[
+      {html:cuentas},
+      {nota:["Con las demás filas se hace igual: energía, grasas, saturadas y sal. <b>Siempre la misma operación.</b>"]}
+    ]},
+
+    { titulo:"➕ Pasos 4 y 5: mis tablas", cuerpo:[
+      {html:tablas}
+    ]},
+
+    { titulo:"📊 El total y el % del día", cuerpo:[
+      {html:totalDia}
     ]},
 
     { titulo:"🖼 Nuestra cartulina", cuerpo:[
@@ -181,9 +260,9 @@ TEMA.registrar({
 
     { titulo:"🚀 ¡Ahora vosotros!", cuerpo:[
       {html:`<div class="sa-fases">
-        <div class="casa"><b>🏠 Antes</b><span>Cada uno trae la <b>foto de la etiqueta</b> de lo que desayuna y apunta <b>cuánto toma</b> (una taza, 5 galletas, 30 g…).</span></div>
-        <div><b>Sesión 1</b><span>Los <b>cálculos</b> como en el ejemplo: lo que tomo, el total, el % del día y los terrones.</span></div>
-        <div><b>Sesión 2</b><span>La <b>cartulina</b> del grupo, como la del ejemplo.</span></div>
+        <div class="casa"><b>🏠 Antes</b><span>Cada uno trae la <b>foto de la etiqueta</b> de lo que desayuna y merienda, y apunta <b>cuánto toma</b>.</span></div>
+        <div><b>Sesión 1</b><span>Pasos 3, 4 y 5: <b>de 100 g a vuestra ración</b>, las dos tablas y el % del día.</span></div>
+        <div><b>Sesión 2</b><span>Pasos 6 y 7: semáforo, terrones y la <b>cartulina</b> del grupo.</span></div>
         <div><b>Sesión 3</b><span><b>Exposiciones</b> de 2 minutos.</span></div></div>`},
       {html:`<table class="t"><tr><th>Se evalúa</th><th>Cuenta</th></tr>
         <tr><td>Etiquetas bien copiadas, con la ración</td><td>20 %</td></tr>
@@ -192,9 +271,9 @@ TEMA.registrar({
         <tr><td>Exposición: habla todo el grupo</td><td>10 %</td></tr></table>`},
       {proy:[{html:`<p><a class="sa-btn" href="situacion.html" target="_blank" rel="noopener" style="background:#15803d">🧮 Calculadora de etiquetas</a></p>`}]},
       {estudio:[
-        {nota:["<b>Saberes:</b> porcentajes (qué % representa una parte, el % como decimal), proporcionalidad directa (de la ración al total) y lectura de tablas.",
-               "<b>Idea:</b> las tres etiquetas ya dan la columna «por ración», así que el cálculo es sumar y comparar con la IR. La de las galletas no trae %IR a propósito: ahí es donde se ve si han entendido el porcentaje.",
-               "<b>Fuentes:</b> fotos reales de ColaCao Original (Idilia Foods, columna «por taza»: 14 g + 200 ml de leche), galletas María (envase de 900 g, 141 galletas, columna «por galleta» de 6,4 g) y cereales de cacao (columna «por 30 g»). IR de un adulto medio (8400 kJ / 2000 kcal): Reglamento (UE) 1169/2011, anexo XIII. Sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
+        {nota:["<b>Saberes:</b> proporcionalidad directa (de 100 g a la ración), porcentajes (qué % representa una parte y el % como decimal) y lectura e interpretación de tablas.",
+               "<b>Idea:</b> el ejemplo está resuelto entero, con las etiquetas reales y los siete pasos numerados, para que cada grupo repita lo mismo con lo suyo. La leche aparece en las dos comidas a propósito, para que vean que hay que contarla dos veces.",
+               "<b>Fuentes:</b> fotos reales de ColaCao Original (Idilia Foods), leche entera UHT COVAP, galletas María (envase de 900 g, 141 galletas, columna «por galleta» de 6,4 g), tortas de aceite Inés Rosales (180 g, 6 tortas de 30 g) y Tulipán (materia grasa para untar 59 %). IR de un adulto medio (8400 kJ / 2000 kcal): Reglamento (UE) 1169/2011, anexo XIII. Sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
       ]}
     ]}
   ]
