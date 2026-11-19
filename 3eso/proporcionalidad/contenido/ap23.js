@@ -1,28 +1,134 @@
 /* 3.º ESO · Tema 3 · SITUACIÓN DE APRENDIZAJE «¿Es saludable nuestra cesta de la compra?»
-   Situación de la profesora (página anterior del tema): mirar las etiquetas de los productos que se compran en casa
-   y analizar con porcentajes los nutrientes que se toman. Producto final: una cartulina por grupo (tabla, gráfico,
-   semáforo y conclusiones) que se expone en 2 minutos. La calculadora y la tabla de la cesta están en situacion.html.
-   Sustituye a «El mercadillo solidario» (decisión de la profesora, 11-nov-2026).
-   11-nov: la SA es TRABAJO EN GRUPO (en clase y en casa). No hay ejercicios individuales ni corrección en clase:
-   la presentación explica el reto de forma sencilla y el «dosier del grupo» (modo estudiar) tiene las misiones. */
+   19-nov-2026 (versión corta, decisión de la profesora): sin ejercicios de explicación.
+   Solo un ejemplo concreto: el desayuno y la merienda de la profe con etiquetas reales,
+   las ingestas de referencia del día con los cálculos, y la cartulina terminada
+   presentada como si fuera el trabajo de un grupo.
+   Etiquetas (valores por 100 g / 100 ml):
+     Leche semidesnatada COVAP · Cola Cao Original · Galletas María Fontaneda · Donuts Glacé
+   Ingestas de referencia: Reglamento (UE) 1169/2011, anexo XIII (adulto medio, 2000 kcal). */
 (function(){
 const R = String.raw;
-const etiqueta = `<table class="t" style="max-width:34em;border:3px solid #111;background:#fff;color:#111">
-  <tr><th colspan="4" style="text-align:left;font-size:1.15em;border-bottom:5px solid #111">Información nutricional</th></tr>
-  <tr><th></th><th>por 100 g</th><th>por ración (30 g)</th><th>% IR*</th></tr>
-  <tr><td>Valor energético</td><td>380 kcal</td><td>114 kcal</td><td>6 %</td></tr>
-  <tr><td>Grasas</td><td>3 g</td><td>0,9 g</td><td>1 %</td></tr>
-  <tr><td>&emsp;de las cuales saturadas</td><td>1 g</td><td>0,3 g</td><td>2 %</td></tr>
-  <tr><td>Hidratos de carbono</td><td>80 g</td><td>24 g</td><td>9 %</td></tr>
-  <tr style="background:#ffe9a8"><td>&emsp;de los cuales azúcares</td><td>25 g</td><td>7,5 g</td><td>8 %</td></tr>
-  <tr><td>Proteínas</td><td>8 g</td><td>2,4 g</td><td>5 %</td></tr>
-  <tr><td>Sal</td><td>0,6 g</td><td>0,18 g</td><td>3 %</td></tr>
-  <tr><td colspan="4" style="font-size:.8em">*IR: ingesta de referencia de un adulto medio (2000 kcal)</td></tr></table>`;
-const semaforo = `<table class="t"><tr><th>Por cada 100 g</th><th style="background:#dff3e6">🟢 poco</th><th style="background:#fff1c7">🟡 medio</th><th style="background:#fbe1de">🔴 mucho</th></tr>
-  <tr><td>Azúcares</td><td>hasta 5 g</td><td>de 5 a 22,5 g</td><td>más de 22,5 g</td></tr>
-  <tr><td>Grasas</td><td>hasta 3 g</td><td>de 3 a 17,5 g</td><td>más de 17,5 g</td></tr>
-  <tr><td>Saturadas</td><td>hasta 1,5 g</td><td>de 1,5 a 5 g</td><td>más de 5 g</td></tr>
-  <tr><td>Sal</td><td>hasta 0,3 g</td><td>de 0,3 a 1,5 g</td><td>más de 1,5 g</td></tr></table>`;
+
+/* --- estilos propios de esta SA --- */
+const CSS = `<style>
+.sa2-etqs{display:grid;grid-template-columns:repeat(auto-fit,minmax(13.5em,1fr));gap:.6em}
+.sa2-etq{background:#fff;color:#111;border:3px solid #111;border-radius:6px;padding:.35em .55em;font-size:.86em;line-height:1.25}
+.sa2-etq h4{margin:0 0 .1em;font:800 1.08em var(--f-d,system-ui)}
+.sa2-etq .m{font-size:.85em;color:#444;margin-bottom:.25em}
+.sa2-etq table{border-collapse:collapse;width:100%}
+.sa2-etq th{font-size:.82em;text-align:left;border-bottom:4px solid #111;padding:.1em 0}
+.sa2-etq th:last-child,.sa2-etq td:last-child{text-align:right}
+.sa2-etq td{border-bottom:1px solid #999;padding:.12em 0}
+.sa2-etq td.s{padding-left:1em}
+.sa2-etq .rac{margin-top:.35em;background:#fff3c4;border-radius:6px;padding:.15em .4em;font-weight:800;text-align:center}
+.sa2-comida{font:800 1.05em var(--f-d,system-ui);margin:.1em 0 .25em}
+.sa2-ir{border-collapse:collapse;font-size:1.05em}
+.sa2-ir td{padding:.3em .7em;border-bottom:2px solid var(--line,#ddd)}
+.sa2-ir td:last-child{font:800 1.25em var(--f-d,system-ui);text-align:right}
+.sa2-paso{background:var(--card,#fff);border-radius:14px;box-shadow:var(--sombra,0 1px 4px #0002);padding:.45em .7em;margin-bottom:.45em}
+.sa2-paso b.n{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#4f46e5;color:#fff;margin-right:.35em}
+.sa2-paso .f{display:block;margin:.25em 0 0 2em;padding:.2em .6em;background:#eef2ff;border-radius:10px;width:fit-content}
+/* cartulina */
+.sa2-cart{background:#fdf3d7;border-radius:10px;padding:.8em;box-shadow:0 6px 18px #0003;color:#222;font-family:"Caveat","Comic Sans MS",cursive;font-size:1.22em;line-height:1.15;transform:rotate(-.4deg)}
+.sa2-cart h3{font-family:"Caveat",cursive;font-size:2em;text-align:center;margin:0;color:#b91c1c}
+.sa2-cart .grupo{text-align:center;color:#444;margin-bottom:.4em}
+.sa2-cart .zona{display:grid;grid-template-columns:1.25fr 1fr;gap:.6em}
+.sa2-cart .pieza{background:#fff;border-radius:8px;padding:.4em .55em;box-shadow:0 2px 6px #0002}
+.sa2-cart .pieza h5{margin:0 0 .2em;font:700 1.15em "Caveat",cursive;color:#1d4ed8}
+.sa2-cart table{border-collapse:collapse;width:100%;font-size:.92em}
+.sa2-cart td,.sa2-cart th{border:1.5px solid #555;padding:.05em .3em;text-align:center}
+.sa2-cart td:first-child{text-align:left}
+.sa2-cart tr.tot td{font-weight:700;background:#fef9c3}
+.sa2-cart tr.pc td{font-weight:700;background:#fde2e1;color:#b91c1c}
+.sa2-bar{display:grid;grid-template-columns:5.2em 1fr 2.8em;align-items:center;gap:.3em;margin:.15em 0}
+.sa2-bar .b{height:1em;background:#eee;border:1.5px solid #555;border-radius:4px;overflow:hidden}
+.sa2-bar .b i{display:block;height:100%}
+.sa2-cart .terr{letter-spacing:.05em}
+.sa2-cart ol{margin:.1em 0 0 1.1em;padding:0}
+.sa2-cart li{margin:.1em 0}
+@media (max-width:700px){.sa2-cart .zona{grid-template-columns:1fr}}
+</style>`;
+
+/* --- una etiqueta nutricional real --- */
+function etq(nombre, marca, por, v, racion){
+  return `<div class="sa2-etq"><h4>${nombre}</h4><div class="m">${marca}</div>
+  <table><tr><th>Información nutricional</th><th>por ${por}</th></tr>
+  <tr><td>Grasas</td><td>${v[0]} g</td></tr>
+  <tr><td class="s">de las cuales saturadas</td><td>${v[1]} g</td></tr>
+  <tr><td>Azúcares</td><td>${v[2]} g</td></tr>
+  <tr><td>Sal</td><td>${v[3]} g</td></tr></table>
+  <div class="rac">Yo tomo: ${racion}</div></div>`;
+}
+const etiquetas = `${CSS}
+<div class="sa2-comida">☕ Mi desayuno</div>
+<div class="sa2-etqs">
+  ${etq("🥛 Leche semidesnatada","COVAP","100 ml",["1,6","1,1","4,8","0,13"],"1 vaso = 250 ml")}
+  ${etq("🍫 Cola Cao Original","Idilia Foods","100 g",["2,5","1,6","70","0,25"],"2 cucharadas = 20 g")}
+  ${etq("🍪 Galletas María","Fontaneda","100 g",["11","5,1","24","0,76"],"5 galletas = 30 g")}
+</div>
+<div class="sa2-comida" style="margin-top:.5em">🍩 Mi merienda</div>
+<div class="sa2-etqs">
+  ${etq("🍩 Donuts Glacé","Donuts","100 g",["22","11","21","0,4"],"1 donut = 52 g")}
+</div>`;
+
+/* --- ingestas de referencia y cálculos --- */
+const ir = `${CSS}<table class="sa2-ir">
+  <tr><td>🍬 Azúcares</td><td>90 g</td></tr>
+  <tr><td>🧈 Grasas</td><td>70 g</td></tr>
+  <tr><td>🥓 de ellas, saturadas</td><td>20 g</td></tr>
+  <tr><td>🧂 Sal</td><td>6 g</td></tr></table>
+  <p style="font-size:.85em;margin-top:.4em">Lo máximo que debería tomar al día un adulto (2000 kcal). Viene en el Reglamento europeo de etiquetado.</p>`;
+
+const calculos = R`
+<div class="sa2-paso"><b class="n">1</b><b>Lo que tomo de cada producto</b>: ración × el decimal de la etiqueta
+  <span class="f">Cola Cao, azúcares: $20 \cdot 0,70 = 14$ g</span></div>
+<div class="sa2-paso"><b class="n">2</b><b>Sumo</b> el desayuno y la merienda
+  <span class="f">Azúcares: $12 + 14 + 7,2 + 10,9 = 44,1$ g</span></div>
+<div class="sa2-paso"><b class="n">3</b><b>Qué % del día</b> es: lo que tomo : lo máximo
+  <span class="f">$44,1 : 90 = 0,49$ → <b>49 %</b></span></div>
+<div class="sa2-paso"><b class="n">4</b><b>Terrones</b> de azúcar (1 terrón = 4 g)
+  <span class="f">$44,1 : 4 \approx 11$ terrones</span></div>`;
+
+/* --- la cartulina terminada --- */
+function barra(nombre, pc, color){
+  return `<div class="sa2-bar"><span>${nombre}</span><span class="b"><i style="width:${pc}%;background:${color}"></i></span><b>${pc} %</b></div>`;
+}
+const cartulina = `${CSS}<div class="sa2-cart">
+  <h3>¿Qué desayuna y merienda la profe? 🍩</h3>
+  <div class="grupo">Grupo de la profe · 3.º ESO</div>
+  <div class="zona">
+    <div class="pieza"><h5>📋 Nuestra tabla (gramos que tomo)</h5>
+      <table>
+        <tr><th>Producto</th><th>Azúcares</th><th>Grasas</th><th>Saturadas</th><th>Sal</th></tr>
+        <tr><td>🥛 Leche 250 ml</td><td>12</td><td>4</td><td>2,8</td><td>0,33</td></tr>
+        <tr><td>🍫 Cola Cao 20 g</td><td>14</td><td>0,5</td><td>0,3</td><td>0,05</td></tr>
+        <tr><td>🍪 Galletas 30 g</td><td>7,2</td><td>3,3</td><td>1,5</td><td>0,23</td></tr>
+        <tr><td>🍩 Donuts 52 g</td><td>10,9</td><td>11,4</td><td>5,7</td><td>0,21</td></tr>
+        <tr class="tot"><td>TOTAL</td><td>44,1</td><td>19,2</td><td>10,3</td><td>0,82</td></tr>
+        <tr><td>Máximo del día</td><td>90</td><td>70</td><td>20</td><td>6</td></tr>
+        <tr class="pc"><td>% del día</td><td>49 %</td><td>27 %</td><td>52 %</td><td>14 %</td></tr>
+      </table>
+      <div style="margin-top:.3em">Ejemplo: saturadas $10,3 : 20 = 0,515$ → 52 %</div>
+    </div>
+    <div class="pieza"><h5>📊 ¿Qué parte del día me como?</h5>
+      ${barra("Azúcares",49,"#f59e0b")}
+      ${barra("Grasas",27,"#f59e0b")}
+      ${barra("Saturadas",52,"#dc2626")}
+      ${barra("Sal",14,"#16a34a")}
+      <div style="font-size:.85em">🟢 menos del 25 % · 🟡 del 25 % al 50 % · 🔴 más del 50 %</div>
+      <h5 style="margin-top:.4em">🍬 Mis terrones de azúcar</h5>
+      <div class="terr">🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊🧊 = 11 terrones</div>
+    </div>
+    <div class="pieza"><h5>💬 Conclusiones</h5><ol>
+      <li>Solo con el desayuno y la merienda tomo el <b>52 %</b> de las grasas saturadas del día: ¡más de la mitad!</li>
+      <li>Tomo <b>44 g de azúcar</b>, unos 11 terrones: casi la mitad (49 %) del día.</li>
+      <li>La sal está bien: solo el <b>14 %</b>.</li></ol></div>
+    <div class="pieza"><h5>🔄 Nuestro cambio saludable</h5>
+      Quitamos el Donuts de la merienda.<br>
+      Saturadas: $10,3 - 5,7 = 4,6$ g → $4,6 : 20 = 0,23$ → <b>23 %</b><br>
+      Bajan de 52 % a 23 % del día. 👍</div>
+  </div>
+</div>`;
 
 TEMA.registrar({
   num: "SA", pref: "SA", seccion: "Situación de aprendizaje",
@@ -31,121 +137,45 @@ TEMA.registrar({
 
   laminas: [
     { portada:true, cuerpo:[
-      {html:`<p class="gancho">🕵️ Detectives de etiquetas: ¿cuántos terrones de azúcar hay en tu desayuno?</p>`}
+      {html:`<p class="gancho">🕵️ ¿Cuánto azúcar, grasa y sal hay en el desayuno y la merienda de la profe?</p>`}
     ]},
 
     { titulo:"🎯 La misión", cuerpo:[
-      {prop:["Vais a investigar, <b>en grupo</b>, los productos que se compran en vuestras casas. Con los <b>porcentajes</b> de las etiquetas descubriréis si vuestra cesta es <b>saludable y equilibrada</b>… y propondréis un cambio para mejorarla."], etq:"La misión"},
+      {prop:["En <b>grupos de 4</b>, traed las <b>etiquetas</b> de vuestro desayuno y vuestra merienda. Calculad qué <b>% de lo máximo del día</b> os coméis y contadlo en una <b>cartulina</b>."], etq:"La misión"},
       {cols:[
-        [{nota:["Una <b>cartulina por grupo</b>: vuestra cesta con su tabla, un gráfico, el semáforo y vuestras conclusiones."], etq:"🖼 Producto final"}],
-        [{nota:["La <b>presentáis a la clase en 2 minutos</b>. ¡Habla todo el grupo!"], etq:"🎤 Y al final"}]
+        [{nota:["Os enseño un ejemplo hecho: <b>mi desayuno y mi merienda</b>."], etq:"👀 Primero, mirad el mío"}],
+        [{nota:["Presentáis la cartulina en <b>2 minutos</b>. ¡Habla todo el grupo!"], etq:"🎤 Al final"}]
       ]}
     ]},
 
-    { titulo:"👥 Equipos de 4: cada uno, un papel", cuerpo:[
-      {html:`<div class="sa-roles">
-        <div><i>🕵️</i><b>Detective</b><small>revisa que los datos de las etiquetas estén bien copiados</small></div>
-        <div><i>🧮</i><b>Calculista</b><small>comprueba que todas las operaciones estén escritas y bien</small></div>
-        <div><i>🎨</i><b>Diseñador/a</b><small>organiza la tabla, el gráfico y la cartulina</small></div>
-        <div><i>🎤</i><b>Portavoz</b><small>organiza la exposición y el tiempo</small></div></div>`},
-      {nota:["Todos calculáis y todos opináis: el papel solo dice de qué se encarga cada uno."]}
+    { titulo:"☕ Mi desayuno y 🍩 mi merienda", cuerpo:[
+      {html:etiquetas}
     ]},
 
-    { titulo:"🗓 Cómo lo vamos a hacer", cuerpo:[
+    { titulo:"📏 Lo máximo en un día y los cálculos", cuerpo:[
+      {cols:[ [{html:ir}], [{html:calculos}] ]}
+    ]},
+
+    { titulo:"🖼 Nuestra cartulina", cuerpo:[
+      {html:cartulina}
+    ]},
+
+    { titulo:"🚀 ¡Ahora vosotros!", cuerpo:[
       {html:`<div class="sa-fases">
-        <div class="casa"><b>🏠 Antes</b><span>Cada uno trae fotos de <b>3 etiquetas</b> de casa: algo del desayuno, de la merienda y de la comida.</span></div>
-        <div><b>Sesión 1</b><span>Aprendemos a leer una etiqueta y hacemos el <b>calentamiento</b> en grupo.</span></div>
-        <div><b>Sesión 2</b><span>Misiones 1, 2 y 3: los <b>%</b>, el <b>semáforo</b>, los <b>terrones</b> y el <b>% del día</b> de vuestros productos.</span></div>
-        <div class="casa"><b>🏠 En casa</b><span>Terminamos la <b>tabla de la cesta</b> (nos repartimos los productos).</span></div>
-        <div><b>Sesión 3</b><span>Misiones 4 y 5: ¿es <b>equilibrada</b>? y nuestro <b>cambio saludable</b>. Hacemos la cartulina.</span></div>
-        <div><b>Sesión 4</b><span><b>Exposiciones</b> de 2 minutos y votamos la cesta más sana.</span></div></div>`}
-    ]},
-
-    { titulo:"🔎 Cómo se lee una etiqueta", cuerpo:[
-      {cols:[
-        [{html:etiqueta}],
-        [{nota:["25 g de azúcar <b>de cada 100 g</b> es lo mismo que <b>un 25 % de azúcar</b>. ¡Ya es un porcentaje!"], etq:"① «por 100 g» es un %"},
-         {nota:[R`Lo que te comes de una vez. Azúcar que tomas: $C_F = I_V \cdot C_I = 30 \cdot 0,25 = 7,5$ g`], etq:"② La ración"},
-         {nota:[R`Qué parte del azúcar de <b>todo el día</b> (90 g) te comes: $7,5 = x \cdot 90 \;\Rightarrow\; x = \dfrac{7,5}{90} \approx 0,083$ → 8 %`], etq:"③ % del día"}]
-      ]}
-    ]},
-
-    { titulo:"🍬 ¿Cuántos terrones son?", cuerpo:[
-      {ej:{etq:"🥣 El ejemplo que haremos juntos", enun:"Lucía desayuna una ración de 30 g de los cereales de la etiqueta. Un terrón de azúcar pesa unos 4 g. ¿Cuántos terrones se come?",
-        pasos:["25 g de cada 100 g → 25 %. Como 25 es más de 22,5 → 🔴 mucho azúcar",
-               R`Azúcar de la ración: $30 \cdot 0,25 = 7,5$ g`,
-               R`Terrones: $7,5 : 4 \approx 1,9$ → casi 2 terrones`],
-        res:"Lucía se come casi <b>2 terrones</b> de azúcar en el desayuno."}},
-      {html:semaforo}
-    ]},
-
-    { titulo:"🖼 Así puede ser la cartulina", cuerpo:[
-      {html:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5em;background:#fdf7e8;border:3px dashed #c9a24a;border-radius:16px;padding:.7em;max-width:40em">
-        <div style="grid-column:1/-1;text-align:center;background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">🏷 <b>Título</b> y los nombres del grupo</div>
-        <div style="grid-column:1/-1;background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">📋 <b>La tabla de la cesta</b>: producto, ración, % de azúcar, grasa y sal, semáforo, terrones, % del día</div>
-        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">📊 <b>Gráfico</b> de barras con el % de azúcar y los colores del semáforo</div>
-        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">⚖ <b>¿Equilibrada?</b> Vuestros % de energía al lado de los recomendados</div>
-        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">💬 <b>Conclusiones</b>: 3 frases con números</div>
-        <div style="background:#fff;border:2px solid #c9a24a;border-radius:10px;padding:.4em">🔄 <b>Nuestro cambio saludable</b>: qué cambiamos y cuánto baja el %</div></div>`}
-    ]},
-
-    { titulo:"⭐ Cómo se evalúa", cuerpo:[
-      {html:`<table class="t"><tr><th>Criterio</th><th>4 Excelente</th><th>3 Bien</th><th>2 Regular</th><th>1 Hay que mejorar</th></tr>
-        <tr><td><b>Lectura de etiquetas</b> (20 %)</td><td>Todos los datos bien copiados, con la ración</td><td>Algún dato sin ración</td><td>Varios datos mal copiados</td><td>Faltan etiquetas</td></tr>
-        <tr><td><b>Cálculo de %</b> (30 %)</td><td>Todos los % bien, con la operación escrita</td><td>Algún error pequeño</td><td>Varios errores</td><td>No hay operaciones</td></tr>
-        <tr><td><b>Tabla y gráfico</b> (20 %)</td><td>Claros, ordenados y con los colores del semáforo</td><td>Completos pero poco claros</td><td>Incompletos</td><td>No hay gráfico</td></tr>
-        <tr><td><b>Conclusiones y cambio</b> (20 %)</td><td>Con números y con un cambio calculado</td><td>Con números</td><td>Sin números</td><td>No hay conclusiones</td></tr>
-        <tr><td><b>Exposición y equipo</b> (10 %)</td><td>Hablan todos y se explican bien</td><td>Hablan casi todos</td><td>Lee uno solo</td><td>No exponen</td></tr></table>`},
-      {nota:[R`La nota también es un porcentaje: cada criterio pesa lo que dice el paréntesis. Por ejemplo: $(4 \cdot 0,2 + 3 \cdot 0,3 + 4 \cdot 0,2 + 3 \cdot 0,2 + 4 \cdot 0,1) : 4 = 0,875$ → <b>8,75</b>`]}
-    ]},
-
-    { titulo:"🚀 ¡A trabajar!", cuerpo:[
-      {proy:[{html:`<p class="gancho">Abrid el <b>dosier del grupo</b>: ahí están todas las misiones.</p>`}]},
-      {html:`<p><a class="sa-btn" href="apuntes.html?ap=23" target="_blank" rel="noopener">📋 Dosier del grupo</a><a class="sa-btn" href="situacion.html" target="_blank" rel="noopener" style="background:#15803d">🧮 Calculadora y tabla de la cesta</a></p>`},
+        <div class="casa"><b>🏠 Antes</b><span>Cada uno trae la foto de las etiquetas de <b>su desayuno y su merienda</b>, y apunta cuánto toma.</span></div>
+        <div><b>Sesión 1</b><span>Hacemos los <b>cálculos</b> como en el ejemplo: lo que tomo, el total, el % del día y los terrones.</span></div>
+        <div><b>Sesión 2</b><span>Hacemos la <b>cartulina</b> del grupo, como la del ejemplo.</span></div>
+        <div><b>Sesión 3</b><span><b>Exposiciones</b> de 2 minutos.</span></div></div>`},
+      {html:`<table class="t"><tr><th>Se evalúa</th><th>Cuenta</th></tr>
+        <tr><td>Etiquetas bien copiadas, con la ración</td><td>20 %</td></tr>
+        <tr><td>Cálculos con la operación escrita</td><td>40 %</td></tr>
+        <tr><td>Tabla, gráfico y conclusiones con números</td><td>30 %</td></tr>
+        <tr><td>Exposición: habla todo el grupo</td><td>10 %</td></tr></table>`},
+      {proy:[{html:`<p><a class="sa-btn" href="situacion.html" target="_blank" rel="noopener" style="background:#15803d">🧮 Calculadora de etiquetas</a></p>`}]},
       {estudio:[
-        {html:R`<h2>📋 Dosier del grupo</h2>
-        <p>Todo se hace <b>en grupo</b>, en clase y en casa. Escribid siempre la operación: así sabéis de dónde sale cada número.</p>
-
-        <div class="mision"><h4>🔥 Calentamiento (sesión 1): resolvedlas entre todos</h4>
-        <div class="sa-tarjetas">
-          <div class="mision"><b>🍪 Galletas</b>: 24 g de azúcares por cada 100 g y la ración es de 30 g. ¿Qué % de azúcar tienen? ¿Qué color del semáforo? ¿Cuántos terrones hay en una ración?
-            <details><summary>Comprobad</summary>24 % → 🔴. Ración: $30 \cdot 0,24 = 7,2$ g → $7,2 : 4 = 1,8$ terrones.</details></div>
-          <div class="mision"><b>🥛 Yogur</b> natural de 125 g con un 4,5 % de azúcares. ¿Cuánto azúcar tiene? ¿Qué % del azúcar del día (90 g) es?
-            <details><summary>Comprobad</summary>$125 \cdot 0,045 \approx 5,6$ g → $5,625 : 90 = 0,0625$ → 6,25 %.</details></div>
-          <div class="mision"><b>🍫 Crema de cacao</b>: 56 g de azúcares por 100 g y la ración es de 15 g. ¿Qué % del azúcar del día tomas en una ración?
-            <details><summary>Comprobad</summary>$15 \cdot 0,56 = 8,4$ g → $8,4 : 90 \approx 0,093$ → 9,3 %.</details></div>
-          <div class="mision"><b>🍟 Patatas fritas</b>: una bolsa de 40 g tiene 0,56 g de sal. ¿Qué % de sal tienen? ¿Qué color?
-            <details><summary>Comprobad</summary>$0,56 = x \cdot 40 \;\Rightarrow\; x = 0,56 : 40 = 0,014$ → 1,4 % → 🟡 (muy cerca del rojo).</details></div>
-        </div></div>
-
-        <div class="mision"><h4>🕵️ Misión 1: los datos (sesión 2)</h4><ul class="check">
-          <li>Cada uno copia sus 3 etiquetas en la calculadora: los datos «por 100 g» y la ración.</li>
-          <li>El/la detective revisa que estén bien copiados.</li></ul></div>
-
-        <div class="mision"><h4>🚦 Misión 2: semáforo y terrones</h4><ul class="check">
-          <li>El % de azúcar, grasa y sal de cada producto y su color del semáforo.</li>
-          <li>El azúcar de una ración: $C_F = \text{ración} \cdot I_V$, y cuántos terrones son (1 terrón ≈ 4 g).</li>
-          <li>¿Qué producto tiene más azúcar <b>en %</b>? ¿Y en <b>una ración</b>? ¿Es el mismo? ¿Por qué?</li></ul></div>
-
-        <div class="mision"><h4>📅 Misión 3: el % del día</h4><ul class="check">
-          <li>Si comierais una ración de cada producto, ¿qué % del azúcar (90 g) y de la sal (6 g) del día tomaríais?</li>
-          <li>🏠 En casa: terminad la tabla de la cesta repartiéndoos los productos.</li></ul></div>
-
-        <div class="mision"><h4>⚖ Misión 4: ¿es equilibrada? (sesión 3)</h4><ul class="check">
-          <li>Energía: 1 g de hidratos o de proteínas = 4 kcal; 1 g de grasa = 9 kcal.</li>
-          <li>¿Qué % de la energía viene de hidratos, grasas y proteínas? Comparadlo con lo recomendado: hidratos 50 – 55 %, grasas 30 – 35 %, proteínas 10 – 15 %.</li></ul></div>
-
-        <div class="mision"><h4>🔄 Misión 5: nuestro cambio saludable</h4><ul class="check">
-          <li>Elegid el producto «más rojo» y buscad otro más sano que lo pueda sustituir.</li>
-          <li>Calculad cuánto baja el azúcar: $I_V = \text{nuevo} : \text{antiguo}$ y la bajada $1 - I_V$.</li>
-          <li>Ejemplo: cambiar 30 g de cereales (25 %) por 30 g de copos de avena (1 %): de 7,5 g a 0,3 g → $0,3 : 7,5 = 0,04$ → baja un 96 %.</li></ul></div>
-
-        <div class="mision"><h4>🖼 Cartulina y 🎤 exposición (sesiones 3 y 4)</h4><ul class="check">
-          <li>Tabla, gráfico de barras con colores, ¿equilibrada?, 3 conclusiones con números y vuestro cambio.</li>
-          <li>Exposición de 2 minutos: habla todo el grupo. Al final votamos la cesta más sana de la clase.</li></ul></div>`},
-        {nota:["<b>Saberes:</b> porcentajes (el % como decimal, $C_F = I_V \\cdot C_I$, qué % representa, variación), proporcionalidad directa (de 100 g a la ración), tablas y gráficos.",
+        {nota:["<b>Saberes:</b> porcentajes (el % como decimal, $C_F = I_V \\cdot C_I$, qué % representa una parte), proporcionalidad directa (de 100 g a la ración), tablas y gráficos.",
                "<b>Conexiones:</b> Biología y Geología (nutrición), Educación Física (hábitos saludables) y ODS 3 (salud y bienestar).",
-               "<b>Ideas:</b> cartulina A3; se pueden colgar en el pasillo. Las bebidas tienen otros límites del semáforo: mejor dejarlas fuera. Los valores del día son de un adulto medio: sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
+               "<b>Fuentes:</b> etiquetas de COVAP leche semidesnatada, Cola Cao Original, Galletas María Fontaneda y Donuts Glacé (valores por 100 g / 100 ml). Ingestas de referencia: Reglamento (UE) 1169/2011, anexo XIII. Son de un adulto medio: sirven para comparar, no son una dieta."], etq:"👩‍🏫 Para el profesor"}
       ]}
     ]}
   ]
