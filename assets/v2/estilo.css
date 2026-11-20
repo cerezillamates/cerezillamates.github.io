@@ -499,3 +499,105 @@ details.sol>summary{padding:6px 0}
 .mano .katex .mrel .mord,.mano .katex .mrel .mrel{font-family:KaTeX_Main;font-style:normal}
 .mano .katex .mord.mathbb{font-family:KaTeX_AMS}
 .mano .anota .katex{color:var(--rojo)}
+
+/* ==========================================================================
+   Página ancha (portada y cursos) y portada «la mesa de estudio»
+   ========================================================================== */
+body.ancha .hoja{grid-template-columns:minmax(0,1fr);padding-left:clamp(30px,5vw,72px)}
+body.ancha .hoja::before{left:clamp(14px,2.6vw,40px)}
+body.ancha .hoja>.margen{display:none}
+body.ancha .hoja>.cuerpo{grid-column:1}
+body.ancha .portada-pag{max-width:72ch}
+body.inicio .hoja{max-width:1320px}
+.portada2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:30px clamp(30px,5vw,70px);align-items:center;padding:clamp(34px,6vw,76px) 0 clamp(30px,5vw,60px);position:relative}
+.portada2::after{content:"";position:absolute;z-index:-1;inset:0 calc(-1 * clamp(30px,5vw,72px)) 0 auto;width:62%;
+  background-image:linear-gradient(var(--cuadro) 1px,transparent 1px),linear-gradient(90deg,var(--cuadro) 1px,transparent 1px);background-size:var(--cuadro-tam) var(--cuadro-tam);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 30%);mask-image:linear-gradient(90deg,transparent,#000 30%)}
+.portada2 h1{font-size:clamp(2.7rem,6.4vw,5.6rem);line-height:.92;letter-spacing:-.045em}
+.portada2 h1 span{display:block;color:var(--azul)}
+.portada2 .entrada{font-size:1.2rem;color:var(--tinta-2);max-width:44ch;margin:24px 0 0}
+.p2-acc{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin:26px 0 0}
+.p2-acc .boton{padding:13px 20px;font-size:1.02rem;min-height:48px}
+.p2-link{font-weight:700;color:var(--tinta);min-height:44px;display:inline-flex;align-items:center}
+/* la mesa: una hoja de examen y un pósit */
+.mesa{position:relative;min-height:470px}
+.hoja-mesa{position:absolute;inset:0 16% auto 0;display:block;background:#fff;color:inherit;text-decoration:none;border:1px solid var(--linea);
+  box-shadow:0 1px 0 var(--linea),0 18px 40px -22px rgba(27,33,48,.35);transform:rotate(-2.2deg);transition:transform .25s ease;padding:16px 0 14px}
+.hoja-mesa:hover,.hoja-mesa:focus-visible{transform:rotate(-1deg) translateY(-3px)}
+.hm-fuente{display:block;font:700 .82rem var(--f-titulo);color:var(--tinta-2);padding:0 20px 8px;border-bottom:1.5px solid var(--tinta)}
+.hoja-mesa .mano{display:block;padding:10px 16px 6px 54px;font-size:1.08rem}
+.hoja-mesa .mano .r{display:grid}
+.hoja-mesa .mano .lin{grid-column:1}
+.hoja-mesa .mano .anota{font-size:1.25rem}
+.hm-graf{display:block;width:calc(100% - 70px);margin:2px 0 0 54px;height:auto}
+.hm-pie{display:block;margin:6px 20px 0 54px;font-weight:700;color:var(--azul)}
+.postit{position:absolute;right:0;bottom:-10px;width:min(330px,62%);background:#fff3a6;padding:16px 18px 12px;transform:rotate(2.4deg);
+  box-shadow:0 1px 0 #e3d27c,0 22px 30px -20px rgba(27,33,48,.45);border-radius:2px 2px 18px 2px}
+.postit-tit{font:700 1.55rem/1 var(--f-mano);color:var(--rojo);margin:0 0 6px}
+.postit .reto-enun{font:600 .98rem/1.45 var(--f-texto);margin:0}
+.postit .formula{background:transparent;border:0;padding:4px 0;margin:4px 0;font-size:.9em}
+.postit .prueba>li{border:0;padding:4px 0 0}
+.postit .opciones button{background:#fffbe0;border-color:#d8c56b}
+.postit .marcador:empty{display:none}
+.postit .marcador{margin:6px 0 2px;font-size:.95rem}
+.postit .marcador .num{font-size:1.5rem}
+/* un solo momento de movimiento: la solución se escribe al cargar */
+@media (prefers-reduced-motion:no-preference){
+  .hoja-mesa .mano .r{animation:escribe .7s steps(18,end) both}
+  .hoja-mesa .mano .r:nth-child(2){animation-delay:.75s}
+  .hoja-mesa .mano .r:nth-child(3){animation-delay:1.5s}
+  .hoja-mesa .mano .anota{animation:aparece .4s ease 2.3s both}
+}
+@keyframes escribe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes aparece{from{opacity:0;transform:rotate(-1.2deg) translateX(-6px)}to{opacity:1;transform:rotate(-1.2deg)}}
+#cursos>h2{font-size:clamp(1.4rem,2.4vw,1.8rem);margin:0 0 14px}
+@media (max-width:900px){
+  .portada2{grid-template-columns:minmax(0,1fr)}
+  .portada2::after{width:100%;top:auto;height:62%;-webkit-mask-image:none;mask-image:none;opacity:.7}
+  .mesa{min-height:0;display:grid;gap:22px}
+  .hoja-mesa,.postit{position:relative;inset:auto;width:auto;right:auto;bottom:auto}
+  .hoja-mesa{transform:rotate(-1deg)}
+  .postit{transform:rotate(1deg);margin:0 6px}
+}
+/* Portada: el índice de cursos es lo primero */
+.p2-h1{font-size:clamp(1.9rem,3.4vw,2.6rem)!important;line-height:1.05!important;letter-spacing:-.03em;margin:0 0 18px}
+.indice-cursos{list-style:none;margin:0!important;padding:0!important;border-top:2px solid var(--tinta)}
+.indice-cursos>li{margin:0!important;padding:16px 0 14px;border-bottom:1px solid var(--linea)}
+.ic-curso{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 14px;text-decoration:none;color:var(--tinta)}
+.ic-curso b{font:800 clamp(1.6rem,3vw,2.3rem)/1.05 var(--f-titulo);letter-spacing:-.035em}
+.ic-curso span{color:var(--tinta-2);font-size:.95rem}
+.ic-curso:hover b{color:var(--azul)}
+.indice-cursos ul{list-style:none;margin:8px 0 0!important;padding:0!important;display:flex;flex-wrap:wrap;gap:4px 22px}
+.indice-cursos ul li{margin:0!important}
+.indice-cursos ul a{display:inline-flex;align-items:center;min-height:40px;font-weight:700;text-underline-offset:4px}
+.indice-cursos .nuevo{font:700 1.2rem var(--f-mano);color:var(--rojo);margin-left:4px}
+.portada2 .pronto{margin-top:12px;font-size:.92rem}
+.piezas-tema{list-style:none;margin:0!important;padding:0!important;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:0;border-top:2px solid var(--tinta)}
+.piezas-tema li{margin:0!important;padding:14px 18px 16px 0;border-bottom:1px solid var(--linea)}
+.piezas-tema b{display:block;font:700 1.05rem var(--f-titulo);margin-bottom:4px}
+.piezas-tema span{color:var(--tinta-2);font-size:.95rem}
+#como{padding-top:10px}
+.mesa{min-height:560px}
+.hoja-mesa{inset:0 12% auto 0}
+.postit{width:min(300px,56%);bottom:-6px;right:-8px}
+.hm-graf{max-height:230px}
+.hoja-mesa .graf .curva,.hoja-mesa .graf .curva.b{stroke:#1f3aa8}
+.hoja-mesa .graf .etq,.hoja-mesa .graf .marca-eje{font-family:"Kalam",cursive;fill:#1f3aa8}
+.hoja-mesa .graf .etq.mano{font-family:var(--f-mano);fill:var(--rojo)}
+.hm-graf{width:58%!important;margin-left:54px}
+.mesa{min-height:600px}
+.postit{bottom:-30px}
+.hoja-mesa .mano .res{border:1.6px solid #1f3aa8;display:inline-block;padding:0 6px;border-radius:3px 7px 4px 6px}
+/* Objetivos y consejos */
+.objetivos{margin:18px 0 0;font-size:1rem}
+.objetivos b{font-family:var(--f-titulo)}
+.objetivos ul{margin:4px 0 0!important}
+.recuadro.consejo{border-color:var(--verde)}
+.recuadro.consejo>.tit{color:var(--verde)}
+/* Soluciones de los ejercicios, escritas a mano y anotadas */
+details.sol>.dentro.mano{border-left:0;background-color:#fff;padding:10px 16px 12px 46px;border:1px solid var(--linea);
+  background-image:linear-gradient(90deg,transparent 30px,var(--rojo) 30px,var(--rojo) 31.5px,transparent 31.5px),repeating-linear-gradient(transparent 0 calc(2rem - 1px),#dfe6f1 calc(2rem - 1px) 2rem);background-position:0 0,0 10px}
+details.sol>.dentro.mano p{margin:0 0 .25rem}
+details.sol>.dentro.mano .anota{display:block;font:400 1.3rem/1.2 var(--f-mano);color:var(--rojo);padding-left:16px;position:relative;transform:rotate(-1deg);margin:4px 0 2px}
+details.sol>.dentro.mano .anota::before{content:"";position:absolute;left:0;top:.4em;width:9px;height:9px;border-left:2px solid var(--rojo);border-bottom:2px solid var(--rojo);transform:rotate(45deg)}
+details.sol>.dentro.mano .formula{background:transparent;border-color:transparent}
