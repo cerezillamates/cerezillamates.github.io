@@ -3,47 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Matemáticas de Mercedes Cerezo: apuntes para proyectar en la pizarra, ejercicios de clase y de casa, autoevaluación y ejercicios de selectividad (ESO y Bachillerato).">
+<title>Matemáticas · Mercedes Cerezo</title>
+<meta name="description" content="Matemáticas de Mercedes Cerezo: apuntes para estudiar y para proyectar en clase, ejercicios con la solución desarrollada, autoevaluación y ejercicios de selectividad de Andalucía (ESO y Bachillerato).">
 <link rel="manifest" href="/manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Mates">
-<!-- ======================================================================
-     PARA CAMBIAR TU NOMBRE: busca la palabra  MERCEDES CEREZO  (sale 3 veces)
-     y escribe el tuyo. Después pulsa «Commit changes».
-     ====================================================================== -->
-<title>Matemáticas · CEREZO</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="assets/portal.css">
+<meta name="theme-color" content="#fdfdfb">
 <link rel="icon" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/v2/estilo.css?v=20261120">
+<script src="assets/katex/katex.min.js" defer></script>
+<script src="assets/v2/mates.js?v=20261120" defer></script>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <a href="index.html" aria-label="Inicio"><img src="assets/logo-192.png" alt="Logotipo" width="64" height="64" style="display:block;border-radius:16px;margin-bottom:10px"></a>
-    <div style="font:600 .85rem var(--f-b);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Profesora: CEREZO </div>
-    <h1>Matemáticas <span>paso a paso</span></h1>
-    <p class="lead">Apuntes y materiales de clase. Elige tu curso.</p>
-  </header>
-  <section>
-    <h2>Mis cursos</h2>
-    <div class="grid">
-      <div class="card soon" style="--c:var(--amb)"><h3>1º ESO</h3><p>Próximamente.</p></div>
-      <a class="card" href="2eso.html" style="--c:var(--amb)"><h3>2º ESO</h3><p>Tema 3: Proporcionalidad y problemas aritméticos.</p><span class="go">Entrar →</span></a>
-      <a class="card" href="3eso.html" style="--c:var(--blue)"><h3>3º ESO</h3><p>Tema 3: Proporcionalidad y problemas aritméticos.</p><span class="go">Entrar →</span></a>
-      <div class="card soon" style="--c:var(--blue)"><h3>4º ESO</h3><p>Próximamente.</p></div>
-      <div class="card soon" style="--c:var(--vio)"><h3>1º Bachillerato CCSS</h3><p>Próximamente.</p></div>
-      <a class="card" href="2bach-ccss.html" style="--c:var(--acc)"><h3>2º Bachillerato CCSS</h3><p>Los 6 temas de la PAU: matrices, sistemas, programación lineal, análisis, probabilidad y estadística.</p><span class="go">Entrar →</span></a>
-    </div>
-  </section>
-  <footer>
-    <p>Materiales elaborados por <b>CEREZO</b> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener license">Licencia Creative Commons BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y compartiéndolos con la misma licencia.</p>
-    <p>Los enunciados de los exámenes de selectividad pertenecen a sus universidades y comunidades; las soluciones enlazadas son de sus autores.</p>
-    <p>🖥 ¿No se ve bien en tu pizarra o tu dispositivo? <a href="pizarra.html">Prueba de compatibilidad</a></p>
-  </footer>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="index.html"><img src="assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"></nav>
+  <div class="acciones"></div>
+</div></header>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"><div class="indice"><p class="nota" style="margin-top:70px">Elige tu curso y después el tema.</p><p class="nota roja" style="margin-top:200px">2.º Bach: el Análisis es el ejercicio 2 de la PAU y vale 3 puntos.</p></div></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada">
+  <h1>Matemáticas, <span class="trazo">paso a paso.</span></h1>
+  <p class="entrada">Apuntes para estudiar en casa y para proyectar en clase, ejercicios con la solución desarrollada y los exámenes de selectividad clasificados por tipos.</p>
+  <p class="seguir" data-seguir hidden></p>
+</header>
+
+<section id="cursos" class="ancho">
+  <h2 class="sr">Cursos</h2>
+  <ol class="cursos">
+    <li>
+      <h3 class="nombre">2.º ESO</h3>
+      <ul class="temas">
+        <li><a href="2eso/proporcionalidad/"><b>Proporcionalidad y problemas aritméticos</b><span>Razón y proporción, regla de tres, repartos, porcentajes, interés y grifos</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <h3 class="nombre">3.º ESO</h3>
+      <ul class="temas">
+        <li><a href="3eso/proporcionalidad/"><b>Proporcionalidad y problemas aritméticos</b><span>Regla de tres simple y compuesta, repartos, porcentajes, interés, grifos y mezclas</span></a></li>
+        <li><a href="3eso/estadistica/"><b>Estadística</b><span>Tablas, gráficos, media, mediana y moda, cuartiles y diagrama de caja, dispersión</span></a></li>
+      </ul>
+    </li>
+    <li>
+      <h3 class="nombre">2.º Bach<small>Matemáticas Aplicadas a las CCSS II</small></h3>
+      <ul class="temas">
+        <li><a href="2bach-ccss/analisis/"><b>Análisis</b><span>Continuidad, derivadas, derivabilidad y parámetros, con ejercicios de la PAU de Andalucía</span><span class="nuevo">nuevo</span></a></li>
+        <li><a href="2bach-ccss/programacion-lineal/"><b>Programación lineal</b><span>El método paso a paso y 363 ejercicios de selectividad</span></a></li>
+        <li><a href="sistemas.html"><b>Sistemas de ecuaciones</b><span>Método de Gauss, cómo se escribe en el examen y 222 ejercicios de selectividad</span></a></li>
+        <li><a href="2bach-ccss/entregas.html"><b>Entregas semanales</b><span>Calendario y tu seguimiento con el código personal</span></a></li>
+      </ul>
+    </li>
+  </ol>
+  <p class="pronto">1.º y 4.º de ESO y 1.º de Bachillerato: los materiales se publicarán aquí durante el curso.</p>
+</section>
+
+  </main>
 </div>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
 </body>
 </html>

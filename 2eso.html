@@ -3,36 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="/manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Mates">
 <title>2.º ESO · Mercedes Cerezo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="assets/portal.css">
+<meta name="description" content="Matemáticas de 2.º de ESO: apuntes para proyectar en clase y para estudiar en casa, actividades, tareas y autoevaluación.">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#fdfdfb">
 <link rel="icon" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/v2/estilo.css?v=20261120">
+<script src="assets/katex/katex.min.js" defer></script>
+<script src="assets/v2/mates.js?v=20261120" defer></script>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← Mis cursos</a>
-  <header>
-    <a href="index.html" aria-label="Inicio"><img src="assets/logo-192.png" alt="Logotipo" width="64" height="64" style="display:block;border-radius:16px;margin-bottom:10px"></a>
-    <div style="font:600 .85rem var(--f-b);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Matemáticas · 2.º ESO</div>
-    <h1>2.º <span>ESO</span></h1>
-    <p class="lead">Apuntes para proyectar en clase y para estudiar en casa, actividades, tareas y autoevaluación. Pincha en un tema para abrirlo.</p>
-  </header>
-  <section>
-    <h2>Temas</h2>
-    <div class="grid">
-      <a class="card" href="2eso/proporcionalidad/" style="--c:var(--blue)"><span class="num">Tema 3</span><h3>Proporcionalidad y problemas aritméticos</h3><p>Razón y proporción, regla de tres, repartos, porcentajes, interés y grifos.</p><span class="go">Abrir el tema →</span></a>
-    </div>
-  </section>
-  <footer>
-    <p>Materiales elaborados por <b>Mercedes Cerezo</b> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener license">Licencia Creative Commons BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y compartiéndolos con la misma licencia.</p>
-  </footer>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="index.html"><img src="assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"><a href="index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">2.º ESO</span></nav>
+  <div class="acciones"></div>
+</div></header>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"><div class="indice"><p class="nota" style="margin-top:40px">En clase: explicación y ejercicios para la pizarra.</p><p class="nota verde" style="margin-top:18px">En casa: apuntes, tareas, repaso y autoevaluación.</p></div></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada-pag">
+  <p class="curso">Matemáticas</p>
+  <h1>2.º ESO</h1>
+  <p class="entrada">Apuntes para proyectar en clase y para estudiar en casa, actividades, tareas y autoevaluación.</p>
+  <p class="seguir" data-seguir hidden></p>
+</header>
+<section id="temas" class="ancho">
+  <h2 class="sr">Temas</h2>
+  <ol class="temario">
+    <li><span class="num">3</span><div><h3>Proporcionalidad y problemas aritméticos</h3><p>Razón y proporción, regla de tres, repartos, porcentajes, interés y grifos.</p>
+      <div class="piezas"><a class="prim" href="2eso/proporcionalidad/">Abrir el tema</a></div></div></li>
+  </ol>
+</section>
+
+  </main>
 </div>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
 </body>
 </html>

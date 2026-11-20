@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Derivadas: tabla y reglas · Análisis · 2.º Bach CCSS</title>
+<meta name="description" content="Derivadas para la PAU de Matemáticas Aplicadas a las CCSS II de Andalucía: qué significa la derivada, tabla de derivadas, regla de la cadena, cómo elegir la regla, ejemplos resueltos y autoevaluación.">
+<meta name="mates:pagina" content="Análisis B2: Derivadas">
+<meta name="mates:curso" content="2.º Bach CCSS">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#fdfdfb">
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preload" href="../../assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/v2/estilo.css?v=20261120">
+<script src="../../assets/katex/katex.min.js" defer></script>
+<script src="../../assets/v2/mates.js?v=20261120" defer></script>
+<script src="../../assets/v2/grafica.js?v=20261120" defer></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="../../index.html"><img src="../../assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"><a href="../../index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss/analisis/">Análisis</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Derivadas</span></nav>
+  <div class="acciones"><button type="button" class="boton fino" data-pizarra aria-pressed="false" title="Letra grande y pasos con las flechas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg><span class="txt">Pizarra</span></button><button type="button" class="boton fino" data-imprimir title="Imprimir o guardar en PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg><span class="txt">Imprimir</span></button></div>
+</div></header>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"><nav class="indice" aria-label="Índice de la página"><h2>En esta página</h2><div class="hilo"><ol><li><a href="#significado">Qué es la derivada</a></li><li><a href="#tabla">La tabla de derivadas</a></li><li><a href="#metodo">El método: ¿qué regla toca?</a></li><li><a href="#ejemplos">Ejemplos resueltos</a></li><li><a href="#fallos">Lo que suele fallar</a></li><li><a href="#entrenamiento">Entrenamiento</a></li><li><a href="#pau">Ejercicios de examen</a></li><li><a href="#autoevaluacion">Autoevaluación</a></li><li><a href="#resumen">Resumen</a></li></ol></div></nav></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada-pag">
+  <p class="curso">Análisis, bloque B, apartado 2</p>
+  <h1>Derivadas: la tabla y las reglas</h1>
+  <p class="entrada">Derivar es la herramienta de todo el bloque: la usarás para saber si una función es derivable, dónde crece, dónde tiene un máximo y cuál es su recta tangente. Aquí aprendes a derivar sin dudar y a elegir la regla más corta.</p>
+  <p class="pregunta"><b>Pregunta de entrada.</b> El beneficio de una almazara es $B(t)=-0{,}04t^2+2{,}4t$ miles de euros en el año $t$. ¿A qué ritmo está creciendo el beneficio justo en el año 20?</p>
+</header>
+
+<section id="significado">
+  <h2>Qué es la derivada</h2>
+  <p>Entre dos instantes $a$ y $a+h$, el beneficio cambia, de media, la <b>tasa de variación media</b>:</p>
+  <div class="formula">$$\text{TVM}[a,a+h]=\frac{f(a+h)-f(a)}{h}$$</div>
+  <p>Es la pendiente de la recta <em>secante</em> que une los dos puntos de la gráfica. Si el segundo punto se acerca al primero ($h\to0$), la secante se convierte en la recta <em>tangente</em> y la tasa media, en la tasa instantánea: la derivada.</p>
+  <div class="recuadro def"><span class="tit">Definición</span>
+    <div class="formula">$$f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}$$</div>
+    <p>Si este límite existe y es finito, $f$ es <b>derivable</b> en $a$. Su valor es la pendiente de la recta tangente en $x=a$ y el ritmo de cambio de $f$ en ese instante.</p></div>
+  <div class="lab" data-lab="secante" id="lab-secante">
+    <header><h3>Laboratorio: de la secante a la tangente</h3><p>Beneficio de la almazara en $t=20$.</p></header>
+    <div class="lienzo"><svg class="graf" role="img" aria-label="Parábola del beneficio con una recta secante que se acerca a la tangente en t igual a 20"></svg></div>
+    <div class="mandos"></div>
+    <div class="lectura" aria-live="polite"></div>
+  </div>
+  <p class="con-nota"><span class="nota" aria-hidden="true">La derivada tiene unidades: las de $f$ entre las de $t$.</span>Respuesta a la pregunta de entrada: $B'(t)=-0{,}08t+2{,}4$, así que $B'(20)=0{,}8$. En el año 20 el beneficio crece a un ritmo de 0,8 miles de euros por año, es decir, 800 € más cada año.</p>
+</section>
+
+<section id="tabla">
+  <h2>La tabla de derivadas</h2>
+  <p>Solo las funciones que entran en la PAU de CCSS: polinómicas, racionales, irracionales, exponenciales y logarítmicas. A la izquierda, la función sola; a la derecha, la misma función con algo dentro ($u$ es una función de $x$). La columna de la derecha ya lleva la regla de la cadena.</p>
+  <div class="desliza"><table class="tabla">
+    <thead><tr><th>Tipo</th><th>Función simple</th><th>Derivada</th><th>Función compuesta</th><th>Derivada</th></tr></thead>
+    <tbody>
+      <tr><td>Constante</td><td>$k$</td><td>$0$</td><td></td><td></td></tr>
+      <tr><td>Potencia</td><td>$x^n$</td><td>$n\,x^{n-1}$</td><td>$u^n$</td><td>$n\,u^{n-1}\cdot u'$</td></tr>
+      <tr><td>Raíz</td><td>$\sqrt{x}$</td><td>$\dfrac{1}{2\sqrt{x}}$</td><td>$\sqrt{u}$</td><td>$\dfrac{u'}{2\sqrt{u}}$</td></tr>
+      <tr><td>Exponencial $e$</td><td>$e^x$</td><td>$e^x$</td><td>$e^{u}$</td><td>$e^{u}\cdot u'$</td></tr>
+      <tr><td>Exponencial $a$</td><td>$a^x$</td><td>$a^x\ln a$</td><td>$a^{u}$</td><td>$a^{u}\ln a\cdot u'$</td></tr>
+      <tr><td>Logaritmo neperiano</td><td>$\ln x$</td><td>$\dfrac1x$</td><td>$\ln u$</td><td>$\dfrac{u'}{u}$</td></tr>
+      <tr><td>Logaritmo en base $a$</td><td>$\log_a x$</td><td>$\dfrac{1}{x\ln a}$</td><td>$\log_a u$</td><td>$\dfrac{u'}{u\ln a}$</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Las reglas de las operaciones</h3>
+  <div class="formulas">
+    <div class="formula">$$(f\pm g)'=f'\pm g'$$</div>
+    <div class="formula">$$(k\cdot f)'=k\cdot f'$$</div>
+    <div class="formula">$$(f\cdot g)'=f'\,g+f\,g'$$</div>
+    <div class="formula">$$\left(\frac fg\right)'=\frac{f'\,g-f\,g'}{g^2}$$</div>
+    <div class="formula">$$\big(f(u)\big)'=f'(u)\cdot u'$$</div>
+  </div>
+</section>
+
+<section id="metodo">
+  <h2>El método: ¿qué regla toca?</h2>
+  <div class="recuadro metodo"><span class="tit">Antes de derivar, mira la última operación</span>
+    <ol>
+      <li><b>Mira qué operación harías la última</b> si calcularas $f(2)$ con la calculadora. Esa es la regla principal: suma, producto, cociente o una función de algo (cadena).</li>
+      <li><b>Escribe al lado el nombre de la regla</b>: «regla del producto», «potencia y cadena»… Así no te pierdes y el corrector ve el razonamiento.</li>
+      <li><b>Simplifica antes si puedes</b>: propiedades de los logaritmos, raíces como potencias, constantes fuera.</li>
+      <li><b>Saca factor común al final</b>, sobre todo si después vas a igualar a cero.</li>
+    </ol></div>
+  <p class="con-nota"><span class="nota" aria-hidden="true">Cuando hay dos caminos, el más corto casi siempre es simplificar primero.</span>Algunas funciones se pueden derivar de dos formas. Elige la que deja menos cuentas: en los ejemplos 3 y 4 verás la diferencia.</p>
+</section>
+
+<section id="ejemplos">
+  <h2>Ejemplos resueltos</h2>
+
+  <article class="ejemplo" id="ej-potencia">
+    <header><h3>1. Una potencia con raíz</h3><span class="fuente">Regla de la potencia y de la cadena</span></header>
+    <div class="enunciado"><p>Deriva $y=\dfrac{1}{\sqrt{(4x^4+x)^3}}$.</p></div>
+    <div class="pasos">
+      <div class="paso"><span class="n">1</span><h4>Escribirla como potencia</h4><p>$y=(4x^4+x)^{-3/2}$. Ahora es «algo elevado a un número».</p></div>
+      <div class="paso"><span class="n">2</span><h4>Potencia y cadena</h4><p>$y'=-\frac32\,(4x^4+x)^{-5/2}\cdot(16x^3+1)$.</p></div>
+      <div class="paso"><span class="n">3</span><h4>Dejarla sin exponentes negativos</h4><p>$y'=-\dfrac{3\,(16x^3+1)}{2\,(4x^4+x)^{5/2}}$.</p></div>
+    </div>
+    <div class="respuesta"><b>Resultado.</b> $y'=-\dfrac{3(16x^3+1)}{2(4x^4+x)^{5/2}}$</div>
+  </article>
+
+  <article class="ejemplo" id="ej-producto">
+    <header><h3>2. Producto y factor común</h3><span class="fuente">Regla del producto</span></header>
+    <div class="enunciado"><p>Deriva $f(r)=3r^4\,(r^2-5r+1)^2$ y simplifica.</p></div>
+    <div class="pasos">
+      <div class="paso"><span class="n">1</span><h4>Producto: $f'=u'v+uv'$</h4><p>$u=3r^4 \Rightarrow u'=12r^3$. $\quad v=(r^2-5r+1)^2 \Rightarrow v'=2(r^2-5r+1)(2r-5)$ (potencia y cadena).</p></div>
+      <div class="paso"><span class="n">2</span><h4>Sustituir</h4><p>$f'(r)=12r^3(r^2-5r+1)^2+3r^4\cdot2(r^2-5r+1)(2r-5)$.</p></div>
+      <div class="paso"><span class="n">3</span><h4>Factor común $6r^3(r^2-5r+1)$</h4><p>$f'(r)=6r^3(r^2-5r+1)\big[2(r^2-5r+1)+r(2r-5)\big]=6r^3(r^2-5r+1)(4r^2-15r+2)$.</p></div>
+    </div>
+    <div class="respuesta"><b>Resultado.</b> $f'(r)=6r^3(r^2-5r+1)(4r^2-15r+2)$. Factorizada, así es fácil igualarla a cero.</div>
+  </article>
+
+  <article class="ejemplo" id="ej-log">
+    <header><h3>3. Un logaritmo: dos caminos</h3><span class="fuente">Propiedades de los logaritmos frente a cadena y cociente</span></header>
+    <div class="enunciado"><p>Deriva $y=\ln\left(\dfrac{2x}{x+1}\right)$.</p></div>
+    <div class="pasos">
+      <div class="paso"><span class="n">1</span><h4>Camino largo (cadena + cociente)</h4><p>$y'=\dfrac{u'}{u}$ con $u=\dfrac{2x}{x+1}$, $u'=\dfrac{2(x+1)-2x}{(x+1)^2}=\dfrac{2}{(x+1)^2}$. Entonces $y'=\dfrac{2}{(x+1)^2}\cdot\dfrac{x+1}{2x}=\dfrac{1}{x(x+1)}$.</p></div>
+      <div class="paso"><span class="n">2</span><h4>Camino corto: separar primero</h4><p>$y=\ln(2x)-\ln(x+1)\;\Rightarrow\; y'=\dfrac{2}{2x}-\dfrac{1}{x+1}=\dfrac1x-\dfrac{1}{x+1}=\dfrac{1}{x(x+1)}$.</p>
+        <p class="con-nota"><span class="nota verde" aria-hidden="true">Mismo resultado, la mitad de cuentas.</span>El logaritmo de un cociente es la resta de logaritmos. Con un logaritmo de un producto, un cociente o una potencia, separa antes de derivar.</p></div>
+    </div>
+    <div class="respuesta"><b>Resultado.</b> $y'=\dfrac{1}{x(x+1)}$</div>
+  </article>
+
+  <article class="ejemplo" id="ej-cociente">
+    <header><h3>4. Un cociente de potencias</h3><span class="fuente">Regla del cociente con factor común</span></header>
+    <div class="enunciado"><p>Deriva $g(x)=\dfrac{(3x^2+1)^3}{(x^2-1)^4}$ y simplifica.</p></div>
+    <div class="pasos">
+      <div class="paso"><span class="n">1</span><h4>Cociente</h4><p>$g'(x)=\dfrac{3(3x^2+1)^2\cdot6x\cdot(x^2-1)^4-(3x^2+1)^3\cdot4(x^2-1)^3\cdot2x}{(x^2-1)^8}$.</p></div>
+      <div class="paso"><span class="n">2</span><h4>Factor común en el numerador: $2x(3x^2+1)^2(x^2-1)^3$</h4><p>$g'(x)=\dfrac{2x(3x^2+1)^2(x^2-1)^3\big[9(x^2-1)-4(3x^2+1)\big]}{(x^2-1)^8}$.</p></div>
+      <div class="paso"><span class="n">3</span><h4>Simplificar</h4><p>El corchete vale $9x^2-9-12x^2-4=-3x^2-13$. Y $(x^2-1)^3$ se simplifica con $(x^2-1)^8$:</p><p>$g'(x)=-\dfrac{2x(3x^2+1)^2(3x^2+13)}{(x^2-1)^5}$.</p>
+        <p class="con-nota"><span class="nota roja" aria-hidden="true">No desarrolles las potencias: saca factor común.</span>Si hubieras desarrollado $(3x^2+1)^3$ y $(x^2-1)^4$, tendrías polinomios de grado 6 y 8 y casi seguro un error de signo.</p></div>
+    </div>
+    <div class="respuesta"><b>Resultado.</b> $g'(x)=-\dfrac{2x(3x^2+1)^2(3x^2+13)}{(x^2-1)^5}$</div>
+  </article>
+</section>
+
+<section id="fallos">
+  <h2>Lo que suele fallar</h2>
+  <div class="recuadro fallo"><span class="tit">Errores frecuentes</span>
+    <ul>
+      <li><b>Olvidar multiplicar por $u'$</b> en la cadena: $(e^{3x^2-5x})'=e^{3x^2-5x}\cdot(6x-5)$, no $e^{3x^2-5x}$.</li>
+      <li><b>Derivar el cociente como si fuera un producto</b> o cambiar el orden del numerador: es $f'g-fg'$, con el menos en medio y en ese orden.</li>
+      <li><b>Pensar que la derivada de $\ln u$ es $\frac1u$.</b> Es $\frac{u'}{u}$.</li>
+      <li><b>Desarrollarlo todo</b> antes de sacar factor común. Ocupa más, se equivoca uno más y luego no se puede igualar a cero con facilidad.</li>
+      <li><b>Derivar un número con $x$ escondida:</b> $\ln 5$ o $e^2$ son constantes; su derivada es 0.</li>
+    </ul></div>
+</section>
+
+<section id="entrenamiento">
+  <h2>Entrenamiento</h2>
+  <ol class="ejercicios">
+    <li><span class="nivel n1">básico</span> $f(x)=3x^4-5x^2+7x-2$
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>$f'(x)=12x^3-10x+7$.</p></div></details></li>
+    <li><span class="nivel n1">básico</span> $f(x)=\dfrac{2x-1}{x+3}$
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>Cociente: $f'(x)=\dfrac{2(x+3)-(2x-1)\cdot1}{(x+3)^2}=\dfrac{7}{(x+3)^2}$.</p></div></details></li>
+    <li><span class="nivel n1">básico</span> $f(x)=\sqrt{4x+1}$
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>Raíz y cadena: $f'(x)=\dfrac{4}{2\sqrt{4x+1}}=\dfrac{2}{\sqrt{4x+1}}$.</p></div></details></li>
+    <li><span class="nivel n2">medio</span> $f(x)=x\,e^{2x}$
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>Producto: $f'(x)=1\cdot e^{2x}+x\cdot2e^{2x}=e^{2x}(1+2x)$.</p></div></details></li>
+    <li><span class="nivel n2">medio</span> $f(x)=\ln(x^2+1)$
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>Logaritmo y cadena: $f'(x)=\dfrac{2x}{x^2+1}$.</p></div></details></li>
+    <li><span class="nivel n2">medio</span> $f(x)=5^{x^2}$
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>Exponencial de base 5 y cadena: $f'(x)=5^{x^2}\cdot\ln5\cdot2x$.</p></div></details></li>
+    <li><span class="nivel n3">examen</span> $f(x)=\dfrac{x^2+1}{e^x}$ (factoriza el resultado)
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>Cociente: $f'(x)=\dfrac{2x\,e^x-(x^2+1)e^x}{e^{2x}}=\dfrac{e^x(2x-x^2-1)}{e^{2x}}=\dfrac{-(x-1)^2}{e^x}$. Es siempre $\le0$: la función nunca crece.</p></div></details></li>
+    <li><span class="nivel n3">examen</span> $f(x)=\ln\left(\dfrac{x-1}{x+1}\right)$ con el camino más corto
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>$f(x)=\ln(x-1)-\ln(x+1) \Rightarrow f'(x)=\dfrac{1}{x-1}-\dfrac{1}{x+1}=\dfrac{2}{x^2-1}$.</p></div></details></li>
+  </ol>
+</section>
+
+<section id="pau">
+  <h2>Ejercicios de examen</h2>
+  <ol class="ejercicios">
+    <li><span class="origen">Aragón, EvAU ordinaria 2020, ejercicio 3a.</span> Calcula la derivada de $f(x)=e^{3x^2-5x}$.
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>Exponencial y cadena: $f'(x)=e^{3x^2-5x}\cdot(6x-5)$.</p></div></details></li>
+    <li><span class="origen">Baleares, PBAU ordinaria 2023, P5.</span> Sean $f(x)=(x+2)^3$ y $g(x)=x^3+6x^2+12x$. a) Justifica, calculando, que $f'(x)=g'(x)$. b) ¿Es cierto que $f(x)=g(x)$? c) Calcula $\lim_{x\to\infty}\dfrac{f(x)}{g(x)}$.
+      <details class="sol"><summary>Solución</summary><div class="dentro">
+        <p>a) $f'(x)=3(x+2)^2=3x^2+12x+12$ y $g'(x)=3x^2+12x+12$. Son iguales.</p>
+        <p>b) No: $f(x)=x^3+6x^2+12x+8=g(x)+8$. Tienen la misma derivada porque se diferencian en una constante.</p>
+        <p>c) Mismo grado y mismo coeficiente principal: el límite vale $1$.</p></div></details></li>
+    <li><span class="origen">Castilla y León, EBAU extraordinaria 2022, P3 (a, segunda parte).</span> Con $f(t)=-t+13$ para $2&lt;t\le8$ (consumo de combustible en litros/hora), ¿cuánto cambia el consumo por cada hora que pasa a partir de la segunda hora?
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>$f'(t)=-1$: a partir de la segunda hora el consumo baja 1 litro/hora por cada hora que pasa.</p></div></details></li>
+  </ol>
+</section>
+
+<section id="autoevaluacion">
+  <h2>Autoevaluación</h2>
+  <ol class="prueba" id="p-b2">
+    <li><p class="q">La derivada de $e^{x^2}$ es…</p>
+      <div class="opciones"><button type="button">$e^{x^2}$</button><button type="button" data-bien>$2x\,e^{x^2}$</button><button type="button">$x^2e^{x^2-1}$</button></div>
+      <p class="porque">Exponencial y cadena: se copia $e^{x^2}$ y se multiplica por la derivada del exponente, $2x$.</p></li>
+    <li><p class="q">La derivada de $\ln(3x)$ es…</p>
+      <div class="opciones"><button type="button" data-bien>$\dfrac1x$</button><button type="button">$\dfrac{1}{3x}$</button><button type="button">$\dfrac3x$</button></div>
+      <p class="porque">$\dfrac{u'}{u}=\dfrac{3}{3x}=\dfrac1x$. También sale con $\ln(3x)=\ln3+\ln x$.</p></li>
+    <li><p class="q">Para derivar $\dfrac{x^3}{5}$ lo más rápido es…</p>
+      <div class="opciones"><button type="button">la regla del cociente</button><button type="button" data-bien>sacar $\frac15$ como constante</button></div>
+      <p class="porque">$\left(\frac15x^3\right)'=\frac35x^2$. El cociente da lo mismo, pero con más cuentas y más riesgo.</p></li>
+    <li><p class="q">Si $f'(4)=-2$, en $x=4$ la función…</p>
+      <div class="opciones"><button type="button">crece</button><button type="button" data-bien>decrece, a ritmo de 2 unidades por unidad de $x$</button><button type="button">tiene un mínimo</button></div>
+      <p class="porque">La derivada es la pendiente de la tangente: negativa significa que la función baja en ese punto.</p></li>
+    <li><p class="q">La derivada de $\ln 7$ es…</p>
+      <div class="opciones"><button type="button">$\dfrac17$</button><button type="button" data-bien>$0$</button></div>
+      <p class="porque">$\ln7$ es un número: la derivada de una constante es 0.</p></li>
+  </ol>
+  <div class="marcador" aria-live="polite"></div>
+</section>
+
+<section id="resumen">
+  <h2>Resumen</h2>
+  <div class="formulas">
+    <div class="formula">$$f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}$$</div>
+    <div class="formula">$$\big(f(u)\big)'=f'(u)\cdot u'$$</div>
+    <div class="formula">$$(\ln u)'=\frac{u'}{u}$$</div>
+    <div class="formula">$$(e^u)'=e^u\cdot u'$$</div>
+  </div>
+  <p>Mira la última operación, nombra la regla, simplifica antes (logaritmos, raíces como potencias) y saca factor común al final.</p>
+  <nav class="siguiente" aria-label="Apartados">
+    <a href="continuidad.html"><small>Anterior</small><b>B1. Continuidad</b></a>
+    <a class="sig" href="derivabilidad.html"><small>Siguiente</small><b>B3. Derivabilidad</b></a>
+  </nav>
+</section>
+
+  </main>
+</div>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="../../pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
+</body>
+</html>

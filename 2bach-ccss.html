@@ -3,48 +3,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.º Bachillerato CCSS · Mercedes Cerezo</title>
+<meta name="description" content="Matemáticas Aplicadas a las Ciencias Sociales II: los temas de la PAU de Andalucía con apuntes, métodos paso a paso y ejercicios de selectividad.">
 <link rel="manifest" href="/manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Mates">
-<title>2º Bachillerato CCSS · Mercedes Cerezo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="assets/portal.css">
+<meta name="theme-color" content="#fdfdfb">
 <link rel="icon" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<link rel="stylesheet" href="assets/v2/estilo.css?v=20261120">
+<script src="assets/katex/katex.min.js" defer></script>
+<script src="assets/v2/mates.js?v=20261120" defer></script>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← Mis cursos</a>
-  <header>
-    <a href="index.html" aria-label="Inicio"><img src="assets/logo-192.png" alt="Logotipo" width="64" height="64" style="display:block;border-radius:16px;margin-bottom:10px"></a>
-    <div style="font:600 .85rem var(--f-b);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Matemáticas Aplicadas a las Ciencias Sociales II</div>
-    <h1>2º Bachillerato <span>CCSS</span></h1>
-    <p class="lead">Los 6 temas de la PAU. Pincha en un tema para abrirlo.</p>
-  </header>
-  <section>
-    <h2>Entregas semanales</h2>
-    <div class="grid">
-      <a class="card" href="2bach-ccss/entregas.html" style="--c:var(--rose)"><span class="num">📅</span><h3>Calendario y mi seguimiento</h3><p>Qué ejercicios tocan cada semana, plazos (domingo 23:59) y, con tu código personal, cómo vas.</p><span class="go">Abrir →</span></a>
-    </div>
-  </section>
-  <section>
-    <h2>Temas PAU</h2>
-    <div class="grid">
-      <div class="card soon" style="--c:var(--line)"><span class="num">Tema 1</span><h3>Matrices</h3><p>Próximamente.</p></div>
-      <div class="card" style="--c:var(--blue)"><span class="num">Tema 2</span><h3>Sistemas de ecuaciones</h3><p>Método paso a paso con calculadora de Gauss, cómo se escribe en el examen, los tipos de preguntas, 222 ejercicios de selectividad y plan de repaso.</p><div class="links"><a class="main" href="sistemas.html">Apuntes interactivos</a><a href="sistemas-apuntes.pdf">PDF para imprimir</a></div></div>
-      <div class="card" style="--c:var(--acc)"><span class="num">Tema 3</span><h3>Programación lineal</h3><p>La tabla de los 363 ejercicios de selectividad para llevar tus hechos, el método paso a paso, los problemas tipo y el repaso.</p><div class="links"><a class="main" href="programacion-lineal.html">Selectividad (PAU)</a></div></div>
-      <div class="card soon" style="--c:var(--line)"><span class="num">Tema 4</span><h3>Análisis</h3><p>Próximamente.</p></div>
-      <div class="card soon" style="--c:var(--line)"><span class="num">Tema 5</span><h3>Probabilidad</h3><p>Próximamente.</p></div>
-      <div class="card soon" style="--c:var(--line)"><span class="num">Tema 6</span><h3>Estadística</h3><p>Próximamente.</p></div>
-    </div>
-  </section>
-  <footer>
-    <p>Materiales elaborados por <b>Mercedes Cerezo</b> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener license">Licencia Creative Commons BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y compartiéndolos con la misma licencia.</p>
-    <p>Los enunciados de los exámenes de selectividad pertenecen a sus universidades y comunidades; las soluciones enlazadas son de sus autores.</p>
-  </footer>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="index.html"><img src="assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"><a href="index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">2.º Bach CCSS</span></nav>
+  <div class="acciones"></div>
+</div></header>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"><div class="indice"><p class="nota" style="margin-top:40px">Examen: 4 ejercicios en 1 h 30 min.</p><p class="nota" style="margin-top:18px">Ej. 1: álgebra, 3 puntos.<br>Ej. 2: análisis, 3 puntos.<br>Ej. 3 y 4: probabilidad y estadística, 2 puntos cada uno.</p></div></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada-pag">
+  <p class="curso">Matemáticas Aplicadas a las Ciencias Sociales II</p>
+  <h1>2.º Bachillerato CCSS</h1>
+  <p class="entrada">Los seis temas de la PAU de Andalucía, en el orden del curso. Cada tema tiene sus apuntes con el método paso a paso y su colección de ejercicios de selectividad.</p>
+  <p class="seguir" data-seguir hidden></p>
+</header>
+
+<section id="entregas">
+  <h2>Entregas semanales</h2>
+  <p>Cuatro ejercicios del tema actual y dos de cada tema anterior, en un PDF a tu carpeta de Drive antes del domingo a las 23:59. <a href="2bach-ccss/entregas.html">Calendario y tu seguimiento con el código personal</a>.</p>
+</section>
+
+<section id="temas" class="ancho">
+  <h2>Temas de la PAU</h2>
+  <ol class="temario">
+    <li class="sin"><span class="num">1</span><div><h3>Matrices</h3><p>Se publicará más adelante.</p></div></li>
+    <li><span class="num">2</span><div><h3>Sistemas de ecuaciones</h3><p>Método de Gauss con calculadora, cómo se escribe en el examen, los tipos de preguntas, 222 ejercicios de selectividad y plan de repaso.</p>
+      <div class="piezas"><a class="prim" href="sistemas.html">Apuntes y ejercicios PAU</a><a href="sistemas-apuntes.pdf">PDF para imprimir</a></div></div></li>
+    <li><span class="num">3</span><div><h3>Programación lineal</h3><p>Seis problemas resueltos con un paso en cada pantalla y el buscador de 363 ejercicios de selectividad con su tabla y el plan de repaso.</p>
+      <div class="piezas"><a class="prim" href="2bach-ccss/programacion-lineal/">Apuntes</a><a href="programacion-lineal.html">Ejercicios PAU</a><a href="programacion-lineal-apuntes.pdf">PDF para imprimir</a></div></div></li>
+    <li><span class="num">4</span><div><h3>Análisis</h3><p>Bloque B publicado: continuidad, derivadas, derivabilidad y parámetros, con ejemplos de la PAU de Andalucía resueltos, laboratorios interactivos y autoevaluación.</p>
+      <div class="piezas"><a class="prim" href="2bach-ccss/analisis/">Mapa del bloque</a><a href="2bach-ccss/analisis/continuidad.html">Continuidad</a><a href="2bach-ccss/analisis/derivadas.html">Derivadas</a><a href="2bach-ccss/analisis/derivabilidad.html">Derivabilidad</a><a href="2bach-ccss/analisis/parametros.html">Parámetros</a></div></div></li>
+    <li class="sin"><span class="num">5</span><div><h3>Probabilidad</h3><p>Se publicará más adelante.</p></div></li>
+    <li class="sin"><span class="num">6</span><div><h3>Estadística e inferencia</h3><p>Se publicará más adelante.</p></div></li>
+  </ol>
+</section>
+
+  </main>
 </div>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
 </body>
 </html>

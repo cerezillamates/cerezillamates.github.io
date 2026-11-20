@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Derivabilidad de funciones a trozos · Análisis · 2.º Bach CCSS</title>
+<meta name="description" content="Derivabilidad de funciones a trozos para la PAU de Matemáticas Aplicadas a las CCSS II de Andalucía: derivadas laterales, relación con la continuidad, método, ejercicios de selectividad resueltos y autoevaluación.">
+<meta name="mates:pagina" content="Análisis B3: Derivabilidad">
+<meta name="mates:curso" content="2.º Bach CCSS">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#fdfdfb">
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preload" href="../../assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../assets/v2/estilo.css?v=20261120">
+<script src="../../assets/katex/katex.min.js" defer></script>
+<script src="../../assets/v2/mates.js?v=20261120" defer></script>
+<script src="../../assets/v2/grafica.js?v=20261120" defer></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="../../index.html"><img src="../../assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"><a href="../../index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss/analisis/">Análisis</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Derivabilidad</span></nav>
+  <div class="acciones"><button type="button" class="boton fino" data-pizarra aria-pressed="false" title="Letra grande y pasos con las flechas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg><span class="txt">Pizarra</span></button><button type="button" class="boton fino" data-imprimir title="Imprimir o guardar en PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg><span class="txt">Imprimir</span></button></div>
+</div></header>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"><nav class="indice" aria-label="Índice de la página"><h2>En esta página</h2><div class="hilo"><ol><li><a href="#teoria">Lo que necesitas</a></li><li><a href="#metodo">El método</a></li><li><a href="#ejemplos">Ejemplos resueltos</a></li><li><a href="#fallos">Lo que suele fallar</a></li><li><a href="#entrenamiento">Entrenamiento</a></li><li><a href="#autoevaluacion">Autoevaluación</a></li><li><a href="#resumen">Resumen</a></li></ol></div></nav></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada-pag">
+  <p class="curso">Análisis, bloque B, apartado 3</p>
+  <h1>Derivabilidad de funciones a trozos</h1>
+  <p class="entrada">Una función puede ser continua y aun así tener una «esquina» en el punto de unión. Ahí no es derivable. En Andalucía se pregunta casi siempre junto con la continuidad: «estudie la continuidad y derivabilidad de la función».</p>
+  <p class="pregunta"><b>Pregunta de entrada.</b> El beneficio de una almazara pasa de una fórmula a otra en el año 40 sin dar ningún salto. ¿Cambia el beneficio «de golpe» su forma de evolucionar en ese año?</p>
+</header>
+
+<section id="teoria">
+  <h2>Lo que necesitas</h2>
+  <div class="recuadro def"><span class="tit">Derivadas laterales</span>
+    <div class="formulas">
+      <div class="formula">$$f'(a^-)=\lim_{h\to0^-}\frac{f(a+h)-f(a)}{h}$$</div>
+      <div class="formula">$$f'(a^+)=\lim_{h\to0^+}\frac{f(a+h)-f(a)}{h}$$</div>
+    </div>
+    <p>$f$ es derivable en $x=a$ cuando las dos existen, son finitas y valen lo mismo. Ese valor común es $f'(a)$.</p></div>
+  <div class="recuadro def"><span class="tit">Derivable y continua</span>
+    <p>Si $f$ es derivable en $a$, entonces es continua en $a$. Dicho al revés, que es como se usa en los ejercicios:</p>
+    <p class="con-nota"><span class="nota roja" aria-hidden="true">Si no es continua, no es derivable. No hagas las derivadas laterales.</span><b>si $f$ no es continua en $a$, tampoco es derivable en $a$.</b> En ese caso no hace falta calcular ninguna derivada lateral.</p>
+    <p>Lo contrario no es cierto: una función continua puede no ser derivable. Pasa cuando la gráfica tiene un pico o esquina.</p></div>
+
+  <div class="lab" data-lab="lupa" id="lab-lupa">
+    <header><h3>Laboratorio: la lupa</h3><p>Si al acercarte al punto ves una sola recta, la función es derivable. Si sigues viendo una esquina, no lo es.</p></header>
+    <div class="lienzo"><svg class="graf" role="img" aria-label="Gráfica ampliada alrededor del punto de unión"></svg></div>
+    <div class="mandos"></div>
+    <div class="lectura" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="metodo">
+  <h2>El método</h2>
+  <div class="recuadro metodo"><span class="tit">Continuidad y derivabilidad de una función a trozos</span>
+    <ol>
+      <li><b>Continuidad</b> en cada trozo y en cada punto de unión (apartado B1). Donde no sea continua, escribe directamente que no es derivable.</li>
+      <li><b>Deriva cada trozo</b> en su intervalo <em>abierto</em>. Escribe la derivada también a trozos, sin poner todavía los puntos de unión.</li>
+      <li><b>En cada punto de unión donde sea continua</b>, calcula $f'(a^-)$ con la derivada del trozo izquierdo y $f'(a^+)$ con la del derecho.</li>
+      <li><b>Compara.</b> Iguales: derivable y $f'(a)$ vale eso. Distintas: no derivable (punto anguloso).</li>
+      <li><b>Concluye con el conjunto</b> donde $f$ es derivable, por ejemplo $[0,40)\cup(40,50]$.</li>
+    </ol></div>
+  <p class="con-nota"><span class="nota" aria-hidden="true">Esto vale cuando $f$ es continua en $a$ y los trozos son derivables.</span>Calcular $f'(a^-)$ sustituyendo $a$ en la derivada del trozo izquierdo es lo que se hace en la PAU, y es correcto siempre que la función sea continua en $a$. Por eso la continuidad va primero.</p>
+  <span class="escribe">«$f'(40^-)=-0{,}8$ y $f'(40^+)=0{,}2$. Como las derivadas laterales no coinciden, $B$ no es derivable en $t=40$.»</span>
+</section>
+
+<section id="ejemplos">
+  <h2>Ejemplos resueltos</h2>
+
+  <article class="ejemplo" id="ej-almazara">
+    <header><h3>La almazara</h3><span class="fuente">Andalucía, PEvAU septiembre 2018, opción B, ejercicio 2</span></header>
+    <div class="enunciado">
+      <p>El beneficio, en miles de euros, que ha obtenido una almazara a lo largo de 50 años viene dado por</p>
+      <div class="formula">$$B(t)=\begin{cases}-0{,}04t^2+2{,}4t & \text{si } 0\le t&lt;40\\[2mm] \dfrac{40t-320}{t} & \text{si } 40\le t\le50\end{cases}$$</div>
+      <p>a) Estudie la continuidad y la derivabilidad de $B$ en $[0,50]$. b) Estudie su monotonía y determine en qué momento fueron mayores los beneficios y cuál fue el beneficio máximo. c) Represente la gráfica y explique la evolución del beneficio.</p>
+    </div>
+    <div class="pasos">
+      <div class="paso"><span class="n">1</span><h4>Continuidad de cada trozo</h4><p>En $(0,40)$, polinómica. En $(40,50)$, racional con denominador $t$, que solo se anula en $t=0$, fuera del intervalo. Las dos son continuas.</p></div>
+      <div class="paso"><span class="n">2</span><h4>Continuidad en $t=40$</h4>
+        <p>$B(40)=\dfrac{1600-320}{40}=32$. $\quad\lim_{t\to40^-}B(t)=-64+96=32$. $\quad\lim_{t\to40^+}B(t)=32$.</p>
+        <p>Continua en $t=40$, y por tanto en $[0,50]$.</p></div>
+      <div class="paso"><span class="n">3</span><h4>Derivada de cada trozo</h4>
+        <p>Escribimos el segundo trozo como $B(t)=40-\dfrac{320}{t}$, que se deriva más fácil:</p>
+        <div class="formula">$$B'(t)=\begin{cases}-0{,}08t+2{,}4 & \text{si } 0&lt;t&lt;40\\[2mm] \dfrac{320}{t^2} & \text{si } 40&lt;t&lt;50\end{cases}$$</div></div>
+      <div class="paso"><span class="n">4</span><h4>Derivadas laterales en $t=40$</h4>
+        <p>$B'(40^-)=-0{,}08\cdot40+2{,}4=-0{,}8$. $\quad B'(40^+)=\dfrac{320}{1600}=0{,}2$.</p>
+        <p>Son distintas: $B$ no es derivable en $t=40$. Es derivable en $[0,40)\cup(40,50]$.</p>
+        <span class="escribe">«En el año 40 el beneficio cambia bruscamente su tendencia: venía bajando y empieza a subir.»</span></div>
+      <div class="paso"><span class="n">5</span><h4>Monotonía y máximo</h4>
+        <p>Primer trozo: $B'(t)=0 \Rightarrow t=30$. $B'&gt;0$ en $(0,30)$ y $B'&lt;0$ en $(30,40)$. Segundo trozo: $B'(t)=\frac{320}{t^2}&gt;0$, crece en $(40,50)$.</p>
+        <div class="desliza"><table class="tabla"><thead><tr><th>Intervalo</th><th class="c">$(0,30)$</th><th class="c">$(30,40)$</th><th class="c">$(40,50)$</th></tr></thead>
+          <tbody><tr><td>Signo de $B'$</td><td class="c">$+$</td><td class="c">$-$</td><td class="c">$+$</td></tr><tr><td>$B$</td><td class="c">crece</td><td class="c">decrece</td><td class="c">crece</td></tr></tbody></table></div>
+        <p>Candidatos a máximo absoluto: el máximo relativo $B(30)=-36+72=36$ y el extremo final $B(50)=40-6{,}4=33{,}6$. El mayor es $36$.</p></div>
+      <div class="paso"><span class="n">6</span><h4>Gráfica y evolución</h4>
+        <figure><svg class="graf" data-graf="almazara" role="img" aria-label="Gráfica del beneficio: sube hasta 36 en t=30, baja hasta 32 en t=40 y vuelve a subir hasta 33,6 en t=50"></svg></figure>
+        <p>El beneficio crece durante 30 años hasta 36 000 €, baja hasta 32 000 € en el año 40 y, a partir de ahí, vuelve a crecer hasta 33 600 € en el año 50, sin recuperar el máximo.</p></div>
+    </div>
+    <div class="respuesta"><b>Respuesta.</b> a) Continua en $[0,50]$; derivable en $[0,40)\cup(40,50]$. b) Crece en $(0,30)\cup(40,50)$ y decrece en $(30,40)$; el beneficio máximo fue de 36 000 €, en el año 30.</div>
+  </article>
+
+  <article class="ejemplo" id="ej-covid">
+    <header><h3>Los diagnósticos por PCR</h3><span class="fuente">Andalucía, PEvAU extraordinaria 2021, ejercicio 4</span></header>
+    <div class="enunciado">
+      <p>El número de diagnosticados por PCR en Andalucía, en miles de personas, se aproxima por</p>
+      <div class="formula">$$f(t)=\begin{cases}-t^2+2t-0{,}3 & \text{si } 0{,}2\le t\le1{,}8\\ 0{,}1t-0{,}12 & \text{si } 1{,}8&lt;t\le5\\ -0{,}5t^2+8{,}3t-28{,}62 & \text{si } 5&lt;t\le10\end{cases}$$</div>
+      <p>con $t$ en meses desde marzo de 2020. a) Estudie la continuidad y derivabilidad de $f$ en su dominio. b) ¿En qué instante o instantes es máximo el número de diagnosticados? ¿Cuál es ese número?</p>
+    </div>
+    <div class="pasos">
+      <div class="paso"><span class="n">1</span><h4>Continuidad</h4><p>Los tres trozos son polinómicos. En $t=1{,}8$: $f(1{,}8)=-3{,}24+3{,}6-0{,}3=0{,}06$ y por la derecha $0{,}18-0{,}12=0{,}06$. En $t=5$: $f(5)=0{,}5-0{,}12=0{,}38$ y por la derecha $-12{,}5+41{,}5-28{,}62=0{,}38$. Continua en $[0{,}2;\,10]$.</p></div>
+      <div class="paso"><span class="n">2</span><h4>Derivadas laterales</h4>
+        <div class="formula">$$f'(t)=\begin{cases}-2t+2 & 0{,}2&lt;t&lt;1{,}8\\ 0{,}1 & 1{,}8&lt;t&lt;5\\ -t+8{,}3 & 5&lt;t&lt;10\end{cases}$$</div>
+        <p>$f'(1{,}8^-)=-1{,}6\ne f'(1{,}8^+)=0{,}1$. $\quad f'(5^-)=0{,}1\ne f'(5^+)=3{,}3$. No es derivable en $t=1{,}8$ ni en $t=5$.</p></div>
+      <div class="paso"><span class="n">3</span><h4>Máximos</h4>
+        <p>Primer trozo: $f'(t)=0\Rightarrow t=1$, con $f(1)=0{,}7$. Segundo trozo: $f'=0{,}1&gt;0$, sin extremos dentro. Tercer trozo: $f'(t)=0\Rightarrow t=8{,}3$, con $f(8{,}3)=5{,}825$.</p>
+        <p>Comparamos con los extremos del dominio: $f(0{,}2)=0{,}06$ y $f(10)=4{,}38$. El valor mayor es $5{,}825$.</p>
+        <figure><svg class="graf" data-graf="covid" role="img" aria-label="Gráfica a trozos con un pequeño máximo en t=1, un tramo recto creciente y un máximo de 5,825 en t=8,3"></svg></figure></div>
+    </div>
+    <div class="respuesta"><b>Respuesta.</b> a) Continua en $[0{,}2;\,10]$ y derivable salvo en $t=1{,}8$ y $t=5$. b) El máximo se alcanza en $t=8{,}3$ meses, con 5 825 diagnosticados.</div>
+  </article>
+
+  <article class="ejemplo" id="ej-trinidad">
+    <header><h3>El fondo de inversión de Trinidad</h3><span class="fuente">Andalucía, extraordinaria 2025, ejercicio 3</span></header>
+    <div class="enunciado">
+      <p>Trinidad deposita 5000 € en un fondo y el capital final tras $t$ años es</p>
+      <div class="formula">$$f(t)=\begin{cases}5000\,(1+0{,}05t) & \text{si } 0\le t\le1\\ 5000\cdot1{,}05^{\,t} & \text{si } t&gt;1\end{cases}$$</div>
+      <p>a) ¿Cuánto tiempo debe mantener el dinero si el capital final es de 5931,10 €? b) Calcule los intereses entre el año 2 y el año 4, sabiendo que $I=f(t_2)-f(t_1)$. c) Estudie la continuidad y la derivabilidad de $f$. d) Estudie la monotonía de $f$ y esboce su gráfica.</p>
+    </div>
+    <div class="pasos">
+      <div class="paso"><span class="n">1</span><h4>a) Despejar $t$</h4><p>El primer trozo llega como mucho a $f(1)=5250$, así que buscamos en el segundo: $5000\cdot1{,}05^t=5931{,}10 \Rightarrow 1{,}05^t=1{,}18622 \Rightarrow t=\dfrac{\ln1{,}18622}{\ln1{,}05}\approx3{,}5$ años.</p></div>
+      <div class="paso"><span class="n">2</span><h4>b) Intereses</h4><p>$I=f(4)-f(2)=5000\,(1{,}05^4-1{,}05^2)=6077{,}53125-5512{,}5=565{,}03125$ €.</p></div>
+      <div class="paso"><span class="n">3</span><h4>c) Continuidad</h4><p>Los dos trozos son continuos (polinómico y exponencial). En $t=1$: $f(1)=5250$, $\lim_{t\to1^-}f(t)=5250$, $\lim_{t\to1^+}f(t)=5000\cdot1{,}05=5250$. Continua en $[0,+\infty)$.</p></div>
+      <div class="paso"><span class="n">4</span><h4>c) Derivabilidad</h4>
+        <div class="formula">$$f'(t)=\begin{cases}250 & \text{si } 0&lt;t&lt;1\\ 5000\cdot1{,}05^{\,t}\ln1{,}05 & \text{si } t&gt;1\end{cases}$$</div>
+        <p>$f'(1^-)=250$ y $f'(1^+)=5250\ln1{,}05\approx256{,}14$. Son distintas: no es derivable en $t=1$. Es derivable en $[0,1)\cup(1,+\infty)$.</p></div>
+      <div class="paso"><span class="n">5</span><h4>d) Monotonía</h4><p>$f'(t)=250&gt;0$ en $(0,1)$ y $f'(t)=5000\cdot1{,}05^t\ln1{,}05&gt;0$ en $(1,+\infty)$, porque $\ln1{,}05&gt;0$. La función crece en todo su dominio.</p>
+        <figure><svg class="graf" data-graf="trinidad" role="img" aria-label="Gráfica creciente del capital: recta hasta t=1 y exponencial después; 5931,10 euros en t=3,5"></svg></figure></div>
+    </div>
+    <div class="respuesta"><b>Respuesta.</b> a) 3 años y medio. b) 565,03125 €. c) Continua en $[0,+\infty)$; derivable en $[0,1)\cup(1,+\infty)$. d) Crece en todo su dominio.</div>
+  </article>
+</section>
+
+<section id="fallos">
+  <h2>Lo que suele fallar</h2>
+  <div class="recuadro fallo"><span class="tit">Errores que cuestan nota</span>
+    <ul>
+      <li><b>Hacer derivadas laterales donde la función no es continua.</b> Si no es continua, no es derivable: escríbelo y sigue.</li>
+      <li><b>Poner los puntos de unión dentro de los intervalos de $f'$.</b> La derivada a trozos va con intervalos abiertos hasta que compruebes los puntos de unión.</li>
+      <li><b>Olvidar los extremos del intervalo</b> al buscar el máximo absoluto: $B(50)$ y $f(10)$ también son candidatos.</li>
+      <li><b>Quedarse con un máximo relativo fuera del intervalo del trozo.</b> Si $f'(t)=0$ en un valor que no pertenece al intervalo de ese trozo, ese valor no cuenta.</li>
+      <li><b>No responder en el contexto:</b> cuándo y cuánto, con unidades («en el año 30, 36 000 €»).</li>
+    </ul></div>
+</section>
+
+<section id="entrenamiento">
+  <h2>Entrenamiento</h2>
+  <ol class="ejercicios">
+    <li><span class="nivel n1">básico</span> Estudia la derivabilidad de $f(x)=\begin{cases}x^2 & x\le1\\ 2x-1 & x&gt;1\end{cases}$.
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>Continua en $x=1$: los tres valores son 1. $f'(1^-)=2\cdot1=2$ y $f'(1^+)=2$. Derivable en $\mathbb{R}$, con $f'(1)=2$.</p></div></details></li>
+    <li><span class="nivel n1">básico</span> Estudia la derivabilidad de $f(x)=\begin{cases}x^2-2x & x&lt;3\\ 4x-9 & x\ge3\end{cases}$.
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>En $x=3$: $f(3)=3$ y los dos límites valen 3: continua. $f'(3^-)=2\cdot3-2=4$ y $f'(3^+)=4$. Derivable en $\mathbb{R}$.</p></div></details></li>
+    <li><span class="nivel n2">medio</span> Estudia la continuidad y derivabilidad de $f(x)=\begin{cases}e^{x-1} & x\le1\\ x^2 & x&gt;1\end{cases}$.
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>En $x=1$ los tres valores son 1: continua. $f'(1^-)=e^0=1$ y $f'(1^+)=2$. No es derivable en $x=1$; sí en $\mathbb{R}-\{1\}$.</p></div></details></li>
+    <li><span class="nivel n2">medio</span> Estudia la continuidad y derivabilidad de $f(x)=\begin{cases}\ln x & 0&lt;x\le1\\ x^2-x & x&gt;1\end{cases}$.
+      <details class="sol"><summary>Solución</summary><div class="dentro"><p>$\ln x$ es continua en $(0,1]$. En $x=1$: $f(1)=0$, por la derecha $1-1=0$: continua. $f'(1^-)=\frac11=1$ y $f'(1^+)=2\cdot1-1=1$. Derivable en $(0,+\infty)$.</p></div></details></li>
+    <li><span class="nivel n3">examen</span> <span class="origen">Baleares, PBAU julio 2018, modelo 1, opción A, 2.</span> Los beneficios (miles de euros) según la inversión en promoción $x$ (miles de euros) son $B(x)=\begin{cases}5x+15 & 0\le x\le3\\ -(x-3)^2+30 & 3&lt;x\le8\end{cases}$. a) ¿Es continua? b) ¿Es derivable? Da el conjunto donde lo es. c) Beneficio máximo y mínimo. d) Crecimiento y decrecimiento.
+      <details class="sol"><summary>Solución</summary><div class="dentro">
+        <p>a) En $x=3$: $B(3)=30$ y los dos límites valen 30. Continua en $[0,8]$.</p>
+        <p>b) $B'(3^-)=5$ y $B'(3^+)=-2(3-3)=0$. No derivable en $x=3$; derivable en $[0,3)\cup(3,8]$.</p>
+        <p>d) $B'=5&gt;0$ en $(0,3)$; $B'=-2(x-3)&lt;0$ en $(3,8)$. Crece en $(0,3)$ y decrece en $(3,8)$.</p>
+        <p>c) Máximo en $x=3$: 30 000 €. Mínimo entre los extremos: $B(0)=15$ y $B(8)=5$, así que el mínimo es 5 000 €, invirtiendo 8 000 €.</p></div></details></li>
+    <li><span class="nivel n3">examen</span> <span class="origen">Canarias, EBAU extraordinaria 2025, 3A.</span> Las bebidas vendidas (miles) en los primeros 6 meses son $A(t)=\begin{cases}12-t(t-2) & 0\le t\le3\\ \dfrac{5t+12}{3} & 3&lt;t\le6\end{cases}$. a) Continuidad y derivabilidad. b) Crecimiento, y valores mínimo y máximo de ventas.
+      <details class="sol"><summary>Solución</summary><div class="dentro">
+        <p>a) En $t=3$: $A(3)=12-3=9$ y $\frac{15+12}{3}=9$: continua. $A'(t)=-2t+2$ en $(0,3)$ y $A'(t)=\frac53$ en $(3,6)$. $A'(3^-)=-4\ne\frac53$: no derivable en $t=3$.</p>
+        <p>b) Crece en $(0,1)$, decrece en $(1,3)$ y crece en $(3,6)$. Valores: $A(0)=12$, $A(1)=13$, $A(3)=9$, $A(6)=14$. Mínimo: 9 000 bebidas en el mes 3. Máximo: 14 000 en el mes 6.</p></div></details></li>
+  </ol>
+</section>
+
+<section id="autoevaluacion">
+  <h2>Autoevaluación</h2>
+  <ol class="prueba" id="p-b3">
+    <li><p class="q">Una función que no es continua en $x=2$…</p>
+      <div class="opciones"><button type="button">puede ser derivable si las derivadas laterales coinciden</button><button type="button" data-bien>no es derivable en $x=2$</button></div>
+      <p class="porque">Derivable implica continua. Si falla la continuidad, falla la derivabilidad, sin hacer cuentas.</p></li>
+    <li><p class="q">$f$ es continua en $x=1$, $f'(1^-)=3$ y $f'(1^+)=3$. Entonces…</p>
+      <div class="opciones"><button type="button" data-bien>$f$ es derivable en $x=1$ y $f'(1)=3$</button><button type="button">no se puede saber</button></div>
+      <p class="porque">Continua y con las derivadas laterales iguales: derivable, y la derivada vale el valor común.</p></li>
+    <li><p class="q">Una función continua con un pico en $x=0$…</p>
+      <div class="opciones"><button type="button">es derivable en $x=0$</button><button type="button" data-bien>no es derivable en $x=0$</button></div>
+      <p class="porque">En un pico las pendientes por cada lado son distintas: punto anguloso.</p></li>
+    <li><p class="q">Si $f'(t)=0$ en $t=7$ pero ese trozo solo vale para $0\le t&lt;5$…</p>
+      <div class="opciones"><button type="button">$t=7$ es un extremo relativo</button><button type="button" data-bien>$t=7$ no cuenta</button></div>
+      <p class="porque">Solo valen los puntos dentro del intervalo del trozo.</p></li>
+    <li><p class="q">Para el máximo absoluto de una función en $[0,50]$ hay que comparar…</p>
+      <div class="opciones"><button type="button">solo los puntos con $f'=0$</button><button type="button" data-bien>los puntos con $f'=0$, los puntos de unión y los extremos $0$ y $50$</button></div>
+      <p class="porque">El máximo puede estar en un extremo del intervalo o en un punto donde $f$ no es derivable.</p></li>
+  </ol>
+  <div class="marcador" aria-live="polite"></div>
+</section>
+
+<section id="resumen">
+  <h2>Resumen</h2>
+  <div class="formulas">
+    <div class="formula">$$f'(a^-)=f'(a^+)\;\Rightarrow\;\text{derivable en } a$$</div>
+    <div class="formula">$$\text{no continua}\;\Rightarrow\;\text{no derivable}$$</div>
+  </div>
+  <p>Primero la continuidad. Después deriva cada trozo en intervalos abiertos y compara las derivadas laterales en los puntos de unión donde sea continua. Concluye con el conjunto donde es derivable.</p>
+  <nav class="siguiente" aria-label="Apartados">
+    <a href="derivadas.html"><small>Anterior</small><b>B2. Derivadas</b></a>
+    <a class="sig" href="parametros.html"><small>Siguiente</small><b>B4. Parámetros</b></a>
+  </nav>
+</section>
+
+  </main>
+</div>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="../../pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
+</body>
+</html>
