@@ -32,7 +32,7 @@ function Graf(svg, o){
     s += `<line class="eje" x1="${g.X(ey)}" x2="${g.X(ey)}" y1="${g.Y(g.y0)}" y2="${g.Y(g.y1)}"/>`;
     for(let x=Math.ceil(g.x0/px)*px; x<=g.x1+1e-9; x+=px){ if(Math.abs(x-ey)<1e-9 && !op.cero) continue;
       s += `<text class="marca-eje" x="${g.X(x)}" y="${g.Y(ex)+17}" text-anchor="middle">${fmt(x,3)}</text>`; }
-    for(let y=Math.ceil(g.y0/py)*py; y<=g.y1+1e-9; y+=py){ if(Math.abs(y-ex)<1e-9) continue;
+    for(let y=Math.ceil(g.y0/py)*py; y<=g.y1+1e-9; y+=py){ if(Math.abs(y-ex)<1e-9 || (op.sinY||[]).some(v=>Math.abs(v-y)<1e-9)) continue;
       s += `<text class="marca-eje" x="${g.X(ey)-7}" y="${g.Y(y)+4}" text-anchor="end">${fmt(y,3)}</text>`; }
     if(op.nx) s += `<text class="etq" x="${g.X(g.x1)-2}" y="${g.Y(ex)-8}" text-anchor="end">${op.nx}</text>`;
     if(op.ny) s += `<text class="etq" x="${g.X(ey)+8}" y="${g.Y(g.y1)+14}">${op.ny}</text>`;
@@ -116,13 +116,13 @@ function labTipos(el){
    ========================================================================== */
 function labCoser(el){
   const L = lab(el);
-  L.mandos.innerHTML = `<label class="campo">Valor de $a$ <input type="range" data-p="a" min="-3" max="2" step="0.25" value="1" aria-describedby="${el.id}-lect"><output>1</output></label>`;
+  L.mandos.innerHTML = `<label class="campo"><span>Valor de $a$</span> <input type="range" data-p="a" min="-3" max="2" step="0.25" value="1" aria-describedby="${el.id}-lect"><output>1</output></label>`;
   window.Mates && Mates.formulas(L.mandos);
   L.lectura.id = el.id + "-lect";
   const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
   const pon = () => {
     const a = +r.value; out.textContent = fmt(a);
-    const g = Graf(L.svg, {x:[-3,2.5], y:[-3.5,5], alto:360}).ejes({px:1, py:1});
+    const g = Graf(L.svg, {x:[-3,2.5], y:[-3.5,5], alto:360}).ejes({px:1, py:1, sinY:[-1]});
     g.curva(x=>1/(x-1), -3, -0.0001);
     g.curva(x=>x*x+a, 0, 2.5, "b");
     const cosida = Math.abs(a+1) < 1e-9;
@@ -150,7 +150,7 @@ function labLupa(el){
       nota:"Andalucía, PEvAU ordinaria 2022"}
   };
   L.mandos.innerHTML = `<div class="segmentado" role="group" aria-label="Función">${Object.entries(casos).map(([k,c])=>`<button type="button" data-k="${k}" aria-pressed="false">${c.t}</button>`).join("")}</div>
-    <label class="campo">Aumento <input type="range" data-p="z" min="0" max="7" step="0.05" value="0"><output>×1</output></label>`;
+    <label class="campo"><span>Aumento</span> <input type="range" data-p="z" min="0" max="7" step="0.05" value="0"><output>×1</output></label>`;
   window.Mates && Mates.formulas(L.mandos);
   const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
   let k = "almazara";
@@ -182,7 +182,7 @@ function labLupa(el){
 function labSecante(el){
   const L = lab(el);
   const f = t => -0.04*t*t + 2.4*t, t0 = 20;
-  L.mandos.innerHTML = `<label class="campo">$h$ <input type="range" data-p="h" min="0" max="1" step="0.005" value="0.4"><output></output></label>`;
+  L.mandos.innerHTML = `<label class="campo"><span>$h$</span> <input type="range" data-p="h" min="0" max="1" step="0.005" value="0.4"><output></output></label>`;
   window.Mates && Mates.formulas(L.mandos);
   const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
   const pon = () => {
@@ -208,8 +208,8 @@ function labSecante(el){
    ========================================================================== */
 function labDos(el){
   const L = lab(el);
-  L.mandos.innerHTML = `<label class="campo">$a$ <input type="range" min="0" max="8" step="0.5" value="2" data-p="a"><output></output></label>
-    <label class="campo">$b$ <input type="range" min="-8" max="4" step="0.5" value="1" data-p="b"><output></output></label>`;
+  L.mandos.innerHTML = `<label class="campo"><span>$a$</span> <input type="range" min="0" max="8" step="0.5" value="2" data-p="a"><output></output></label>
+    <label class="campo"><span>$b$</span> <input type="range" min="-8" max="4" step="0.5" value="1" data-p="b"><output></output></label>`;
   window.Mates && Mates.formulas(L.mandos);
   const [ra, rb] = L.mandos.querySelectorAll("input"), [oa, ob] = L.mandos.querySelectorAll("output");
   const pon = () => {
@@ -256,11 +256,28 @@ const ESTATICAS = {
 document.addEventListener("mates:listo", ()=>{
   const vigila = (el, fn) => { let w = el.getBoundingClientRect().width;
     new ResizeObserver(()=>{ const n = el.getBoundingClientRect().width; if(Math.abs(n-w) > 8){ w = n; fn(); } }).observe(el); };
-  document.querySelectorAll("[data-lab]").forEach(el=>{
-    ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos}[el.dataset.lab]||(()=>{}))(el);
-    const inp = el.querySelector("input[type=range]"), seg = el.querySelector(".segmentado button[aria-pressed=true]");
-    vigila(el, ()=>{ if(inp) inp.dispatchEvent(new Event("input")); else if(seg) seg.click(); else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
-  });
+  const yo = document.querySelector('script[src*="assets/v2/grafica.js"]');
+  const base = yo ? yo.getAttribute("src").replace(/assets\/v2\/grafica\.js.*$/, "") : "";
+  let cargaKatex = null;
+  const katexListo = () => cargaKatex || (cargaKatex = new Promise(ok=>{
+    if(window.katex) return ok();
+    const sc = document.createElement("script"); sc.src = base + "assets/katex/katex.min.js"; sc.onload = sc.onerror = () => ok();
+    document.head.appendChild(sc); }));
+  const arranca = el => {
+    if(el._listo) return; el._listo = true;
+    katexListo().then(()=>{
+      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos}[el.dataset.lab]||(()=>{}))(el);
+      vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
+        else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
+      el.dispatchEvent(new Event("lab:listo"));
+    });
+  };
+  const labs = document.querySelectorAll("[data-lab]");
+  if("IntersectionObserver" in window){
+    const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ io.unobserve(e.target); arranca(e.target); } }), {rootMargin:"600px 0px"});
+    labs.forEach(el=>io.observe(el));
+  } else labs.forEach(arranca);
+  window.arrancaLab = arranca;
   document.querySelectorAll("svg[data-graf]").forEach(svg=>{ const f = ESTATICAS[svg.dataset.graf]; if(f){ f(svg); vigila(svg, ()=>f(svg)); } });
 });
 })();

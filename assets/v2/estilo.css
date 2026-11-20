@@ -46,6 +46,7 @@
 }
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:84px}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:var(--papel);color:var(--tinta);font:400 1.0625rem/1.65 var(--f-texto);font-feature-settings:"kern","liga"}
@@ -424,3 +425,19 @@ details.sol>summary{padding:6px 0}
 .reto .marcador:empty{display:none}
 .reto .prueba{margin-bottom:6px}
 @media (max-width:860px){.portada{grid-template-columns:minmax(0,1fr)}}
+/* Tablas de dos o tres columnas con texto: apiladas en móvil */
+@media (max-width:600px){
+  .tabla.apila thead{display:none}
+  .tabla.apila tr{display:grid;gap:2px;padding:10px 0;border-bottom:1px solid var(--linea)}
+  .tabla.apila td{border:0;padding:0}
+  .tabla.apila td:first-child{font-weight:700}
+}
+/* ====== Ronda 3 ====== */
+.con-nota>.nota{transition:opacity .2s}
+.con-nota>.nota.cruza{opacity:.08}
+.portada{align-items:start}
+.porque .katex,.reto .katex,.opciones .katex{white-space:nowrap}
+.parada.req::after{right:-4px;top:-16px;transform:rotate(-6deg);background:var(--papel);padding:0 4px;line-height:1}
+.mapa.activo .parada:not(.req):not(.foco){opacity:.6}
+.sin-js [data-pizarra],.sin-js [data-imprimir],.sin-js [data-poner],.sin-js .lab,.sin-js .tapa{display:none!important}
+.reto .formula{margin:8px 0 10px;background:#fff;font-size:.92em}

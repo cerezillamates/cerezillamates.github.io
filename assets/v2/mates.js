@@ -70,7 +70,7 @@ function ejemplos(){
     };
     tapa.addEventListener("click", e=>{
       const b = e.target.closest("button"); if(!b) return;
-      if(b === bSig){ vistos++; pinta(); pasos[vistos-1].scrollIntoView({block:"nearest"});
+      if(b === bSig){ if(vistos >= pasos.length) return; vistos++; pinta(); pasos[vistos-1].scrollIntoView({block:"nearest"});
         (vistos >= pasos.length ? bTapar : bSig).focus({preventScroll:true}); }
       if(b === bTodo){ vistos = pasos.length; pinta(); pasos[0].focus(); }
       if(b === bTapar){ vistos = 0; pinta(); ej.scrollIntoView({block:"start"}); bSig.focus({preventScroll:true}); }
@@ -78,6 +78,8 @@ function ejemplos(){
     ej._sig = () => { if(vistos < pasos.length){ vistos++; pinta(); pasos[vistos-1].scrollIntoView({block:"center"}); return true; } return false; };
     ej._ant = () => { if(vistos > 0){ vistos--; pinta(); return true; } return false; };
     ej._todo = () => { vistos = pasos.length; pinta(); };
+    ej._vistos = () => vistos;
+    ej._pon = n => { vistos = Math.max(0, Math.min(pasos.length, n)); pinta(); };
     pinta();
   });
 }
@@ -92,7 +94,7 @@ function pruebas(){
       if(!marc) return;
       const hechas = items.filter(li=>li.dataset.respondida), bien = hechas.filter(li=>li.dataset.respondida==="bien");
       marc.innerHTML = hechas.length===items.length
-        ? `<span class="num">${bien.length}/${items.length}</span><span>${bien.length===items.length ? (marc.dataset.fin || "Todo bien. Puedes pasar a los ejercicios de examen.") : "Repasa las que tienes en rojo: debajo de cada una está el porqué."}</span><button type="button" class="boton fino" data-otra>Repetir</button>`
+        ? `<span class="num">${bien.length}/${items.length}</span><span>${bien.length===items.length ? (marc.dataset.fin || "Todo bien. Puedes pasar a los ejercicios de examen.") : (items.length===1 ? "Lee debajo el porqué." : "Repasa las que tienes en rojo: debajo de cada una está el porqué.")}</span><button type="button" class="boton fino" data-otra>Repetir</button>`
         : (items.length > 1 ? `<span class="tenue">${hechas.length} de ${items.length} respondidas</span>` : "");
       const b = $("[data-otra]", marc);
       if(b) b.onclick = () => { items.forEach(li=>{ delete li.dataset.respondida;
@@ -139,6 +141,7 @@ function indice(){
   const B = t => t < 40 ? -0.04*t*t + 2.4*t : (40*t-320)/t;
   const X = t => 3 + 21 * (B(t) / 36);
   let ys = [], camino = null, L = 0;
+  const notas = $$(".con-nota>.nota");
   const dibuja = () => {
     const b = nav.getBoundingClientRect(), h = b.height;
     ys = enlaces.map(a=>{ const r = a.getBoundingClientRect(); return r.top - b.top + r.height/2; });
@@ -149,6 +152,7 @@ function indice(){
     svg.setAttribute("viewBox", `0 0 28 ${h}`); svg.style.height = h + "px";
     svg.innerHTML = `<path d="${d}" fill="none" stroke="var(--cuadro-fuerte)" stroke-width="2"/>
       <path class="avance" d="${d}" fill="none" stroke="var(--azul)" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="${X(40).toFixed(2)}" cy="${(y0+(y1-y0)*0.8).toFixed(2)}" r="2.6" fill="var(--rojo)"/>
       ${ys.map(y=>`<circle cx="${X(tDeY(y)).toFixed(2)}" cy="${y.toFixed(2)}" r="4.2" fill="var(--papel)" stroke="var(--cuadro-fuerte)" stroke-width="2"/>`).join("")}`;
     camino = $(".avance", svg); L = camino.getTotalLength();
     actualiza();
@@ -166,6 +170,8 @@ function indice(){
     const y = ys[act] + (ys[act+1] !== undefined ? (ys[act+1]-ys[act])*frac : 0);
     let lo = 0, hi = L; for(let k=0;k<24;k++){ const m=(lo+hi)/2; if(camino.getPointAtLength(m).y < y) lo = m; else hi = m; }
     camino.style.strokeDasharray = `${lo} ${L}`;
+    const ri = nav.closest(".indice").getBoundingClientRect();
+    notas.forEach(n=>{ const r = n.getBoundingClientRect(); n.classList.toggle("cruza", r.bottom > ri.top - 6 && r.top < ri.bottom + 6 && r.right <= ri.right + 40); });
     $$("circle", svg).forEach((c,i)=>{ const ok = i<=act; c.setAttribute("fill", ok ? "var(--azul)" : "var(--papel)"); c.setAttribute("stroke", ok ? "var(--azul)" : "var(--cuadro-fuerte)"); });
   };
   let pend = false;
@@ -208,9 +214,10 @@ function recuerda(){
 /* ---------- 7. Imprimir: con todas las soluciones abiertas ---------- */
 function imprimir(){
   $$("[data-imprimir]").forEach(b=>b.addEventListener("click", ()=>window.print()));
-  let cerrados = [];
-  addEventListener("beforeprint", ()=>{ cerrados = $$("details:not([open])"); cerrados.forEach(d=>d.open = true); $$(".ejemplo").forEach(ej=>ej._todo && ej._todo()); });
-  addEventListener("afterprint", ()=>{ cerrados.forEach(d=>d.open = false); });
+  let cerrados = [], estado = [];
+  addEventListener("beforeprint", ()=>{ cerrados = $$("details:not([open])"); cerrados.forEach(d=>d.open = true);
+    estado = $$(".ejemplo").map(ej=>ej._vistos ? ej._vistos() : 0); $$(".ejemplo").forEach(ej=>ej._todo && ej._todo()); });
+  addEventListener("afterprint", ()=>{ cerrados.forEach(d=>d.open = false); $$(".ejemplo").forEach((ej,i)=>ej._pon && ej._pon(estado[i]||0)); });
 }
 
 /* ---------- 8. Mapa del bloque: al señalar un apartado se iluminan sus requisitos ---------- */
@@ -220,8 +227,9 @@ function mapa(){
   const paradas = $$(".parada", m);
   const necesita = id => { const p = document.getElementById(id), q = p && $(".parada", p); return q ? q.dataset.necesita.split(" ").filter(Boolean) : []; };
   const todos = (id, acc=new Set()) => { necesita(id).forEach(r=>{ if(!acc.has(r)){ acc.add(r); todos(r, acc); } }); return acc; };
-  paradas.forEach(p=>{ const n = necesita(p.closest("li").id);
-    p.insertAdjacentHTML("beforeend", `<span class="nec">${n.length ? "Necesitas: " + n.join(", ") : "Puedes empezar por aquí"}</span>`); });
+  const publicado = id => { const li = document.getElementById(id); return !!(li && $("a.parada", li)); };
+  paradas.forEach(p=>{ const n = necesita(p.closest("li").id), falta = n.some(r=>!publicado(r)) && p.tagName === "A";
+    p.insertAdjacentHTML("beforeend", `<span class="nec">${n.length ? "Necesitas: " + n.join(", ") + (falta ? " (lo imprescindible se explica dentro)" : "") : "Puedes empezar por aquí"}</span>`); });
   const enciende = (p) => {
     const id = p.closest("li").id, req = todos(id);
     m.classList.add("activo");
@@ -230,7 +238,6 @@ function mapa(){
   };
   const apaga = () => { m.classList.remove("activo"); paradas.forEach(q=>q.classList.remove("req","foco")); if(ayuda) ayuda.textContent = base; };
   paradas.forEach(p=>{
-    if(p.tagName !== "A") p.tabIndex = 0;
     p.addEventListener("mouseenter", ()=>enciende(p)); p.addEventListener("focus", ()=>enciende(p));
     p.addEventListener("mouseleave", apaga); p.addEventListener("blur", apaga);
   });
@@ -240,6 +247,8 @@ function mapa(){
 function puentes(){
   $$("[data-poner]").forEach(b=>b.addEventListener("click", ()=>{
     const lab = document.getElementById(b.dataset.poner); if(!lab) return;
+    if(!lab._listo && window.arrancaLab){ lab.addEventListener("lab:listo", ()=>b.click(), {once:true}); window.arrancaLab(lab); return; }
+    if(!lab.querySelector("input,button")) { lab.addEventListener("lab:listo", ()=>b.click(), {once:true}); return; }
     const vals = JSON.parse(b.dataset.valores || "{}");
     if(vals.caso){ const seg = lab.querySelector(`button[data-k="${vals.caso}"]`); if(seg) seg.click(); }
     Object.entries(vals).forEach(([k,v])=>{ if(k==="caso") return;
@@ -252,7 +261,10 @@ function puentes(){
 
 document.addEventListener("DOMContentLoaded", ()=>{
   formulas(document.body);
-  ejemplos(); pruebas(); indice(); pizarra(); recuerda(); imprimir(); mapa(); puentes();
+  ejemplos();
+  const q = new URLSearchParams(location.search).get("pasos"), dest = location.hash && document.getElementById(location.hash.slice(1));
+  if(q && dest && dest._pon){ dest._pon(+q); requestAnimationFrame(()=>dest.scrollIntoView({block:"start"})); }
+  pruebas(); indice(); pizarra(); recuerda(); imprimir(); mapa(); puentes();
   document.dispatchEvent(new Event("mates:listo"));
 });
 })();
