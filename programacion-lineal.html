@@ -225,6 +225,14 @@ table.grid td.y{background:var(--soft)}
 .steps::-webkit-scrollbar{display:none}
 .steps a{border-radius:999px;padding:6px 12px;white-space:nowrap}
 .qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.rpbig{display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:var(--card);border:2px solid var(--acc);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh);margin:6px 0 14px}
+.rpbig .qn{font-size:1.8rem}
+.rpbig b{font-size:1.2rem}
+.rph{font-size:1.15rem;margin:16px 0 8px}
+#rphome .qgrid a .count, #rpsub .qgrid a .count{font-weight:400;display:block;margin-top:2px}
+.rpback{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:4px 0 10px}
+.rpback b{font-size:1.25rem}
+.rpdrill > h2, .rpdrill > p, .rpdrill > .progress, .rpdrill > .count{display:none}
 .qgrid a{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;box-shadow:var(--sh);font-weight:600;line-height:1.3}
 .qgrid a:hover{border-color:var(--vio)}
 .qn{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--vio-bg);color:var(--vio);font:800 1rem var(--f-display)}
@@ -750,8 +758,10 @@ Misiones y programas son enteros: es lo mismo que \(2x+y\ge 21\).<br>El máximo 
 <!-- ================= REPASO ================= -->
 <section class="view" id="v-repaso" hidden>
   <div class="vh"><span class="eyebrow">Selectividad PAU</span><h1>Repaso</h1>
-    <p class="lead">Empieza por la <b>Selección para el examen</b>. Si después quieres más práctica de algo concreto, búscalo por tipo de pregunta o por tipo de enunciado.</p></div>
-  <nav class="steps" aria-label="Partes del repaso"><a href="#repaso" data-go="rp0">Selección para el examen</a><a href="#repaso" data-go="rp1">Por tipo de pregunta</a><a href="#repaso" data-go="rp2">Por tipo de enunciado</a></nav>
+    <p class="lead" id="rplead">Empieza por la <b>Selección para el examen</b>. Si después quieres más práctica de algo concreto, entra en su tipo de pregunta o de enunciado.</p></div>
+  <div id="rpback" class="rpback" hidden><a id="rpbacka" href="#repaso" class="tool">← Volver</a><b id="rptit"></b></div>
+  <div id="rphome"></div>
+  <div id="rpsub" hidden></div>
   <div class="card rcard" id="rp0">
     <h2>Selección para el examen</h2>
     <p style="margin:0"><b id="selN"></b> ejercicios reales de PAU, elegidos y ordenados como un plan: de menos a más difícil. Cada uno entrena una dificultad distinta. Hazlos en orden y marca <b>Hecho</b> al terminar.</p>
@@ -815,14 +825,16 @@ const VIEWS = ['inicio','tabla','teoria','tipos','ejercicios','repaso'];
 const TAB = {inicio:'inicio', tabla:'tabla', ejercicios:'tabla', teoria:'metodo', tipos:'metodo', repaso:'repaso'};
 let BACK = null, RESTORE = null, HL = false;
 function route(){
-  let h = location.hash.slice(1) || 'inicio', target = null;
+  let h = location.hash.slice(1) || 'inicio', target = null, rpsub = null;
   const m = h.match(/^e(\d+)$/); if (m){ target = +m[1]; h = 'ejercicios'; }
+  const mr = h.match(/^repaso\/(.+)$/); if (mr){ rpsub = mr[1]; h = 'repaso'; }
   if (!VIEWS.includes(h)) h = 'inicio';
   VIEWS.forEach(v => $('#v-' + v).hidden = v !== h);
   $$('nav.tabs a').forEach(a => a.setAttribute('aria-current', a.dataset.tab === TAB[h] ? 'page' : 'false'));
   $$('.seg a').forEach(a => a.setAttribute('aria-current', a.dataset.v === h ? 'page' : 'false'));
   $('#backBtn').hidden = !(target && BACK);
   if (h === 'ejercicios' && !target && !rendered) renderList();
+  if (h === 'repaso' && window.rpShow) rpShow(rpsub);
   if (target){ openExercise(target); } else if (RESTORE != null){ const y = RESTORE; RESTORE = null; setTimeout(() => window.scrollTo(0, y), 30); } else window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
@@ -971,6 +983,41 @@ $('#sit').innerHTML = DATA.sit.map(([k, first]) => { const T = TIPOS.find(t => t
     <div style="display:grid;gap:3px">${first.map(n => '<div>' + chip(BYN[n], 'rec', true) + ' <span class="count">' + esc(BYN[n].s) + '</span></div>').join('')}</div>
     ${rest.length ? `<details><summary class="count" style="cursor:pointer">Más ejercicios de este tipo (${rest.length})</summary><div>${rest.map(e => chip(e, '', true)).join(' ')}</div></details>` : ''}
   </div>`; }).join('');
+
+/* ---------- repaso: portada con recuadros y se entra en uno cada vez ---------- */
+const NRES = k => EX.filter(e => e.L.includes(k) && SOL[e.n]).length;
+$('#rphome').innerHTML = `<a class="rpbig" href="#repaso/sel"><span class="qn">🎯</span><span><b>Selección para el examen</b><br><span class="count">${SELN.length} ejercicios en ${SEL.length} bloques, de menos a más difícil · todos con solución a mano</span></span></a>
+  <h2 class="rph">Por tipo de pregunta</h2>
+  <div class="qgrid">${ROWS.map(r => `<a href="#repaso/q-${r[0]}"><span class="qn">${r[0]}</span><span>${esc(r[1])}<span class="count">${esc(r[2]).replace(/Pregunta (\d+)/g, 'Problema tipo $1')}${NRES(r[0]) ? ' · ✍️ ' + NRES(r[0]) + (NRES(r[0]) === 1 ? ' resuelto' : ' resueltos') : ''}</span></span></a>`).join('')}</div>
+  <h2 class="rph">Por tipo de enunciado</h2>
+  <div class="qgrid">${DATA.sit.map(([k]) => { const T = TIPOS.find(t => t[0] === k); return `<a href="#repaso/t-${k}"><span class="qn">✎</span><span>${esc(T[1])}<span class="count">${EX.filter(e => e.t.includes(k)).length} ejercicios</span></span></a>`; }).join('')}</div>`;
+window.rpShow = function(sub){
+  const home = !sub;
+  $('#rphome').hidden = !home; $('#rplead').hidden = !home; $('#rpback').hidden = home; $('#rpsub').hidden = true;
+  ['rp0','rp1','rp2'].forEach(id => { const c = $('#' + id); c.hidden = true; c.classList.remove('rpdrill'); });
+  $('#rpbacka').setAttribute('href', '#repaso');
+  if (home) return;
+  let m;
+  if (sub === 'sel'){
+    $('#rptit').textContent = '🎯 Selección para el examen';
+    $('#rpsub').innerHTML = `<p class="count" style="margin:0 0 8px">Seis bloques, de menos a más difícil. Entra en uno y hazlos en orden.</p><div class="qgrid">${SEL.map((b, i) => `<a href="#repaso/sel-${i}"><span class="qn">${i + 1}</span><span>${esc(b[0])}<span class="count">${b[2].length} ejercicios · <span data-selblk="${i}"></span> hechos</span></span></a>`).join('')}</div>`;
+    $('#rpsub').hidden = false; if (window.refreshDone) refreshDone();
+  } else if ((m = sub.match(/^sel-(\d+)$/))){
+    const i = +m[1]; $('#rp0').hidden = false;
+    $$('#sel .selblk').forEach((x, j) => x.hidden = j !== i);
+    $('#rptit').textContent = (i + 1) + '. ' + SEL[i][0]; $('#rpbacka').setAttribute('href', '#repaso/sel');
+  } else if ((m = sub.match(/^q-(\w)$/))){
+    const k = m[1], r = ROWS.find(r => r[0] === k); const c = $('#rp1'); c.hidden = false; c.classList.add('rpdrill');
+    $$('#bytype .lvrow').forEach(x => x.hidden = x.querySelector('.rk').textContent !== k);
+    $('#rptit').textContent = k + ' · ' + (r ? r[1] : '');
+  } else if ((m = sub.match(/^t-(\w+)$/))){
+    const k = m[1], T = TIPOS.find(t => t[0] === k); const c = $('#rp2'); c.hidden = false; c.classList.add('rpdrill');
+    $$('#sit .sitrow').forEach((x, j) => x.hidden = DATA.sit[j][0] !== k);
+    $('#rptit').textContent = '✎ ' + (T ? T[1] : '');
+  } else { location.hash = 'repaso'; return; }
+  window.scrollTo(0, 0);
+};
+if ((location.hash.slice(1) || '').startsWith('repaso')) rpShow((location.hash.match(/^#repaso\/(.+)$/) || [])[1]);
 
 /* ---------- checklist ---------- */
 const CHK = ['Incógnitas definidas con unidades','F escrita y «maximizar» o «minimizar»','Todas las restricciones (y x ≥ 0, y ≥ 0 si son cantidades)','Cada recta con su tabla de valores','Semiplano comprobado con un punto y marcado con flechas','Región sombreada y vértices con letra','Cada vértice calculado con su sistema','F evaluada en todos los vértices','Respuesta: punto + valor + frase','Si son unidades: soluciones enteras'];
