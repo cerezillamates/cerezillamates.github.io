@@ -13,7 +13,8 @@ const fmt = (v, d=2) => {                 // número con coma decimal y sin cero
 
 /* ---------- Lienzo ---------- */
 function Graf(svg, o){
-  const W = o.ancho || 640, H = o.alto || 380, m = o.margen || {i:44, d:16, a:16, b:34};
+  const real = Math.round(svg.getBoundingClientRect().width) || 640;
+  const W = o.ancho || Math.max(300, Math.min(900, real)), H = Math.round((o.alto || 380) * Math.min(1.1, Math.max(0.8, W/640))), m = o.margen || {i:44, d:16, a:16, b:34};
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   svg.classList.add("graf");
   const g = {svg, W, H, x0:o.x[0], x1:o.x[1], y0:o.y[0], y1:o.y[1], capas:""};
@@ -115,7 +116,7 @@ function labTipos(el){
    ========================================================================== */
 function labCoser(el){
   const L = lab(el);
-  L.mandos.innerHTML = `<label class="campo">Valor de $a$ <input type="range" min="-3" max="2" step="0.25" value="1" aria-describedby="${el.id}-lect"><output>1</output></label>`;
+  L.mandos.innerHTML = `<label class="campo">Valor de $a$ <input type="range" data-p="a" min="-3" max="2" step="0.25" value="1" aria-describedby="${el.id}-lect"><output>1</output></label>`;
   window.Mates && Mates.formulas(L.mandos);
   L.lectura.id = el.id + "-lect";
   const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
@@ -128,7 +129,7 @@ function labCoser(el){
     g.punto(0,a);                                     // f(0)=a (trozo derecho incluye el 0)
     if(!cosida){ g.punto(0,-1,true); g.recta(0,-1,0,a,"salto");
       g.texto(0,(a-1)/2,`salto de ${fmt(Math.abs(a+1))}`,"etq mano","start",10,0); }
-    else g.texto(0,-1,"¡cosida!","etq mano verde","start",12,-10);
+    else g.texto(0,-1,"¡cosida!","etq mano verde","start",16,-18);
     g.pinta();
     L.lectura.innerHTML = tx(`Por la izquierda: $\\lim_{x\\to0^-}\\frac{1}{x-1}=-1$. Por la derecha: $\\lim_{x\\to0^+}(x^2+a)=${fmt(a).replace(",","{,}")}$, y $f(0)=${fmt(a).replace(",","{,}")}$. `) +
       (cosida ? tx(`<span class="ok">Coinciden: con $a=-1$ la función es continua en $x=0$.</span> Mira el ángulo que queda en el punto: eso lo estudia la derivabilidad.`)
@@ -149,7 +150,7 @@ function labLupa(el){
       nota:"Andalucía, PEvAU ordinaria 2022"}
   };
   L.mandos.innerHTML = `<div class="segmentado" role="group" aria-label="Función">${Object.entries(casos).map(([k,c])=>`<button type="button" data-k="${k}" aria-pressed="false">${c.t}</button>`).join("")}</div>
-    <label class="campo">Aumento <input type="range" min="0" max="7" step="0.05" value="0"><output>×1</output></label>`;
+    <label class="campo">Aumento <input type="range" data-p="z" min="0" max="7" step="0.05" value="0"><output>×1</output></label>`;
   window.Mates && Mates.formulas(L.mandos);
   const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
   let k = "almazara";
@@ -181,7 +182,7 @@ function labLupa(el){
 function labSecante(el){
   const L = lab(el);
   const f = t => -0.04*t*t + 2.4*t, t0 = 20;
-  L.mandos.innerHTML = `<label class="campo">$h$ <input type="range" min="0" max="1" step="0.005" value="0"><output></output></label>`;
+  L.mandos.innerHTML = `<label class="campo">$h$ <input type="range" data-p="h" min="0" max="1" step="0.005" value="0.4"><output></output></label>`;
   window.Mates && Mates.formulas(L.mandos);
   const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
   const pon = () => {
@@ -190,13 +191,12 @@ function labSecante(el){
     const m = (f(t0+h)-f(t0))/h;
     const g = Graf(L.svg, {x:[0,50], y:[0,42], alto:360}).ejes({px:10, py:10, nx:"t (años)", ny:"B (miles de €)"});
     g.curva(f, 0, 50);
-    g.recta(0, f(t0)-m*t0, 50, f(t0)+m*(50-t0), "tangente");
+    g.recta(0, f(t0)-m*t0, 50, f(t0)+m*(50-t0), "secante");
     g.recta(0, f(t0)-0.8*t0, 50, f(t0)+0.8*(50-t0), "guia");
     g.recta(t0, 0, t0, f(t0)); g.recta(t0+h, 0, t0+h, f(t0+h));
     g.punto(t0, f(t0)); g.punto(t0+h, f(t0+h), true);
-    g.texto(t0, 0, "20", "etq", "middle", 0, -6);
     g.pinta();
-    L.lectura.innerHTML = tx(`Tasa de variación media en $[20,\\,${fmt(20+h).replace(",","{,}")}]$: $\\dfrac{B(${fmt(20+h).replace(",","{,}")})-B(20)}{${fmt(h).replace(",","{,}")}}=${fmt(m,3).replace(",","{,}")}$ miles de euros por año. `) +
+    L.lectura.innerHTML = tx(`Tasa de variación media en $[20;\\,${fmt(20+h).replace(",","{,}")}]$: $\\dfrac{B(${fmt(20+h).replace(",","{,}")})-B(20)}{${fmt(h).replace(",","{,}")}}=${fmt(m,4).replace(",","{,}").replace("−","-")}$ miles de euros por año. `) +
       (h < 0.2 ? tx(`<span class="ok">Al hacer $h\\to0$ la secante (roja) se pega a la tangente (discontinua): $B'(20)=0{,}8$.</span>`) : "Acerca el segundo punto con el deslizador.");
   };
   r.addEventListener("input", pon); pon();
@@ -222,7 +222,7 @@ function labDos(el){
     if(!cont) g.punto(1,dcha,true);
     g.texto(1,3, der ? "continua y derivable" : cont ? "continua, con esquina" : "", "etq mano"+(der?" verde":""), "start", 12, 26);
     g.pinta();
-    L.lectura.innerHTML = tx(`Continuidad: $a+b+2=${fmt(dcha).replace(",","{,}")}$ ${cont ? "$=3$ ✓" : "$\\neq3$"}. Derivabilidad: $2a+b=${fmt(2*a+b).replace(",","{,}")}$ ${Math.abs(2*a+b-6)<1e-9 ? "$=6$ ✓" : "$\\neq6$"}. `) +
+    L.lectura.innerHTML = tx(`Continuidad: $a+b+2=${fmt(a).replace(",","{,}")}+(${fmt(b).replace(",","{,}").replace("−","-")})+2=${fmt(dcha).replace(",","{,}").replace("−","-")}$, ${cont ? "igual a $3$ ✓" : "distinto de $3$"}. Derivabilidad: $2a+b=${fmt(2*a+b).replace(",","{,}").replace("−","-")}$, ${Math.abs(2*a+b-6)<1e-9 ? "igual a $6$ ✓" : "distinto de $6$"}. `) +
       (der ? `<span class="ok">Las dos condiciones a la vez: es el sistema que resuelve el ejercicio.</span>` : "Busca los valores que cumplen las dos ecuaciones.");
   };
   ra.addEventListener("input", pon); rb.addEventListener("input", pon); pon();
@@ -254,9 +254,13 @@ const ESTATICAS = {
 };
 
 document.addEventListener("mates:listo", ()=>{
+  const vigila = (el, fn) => { let w = el.getBoundingClientRect().width;
+    new ResizeObserver(()=>{ const n = el.getBoundingClientRect().width; if(Math.abs(n-w) > 8){ w = n; fn(); } }).observe(el); };
   document.querySelectorAll("[data-lab]").forEach(el=>{
     ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos}[el.dataset.lab]||(()=>{}))(el);
+    const inp = el.querySelector("input[type=range]"), seg = el.querySelector(".segmentado button[aria-pressed=true]");
+    vigila(el, ()=>{ if(inp) inp.dispatchEvent(new Event("input")); else if(seg) seg.click(); else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
   });
-  document.querySelectorAll("svg[data-graf]").forEach(svg=>{ const f = ESTATICAS[svg.dataset.graf]; if(f) f(svg); });
+  document.querySelectorAll("svg[data-graf]").forEach(svg=>{ const f = ESTATICAS[svg.dataset.graf]; if(f){ f(svg); vigila(svg, ()=>f(svg)); } });
 });
 })();

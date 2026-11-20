@@ -14,7 +14,10 @@
 @font-face{font-family:"Atkinson Hyperlegible Next";src:url("fuentes/atkinson-hyperlegible-next-latin-600-normal.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible Next";src:url("fuentes/atkinson-hyperlegible-next-latin-700-normal.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible Next";src:url("fuentes/atkinson-hyperlegible-next-latin-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:"Caveat";src:url("../fonts/Caveat.ttf") format("truetype");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Caveat";src:url("fuentes/caveat.woff2") format("woff2");font-weight:400 700;font-display:swap}
+/* Cifras sin cero barrado (el cero barrado de Atkinson se confunde con ∅ en matemáticas) */
+@font-face{font-family:"Cifras";src:url("fuentes/cifras-400.woff2") format("woff2");font-weight:400 500;unicode-range:U+0030-0039;font-display:swap}
+@font-face{font-family:"Cifras";src:url("fuentes/cifras-700.woff2") format("woff2");font-weight:600 900;unicode-range:U+0030-0039;font-display:swap}
 
 :root{
   --papel:#fdfdfb;
@@ -32,7 +35,7 @@
   --linea:#d9dee8;
 
   --f-titulo:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
-  --f-texto:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;
+  --f-texto:"Cifras","Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;
   --f-mano:"Caveat","Segoe Print","Bradley Hand",cursive;
 
   --cuadro-tam:20px;
@@ -350,3 +353,74 @@ a.parada:hover{background:var(--azul-claro)}
 .temario li.sin .num{color:var(--linea)}
 .cursos .nombre,.temario h3{margin-top:0}
 .cursos .nombre{margin:6px 0 0}
+.atajo{margin:16px 0 0;font-size:1rem}
+.atajo .nota{font-size:1.45rem;margin-right:6px}
+
+/* ====== Ronda 2: correcciones del árbitro ====== */
+/* Cabecera en móvil: una sola línea con «volver» */
+.volver{display:none}
+@media (max-width:720px){
+  .barra-in{gap:10px;min-height:52px;padding-top:6px;padding-bottom:6px}
+  .marca small{display:none}
+  .marca span{font-size:.98rem}
+  .migas{display:none}
+  .volver{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 4px;font-weight:700;text-decoration:none;color:var(--tinta);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .volver::before{content:"";width:9px;height:9px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-right:2px;flex:none}
+  .barra .boton{min-height:44px;min-width:44px;justify-content:center;padding:8px 10px}
+}
+/* Funciones a trozos: versión apilada en pantallas estrechas */
+.f-estrecha{display:none}
+@media (max-width:600px){ .f-ancha{display:none}.f-estrecha{display:block} .formula{padding:10px 8px} }
+.formula{scrollbar-width:thin}
+.tabla .katex{white-space:nowrap}
+/* Mandos de los laboratorios que no desbordan */
+.campo{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;min-width:0;width:min(440px,100%)}
+input[type=range]{width:100%;min-width:0;height:44px}
+.lab .mandos{display:grid;grid-template-columns:minmax(0,1fr);justify-items:start}
+@media (min-width:760px){.lab .mandos{display:flex}}
+.segmentado{flex-wrap:wrap;max-width:100%}
+.segmentado button{min-height:44px}
+/* Objetivos táctiles */
+.tapa .boton,details.sol>summary,.opciones button{min-height:44px}
+details.sol>summary{padding:6px 0}
+/* Autoevaluación: la corrección también en texto */
+.opciones button .marca-c{font-weight:800;margin-left:8px}
+.opciones button[data-estado="bien"] .marca-c{color:var(--verde)}
+.opciones button[data-estado="mal"] .marca-c{color:var(--rojo)}
+/* Mapa: requisitos siempre visibles en móvil */
+.parada .nec{display:block;font-size:.8rem;color:var(--ambar);margin-top:3px}
+@media (hover:hover) and (min-width:900px){.parada .nec{display:none}}
+/* Enlaces de las piezas de un tema (sin botones repetidos) */
+.temario .piezas{gap:4px 20px}
+.temario .piezas a{border:0;padding:6px 0;font-weight:700;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;border-radius:0}
+.temario .piezas a:hover{background:none;color:var(--tinta);text-decoration-thickness:2px}
+.temario .piezas a.prim{background:none;color:var(--azul);font-size:1.06rem}
+/* Impresión útil para estudiar */
+@media print{
+  .prueba,.marcador,#autoevaluacion,.lab,.atajo,.volver{display:none!important}
+  .ejemplo,.lab,.recuadro{break-inside:auto}
+  .paso,.formula,.recuadro.def{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
+  .f-ancha{display:block!important}.f-estrecha{display:none!important}
+}
+.graf .secante{stroke:var(--rojo);stroke-width:2;fill:none}
+.lab.avisado{outline:3px solid var(--azul);outline-offset:4px;transition:outline-color .6s}
+/* Portada en dos columnas: el nombre y una pregunta de examen que se responde ahí mismo */
+.portada{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px 40px;align-items:end;padding:46px 0 34px}
+.portada h1{font-size:clamp(2.5rem,6vw,4.6rem)}
+@media (max-width:860px){.portada{grid-template-columns:minmax(0,1fr)}}
+.reto{border:1.5px solid var(--tinta);border-radius:var(--radio);padding:18px 18px 8px;background-color:#fff}
+.reto .nota{font-size:1.5rem;margin:0 0 6px}
+.reto-enun{font:600 1.05rem/1.5 var(--f-texto);letter-spacing:0;margin:0 0 4px}
+.reto .prueba>li{border-top:0;padding-top:6px}
+.reto .prueba .q::before{content:none}
+.reto .marcador{margin:4px 0 8px}
+.reto .marcador .num{font-size:1.6rem}
+.formulas{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.formula .rot{display:block;font:600 .88rem var(--f-texto);color:var(--tinta-2);text-align:center}
+.formula .grande{display:block;font:700 1.15rem var(--f-titulo);margin-top:4px}
+.portada{grid-template-columns:minmax(0,1.25fr) minmax(300px,1fr)}
+.portada h1{font-size:clamp(2.4rem,4.4vw,4rem)}
+.reto .marcador:empty{display:none}
+.reto .prueba{margin-bottom:6px}
+@media (max-width:860px){.portada{grid-template-columns:minmax(0,1fr)}}

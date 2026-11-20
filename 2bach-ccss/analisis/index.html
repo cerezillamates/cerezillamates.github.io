@@ -14,15 +14,20 @@
 <link rel="preload" href="../../assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="preload" href="../../assets/v2/fuentes/caveat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://cerezillamates.github.io/2bach-ccss/analisis/">
+<meta property="og:title" content="Análisis · 2.º Bachillerato CCSS · Mercedes Cerezo">
+<meta property="og:description" content="Mapa del bloque de Análisis de Matemáticas Aplicadas a las CCSS II para la PAU de Andalucía: qué entra, cómo es el ejercicio y por qué orden estudiarlo.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="stylesheet" href="../../assets/v2/estilo.css?v=20261120">
-<script src="../../assets/katex/katex.min.js" defer></script>
 <script src="../../assets/v2/mates.js?v=20261120" defer></script>
 </head>
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <header class="barra"><div class="barra-in">
   <a class="marca" href="../../index.html"><img src="../../assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
-  <nav class="migas" aria-label="Estás en"><a href="../../index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Análisis</span></nav>
+  <nav class="migas" aria-label="Estás en"><a href="../../index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Análisis</span></nav><a class="volver" href="../../2bach-ccss.html">2.º Bach CCSS</a>
   <div class="acciones"></div>
 </div></header>
 <div class="hoja">
@@ -61,7 +66,7 @@
         <li id="C3"><span class="parada" data-necesita="B1 C2"><b>C3</b> Extremos absolutos en un intervalo cerrado<small>En preparación</small></span></li>
         <li id="C4"><span class="parada" data-necesita="B2 C2"><b>C4</b> Curvatura y puntos de inflexión<small>En preparación</small></span></li>
         <li id="C5"><span class="parada" data-necesita="A1 A2 C2 C4"><b>C5</b> Estudio y gráfica por familias de funciones<small>En preparación</small></span></li>
-        <li id="C6"><span class="parada" data-necesita="C2 C4"><b>C6</b> Leer la gráfica de $f$ o de $f'$<small>En preparación</small></span></li>
+        <li id="C6"><span class="parada" data-necesita="C2 C4"><b>C6</b> Leer la gráfica de <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span> o de <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span><small>En preparación</small></span></li>
         <li id="C7"><span class="parada" data-necesita="C2 C3"><b>C7</b> Optimización en contexto<small>En preparación</small></span></li>
       </ol>
     </div>
@@ -97,9 +102,9 @@
       <li>La derivada para calcular límites, recta tangente, parámetros con condiciones, optimización en contexto, monotonía, extremos, curvatura e inflexión.</li>
       <li>Primitivas inmediatas simples y compuestas, regla de Barrow y áreas.</li>
     </ul></div>
-  <div class="recuadro fallo"><span class="tit">Qué no entra</span>
-    <p>Funciones trigonométricas, integración por partes o por cambio de variable, teoremas de Bolzano, Rolle o del valor medio y las asíntotas como apartado propio.</p></div>
-  <p class="con-nota"><span class="nota roja" aria-hidden="true">Explicar el método sin hacerlo no puntúa.</span>Se puntúa el planteamiento y su desarrollo. También se valoran las justificaciones, la notación y que interpretes el resultado en el contexto. Un error de cálculo resta como mucho el 10 % del apartado.</p>
+  <div class="recuadro fallo"><span class="tit">Qué no figura en las orientaciones</span>
+    <p>Las orientaciones no mencionan funciones trigonométricas, integración por partes ni por cambio de variable, los teoremas de Bolzano, Rolle o del valor medio, ni las asíntotas. Aquí no se trabajan.</p></div>
+  <p class="con-nota"><span class="nota roja" role="note">Explicar el método sin hacerlo no puntúa.</span>Se puntúa el planteamiento y su desarrollo. También se valoran las justificaciones, la notación y que interpretes el resultado en el contexto. Un error de cálculo resta como mucho el 10 % del apartado.</p>
 </section>
 
 <section id="orden">
@@ -109,7 +114,7 @@
     <li><a href="continuidad.html">B1. Continuidad</a> y <a href="derivabilidad.html">B3. Derivabilidad</a>: la primera pregunta de casi todos los ejercicios de Andalucía.</li>
     <li><a href="parametros.html">B4. Parámetros</a>: sale en Andalucía en junio de 2019, en la extraordinaria de 2020, en la ordinaria de 2022 y en un examen suplente de 2025.</li>
   </ol>
-  <p>Cada apartado tiene el mismo orden: lo que necesitas, el método, ejemplos de selectividad resueltos paso a paso, lo que suele fallar, entrenamiento por niveles, ejercicios de examen, autoevaluación y resumen.</p>
+  <p>Cada apartado sigue el mismo orden: lo que necesitas, el método, ejemplos de selectividad resueltos paso a paso, lo que suele fallar, entrenamiento por niveles (el último nivel con ejercicios de examen), autoevaluación y resumen.</p>
 </section>
 
   </main>
