@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de nuestros datos · ODS 11 · 3.º ESO · Estadística</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="../../assets/tema.css?v=20261120b">
+<link rel="icon" href="../../assets/favicon.svg">
+<script src="graficos.js?v=20261120b"></script>
+<style>
+body{background:var(--bg);color:var(--ink);font-family:var(--f-b);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:16px}
+.hero{background:linear-gradient(120deg,var(--ind),var(--ind2));color:#fff;padding:18px 0 22px}
+.hero a{color:#fff}
+.hero h1{font-family:var(--f-d);margin:.2em 0 .1em;font-size:clamp(1.6rem,4vw,2.4rem)}
+.migas{font-size:.9rem;opacity:.9} .migas span{margin:0 .4em}
+.card{background:var(--card);border-radius:16px;box-shadow:var(--sombra);padding:14px 16px;margin:14px 0}
+.card h2{font-family:var(--f-d);margin:0 0 .4em;font-size:1.25rem;color:var(--ind)}
+label{font-weight:700;font-size:.9rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:6px 10px}
+textarea{width:100%;min-height:3.2em;resize:vertical}
+.fila{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.fila>label{flex:1 1 180px}
+.btn{font:inherit;font-weight:800;border:2px solid var(--ind);background:var(--card);color:var(--ind);border-radius:99px;padding:.4em 1em;cursor:pointer;text-decoration:none}
+.btn.main{background:var(--ind);color:#fff}
+.medidas{display:grid;grid-template-columns:repeat(auto-fit,minmax(9em,1fr));gap:8px;margin:.6em 0}
+.medidas div{background:var(--ind-bg);border-radius:12px;padding:.4em .6em;display:flex;flex-direction:column}
+.medidas b{font-family:var(--f-d);font-size:1.25rem;color:var(--ind)}
+.medidas span{font-size:.85rem;color:var(--muted)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:760px){.dos{grid-template-columns:1fr}}
+.aviso{color:var(--rose);font-weight:700}
+.muted{color:var(--muted)}
+@media print{.noprint{display:none!important}.card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}.hero{background:none;color:#000}.hero a{color:#000}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../3eso.html">3.º ESO</a><span>›</span><a href="./">Estadística</a><span>›</span><a href="apuntes.html?ap=23">Situación de aprendizaje</a></nav>
+  <h1>🧮 Calculadora de nuestros datos · ODS 11</h1>
+  <p style="margin:0">Escribid vuestros datos y salen la tabla, las medidas, los cuartiles (método de clase) y los gráficos. Se guarda en este navegador.</p>
+</div></header>
+<main class="wrap">
+  <section class="card">
+    <h2>👥 Nuestro grupo</h2>
+    <div class="fila">
+      <label>Grupo <select id="pre"><option value="1">1 · Movilidad</option><option value="2">2 · Temperaturas</option><option value="3">3 · Residuos</option><option value="4">4 · Inventario del barrio</option></select></label>
+      <label>Nombre del equipo <input id="eq" placeholder="nombre del equipo" autocomplete="off"></label>
+      <span class="noprint" style="display:flex;gap:8px"><button class="btn" id="demo">↺ Datos de ejemplo</button><button class="btn main" id="imp">🖨 Imprimir</button></span>
+    </div>
+    <p class="muted noprint">Números separados por espacios (decimales con coma). Lo cualitativo, separado por punto y coma.</p>
+  </section>
+  <section class="card noprint">
+    <h2>✍️ Los datos</h2>
+    <div class="fila"><label>📏 Variable 1 <input id="l1"></label><label style="flex:0 1 110px">unidad <input id="u1"></label><label style="flex:0 1 170px">agrupar de … en … (vacío: sin agrupar) <input id="a1" inputmode="decimal"></label></div>
+    <textarea id="d1"></textarea>
+    <div class="fila" style="margin-top:8px"><label>📐 Variable 2 <input id="l2"></label><label style="flex:0 1 110px">unidad <input id="u2"></label><label style="flex:0 1 170px">agrupar de … en … <input id="a2" inputmode="decimal"></label></div>
+    <textarea id="d2"></textarea>
+    <div class="fila" style="margin-top:8px"><label>💬 Variable cualitativa <input id="l3"></label></div>
+    <textarea id="d3"></textarea>
+    <div class="fila" style="margin-top:8px"><label style="flex:0 1 260px">El dato que nos preocupa: % de la variable 1 que es mayor o igual que <input id="th" inputmode="decimal"></label></div>
+  </section>
+  <div id="out"></div>
+  <p class="muted" style="font-size:.85rem">Cuartiles con el método de clase: lugar N · 0,25; si sale entero, media de ese dato y el siguiente; si no, se sube al lugar siguiente. σ es la de la población (σx en la calculadora, DESVESTP en Excel). Materiales de <b>Mercedes Cerezo</b> · CC BY-NC-SA 4.0.</p>
+</main>
+<script>
+(function(){
+const $ = id => document.getElementById(id), F = EST.F;
+const PRE = {
+ "1":{l1:"Minutos hasta el instituto",u1:"min",a1:"10",l2:"Días a la semana andando o en bici",u2:"días",a2:"",l3:"Medio de transporte",th:"15",
+   d1:"5 12 25 8 30 10 15 7 20 35 12 5 18 10 22 14 6 28 9 16 11 40 13 8 19 24 7 15 10 12",
+   d2:"5 2 0 5 0 3 1 5 0 0 2 5 1 4 0 2 5 0 4 1 3 0 2 5 1 0 5 2 4 3",
+   d3:"A pie; Bus; Coche; A pie; Coche; A pie; Bus; A pie; Coche; Coche; Bus; A pie; Bici; A pie; Coche; Bus; A pie; Coche; Bici; Bus; A pie; Coche; Bus; A pie; Bici; Coche; A pie; Bus; A pie; A pie"},
+ "2":{l1:"Temperatura con sombra",u1:"°C",a1:"1",l2:"Temperatura sin sombra",u2:"°C",a2:"1",l3:"Tipo de punto",th:"30",
+   d1:"26,4 25,8 27,1 26 24,9 27,5 25,2 26,8 25,5 27 26,2 24,6 26,9 25,7 27,3 26,1",
+   d2:"31,2 33 30,5 34,1 32,4 35 31,8 33,6 30,9 34,5 32,1 33,2 35,4 31,5 32,8 34",
+   d3:"Parque; Plaza con árboles; Patio; Aparcamiento; Calle sin sombra; Parque; Plaza con árboles; Aparcamiento; Calle sin sombra; Patio; Parque; Calle sin sombra; Aparcamiento; Plaza con árboles; Patio; Calle sin sombra"},
+ "3":{l1:"Gramos de envases al día",u1:"g",a1:"100",l2:"Gramos de papel al día",u2:"g",a2:"50",l3:"Residuo que más pesa ese día",th:"500",
+   d1:"420 510 380 640 470 530 350 600 450 480 520 390 560 430 500 470 610 360 540 460",
+   d2:"280 340 220 400 310 360 240 420 300 330 350 260 380 290 340 310 400 230 360 300",
+   d3:"Envases; Papel; Envases; Envases; Papel; Envases; Papel; Envases; Envases; Papel; Envases; Papel; Envases; Envases; Papel; Envases; Envases; Papel; Envases; Papel"},
+ "4":{l1:"Bancos por calle",u1:"bancos",a1:"",l2:"Árboles por calle",u2:"árboles",a2:"5",l3:"Estado de la acera",th:"4",
+   d1:"0 2 5 1 3 0 4 2 6 1 0 3 2 8 1 4 0 2 3 1",
+   d2:"0 4 12 2 7 0 9 5 14 3 1 6 4 18 2 8 0 5 7 3",
+   d3:"Mala; Regular; Buena; Mala; Buena; Mala; Buena; Regular; Buena; Regular; Mala; Buena; Regular; Buena; Mala; Buena; Mala; Regular; Buena; Regular"}
+};
+const CAMPOS = ["eq","l1","u1","a1","d1","l2","u2","a2","d2","l3","d3","th"];
+const num = t => { const s = String(t).trim().replace(",", "."); return s === "" ? NaN : Number(s); };
+const nums = t => String(t).trim().split(/\s+/).filter(Boolean).map(num);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function cuartil(s, p){ const pos = s.length*p, k = Math.round(pos); return Math.abs(pos-k) < 1e-9 ? (s[k-1]+s[k])/2 : s[Math.ceil(pos)-1]; }
+function variable(t, nombre, unidad, amp, umbral){
+  const v = nums(t); if(!v.length) return "";
+  if(v.some(x=>!isFinite(x))) return `<section class="card"><h2>${esc(nombre)}</h2><p class="aviso">Hay algún dato que no es un número. Revisa las comas y los espacios.</p></section>`;
+  const s = v.slice().sort((a,b)=>a-b), N = s.length, S = s.reduce((a,b)=>a+b,0), m = S/N;
+  const S2 = s.reduce((a,b)=>a+b*b,0), sd = Math.sqrt(Math.max(0, S2/N - m*m));
+  const cuenta = {}; s.forEach(x=>cuenta[x]=(cuenta[x]||0)+1); const vals = Object.keys(cuenta).map(Number).sort((a,b)=>a-b);
+  const mx = Math.max(...Object.values(cuenta)), modas = vals.filter(x=>cuenta[x]===mx);
+  const q1 = cuartil(s,.25), me = cuartil(s,.5), q3 = cuartil(s,.75), u = unidad ? " "+esc(unidad) : "";
+  let tabla, graf;
+  const A = num(amp);
+  if(isFinite(A) && A > 0){
+    const a0 = Math.floor(s[0]/A)*A, ext = [a0]; while(ext[ext.length-1] <= s[N-1]) ext.push(+(ext[ext.length-1]+A).toFixed(6));
+    const ns = ext.slice(0,-1).map((a,i)=>s.filter(x=>x>=a && x<ext[i+1]).length); let acc = 0, Sx = 0;
+    const filas = ns.map((n,i)=>{ const mc = (ext[i]+ext[i+1])/2; acc += n; Sx += mc*n; return [`[${F(ext[i])}, ${F(ext[i+1])})`, F(mc), n, acc, F(n/N,3), F(n/N*100,1)+" %"]; });
+    tabla = EST.tabla(["Intervalo","xᵢ","nᵢ","Nᵢ","fᵢ","%"], filas, ["Total","",N,"","1","100 %"]) + `<p class="muted">Media con las marcas de clase: ${F(Sx/N)}${u} (con los datos sueltos: ${F(m)}${u}).</p>`;
+    graf = EST.histo(ext.map(F), ns, {poligono:true, titulo:nombre});
+  } else {
+    let acc = 0; const filas = vals.map(x=>{ acc += cuenta[x]; return [F(x), cuenta[x], acc, F(cuenta[x]/N,3), F(cuenta[x]/N*100,1)+" %"]; });
+    tabla = EST.tabla(["xᵢ","nᵢ","Nᵢ","fᵢ","%"], filas, ["Total",N,"","1","100 %"]);
+    graf = vals.length <= 14 ? EST.barras(vals.map(x=>F(x)), vals.map(x=>cuenta[x]), {titulo:nombre}) : `<p class="muted">Hay muchos valores distintos: escribe una amplitud para agruparlos y ver el histograma.</p>`;
+  }
+  let extra = "";
+  const T = num(umbral);
+  if(umbral !== undefined && isFinite(T)){ const k = s.filter(x=>x>=T).length; extra = `<p>📌 Datos de ${F(T)}${u} o más: ${k} de ${N} → <b>${F(k/N*100,1)} %</b></p>`; }
+  return `<section class="card"><h2>${esc(nombre)}</h2>
+    <div class="medidas"><div><b>${N}</b><span>N, cuántos datos</span></div><div><b>${F(m)}${u}</b><span>media x̄</span></div><div><b>${F(me)}${u}</b><span>mediana</span></div>
+    <div><b>${modas.length>3?"no hay":modas.map(F).join(" y ")}</b><span>moda</span></div><div><b>${F(s[N-1]-s[0])}</b><span>rango</span></div>
+    <div><b>${F(q1)}${u}</b><span>Q₁</span></div><div><b>${F(q3)}${u}</b><span>Q₃</span></div><div><b>${F(sd)}</b><span>desviación típica σ</span></div><div><b>${m ? F(sd/m,3) : "—"}</b><span>CV ${m ? (sd/m<.3?"(dispersión pequeña)":"(dispersión grande)") : ""}</span></div></div>
+    ${extra}<div class="dos"><div>${tabla}</div><div>${graf}${EST.caja(s[0],q1,me,q3,s[N-1],{titulo:"diagrama de caja"})}</div></div></section>`;
+}
+function cualitativa(t, nombre){
+  const v = String(t).split(";").map(x=>x.trim()).filter(Boolean); if(!v.length) return "";
+  const c = {}; v.forEach(x=>c[x]=(c[x]||0)+1); const et = Object.keys(c).sort((a,b)=>c[b]-c[a]), N = v.length;
+  const tabla = EST.tabla(["Valor","nᵢ","fᵢ","%","ángulo"], et.map(e=>[esc(e), c[e], F(c[e]/N,3), F(c[e]/N*100,1)+" %", F(c[e]/N*360,1)+"°"]), ["Total",N,"1","100 %","360°"]);
+  return `<section class="card"><h2>${esc(nombre)}</h2><p>Moda: <b>${esc(et[0])}</b> (${F(c[et[0]]/N*100,1)} %). Al ser cualitativa, no hay media ni mediana.</p>
+    <div class="dos"><div>${tabla}</div><div>${EST.sectores(et.map(esc), et.map(e=>c[e]))}</div></div></section>`;
+}
+function calcular(){
+  $("out").innerHTML = (($("eq").value.trim()) ? `<section class="card"><h2>Equipo: ${esc($("eq").value)}</h2></section>` : "")
+    + variable($("d1").value, "📏 "+($("l1").value||"Variable 1"), $("u1").value, $("a1").value, $("th").value)
+    + variable($("d2").value, "📐 "+($("l2").value||"Variable 2"), $("u2").value, $("a2").value)
+    + cualitativa($("d3").value, "💬 "+($("l3").value||"Variable cualitativa"));
+}
+function guardar(){ const o = {pre:$("pre").value}; CAMPOS.forEach(k=>o[k]=$(k).value); try{ localStorage.setItem("est3-sa", JSON.stringify(o)); }catch(e){} }
+function cargarPre(k){ const p = PRE[k]; Object.keys(p).forEach(c=>{ if($(c)) $(c).value = p[c]; }); }
+let st = {}; try{ st = JSON.parse(localStorage.getItem("est3-sa")||"{}")||{}; }catch(e){}
+$("pre").value = st.pre || "1"; cargarPre($("pre").value);
+CAMPOS.forEach(k=>{ if(st[k] !== undefined) $(k).value = st[k]; });
+CAMPOS.forEach(k=>$(k).addEventListener("input", ()=>{ calcular(); guardar(); }));
+$("pre").addEventListener("change", ()=>{ cargarPre($("pre").value); calcular(); guardar(); });
+$("demo").addEventListener("click", ()=>{ cargarPre($("pre").value); calcular(); guardar(); });
+$("imp").addEventListener("click", ()=>window.print());
+calcular();
+})();
+</script>
+</body>
+</html>

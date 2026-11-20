@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mates">
+<title>Estadística · 3.º ESO · Mercedes Cerezo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="../../assets/tema.css?v=20261120b">
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<script src="info.js?v=20261120b"></script>
+<script src="graficos.js?v=20261120b"></script>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../3eso.html">3.º ESO</a></nav>
+  <div class="kicker">3.º ESO · Estadística</div>
+  <h1>Estadística</h1>
+  <p class="lead">Población y muestra, tablas de frecuencias, gráficos, media, mediana y moda, datos en intervalos, cuartiles y diagrama de caja, dispersión, y la calculadora y Excel.</p>
+</div></header>
+<div class="wrap">
+  <div id="inicio" hidden></div>
+  <div id="todo" hidden>
+  <p class="volver-apps"><button class="btn" onclick="volverApps()">← Volver a los iconos</button></p>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div id="paneles"></div>
+  </div>
+
+  <p style="margin-top:22px;font-size:.9rem;color:var(--muted)">¿Buscas la versión anterior del tema? <a href="../../Estadistica_3ESO.html">Apuntes interactivos con calculadoras (versión anterior)</a>.</p>
+</div>
+<script>
+const EXTRA = {
+  repaso: [["R","Repaso y modelo de control","Qué entra, cómo reconocer cada problema y la lista de comprobación. Modelo de control con cronómetro y corrección; ejercicios de repaso para casa (un ejemplo de cada tipo).",[["🖥 Explicación","apuntes.html?ap=20&modo=proyectar","main"],["✏️ Modelo de control","clase.html?ap=20","verde"],["🏠 Ejercicios de repaso","tareas.html?ap=20"]]]],
+  autoeval: [["✅","Autoevaluación del tema","Test, verdadero o falso y respuesta numérica. Te corrige al momento, explica los errores y te da la nota final.",[["Empezar","apuntes.html?ap=22","main"]]]],
+  situacion: [["SA","Nuestro vídeo para el concurso (ODS 11)","Trabajo en grupo: recogemos datos reales del pueblo y los contamos en un vídeo de 5 minutos. El ejemplo de la profe resuelto entero, la calculadora de los grupos y la plantilla de Excel.",[["🖥 Presentar el reto","apuntes.html?ap=23&modo=proyectar","main"],["📋 Dosier del grupo","apuntes.html?ap=23","verde"],["🧮 Calculadora de nuestros datos","situacion.html"],["📥 Plantilla de Excel","Plantilla_datos_ODS11.xlsx"]]]],
+  ampliacion: [["★","Retos y estrategias","Problemas de ingenio con la media, la mediana y la dispersión para pensar con calma.",[["🖥 Estrategias","apuntes.html?ap=24&modo=proyectar","main"],["✏️ Retos en clase","clase.html?ap=24","verde"],["🏠 Retos para casa","tareas.html?ap=24"]]]]
+};
+const SECC = [
+  {id:"apuntes", t:"📘 Apuntes"},
+  {id:"videos", t:"🎬 Vídeos", d:"Los vídeos de cada apartado, para volver a ver la explicación en casa."},
+  {id:"clase", t:"🧑‍🏫 Actividades de clase", d:"Primero todos los enunciados juntos con cronómetro; después la corrección de uno en uno con la solución paso a paso."},
+  {id:"tareas", t:"🏠 Tareas para casa", d:"Ejercicios graduados por dificultad con sus soluciones."},
+  {id:"repaso", t:"📋 Repaso para el control", d:"Un ejemplo de cada tipo de problema que puede salir y un modelo de control resuelto."},
+  {id:"autoeval", t:"✅ Autoevaluación", d:"Test, verdadero/falso y respuesta numérica con corrección automática."},
+  {id:"situacion", t:"🌍 Situación de aprendizaje", d:"Un reto en un contexto real que se hace en grupo, en clase y en casa. La presentación explica el trabajo y el dosier tiene las misiones."},
+  {id:"ampliacion", t:"🧠 Ampliación y retos", d:"Problemas de ingenio, razonamiento y estilo olimpiada."}
+];
+const tabs = document.getElementById("tabs"), pan = document.getElementById("paneles");
+SECC.forEach((s,i)=>{
+  tabs.insertAdjacentHTML("beforeend",`<button role="tab" id="t-${s.id}" aria-controls="p-${s.id}" aria-selected="${i===0}">${s.t}</button>`);
+  let h;
+  // apartados; los que tienen «grupo» (subapartados 5.1, 5.2…) van juntos en una tarjeta
+  const fila = (a, fn) => `<div class="ap ${a.listo?"":"prox"}${a.grupo?" sub":""}">
+      ${a.grupo?"":`<span class="n">${a.num}</span>`}<div>${a.tipo?`<span class="tipo-p">${a.num} · ${a.tipo}</span>`:""}<h3>${a.titulo}</h3><p>${a.desc}</p></div>
+      <div class="acts">${a.listo ? fn(a) : `<span class="prox-tag">En preparación</span>`}</div></div>`;
+  const lista = (fn) => { const L = TEMA.info.apartados; let h = `<div class="aps">`;
+    for(let k=0; k<L.length; k++){ const a = L[k];
+      if(!a.grupo){ h += fila(a, fn); continue; }
+      const subs = []; while(k<L.length && L[k].grupo===a.grupo) subs.push(L[k++]); k--;
+      const m = a.grupo.match(/^(\S+?)\.?\s+(.*)$/) || [0,"",a.grupo];
+      h += `<div class="ap-g"><div class="ap-g-cab"><span class="n">${m[1]}</span><div><h3>${m[2]}</h3><p>${a.grupoDesc||""}</p></div></div><div class="ap-g-subs">${subs.map(x=>fila(x, fn)).join("")}</div></div>`;
+    }
+    return h + `</div>`; };
+  if(s.id==="apuntes"){
+    h = `` + lista(a=>
+      `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Explicación</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a><a class="btn verde" href="clase.html?ap=${a.num}">✏️ Clase</a><a class="btn" href="tareas.html?ap=${a.num}">🏠 Casa</a>`);
+  } else if(s.id==="videos"){
+    h = `<p class="guia">${s.d}</p><div class="aps" id="lista-videos"><p style="color:var(--muted)">Cargando los vídeos…</p></div>`;
+  } else if(s.id==="clase"){
+    h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn verde" href="clase.html?ap=${a.num}">✏️ Proyectar ejercicios</a>`);
+  } else if(s.id==="tareas"){
+    h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn main" href="tareas.html?ap=${a.num}">🏠 Abrir tareas</a>`);
+  } else if(EXTRA[s.id]){
+    h = `<p class="guia">${s.d}</p><div class="aps">` + EXTRA[s.id].map((x,k)=>`<div class="ap"><span class="n">${x[0]}</span><div><h3>${x[1]}</h3><p>${x[2]}</p></div><div class="acts">${x[3].map(b=>`<a class="btn ${b[2]||""}" href="${b[1]}">${b[0]}</a>`).join("")}</div></div>`).join("") + `</div>`;
+  } else {
+    h = `<p><b>${s.t}</b></p><p style="color:var(--muted)">${s.d}</p><p class="prox-tag" style="display:inline-block">En preparación</p>`;
+  }
+  pan.insertAdjacentHTML("beforeend",`<div class="panel" role="tabpanel" id="p-${s.id}" aria-labelledby="t-${s.id}" ${i?"hidden":""}>${h}</div>`);
+});
+/* vídeos: se leen de cada apartado (contenido/apN.js) */
+(function(){
+  const aps = TEMA.info.apartados.filter(a=>a.listo), vids = {};
+  let n = 0;
+  TEMA.registrar = ap => { vids[ap.num] = ap.videos || []; };
+  const pinta = () => {
+    const el = document.getElementById("lista-videos"); if(!el) return;
+    el.innerHTML = aps.map((a,k,L)=>(a.grupo && (k===0 || L[k-1].grupo!==a.grupo) ? `<div class="ap-grupo">${a.grupo}</div>` : "") + `<div class="ap${a.grupo?" sub":""}"><span class="n">${a.num}</span><div><h3>${a.titulo}</h3>${(vids[a.num]||[]).length ? "" : `<p>Sin vídeos todavía.</p>`}</div>
+      <div class="acts">${(vids[a.num]||[]).map(v=>`<a class="btn" href="${v.url}" target="_blank" rel="noopener">▶ ${v.t}</a>`).join("")}</div></div>`).join("");
+  };
+  aps.forEach(a=>{ const sc = document.createElement("script"); sc.src = `contenido/ap${a.num}.js`;
+    sc.onload = sc.onerror = () => { if(++n === aps.length) pinta(); }; document.head.appendChild(sc); });
+})();
+function abrir(id){
+  SECC.forEach(s=>{ document.getElementById("t-"+s.id).setAttribute("aria-selected", s.id===id); document.getElementById("p-"+s.id).hidden = s.id!==id; });
+  history.replaceState(null,"","#"+id);
+}
+tabs.addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) abrir(b.id.slice(2)); });
+if(SECC.some(s=>"#"+s.id===location.hash)) abrir(location.hash.slice(1));
+</script>
+<script src="../../assets/inicio.js?v=20261120b"></script>
+</body>
+</html>
