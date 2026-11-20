@@ -59,16 +59,6 @@ function ejemplos(){
     $(".pasos", ej).after(tapa);
     const [bSig, bTodo, bTapar] = ["sig","todo","tapar"].map(a=>$(`[data-acc="${a}"]`, tapa));
     pasos.forEach(p=>p.tabIndex=-1);
-    const papel = $(".papel", ej);
-    if(papel){
-      const bp = document.createElement("button");
-      bp.type = "button"; bp.className = "boton fino ver-papel"; bp.setAttribute("aria-expanded","false");
-      bp.textContent = "Cómo queda en el examen";
-      papel.id = papel.id || ej.id + "-papel"; bp.setAttribute("aria-controls", papel.id);
-      $("header", ej).appendChild(bp);
-      bp.addEventListener("click", ()=>{ const abre = papel.hidden; papel.hidden = !abre; bp.setAttribute("aria-expanded", abre);
-        bp.textContent = abre ? "Ocultar la redacción" : "Cómo queda en el examen"; if(abre) papel.scrollIntoView({block:"nearest"}); });
-    }
     const pinta = () => {
       const fin = vistos >= pasos.length;
       pasos.forEach((p,i)=> p.hidden = i >= vistos);
@@ -162,7 +152,7 @@ function indice(){
     svg.setAttribute("viewBox", `0 0 28 ${h}`); svg.style.height = h + "px";
     svg.innerHTML = `<path d="${d}" fill="none" stroke="var(--cuadro-fuerte)" stroke-width="2"/>
       <path class="avance" d="${d}" fill="none" stroke="var(--azul)" stroke-width="2.4" stroke-linecap="round"/>
-      <circle cx="${X(40).toFixed(2)}" cy="${(y0+(y1-y0)*0.8).toFixed(2)}" r="2.6" fill="var(--rojo)"/>
+      <circle class="esquina" cx="${X(40).toFixed(2)}" cy="${(y0+(y1-y0)*0.8).toFixed(2)}" r="2.6" fill="var(--rojo)"/>
       ${ys.map(y=>`<circle cx="${X(tDeY(y)).toFixed(2)}" cy="${y.toFixed(2)}" r="4.2" fill="var(--papel)" stroke="var(--cuadro-fuerte)" stroke-width="2"/>`).join("")}`;
     camino = $(".avance", svg); L = camino.getTotalLength();
     actualiza();
@@ -182,7 +172,7 @@ function indice(){
     camino.style.strokeDasharray = `${lo} ${L}`;
     const ri = nav.closest(".indice").getBoundingClientRect();
     notas.forEach(n=>{ const r = n.getBoundingClientRect(); n.classList.toggle("cruza", r.bottom > ri.top - 6 && r.top < ri.bottom + 6 && r.right <= ri.right + 40); });
-    $$("circle", svg).forEach((c,i)=>{ const ok = i<=act; c.setAttribute("fill", ok ? "var(--azul)" : "var(--papel)"); c.setAttribute("stroke", ok ? "var(--azul)" : "var(--cuadro-fuerte)"); });
+    $$("circle:not(.esquina)", svg).forEach((c,i)=>{ const ok = i<=act; c.setAttribute("fill", ok ? "var(--azul)" : "var(--papel)"); c.setAttribute("stroke", ok ? "var(--azul)" : "var(--cuadro-fuerte)"); });
   };
   let pend = false;
   addEventListener("scroll", ()=>{ if(!pend){ pend = true; requestAnimationFrame(()=>{ pend=false; actualiza(); }); } }, {passive:true});
@@ -272,6 +262,8 @@ function puentes(){
 document.addEventListener("DOMContentLoaded", ()=>{
   formulas(document.body);
   ejemplos();
+  if(location.hash){ const ancla = () => { const d = document.getElementById(location.hash.slice(1)); if(d) d.scrollIntoView({block:"start"}); };
+    document.addEventListener("lab:listo", ancla, true); addEventListener("load", ()=>setTimeout(ancla, 50)); }
   const q = new URLSearchParams(location.search).get("pasos"), dest = location.hash && document.getElementById(location.hash.slice(1));
   if(q && dest && dest._pon){ dest._pon(+q); requestAnimationFrame(()=>dest.scrollIntoView({block:"start"})); }
   pruebas(); indice(); pizarra(); recuerda(); imprimir(); mapa(); puentes();

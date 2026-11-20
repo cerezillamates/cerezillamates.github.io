@@ -269,7 +269,7 @@ document.addEventListener("mates:listo", ()=>{
       ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos}[el.dataset.lab]||(()=>{}))(el);
       vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
         else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
-      el.dispatchEvent(new Event("lab:listo"));
+      el.dispatchEvent(new Event("lab:listo", {bubbles:true}));
     });
   };
   const labs = document.querySelectorAll("[data-lab]");

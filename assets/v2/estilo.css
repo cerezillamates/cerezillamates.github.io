@@ -451,3 +451,51 @@ details.sol>summary{padding:6px 0}
 .papel .formula{background:transparent;border-color:transparent;color:var(--azul)}
 .papel b{color:var(--tinta)}
 @media print{.papel{display:block!important}.ver-papel{display:none}}
+
+/* ==========================================================================
+   Hoja de examen escrita a mano (bolígrafo azul) con anotaciones de la profesora (rojo)
+   ========================================================================== */
+@font-face{font-family:"Kalam";src:url("fuentes/kalam-latin-400-normal.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Kalam";src:url("fuentes/kalam-latin-700-normal.woff2") format("woff2");font-weight:700;font-display:swap}
+.hojaex{--tinta-boli:#1f3aa8;margin:8px 0 18px;background:#fff;border:1px solid var(--linea);box-shadow:0 1px 0 var(--linea),0 2px 0 #eef1f6,0 3px 0 var(--linea);border-radius:2px}
+.hoja-enun{padding:16px 20px 12px;border-bottom:1.5px solid var(--tinta);font-size:.98rem;background:#fbfbf8}
+.hoja-enun p{margin:0 0 6px}
+.hoja-fuente{font:700 .9rem var(--f-titulo);color:var(--tinta-2)}
+.mano{position:relative;padding:14px 18px 18px 58px;font-family:"Kalam","Segoe Print",cursive;font-size:1.12rem;line-height:2rem;color:var(--tinta-boli);
+  background-image:linear-gradient(90deg,transparent 40px,var(--rojo) 40px,var(--rojo) 41.5px,transparent 41.5px),
+    repeating-linear-gradient(transparent 0 calc(2rem - 1px),#dfe6f1 calc(2rem - 1px) 2rem);
+  background-position:0 0,0 14px}
+.mano .r{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,210px);gap:0 22px;align-items:start}
+.mano .r>p,.mano .r>table,.mano .r>figure{grid-column:1;margin:0 0 .25rem}
+.mano .r>p b{font-weight:700;color:var(--tinta-boli)}
+.mano .anota{grid-column:2;font:400 1.3rem/1.15 var(--f-mano);color:var(--rojo);position:relative;padding-left:14px;margin-top:4px;transform:rotate(-1.2deg)}
+.mano .anota::before{content:"";position:absolute;left:0;top:.45em;width:9px;height:9px;border-left:2px solid var(--rojo);border-bottom:2px solid var(--rojo);transform:rotate(45deg)}
+.mano .res{display:inline-block;max-width:100%;padding:1px 6px 2px;line-height:1.75rem;border:1.6px solid var(--tinta-boli);border-radius:3px 7px 4px 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.mano .signos{border-collapse:collapse;margin:4px 0 6px;font-size:1.02rem}
+.mano .signos td{border:1.4px solid var(--tinta-boli);padding:0 12px;text-align:center;line-height:1.8rem}
+.mano .hoja-graf{margin:4px 0 8px;max-width:520px}
+/* las fórmulas, también a mano */
+.mano .katex{font-size:1.06em;color:var(--tinta-boli)}
+.mano .katex .mathnormal,.mano .katex .mord,.mano .katex .mbin,.mano .katex .mpunct,
+.mano .katex .mopen,.mano .katex .mclose,.mano .katex .mop,.mano .katex .mathrm,.mano .katex .text,.mano .katex .textrm{
+  font-family:"Kalam","Segoe Print",cursive;font-style:normal}
+.mano .katex .frac-line{border-bottom-width:1.4px!important}
+.mano .graf .curva{stroke:var(--tinta-boli)}
+.mano .graf .curva.b{stroke:var(--tinta-boli);stroke-dasharray:none}
+.mano .graf .etq,.mano .graf .marca-eje{font-family:"Kalam",cursive;fill:var(--tinta-boli)}
+.mano .graf .rejilla{stroke:#e8edf5}
+.a-hoja{display:inline-block;margin-left:8px;font-weight:700}
+@media (max-width:760px){
+  .mano{padding-left:34px;font-size:1.06rem;background-image:linear-gradient(90deg,transparent 22px,var(--rojo) 22px,var(--rojo) 23.5px,transparent 23.5px),repeating-linear-gradient(transparent 0 calc(2rem - 1px),#dfe6f1 calc(2rem - 1px) 2rem)}
+  .mano .r{grid-template-columns:minmax(0,1fr)}
+  .mano .anota{grid-column:1;margin:0 0 6px}
+}
+@media print{.mano{background-image:none}.hojaex{break-inside:auto}.mano .r{break-inside:avoid}}
+/* Reservar el alto de los laboratorios antes de dibujarlos (los anclas no se mueven) */
+.lab .lienzo{aspect-ratio:640/370;min-height:250px}
+.lab .lienzo svg.graf{height:100%}
+.lab .mandos{min-height:64px}
+.lab .lectura{min-height:5.2em}
+.mano .katex .mrel .mord,.mano .katex .mrel .mrel{font-family:KaTeX_Main;font-style:normal}
+.mano .katex .mord.mathbb{font-family:KaTeX_AMS}
+.mano .anota .katex{color:var(--rojo)}
