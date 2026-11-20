@@ -107,6 +107,8 @@ button{font:inherit;cursor:pointer}
 
 /* cadena de flechas */
 .chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;justify-content:center}
+.ef-ed .ctrls{display:flex;flex-wrap:wrap;gap:10px}.ef-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:6px}.ef-row input.n{width:5em}
+.cv-wrap{width:100%;box-sizing:border-box;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:10px;overflow-x:auto}.cv-wrap svg{display:block;margin:0 auto;min-width:420px}.cv-wrap text,.cv-mini text{font-family:var(--f-body)}.cv-mini{margin:8px 0;overflow-x:auto}.cv-mini svg{display:block;margin:0 auto;min-width:360px;max-width:520px!important}
 .box{border:3px solid var(--c,var(--line));background:var(--cb,var(--soft));border-radius:12px;padding:8px 14px;text-align:center;min-width:5.5em}
 .box .v{font-family:var(--f-display);font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums}
 .box .s{font-size:.78rem;color:var(--muted)}
@@ -656,7 +658,12 @@ p.try-sub{margin:0 0 6px;color:var(--muted)}
   <section class="view" id="v-encadenados" hidden>
     <h2><span class="h2n">9</span> ⛓ Porcentajes encadenados</h2>
     <div class="vids"><a class="susi" href="https://www.youtube.com/watch?v=Gf3qu0wHs0M" target="_blank" rel="noopener">▶ Susi Profe: porcentajes encadenados</a><a class="ldm" href="https://www.youtube.com/watch?v=ynSBIu_6zSE" target="_blank" rel="noopener">▶ Lecciones de Mates: encadenados e índice de variación</a></div>
-    <div class="ap"><figure class="ap-fig"><svg class="fig" viewBox="0 0 560 176" role="img" aria-label="Cadena de porcentajes: se multiplican los índices" style="width:100%;max-width:560px;height:auto"><defs><marker id="ah24" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--ink)"/></marker></defs><rect x="20" y="30" width="130" height="56" rx="12" style="fill:var(--soft);stroke:var(--line);stroke-width:2.5"/><text x="85" y="66" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">200 €</text><rect x="210" y="30" width="130" height="56" rx="12" style="fill:var(--soft);stroke:var(--line);stroke-width:2.5"/><text x="275" y="66" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">220 €</text><rect x="400" y="30" width="130" height="56" rx="12" style="fill:var(--soft);stroke:var(--line);stroke-width:2.5"/><text x="465" y="66" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">165 €</text><line x1="152" y1="58" x2="206" y2="58" style="stroke:var(--d);stroke-width:3" marker-end="url(#ah24)"/><text x="180" y="22" font-size="15" font-weight="800" text-anchor="middle" style="fill:var(--d)">× 1,10</text><text x="180" y="104" font-size="13" font-weight="700" text-anchor="middle" style="fill:var(--d)">+10 %</text><line x1="342" y1="58" x2="396" y2="58" style="stroke:var(--i);stroke-width:3" marker-end="url(#ah24)"/><text x="370" y="22" font-size="15" font-weight="800" text-anchor="middle" style="fill:var(--i)">× 0,75</text><text x="370" y="104" font-size="13" font-weight="700" text-anchor="middle" style="fill:var(--i)">−25 %</text><rect x="60" y="122" width="440" height="44" rx="12" style="fill:var(--yellow-bg);stroke:var(--yellow);stroke-width:2.5"/><text x="280" y="150" font-size="15" font-weight="800" text-anchor="middle" style="fill:var(--ink)">Índice total: 1,10 × 0,75 = 0,825 → baja un 17,5 %</text></svg></figure><div class="ap-box ap-idea"><h3>📌 Lo que tienes que saber</h3><p>Cuando hay <b>varios cambios seguidos</b>, cada uno se aplica sobre el precio que queda después del anterior. Por eso los P se <b>multiplican</b> y los porcentajes <b>no se suman</b>.</p><div class="fboxes"><span class="fbox">P total = P₁ × P₂ × …</span><span class="fbox">Final = Inicial × P total</span></div><p>Subir un 20 % y luego bajar un 20 % <b>no</b> deja el precio igual: 1,20 × 0,80 = 0,96 → baja un 4 %.</p></div><div class="ap-grid"><div class="ap-box ap-rec"><h3>🔎 ¿Cómo lo reconozco?</h3><p class="kw"><span>y después</span><span>al año siguiente</span><span>descuento y luego IVA</span><span>variación total</span></p></div><div class="ap-box ap-steps"><h3>🪜 Paso a paso</h3><ol><li>Escribe el índice de cada cambio.</li><li>Multiplícalos: es el índice total.</li><li>Final = Inicial × índice total (o Inicial = Final : índice total).</li><li>Con el índice total, di cuánto ha variado en total.</li></ol></div></div><div class="ap-box ap-ex"><h3>✍️ Ejemplo resuelto</h3><p class="q">Un producto de 200 € sube un 10 % y después baja un 25 %.</p><ol class="sol"><li>Índices: 1,10 y 0,75</li><li>Índice total: 1,10 · 0,75 = 0,825 → Final = 200 · 0,825 = <b class="res">165 €</b></li><li>0,825 = 82,5 % → ha bajado un <b class="res">17,5 %</b> (no un 15 %).</li></ol></div><div class="ap-box ap-ex"><h3>✍️ Ejemplo resuelto</h3><p class="q">Pagamos 290,40 € con una rebaja del 20 % y un 21 % de IVA. ¿Precio inicial?</p><ol class="sol"><li>Índice total: 0,80 · 1,21 = 0,968</li><li>Inicial = 290,40 : 0,968 = <b class="res">300 €</b></li></ol></div><div class="ap-box ap-err"><h3>⚠️ Errores típicos</h3><ul><li>Sumar los porcentajes: +10 % y −25 % no es −15 %.</li><li>Pensar que subir y bajar el mismo % deja el precio igual.</li><li>Para el precio inicial, multiplicar en vez de dividir.</li></ul></div></div>
+    <div class="ap"><figure class="ap-fig" id="efFig"><svg class="fig cv" viewBox="0 0 568 366" role="img" aria-label="Porcentajes encadenados: hacia delante se multiplica por el índice y hacia atrás se divide" style="width:100%;max-width:568px;height:auto"><defs><marker id="cvAf" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--blue)"/></marker><marker id="cvAb" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--orange)"/></marker></defs><rect x="16" y="104" width="136" height="58" rx="14" style="fill:var(--soft);stroke:var(--line);stroke-width:2.5"/><text x="84" y="134" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">200 €</text><text x="84" y="153" font-size="12" font-weight="700" text-anchor="middle" style="fill:var(--muted)">inicial</text><rect x="216" y="104" width="136" height="58" rx="14" style="fill:var(--card);stroke:var(--line);stroke-width:2.5"/><text x="284" y="134" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">220 €</text><rect x="416" y="104" width="136" height="58" rx="14" style="fill:var(--card);stroke:var(--ink);stroke-width:3"/><text x="484" y="134" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">165 €</text><text x="484" y="153" font-size="12" font-weight="700" text-anchor="middle" style="fill:var(--muted)">final</text><g style="opacity:1"><path d="M114 100 Q184 12 254 100" style="fill:none;stroke:var(--blue);stroke-width:3.2" marker-end="url(#cvAf)"/><text x="184" y="24" font-size="16" font-weight="800" text-anchor="middle" style="fill:var(--d)">+10 %</text><text x="184" y="46" font-size="18" font-weight="800" text-anchor="middle" style="fill:var(--blue)">× 1,10</text></g><g style="opacity:1"><path d="M254 166 Q184 254 114 166" style="fill:none;stroke:var(--orange);stroke-width:3.2;stroke-dasharray:9 6" marker-end="url(#cvAb)"/><text x="184" y="234" font-size="18" font-weight="800" text-anchor="middle" style="fill:var(--orange)">: 1,10</text><text x="184" y="255" font-size="13" font-weight="700" text-anchor="middle" style="fill:var(--d)">(+10 %)</text></g><g style="opacity:1"><path d="M314 100 Q384 12 454 100" style="fill:none;stroke:var(--blue);stroke-width:3.2" marker-end="url(#cvAf)"/><text x="384" y="24" font-size="16" font-weight="800" text-anchor="middle" style="fill:var(--i)">−25 %</text><text x="384" y="46" font-size="18" font-weight="800" text-anchor="middle" style="fill:var(--blue)">× 0,75</text></g><g style="opacity:1"><path d="M454 166 Q384 254 314 166" style="fill:none;stroke:var(--orange);stroke-width:3.2;stroke-dasharray:9 6" marker-end="url(#cvAb)"/><text x="384" y="234" font-size="18" font-weight="800" text-anchor="middle" style="fill:var(--orange)">: 0,75</text><text x="384" y="255" font-size="13" font-weight="700" text-anchor="middle" style="fill:var(--i)">(−25 %)</text></g><rect x="49" y="274" width="470" height="44" rx="12" style="fill:var(--yellow-bg);stroke:var(--yellow);stroke-width:2.5"/><text x="284" y="302" font-size="15" font-weight="800" text-anchor="middle" style="fill:var(--ink)">Índice total: 1,10 × 0,75 = 0,825 → baja un 17,5 %</text><text x="284" y="336" font-size="13" font-weight="800" text-anchor="middle" style="fill:var(--blue)">➜ hacia delante: multiplico por el índice</text><text x="284" y="354" font-size="13" font-weight="800" text-anchor="middle" style="fill:var(--orange)">⟵ hacia atrás: divido entre el índice</text></svg></figure><div class="ap-box ef-ed"><h3>✏️ Cambia los datos y mira el diagrama</h3>
+<div class="ctrls" style="align-items:flex-end"><div class="seg" role="group" aria-label="Qué conozco"><button class="neu" id="efKI" aria-pressed="true">Sé el inicial ➡</button><button class="neu" id="efKF" aria-pressed="false">⬅ Sé el final</button></div>
+<label class="f"><span id="efSL">Precio inicial (€)</span><input class="n" id="efS" inputmode="decimal" value="200"></label>
+<button class="btn ghost" id="efAdd">+ Añadir cambio</button><button class="chip" id="efReset">↺ Volver al ejemplo</button></div>
+<div id="efList" style="margin-top:8px"></div>
+<p class="note" id="efNote" style="margin-top:10px"></p></div><div class="ap-box ap-idea"><h3>📌 Lo que tienes que saber</h3><p>Cuando hay <b>varios cambios seguidos</b>, cada uno se aplica sobre el precio que queda después del anterior. Por eso los P se <b>multiplican</b> y los porcentajes <b>no se suman</b>.</p><div class="fboxes"><span class="fbox">P total = P₁ × P₂ × …</span><span class="fbox">Final = Inicial × P total</span></div><p>➡ <b>Hacia delante</b> (de lo inicial a lo final) <b>multiplico</b> por el índice. ⬅ <b>Hacia atrás</b> (de lo final a lo inicial) <b>divido</b> entre el índice.</p><p>Subir un 20 % y luego bajar un 20 % <b>no</b> deja el precio igual: 1,20 × 0,80 = 0,96 → baja un 4 %.</p></div><div class="ap-grid"><div class="ap-box ap-rec"><h3>🔎 ¿Cómo lo reconozco?</h3><p class="kw"><span>y después</span><span>al año siguiente</span><span>descuento y luego IVA</span><span>variación total</span></p></div><div class="ap-box ap-steps"><h3>🪜 Paso a paso</h3><ol><li>Escribe el índice de cada cambio.</li><li>Multiplícalos: es el índice total.</li><li>Final = Inicial × índice total (o Inicial = Final : índice total).</li><li>Con el índice total, di cuánto ha variado en total.</li></ol></div></div><div class="ap-box ap-ex"><h3>✍️ Ejemplo resuelto</h3><p class="q">Un producto de 200 € sube un 10 % y después baja un 25 %.</p><ol class="sol"><li>Índices: 1,10 y 0,75</li><li>Índice total: 1,10 · 0,75 = 0,825 → Final = 200 · 0,825 = <b class="res">165 €</b></li><li>0,825 = 82,5 % → ha bajado un <b class="res">17,5 %</b> (no un 15 %).</li></ol></div><div class="ap-box ap-ex"><h3>✍️ Ejemplo resuelto</h3><p class="q">Pagamos 290,40 € con una rebaja del 20 % y un 21 % de IVA. ¿Precio inicial?</p><div class="cv-mini"><svg class="fig cv" viewBox="0 0 568 312" role="img" aria-label="Voy hacia atrás desde el precio pagado dividiendo entre los índices" style="width:100%;max-width:568px;height:auto"><defs><marker id="cvBf" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--blue)"/></marker><marker id="cvBb" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--orange)"/></marker></defs><rect x="16" y="104" width="136" height="58" rx="14" style="fill:var(--soft);stroke:var(--line);stroke-width:2.5"/><text x="84" y="134" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">300 €</text><text x="84" y="153" font-size="12" font-weight="700" text-anchor="middle" style="fill:var(--muted)">inicial (?)</text><rect x="216" y="104" width="136" height="58" rx="14" style="fill:var(--card);stroke:var(--line);stroke-width:2.5"/><text x="284" y="134" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">240 €</text><rect x="416" y="104" width="136" height="58" rx="14" style="fill:var(--card);stroke:var(--ink);stroke-width:3"/><text x="484" y="134" font-size="20" font-weight="800" text-anchor="middle" style="fill:var(--ink)">290,40 €</text><text x="484" y="153" font-size="12" font-weight="700" text-anchor="middle" style="fill:var(--muted)">lo que pago</text><g style="opacity:0.28"><path d="M114 100 Q184 12 254 100" style="fill:none;stroke:var(--blue);stroke-width:3.2" marker-end="url(#cvBf)"/><text x="184" y="24" font-size="16" font-weight="800" text-anchor="middle" style="fill:var(--i)">−20 %</text><text x="184" y="46" font-size="18" font-weight="800" text-anchor="middle" style="fill:var(--blue)">× 0,80</text></g><g style="opacity:1"><path d="M254 166 Q184 254 114 166" style="fill:none;stroke:var(--orange);stroke-width:3.2;stroke-dasharray:9 6" marker-end="url(#cvBb)"/><text x="184" y="234" font-size="18" font-weight="800" text-anchor="middle" style="fill:var(--orange)">: 0,80</text><text x="184" y="255" font-size="13" font-weight="700" text-anchor="middle" style="fill:var(--i)">(−20 %)</text></g><g style="opacity:0.28"><path d="M314 100 Q384 12 454 100" style="fill:none;stroke:var(--blue);stroke-width:3.2" marker-end="url(#cvBf)"/><text x="384" y="24" font-size="16" font-weight="800" text-anchor="middle" style="fill:var(--d)">+21 %</text><text x="384" y="46" font-size="18" font-weight="800" text-anchor="middle" style="fill:var(--blue)">× 1,21</text></g><g style="opacity:1"><path d="M454 166 Q384 254 314 166" style="fill:none;stroke:var(--orange);stroke-width:3.2;stroke-dasharray:9 6" marker-end="url(#cvBb)"/><text x="384" y="234" font-size="18" font-weight="800" text-anchor="middle" style="fill:var(--orange)">: 1,21</text><text x="384" y="255" font-size="13" font-weight="700" text-anchor="middle" style="fill:var(--d)">(+21 %)</text></g><text x="284" y="282" font-size="13" font-weight="800" text-anchor="middle" style="fill:var(--blue)">➜ hacia delante: multiplico por el índice</text><text x="284" y="300" font-size="13" font-weight="800" text-anchor="middle" style="fill:var(--orange)">⟵ hacia atrás: divido entre el índice</text></svg></div><ol class="sol"><li>Índice total: 0,80 · 1,21 = 0,968</li><li>Inicial = 290,40 : 0,968 = <b class="res">300 €</b></li><li>O flecha a flecha hacia atrás: 290,40 : 1,21 = 240 → 240 : 0,80 = <b class="res">300 €</b></li></ol></div><div class="ap-box ap-err"><h3>⚠️ Errores típicos</h3><ul><li>Sumar los porcentajes: +10 % y −25 % no es −15 %.</li><li>Pensar que subir y bajar el mismo % deja el precio igual.</li><li>Para el precio inicial, multiplicar en vez de dividir.</li></ul></div></div>
     <h3 class="try">🔧 Esquema y calculadora</h3><p class="try-sub">Cambia los números y mira cómo se resuelve paso a paso.</p>
     <p class="lead">Cada cambio se hace sobre el precio que queda después del anterior. Los índices se <b>multiplican</b>; los porcentajes <b>no se suman</b>.</p>
     <div class="panel">
@@ -668,7 +675,7 @@ p.try-sub{margin:0 0 6px;color:var(--muted)}
         <button class="btn ghost" id="enAdd">+ Añadir cambio</button>
       </div>
       <div class="ctrls" id="enList" style="margin-top:10px"></div>
-      <h3 style="margin-top:18px">El diagrama</h3>
+      <h3 style="margin-top:18px">El diagrama de flechas</h3><p class="muted">Arriba ➡ multiplico (de inicial a final). Abajo ⬅ divido (de final a inicial). Se resalta el camino que necesitas.</p>
       <div class="chain" id="enChain" style="margin-top:8px"></div>
       <h3 style="margin-top:14px">El atajo: multiplico los índices</h3>
       <div class="chain" id="enShort" style="margin-top:8px"></div>
@@ -935,6 +942,52 @@ function setPressed(on, off){ on.setAttribute('aria-pressed','true'); off.setAtt
 function chips(el, list, fn){ el.innerHTML=''; list.forEach((ex,i)=>{ const b=document.createElement('button'); b.className='chip'; b.textContent=ex.name; b.addEventListener('click',()=>fn(ex)); el.appendChild(b); }); }
 function box(v, s, cls){ return `<div class="box ${cls||'c-g'}"><div class="v">${v}</div>${s?`<div class="s">${s}</div>`:''}</div>`; }
 function arr(lbl, cls, back){ return `<div class="arr ${cls||''}" style="${cls?'':''}"><span>${lbl}</span><span class="a">${back?'◄━━━':'━━━►'}</span></div>`; }
+/* Diagrama de flechas curvas: hacia delante × índice, hacia atrás : índice */
+function curvas(vals, steps, o){
+  o = o || {};
+  const id = o.id || ('cv' + Math.random().toString(36).slice(2,7));
+  const n = vals.length, BW = 136, GAP = 64, PAD = 16, BH = 58;
+  const W = PAD*2 + n*BW + (n-1)*GAP;
+  const yT = 104, yB = yT + BH;              // parte de arriba y de abajo de las cajas
+  const H0 = yB + 110;                        // alto sin fila de total
+  const fwOp = o.dir === 'B' ? 0.28 : 1, bkOp = o.dir === 'F' ? 0.28 : 1;
+  const cx = i => PAD + BW/2 + i*(BW+GAP);
+  const t = (x, y, s, size, w, fill, extra) =>
+    `<text x="${x}" y="${y}" font-size="${size}" font-weight="${w}" text-anchor="middle" style="fill:${fill}"${extra||''}>${s}</text>`;
+  let g = '';
+  vals.forEach((v, i) => {
+    const x = cx(i) - BW/2, first = i === 0, last = i === n-1;
+    const fill = first ? 'var(--soft)' : 'var(--card)';
+    g += `<rect x="${x}" y="${yT}" width="${BW}" height="${BH}" rx="14" style="fill:${fill};stroke:${last && n>1 ? 'var(--ink)' : 'var(--line)'};stroke-width:${last && n>1 ? 3 : 2.5}"/>`;
+    g += t(cx(i), yT + 30, v, 20, 800, 'var(--ink)');
+    const sub = (o.subs && o.subs[i] != null) ? o.subs[i] : (first ? 'inicial' : last ? 'final' : '');
+    if (sub) g += t(cx(i), yT + 49, sub, 12, 700, 'var(--muted)');
+  });
+  steps.forEach((s, i) => {
+    const a = cx(i) + 30, b = cx(i+1) - 30, m = (a + b) / 2;
+    const col = s.up ? 'var(--d)' : 'var(--i)';
+    // hacia delante (arriba): multiplico
+    g += `<g style="opacity:${fwOp}"><path d="M${a} ${yT-4} Q${m} ${yT-92} ${b} ${yT-4}" style="fill:none;stroke:var(--blue);stroke-width:3.2" marker-end="url(#${id}f)"/>`;
+    g += t(m, 24, s.pct, 16, 800, col) + t(m, 46, '× ' + s.idx, 18, 800, 'var(--blue)') + '</g>';
+    // hacia atrás (abajo): divido
+    g += `<g style="opacity:${bkOp}"><path d="M${b} ${yB+4} Q${m} ${yB+92} ${a} ${yB+4}" style="fill:none;stroke:var(--orange);stroke-width:3.2;stroke-dasharray:9 6" marker-end="url(#${id}b)"/>`;
+    g += t(m, yB + 72, ': ' + s.idx, 18, 800, 'var(--orange)') + t(m, yB + 93, '(' + s.pct + ')', 13, 700, col) + '</g>';
+  });
+  let H = H0;
+  if (o.total) {
+    const bw = Math.min(W - 40, 470);
+    g += `<rect x="${(W-bw)/2}" y="${H0+2}" width="${bw}" height="44" rx="12" style="fill:var(--yellow-bg);stroke:var(--yellow);stroke-width:2.5"/>`;
+    g += t(W/2, H0 + 30, o.total, 15, 800, 'var(--ink)');
+    H += 54;
+  }
+  // leyenda (dos líneas)
+  g += t(W/2, H + 10, '➜ hacia delante: multiplico por el índice', 13, 800, 'var(--blue)');
+  g += t(W/2, H + 28, '⟵ hacia atrás: divido entre el índice', 13, 800, 'var(--orange)');
+  H += 40;
+  const mk = (sfx, c) => `<marker id="${id}${sfx}" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:${c}"/></marker>`;
+  const minW = Math.max(W, 340);
+  return `<svg class="fig cv" viewBox="${(W-minW)/2} 0 ${minW} ${H}" role="img" aria-label="${o.label || 'Diagrama de porcentajes encadenados con flechas'}" style="width:100%;max-width:${minW}px;height:auto"><defs>${mk('f','var(--blue)')}${mk('b','var(--orange)')}</defs>${g}</svg>`;
+}
 
 /* ---------------- routing ---------------- */
 const views = ["mapa", "razones", "magnitudes", "regla", "compuesta", "repartos", "triangulo", "subebaja", "variacion", "encadenados", "interes", "escalas", "consumo", "grifos", "moviles", "sa", "clase", "casa", "prep", "auto", "conceptual"].filter(v=>document.getElementById('v-'+v));
@@ -1295,12 +1348,57 @@ function vaCalc(){
   $('vaBars').innerHTML=`<div class="bar"><span class="lbl">antes = 100 %</span><div class="track">${segs}</div></div>`;
 }
 
+
+/* ---- editor del diagrama de los apuntes ---- */
+const EF0={s:200,know:'I',ch:[[true,10],[false,25]]};
+let ef=JSON.parse(JSON.stringify(EF0));
+const ix2=x=>x.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+function efInputs(){
+  const el=$('efList'); el.innerHTML='';
+  ef.ch.forEach((c,i)=>{
+    const w=document.createElement('div'); w.className='ef-row';
+    w.innerHTML=`<b>Cambio ${i+1}</b><div class="seg" role="group" aria-label="Cambio ${i+1}"><button class="up" aria-pressed="${c[0]}">📈 Sube</button><button class="down" aria-pressed="${!c[0]}">📉 Baja</button></div>
+      <label class="f" style="flex-direction:row;align-items:center;gap:6px"><input class="n" inputmode="decimal" value="${F(c[1])}" aria-label="Porcentaje del cambio ${i+1}"> %</label>
+      ${ef.ch.length>1?`<button class="chip">Quitar</button>`:''}`;
+    const [bu,bd]=w.querySelectorAll('.seg button');
+    bu.addEventListener('click',()=>{c[0]=true; efInputs(); efDraw();});
+    bd.addEventListener('click',()=>{c[0]=false; efInputs(); efDraw();});
+    w.querySelector('input').addEventListener('input',e=>{c[1]=P(e.target.value); efDraw();});
+    const q=w.querySelector('.chip'); if(q) q.addEventListener('click',()=>{ef.ch.splice(i,1); efInputs(); efDraw();});
+    el.appendChild(w);
+  });
+  $('efAdd').disabled = ef.ch.length>=4;
+}
+function efDraw(){
+  const kF=ef.know==='F'; if(kF) setPressed($('efKF'),$('efKI')); else setPressed($('efKI'),$('efKF'));
+  $('efSL').textContent = kF?'Precio final (€)':'Precio inicial (€)';
+  const x=P($('efS').value), ok=isFinite(x) && ef.ch.every(c=>isFinite(c[1]) && (c[0]||c[1]<100));
+  if(!ok){ $('efNote').innerHTML='Escribe números válidos (una bajada tiene que ser menor que 100 %).'; return; }
+  const idxs=ef.ch.map(c=>(c[0]?100+c[1]:100-c[1])/100), tot=idxs.reduce((a,b)=>a*b,1);
+  let v=kF?x/tot:x; const vals=[v]; idxs.forEach(k=>{v*=k; vals.push(v);});
+  const steps=ef.ch.map((c,i)=>({up:c[0], pct:`${c[0]?'+':'−'}${F(c[1])} %`, idx:ix2(idxs[i])}));
+  const rp=tot*100-100;
+  const subs=vals.map((_,k)=>k===0?(kF?'inicial (?)':'inicial'):k===vals.length-1?(kF?'final':'final (?)'):'');
+  $('efFig').innerHTML=curvas(vals.map(E),steps,{id:'cvA',dir:kF?'B':'F',subs,
+    total:`Índice total: ${idxs.map(ix2).join(' × ')} = ${F(tot,4)} → ${rp>=0?'sube':'baja'} un ${F(Math.abs(rp))} %`});
+  $('efNote').innerHTML = kF
+    ? `⬅ Voy hacia atrás <b>dividiendo</b>: ${vals.slice(1).reverse().map((_,j)=>{const k=vals.length-1-j; return `${F(vals[k])} : ${ix2(idxs[k-1])} = ${F(vals[k-1])}`;}).join(' → ')}. Precio inicial: <b>${E(vals[0])}</b>.`
+    : `➡ Voy hacia delante <b>multiplicando</b>: ${idxs.map((k,i)=>`${F(vals[i])} × ${ix2(k)} = ${F(vals[i+1])}`).join(' → ')}. Precio final: <b>${E(vals[vals.length-1])}</b>.`;
+}
+function efInit(){
+  efInputs(); efDraw();
+  $('efS').addEventListener('input',efDraw);
+  $('efKI').addEventListener('click',()=>{ if(ef.know!=='I'){ const t=ef.ch.reduce((a,c)=>a*(c[0]?100+c[1]:100-c[1])/100,1); $('efS').value=F(P($('efS').value)/t); ef.know='I'; } efDraw(); });
+  $('efKF').addEventListener('click',()=>{ if(ef.know!=='F'){ const t=ef.ch.reduce((a,c)=>a*(c[0]?100+c[1]:100-c[1])/100,1); $('efS').value=F(P($('efS').value)*t); ef.know='F'; } efDraw(); });
+  $('efAdd').addEventListener('click',()=>{ if(ef.ch.length<4){ ef.ch.push([false,10]); efInputs(); efDraw(); } });
+  $('efReset').addEventListener('click',()=>{ ef=JSON.parse(JSON.stringify(EF0)); $('efS').value='200'; efInputs(); efDraw(); });
+}
 /* ---------------- ENCADENADOS ---------------- */
 const ENEX=[
   {name:'🎒 Mochila +20 % y −25 %', ctx:'Una mochila cuesta 50 €. En septiembre sube un 20 % y en enero la rebajan un 25 %.', s:50, ch:[[true,20],[false,25]]},
   {name:'🧾 Factura −20 % y IVA', ctx:'Una factura de 350 € con un 20 % de descuento y después un 21 % de IVA.', s:350, ch:[[false,20],[true,21]]},
   {name:'👕 Camiseta +10 % y −20 %', ctx:'Una camiseta de 40 € sube un 10 % y después la rebajan un 20 %.', s:40, ch:[[true,10],[false,20]]},
-  {name:'📺 Televisor: pagué 232 €', ctx:'Pagamos 232 € por un televisor con un 20 % de rebaja y después un 21 % de IVA. ¿Cuál era su precio inicial?', s:232, know:'F', ch:[[false,20],[true,21]]},
+  {name:'📺 Televisor: pagué 242 €', ctx:'Pagamos 242 € por un televisor con un 20 % de rebaja y después un 21 % de IVA. ¿Cuál era su precio inicial?', s:242, know:'F', ch:[[false,20],[true,21]]},
   {name:'📈 Dos subidas', ctx:'Un producto de 100 € sube un 15 % un año y un 16 % el año siguiente.', s:100, ch:[[true,15],[true,16]]}
 ];
 let en={s:50,ch:[[true,20],[false,25]],know:'I'};
@@ -1326,12 +1424,13 @@ function enCalc(){
   $('enStartL').textContent = kF?'Precio final pagado (€)':'Precio al principio (€)';
   const tIdx=en.ch.reduce((a,c)=>a*(c[0]?100+c[1]:100-c[1])/100,1);
   en.s = kF ? P($('enStart').value)/tIdx : P($('enStart').value);
-  let v=en.s, chain=box(E(v),'al principio','c-g'), vals=[v], idxs=[];
+  let v=en.s, vals=[v], idxs=[], steps=[];
   en.ch.forEach(c=>{ const ix=(c[0]?100+c[1]:100-c[1])/100; idxs.push(ix); v=v*ix; vals.push(v);
-    chain+=arr(`${c[0]?'+':'−'}${F(c[1])} % → × ${F(ix,2)}`, c[0]?'c-d':'c-i')+box(E(v),'',c[0]?'c-d':'c-i'); });
-  $('enChain').innerHTML=chain;
-  const tot=idxs.reduce((a,b)=>a*b,1), pc=tot*100;
-  $('enShort').innerHTML=box(E(en.s),'','c-g')+arr(`× ${idxs.map(x=>F(x,2)).join(' · ')} = × ${F(tot,4)}`,'c-p')+box(E(v),'','c-p');
+    steps.push({up:c[0], pct:`${c[0]?'+':'−'}${F(c[1])} %`, idx:ix.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}); });
+  const dir = kF ? 'B' : 'F';
+  $('enChain').innerHTML='<div class="cv-wrap">'+curvas(vals.map(E), steps, {id:'cvC', dir, subs:vals.map((_,k)=>k===0?(kF?'inicial (?)':'inicial'):k===vals.length-1?(kF?'lo que pago':'final (?)'):'')})+'</div>';
+  const tot=idxs.reduce((a,b)=>a*b,1), pc=tot*100, rp=pc-100;
+  $('enShort').innerHTML='<div class="cv-wrap">'+curvas([E(en.s),E(v)], [{up:rp>=0, pct:`${rp>=0?'+':'−'}${F(Math.abs(rp))} %`, idx:F(tot,4)}], {id:'cvD', dir, subs:[kF?'inicial (?)':'inicial', kF?'lo que pago':'final (?)'], total:`Índice total: ${idxs.map(x=>x.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})).join(' × ')} = ${F(tot,4)}`})+'</div>';
   const maxv=Math.max(...vals);
   let bars='';
   vals.forEach((x,k)=>{
@@ -1346,7 +1445,7 @@ function enCalc(){
   const sumPct = en.ch.reduce((a,c)=>a+(c[0]?c[1]:-c[1]),0);
   const real = pc-100;
   $('enNote').innerHTML = `<b>Índice total = ${F(tot,4)} = ${F(pc)} %</b> → ${real>=0?'ha subido':'ha bajado'} un <b>${F(Math.abs(real))} %</b>.<br>
-    ${kF?`⬅ Como sé el final, voy hacia atrás: ${F(P($('enStart').value))} : ${F(tot,4)} = <b>${E(en.s)}</b> al principio.<br>`:''}⚠ Si sumaras los porcentajes saldría ${sumPct>=0?'+':'−'}${F(Math.abs(sumPct))} %, y eso <b>está mal</b>: cada % se calcula sobre el precio que había en ese momento.`;
+    ${kF?`⬅ Como sé el final, voy hacia atrás <b>dividiendo</b>: ${F(P($('enStart').value))} : ${F(tot,4)} = <b>${E(en.s)}</b> al principio.<br>`:''}⚠ Si sumaras los porcentajes saldría ${sumPct>=0?'+':'−'}${F(Math.abs(sumPct))} %, y eso <b>está mal</b>: cada % se calcula sobre el precio que había en ese momento.`;
 }
 
 
@@ -1882,7 +1981,7 @@ function init(){
   $('vaI').addEventListener('input',vaCalc); $('vaF').addEventListener('input',vaCalc);
   vaLoad(VAEX[0]); }
 
-  if($('v-encadenados')){ chips($('enEx'),ENEX,enLoad);
+  if($('v-encadenados')){ if($('efFig')) efInit(); chips($('enEx'),ENEX,enLoad);
   $('enStart').addEventListener('input',enCalc);
   $('enKI').addEventListener('click',()=>{ if(en.know!=='I'){ $('enStart').value=F(en.s); en.know='I'; } enCalc(); });
   $('enKF').addEventListener('click',()=>{ if(en.know!=='F'){ const t=en.ch.reduce((a,c)=>a*(c[0]?100+c[1]:100-c[1])/100,1); $('enStart').value=F(en.s*t); en.know='F'; } enCalc(); });
