@@ -46,20 +46,19 @@ TEMA.registrar({
       res:"A los nietos les tocan <b>120 €</b>, <b>90 €</b> y <b>60 €</b>." },
     { nivel:"Problema", min:5,
       enun:"En 2.º hay 75 alumnos y 30 hacen deporte en un club. <b>a)</b> ¿Qué porcentaje hace deporte en un club? <b>b)</b> El 60 % de los que hacen deporte juega al fútbol. ¿Cuántos son?",
-      pasos:["<b>a)</b> Los 75 alumnos son el 100 % (D):", cuadro("Alumnos","Porcentaje (%)",["75","100"],["30","x"],"D"),
-             R`$\dfrac{75}{30} = \dfrac{100}{x} \;\Rightarrow\; x = \dfrac{30 \cdot 100}{75} = 40$ → $40\,\%$`,
+      pasos:["<b>a)</b> La parte son 30 alumnos y el total, 75 (tipo 3):",
+             R`$\% = \dfrac{30}{75} \cdot 100 = 40\,\%$`,
              R`<b>b)</b> El 60 % de 30: $C_F = I_V \cdot C_I = 0,60 \cdot 30 = 18$`],
       res:"a) Hace deporte en un club el <b>40 %</b>.<br>b) Juegan al fútbol <b>18 alumnos</b>." },
     { nivel:"Problema", min:6,
       enun:"En agosto un artículo costaba 125 € y en diciembre costaba un 40 % más. Al verano siguiente lo compré por 210 €. ¿El segundo cambio fue una subida o una bajada? ¿De qué porcentaje?",
       pasos:[R`Diciembre: el 40 % de 125 $= 50$ € → $125 + 50 = 175$ €`,
-             R`De 175 € a 210 € <b>sube</b> $210 - 175 = 35$ €. El 100 % es lo de antes, 175 €:`,
-             cuadro("Precio (€)","Porcentaje (%)",["175","100"],["35","x"],"D"),
-             R`$x = \dfrac{35 \cdot 100}{175} = 20$ → subida del $20\,\%$`],
+             R`De 175 € a 210 € <b>sube</b> $210 - 175 = 35$ €. El total es lo de antes, 175 €:`,
+             R`$\% = \dfrac{35}{175} \cdot 100 = 20\,\%$ → subida del $20\,\%$`],
       res:"El segundo cambio fue una <b>subida del 20 %</b>." },
     { nivel:"Aplicación", min:4,
       enun:"¿Qué interés producen 6000 € al 2,5 % anual durante 9 meses?",
-      pasos:[R`1 año (D): 100 € → 2,5 €; 6000 € → $x = \dfrac{6000 \cdot 2,5}{100} = 150$ €`, R`12 meses → 150 €; 9 meses → $x = \dfrac{9 \cdot 150}{12} = \dfrac{1350}{12} = 112,50$ €`],
+      pasos:[R`1 año: el 2,5 % de 6000 $= 0,025 \cdot 6000 = 150$ €`, R`1 mes: $150 : 12 = 12,50$ €`, R`9 meses: $12,50 \cdot 9 = 112,50$ €`],
       res:"Producen <b>112,50 €</b> de interés." }
   ],
 
@@ -77,13 +76,13 @@ TEMA.registrar({
     { nivel:"Consolidación", enun:"Tres primos de 5, 7 y 8 años reciben dinero de forma directamente proporcional a su edad. Al mayor le dan 96 €. ¿Cuánto les dan a los otros? ¿Cuánto se repartió?",
       pasos:["96 : 8 = 12 € por año", "5 · 12 = 60 € · 7 · 12 = 84 €", "Total: 96 + 60 + 84 = 240 €"], res:"A los otros les dan <b>60 €</b> y <b>84 €</b>. Se repartieron <b>240 €</b>." },
     { nivel:"Consolidación", enun:"Un precio sube un 10 % y después baja un 10 %. ¿Cuánto ha variado en total?",
-      pasos:[R`$1,10 \cdot 0,90 = 0,99$ → menos de 1`], res:"En total el precio baja un <b>1 %</b>." },
+      pasos:["Lo pruebo con 100 €:", window.curvas(["100 €","110 €","99 €"],[{up:true,pct:"+10 %",idx:"1,10"},{up:false,pct:"−10 %",idx:"0,90"}],{total:"Índice total: 1,10 × 0,90 = 0,99 → baja un 1 %"}), R`$100 \cdot 1,10 = 110$ € → $110 \cdot 0,90 = 99$ €`], res:"En total el precio baja un <b>1 %</b>." },
     { nivel:"Problema", enun:"Un grifo llena un depósito en 10 horas y otro en 15 horas. ¿Cuánto tardan los dos juntos?",
       pasos:[R`$\dfrac{1}{10} + \dfrac{1}{15} = \dfrac{3}{30} + \dfrac{2}{30} = \dfrac{5}{30} = \dfrac16$`], res:"Los dos juntos tardan <b>6 horas</b>." },
     { nivel:"Problema", enun:"Un grifo llena un depósito en 3 horas y el desagüe lo vacía en 12 horas. Si se abren los dos, ¿cuánto tarda en llenarse?",
       pasos:[R`El desagüe resta: $\dfrac13 - \dfrac{1}{12} = \dfrac{4}{12} - \dfrac{1}{12} = \dfrac{3}{12} = \dfrac14$`, "Le doy la vuelta: 4 horas"], res:"El depósito tarda <b>4 horas</b> en llenarse." },
     { nivel:"Problema", enun:"¿Qué dinero hay que depositar al 2 % para ganar 150 € de intereses en 3 años?",
-      pasos:[R`1 año: 3 años → 150 €; 1 año → $150 : 3 = 50$ €`, R`100 € → 2 €; $x$ → 50 €: $x = \dfrac{100 \cdot 50}{2} = 2500$ €`], res:"Hay que depositar <b>2500 €</b>." },
+      pasos:[R`1 año: $150 : 3 = 50$ €`, "50 € son el 2 % del dinero: busco el total (tipo 2), el dinero es el 100 %.", cuadro("Porcentaje (%)","Dinero (€)",["2","50"],["100","x"],"D"), R`$x = \dfrac{100 \cdot 50}{2} = 2500$ €`], res:"Hay que depositar <b>2500 €</b>." },
 
     { nivel:"Básico", enun:"La razón entre los chicos y las chicas de una clase es 4 : 5. En la clase hay 27 alumnos. ¿Cuántos chicos y cuántas chicas hay?",
       pasos:["4 + 5 = 9 partes", "27 : 9 = 3 alumnos cada parte", "Chicos: 4 · 3 = 12. Chicas: 5 · 3 = 15"], res:"Hay <b>12 chicos</b> y <b>15 chicas</b>." },
@@ -100,15 +99,15 @@ TEMA.registrar({
       pasos:[R`Doy la vuelta: $\dfrac12,\ \dfrac15,\ \dfrac{1}{10}$ → mismo denominador: $\dfrac{5}{10},\ \dfrac{2}{10},\ \dfrac{1}{10}$`, "Reparto directo a 5, 2 y 1: 8 partes → 1600 : 8 = 200 €", "5 · 200 = 1000 €, 2 · 200 = 400 € y 1 · 200 = 200 €"],
       res:"Las partes son <b>1000 €</b>, <b>400 €</b> y <b>200 €</b>." },
     { nivel:"Consolidación", enun:"En un instituto de 840 alumnos:<br><b>a)</b> El 35 % hace deporte por las tardes. ¿Cuántos alumnos son?<br><b>b)</b> 126 alumnos vienen en autobús. ¿Qué porcentaje es?",
-      pasos:[R`<b>a)</b> $C_F = I_V \cdot C_I = 0,35 \cdot 840 = 294$`, "<b>b)</b> Los 840 alumnos son el 100 %:",
-             cuadro("Alumnos","Porcentaje (%)",["840","100"],["126","x"],"D"), R`$x = \dfrac{126 \cdot 100}{840} = 15$ → $15\,\%$`], res:"a) Hacen deporte <b>294 alumnos</b>.<br>b) Viene en autobús el <b>15 %</b>." },
+      pasos:[R`<b>a)</b> $C_F = I_V \cdot C_I = 0,35 \cdot 840 = 294$`, "<b>b)</b> La parte son 126 y el total, 840 (tipo 3):",
+             R`$\% = \dfrac{126}{840} \cdot 100 = 15\,\%$`], res:"a) Hacen deporte <b>294 alumnos</b>.<br>b) Viene en autobús el <b>15 %</b>." },
     { nivel:"Problema", enun:"Después de una rebaja del 15 %, unas zapatillas cuestan 68 €. ¿Cuánto costaban antes?",
       pasos:[R`Con la rebaja pago el $100 - 15 = 85\,\%$`, cuadro("Porcentaje (%)","Precio (€)",["85","68"],["100","x"],"D"),
              R`$\dfrac{85}{100} = \dfrac{68}{x} \;\Rightarrow\; x = \dfrac{100 \cdot 68}{85} = 80$ €`], res:"Las zapatillas costaban <b>80 €</b>." },
     { nivel:"Problema", enun:"Una lavadora cuesta 350 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
       pasos:[R`IVA: el 21 % de 350 $= 73,50$ € → $350 + 73,50 = 423,50$ €`, R`🪄 O de una vez, pagando el $121\,\%$: $1,21 \cdot 350 = 423,50$ €`], res:"Con IVA, la lavadora cuesta <b>423,50 €</b>." },
     { nivel:"Problema", enun:"¿Qué interés producen 4000 € al 3 % anual durante 8 meses?",
-      pasos:[R`1 año (D): $x = \dfrac{4000 \cdot 3}{100} = 120$ €`, R`12 meses → 120 €; 8 meses → $x = \dfrac{8 \cdot 120}{12} = \dfrac{960}{12} = 80$ €`], res:"Producen <b>80 €</b> de interés." }
+      pasos:[R`1 año: $0,03 \cdot 4000 = 120$ €`, R`1 mes: $120 : 12 = 10$ €`, R`8 meses: $10 \cdot 8 = 80$ €`], res:"Producen <b>80 €</b> de interés." }
   ],
 
   laminas: [
@@ -135,9 +134,9 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">🙃 Inversa</span><p>doble → mitad: le doy la vuelta a la fracción de la $x$ y multiplico en cruz</p></div>
         <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I a la x; a las I, la vuelta; multiplico</p></div>
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
-        <div class="b-prop"><span class="etq">％ Porcentajes</span><p>tipo 1: $C_F = I_V \\cdot C_I$ · tipos 2 y 3 (el total o el %): regla de tres, el total es el 100 %</p></div>
-        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>calculo el % y lo sumo o lo resto (🪄 $-20\\,\\%$ = pagar el $80\\,\\%$) · encadenados: se multiplican los índices</p></div>
-        <div class="b-prop"><span class="etq">🏦 Interés</span><p>dos reglas de tres D: 100 € → el % (1 año) y 1 año (12 meses) → todo el tiempo</p></div>
+        <div class="b-prop"><span class="etq">％ Porcentajes</span><p>tipo 1: $C_F = I_V \\cdot C_I$<br>tipo 2 (el total): regla de tres, el total es el 100 %<br>tipo 3 (el %): $\\dfrac{\\text{parte}}{\\text{total}} \\cdot 100$</p></div>
+        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>calculo el % y lo sumo o lo resto (🪄 $-20\\,\\%$ = pagar el $80\\,\\%$) <br>encadenados: flechas, hacia delante multiplico y hacia atrás divido; se multiplican los índices</p></div>
+        <div class="b-prop"><span class="etq">🏦 Interés</span><p>1 año: el % en decimal por el capital (tipo 1); después, por el tiempo (en meses, : 12 y por los meses)</p></div>
         <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta</p></div></div>`}
     ]},
 

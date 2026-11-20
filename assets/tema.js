@@ -350,6 +350,56 @@ window.despeje = function(filas){
     ? `<div class="dsp-a"><i>⬇</i><span>${f}</span></div>`
     : `<div class="dsp-f${k===filas.length-1?" fin":""}">$${f}$</div>`).join("")}</div>`;
 };
+/* Porcentajes encadenados: diagrama de flechas curvas. Arriba ➡ multiplico por el índice; abajo ⬅ divido entre el índice.
+   curvas(['200 €','220 €','165 €'], [{up:true,pct:'+10 %',idx:'1,10'},{up:false,pct:'−25 %',idx:'0,75'}], {total:'…', dir:'F'|'B', subs:[…]}) */
+/* Diagrama de flechas curvas: hacia delante × índice, hacia atrás : índice */
+window.curvas = function(vals, steps, o){
+  o = o || {};
+  const id = o.id || ('cv' + Math.random().toString(36).slice(2,7));
+  const n = vals.length, BW = 136, GAP = 64, PAD = 16, BH = 58;
+  const W = PAD*2 + n*BW + (n-1)*GAP;
+  const yT = 104, yB = yT + BH;              // parte de arriba y de abajo de las cajas
+  const H0 = yB + 110;                        // alto sin fila de total
+  const fwOp = o.dir === 'B' ? 0.28 : 1, bkOp = o.dir === 'F' ? 0.28 : 1;
+  const cx = i => PAD + BW/2 + i*(BW+GAP);
+  const t = (x, y, s, size, w, fill, extra) =>
+    `<text x="${x}" y="${y}" font-size="${size}" font-weight="${w}" text-anchor="middle" style="fill:${fill}"${extra||''}>${s}</text>`;
+  const head = (x, y, ux, uy, c) => { const L = Math.hypot(ux, uy); ux /= L; uy /= L;
+    const p = (a, b) => `${(x + a).toFixed(1)},${(y + b).toFixed(1)}`;
+    return `<polygon points="${p(0,0)} ${p(-13*ux + 6*uy, -13*uy - 6*ux)} ${p(-13*ux - 6*uy, -13*uy + 6*ux)}" style="fill:${c}"/>`; };
+  let g = '';
+  vals.forEach((v, i) => {
+    const x = cx(i) - BW/2, first = i === 0, last = i === n-1;
+    const fill = first ? 'var(--ind-bg)' : 'var(--card)';
+    g += `<rect x="${x}" y="${yT}" width="${BW}" height="${BH}" rx="14" style="fill:${fill};stroke:${last && n>1 ? 'var(--ink)' : 'var(--line)'};stroke-width:${last && n>1 ? 3 : 2.5}"/>`;
+    g += t(cx(i), yT + 30, v, 20, 800, 'var(--ink)');
+    const sub = (o.subs && o.subs[i] != null) ? o.subs[i] : (first ? 'inicial' : last ? 'final' : '');
+    if (sub) g += t(cx(i), yT + 49, sub, 12, 700, 'var(--muted)');
+  });
+  steps.forEach((s, i) => {
+    const a = cx(i) + 30, b = cx(i+1) - 30, m = (a + b) / 2;
+    const col = s.up ? 'var(--ok)' : 'var(--rose)';
+    // hacia delante (arriba): multiplico
+    g += `<g style="opacity:${fwOp}"><path d="M${a} ${yT-4} Q${m} ${yT-92} ${b} ${yT-4}" style="fill:none;stroke:var(--sky);stroke-width:3.2"/>` + head(b, yT-4, b - m, 88, 'var(--sky)');
+    g += t(m, 24, s.pct, 16, 800, col) + t(m, 46, '× ' + s.idx, 18, 800, 'var(--sky)') + '</g>';
+    // hacia atrás (abajo): divido
+    g += `<g style="opacity:${bkOp}"><path d="M${b} ${yB+4} Q${m} ${yB+92} ${a} ${yB+4}" style="fill:none;stroke:var(--amb);stroke-width:3.2;stroke-dasharray:9 6"/>` + head(a, yB+4, a - m, -88, 'var(--amb)');
+    g += t(m, yB + 72, ': ' + s.idx, 18, 800, 'var(--amb)') + t(m, yB + 93, '(' + s.pct + ')', 13, 700, col) + '</g>';
+  });
+  let H = H0;
+  if (o.total) {
+    const bw = Math.min(W - 40, 470);
+    g += `<rect x="${(W-bw)/2}" y="${H0+2}" width="${bw}" height="44" rx="12" style="fill:var(--amb-bg);stroke:var(--amb-hi);stroke-width:2.5"/>`;
+    g += t(W/2, H0 + 30, o.total, 15, 800, 'var(--ink)');
+    H += 54;
+  }
+  // leyenda (dos líneas)
+  g += t(W/2, H + 10, '➜ hacia delante: multiplico por el índice', 13, 800, 'var(--sky)');
+  g += t(W/2, H + 28, '⟵ hacia atrás: divido entre el índice', 13, 800, 'var(--amb)');
+  H += 40;
+  const minW = Math.max(W, 340);
+  return `<svg class="fig cv" viewBox="${(W-minW)/2} 0 ${minW} ${H}" role="img" aria-label="${o.label || 'Diagrama de porcentajes encadenados con flechas'}" style="width:100%;max-width:${(minW/17).toFixed(1)}em;height:auto;display:block;margin:.3em auto;font-family:var(--f-b)">${g}</svg>`;
+};
 function siguienteAp(){ const L = TEMA.info.apartados||[], i = L.findIndex(a=>String(a.num)===AP); const s = i>=0 ? L[i+1] : null; return s && s.listo ? s : null; }
 
 /* Encaja el contenido en la pantalla sin scroll: ajusta el tamaño de letra */

@@ -29,15 +29,15 @@ TEMA.registrar({
     ]},
     { titulo:"Porcentajes", cuerpo:[
       {comp:{q:"¿Cuánto es el 30 % de 250?", sol:75, explic:"C_F = 250 · 0,30 = 75", pista:"Escribe el 30 % en decimal y multiplica."}},
-      {comp:{q:"¿Qué porcentaje es 18 de 72?", sol:25, unidad:"%", explic:"72 → 100 %; 18 → x = 18 · 100 : 72 = 25 %", pista:"El total, 72, es el 100 %."}},
+      {comp:{q:"¿Qué porcentaje es 18 de 72?", sol:25, unidad:"%", explic:"18 : 72 · 100 = 25 %", pista:"La parte entre el total, por 100."}},
       {comp:{q:"45 es el 15 % de una cantidad. ¿Cuál es?", sol:300, explic:"15 % → 45; 100 % → x = 100 · 45 : 15 = 300", pista:"El total es el 100 %: regla de tres."}},
       {comp:{q:"Si te descuentan un 8 %, ¿qué porcentaje pagas?", opciones:["92 %","108 %","8 %"], ok:0, explic:"100 − 8 = 92 % (el índice es 0,92)", pista:"Del 100 % te quitan 8."}},
       {comp:{q:"¿Cuánto cuesta con el 21 % de IVA algo de 200 €?", sol:242, unidad:"€", explic:"200 · 1,21 = 242 €", pista:"Multiplica por 1,21."}},
       {comp:{q:"Con un 25 % de rebaja he pagado 60 €. ¿Cuánto costaba?", sol:80, unidad:"€", explic:"Pago el 75 %: 75 → 60; 100 → x = 100 · 60 : 75 = 80 €", pista:"Con la rebaja pagas el 75 %."}},
-      {comp:{q:"Subir un 10 % y después bajar un 10 % deja el precio igual.", opciones:VF, ok:1, explic:"1,10 · 0,90 = 0,99: queda un 1 % más barato.", pista:"Prueba con 100 €."}}
+      {comp:{q:"Subir un 10 % y después bajar un 10 % deja el precio igual.", opciones:VF, ok:1, explic:"Con 100 €: 100 · 1,10 = 110 € → 110 · 0,90 = 99 €. El índice total es 0,99: queda un 1 % más barato.", pista:"Prueba con 100 €."}}
     ]},
     { titulo:"Interés y grifos", cuerpo:[
-      {comp:{q:"¿Qué interés dan 1000 € al 3 % durante 2 años?", sol:60, unidad:"€", explic:"1 año: 100 € → 3 €, 1000 € → 30 €. 2 años: 60 €", pista:"Primero el interés de 1 año (regla de tres: 100 € → 3 €)."}},
+      {comp:{q:"¿Qué interés dan 1000 € al 3 % durante 2 años?", sol:60, unidad:"€", explic:"1 año: 0,03 · 1000 = 30 €. 2 años: 30 · 2 = 60 €", pista:"Primero el interés de 1 año: el 3 % de 1000 €."}},
       {comp:{q:"Dos grifos iguales tardan cada uno 2 h en llenar un depósito. ¿Cuántas horas tardan juntos?", sol:1, unidad:"h", explic:"½ + ½ = 1 → 1 hora", pista:"Suma lo que llena cada uno en 1 hora."}},
       {comp:{q:"Un grifo llena un depósito en 2 h y el desagüe lo vacía en 6 h. ¿Cuántas horas tarda en llenarse?", sol:3, unidad:"h", explic:"1/2 − 1/6 = 2/6 = 1/3 → 3 horas", pista:"El desagüe resta; después, la vuelta."}}
     ]}

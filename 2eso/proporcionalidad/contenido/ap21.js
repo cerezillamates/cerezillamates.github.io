@@ -35,9 +35,8 @@ TEMA.registrar({
       res:"a) Pagué <b>72 €</b> por el abrigo.<br>b) La bufanda me costó <b>15 €</b>." },
     { nivel:"1,25 puntos", min:5,
       enun:"Un pantalón costaba 70 € y lo he pagado a 56 €. ¿Qué porcentaje de descuento me han hecho?",
-      pasos:[R`Me han descontado $70 - 56 = 14$ €`, "El 100 % es el precio de antes, 70 €:",
-             cuadro("Precio (€)","Porcentaje (%)",["70","100"],["14","x"],"D"),
-             R`$x = \dfrac{14 \cdot 100}{70} = 20$ → $20\,\%$`],
+      pasos:[R`Me han descontado $70 - 56 = 14$ €`, "El total es el precio de antes, 70 €:",
+             R`$\% = \dfrac{14}{70} \cdot 100 = 20\,\%$`],
       res:"Me han hecho un descuento del <b>20 %</b>." },
     { nivel:"1 punto", min:4,
       enun:"Un ordenador cuesta 1200 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
@@ -45,7 +44,7 @@ TEMA.registrar({
       res:"Con IVA, el ordenador cuesta <b>1452 €</b>." },
     { nivel:"1,25 puntos", min:6,
       enun:"Un televisor de 325 € está rebajado un 25 %. Al pagar en caja nos añaden el 21 % de IVA. ¿Cuál es el precio final?",
-      pasos:[R`Rebaja: $325 \cdot 0,75 = 243,75$ €`, R`IVA: $243,75 \cdot 1,21 \approx 294,94$ €`, R`O de una vez: $325 \cdot 0,75 \cdot 1,21 = 325 \cdot 0,9075 \approx 294,94$ €`],
+      pasos:[window.curvas(["325 €","243,75 €","294,94 €"],[{up:false,pct:"−25 %",idx:"0,75"},{up:true,pct:"+21 %",idx:"1,21"}],{dir:"F"}), R`Rebaja: $325 \cdot 0,75 = 243,75$ €`, R`IVA: $243,75 \cdot 1,21 \approx 294,94$ €`],
       res:"El precio final del televisor es <b>294,94 €</b>." }
   ],
 

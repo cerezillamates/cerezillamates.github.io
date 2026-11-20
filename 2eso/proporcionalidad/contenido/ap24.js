@@ -35,7 +35,7 @@ TEMA.registrar({
 
   casa: [
     { nivel:"Reto", enun:"Un precio sube un 25 %. ¿Qué porcentaje tiene que bajar para volver al precio de antes?",
-      pasos:[R`Con 100 €: sube a 125 €. Para volver a 100: $100 : 125 = 0,80$ → baja un 20 %`], res:"Tiene que bajar un <b>20 %</b> (no un 25 %)." },
+      pasos:[R`Con 100 €: sube a 125 €. Para volver a 100 tiene que bajar 25 €.`, R`¿Qué % de 125 son 25? $\dfrac{25}{125} \cdot 100 = 20\,\%$`], res:"Tiene que bajar un <b>20 %</b> (no un 25 %)." },
     { nivel:"Reto", enun:"¿Qué es mayor: el 50 % del 50 % de una cantidad o el 25 % de esa cantidad?",
       pasos:[R`$0,5 \cdot 0,5 = 0,25$`], res:"Son <b>iguales</b>." },
     { nivel:"Reto", enun:"Un grifo llena una bañera en 6 minutos y el desagüe la vacía en 9 minutos. Si dejamos los dos abiertos, ¿cuánto tarda en llenarse?",

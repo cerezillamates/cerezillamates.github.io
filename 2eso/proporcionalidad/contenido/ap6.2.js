@@ -1,6 +1,6 @@
 /* 2.º ESO · Tema 3 · Apartado 6.2: Porcentajes. Tipo 2: calcular el total
    Cambio pedido por la profesora (16-11-2026): el tipo 2 se resuelve con REGLA DE TRES (el total es el 100 %).
-   La fórmula C_F = I_V · C_I queda como AMPLIACIÓN al final. */
+   Cambio pedido por la profesora (20-11-2026): sin la fórmula C_F = I_V · C_I (solo en el tipo 1). */
 (function(){
 const R = String.raw;
 const barra = (trozos, pie) => `<figure class="dib"><div class="barra-pct">${trozos.map(t=>`<span class="${t[2]||""}" style="flex:${t[0]}">${t[1]}</span>`).join("")}</div>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
@@ -129,14 +129,6 @@ TEMA.registrar({
       {aviso:["<b>Confundir la parte con el total</b>: el total es siempre el 100 %."], etq:"⚠️ Error 1"},
       {aviso:["<b>Sumar el porcentaje al precio rebajado</b>: el % era del precio de antes."], etq:"⚠️ Error 2"},
       {aviso:["<b>Poner el 20 % cuando pago el 80 %</b>: lee si el dato es lo que pagas o lo que te ahorras."], etq:"⚠️ Error 3"}
-    ]},
-    { titulo:"➕ Ampliación: con la fórmula", cuerpo:[
-      {prop:[R`Es el mismo problema escrito con la fórmula del tipo 1, $C_F = I_V \cdot C_I$, poniendo la $x$ en la cantidad inicial.`], etq:"➕ Ampliación"},
-      {html:despeje([R`C_F = I_V \cdot C_I`, R`Busco $C_I$: pongo una $x$`, R`C_F = I_V \cdot x`, R`$I_V$ está multiplicando: pasa dividiendo`, R`x = \dfrac{C_F}{I_V}`])},
-      {ej:{enun:"La sudadera de 28 € con una rebaja del 20 %.",
-        pasos:[R`$I_V = 1 - 0,20 = 0,80$`, R`$28 = 0,80 \cdot x \;\Rightarrow\; x = \dfrac{28}{0,80} = 35$ €`],
-        res:"Sale lo mismo: <b>35 €</b>."}},
-      {nota:["En el examen puedes hacerlo como prefieras, pero <b>escribiendo todos los pasos</b>."]}
     ]},
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[{lista:[
