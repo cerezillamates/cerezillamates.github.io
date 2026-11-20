@@ -893,8 +893,8 @@ function renderList(){
     if (e.g !== lastG){ lastG = e.g; head = `<h2 style="font-size:1.2rem;margin-top:6px">${esc(e.g)}</h2>`; }
     return head + `<article class="card ex" id="ex${e.n}" data-n="${e.n}">
       <div class="hd"><span class="num">nº ${e.n}</span><span class="ttl">${esc(e.h)}</span><span class="codes">[${code(e)}]</span>
-      <span class="sp"><button class="proy-btn" data-proy="${e.n}" title="Proyectar a pantalla completa con cronómetro">🖥 Proyectar</button>${e.u ? `<a href="${esc(e.u)}" target="_blank" rel="noopener">Solución</a>` : ''}<label style="display:flex;gap:5px;align-items:center"><input type="checkbox" data-done="${e.n}"> Hecho</label></span></div>
-      <div class="body">${e.b}<div class="tags" aria-label="Clasificación"><span class="chip dif" title="Dificultad">${DOTS[e.lv]} ${DIF[e.lv]}</span>${e.t.map(k => `<span class="chip" title="Tipo de enunciado">${esc(TNAME[k])}</span>`).join('')}</div></div></article>`; }).join('') || '<p class="card count">Ningún ejercicio cumple todos los filtros a la vez. Quita alguno.</p>';
+      <span class="sp"><button class="proy-btn" data-proy="${e.n}" title="Proyectar a pantalla completa con cronómetro">🖥 Proyectar</button>${e.u ? `<a href="${esc(e.u)}" target="_blank" rel="noopener">${/emestrada/.test(e.u) ? 'Solución de emestrada' : 'Solución de otro profe'}</a>` : ''}<label style="display:flex;gap:5px;align-items:center"><input type="checkbox" data-done="${e.n}"> Hecho</label></span></div>
+      <div class="body">${e.b}<div class="tags" aria-label="Clasificación"><span class="chip dif" title="Dificultad">${DOTS[e.lv]} ${DIF[e.lv]}</span>${e.t.map(k => `<span class="chip" title="Tipo de enunciado">${esc(TNAME[k])}</span>`).join('')}</div>${SOL[e.n] ? `<div class="solx" data-sol="${e.n}"><div class="solbar"><button class="tool pri" type="button" data-solnext>Solución paso a paso</button><button class="tool" type="button" data-solall>Ver toda la solución</button><button class="tool" type="button" data-solhide hidden>Ocultar</button></div><div class="hoja" hidden></div></div>` : ''}</div></article>`; }).join('') || '<p class="card count">Ningún ejercicio cumple todos los filtros a la vez. Quita alguno.</p>';
   $$('#list img[data-k]').forEach(i => { i.src = DATA.imgs[i.dataset.k]; });
   rendered = true; refreshDone();
 }
@@ -941,15 +941,19 @@ function drawSol(svg, s){ const p = Plot(svg, s.xmax, s.ymax, s.step, s); p.poly
 function solState(x){ const st = [...x.querySelectorAll('.solstep')], left = st.filter(s => s.hidden).length, shown = st.length - left, nx = x.querySelector('[data-solnext]');
   nx.textContent = !shown ? 'Solución paso a paso' : left ? 'Siguiente paso (' + left + ')' : 'Solución completa ✓'; nx.disabled = !!shown && !left;
   x.querySelector('[data-solall]').hidden = !left && !!shown; x.querySelector('[data-solhide]').hidden = !shown; x.querySelector('.hoja').hidden = !shown; }
-function solBuild(x){ const h = x.querySelector('.hoja'), S = SOL[x.dataset.sol]; if (h.dataset.ok) return; h.dataset.ok = 1;
-  h.innerHTML = S.map(s => `<section class="solstep" hidden><h4>${s.t}</h4>${s.h}${s.plot ? '<svg class="plot solplot" viewBox="0 0 400 330" role="img" aria-label="Región factible"></svg>' : ''}</section>`).join('');
+function solFill(h, n, abierto){ const S = SOL[n]; if (!S || h.dataset.ok) return; h.dataset.ok = 1;
+  h.innerHTML = S.map(s => `<section class="solstep"${abierto ? '' : ' hidden'}><h4>${s.t}</h4>${s.h}${s.plot ? '<svg class="plot solplot" viewBox="0 0 400 330" role="img" aria-label="Región factible"></svg>' : ''}</section>`).join('');
   S.forEach((s, i) => { if (s.plot) drawSol(h.children[i].querySelector('svg'), s.plot); }); }
-$('#sel').addEventListener('click', ev => { const b = ev.target.closest('[data-solnext],[data-solall],[data-solhide]'); if (!b) return; const x = b.closest('.solx'); solBuild(x);
+function solBuild(x){ solFill(x.querySelector('.hoja'), x.dataset.sol); }
+window.solFill = solFill;
+function solClick(ev){ const b = ev.target.closest('[data-solnext],[data-solall],[data-solhide]'); if (!b) return; const x = b.closest('.solx'); solBuild(x);
   const st = [...x.querySelectorAll('.solstep')]; let go = null;
   if (b.hasAttribute('data-solhide')) st.forEach(s => s.hidden = true);
   else if (b.hasAttribute('data-solall')){ go = st.find(s => s.hidden); st.forEach(s => s.hidden = false); }
   else { go = st.find(s => s.hidden); if (go) go.hidden = false; }
-  solState(x); if (go) go.scrollIntoView({behavior:'smooth', block: b.hasAttribute('data-solall') ? 'start' : 'nearest'}); });
+  solState(x); if (go) go.scrollIntoView({behavior:'smooth', block: b.hasAttribute('data-solall') ? 'start' : 'nearest'}); }
+$('#sel').addEventListener('click', solClick);
+$('#list').addEventListener('click', solClick);
 $('#snext').addEventListener('click', () => { const n = SELN.find(n => !DONE.has(n)); if (n == null) return; BACK = {h: 'repaso', y: window.scrollY}; location.hash = 'e' + n; });
 const FIRST = Object.values(DATA.pick).flat();
 $('#bytype').innerHTML = ROWS.map(r => { const k = r[0], first = DATA.pick[k] || [];
@@ -957,7 +961,9 @@ $('#bytype').innerHTML = ROWS.map(r => { const k = r[0], first = DATA.pick[k] ||
   return `<div class="lvrow" style="display:grid;grid-template-columns:3rem minmax(0,1fr);gap:10px;align-items:start;border-top:1px dashed var(--line);padding-top:8px">
     <b class="rk">${k}</b>
     <div style="display:grid;gap:4px;min-width:0"><b>${esc(r[1])}</b><span class="count">${QLINK(r[2])} · <span data-tcount="${k}"></span> hechos</span>
-      <div style="display:grid;gap:3px">${first.map(n => '<div>' + chip(BYN[n], 'rec', true) + ' <span class="count">' + esc(BYN[n].s) + '</span></div>').join('')}</div>
+      <div style="display:grid;gap:3px">${first.map(n => '<div>' + chip(BYN[n], 'rec', true) + ' <span class="count">' + esc(BYN[n].s) + '</span>' + (SOL[n] ? ' <span class="solyes">✍️ con solución a mano</span>' : '') + '</div>').join('')}</div>
+      ${(() => { const cs = EX.filter(e => e.L.includes(k) && SOL[e.n] && !first.includes(e.n)).slice(0, 3);
+        return cs.length ? `<div class="count solline">✍️ Resueltos paso a paso: ${cs.map(e => chip(e, 'rec', true) + ' <span class="count">' + esc(e.s) + '</span>').join(' · ')}</div>` : ''; })()}
       ${k === 'B' ? `<span class="count">Son ${all.length + first.length}: <a href="#ejercicios" data-flt='{"fl":"B"}'>ábrelos en la lista</a> y fíltralos por dificultad o por tipo de enunciado.</span>` : rest.length ? `<details><summary class="count" style="cursor:pointer">Más ejercicios de este tipo (${rest.length})</summary><div>${rest.map(e => chip(e, '', true)).join(' ')}</div></details>` : '<span class="count">No hay más en la relación.</span>'}
     </div></div>`; }).join('');
 $('#sit').innerHTML = DATA.sit.map(([k, first]) => { const T = TIPOS.find(t => t[0] === k), xs = EX.filter(e => e.t.includes(k)), rest = xs.filter(e => !first.includes(e.n) && !HIDE.has(e.n));
@@ -1383,12 +1389,17 @@ drawHero(); draw0(); draw1(); drawE(); drawS(); drawJ(); draw2(); draw4(); route
 #proy .crono{font:800 1.6rem var(--f-mono);padding:2px 14px;border-radius:12px;background:#fff;color:#1e1b3a;min-width:5.5ch;text-align:center}
 #proy .crono.extra{background:#fde68a}
 #proy .crono.fin{background:#fecaca}
+.solyes{font-size:.82em;color:#0f766e;font-weight:700}
+.solline{background:var(--yellow-bg,#fef9c3);border-radius:10px;padding:4px 8px;margin-top:2px}
+#proy.consol .pb{overflow:auto;font-size:17px!important;line-height:1.35}
+#proy .hoja{background:var(--hoja);color:#1e3a8a;border-radius:12px;padding:10px 14px;margin-top:10px}
+#proy .hoja h4{margin:.5em 0 .2em}
 </style>
 <div id="proy" hidden role="dialog" aria-label="Ejercicio a pantalla completa">
   <div class="pt"><span class="n" id="pn"></span><span class="s" id="ps"></span>
     <span class="der"><button id="pmenos" title="Quitar 5 minutos">−5</button><span class="crono" id="pcr">20:00</span><button id="pmas" title="Añadir 5 minutos">+5</button><button id="pplay" class="main">▶ Empezar</button><button id="preset" title="Reiniciar">↺</button></span></div>
   <div class="pb" id="pb"></div>
-  <div class="pf"><button id="pant">◀ Anterior</button><button id="pazar">🎲 Otro al azar</button><a class="b" id="psol" target="_blank" rel="noopener">Ver la solución</a><button id="pfull">⛶ Pantalla completa</button><button id="pnext">Siguiente ▶</button><button id="pcerrar">✕ Cerrar</button></div>
+  <div class="pf"><button id="pant">◀ Anterior</button><button id="pazar">🎲 Otro al azar</button><button id="pnuestra" class="main" hidden>📝 Nuestra solución</button><a class="b" id="psol" target="_blank" rel="noopener">Solución de otro profe</a><button id="pfull">⛶ Pantalla completa</button><button id="pnext">Siguiente ▶</button><button id="pcerrar">✕ Cerrar</button></div>
 </div>
 <script>
 /* ---------- modo proyección del buscador: un ejercicio a pantalla completa, letra grande y cronómetro ---------- */
@@ -1410,6 +1421,8 @@ drawHero(); draw0(); draw1(); drawE(); drawS(); drawJ(); draw2(); draw4(); route
     document.getElementById('pn').textContent = 'nº ' + e.n; document.getElementById('ps').textContent = e.h + ' · [' + code(e) + ']';
     B.innerHTML = e.b; B.querySelectorAll('img[data-k]').forEach(i => { i.src = DATA.imgs[i.dataset.k]; i.onload = ajusta; });
     const s = document.getElementById('psol'); s.style.display = e.u ? '' : 'none'; if (e.u) s.href = e.u;
+    const bn = document.getElementById('pnuestra');
+    bn.hidden = !SOL[n]; bn.textContent = '📝 Nuestra solución'; P.classList.remove('consol');
     P.hidden = false; document.body.style.overflow = 'hidden'; reinicia(); requestAnimationFrame(ajusta);
   }
   function cierra(){ P.hidden = true; document.body.style.overflow = ''; para(); if (document.fullscreenElement) document.exitFullscreen(); }
@@ -1419,6 +1432,15 @@ drawHero(); draw0(); draw1(); drawE(); drawS(); drawJ(); draw2(); draw4(); route
     const b = ev.target.closest('[data-proy]'); if (b){ ev.preventDefault(); abre(+b.dataset.proy); }
     if (ev.target.closest('#azar')){ if (!window.XS) renderList(); azar(); }
   });
+  document.getElementById('pnuestra').onclick = () => {
+    const b = document.getElementById('pnuestra');
+    let h = B.querySelector('.hoja');
+    if (h){ B.removeChild(h); P.classList.remove('consol'); b.textContent = '📝 Nuestra solución'; ajusta(); return; }
+    h = document.createElement('div'); h.className = 'hoja'; B.appendChild(h);
+    solFill(h, cur, true);
+    P.classList.add('consol'); b.textContent = '✕ Ocultar la solución';
+    B.scrollTop = B.scrollHeight;
+  };
   document.getElementById('pcerrar').onclick = cierra;
   document.getElementById('pnext').onclick = () => mueve(1);
   document.getElementById('pant').onclick = () => mueve(-1);
