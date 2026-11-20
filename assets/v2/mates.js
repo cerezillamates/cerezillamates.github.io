@@ -59,6 +59,16 @@ function ejemplos(){
     $(".pasos", ej).after(tapa);
     const [bSig, bTodo, bTapar] = ["sig","todo","tapar"].map(a=>$(`[data-acc="${a}"]`, tapa));
     pasos.forEach(p=>p.tabIndex=-1);
+    const papel = $(".papel", ej);
+    if(papel){
+      const bp = document.createElement("button");
+      bp.type = "button"; bp.className = "boton fino ver-papel"; bp.setAttribute("aria-expanded","false");
+      bp.textContent = "Cómo queda en el examen";
+      papel.id = papel.id || ej.id + "-papel"; bp.setAttribute("aria-controls", papel.id);
+      $("header", ej).appendChild(bp);
+      bp.addEventListener("click", ()=>{ const abre = papel.hidden; papel.hidden = !abre; bp.setAttribute("aria-expanded", abre);
+        bp.textContent = abre ? "Ocultar la redacción" : "Cómo queda en el examen"; if(abre) papel.scrollIntoView({block:"nearest"}); });
+    }
     const pinta = () => {
       const fin = vistos >= pasos.length;
       pasos.forEach((p,i)=> p.hidden = i >= vistos);

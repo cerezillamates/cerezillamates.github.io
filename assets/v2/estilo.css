@@ -441,3 +441,13 @@ details.sol>summary{padding:6px 0}
 .mapa.activo .parada:not(.req):not(.foco){opacity:.6}
 .sin-js [data-pizarra],.sin-js [data-imprimir],.sin-js [data-poner],.sin-js .lab,.sin-js .tapa{display:none!important}
 .reto .formula{margin:8px 0 10px;background:#fff;font-size:.92em}
+/* «Cómo queda en el examen»: la redacción modelo, en tinta azul sobre el papel del examen */
+.ejemplo>header .ver-papel{margin-left:auto;font-size:.9rem;padding:7px 12px}
+.papel{margin:0;padding:18px 20px 10px 46px;border-top:1.5px solid var(--tinta);color:var(--azul);position:relative;
+  background-color:#fff;background-image:linear-gradient(90deg,transparent 30px,var(--rojo) 30px,var(--rojo) 31.5px,transparent 31.5px),
+  linear-gradient(var(--cuadro) 1px,transparent 1px),linear-gradient(90deg,var(--cuadro) 1px,transparent 1px);
+  background-size:100% 100%,var(--cuadro-tam) var(--cuadro-tam),var(--cuadro-tam) var(--cuadro-tam)}
+.papel .papel-tit{font:700 1.5rem/1 var(--f-mano);color:var(--rojo);margin:0 0 12px}
+.papel .formula{background:transparent;border-color:transparent;color:var(--azul)}
+.papel b{color:var(--tinta)}
+@media print{.papel{display:block!important}.ver-papel{display:none}}
