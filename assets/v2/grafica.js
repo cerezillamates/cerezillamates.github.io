@@ -408,6 +408,41 @@ function labCapas(el){
   pon();
 }
 
+/* ==========================================================================
+   LAB 10 · De f′ a f: dibujar la función leyendo su derivada (Andalucía, sept. 2019)
+   f′(x) = 3x² − 3 ;  f(x) = x³ − 3x + 1
+   ========================================================================== */
+function labDoble(el){
+  const L = lab(el);
+  const svgs = el.querySelectorAll("svg.graf"), arriba = svgs[0], abajo = svgs[1];
+  const d = x => 3*x*x-3, f = x => x*x*x-3*x+1;
+  L.mandos.innerHTML = `<label class="campo"><span>Hasta $x=$</span> <input type="range" data-p="x" min="-2.2" max="2.2" step="0.01" value="-1.6"><output></output></label>`;
+  window.Mates && Mates.formulas(L.mandos);
+  const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
+  let ga, gb;
+  const pon = () => {
+    let a = +r.value; for(const p of [-1,0,1]) if(Math.abs(a-p)<0.04) a = p;
+    out.textContent = fmt(a,2);
+    ga = Graf(arriba, {x:[-2.3,2.3], y:[-4,10], alto:220}).ejes({px:1, py:2, ny:"f′"});
+    ga.add(`<line class="cinta mas" x1="${ga.X(-2.3)}" x2="${ga.X(-1)}" y1="${ga.Y(0)}" y2="${ga.Y(0)}"/><line class="cinta menos" x1="${ga.X(-1)}" x2="${ga.X(1)}" y1="${ga.Y(0)}" y2="${ga.Y(0)}"/><line class="cinta mas" x1="${ga.X(1)}" x2="${ga.X(2.3)}" y1="${ga.Y(0)}" y2="${ga.Y(0)}"/>`);
+    ga.curva(d,-2.3,2.3,"r"); ga.recta(a,-4,a,10,"guia"); ga.punto(a,d(a),false,5); ga.pinta();
+    gb = Graf(abajo, {x:[-2.3,2.3], y:[-3,5], alto:240}).ejes({px:1, py:1, ny:"f"});
+    gb.curva(f,-2.3,2.3,"tenue"); gb.curva(f,-2.3,a); gb.recta(a,-3,a,5,"guia"); gb.punto(a,f(a),false,6);
+    if(a>=-1) gb.texto(-1,3,"máx.","etq mano verde","middle",0,-10);
+    if(a>=1) gb.texto(1,-1,"mín.","etq mano","middle",0,24);
+    gb.pinta();
+    const m = d(a);
+    let t = `En $x=${fmt(a,2).replace(",","{,}").replace("−","-")}$: $f'(x)=${fmt(m,2).replace(",","{,}").replace("−","-")}$. `;
+    t += Math.abs(m)<1e-9 ? `<span class="ok">$f'=0$ y cambia de signo: ${a<0?"máximo":"mínimo"} de $f$.</span>` : (m>0 ? "Arriba, $f'$ está por encima del eje: abajo, $f$ sube." : "Arriba, $f'$ está por debajo del eje: abajo, $f$ baja.");
+    if(Math.abs(a)<1e-9) t += ` <span class="ok">Aquí $f'$ tiene su mínimo: $f$ cambia de curvatura (inflexión).</span>`;
+    L.lectura.innerHTML = tx(t);
+  };
+  r.addEventListener("input", pon);
+  arrastre(abajo, () => gb, v => { r.value = Math.max(-2.2, Math.min(2.2, v)).toFixed(2); pon(); });
+  arrastre(arriba, () => ga, v => { r.value = Math.max(-2.2, Math.min(2.2, v)).toFixed(2); pon(); });
+  pon();
+}
+
 /* ---------- Gráficas estáticas descritas en HTML: data-graf="nombre" ---------- */
 const ESTATICAS = {
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
@@ -474,6 +509,12 @@ const ESTATICAS = {
   emprende(svg){ const g = Graf(svg,{x:[0,10.5],y:[-1.2,2.6],alto:300}).ejes({px:1,py:0.5,nx:"t (años)",ny:"millones €"});
     g.recta(0,2,10.5,2,"guia"); g.curva(t=>3*t/(t+2)-1,0,10); g.punto(0,-1); g.punto(1,0); g.punto(3,0.8); g.punto(10,1.5);
     g.texto(10,1.5,"(10; 1,5)","etq","end",-8,-8); g.texto(3,0.8,"(3; 0,8)","etq","start",8,18); g.texto(10.5,2,"y = 2 (límite)","etq mano","end",-4,-8); g.pinta(); },
+  acciones(svg){ const g = Graf(svg,{x:[0,6.3],y:[8,30],alto:300}).ejes({px:1,py:4,nx:"t (h)",ny:"€"});
+    const v=t=>t*t*t/3-2.5*t*t+6*t+10; g.curva(v,0,6);
+    [[0,10],[2,44/3],[3,14.5],[4,46/3],[6,28]].forEach(([u,w])=>g.punto(u,w));
+    g.texto(0,10,"compra (0, 10)","etq mano","start",8,-8); g.texto(6,28,"venta (6, 28)","etq mano verde","end",-10,4); g.pinta(); },
+  fprima(svg){ const g = Graf(svg,{x:[-3,5],y:[-5,6],alto:300}).ejes({px:1,py:1,ny:"f′"});
+    g.curva(x=>x*x-2*x-3,-3,5,"r"); g.punto(-1,0); g.punto(3,0); g.texto(4.4,(4.4*4.4-8.8-3),"y = f′(x)","etq roja","end",-8,0); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };
@@ -491,7 +532,7 @@ document.addEventListener("mates:listo", ()=>{
   const arranca = el => {
     if(el._listo) return; el._listo = true;
     katexListo().then(()=>{
-      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas}[el.dataset.lab]||(()=>{}))(el);
+      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas, doble:labDoble}[el.dataset.lab]||(()=>{}))(el);
       vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
         else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
       el.dispatchEvent(new Event("lab:listo", {bubbles:true}));
