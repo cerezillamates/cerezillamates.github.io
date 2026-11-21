@@ -382,9 +382,9 @@ function labCapas(el){
   const pasos = [
     ["Dominio", "$2-x=0\\Rightarrow x=2$. $\;\\text{Dom}\\,f=\\mathbb{R}-\\{2\\}$: la gráfica no puede cortar la recta $x=2$."],
     ["Cortes", "Con el eje $OY$: $f(0)=-3$, punto $(0,-3)$. Con el eje $OX$: $2x-6=0$, punto $(3,0)$."],
-    ["Signo", "Ceros y puntos fuera del dominio: $x=2$ y $x=3$. $f&lt;0$ en $(-\\infty,2)$ y en $(3,+\\infty)$; $f&gt;0$ en $(2,3)$. Lo sombreado es donde la gráfica no puede estar."],
-    ["Límites", "$\\lim\\limits_{x\\to2^-}f=-\\infty$, $\;\\lim\\limits_{x\\to2^+}f=+\\infty$, $\;\\lim\\limits_{x\\to\\pm\\infty}f=-2$ (mismo grado). Los extremos del dibujo ya están decididos."],
-    ["Monotonía", "$f'(x)=\\dfrac{-2}{(2-x)^2}&lt;0$: decrece en $(-\\infty,2)$ y en $(2,+\\infty)$. Sin extremos relativos."],
+    ["Signo", "Ceros y puntos fuera del dominio: $x=2$ y $x=3$. $f<0$ en $(-\\infty,2)$ y en $(3,+\\infty)$; $f>0$ en $(2,3)$. Lo sombreado es donde la gráfica no puede estar."],
+    ["Asíntotas", "$\\lim\\limits_{x\\to2^-}f=-\\infty$ y $\\lim\\limits_{x\\to2^+}f=+\\infty$: asíntota vertical $x=2$. $\\lim\\limits_{x\\to\\pm\\infty}f=-2$ (mismo grado): asíntota horizontal $y=-2$. Los extremos del dibujo ya están decididos."],
+    ["Monotonía", "$f'(x)=\\dfrac{-2}{(2-x)^2}<0$: decrece en $(-\\infty,2)$ y en $(2,+\\infty)$. Sin extremos relativos."],
     ["Curvatura", "$f''(x)=\\dfrac{-4}{(2-x)^3}$: cóncava $(\\cap)$ en $(-\\infty,2)$ y convexa $(\\cup)$ en $(2,+\\infty)$. Sin inflexión: en $x=2$ no hay punto."],
     ["Gráfica", "Uniendo todo sale una hipérbola. Cada trazo respeta lo que dijeron los pasos anteriores."]
   ];
@@ -578,6 +578,10 @@ const ESTATICAS = {
     const B=x=>-0.02*x*x+1.3*x-15; g.recta(0,5,66,5,"guia"); g.curva(B,0,65);
     [[0,-15],[15,0],[50,0],[32.5,6.125],[25,5],[40,5]].forEach(([u,v])=>g.punto(u,v));
     g.texto(32.5,6.125,"máx. (32,5; 6,125)","etq","middle",0,-12); g.texto(66,5,"B = 5","etq mano","end",-4,18); g.pinta(); },
+  asintotas(svg){ const g = Graf(svg,{x:[-10,9],y:[-2,2],alto:320}).ejes({px:2,py:0.5});
+    const f=x=>(3*x-15)/(4*x*x+4*x-120); g.recta(-6,-2,-6,2,"prohibida"); g.recta(-10,0,9,0,"guia");
+    g.curva(f,-10,-6.0005,"",400); g.curva(f,-5.9995,4.999,"",400); g.curva(f,5.001,9,"",200); g.punto(5,3/44,true,6);
+    g.texto(-6,2,"x = −6 (A.V.)","etq mano","start",6,16); g.texto(5,3/44,"hueco","etq mano","end",-10,-12); g.texto(-10,0,"y = 0 (A.H.)","etq mano","start",4,-10); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };
