@@ -468,6 +468,36 @@ function labFamilia(el){
   r.addEventListener("input", pon); pon();
 }
 
+/* ==========================================================================
+   LAB 12 · El rectángulo de los ingresos (Cataluña 2026: n(p) = 480 − 20p)
+   Ingresos = precio × asistentes: el área del rectángulo bajo la recta de demanda
+   ========================================================================== */
+function labIngresos(el){
+  const L = lab(el);
+  const n = p => Math.min(320, Math.max(0, 480-20*p));
+  L.mandos.innerHTML = `<label class="campo"><span>Precio $p$ (€)</span> <input type="range" data-p="p" min="0" max="24" step="0.5" value="18"><output></output></label>`;
+  window.Mates && Mates.formulas(L.mandos);
+  const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
+  let g;
+  const pon = () => {
+    const p = +r.value, q = n(p), I = p*q;
+    out.textContent = fmt(p,1) + " €";
+    g = Graf(L.svg, {x:[0,25], y:[0,360], alto:340}).ejes({px:2, py:40, nx:"p (€)", ny:"personas"});
+    g.add(`<rect class="ingreso" x="${g.X(0)}" y="${g.Y(q)}" width="${g.X(p)-g.X(0)}" height="${g.Y(0)-g.Y(q)}"/>`);
+    g.recta(0,320,8,320,"guia"); g.curva(n,0,24); g.punto(p,q,false,7);
+    g.add(`<circle class="asa" cx="${g.X(p)}" cy="${g.Y(q)}" r="18"/>`);
+    g.texto(p/2, q/2, "I = " + fmt(I,0) + " €", "etq mano"+(Math.abs(p-12)<1e-9?" verde":""), "middle", 0, 6);
+    g.texto(8,320,"aforo: 320","etq","start",8,-8);
+    g.pinta();
+    L.lectura.innerHTML = tx(`Con $p=${fmt(p,1).replace(",","{,}")}$ € acuden $${fmt(q,0)}$ personas: $I=${fmt(p,1).replace(",","{,}")}\\cdot${fmt(q,0)}=${fmt(I,0)}$ €. El ingreso es el área del rectángulo. `) +
+      (Math.abs(p-12)<1e-9 ? tx(`<span class="ok">Es el rectángulo más grande: $I(p)=p(480-20p)$ tiene su máximo en $p=12$, con $2880$ €.</span>`)
+        : (p<8 ? "Con este precio el local está lleno: bajar más el precio solo pierde dinero." : "Mueve el punto por la recta y busca el rectángulo de mayor área."));
+  };
+  r.addEventListener("input", pon);
+  arrastre(L.svg, () => g, v => { r.value = Math.max(0, Math.min(24, Math.round(v*2)/2)); pon(); });
+  pon();
+}
+
 /* ---------- Gráficas estáticas descritas en HTML: data-graf="nombre" ---------- */
 const ESTATICAS = {
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
@@ -540,6 +570,14 @@ const ESTATICAS = {
     g.texto(0,10,"compra (0, 10)","etq mano","start",8,-8); g.texto(6,28,"venta (6, 28)","etq mano verde","end",-10,4); g.pinta(); },
   fprima(svg){ const g = Graf(svg,{x:[-3,5],y:[-5,6],alto:300}).ejes({px:1,py:1,ny:"f′"});
     g.curva(x=>x*x-2*x-3,-3,5,"r"); g.punto(-1,0); g.punto(3,0); g.texto(4.4,(4.4*4.4-8.8-3),"y = f′(x)","etq roja","end",-8,0); g.pinta(); },
+  toneladas(svg){ const g = Graf(svg,{x:[0,560],y:[-6000,12000],alto:320,margen:{i:56,d:16,a:16,b:34}}).ejes({px:100,py:2000,nx:"x (t)",ny:"€"});
+    const B=x=>-0.2*x*x+110*x-5000; g.recta(0,4000,560,4000,"guia"); g.curva(B,0,550);
+    [[0,-5000],[50,0],[275,10125],[500,0],[100,4000],[450,4000]].forEach(([u,v])=>g.punto(u,v));
+    g.texto(275,10125,"máx. (275, 10 125)","etq","middle",0,-12); g.texto(560,4000,"B = 4000","etq mano","end",-4,-8); g.pinta(); },
+  aceitunas(svg){ const g = Graf(svg,{x:[0,66],y:[-16,8],alto:300}).ejes({px:10,py:4,nx:"x (miles de kg)",ny:"miles de €"});
+    const B=x=>-0.02*x*x+1.3*x-15; g.recta(0,5,66,5,"guia"); g.curva(B,0,65);
+    [[0,-15],[15,0],[50,0],[32.5,6.125],[25,5],[40,5]].forEach(([u,v])=>g.punto(u,v));
+    g.texto(32.5,6.125,"máx. (32,5; 6,125)","etq","middle",0,-12); g.texto(66,5,"B = 5","etq mano","end",-4,18); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };
@@ -557,7 +595,7 @@ document.addEventListener("mates:listo", ()=>{
   const arranca = el => {
     if(el._listo) return; el._listo = true;
     katexListo().then(()=>{
-      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas, doble:labDoble, familia:labFamilia}[el.dataset.lab]||(()=>{}))(el);
+      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas, doble:labDoble, familia:labFamilia, ingresos:labIngresos}[el.dataset.lab]||(()=>{}))(el);
       vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
         else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
       el.dispatchEvent(new Event("lab:listo", {bubbles:true}));
