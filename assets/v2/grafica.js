@@ -498,6 +498,38 @@ function labIngresos(el){
   pon();
 }
 
+/* ==========================================================================
+   LAB 13 · Integral frente a área (Andalucía, ordinaria 2023: f(x) = x³ − 3x² + 2x)
+   ========================================================================== */
+function labArea(el){
+  const L = lab(el);
+  const f = x => x*x*x - 3*x*x + 2*x, F = x => x**4/4 - x**3 + x*x;
+  L.mandos.innerHTML = `<label class="campo"><span>Hasta $b=$</span> <input type="range" data-p="b" min="0.1" max="2.4" step="0.01" value="1.6"><output></output></label>`;
+  window.Mates && Mates.formulas(L.mandos);
+  const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
+  let g;
+  const pon = () => {
+    let b = +r.value; for(const p of [1,2]) if(Math.abs(b-p)<0.03) b = p;
+    out.textContent = fmt(b,2);
+    g = Graf(L.svg, {x:[-0.3,2.5], y:[-0.6,1.6], alto:330}).ejes({px:0.5, py:0.5});
+    const trozo = (a, c, cls) => { let d = `M${g.X(a)} ${g.Y(0)}`; for(let k=0;k<=80;k++){ const x=a+(c-a)*k/80; d += `L${g.X(x)} ${g.Y(f(x))}`; } g.add(`<path class="${cls}" d="${d}L${g.X(c)} ${g.Y(0)}Z"/>`); };
+    const cortes = [0,1,2].filter(c=>c<b);
+    const tramos = []; let a = 0;
+    [1,2].forEach(c=>{ if(c<b){ tramos.push([a,c]); a=c; } }); tramos.push([a,b]);
+    tramos.forEach(([u,v])=>trozo(u, v, f((u+v)/2)>=0 ? "area" : "area neg"));
+    g.curva(f,-0.3,2.5); g.recta(b,-0.6,b,1.6,"guia"); [0,1,2].forEach(c=>g.punto(c,0,false,4));
+    g.pinta();
+    const integral = F(b), area = tramos.reduce((s,[u,v])=>s+Math.abs(F(v)-F(u)),0);
+    const n = v => fmt(v,4).replace(",","{,}").replace("−","-");
+    L.lectura.innerHTML = tx(`$\\int_0^{${n(b)}} f(x)\\,dx=${n(integral)}$. Área sombreada: $${n(area)}$. `) +
+      (b>1 ? tx(`<span class="mal">Lo rojo está bajo el eje: la integral lo resta, el área lo suma.</span>`) : "Mientras $f\\ge0$, integral y área coinciden.".replace(/\$([^$]+)\$/g,(_,m)=>window.Mates?Mates.tex(m,false):m)) +
+      (b===2 ? tx(` <span class="ok">Con $b=2$ la integral vale $0$, pero el área es $\\frac14+\\frac14=\\frac12$.</span>`) : "");
+  };
+  r.addEventListener("input", pon);
+  arrastre(L.svg, () => g, v => { r.value = Math.max(0.1, Math.min(2.4, v)).toFixed(2); pon(); });
+  pon();
+}
+
 /* ---------- Gráficas estáticas descritas en HTML: data-graf="nombre" ---------- */
 const ESTATICAS = {
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
@@ -582,6 +614,19 @@ const ESTATICAS = {
     const f=x=>(3*x-15)/(4*x*x+4*x-120); g.recta(-6,-2,-6,2,"prohibida"); g.recta(-10,0,9,0,"guia");
     g.curva(f,-10,-6.0005,"",400); g.curva(f,-5.9995,4.999,"",400); g.curva(f,5.001,9,"",200); g.punto(5,3/44,true,6);
     g.texto(-6,2,"x = −6 (A.V.)","etq mano","start",6,16); g.texto(5,3/44,"hueco","etq mano","end",-10,-12); g.texto(-10,0,"y = 0 (A.H.)","etq mano","start",4,-10); g.pinta(); },
+  parabola(svg){ const g = Graf(svg,{x:[-1.6,3.6],y:[-1,4.6],alto:300}).ejes({px:1,py:1});
+    const h=x=>-x*x+2*x+3; g.area(h,-1,3); g.curva(h,-1.6,3.6); g.punto(-1,0); g.punto(3,0); g.punto(1,4); g.texto(1,1.5,"A = 32/3","etq mano","middle"); g.pinta(); },
+  siembra(svg){ const g = Graf(svg,{x:[-3,3.5],y:[-2,10],alto:320}).ejes({px:1,py:2});
+    const f=x=>(x-1)*(x-1), q=x=>5-2*x; let d=`M${g.X(-2)} ${g.Y(q(-2))}`;
+    for(let k=0;k<=80;k++){const x=-2+4*k/80; d+=`L${g.X(x)} ${g.Y(q(x))}`;} for(let k=80;k>=0;k--){const x=-2+4*k/80; d+=`L${g.X(x)} ${g.Y(f(x))}`;}
+    g.add(`<path class="area" d="${d}Z"/>`); g.curva(f,-3,3.5); g.curva(q,-3,3.5,"r"); g.punto(-2,9); g.punto(2,1);
+    g.texto(-2,9,"(−2, 9)","etq","start",10,4); g.texto(2,1,"(2, 1)","etq","start",10,4); g.texto(0.3,q(0.3),"g = 5 − 2x","etq roja","start",10,-6); g.texto(3.2,f(3.2),"f = (x − 1)²","etq","end",-10,4); g.pinta(); },
+  trozosArea(svg){ const g = Graf(svg,{x:[-5,5],y:[-1,6],alto:300}).ejes({px:1,py:1});
+    const f=x=>x<=-2?10+2.5*x:(x<2?x*x+1:10-2.5*x); g.area(f,-4,4); g.curva(f,-5,5); [[-4,0],[-2,5],[2,5],[4,0]].forEach(([u,v])=>g.punto(u,v));
+    g.texto(0,2.2,"A = 58/3","etq mano","middle"); g.pinta(); },
+  cubicaArea(svg){ const g = Graf(svg,{x:[-0.5,2.5],y:[-0.8,0.8],alto:280}).ejes({px:0.5,py:0.4});
+    const f=x=>x*x*x-3*x*x+2*x, r=Math.sqrt(3)/3; g.curva(f,-0.5,2.5);
+    [[0,0],[1,0],[2,0],[1-r,f(1-r)],[1+r,f(1+r)]].forEach(([u,v])=>g.punto(u,v)); g.texto(1,0,"inflexión","etq mano","start",8,-10); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };
@@ -599,7 +644,7 @@ document.addEventListener("mates:listo", ()=>{
   const arranca = el => {
     if(el._listo) return; el._listo = true;
     katexListo().then(()=>{
-      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas, doble:labDoble, familia:labFamilia, ingresos:labIngresos}[el.dataset.lab]||(()=>{}))(el);
+      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas, doble:labDoble, familia:labFamilia, ingresos:labIngresos, area:labArea}[el.dataset.lab]||(()=>{}))(el);
       vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
         else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
       el.dispatchEvent(new Event("lab:listo", {bubbles:true}));

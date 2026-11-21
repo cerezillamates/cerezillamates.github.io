@@ -625,3 +625,4 @@ details.sol>.dentro.mano .formula{background:transparent;border-color:transparen
 .graf .etq.grande{font-size:26px}
 .segmentado.capas button{padding:7px 10px}
 .graf .ingreso{fill:var(--verde);fill-opacity:.13;stroke:var(--verde);stroke-width:1.4}
+.graf .area.neg{fill:var(--rojo);opacity:.2}
