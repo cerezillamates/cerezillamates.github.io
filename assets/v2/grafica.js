@@ -319,6 +319,52 @@ function labVentana(el){
   ra.addEventListener("input", pon); rb.addEventListener("input", pon); pon();
 }
 
+/* ==========================================================================
+   LAB 8 · Acércate: el límite como lo que «se ve venir»
+   ========================================================================== */
+function labAcercate(el){
+  const L = lab(el);
+  const casos = {
+    hueco:{t:"0/0 en x = 1", f:x=>(x*x+x-2)/(x*x-x), a:1, x:[-0.5,3], y:[-2,6], lim:"3",
+      tex:"\\lim\\limits_{x\\to1}\\dfrac{x^2+x-2}{x^2-x}", fin:"Por los dos lados los valores se acercan a $3$, aunque $f(1)$ no existe (hay un hueco): el límite es $3$."},
+    polo:{t:"k/0 en x = 2", f:x=>(6-2*x)/(x-2), a:2, x:[-1,5], y:[-12,10],
+      tex:"\\lim\\limits_{x\\to2}\\dfrac{6-2x}{x-2}", fin:"Por la izquierda los valores bajan sin parar ($-\\infty$) y por la derecha suben ($+\\infty$): no existe el límite en $x=2$."},
+    inf:{t:"t → +∞", f:t=>(12*t-24)/(t+3), inf:true,
+      tex:"\\lim\\limits_{t\\to+\\infty}\\dfrac{12t-24}{t+3}", fin:"Por muy lejos que vayas, los valores se pegan a $12$ por debajo: el límite es $12$ y nunca se alcanza."}
+  };
+  L.mandos.innerHTML = `<div class="segmentado" role="group" aria-label="Límite">${Object.entries(casos).map(([k,c])=>`<button type="button" data-k="${k}" aria-pressed="false">${c.t}</button>`).join("")}</div>
+    <label class="campo"><span>Acércate</span> <input type="range" data-p="p" min="0" max="1" step="0.01" value="0.2"><output></output></label>`;
+  window.Mates && Mates.formulas(L.mandos);
+  const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
+  let k = "hueco";
+  const n = (v,d=4) => { const s = fmt(v,d); return s.replace(",","{,}").replace("−","-"); };
+  const pon = () => {
+    const c = casos[k], p = +r.value;
+    if(c.inf){
+      const T = Math.pow(10, 1 + 4*p), f = c.f(T);
+      out.textContent = "t = " + fmt(T,0);
+      const g = Graf(L.svg, {x:[0, T*1.15], y:[-10,16], alto:340}).ejes({py:4, nx:"t", ny:"f(t)"});
+      g.recta(0,12,T*1.15,12,"guia"); g.curva(c.f, 0, T*1.15, "", 500); g.punto(T, f);
+      g.texto(T*1.15, 12, "y = 12", "etq mano", "end", -4, -8); g.pinta();
+      L.lectura.innerHTML = tx(`$${c.tex}$. Para $t=${fmt(T,0).replace(/\s/g,"\\,")}$: $f(t)=${n(f,6)}$, a $${n(12-f,6)}$ de $12$. `) + (p > 0.9 ? tx(`<span class="ok">${c.fin}</span>`) : "Lleva el deslizador hacia la derecha.");
+    } else {
+      const h = Math.pow(10, -0.3 - 3.2*p), a = c.a, iz = c.f(a-h), de = c.f(a+h);
+      out.textContent = "h = " + fmt(h, 4);
+      const g = Graf(L.svg, {x:c.x, y:c.y, alto:340}).ejes({px:1, py:2});
+      g.curva(c.f, c.x[0], a-1e-6, "", 300); g.curva(c.f, a+1e-6, c.x[1], "", 300);
+      if(k==="hueco") g.punto(1,3,true);
+      g.recta(a,c.y[0],a,c.y[1],"guia");
+      [[a-h,iz],[a+h,de]].forEach(([u,v])=>{ if(v>c.y[1]) g.texto(u,c.y[1],"↑ "+fmt(v,0),"etq mano","middle",0,16);
+        else if(v<c.y[0]) g.texto(u,c.y[0],"↓ "+fmt(v,0),"etq mano","middle",0,-6); else g.punto(u,v,false,6); });
+      g.pinta();
+      L.lectura.innerHTML = tx(`$${c.tex}$. Por la izquierda, $f(${n(a-h)})=${n(iz,4)}$; por la derecha, $f(${n(a+h)})=${n(de,4)}$. `) + (p > 0.9 ? tx(`<span class="${k==="hueco"?"ok":"mal"}">${c.fin}</span>`) : "Acerca los dos puntos a la recta discontinua.");
+    }
+    L.mandos.querySelectorAll(".segmentado button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.k===k));
+  };
+  L.mandos.addEventListener("click", e=>{ const b=e.target.closest("button[data-k]"); if(b){ k=b.dataset.k; pon(); }});
+  r.addEventListener("input", pon); pon();
+}
+
 /* ---------- Gráficas estáticas descritas en HTML: data-graf="nombre" ---------- */
 const ESTATICAS = {
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
@@ -366,6 +412,9 @@ const ESTATICAS = {
     const P=d=>d*d*d/3-15*d*d+144*d+1500; g.curva(P,1,31);
     g.punto(1,P(1)); g.punto(6,1896); g.punto(24,924); g.punto(31,P(31));
     g.texto(6,1896,"(6, 1896)","etq","middle",0,-12); g.texto(24,924,"(24, 924)","etq","middle",0,26); g.pinta(); },
+  beneficios(svg){ const g = Graf(svg,{x:[0,40],y:[-10,14],alto:320}).ejes({px:5,py:2,nx:"t (años)",ny:"millones €"});
+    g.recta(0,12,40,12,"guia"); g.curva(t=>(12*t-24)/(t+3),0,40); g.punto(0,-8); g.punto(2,0);
+    g.texto(40,12,"y = 12, nunca se alcanza","etq mano","end",-4,-8); g.texto(2,0,"(2, 0)","etq","start",8,20); g.texto(0,-8,"(0, −8)","etq","start",10,4); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };
@@ -383,7 +432,7 @@ document.addEventListener("mates:listo", ()=>{
   const arranca = el => {
     if(el._listo) return; el._listo = true;
     katexListo().then(()=>{
-      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana}[el.dataset.lab]||(()=>{}))(el);
+      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate}[el.dataset.lab]||(()=>{}))(el);
       vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
         else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
       el.dispatchEvent(new Event("lab:listo", {bubbles:true}));
