@@ -492,8 +492,8 @@ details.sol>summary{padding:6px 0}
 }
 @media print{.mano{background-image:none}.hojaex{break-inside:auto}.mano .r{break-inside:avoid}}
 /* Reservar el alto de los laboratorios antes de dibujarlos (los anclas no se mueven) */
-.lab .lienzo{aspect-ratio:640/370;min-height:250px}
-.lab .lienzo svg.graf{height:100%}
+.lab .lienzo{width:100%;min-height:clamp(250px,41vw,380px)}
+.lab .lienzo svg.graf{height:auto}
 .lab .mandos{min-height:64px}
 .lab .lectura{min-height:5.2em}
 .mano .katex .mrel .mord,.mano .katex .mrel .mrel{font-family:KaTeX_Main;font-style:normal}
@@ -601,3 +601,20 @@ details.sol>.dentro.mano p{margin:0 0 .25rem}
 details.sol>.dentro.mano .anota{display:block;font:400 1.3rem/1.2 var(--f-mano);color:var(--rojo);padding-left:16px;position:relative;transform:rotate(-1deg);margin:4px 0 2px}
 details.sol>.dentro.mano .anota::before{content:"";position:absolute;left:0;top:.4em;width:9px;height:9px;border-left:2px solid var(--rojo);border-bottom:2px solid var(--rojo);transform:rotate(45deg)}
 details.sol>.dentro.mano .formula{background:transparent;border-color:transparent}
+/* Bloque C: laboratorios de tangente y ventana */
+.graf .cinta{stroke-width:7;stroke-linecap:butt}
+.graf .cinta.mas{stroke:var(--verde)}
+.graf .cinta.menos{stroke:var(--rojo)}
+.graf .etq.verde{fill:var(--verde)}
+.graf .etq.roja{fill:var(--rojo)}
+.graf .asa{fill:transparent;stroke:none;cursor:grab}
+.graf .ventana{fill:var(--azul);fill-opacity:.07}
+.graf .franja{fill:#f0a020;fill-opacity:.14}
+.graf .curva.tenue{stroke:var(--tinta-2);stroke-width:1.2;stroke-dasharray:2 4}
+@media (max-width:600px){
+  .mano .signos{font-size:.86rem}
+  .mano .signos td{padding:0 4px}
+  .mano .r>table.signos{display:block;max-width:100%;overflow-x:auto}
+  .postit .formula{font-size:.76em;padding:8px 2px}
+  .f-pequena{font-size:.88em}
+}

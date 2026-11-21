@@ -228,6 +228,97 @@ function labDos(el){
   ra.addEventListener("input", pon); rb.addEventListener("input", pon); pon();
 }
 
+/* ==========================================================================
+   LAB 6 · La tangente que se desliza (Andalucía, junio 2019: f(x) = x³ − 9x + 2)
+   Se arrastra el punto sobre la curva o se mueve el deslizador.
+   ========================================================================== */
+function labTangente(el){
+  const L = lab(el);
+  const f = x => x*x*x - 9*x + 2, d = x => 3*x*x - 9, r3 = Math.sqrt(3);
+  const especiales = [[-2,"par"],[2,"par"],[-r3,"max"],[r3,"min"]];
+  L.mandos.innerHTML = `<div class="segmentado" role="group" aria-label="Qué se ve"><button type="button" data-k="tan" aria-pressed="true">Tangente</button><button type="button" data-k="signo" aria-pressed="false">Signo de $f'$</button><button type="button" data-k="deriv" aria-pressed="false">Gráfica de $f'$</button></div>
+    <label class="campo"><span>$a$</span> <input type="range" data-p="x0" min="-3.5" max="3.5" step="0.01" value="-0.8"><output></output></label>`;
+  window.Mates && Mates.formulas(L.mandos);
+  const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
+  let modo = "tan", g = null;
+  const n = v => fmt(v,2).replace(",","{,}");
+  const sg = v => v < 0 ? "-" + n(-v) : "+" + n(v);
+  const pon = () => {
+    let a = +r.value;
+    for(const [p] of especiales) if(Math.abs(a-p) < 0.05){ a = p; }
+    out.textContent = fmt(a,2);
+    const m = d(a), y0 = f(a), c = y0 - m*a;
+    g = Graf(L.svg, {x:[-3.6,3.6], y:[-14,18], alto:370}).ejes({px:1, py:4});
+    if(modo === "signo"){
+      const tr = [[-3.6,-r3,"mas"],[-r3,r3,"menos"],[r3,3.6,"mas"]];
+      g.add(tr.map(([u,v,s])=>`<line class="cinta ${s}" x1="${g.X(u)}" x2="${g.X(v)}" y1="${g.Y(0)}" y2="${g.Y(0)}"/>`).join(""));
+      g.texto(-2.65,0,"f′ > 0","etq verde","middle",0,-10); g.texto(-0.95,0,"f′ < 0","etq roja","middle",0,-10); g.texto(2.65,0,"f′ > 0","etq verde","middle",0,-10);
+      g.recta(-r3,0,-r3,f(-r3)); g.recta(r3,0,r3,f(r3));
+    }
+    if(modo === "deriv"){ g.curva(d,-3.6,3.6,"r"); g.texto(2.75,d(2.75),"f′","etq roja","start",8,4); g.punto(a,m,false,4.5); g.recta(a,y0,a,m); }
+    g.recta(-3.6, 3*-3.6-3, 3.6, 3*3.6-3, "guia");
+    g.curva(f,-3.6,3.6);
+    g.recta(-3.6, m*-3.6+c, 3.6, m*3.6+c, "secante");
+    g.punto(a, y0, false, 7);
+    g.add(`<circle class="asa" cx="${g.X(a)}" cy="${g.Y(y0)}" r="18"/>`);
+    g.pinta();
+    let que;
+    if(Math.abs(m) < 1e-9) que = `<span class="ok">Tangente horizontal: $f'(a)=0$. La función pasa de ${a<0?"crecer a decrecer: <b>máximo relativo</b>":"decrecer a crecer: <b>mínimo relativo</b>"}.</span>`;
+    else if(Math.abs(m-3) < 1e-9) que = `<span class="ok">Pendiente $3$: la tangente es paralela a $y=3x-3$ (la discontinua). Es una de las dos que pide el apartado a).</span>`;
+    else que = m > 0 ? "$f'(a)>0$: aquí la función crece." : "$f'(a)<0$: aquí la función decrece.";
+    L.lectura.innerHTML = tx(`$f(${n(a)})=${n(y0)}$ y $f'(${n(a)})=${n(m)}$. Tangente: $y=${n(m)}x${Math.abs(c)<0.005?"":sg(c)}$. `) + tx(que) +
+      ` <span class="tenue">Arrastra el punto o usa el deslizador.</span>`;
+    L.mandos.querySelectorAll(".segmentado button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.k===modo));
+  };
+  L.mandos.addEventListener("click", e=>{ const b=e.target.closest("button[data-k]"); if(b){ modo=b.dataset.k; pon(); }});
+  r.addEventListener("input", pon);
+  arrastre(L.svg, () => g, v => { r.value = Math.max(-3.5, Math.min(3.5, v)).toFixed(2); pon(); });
+  pon();
+}
+/* arrastrar sobre la gráfica: traduce la posición horizontal del puntero a la abscisa */
+function arrastre(svg, dameG, alMover){
+  let activo = false;
+  const x = e => { const g = dameG(), b = svg.getBoundingClientRect(), px = (e.clientX - b.left) * g.W / b.width;
+    const m = g.X(g.x0), M = g.X(g.x1); return g.x0 + (px - m) / (M - m) * (g.x1 - g.x0); };
+  svg.addEventListener("pointerdown", e => { activo = true; svg.setPointerCapture(e.pointerId); alMover(x(e)); });
+  svg.addEventListener("pointermove", e => { if(activo) alMover(x(e)); });
+  ["pointerup","pointercancel"].forEach(t => svg.addEventListener(t, () => activo = false));
+}
+
+/* ==========================================================================
+   LAB 7 · La ventana: extremos absolutos en [a, b] (precio del oro)
+   ========================================================================== */
+function labVentana(el){
+  const L = lab(el);
+  const P = d => d*d*d/3 - 15*d*d + 144*d + 1500;
+  L.mandos.innerHTML = `<label class="campo"><span>Desde el día</span> <input type="range" data-p="a" min="1" max="30" step="1" value="1"><output></output></label>
+    <label class="campo"><span>hasta el día</span> <input type="range" data-p="b" min="2" max="31" step="1" value="31"><output></output></label>`;
+  window.Mates && Mates.formulas(L.mandos);
+  const [ra, rb] = L.mandos.querySelectorAll("input"), [oa, ob] = L.mandos.querySelectorAll("output");
+  const e = v => fmt(v,2).replace(",","{,}");
+  const pon = (ev) => {
+    let a = +ra.value, b = +rb.value;
+    if(a >= b){ if(ev && ev.target === ra){ b = a+1; rb.value = b; } else { a = b-1; ra.value = a; } }
+    oa.textContent = a; ob.textContent = b;
+    const g = Graf(L.svg, {x:[0,32], y:[800,2000], alto:350}).ejes({px:5, py:200, nx:"d (día)", ny:"€/kg"});
+    g.add(`<rect class="ventana" x="${g.X(a)}" y="${g.Y(2000)}" width="${g.X(b)-g.X(a)}" height="${g.Y(800)-g.Y(2000)}"/>`);
+    g.curva(P,1,31,"tenue"); g.curva(P,a,b);
+    const cand = [[a,"extremo"],[b,"extremo"]];
+    [6,24].forEach(c => { if(c>a && c<b) cand.push([c,"P′ = 0"]); });
+    const vals = cand.map(([d,t])=>({d,t,v:P(d)}));
+    const max = vals.reduce((p,q)=>q.v>p.v?q:p), min = vals.reduce((p,q)=>q.v<p.v?q:p);
+    vals.forEach(c => g.punto(c.d, c.v, !(c===max||c===min), 5.5));
+    g.texto(max.d, max.v, "máximo", "etq mano verde", "middle", 0, -14);
+    g.texto(min.d, min.v, "mínimo", "etq mano", "middle", 0, 26);
+    g.pinta();
+    vals.sort((p,q)=>p.d-q.d);
+    L.lectura.innerHTML = tx(`Candidatos en $[${a},${b}]$: ` + vals.map(c=>`$P(${c.d})=${e(c.v)}$`).join(", ") + ". ") +
+      `<span class="ok">Máximo: día ${max.d}, ${fmt(max.v,2)} €/kg.</span> <span class="mal">Mínimo: día ${min.d}, ${fmt(min.v,2)} €/kg.</span>` +
+      ((6>a&&6<b)||(24>a&&24<b) ? "" : ` <span class="tenue">En esta ventana no hay ningún punto con $P'=0$: los extremos están en los bordes.</span>`.replace(/\$([^$]+)\$/g,(_,m)=>window.Mates?Mates.tex(m,false):m));
+  };
+  ra.addEventListener("input", pon); rb.addEventListener("input", pon); pon();
+}
+
 /* ---------- Gráficas estáticas descritas en HTML: data-graf="nombre" ---------- */
 const ESTATICAS = {
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
@@ -249,6 +340,32 @@ const ESTATICAS = {
     const f=x=>x*x*x/3-x*x+0.5, d=x=>x*x-2*x;
     g.curva(f,-1,4); g.curva(d,-1,4,"r"); g.punto(0,f(0)); g.punto(2,f(2)); g.punto(0,0); g.punto(2,0);
     g.texto(3.3,f(3.3),"f","etq","start",8,0); g.texto(3.6,d(3.6),"f′","etq","start",-26,0); g.pinta(); },
+  tangentes(svg){ const g = Graf(svg,{x:[-3.6,3.6],y:[-14,18],alto:340}).ejes({px:1,py:4});
+    g.curva(x=>x*x*x-9*x+2,-3.6,3.6); g.recta(-3.6,3*-3.6+18,3.6,3*3.6+18,"secante"); g.recta(-3.6,3*-3.6-14,3.6,3*3.6-14,"secante");
+    g.recta(-3.6,3*-3.6-3,3.6,3*3.6-3,"guia"); g.punto(-2,12); g.punto(2,-8);
+    g.texto(-2,12,"y = 3x + 18","etq mano","end",-10,-6); g.texto(2,-8,"y = 3x − 14","etq mano","start",12,20); g.pinta(); },
+  paralelas(svg){ const g = Graf(svg,{x:[-0.5,5],y:[-8,14],alto:330}).ejes({px:1,py:2});
+    g.curva(x=>5-16/x,0.6,5); g.curva(x=>x*x,-0.5,4,"b");
+    g.recta(-0.5,4*-0.5-11,5,4*5-11,"secante"); g.recta(-0.5,4*-0.5-4,5,4*5-4,"secante");
+    g.punto(2,-3); g.punto(2,4); g.texto(4.2,4.2*4.2,"g","etq","start",8,10); g.texto(4.8,5-16/4.8,"f","etq","start",4,18);
+    g.texto(2,-3,"pendiente 4","etq mano","start",12,22); g.texto(2,4,"pendiente 4","etq mano","end",-12,-4); g.pinta(); },
+  glucosa(svg){ const g = Graf(svg,{x:[0,24.5],y:[0,360],alto:330}).ejes({px:2,py:50,nx:"t (h)",ny:"mg/dl"});
+    const f1=t=>5/6*(t*t*t/3-12*t*t+108*t+108), f2=t=>t*t-40*t+546;
+    g.curva(f1,0,12); g.curva(f2,12,24,"b"); g.recta(0,155,24,155,"guia");
+    g.punto(0,90); g.punto(6,330); g.punto(12,210); g.punto(20,146); g.punto(24,162); g.punto(17,155,false,4); g.punto(23,155,false,4);
+    g.texto(6,330,"máx. (6, 330)","etq","middle",0,-12); g.texto(0,90,"mín. (0, 90)","etq","start",10,22);
+    g.texto(17,155,"155","etq mano","middle",0,26); g.pinta(); },
+  viento(svg){ const g = Graf(svg,{x:[0,24.5],y:[0,150],alto:330}).ejes({px:2,py:20,nx:"t (h)",ny:"km/h"});
+    const v=t=>t<=10?t*t-8*t+60:-t*t+32*t-140;
+    g.add(`<rect class="franja" x="${g.X(0)}" y="${g.Y(140)}" width="${g.X(24.5)-g.X(0)}" height="${g.Y(100)-g.Y(140)}"/>`);
+    g.curva(v,0,10); g.curva(v,10,24,"b");
+    g.punto(0,60); g.punto(4,44); g.punto(10,80); g.punto(16,116); g.punto(24,52); g.punto(12,100,false,4); g.punto(20,100,false,4);
+    g.texto(16,116,"(16, 116)","etq","middle",0,26); g.texto(4,44,"(4, 44)","etq","middle",0,26);
+    g.texto(0.6,140,"alerta naranja","etq mano","start",4,22); g.pinta(); },
+  oro(svg){ const g = Graf(svg,{x:[0,32],y:[800,2000],alto:330}).ejes({px:5,py:200,nx:"d (día)",ny:"€/kg"});
+    const P=d=>d*d*d/3-15*d*d+144*d+1500; g.curva(P,1,31);
+    g.punto(1,P(1)); g.punto(6,1896); g.punto(24,924); g.punto(31,P(31));
+    g.texto(6,1896,"(6, 1896)","etq","middle",0,-12); g.texto(24,924,"(24, 924)","etq","middle",0,26); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };
@@ -266,7 +383,7 @@ document.addEventListener("mates:listo", ()=>{
   const arranca = el => {
     if(el._listo) return; el._listo = true;
     katexListo().then(()=>{
-      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos}[el.dataset.lab]||(()=>{}))(el);
+      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana}[el.dataset.lab]||(()=>{}))(el);
       vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
         else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
       el.dispatchEvent(new Event("lab:listo", {bubbles:true}));
