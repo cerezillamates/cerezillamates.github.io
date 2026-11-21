@@ -273,7 +273,7 @@ function labTangente(el){
     else que = m > 0 ? "$f'(a)>0$: aquí la función crece." : "$f'(a)<0$: aquí la función decrece.";
     if(modo === "curv") que = Math.abs(a) < 1e-9 ? `<span class="ok">En $x=0$ cambia la curvatura: <b>punto de inflexión</b> $(0,2)$. La tangente atraviesa la curva.</span>`
       : (a > 0 ? "$f''(a)=6a>0$: la curva queda por encima de la tangente. <b>Convexa</b> $(\\cup)$." : "$f''(a)=6a<0$: la curva queda por debajo de la tangente. <b>Cóncava</b> $(\\cap)$.");
-    L.lectura.innerHTML = tx(`$f(${n(a)})=${n(y0)}$ y $f'(${n(a)})=${n(m)}$. Tangente: $y=${n(m)}x${Math.abs(c)<0.005?"":sg(c)}$. `) + tx(que) +
+    L.lectura.innerHTML = tx(`$f(${n(a)})=${n(y0)}$ y $f'(${n(a)})=${n(m)}$. Tangente: $y=${Math.abs(m)<1e-9 ? n(c) : n(m)+"x"+(Math.abs(c)<0.005?"":sg(c))}$. `) + tx(que) +
       ` <span class="tenue">Arrastra el punto o usa el deslizador.</span>`;
     L.mandos.querySelectorAll(".segmentado button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.k===modo));
   };
@@ -284,12 +284,21 @@ function labTangente(el){
 }
 /* arrastrar sobre la gráfica: traduce la posición horizontal del puntero a la abscisa */
 function arrastre(svg, dameG, alMover){
-  let activo = false;
+  let activo = false, ini = null;
   const x = e => { const g = dameG(), b = svg.getBoundingClientRect(), px = (e.clientX - b.left) * g.W / b.width;
     const m = g.X(g.x0), M = g.X(g.x1); return g.x0 + (px - m) / (M - m) * (g.x1 - g.x0); };
-  svg.addEventListener("pointerdown", e => { activo = true; svg.setPointerCapture(e.pointerId); alMover(x(e)); });
-  svg.addEventListener("pointermove", e => { if(activo) alMover(x(e)); });
-  ["pointerup","pointercancel"].forEach(t => svg.addEventListener(t, () => activo = false));
+  /* Con ratón, el punto sigue al puntero desde el primer clic. Con el dedo, solo un gesto horizontal mueve el punto;
+     un gesto vertical deja que la página haga scroll (touch-action: pan-y). */
+  svg.addEventListener("pointerdown", e => {
+    if(e.pointerType === "touch"){ ini = {x:e.clientX, y:e.clientY, id:e.pointerId}; return; }
+    activo = true; svg.setPointerCapture(e.pointerId); alMover(x(e)); });
+  svg.addEventListener("pointermove", e => {
+    if(!activo && ini && e.pointerId === ini.id){
+      const dx = Math.abs(e.clientX - ini.x), dy = Math.abs(e.clientY - ini.y);
+      if(dx > 8 && dx > dy){ activo = true; try{ svg.setPointerCapture(e.pointerId); }catch(_){} } else if(dy > 8){ ini = null; }
+    }
+    if(activo) alMover(x(e)); });
+  ["pointerup","pointercancel"].forEach(t => svg.addEventListener(t, () => { activo = false; ini = null; }));
 }
 
 /* ==========================================================================
@@ -314,14 +323,14 @@ function labVentana(el){
     [6,24].forEach(c => { if(c>a && c<b) cand.push([c,"P′ = 0"]); });
     const vals = cand.map(([d,t])=>({d,t,v:P(d)}));
     const max = vals.reduce((p,q)=>q.v>p.v?q:p), min = vals.reduce((p,q)=>q.v<p.v?q:p);
-    vals.forEach(c => g.punto(c.d, c.v, !(c===max||c===min), 5.5));
+    vals.forEach(c => g.punto(c.d, c.v, false, (c===max||c===min) ? 6.5 : 4.5));
     g.texto(max.d, max.v, "máximo", "etq mano verde", "middle", 0, -14);
-    g.texto(min.d, min.v, "mínimo", "etq mano", "middle", 0, 26);
+    g.texto(min.d, min.v, "mínimo", "etq mano", "start", 10, -10);
     g.pinta();
     vals.sort((p,q)=>p.d-q.d);
     L.lectura.innerHTML = tx(`Candidatos en $[${a},${b}]$: ` + vals.map(c=>`$P(${c.d})=${e(c.v)}$`).join(", ") + ". ") +
       `<span class="ok">Máximo: día ${max.d}, ${fmt(max.v,2)} €/kg.</span> <span class="mal">Mínimo: día ${min.d}, ${fmt(min.v,2)} €/kg.</span>` +
-      ((6>a&&6<b)||(24>a&&24<b) ? "" : ` <span class="tenue">En esta ventana no hay ningún punto con $P'=0$: los extremos están en los bordes.</span>`.replace(/\$([^$]+)\$/g,(_,m)=>window.Mates?Mates.tex(m,false):m));
+      ((6>a&&6<b)||(24>a&&24<b) ? "" : ` <span class="tenue">No hay ningún punto con $P'=0$ en el interior de la ventana: los extremos absolutos están en los bordes.</span>`.replace(/\$([^$]+)\$/g,(_,m)=>window.Mates?Mates.tex(m,false):m));
   };
   ra.addEventListener("input", pon); rb.addEventListener("input", pon); pon();
 }
@@ -380,7 +389,7 @@ function labCapas(el){
   const L = lab(el);
   const f = x => (2*x-6)/(2-x);
   const pasos = [
-    ["Dominio", "$2-x=0\\Rightarrow x=2$. $\;\\text{Dom}\\,f=\\mathbb{R}-\\{2\\}$: la gráfica no puede cortar la recta $x=2$."],
+    ["Dominio", "$2-x=0\\Rightarrow x=2$. $\\;\\text{Dom}\\,f=\\mathbb{R}-\\{2\\}$: la gráfica no puede cortar la recta $x=2$."],
     ["Cortes", "Con el eje $OY$: $f(0)=-3$, punto $(0,-3)$. Con el eje $OX$: $2x-6=0$, punto $(3,0)$."],
     ["Signo", "Ceros y puntos fuera del dominio: $x=2$ y $x=3$. $f<0$ en $(-\\infty,2)$ y en $(3,+\\infty)$; $f>0$ en $(2,3)$. Lo sombreado es donde la gráfica no puede estar."],
     ["Asíntotas", "$\\lim\\limits_{x\\to2^-}f=-\\infty$ y $\\lim\\limits_{x\\to2^+}f=+\\infty$: asíntota vertical $x=2$. $\\lim\\limits_{x\\to\\pm\\infty}f=-2$ (mismo grado): asíntota horizontal $y=-2$. Los extremos del dibujo ya están decididos."],
@@ -463,7 +472,7 @@ function labFamilia(el){
     if(C===50){ g.punto(24,F(24,50)); g.texto(24,F(24,50),"c(24) = 73,04","etq mano verde","end",-12,26); }
     g.pinta();
     L.lectura.innerHTML = tx(`Todas estas curvas tienen la misma derivada $c'(t)=0{,}03t^2-0{,}9t+6$: son paralelas en vertical. Con $C=${C}$, $c(0)=${C}$. `) +
-      (C===50 ? tx(`<span class="ok">$C=50$: es la única que cumple el dato del enunciado.</span>`) : "Busca la que pasa por el punto rojo.");
+      (C===50 ? tx(`<span class="ok">$C=50$: es la única que cumple el dato del enunciado.</span>`) : "Busca la que pasa por el punto hueco: es el dato del enunciado.");
   };
   r.addEventListener("input", pon); pon();
 }
@@ -535,7 +544,7 @@ const ESTATICAS = {
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
     g.curva(t=>-0.04*t*t+2.4*t,0,40); g.curva(t=>(40*t-320)/t,40,50,"b");
     g.punto(40,32); g.punto(30,36); g.recta(30,0,30,36); g.texto(30,36,"máximo (30, 36)","etq","middle",0,-12);
-    g.texto(40,32,"esquina en t = 40","etq mano","end",-10,24); g.pinta(); },
+    g.texto(40,32,"esquina","etq mano","middle",0,28); g.pinta(); },
   covid(svg){ const g = Graf(svg,{x:[0,10.5],y:[-0.5,6.5],alto:330}).ejes({px:1,py:1,nx:"t (meses)",ny:"miles"});
     const f=t=> t<=1.8? -t*t+2*t-0.3 : t<=5 ? 0.1*t-0.12 : -0.5*t*t+8.3*t-28.62;
     g.curva(f,0.2,1.8); g.curva(f,1.8,5,"b"); g.curva(f,5,10);
@@ -572,7 +581,7 @@ const ESTATICAS = {
     g.curva(v,0,10); g.curva(v,10,24,"b");
     g.punto(0,60); g.punto(4,44); g.punto(10,80); g.punto(16,116); g.punto(24,52); g.punto(12,100,false,4); g.punto(20,100,false,4);
     g.texto(16,116,"(16, 116)","etq","middle",0,26); g.texto(4,44,"(4, 44)","etq","middle",0,26);
-    g.texto(0.6,140,"alerta naranja","etq mano","start",4,22); g.pinta(); },
+    g.texto(24.5,140,"alerta naranja","etq mano","end",-4,22); g.pinta(); },
   oro(svg){ const g = Graf(svg,{x:[0,32],y:[800,2000],alto:330}).ejes({px:5,py:200,nx:"d (día)",ny:"€/kg"});
     const P=d=>d*d*d/3-15*d*d+144*d+1500; g.curva(P,1,31);
     g.punto(1,P(1)); g.punto(6,1896); g.punto(24,924); g.punto(31,P(31));
@@ -601,7 +610,7 @@ const ESTATICAS = {
     [[0,10],[2,44/3],[3,14.5],[4,46/3],[6,28]].forEach(([u,w])=>g.punto(u,w));
     g.texto(0,10,"compra (0, 10)","etq mano","start",8,-8); g.texto(6,28,"venta (6, 28)","etq mano verde","end",-10,4); g.pinta(); },
   fprima(svg){ const g = Graf(svg,{x:[-3,5],y:[-5,6],alto:300}).ejes({px:1,py:1,ny:"f′"});
-    g.curva(x=>x*x-2*x-3,-3,5,"r"); g.punto(-1,0); g.punto(3,0); g.texto(4.4,(4.4*4.4-8.8-3),"y = f′(x)","etq roja","end",-8,0); g.pinta(); },
+    g.curva(x=>x*x-2*x-3,-3,5,"r"); g.punto(-1,0); g.punto(3,0); g.texto(-2.9,5.2,"y = f′(x)","etq roja","start",14,0); g.pinta(); },
   toneladas(svg){ const g = Graf(svg,{x:[0,560],y:[-6000,12000],alto:320,margen:{i:56,d:16,a:16,b:34}}).ejes({px:100,py:2000,nx:"x (t)",ny:"€"});
     const B=x=>-0.2*x*x+110*x-5000; g.recta(0,4000,560,4000,"guia"); g.curva(B,0,550);
     [[0,-5000],[50,0],[275,10125],[500,0],[100,4000],[450,4000]].forEach(([u,v])=>g.punto(u,v));
@@ -620,10 +629,10 @@ const ESTATICAS = {
     const f=x=>(x-1)*(x-1), q=x=>5-2*x; let d=`M${g.X(-2)} ${g.Y(q(-2))}`;
     for(let k=0;k<=80;k++){const x=-2+4*k/80; d+=`L${g.X(x)} ${g.Y(q(x))}`;} for(let k=80;k>=0;k--){const x=-2+4*k/80; d+=`L${g.X(x)} ${g.Y(f(x))}`;}
     g.add(`<path class="area" d="${d}Z"/>`); g.curva(f,-3,3.5); g.curva(q,-3,3.5,"r"); g.punto(-2,9); g.punto(2,1);
-    g.texto(-2,9,"(−2, 9)","etq","start",10,4); g.texto(2,1,"(2, 1)","etq","start",10,4); g.texto(0.3,q(0.3),"g = 5 − 2x","etq roja","start",10,-6); g.texto(3.2,f(3.2),"f = (x − 1)²","etq","end",-10,4); g.pinta(); },
+    g.texto(-2,9,"(−2, 9)","etq","start",10,4); g.texto(2,1,"(2, 1)","etq","start",10,4); g.texto(0.5,9.3,"g = 5 − 2x","etq roja","start"); g.texto(0.5,8,"f = (x − 1)²","etq","start"); g.pinta(); },
   trozosArea(svg){ const g = Graf(svg,{x:[-5,5],y:[-1,6],alto:300}).ejes({px:1,py:1});
     const f=x=>x<=-2?10+2.5*x:(x<2?x*x+1:10-2.5*x); g.area(f,-4,4); g.curva(f,-5,5); [[-4,0],[-2,5],[2,5],[4,0]].forEach(([u,v])=>g.punto(u,v));
-    g.texto(0,2.2,"A = 58/3","etq mano","middle"); g.pinta(); },
+    g.texto(4.9,5.6,"A = 58/3","etq mano","end"); g.pinta(); },
   cubicaArea(svg){ const g = Graf(svg,{x:[-0.5,2.5],y:[-0.8,0.8],alto:280}).ejes({px:0.5,py:0.4});
     const f=x=>x*x*x-3*x*x+2*x, r=Math.sqrt(3)/3; g.curva(f,-0.5,2.5);
     [[0,0],[1,0],[2,0],[1-r,f(1-r)],[1+r,f(1+r)]].forEach(([u,v])=>g.punto(u,v)); g.texto(1,0,"inflexión","etq mano","start",8,-10); g.pinta(); },
@@ -656,6 +665,10 @@ document.addEventListener("mates:listo", ()=>{
     labs.forEach(el=>io.observe(el));
   } else labs.forEach(arranca);
   window.arrancaLab = arranca;
+  /* Los deslizadores anuncian su valor con unidades (lo que muestra su <output>) */
+  const anuncia = inp => { const o = inp.parentElement && inp.parentElement.querySelector("output"); if(o) inp.setAttribute("aria-valuetext", o.textContent.trim()); };
+  document.addEventListener("input", e => { if(e.target.matches && e.target.matches(".lab input[type=range]")) anuncia(e.target); });
+  document.addEventListener("lab:listo", e => e.target.querySelectorAll("input[type=range]").forEach(anuncia));
   document.querySelectorAll("svg[data-graf]").forEach(svg=>{ const f = ESTATICAS[svg.dataset.graf]; if(f){ f(svg); vigila(svg, ()=>f(svg)); } });
 });
 })();

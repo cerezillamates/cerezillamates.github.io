@@ -626,3 +626,30 @@ details.sol>.dentro.mano .formula{background:transparent;border-color:transparen
 .segmentado.capas button{padding:7px 10px}
 .graf .ingreso{fill:var(--verde);fill-opacity:.13;stroke:var(--verde);stroke-width:1.4}
 .graf .area.neg{fill:var(--rojo);opacity:.2}
+/* ===== Ronda 4 del árbitro ===== */
+/* Los laboratorios no atrapan el scroll vertical en el móvil (el arrastre es horizontal) */
+.lab svg.graf{touch-action:pan-y}
+/* Letra a mano: el «1» con gancho (de Caveat) y, si Kalam no tiene un signo, KaTeX_Main antes que la fuente del sistema */
+@font-face{font-family:"ManoUno";src:url("fuentes/caveat.woff2") format("woff2");unicode-range:U+0031;size-adjust:128%;font-display:swap}
+.mano{font-family:"ManoUno","Kalam",KaTeX_Main,"Segoe Print",cursive}
+.mano .katex .mathnormal,.mano .katex .mord,.mano .katex .mbin,.mano .katex .mpunct,
+.mano .katex .mopen,.mano .katex .mclose,.mano .katex .mop,.mano .katex .mathrm,.mano .katex .text,.mano .katex .textrm{
+  font-family:"ManoUno","Kalam",KaTeX_Main,"Segoe Print",cursive}
+.mano .graf .etq,.mano .graf .marca-eje,.hoja-mesa .graf .etq,.hoja-mesa .graf .marca-eje{font-family:"ManoUno","Kalam",cursive}
+/* La integral y los paréntesis grandes conservan sus fuentes de KaTeX */
+.mano .katex .mop.op-symbol.small-op{font-family:KaTeX_Size1}
+.mano .katex .mop.op-symbol.large-op{font-family:KaTeX_Size2}
+.mano .katex .delimsizing.size1{font-family:KaTeX_Size1}
+.mano .katex .delimsizing.size2{font-family:KaTeX_Size2}
+.mano .katex .delimsizing.size3{font-family:KaTeX_Size3}
+.mano .katex .delimsizing.size4{font-family:KaTeX_Size4}
+.mano .katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}
+.mano .katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}
+/* Portada en móvil: el pósit a todo el ancho y sin scroll horizontal */
+@media (max-width:900px){
+  .mesa{min-height:0;overflow-x:clip}
+  .hoja-mesa{inset:auto}
+  .postit{width:auto;right:auto;bottom:auto}
+  .hm-graf{width:100%!important;margin-left:0}
+}
+@media (max-width:900px){.portada2::after{right:calc(-1 * clamp(16px,4vw,30px));left:calc(-1 * clamp(16px,4vw,30px))}.portada2{overflow-x:clip}}
