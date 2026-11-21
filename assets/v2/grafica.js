@@ -443,6 +443,31 @@ function labDoble(el){
   pon();
 }
 
+/* ==========================================================================
+   LAB 11 · La familia de primitivas: el papel de la constante C
+   c′(t) = 0,03t² − 0,9t + 6  →  c(t) = 0,01t³ − 0,45t² + 6t + C
+   ========================================================================== */
+function labFamilia(el){
+  const L = lab(el);
+  const F = (t,C) => 0.01*t*t*t - 0.45*t*t + 6*t + C;
+  L.mandos.innerHTML = `<label class="campo"><span>$C$</span> <input type="range" data-p="C" min="0" max="100" step="1" value="20"><output></output></label>`;
+  window.Mates && Mates.formulas(L.mandos);
+  const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
+  const pon = () => {
+    const C = +r.value; out.textContent = C;
+    const g = Graf(L.svg, {x:[0,25], y:[0,140], alto:340}).ejes({px:2, py:20, nx:"t (h)", ny:"€"});
+    for(let k=0;k<=100;k+=20) g.curva(t=>F(t,k),0,24,"tenue");
+    g.curva(t=>F(t,C),0,24);
+    g.punto(0,50,true,7); g.texto(0,50,"dato: c(0) = 50","etq mano","start",12,4);
+    g.punto(0,C,false,5);
+    if(C===50){ g.punto(24,F(24,50)); g.texto(24,F(24,50),"c(24) = 73,04","etq mano verde","end",-12,26); }
+    g.pinta();
+    L.lectura.innerHTML = tx(`Todas estas curvas tienen la misma derivada $c'(t)=0{,}03t^2-0{,}9t+6$: son paralelas en vertical. Con $C=${C}$, $c(0)=${C}$. `) +
+      (C===50 ? tx(`<span class="ok">$C=50$: es la única que cumple el dato del enunciado.</span>`) : "Busca la que pasa por el punto rojo.");
+  };
+  r.addEventListener("input", pon); pon();
+}
+
 /* ---------- Gráficas estáticas descritas en HTML: data-graf="nombre" ---------- */
 const ESTATICAS = {
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
@@ -532,7 +557,7 @@ document.addEventListener("mates:listo", ()=>{
   const arranca = el => {
     if(el._listo) return; el._listo = true;
     katexListo().then(()=>{
-      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas, doble:labDoble}[el.dataset.lab]||(()=>{}))(el);
+      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas, doble:labDoble, familia:labFamilia}[el.dataset.lab]||(()=>{}))(el);
       vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
         else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
       el.dispatchEvent(new Event("lab:listo", {bubbles:true}));
