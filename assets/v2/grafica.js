@@ -636,6 +636,15 @@ const ESTATICAS = {
   cubicaArea(svg){ const g = Graf(svg,{x:[-0.5,2.5],y:[-0.8,0.8],alto:280}).ejes({px:0.5,py:0.4});
     const f=x=>x*x*x-3*x*x+2*x, r=Math.sqrt(3)/3; g.curva(f,-0.5,2.5);
     [[0,0],[1,0],[2,0],[1-r,f(1-r)],[1+r,f(1+r)]].forEach(([u,v])=>g.punto(u,v)); g.texto(1,0,"inflexión","etq mano","start",8,-10); g.pinta(); },
+  audiencia(svg){ const g = Graf(svg,{x:[0,63],y:[0,40],alto:300}).ejes({px:10,py:5,nx:"t (min)",ny:"índice"});
+    const f=t=>-0.01*t*t+0.8*t+20; g.curva(f,0,60); g.punto(0,20); g.punto(40,36); g.punto(60,32);
+    g.texto(40,36,"máx. (40, 36)","etq","middle",0,-12); g.texto(0,20,"(0, 20)","etq","start",10,18); g.texto(60,32,"(60, 32)","etq","end",-8,22); g.pinta(); },
+  sep2017p(svg){ const g = Graf(svg,{x:[-4.6,1.2],y:[-6,4],alto:300}).ejes({px:1,py:1});
+    const f=x=>x*x*x+6*x*x+9*x; g.curva(f,-4.6,1.2); [[-3,0],[-1,-4],[0,0],[-2,-2]].forEach(([u,v])=>g.punto(u,v));
+    g.texto(-3,0,"máx. (−3, 0)","etq","middle",0,-12); g.texto(-1,-4,"mín. (−1, −4)","etq","middle",0,24); g.texto(-2,-2,"inflexión","etq mano","end",-10,4); g.pinta(); },
+  dosCurvas(svg){ const g = Graf(svg,{x:[-2.6,2.6],y:[-4,7],alto:300}).ejes({px:1,py:1});
+    g.curva(x=>x*x*x-3*x,-2.6,2.6); g.curva(x=>3*x*x-3,-2.6,2.6,"r");
+    g.texto(2.2,4.05,"A","etq azul","end",-10,4); g.texto(-1.5,3.75,"B","etq roja","end",-10,4); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };

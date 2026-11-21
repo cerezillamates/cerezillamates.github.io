@@ -653,3 +653,7 @@ details.sol>.dentro.mano .formula{background:transparent;border-color:transparen
   .hm-graf{width:100%!important;margin-left:0}
 }
 @media (max-width:900px){.portada2::after{right:calc(-1 * clamp(16px,4vw,30px));left:calc(-1 * clamp(16px,4vw,30px))}.portada2{overflow-x:clip}}
+/* Contenido que no entra este curso: se conserva para otros años */
+.recuadro.aviso{border:2px dashed var(--tinta-2)}
+.recuadro.aviso>.tit{color:var(--tinta)}
+#no-entra .ejemplo{opacity:.92}
