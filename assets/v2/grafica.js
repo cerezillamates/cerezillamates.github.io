@@ -372,6 +372,42 @@ function labAcercate(el){
   r.addEventListener("input", pon); pon();
 }
 
+/* ==========================================================================
+   LAB 9 · Capas: la gráfica se construye paso a paso (Andalucía, extraordinaria 2024)
+   f(x) = (2x − 6)/(2 − x)
+   ========================================================================== */
+function labCapas(el){
+  const L = lab(el);
+  const f = x => (2*x-6)/(2-x);
+  const pasos = [
+    ["Dominio", "$2-x=0\\Rightarrow x=2$. $\;\\text{Dom}\\,f=\\mathbb{R}-\\{2\\}$: la gráfica no puede cortar la recta $x=2$."],
+    ["Cortes", "Con el eje $OY$: $f(0)=-3$, punto $(0,-3)$. Con el eje $OX$: $2x-6=0$, punto $(3,0)$."],
+    ["Signo", "Ceros y puntos fuera del dominio: $x=2$ y $x=3$. $f&lt;0$ en $(-\\infty,2)$ y en $(3,+\\infty)$; $f&gt;0$ en $(2,3)$. Lo sombreado es donde la gráfica no puede estar."],
+    ["Límites", "$\\lim\\limits_{x\\to2^-}f=-\\infty$, $\;\\lim\\limits_{x\\to2^+}f=+\\infty$, $\;\\lim\\limits_{x\\to\\pm\\infty}f=-2$ (mismo grado). Los extremos del dibujo ya están decididos."],
+    ["Monotonía", "$f'(x)=\\dfrac{-2}{(2-x)^2}&lt;0$: decrece en $(-\\infty,2)$ y en $(2,+\\infty)$. Sin extremos relativos."],
+    ["Curvatura", "$f''(x)=\\dfrac{-4}{(2-x)^3}$: cóncava $(\\cap)$ en $(-\\infty,2)$ y convexa $(\\cup)$ en $(2,+\\infty)$. Sin inflexión: en $x=2$ no hay punto."],
+    ["Gráfica", "Uniendo todo sale una hipérbola. Cada trazo respeta lo que dijeron los pasos anteriores."]
+  ];
+  L.mandos.innerHTML = `<div class="segmentado capas" role="group" aria-label="Paso del estudio">${pasos.map((p,i)=>`<button type="button" data-k="${i}" aria-pressed="false">${i+1}. ${p[0]}</button>`).join("")}</div>`;
+  let k = 0;
+  const pon = () => {
+    const g = Graf(L.svg, {x:[-3,7], y:[-10,8], alto:350}).ejes({px:1, py:2});
+    if(k>=0) g.recta(2,-10,2,8,"prohibida");
+    if(k>=2){ const z = (a,b,arriba) => g.add(`<rect class="tachado" x="${g.X(a)}" y="${g.Y(arriba?8:0)}" width="${g.X(b)-g.X(a)}" height="${arriba?g.Y(0)-g.Y(8):g.Y(-10)-g.Y(0)}"/>`);
+      z(-3,2,true); z(2,3,false); z(3,7,true); }
+    if(k>=1){ g.punto(0,-3); g.punto(3,0); }
+    if(k>=3){ g.recta(-3,-2,7,-2,"guia"); g.texto(2,8,"↑ +∞","etq mano","start",8,18); g.texto(2,-10,"↓ −∞","etq mano","end",-8,-6); g.texto(-2.6,-2,"→ −2","etq mano","start",0,22); g.texto(7,-2,"−2 ←","etq mano","end",-4,22); }
+    if(k>=4){ g.texto(-1.5,0,"↘","etq grande","middle",0,-12); g.texto(5,0,"↘","etq grande","middle",0,-12); }
+    if(k>=5){ g.texto(0.6,-6.5,"∩","etq roja grande","middle"); g.texto(2.6,5,"∪","etq azul grande","middle"); }
+    if(k>=6){ g.curva(f,-3,1.999,"",300); g.curva(f,2.001,7,"",300); }
+    g.pinta();
+    L.lectura.innerHTML = tx(`<b>${k+1}. ${pasos[k][0]}.</b> ${pasos[k][1]}`);
+    L.mandos.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed", +b.dataset.k===k));
+  };
+  L.mandos.addEventListener("click", e=>{ const b=e.target.closest("button[data-k]"); if(b){ k=+b.dataset.k; pon(); }});
+  pon();
+}
+
 /* ---------- Gráficas estáticas descritas en HTML: data-graf="nombre" ---------- */
 const ESTATICAS = {
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
@@ -427,6 +463,17 @@ const ESTATICAS = {
     g.punto(0,6000); g.punto(18,26304); g.punto(40,47600); g.punto(62,5008);
     g.texto(18,26304,"inflexión (18, 26 304)","etq mano","start",10,24); g.texto(40,47600,"máx. (40, 47 600)","etq","middle",0,-12);
     g.texto(9,I(9),"∪","etq azul","middle",-14,-6); g.texto(52,I(52),"∩","etq roja","middle",16,0); g.pinta(); },
+  cereales(svg){ const g = Graf(svg,{x:[0,12.5],y:[0,350],alto:330}).ejes({px:1,py:50,nx:"t",ny:"miles de t"});
+    const c=t=>t*t*t-15*t*t+63*t+10; g.curva(c,0,12);
+    [[0,10],[3,91],[5,75],[7,59],[12,334]].forEach(([u,v])=>g.punto(u,v));
+    g.texto(3,91,"máx. rel. (3, 91)","etq","middle",0,-12); g.texto(7,59,"mín. rel. (7, 59)","etq","middle",0,24); g.texto(5,75,"inflexión","etq mano","start",8,-4);
+    g.texto(12,334,"máx. abs. (12, 334)","etq","end",-10,4); g.pinta(); },
+  noticia(svg){ const g = Graf(svg,{x:[0,30],y:[0,550000],alto:320,margen:{i:64,d:16,a:16,b:34}}).ejes({px:5,py:100000,nx:"t (h)",ny:"personas"});
+    g.recta(0,500000,30,500000,"guia"); g.curva(t=>500000*(1-Math.exp(-0.2*t)),0,30); g.recta(0,450000,5*Math.log(10),450000); g.recta(5*Math.log(10),0,5*Math.log(10),450000);
+    g.punto(5*Math.log(10),450000); g.texto(5*Math.log(10),450000,"t ≈ 11,5 h","etq mano","start",8,26); g.texto(30,500000,"tiende a 500 000","etq mano","end",-4,-8); g.pinta(); },
+  emprende(svg){ const g = Graf(svg,{x:[0,10.5],y:[-1.2,2.6],alto:300}).ejes({px:1,py:0.5,nx:"t (años)",ny:"millones €"});
+    g.recta(0,2,10.5,2,"guia"); g.curva(t=>3*t/(t+2)-1,0,10); g.punto(0,-1); g.punto(1,0); g.punto(3,0.8); g.punto(10,1.5);
+    g.texto(10,1.5,"(10; 1,5)","etq","end",-8,-8); g.texto(3,0.8,"(3; 0,8)","etq","start",8,18); g.texto(10.5,2,"y = 2 (límite)","etq mano","end",-4,-8); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };
@@ -444,7 +491,7 @@ document.addEventListener("mates:listo", ()=>{
   const arranca = el => {
     if(el._listo) return; el._listo = true;
     katexListo().then(()=>{
-      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate}[el.dataset.lab]||(()=>{}))(el);
+      ({tipos:labTipos, coser:labCoser, lupa:labLupa, secante:labSecante, dos:labDos, tangente:labTangente, ventana:labVentana, acercate:labAcercate, capas:labCapas}[el.dataset.lab]||(()=>{}))(el);
       vigila(el, ()=>{ const inp = el.querySelector("input[type=range]"); if(inp) inp.dispatchEvent(new Event("input"));
         else { const s = el.querySelector(".segmentado button[aria-pressed=true]"); if(s) s.click(); } });
       el.dispatchEvent(new Event("lab:listo", {bubbles:true}));

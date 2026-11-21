@@ -620,3 +620,7 @@ details.sol>.dentro.mano .formula{background:transparent;border-color:transparen
 }
 .graf .cinta.curv{stroke:var(--azul)}
 .graf .etq.azul{fill:var(--azul)}
+.graf .prohibida{stroke:var(--rojo);stroke-width:1.4;stroke-dasharray:6 4}
+.graf .tachado{fill:rgba(27,33,48,.09)}
+.graf .etq.grande{font-size:26px}
+.segmentado.capas button{padding:7px 10px}
