@@ -541,6 +541,78 @@ function labArea(el){
 
 /* ---------- Gráficas estáticas descritas en HTML: data-graf="nombre" ---------- */
 const ESTATICAS = {
+  ingresos26(svg){ const g = Graf(svg,{x:[0,6.6],y:[50,70],alto:320}).ejes({px:1,py:5,nx:"t (años)",ny:"miles de €"});
+    const f=t=>-t*t*t+10.5*t*t-30*t+80; g.curva(f,1,6);
+    [[1,59.5],[2,54],[3.5,60.75],[5,67.5],[6,62]].forEach(([u,v])=>g.punto(u,v));
+    g.texto(2,54,"mín (2, 54)","etq","middle",0,22); g.texto(5,67.5,"máx (5; 67,5)","etq","middle",0,-12);
+    g.texto(3.5,60.75,"P.I. (3,5; 60,75)","etq mano","end",-10,-4); g.pinta(); },
+  racional26(svg){ const g = Graf(svg,{x:[-9,9],y:[-8,8],alto:340}).ejes({px:2,py:2});
+    const f=x=>(6-x)/(x+2); g.recta(-2,-8,-2,8,"prohibida"); g.recta(-9,-1,9,-1,"guia");
+    g.curva(f,-9,-2.47,"",300); g.curva(f,-1.53,9,"",300); g.punto(0,3); g.punto(6,0);
+    g.texto(0,3,"(0, 3)","etq","start",8,-6); g.texto(6,0,"(6, 0)","etq","middle",0,-12);
+    g.texto(-2,8,"x = −2","etq mano","start",6,16); g.texto(9,-1,"y = −1","etq mano","end",-4,18); g.pinta(); },
+  canarias26(svg){ const g = Graf(svg,{x:[0,60],y:[0,320],alto:300}).ejes({px:10,py:50,nx:"t (horas)",ny:"palabras"});
+    g.recta(0,300,60,300,"guia"); g.curva(t=>27*t,0,10); g.curva(t=>300*(1-1/t),10,60,"b");
+    g.punto(0,0); g.punto(10,270); g.texto(10,270,"(10, 270)","etq","start",8,14); g.texto(60,300,"V = 300","etq mano","end",-4,-8); g.pinta(); },
+  dron26(svg){ const g = Graf(svg,{x:[0,8.6],y:[0,8],alto:300}).ejes({px:1,py:1,nx:"t (h)",ny:"R"});
+    g.curva(t=>2.5*t,0,2); g.curva(t=>-t*t/2+4*t-1,2,6,"b"); g.curva(t=>8-t/2,6,8);
+    [[0,0],[2,5],[4,7],[6,5],[8,4]].forEach(([u,v])=>g.punto(u,v)); g.texto(4,7,"máx (4, 7)","etq","middle",0,-12); g.pinta(); },
+  and26s1(svg){ const g = Graf(svg,{x:[-6,8],y:[-6,8],alto:320}).ejes({px:2,py:2});
+    const f=x=>(x-3)/(x-1); g.recta(1,-6,1,8,"prohibida"); g.recta(-6,1,8,1,"guia");
+    g.curva(f,-6,0.6,"",300); g.curva(f,1.25,8,"",300); g.punto(0,3); g.punto(3,0);
+    g.texto(0,3,"(0, 3)","etq","end",-8,-6); g.texto(3,0,"(3, 0)","etq","start",6,16);
+    g.texto(1,8,"x = 1","etq mano","start",6,16); g.texto(8,1,"y = 1","etq mano","end",-4,-8); g.pinta(); },
+  and26o(svg){ const g = Graf(svg,{x:[0,62],y:[0,24],alto:300}).ejes({px:10,py:5});
+    g.area(x=>x<20?x*x/20:(x<50?26-0.3*x:36-x*x/100),0,60);
+    g.curva(x=>x*x/20,0,20); g.curva(x=>26-0.3*x,20,50,"b"); g.curva(x=>36-x*x/100,50,60);
+    [[0,0],[20,20],[50,11],[60,0]].forEach(([u,v])=>g.punto(u,v)); g.texto(20,20,"(20, 20)","etq","middle",0,-12); g.texto(50,11,"(50, 11)","etq","start",8,-6); g.texto(32,5,"A = 655","etq mano","middle"); g.pinta(); },
+  and26s1b(svg){ const g = Graf(svg,{x:[-0.8,12],y:[-7,5.5],alto:320}).ejes({px:1,py:1});
+    const f=x=>x<=3?x*x*x-6*x*x+9*x:(-6*x+18)/(x+1); g.recta(-0.8,-6,12,-6,"guia");
+    g.curva(f,-0.4,3); g.curva(f,3,12,"b"); g.punto(1,4); g.punto(0,0); g.punto(3,0);
+    g.texto(1,4,"máx (1, 4)","etq","middle",0,-12); g.texto(12,-6,"y = −6","etq mano","end",-4,-8); g.pinta(); },
+  cant26e(svg){ const g = Graf(svg,{x:[-10,10],y:[-2,14],alto:320}).ejes({px:2,py:2});
+    const f=x=>(3*x*x+12*x)/((x-2)*(x-2)); g.recta(2,-2,2,14,"prohibida"); g.recta(-10,3,10,3,"guia");
+    g.curva(f,-10,1.2,"",300); g.curva(f,2.9,10,"",300); g.punto(-1,-1); g.punto(0,0); g.punto(-4,0);
+    g.texto(-1,-1,"mín (−1, −1)","etq","middle",0,22); g.texto(-4,0,"(−4, 0)","etq","middle",0,-10);
+    g.texto(2,14,"x = 2","etq mano","start",6,16); g.texto(10,3,"y = 3","etq mano","end",-4,-8); g.pinta(); },
+  gal26e(svg){ const g = Graf(svg,{x:[0,12.6],y:[0,105],alto:300}).ejes({px:1,py:10,nx:"t (meses)",ny:"%"});
+    g.curva(t=>96-2*(t-3)*(t-3),0,6); g.curva(t=>5*(t-9)*(t-9)+33,6,12,"b");
+    [[0,78],[3,96],[6,78],[9,33],[12,78]].forEach(([u,v])=>g.punto(u,v));
+    g.texto(3,96,"máx (3, 96)","etq","middle",0,-12); g.texto(9,33,"mín (9, 33)","etq","middle",0,22); g.pinta(); },
+  cat26o(svg){ const g = Graf(svg,{x:[0,10.5],y:[0,3400],alto:300}).ejes({px:1,py:500,nx:"t (semanas)",ny:"seguidores"});
+    g.curva(t=>10*t*t*t-120*t*t+450*t+700,0,10); [[0,700],[3,1240],[5,1200],[10,3200]].forEach(([u,v])=>g.punto(u,v));
+    g.texto(3,1240,"máx (3, 1240)","etq","end",-4,-14); g.texto(5,1200,"mín (5, 1200)","etq","start",6,22); g.pinta(); },
+  cv26ee(svg){ const g = Graf(svg,{x:[-8,8],y:[-1,2],alto:300}).ejes({px:2,py:0.5});
+    const f=x=>(x*x-x)/(x*x+1); g.recta(-8,1,8,1,"guia"); g.curva(f,-8,8,"",300);
+    const a=-1-Math.SQRT2, b=-1+Math.SQRT2; g.punto(a,f(a)); g.punto(b,f(b)); g.punto(0,0); g.punto(1,0);
+    g.texto(a,f(a),"máx","etq","middle",0,-12); g.texto(b,f(b),"mín","etq","middle",0,22); g.texto(8,1,"y = 1","etq mano","end",-4,-8); g.pinta(); },
+  cv26oe(svg){ const g = Graf(svg,{x:[-8,12],y:[-6,6],alto:320}).ejes({px:2,py:2});
+    const f=x=>(x*x-2*x+4)/(x*x-4); g.recta(-2,-6,-2,6,"prohibida"); g.recta(2,-6,2,6,"prohibida"); g.recta(-8,1,12,1,"guia");
+    g.curva(f,-8,-2.2,"",300); g.curva(f,-1.6,1.75,"",300); g.curva(f,2.35,12,"",300);
+    const a=4-2*Math.sqrt(3), b=4+2*Math.sqrt(3); g.punto(a,f(a)); g.punto(b,f(b)); g.punto(0,-1);
+    g.texto(a,f(a),"máx","etq","start",6,-8); g.texto(b,f(b),"mín","etq","middle",0,22); g.pinta(); },
+  cv26o(svg){ const g = Graf(svg,{x:[-9,11],y:[-10,16],alto:320}).ejes({px:2,py:4});
+    const f=x=>(4*x*x-36)/(x*x-2*x-8); g.recta(-2,-10,-2,16,"prohibida"); g.recta(4,-10,4,16,"prohibida"); g.recta(-9,4,11,4,"guia");
+    g.curva(f,-9,-2.9,"",300); g.curva(f,-1.55,3.75,"",300); g.curva(f,4.6,11,"",300);
+    [[-3,0],[0,4.5],[3,0]].forEach(([u,v])=>g.punto(u,v)); g.texto(11,4,"y = 4","etq mano","end",-4,-8); g.pinta(); },
+  bal26e(svg){ const g = Graf(svg,{x:[0,5],y:[-3,3],alto:300}).ejes({px:1,py:1});
+    g.curva(x=>Math.log(2*x),0.03,5,"",300); g.curva(x=>x-1+Math.log(2),0,3.2,"r");
+    g.punto(0.5,0); g.punto(1,Math.log(2)); g.texto(1,Math.log(2),"(1, ln 2)","etq","start",8,14); g.texto(3,2.4,"tangente: pendiente 1","etq roja","end"); g.pinta(); },
+  bal26o(svg){ const g = Graf(svg,{x:[0,16],y:[0,6],alto:300}).ejes({px:2,py:1});
+    g.curva(x=>1+Math.sqrt(x-1),1,16,"",300); g.curva(x=>x/6+7/3,2,16,"r");
+    g.punto(1,1); g.punto(10,4); g.texto(1,1,"mín (1, 1)","etq","start",8,16); g.texto(10,4,"(10, 4)","etq","middle",0,22); g.pinta(); },
+  can26m(svg){ const g = Graf(svg,{x:[0,40],y:[0,66],alto:300}).ejes({px:5,py:10,nx:"t (meses)",ny:"%"});
+    g.recta(0,8,40,8,"guia"); g.curva(t=>-0.6*t*t+12*t,0,15); g.curva(t=>(8*t-75)/(t-14),15,40,"b");
+    g.punto(10,60); g.punto(15,45); g.texto(10,60,"máx (10, 60)","etq","middle",0,-12); g.texto(40,8,"y = 8","etq mano","end",-4,-8); g.pinta(); },
+  pv26o(svg){ const g = Graf(svg,{x:[0,3.6],y:[-0.5,4.6],alto:300}).ejes({px:1,py:1});
+    let d=`M${g.X(1)} ${g.Y(0)}`; for(let k=0;k<=40;k++){const x=1+2*k/40; d+=`L${g.X(x)} ${g.Y(2*x-2)}`;}
+    for(let k=40;k>=0;k--){const x=1+2*k/40, y=x<=2?x-1:(x-1)*(x-1); d+=`L${g.X(x)} ${g.Y(y)}`;}
+    g.add(`<path class="area" d="${d}Z"/>`); g.curva(x=>2*x-2,0.8,3.3,"r"); g.curva(x=>x-1,0.6,3.6,"b"); g.curva(x=>(x-1)*(x-1),0,3.1);
+    [[1,0],[2,1],[3,4]].forEach(([u,v])=>g.punto(u,v)); g.pinta(); },
+  cyl26o(svg){ const g = Graf(svg,{x:[3.6,6.3],y:[-1.4,3.4],alto:280}).ejes({px:1,py:1});
+    const f=x=>(x-4)*(x-4)-1; g.area(f,4,6); g.curva(f,3.6,6.2); g.punto(5,0); g.texto(4.5,-0.6,"2/3","etq mano","middle"); g.texto(5.75,0.5,"4/3","etq mano","middle"); g.pinta(); },
+  cyl26m(svg){ const g = Graf(svg,{x:[-0.3,2.4],y:[-1.4,5.6],alto:280}).ejes({px:0.5,py:1});
+    const f=x=>3*x-1; g.area(f,0,2); g.curva(f,-0.2,2.2); g.punto(1/3,0); g.punto(2,5); g.texto(2,5,"(2, 5)","etq","end",-8,-4); g.pinta(); },
   almazara(svg){ const g = Graf(svg,{x:[0,50],y:[0,40],alto:330}).ejes({px:10,py:10,nx:"t",ny:"B(t)"});
     g.curva(t=>-0.04*t*t+2.4*t,0,40); g.curva(t=>(40*t-320)/t,40,50,"b");
     g.punto(40,32); g.punto(30,36); g.recta(30,0,30,36); g.texto(30,36,"máximo (30, 36)","etq","middle",0,-12);
@@ -678,6 +750,8 @@ document.addEventListener("mates:listo", ()=>{
   const anuncia = inp => { const o = inp.parentElement && inp.parentElement.querySelector("output"); if(o) inp.setAttribute("aria-valuetext", o.textContent.trim()); };
   document.addEventListener("input", e => { if(e.target.matches && e.target.matches(".lab input[type=range]")) anuncia(e.target); });
   document.addEventListener("lab:listo", e => e.target.querySelectorAll("input[type=range]").forEach(anuncia));
-  document.querySelectorAll("svg[data-graf]").forEach(svg=>{ const f = ESTATICAS[svg.dataset.graf]; if(f){ f(svg); vigila(svg, ()=>f(svg)); } });
+  const pintaGrafs = (raiz=document) => raiz.querySelectorAll("svg[data-graf]:not([data-pintada])").forEach(svg=>{ const f = ESTATICAS[svg.dataset.graf]; if(f){ svg.dataset.pintada = "1"; f(svg); vigila(svg, ()=>f(svg)); } });
+  window.pintaGrafs = pintaGrafs;
+  pintaGrafs();
 });
 })();

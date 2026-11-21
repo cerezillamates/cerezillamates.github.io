@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es" class="sin-js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className="js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ejercicios de selectividad de Análisis por comunidades y años · 2.º Bach CCSS</title>
+<meta name="description" content="865 ejercicios de Análisis de la PAU de Matemáticas Aplicadas a las CCSS (2017-2026) de todas las comunidades, en tablas por año y comunidad y en una lista con filtros por apartado, tipo de pregunta, comunidad y año. Los de 2026, resueltos a mano.">
+<meta name="mates:pagina" content="Análisis: ejercicios de selectividad">
+<meta name="mates:curso" content="2.º Bach CCSS">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#fdfdfb">
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preload" href="../../assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<link rel="preload" href="../../assets/v2/fuentes/caveat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://cerezillamates.github.io/2bach-ccss/analisis/selectividad.html">
+<meta property="og:title" content="Ejercicios de selectividad de Análisis por comunidades y años · 2.º Bach CCSS">
+<meta property="og:description" content="865 ejercicios de Análisis de la PAU de Matemáticas Aplicadas a las CCSS (2017-2026) de todas las comunidades, en tablas por año y comunidad y en una lista con filtros por apartado, tipo de pregunta, comunidad y año. Los de 2026, resueltos a mano.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="stylesheet" href="../../assets/v2/estilo.css?v=20261122">
+<script src="../../assets/v2/profe.js?v=20261122"></script>
+<script src="../../assets/v2/mates.js?v=20261122" defer></script>
+<script src="../../assets/v2/grafica.js?v=20261122" defer></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="../../index.html"><img src="../../assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"><a href="../../index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss/analisis/index.html">Análisis</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Ejercicios de selectividad</span></nav><a class="volver" href="../../2bach-ccss/analisis/index.html">Análisis</a>
+  <div class="acciones"><button type="button" class="boton fino" data-pizarra aria-pressed="false" title="Letra grande y pasos con las flechas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg><span class="txt">Pizarra</span></button><button type="button" class="boton fino" data-imprimir title="Imprimir o guardar en PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg><span class="txt">Imprimir</span></button></div>
+</div></header>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada-pag">
+  <p class="curso">Análisis · selectividad 2017-2026</p>
+  <h1>Todos los ejercicios de Análisis, comunidad a comunidad</h1>
+  <p class="entrada">865 ejercicios de la PAU de Matemáticas Aplicadas a las Ciencias Sociales, ordenados por los apartados del tema. Dos tablas, una de funciones y derivadas y otra de integrales, y una lista para filtrar por lo que te preguntan.</p>
+  <p class="atajo"><span class="nota roja">Cómo usarlo:</span> haz el ejercicio en papel y después compara. Los de 2026 están resueltos a mano; los demás enlazan a la solución de otro profesor.</p>
+</header>
+
+<div class="pau" id="pau">
+  <div class="pau-progreso" aria-live="polite">
+    <p><b id="pau-llevas">Llevas 0 de 865</b> <span id="pau-llevas2"></span></p>
+    <div class="pau-barra"><span id="pau-barra"></span></div>
+  </div>
+
+  <nav class="pau-vistas" aria-label="Vistas">
+    <a href="#funciones" data-vista="funciones">Tabla: funciones y derivadas</a>
+    <a href="#integrales" data-vista="integrales">Tabla: integrales</a>
+    <a href="#lista" data-vista="lista">Lista con filtros</a>
+  </nav>
+
+  <section class="pau-vista" id="v-tabla" hidden>
+    <div class="pau-herr">
+      <button type="button" class="boton fino" id="pau-subraya" aria-pressed="false">Modo subrayador</button>
+      <p class="pau-ayuda">Toca un ejercicio para abrir su enunciado. Con el <b>modo subrayador</b> encendido, al tocarlo lo marcas como hecho (o lo desmarcas).</p>
+    </div>
+    <details class="pau-leyenda" open>
+      <summary>Qué significa cada número</summary>
+      <div id="pau-leyenda"></div>
+      <p class="pau-ayuda">Toca un apartado para resaltar sus ejercicios en la tabla. <span class="pau-chip mini con-sol">11</span> = resuelto a mano. ★ = ejercicio destacado.</p>
+    </details>
+    <div id="pau-tablas"></div>
+  </section>
+
+  <section class="pau-vista" id="v-lista" hidden>
+    <form class="pau-filtros" id="pau-filtros" role="search" onsubmit="return false">
+      <label class="ancho"><span>Buscar</span><input type="search" id="f-q" placeholder="Palabra, comunidad, año… (p. ej. «beneficio», «Madrid 2025»)"></label>
+      <label><span>Apartado</span><select id="f-a"></select></label>
+      <label><span>Qué te preguntan</span><select id="f-t"></select></label>
+      <label><span>Comunidad</span><select id="f-c"></select></label>
+      <label><span>Año</span><select id="f-y"></select></label>
+      <label><span>Convocatoria</span><select id="f-v">
+        <option value="">Todas</option><option value="ORD">Ordinaria / junio</option><option value="EXT">Extraordinaria / septiembre / julio</option><option value="MOD">Modelo</option><option value="SUP">Suplentes y reservas</option></select></label>
+      <label class="check"><input type="checkbox" id="f-s"> Solo resueltos a mano</label>
+      <label class="check"><input type="checkbox" id="f-p"> Solo los que me faltan</label>
+      <div class="pau-fila">
+        <p class="pau-cuenta" id="pau-cuenta" aria-live="polite"></p>
+        <button type="button" class="boton fino" id="pau-limpia">Quitar filtros</button>
+        <button type="button" class="boton azul" id="pau-azar">Uno al azar</button>
+      </div>
+    </form>
+    <ol class="pau-lista" id="pau-lista"></ol>
+    <p><button type="button" class="boton fino" id="pau-mas" hidden>Ver más</button></p>
+  </section>
+
+  <section class="pau-vista" id="v-ej" hidden>
+    <p class="pau-volver"><a href="#lista" id="pau-volver">← Volver</a></p>
+    <div id="pau-ej"></div>
+    <nav class="siguiente" aria-label="Otros ejercicios">
+      <a href="#" id="pau-ant"><small>Anterior</small><b>Ejercicio anterior</b></a>
+      <a class="sig" href="#" id="pau-sig"><small>Siguiente</small><b>Ejercicio siguiente</b></a>
+    </nav>
+  </section>
+  <noscript><p>Esta herramienta necesita JavaScript. Los mismos ejercicios están en el documento de apartados de la profesora.</p></noscript>
+</div>
+<script src="pau/datos.js?v=20261122" defer></script>
+<script src="../../assets/katex/katex.min.js" defer></script>
+<script src="../../assets/v2/pau.js?v=20261122" defer></script>
+
+  </main>
+</div>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="../../pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
+</body>
+</html>
