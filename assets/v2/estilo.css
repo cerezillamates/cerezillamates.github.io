@@ -618,3 +618,5 @@ details.sol>.dentro.mano .formula{background:transparent;border-color:transparen
   .postit .formula{font-size:.76em;padding:8px 2px}
   .f-pequena{font-size:.88em}
 }
+.graf .cinta.curv{stroke:var(--azul)}
+.graf .etq.azul{fill:var(--azul)}

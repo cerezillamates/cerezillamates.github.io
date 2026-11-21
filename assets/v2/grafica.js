@@ -235,8 +235,8 @@ function labDos(el){
 function labTangente(el){
   const L = lab(el);
   const f = x => x*x*x - 9*x + 2, d = x => 3*x*x - 9, r3 = Math.sqrt(3);
-  const especiales = [[-2,"par"],[2,"par"],[-r3,"max"],[r3,"min"]];
-  L.mandos.innerHTML = `<div class="segmentado" role="group" aria-label="Qué se ve"><button type="button" data-k="tan" aria-pressed="true">Tangente</button><button type="button" data-k="signo" aria-pressed="false">Signo de $f'$</button><button type="button" data-k="deriv" aria-pressed="false">Gráfica de $f'$</button></div>
+  const especiales = [[-2,"par"],[2,"par"],[-r3,"max"],[r3,"min"],[0,"inf"]];
+  L.mandos.innerHTML = `<div class="segmentado" role="group" aria-label="Qué se ve"><button type="button" data-k="tan" aria-pressed="true">Tangente</button><button type="button" data-k="signo" aria-pressed="false">Signo de $f'$</button><button type="button" data-k="deriv" aria-pressed="false">Gráfica de $f'$</button><button type="button" data-k="curv" aria-pressed="false">Curvatura</button></div>
     <label class="campo"><span>$a$</span> <input type="range" data-p="x0" min="-3.5" max="3.5" step="0.01" value="-0.8"><output></output></label>`;
   window.Mates && Mates.formulas(L.mandos);
   const r = L.mandos.querySelector("input"), out = L.mandos.querySelector("output");
@@ -255,6 +255,11 @@ function labTangente(el){
       g.texto(-2.65,0,"f′ > 0","etq verde","middle",0,-10); g.texto(-0.95,0,"f′ < 0","etq roja","middle",0,-10); g.texto(2.65,0,"f′ > 0","etq verde","middle",0,-10);
       g.recta(-r3,0,-r3,f(-r3)); g.recta(r3,0,r3,f(r3));
     }
+    if(modo === "curv"){
+      g.add(`<line class="cinta menos" x1="${g.X(-3.6)}" x2="${g.X(0)}" y1="${g.Y(0)}" y2="${g.Y(0)}"/><line class="cinta curv" x1="${g.X(0)}" x2="${g.X(3.6)}" y1="${g.Y(0)}" y2="${g.Y(0)}"/>`);
+      g.texto(-2.65,0,"f″ < 0  ∩","etq roja","middle",0,-10); g.texto(2.65,0,"f″ > 0  ∪","etq azul","middle",0,-10);
+      g.punto(0,2,true,6); g.texto(0,2,"inflexión","etq mano","start",10,-10);
+    }
     if(modo === "deriv"){ g.curva(d,-3.6,3.6,"r"); g.texto(2.75,d(2.75),"f′","etq roja","start",8,4); g.punto(a,m,false,4.5); g.recta(a,y0,a,m); }
     g.recta(-3.6, 3*-3.6-3, 3.6, 3*3.6-3, "guia");
     g.curva(f,-3.6,3.6);
@@ -266,6 +271,8 @@ function labTangente(el){
     if(Math.abs(m) < 1e-9) que = `<span class="ok">Tangente horizontal: $f'(a)=0$. La función pasa de ${a<0?"crecer a decrecer: <b>máximo relativo</b>":"decrecer a crecer: <b>mínimo relativo</b>"}.</span>`;
     else if(Math.abs(m-3) < 1e-9) que = `<span class="ok">Pendiente $3$: la tangente es paralela a $y=3x-3$ (la discontinua). Es una de las dos que pide el apartado a).</span>`;
     else que = m > 0 ? "$f'(a)>0$: aquí la función crece." : "$f'(a)<0$: aquí la función decrece.";
+    if(modo === "curv") que = Math.abs(a) < 1e-9 ? `<span class="ok">En $x=0$ cambia la curvatura: <b>punto de inflexión</b> $(0,2)$. La tangente atraviesa la curva.</span>`
+      : (a > 0 ? "$f''(a)=6a>0$: la curva queda por encima de la tangente. <b>Convexa</b> $(\\cup)$." : "$f''(a)=6a<0$: la curva queda por debajo de la tangente. <b>Cóncava</b> $(\\cap)$.");
     L.lectura.innerHTML = tx(`$f(${n(a)})=${n(y0)}$ y $f'(${n(a)})=${n(m)}$. Tangente: $y=${n(m)}x${Math.abs(c)<0.005?"":sg(c)}$. `) + tx(que) +
       ` <span class="tenue">Arrastra el punto o usa el deslizador.</span>`;
     L.mandos.querySelectorAll(".segmentado button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.k===modo));
@@ -415,6 +422,11 @@ const ESTATICAS = {
   beneficios(svg){ const g = Graf(svg,{x:[0,40],y:[-10,14],alto:320}).ejes({px:5,py:2,nx:"t (años)",ny:"millones €"});
     g.recta(0,12,40,12,"guia"); g.curva(t=>(12*t-24)/(t+3),0,40); g.punto(0,-8); g.punto(2,0);
     g.texto(40,12,"y = 12, nunca se alcanza","etq mano","end",-4,-8); g.texto(2,0,"(2, 0)","etq","start",8,20); g.texto(0,-8,"(0, −8)","etq","start",10,4); g.pinta(); },
+  ipr(svg){ const g = Graf(svg,{x:[0,64],y:[0,50000],alto:330}).ejes({px:10,py:10000,nx:"t (años desde 1932)",ny:"IPR"});
+    const I=t=>-t*t*t+54*t*t+480*t+6000; g.curva(I,0,18); g.curva(I,18,62,"b");
+    g.punto(0,6000); g.punto(18,26304); g.punto(40,47600); g.punto(62,5008);
+    g.texto(18,26304,"inflexión (18, 26 304)","etq mano","start",10,24); g.texto(40,47600,"máx. (40, 47 600)","etq","middle",0,-12);
+    g.texto(9,I(9),"∪","etq azul","middle",-14,-6); g.texto(52,I(52),"∩","etq roja","middle",16,0); g.pinta(); },
   jun2019(svg){ const g = Graf(svg,{x:[-3,2.5],y:[-3.5,5],alto:330}).ejes({px:1,py:1});
     g.curva(x=>1/(x-1),-3,0); g.curva(x=>x*x-1,0,2.5,"b"); g.punto(0,-1); g.texto(0,-1,"esquina","etq mano","start",12,22); g.pinta(); }
 };
