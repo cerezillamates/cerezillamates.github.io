@@ -1,11 +1,12 @@
-/* Modo profesora: solo en el navegador de la profesora se puede imprimir.
+/* Modo profesora: solo en el navegador de la profesora se puede imprimir y se ven los enlaces de descarga
+   de los apuntes propios (PDF y Word de la web). Las soluciones de otros profes (enlaces externos) se ven siempre.
    Se activa una vez abriendo cualquier página con ?profe=FRASE (y se desactiva con ?profe=salir).
    La frase no está aquí: solo su huella SHA-256. En su navegador se guarda la frase y en cada visita
    se comprueba su huella, así que no basta con copiar la huella del código.
    Es una barrera para el alumnado, no una protección total. */
 (function(){
   var H = "f7e6daeb0dae4f1b74c7a526fc04c7e1917ec55a8e7b9343f9b5291f1d3887f3", K = "mates:profe", d = document.documentElement;
-  var css = 'html:not(.profe) [data-imprimir],html:not(.profe) .solo-profe,html:not(.profe) button[onclick="print()"],html:not(.profe) a[href$="apuntes.pdf"],html:not(.profe) a[href*="Apuntes_"]{display:none!important}'
+  var css = 'html:not(.profe) [data-imprimir],html:not(.profe) .solo-profe,html:not(.profe) button[onclick="print()"],html:not(.profe) a[href$="apuntes.pdf"],html:not(.profe) a[href*="Apuntes_"],html:not(.profe) a[href$=".pdf"]:not([href^="http"]),html:not(.profe) a[href$=".docx"]:not([href^="http"]),html:not(.profe) a[download],html:not(.profe) [data-descarga]{display:none!important}'
     + '@media print{html:not(.profe) body>*{display:none!important}html:not(.profe) body::before{content:"Estos materiales no se pueden imprimir desde la web. Puedes estudiarlos en cerezillamates.github.io.";display:block;font:16pt/1.5 sans-serif;padding:2cm;color:#1b2130}}';
   var st = document.createElement("style"); st.textContent = css; (document.head || d).appendChild(st);
   function huella(frase){
