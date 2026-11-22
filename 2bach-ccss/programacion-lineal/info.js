@@ -7,7 +7,7 @@ window.TEMA = window.TEMA || {};
 TEMA.info = {
   curso: "2.º Bach CCSS", cursoUrl: "2bach-ccss.html",
   tema: "Tema 3 · Programación lineal",
-  final: {t:"🔎 Buscador de ejercicios PAU", url:"../../programacion-lineal.html#ejercicios", d:"363 ejercicios de selectividad para filtrar y proyectar"},
+  final: {t:"🔎 Buscador de ejercicios PAU", url:"selectividad.html#lista", d:"363 ejercicios de selectividad para filtrar y proyectar"},
   apartados: [
     {num:1, titulo:"El método paso a paso: pañuelos y corbatas", desc:"PAU 2026. Plantear, representar, vértices, F en los vértices y responder. Solución múltiple.", listo:true},
     {num:2, titulo:"Máximo y mínimo en un recinto acotado", desc:"Ejemplo de los apuntes: F = 3x + 2y. Las rectas de nivel.", listo:true},

@@ -1,84 +1,89 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="sin-js">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.className="js"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programación lineal · 2.º Bachillerato CCSS · Mercedes Cerezo</title>
+<meta name="description" content="Mapa del tema de Programación lineal de Matemáticas Aplicadas a las CCSS II para la PAU de Andalucía: el método paso a paso, los 17 problemas tipo, las explicaciones para la pizarra, los 363 ejercicios de selectividad y el repaso.">
+<meta name="mates:pagina" content="Programación lineal">
+<meta name="mates:curso" content="2.º Bach CCSS">
 <link rel="manifest" href="/manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Mates">
-<title>Programación lineal · 2.º Bach CCSS · Mercedes Cerezo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="../../assets/tema.css?v=20261113e">
+<meta name="theme-color" content="#fdfdfb">
 <link rel="icon" href="../../assets/favicon.svg">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
-<script src="info.js?v=20261113e"></script>
-<link rel="stylesheet" href="../../assets/v2/puente.css?v=20261120">
-<script src="../../assets/v2/profe.js?v=20261120"></script>
+<link rel="preload" href="../../assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/v2/fuentes/caveat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://cerezillamates.github.io/2bach-ccss/programacion-lineal/">
+<meta property="og:title" content="Programación lineal · 2.º Bachillerato CCSS · Mercedes Cerezo">
+<meta property="og:description" content="Mapa del tema de Programación lineal de Matemáticas Aplicadas a las CCSS II para la PAU de Andalucía: el método paso a paso, los 17 problemas tipo, las explicaciones para la pizarra, los 363 ejercicios de selectividad y el repaso.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="stylesheet" href="../../assets/v2/estilo.css?v=20261122">
+<link rel="stylesheet" href="../../assets/v2/pl.css?v=20261122">
+<script src="../../assets/v2/profe.js?v=20261122"></script>
+<script src="../../assets/v2/mates.js?v=20261122" defer></script>
 </head>
 <body>
-<header class="hero"><div class="wrap">
-  <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a></nav>
-  <div class="kicker">2.º Bachillerato CCSS · Tema 3</div>
-  <h1>Programación lineal</h1>
-  <p class="lead">Cada problema resuelto como en el examen, con <b>un paso en cada pantalla</b>: plantear, representar, ¿acotada?, vértices, F en los vértices y responder. Para practicar: el <b>buscador de ejercicios de selectividad</b>.</p>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="../../index.html"><img src="../../assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"><a href="../../index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Programación lineal</span></nav><a class="volver" href="../../2bach-ccss.html">2.º Bach CCSS</a>
+  <div class="acciones"></div>
 </div></header>
-<div class="wrap">
-  <div class="tabs" role="tablist" id="tabs"></div>
-  <div id="paneles"></div>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada-pag">
+  <p class="curso">2.º Bachillerato CCSS, tema 3</p>
+  <h1>Programación lineal</h1>
+  <p class="entrada">Maximizar un beneficio o minimizar un coste con unas restricciones. Primero, el método, que es el mismo en todos los problemas. Después, los 17 problemas tipo, con el mismo número que llevan los ejercicios de selectividad en la tabla.</p>
+</header>
 
-  <p style="margin-top:22px">📚 <b>Selectividad</b>: <a href="../../programacion-lineal.html#tabla">tabla de ejercicios tipo</a> · <a href="../../programacion-lineal.html#teoria">cómo se escribe en el examen y preguntas</a> · <a href="../../programacion-lineal.html#ejercicios">363 ejercicios de la PAU 2017-2026</a> · <a href="../../programacion-lineal.html#repaso">plan de repaso</a>.</p>
+<section id="mapa" class="ancho">
+  <h2 class="sr">Mapa del tema</h2>
+  <div class="mapa" data-mapa>
+    <div class="linea" style="--l:var(--azul)">
+      <h3><span class="letra">M</span> El método</h3>
+      <ol>
+        <li id="M"><a class="parada lista" href="metodo.html" data-necesita=""><b>M</b> El método paso a paso<small>Plantear, región, vértices, ¿acotada?, F en los vértices y responder; cómo se escribe en el examen y simulador de calculadora</small></a></li>
+      </ol>
+    </div>
+    <div class="linea" style="--l:var(--tinta-2)">
+      <h3><span class="letra">T</span> Problemas tipo: el ejercicio y la solución</h3>
+      <ol><li id="T1"><a class="parada lista" href="problemas-tipo.html#t1" data-necesita="M"><b>1</b> Con contexto: plantear y resolver<small>Un problema con historia: incógnitas, función objetivo, restricciones, región, vértices y respuesta.</small></a></li><li id="T2"><a class="parada lista" href="problemas-tipo.html#t2" data-necesita="M"><b>2</b> Sin contexto: región dada por inecuaciones<small>Te dan las inecuaciones (o los vértices) y la función: dibujar, vértices, máximo y mínimo.</small></a></li><li id="T3"><a class="parada lista" href="problemas-tipo.html#t3" data-necesita="M"><b>3</b> La región viene en una gráfica<small>Elegir la gráfica correcta, leer los vértices o escribir las inecuaciones de la región dibujada.</small></a></li><li id="T4"><a class="parada lista" href="problemas-tipo.html#t4" data-necesita="M"><b>4</b> Región no acotada o sin solución<small>La región no se cierra: hay que razonar si existe el máximo o el mínimo.</small></a></li><li id="T5"><a class="parada lista" href="problemas-tipo.html#t5" data-necesita="M"><b>5</b> Infinitas soluciones: un lado entero<small>F toma el mismo valor en dos vértices: son óptimos todos los puntos del segmento.</small></a></li><li id="T6"><a class="parada lista" href="problemas-tipo.html#t6" data-necesita="M"><b>6</b> Soluciones enteras<small>Las incógnitas son personas, cajas, viajes…: solo valen puntos con coordenadas enteras.</small></a></li></ol>
+    </div>
+    <div class="linea" style="--l:var(--verde)">
+      <h3><span class="letra">T</span> Problemas tipo: lo que te preguntan además</h3>
+      <ol><li id="T7"><a class="parada lista" href="problemas-tipo.html#t7" data-necesita="M"><b>7</b> ¿Un punto pertenece a la región? ¿Es posible (x, y)?<small>Se sustituye el punto en todas las restricciones.</small></a></li><li id="T8"><a class="parada lista" href="problemas-tipo.html#t8" data-necesita="M"><b>8</b> Puntos de la región con una x (o una y) dada<small>Se fija una coordenada y se mira entre qué valores puede estar la otra.</small></a></li><li id="T9"><a class="parada lista" href="problemas-tipo.html#t9" data-necesita="M"><b>9</b> ¿Puede F tomar un valor?<small>F toma todos los valores entre el mínimo y el máximo.</small></a></li><li id="T10"><a class="parada lista" href="problemas-tipo.html#t10" data-necesita="M"><b>10</b> ¿Sobra o se agota un recurso? ¿Limita la solución una restricción?<small>Se sustituye la solución en cada restricción y se compara con lo disponible.</small></a></li><li id="T11"><a class="parada lista" href="problemas-tipo.html#t11" data-necesita="M"><b>11</b> ¿Podría ser (a, b) la solución óptima?<small>Un punto propuesto (o lo que dice alguien): ¿es factible?, ¿es vértice?, ¿da el mejor valor?</small></a></li><li id="T12"><a class="parada lista" href="problemas-tipo.html#t12" data-necesita="M"><b>12</b> Parámetros: k, a, precio desconocido<small>Una letra en la función objetivo: se plantea la condición con los vértices.</small></a></li><li id="T13"><a class="parada lista" href="problemas-tipo.html#t13" data-necesita="M"><b>13</b> Añadir, quitar o cambiar una restricción<small>La región cambia: nuevos vértices y, quizá, nuevo óptimo. Restricciones superfluas.</small></a></li><li id="T14"><a class="parada lista" href="problemas-tipo.html#t14" data-necesita="M"><b>14</b> ¿Se consigue el óptimo con un solo producto?<small>¿Hay un vértice óptimo sobre un eje?</small></a></li><li id="T15"><a class="parada lista" href="problemas-tipo.html#t15" data-necesita="M"><b>15</b> Cambia un precio, una subvención, un porcentaje o el objetivo<small>Nuevo beneficio, subvención, porcentaje u otro objetivo: la región es la misma y se recalcula F.</small></a></li><li id="T16"><a class="parada lista" href="problemas-tipo.html#t16" data-necesita="M"><b>16</b> Valor medio<small>Total entre número de unidades en la solución óptima.</small></a></li><li id="T17"><a class="parada lista" href="problemas-tipo.html#t17" data-necesita="M"><b>17</b> Líneas de nivel<small>Dibujar la recta F = 0 y sus paralelas por los vértices.</small></a></li></ol>
+    </div>
+    <div class="linea" style="--l:var(--ambar)">
+      <h3><span class="letra">E</span> Explicaciones para la pizarra</h3>
+      <ol><li id="E1"><a class="parada lista" href="apuntes.html?ap=1&amp;modo=proyectar" data-necesita=""><b>E1</b> El método paso a paso: pañuelos y corbatas<small>PAU 2026. Plantear, representar, vértices, F en los vértices y responder. Solución múltiple.</small></a></li><li id="E2"><a class="parada lista" href="apuntes.html?ap=2&amp;modo=proyectar" data-necesita=""><b>E2</b> Máximo y mínimo en un recinto acotado<small>Ejemplo de los apuntes: F = 3x + 2y. Las rectas de nivel.</small></a></li><li id="E3"><a class="parada lista" href="apuntes.html?ap=3&amp;modo=proyectar" data-necesita=""><b>E3</b> El recinto R y las preguntas tipo PAU<small>¿Pertenece un punto? ¿Puede valer F tanto? El parámetro k.</small></a></li><li id="E4"><a class="parada lista" href="apuntes.html?ap=4&amp;modo=proyectar" data-necesita=""><b>E4</b> Región no acotada<small>Ejemplo de los apuntes: mínimo de H = −3x + 3y + 2. ¿Existe el óptimo?</small></a></li><li id="E5"><a class="parada lista" href="apuntes.html?ap=5&amp;modo=proyectar" data-necesita=""><b>E5</b> Problema de máximo: la joyería<small>Ejemplo de los apuntes: collares A y B con perlas blancas, grises y negras.</small></a></li><li id="E6"><a class="parada lista" href="apuntes.html?ap=6&amp;modo=proyectar" data-necesita=""><b>E6</b> Problema de mínimo: los abonos<small>Ejemplo de los apuntes: la mezcla más barata en una región no acotada.</small></a></li></ol>
+    </div>
+    <div class="linea" style="--l:var(--rojo)">
+      <h3><span class="letra">P</span> Practicar selectividad</h3>
+      <ol>
+        <li id="P1"><a class="parada lista" href="selectividad.html" data-necesita=""><b>P1</b> Todos los ejercicios de selectividad<small>363 ejercicios (2017-2026) en una tabla y una lista con filtros por problema tipo y por tipo de enunciado; muchos con la solución paso a paso</small></a></li>
+        <li id="P2"><a class="parada lista" href="repaso.html" data-necesita=""><b>P2</b> Repaso<small>Selección para el examen en seis bloques, de menos a más difícil, y ejercicios escogidos de cada problema tipo y de cada tipo de enunciado</small></a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="estudiar">
+  <h2>Las explicaciones, para estudiar en casa</h2>
+  <p>Las seis explicaciones de la pizarra también se pueden leer seguidas, como unos apuntes:</p>
+  <ol><li><a href="apuntes.html?ap=1">El método paso a paso: pañuelos y corbatas</a></li><li><a href="apuntes.html?ap=2">Máximo y mínimo en un recinto acotado</a></li><li><a href="apuntes.html?ap=3">El recinto R y las preguntas tipo PAU</a></li><li><a href="apuntes.html?ap=4">Región no acotada</a></li><li><a href="apuntes.html?ap=5">Problema de máximo: la joyería</a></li><li><a href="apuntes.html?ap=6">Problema de mínimo: los abonos</a></li></ol>
+</section>
+
+  </main>
 </div>
-<script>
-const SECC = [
-  {id:"apuntes", t:"📘 Apuntes"},
-  {id:"videos", t:"🎬 Vídeos", d:"Los vídeos de cada apartado, para volver a ver la explicación en casa."},
-  {id:"pau", t:"🔎 Ejercicios de selectividad", d:"363 ejercicios de la PAU (2017-2026) para buscar, filtrar y proyectar en clase, con su solución."}
-];
-const tabs = document.getElementById("tabs"), pan = document.getElementById("paneles");
-SECC.forEach((s,i)=>{
-  tabs.insertAdjacentHTML("beforeend",`<button role="tab" id="t-${s.id}" aria-controls="p-${s.id}" aria-selected="${i===0}">${s.t}</button>`);
-  let h;
-  const lista = (fn) => `<div class="aps">` + TEMA.info.apartados.map(a=>`<div class="ap ${a.listo?"":"prox"}">
-      <span class="n">${a.num}</span><div><h3>${a.titulo}</h3><p>${a.desc}</p></div>
-      <div class="acts">${a.listo ? fn(a) : `<span class="prox-tag">En preparación</span>`}</div></div>`).join("") + `</div>`;
-  if(s.id==="apuntes"){
-    h = `` + lista(a=>
-      `<a class="btn main" href="apuntes.html?ap=${a.num}&modo=proyectar">🖥 Explicación</a><a class="btn" href="apuntes.html?ap=${a.num}">📖 Estudiar</a>`);
-  } else if(s.id==="videos"){
-    h = `<p class="guia">${s.d}</p><div class="aps" id="lista-videos"><p style="color:var(--muted)">Cargando los vídeos…</p></div>`;
-  } else if(s.id==="clase"){
-    h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn verde" href="clase.html?ap=${a.num}">✏️ Proyectar ejercicios</a>`);
-  } else if(s.id==="tareas"){
-    h = `<p class="guia">${s.d}</p>` + lista(a=>`<a class="btn main" href="tareas.html?ap=${a.num}">🏠 Abrir tareas</a>`);
-  } else if(s.id==="pau"){
-    h = `<p class="guia">${s.d}</p><div class="aps">${[["🔎 Buscador de ejercicios","Busca por palabra, comunidad, año, tipo y dificultad; proyecta cada ejercicio a pantalla completa con cronómetro, o elige uno al azar.","#ejercicios"],["Tabla de ejercicios tipo","Por comunidad, año y tipo de pregunta.","#tabla"],["Método y examen","Cómo se escribe el ejercicio en el examen y las preguntas típicas.","#teoria"],["Plan de repaso","Por tipos y por dificultad.","#repaso"]].map((x,k)=>`<div class="ap"><span class="n">${k+1}</span><div><h3>${x[0]}</h3><p>${x[1]}</p></div><div class="acts"><a class="btn main" href="../../programacion-lineal.html${x[2]}">Abrir</a></div></div>`).join("")}</div>`;
-  } else {
-    h = `<p><b>${s.t}</b></p><p style="color:var(--muted)">${s.d}</p><p class="prox-tag" style="display:inline-block">En preparación</p>`;
-  }
-  pan.insertAdjacentHTML("beforeend",`<div class="panel" role="tabpanel" id="p-${s.id}" aria-labelledby="t-${s.id}" ${i?"hidden":""}>${h}</div>`);
-});
-/* vídeos: se leen de cada apartado (contenido/apN.js) */
-(function(){
-  const aps = TEMA.info.apartados.filter(a=>a.listo), vids = {};
-  let n = 0;
-  TEMA.registrar = ap => { vids[ap.num] = ap.videos || []; };
-  const pinta = () => {
-    const el = document.getElementById("lista-videos"); if(!el) return;
-    el.innerHTML = aps.map(a=>`<div class="ap"><span class="n">${a.num}</span><div><h3>${a.titulo}</h3>${(vids[a.num]||[]).length ? "" : `<p>Sin vídeos todavía.</p>`}</div>
-      <div class="acts">${(vids[a.num]||[]).map(v=>`<a class="btn" href="${v.url}" target="_blank" rel="noopener">▶ ${v.t}</a>`).join("")}</div></div>`).join("");
-  };
-  aps.forEach(a=>{ const sc = document.createElement("script"); sc.src = `contenido/ap${a.num}.js`;
-    sc.onload = sc.onerror = () => { if(++n === aps.length) pinta(); }; document.head.appendChild(sc); });
-})();
-function abrir(id){
-  SECC.forEach(s=>{ document.getElementById("t-"+s.id).setAttribute("aria-selected", s.id===id); document.getElementById("p-"+s.id).hidden = s.id!==id; });
-  history.replaceState(null,"","#"+id);
-}
-tabs.addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) abrir(b.id.slice(2)); });
-if(SECC.some(s=>"#"+s.id===location.hash)) abrir(location.hash.slice(1));
-</script>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="../../pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
 </body>
 </html>

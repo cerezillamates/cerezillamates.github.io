@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es" class="sin-js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className="js"</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repaso de Programación lineal · Selectividad · 2.º Bach CCSS</title>
+<meta name="description" content="Repaso de programación lineal para la PAU: selección de ejercicios reales en seis bloques, de menos a más difícil, con el porqué de cada uno y su resultado, y ejercicios escogidos de cada problema tipo y de cada tipo de enunciado.">
+<meta name="mates:pagina" content="Programación lineal: repaso">
+<meta name="mates:curso" content="2.º Bach CCSS">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#fdfdfb">
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preload" href="../../assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/v2/fuentes/caveat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://cerezillamates.github.io/2bach-ccss/programacion-lineal/repaso.html">
+<meta property="og:title" content="Repaso de Programación lineal · Selectividad · 2.º Bach CCSS">
+<meta property="og:description" content="Repaso de programación lineal para la PAU: selección de ejercicios reales en seis bloques, de menos a más difícil, con el porqué de cada uno y su resultado, y ejercicios escogidos de cada problema tipo y de cada tipo de enunciado.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="stylesheet" href="../../assets/v2/estilo.css?v=20261122">
+<link rel="stylesheet" href="../../assets/v2/pl.css?v=20261122">
+<script src="../../assets/v2/profe.js?v=20261122"></script>
+<script src="../../assets/v2/mates.js?v=20261122" defer></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="../../index.html"><img src="../../assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"><a href="../../index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss.html">2.º Bach CCSS</a><span class="sep" aria-hidden="true">/</span><a href="../../2bach-ccss/programacion-lineal/index.html">Programación lineal</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Repaso</span></nav><a class="volver" href="../../2bach-ccss/programacion-lineal/index.html">Programación lineal</a>
+  <div class="acciones"><button type="button" class="boton fino" data-pizarra aria-pressed="false" title="Letra grande y pasos con las flechas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg><span class="txt">Pizarra</span></button><button type="button" class="boton fino" data-imprimir title="Imprimir o guardar en PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg><span class="txt">Imprimir</span></button></div>
+</div></header>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"><nav class="indice" aria-label="Índice de la página"><h2>En esta página</h2><div class="hilo"><ol><li><a href="#seleccion">Selección para el examen</a></li><li><a href="#por-tipo">Por problema tipo</a></li><li><a href="#por-enunciado">Por tipo de enunciado</a></li></ol></div></nav></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada-pag">
+  <p class="curso">Programación lineal · repaso</p>
+  <h1>Repaso para el examen</h1>
+  <p class="entrada">Ejercicios reales de la PAU elegidos y ordenados como un plan, de menos a más difícil. Cada uno entrena una dificultad distinta: antes del enunciado tienes por qué está aquí.</p>
+  <p class="atajo"><span class="nota roja">Cómo usarlo:</span> hazlos en orden, en papel, y después mira el resultado o la solución paso a paso. Marca «Hecho» al terminar; se guarda en este navegador.</p>
+</header>
+
+<div data-repaso-pl>
+<div class="pau-progreso" aria-live="polite">
+  <p><b id="rep-llevas">Llevas 0</b> <button type="button" class="boton azul fino" id="rep-siguiente">Ir al siguiente pendiente</button></p>
+  <div class="pau-barra"><span id="rep-barra"></span></div>
+</div>
+
+<section id="seleccion">
+  <h2>Selección para el examen</h2>
+  <p class="pau-ayuda">Los números entre corchetes son los <a href="problemas-tipo.html">problemas tipo</a> y los puntos, la dificultad: • básica, •• media, ••• alta.</p>
+  <ol class="pau-lista pl-bloques" id="rep-seleccion"></ol>
+</section>
+
+<section id="por-tipo">
+  <h2>Por problema tipo</h2>
+  <p class="pau-ayuda">Para practicar un tipo concreto. Empieza por los primeros; si quieres más, despliega el resto.</p>
+  <div id="rep-tipos"></div>
+</section>
+
+<section id="por-enunciado">
+  <h2>Por tipo de enunciado</h2>
+  <p class="pau-ayuda">Para practicar la traducción del enunciado a inecuaciones. En cada situación, los primeros son de dificultad media o alta y de comunidades distintas.</p>
+  <div id="rep-enun"></div>
+</section>
+</div>
+<script src="pau/datos.js?v=20261122" defer></script>
+<script src="../../assets/v2/pl-graf.js?v=20261122" defer></script>
+<script src="../../assets/v2/pau-pl.js?v=20261122" defer></script>
+
+  </main>
+</div>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="../../pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
+</body>
+</html>
