@@ -5,7 +5,7 @@
 <script>document.documentElement.className="js"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ejercicios de selectividad de Análisis por comunidades y años · 2.º Bach CCSS</title>
-<meta name="description" content="865 ejercicios de Análisis de la PAU de Matemáticas Aplicadas a las CCSS (2017-2026) de todas las comunidades, en tablas por año y comunidad y en una lista con filtros por apartado, tipo de pregunta, comunidad y año. Los de 2026, resueltos a mano.">
+<meta name="description" content="865 ejercicios de Análisis de la PAU de Matemáticas Aplicadas a las CCSS (2017-2026) de todas las comunidades, en tablas por año y comunidad y en una lista con filtros por apartado, lo que te preguntan, tipo de función, dificultad, comunidad y año. Los de 2026, resueltos a mano.">
 <meta name="mates:pagina" content="Análisis: ejercicios de selectividad">
 <meta name="mates:curso" content="2.º Bach CCSS">
 <link rel="manifest" href="/manifest.webmanifest">
@@ -18,7 +18,7 @@
 <link rel="preload" href="../../assets/v2/fuentes/caveat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://cerezillamates.github.io/2bach-ccss/analisis/selectividad.html">
 <meta property="og:title" content="Ejercicios de selectividad de Análisis por comunidades y años · 2.º Bach CCSS">
-<meta property="og:description" content="865 ejercicios de Análisis de la PAU de Matemáticas Aplicadas a las CCSS (2017-2026) de todas las comunidades, en tablas por año y comunidad y en una lista con filtros por apartado, tipo de pregunta, comunidad y año. Los de 2026, resueltos a mano.">
+<meta property="og:description" content="865 ejercicios de Análisis de la PAU de Matemáticas Aplicadas a las CCSS (2017-2026) de todas las comunidades, en tablas por año y comunidad y en una lista con filtros por apartado, lo que te preguntan, tipo de función, dificultad, comunidad y año. Los de 2026, resueltos a mano.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <link rel="stylesheet" href="../../assets/v2/estilo.css?v=20261122">
@@ -39,7 +39,7 @@
 <header class="portada-pag">
   <p class="curso">Análisis · selectividad 2017-2026</p>
   <h1>Todos los ejercicios de Análisis, comunidad a comunidad</h1>
-  <p class="entrada">865 ejercicios de la PAU de Matemáticas Aplicadas a las Ciencias Sociales, ordenados por los apartados del tema. Dos tablas, una de funciones y derivadas y otra de integrales, y una lista para filtrar por lo que te preguntan.</p>
+  <p class="entrada">865 ejercicios de la PAU de Matemáticas Aplicadas a las Ciencias Sociales, ordenados por los apartados del tema. Dos tablas, una de funciones y derivadas y otra de integrales, y una lista para elegir qué practicar.</p>
   <p class="atajo"><span class="nota roja">Cómo usarlo:</span> haz el ejercicio en papel y después compara. Los de 2026 están resueltos a mano; los demás enlazan a la solución de otro profesor.</p>
 </header>
 
@@ -52,40 +52,52 @@
   <nav class="pau-vistas" aria-label="Vistas">
     <a href="#funciones" data-vista="funciones">Tabla: funciones y derivadas</a>
     <a href="#integrales" data-vista="integrales">Tabla: integrales</a>
-    <a href="#lista" data-vista="lista">Lista con filtros</a>
+    <a href="#lista" data-vista="lista">Lista para practicar</a>
   </nav>
 
   <section class="pau-vista" id="v-tabla" hidden>
     <div class="pau-herr">
       <button type="button" class="boton fino" id="pau-subraya" aria-pressed="false">Modo subrayador</button>
+      <button type="button" class="boton fino" id="pau-imp-blanco" data-imprimir>Imprimir en blanco</button>
+      <button type="button" class="boton fino" id="pau-imp-mios" data-imprimir>Imprimir con mis hechos</button>
       <p class="pau-ayuda">Toca un ejercicio para abrir su enunciado. Con el <b>modo subrayador</b> encendido, al tocarlo lo marcas como hecho (o lo desmarcas).</p>
     </div>
     <details class="pau-leyenda" open>
-      <summary>Qué significa cada número</summary>
+      <summary>Cómo se lee la tabla</summary>
       <div id="pau-leyenda"></div>
-      <p class="pau-ayuda">Toca un apartado para resaltar sus ejercicios en la tabla. <span class="pau-chip mini con-sol">11</span> = resuelto a mano. ★ = ejercicio destacado.</p>
     </details>
+    <p class="pau-resaltar" id="pau-resaltar"></p>
     <div id="pau-tablas"></div>
   </section>
 
   <section class="pau-vista" id="v-lista" hidden>
-    <form class="pau-filtros" id="pau-filtros" role="search" onsubmit="return false">
+    <details class="pau-filtros-d" id="pau-filtros-d" open>
+      <summary>Filtros</summary>
+    <form class="pau-filtros" id="pau-filtros" role="search">
       <label class="ancho"><span>Buscar</span><input type="search" id="f-q" placeholder="Palabra, comunidad, año… (p. ej. «beneficio», «Madrid 2025»)"></label>
       <label><span>Apartado</span><select id="f-a"></select></label>
+      <label><span>Subtipo</span><select id="f-s2"></select></label>
       <label><span>Qué te preguntan</span><select id="f-t"></select></label>
+      <label><span>Tipo de función</span><select id="f-fn"></select></label>
+      <label><span>Con o sin contexto</span><select id="f-ctx"></select></label>
+      <label><span>Dificultad</span><select id="f-lv">
+        <option value="">Todas</option><option value="1">• Básica</option><option value="2">•• Media</option><option value="3">••• Alta</option></select></label>
       <label><span>Comunidad</span><select id="f-c"></select></label>
       <label><span>Año</span><select id="f-y"></select></label>
       <label><span>Convocatoria</span><select id="f-v">
-        <option value="">Todas</option><option value="ORD">Ordinaria / junio</option><option value="EXT">Extraordinaria / septiembre / julio</option><option value="MOD">Modelo</option><option value="SUP">Suplentes y reservas</option></select></label>
+        <option value="">Todas</option><option value="ORD">Ordinaria / junio</option><option value="EXT">Extraordinaria / julio / septiembre</option><option value="MOD">Modelo</option><option value="SUP">Suplentes y reservas</option></select></label>
       <label class="check"><input type="checkbox" id="f-s"> Solo resueltos a mano</label>
       <label class="check"><input type="checkbox" id="f-p"> Solo los que me faltan</label>
-      <div class="pau-fila">
+      <label class="check"><input type="checkbox" id="f-ne"> Incluir los que no entran (trigonométricas)</label>
+    </form>
+    </details>
+    <div class="pau-fila">
         <p class="pau-cuenta" id="pau-cuenta" aria-live="polite"></p>
         <button type="button" class="boton fino" id="pau-limpia">Quitar filtros</button>
+        <button type="button" class="boton fino" id="pau-proy-lista">Proyectar la lista</button>
         <button type="button" class="boton azul" id="pau-azar">Uno al azar</button>
       </div>
-    </form>
-    <ol class="pau-lista" id="pau-lista"></ol>
+    <ul class="pau-lista" id="pau-lista"></ul>
     <p><button type="button" class="boton fino" id="pau-mas" hidden>Ver más</button></p>
   </section>
 

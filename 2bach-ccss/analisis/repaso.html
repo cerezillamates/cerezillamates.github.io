@@ -34,88 +34,86 @@
   <div class="acciones"><button type="button" class="boton fino" data-pizarra aria-pressed="false" title="Letra grande y pasos con las flechas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg><span class="txt">Pizarra</span></button><button type="button" class="boton fino" data-imprimir title="Imprimir o guardar en PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></svg><span class="txt">Imprimir</span></button></div>
 </div></header>
 <div class="hoja">
-  <aside class="margen" aria-label="En esta página"><nav class="indice" aria-label="Índice de la página"><h2>En esta página</h2><div class="hilo"><ol><li><a href="#bloque-a">Límites, continuidad y derivabilidad</a></li><li><a href="#bloque-b">Asíntotas, derivadas y recta tangente</a></li><li><a href="#bloque-c">Estudio de funciones y problemas con contexto</a></li><li><a href="#bloque-d">Parámetros y función dada su derivada</a></li><li><a href="#bloque-e">Integrales y áreas</a></li></ol></div></nav></aside>
+  <aside class="margen" aria-label="En esta página"><nav class="indice" aria-label="Índice de la página"><h2>En esta página</h2><div class="hilo"><ol><li><a href="#rep-seleccion">Selección para el examen</a></li><li><a href="#rep-por-pregunta">Por lo que te preguntan</a></li><li><a href="#rep-por-apartado">Por apartado y subtipo</a></li></ol></div></nav></aside>
   <main class="cuerpo" id="contenido">
 <header class="portada-pag">
   <p class="curso">Análisis · repaso</p>
   <h1>Repaso para el 10</h1>
-  <p class="entrada">Treinta ejercicios difíciles de selectividad, de todos los apartados del tema. Ninguno es imposible, pero todos tienen algo que hace perder décimas: una raíz que no es del intervalo, un trozo que se olvida, un salto, un parámetro con dos soluciones.</p>
+  <p class="entrada">Treinta ejercicios de selectividad de todos los apartados del tema, ordenados de menos a más. Ninguno es imposible, pero todos tienen algo que hace perder décimas: una raíz que no es del intervalo, un trozo que se olvida, un salto, un parámetro con dos soluciones.</p>
   <p class="atajo"><span class="nota roja">Cómo usarlo:</span> antes de cada ejercicio lee en rojo dónde está la trampa. Hazlo entero en papel, con todas las frases, y compara con la solución. Si fallas uno, vuelve a la teoría de su apartado.</p>
 </header>
 
 <div data-repaso>
 <div class="pau-progreso" aria-live="polite">
-  <p><b id="rep-llevas">Llevas 0 de 30</b></p>
+  <p><b id="rep-llevas">Llevas 0 de 30</b> <button type="button" class="boton azul fino" id="rep-siguiente">Ir al siguiente pendiente</button></p>
   <div class="pau-barra"><span id="rep-barra"></span></div>
 </div>
 
-<section id="bloque-a">
-  <h2>Límites, continuidad y derivabilidad</h2>
+<section id="rep-seleccion">
+  <h2>Selección para el examen</h2>
+  <p class="pau-ayuda">Los puntos son la dificultad: • básica, •• media, ••• alta. Marca «Hecho» cuando lo tengas bien; se guarda en este navegador.</p>
+  <h3 class="pau-tt">• Para entrar en calor <small>(4)</small></h3>
+  <p class="pau-ayuda">Cortos, pero cada uno tiene su trampa. Si alguno te cuesta, vuelve a la teoría antes de seguir.</p>
+  <ol class="pau-lista">
+    <li class="pau-item" data-k="9.2">El aforo: con entradas baratas no caben más de 320 personas. La función de ingresos va a trozos aunque el enunciado no lo diga.</li>
+    <li class="pau-item" data-k="11.15">Los gastos van en cientos de miles: 400 000 € son 4 y la subvención es 3,5.</li>
+    <li class="pau-item" data-k="13.3">Una función con dos parámetros multiplicados: la condición de máximo da b y la del valor da a.</li>
+    <li class="pau-item" data-k="16.3">Una raíz en el denominador: busca qué función, al derivarla, da 1/√(6x + 1).</li>
+  </ol>
+  <h3 class="pau-tt">•• Nivel medio <small>(12)</small></h3>
+  <p class="pau-ayuda">Varios apartados encadenados: lo que sale en uno se usa en el siguiente.</p>
   <ol class="pau-lista">
     <li class="pau-item" data-k="1.14">Una indeterminación 0/0 que se resuelve factorizando. El enunciado dice «continua en x = 3», pero el cambio de trozo está en x = 1: es ahí donde se trabaja. Y en c) piden una integral, no un área: puede salir negativa.</li>
     <li class="pau-item" data-k="1.17">En x = −1 hay una asíntota, no un salto. En el infinito, raíz menos 2x: ∞ − ∞, se multiplica por el conjugado.</li>
     <li class="pau-item" data-k="2.4">La exponencial de la izquierda no llega a 2: hay un salto. Y en x = 0 la función decrece a los dos lados, así que ahí no hay extremo.</li>
+    <li class="pau-item" data-k="6.20">«Paralela a 3x + 4y + 5 = 0»: primero hay que despejar la pendiente, −3/4. Salen dos puntos, y el área lleva un logaritmo.</li>
+    <li class="pau-item" data-k="7.4">La derivada del segundo trozo da raíces feas (54 ± 6√47): solo una cae dentro del intervalo.</li>
+    <li class="pau-item" data-k="10.2">Al igualar los dos beneficios sale t(t² − 28t + 187) = 0. Si divides entre t pierdes una solución.</li>
+    <li class="pau-item" data-k="10.7">Para decidir si conviene empezar antes o terminar después hay que comparar la cantidad de agua, que es una integral.</li>
+    <li class="pau-item" data-k="11.5">Derivada de un cociente con trinomio abajo: el numerador hay que operarlo con mucho cuidado. Y el límite en el infinito no supera al máximo.</li>
+    <li class="pau-item" data-k="14.1">Emparejar gráficas con fórmulas: busca cortes, vértices y comportamiento en el infinito de cada una.</li>
+    <li class="pau-item" data-k="14.2">Te dan c′: no derives otra vez. Para la expresión de c, integra y usa el valor inicial.</li>
+    <li class="pau-item" data-k="9.5">La integral del final lleva 1/(100 − 2x): el −2 de dentro cambia la constante delante del logaritmo.</li>
+    <li class="pau-item" data-k="18.1">Tres curvas: primero todos los cortes. La función de abajo cambia en x = 2, así que son dos integrales.</li>
+  </ol>
+  <h3 class="pau-tt">••• Nivel alto <small>(14)</small></h3>
+  <p class="pau-ayuda">Los de nota: parámetros, trozos, extremos absolutos y áreas en el mismo ejercicio.</p>
+  <ol class="pau-lista">
     <li class="pau-item" data-k="2.7">Los extremos absolutos con un salto en medio: hay que comparar también el valor en el punto de unión y los bordes.</li>
     <li class="pau-item" data-k="3.12">El parámetro dentro de un logaritmo. Luego te dan a = 54, que no es exactamente el valor de la continuidad: el pequeño salto en x = 1 cuenta al comparar.</li>
     <li class="pau-item" data-k="3.13">Tres incógnitas: dos uniones y una derivada en un punto que es del tercer trozo.</li>
     <li class="pau-item" data-k="3.11">La alerta se activa en dos trozos: una inecuación de segundo grado y otra con fracción. Se juntan en un solo intervalo.</li>
-  </ol>
-</section>
-
-<section id="bloque-b">
-  <h2>Asíntotas, derivadas y recta tangente</h2>
-  <ol class="pau-lista">
     <li class="pau-item" data-k="4.1">El denominador es un cuadrado: la tabla de signos de f′ con (x − 2)³ abajo engaña si no la haces bien.</li>
     <li class="pau-item" data-k="6.9">Al imponer la pendiente salen dos valores del parámetro: los dos valen si no anulan el denominador.</li>
-    <li class="pau-item" data-k="6.20">«Paralela a 3x + 4y + 5 = 0»: primero hay que despejar la pendiente, −3/4. Salen dos puntos, y el área lleva un logaritmo.</li>
     <li class="pau-item" data-k="6.25">La recta tangente da dos datos: el punto y la pendiente. Usa uno para hallar a y comprueba con el otro. La oblicua no entra en Andalucía.</li>
-  </ol>
-</section>
-
-<section id="bloque-c">
-  <h2>Estudio de funciones y problemas con contexto</h2>
-  <ol class="pau-lista">
-    <li class="pau-item" data-k="7.4">La derivada del segundo trozo da raíces feas (54 ± 6√47): solo una cae dentro del intervalo.</li>
-    <li class="pau-item" data-k="9.2">El aforo: con entradas baratas no caben más de 320 personas. La función de ingresos va a trozos aunque el enunciado no lo diga.</li>
-    <li class="pau-item" data-k="10.2">Al igualar los dos beneficios sale t(t² − 28t + 187) = 0. Si divides entre t pierdes una solución.</li>
-    <li class="pau-item" data-k="10.7">Para decidir si conviene empezar antes o terminar después hay que comparar la cantidad de agua, que es una integral.</li>
-    <li class="pau-item" data-k="11.5">Derivada de un cociente con trinomio abajo: el numerador hay que operarlo con mucho cuidado. Y el límite en el infinito no supera al máximo.</li>
-    <li class="pau-item" data-k="11.15">Los gastos van en cientos de miles: 400 000 € son 4 y la subvención es 3,5.</li>
     <li class="pau-item" data-k="12.3">El mínimo está en el borde del dominio, donde la derivada ni existe.</li>
-  </ol>
-</section>
-
-<section id="bloque-d">
-  <h2>Parámetros y función dada su derivada</h2>
-  <ol class="pau-lista">
     <li class="pau-item" data-k="13.4">Separar la fracción en a/x + b/x³ antes de derivar ahorra muchos errores. En c), simplifica x⁴·f(x) antes de integrar.</li>
-    <li class="pau-item" data-k="13.3">Una función con dos parámetros multiplicados: la condición de máximo da b y la del valor da a.</li>
     <li class="pau-item" data-k="13.8">«Al cabo de un año, un millón menos»: el dato es f(1) = 3. Y la inecuación de b) lleva fracción.</li>
-    <li class="pau-item" data-k="14.1">Emparejar gráficas con fórmulas: busca cortes, vértices y comportamiento en el infinito de cada una.</li>
-    <li class="pau-item" data-k="14.2">Te dan c′: no derives otra vez. Para la expresión de c, integra y usa el valor inicial.</li>
-  </ol>
-</section>
-
-<section id="bloque-e">
-  <h2>Integrales y áreas</h2>
-  <ol class="pau-lista">
     <li class="pau-item" data-k="15.2">Un parámetro en el exponente: si λ = 0 no puedes dividir entre λ. Hay que separar los dos casos.</li>
-    <li class="pau-item" data-k="9.5">La integral del final lleva 1/(100 − 2x): el −2 de dentro cambia la constante delante del logaritmo.</li>
-    <li class="pau-item" data-k="18.1">Tres curvas: primero todos los cortes. La función de abajo cambia en x = 2, así que son dos integrales.</li>
     <li class="pau-item" data-k="19.1">El trozo corta al eje dentro del intervalo: una parte del área está por debajo.</li>
     <li class="pau-item" data-k="19.2">El área de una exponencial y, en la misma pregunta, un salto enorme en x = 1.</li>
     <li class="pau-item" data-k="17.2">Una función a trozos con asíntota y, después, un área entre parábola y eje con unidades en km².</li>
-    <li class="pau-item" data-k="16.3">Una raíz en el denominador: busca qué función, al derivarla, da 1/√(6x + 1).</li>
   </ol>
 </section>
-</div>
+
+<section id="rep-por-pregunta">
+  <h2>Por lo que te preguntan</h2>
+  <p class="pau-ayuda">Si en un simulacro te ha fallado algo concreto (la curvatura, el recorrido, un parámetro…), aquí están todos los ejercicios en los que lo preguntan. Las trigonométricas no aparecen porque no entran.</p>
+  <div id="rep-letras"></div>
+</section>
+
+<section id="rep-por-apartado">
+  <h2>Por apartado y subtipo</h2>
+  <div id="rep-apartados"></div>
+</section>
 
 <section id="seguir">
   <nav class="siguiente" aria-label="Más ejercicios">
-    <a href="selectividad.html#lista"><small>Todos los ejercicios</small><b>Selectividad: lista con filtros</b></a>
+    <a href="selectividad.html#lista"><small>Todos los ejercicios</small><b>Selectividad: lista para practicar</b></a>
     <a class="sig" href="index.html"><small>Volver</small><b>Mapa de Análisis</b></a>
   </nav>
 </section>
+</div>
 <script src="pau/datos.js?v=20261122" defer></script>
 <script src="../../assets/katex/katex.min.js" defer></script>
 <script src="../../assets/v2/pau.js?v=20261122" defer></script>
