@@ -628,6 +628,10 @@ const ESTATICAS = {
   hotel(svg){ const g = Graf(svg,{x:[0,40],y:[0,100],alto:300}).ejes({px:5,py:10,nx:"t (meses)",ny:"%"});
     g.curva(t=>-2.5*t*t+20*t,0,6); g.curva(t=>(90*t-240)/(t+4),6,40,"b"); g.recta(0,90,40,90,"guia"); g.texto(40,90,"se acerca a 90 %","etq mano","end",-4,-8);
     g.punto(6,30); g.punto(4,40); g.punto(8,40); g.recta(0,40,8,40); g.pinta(); },
+  absclm23(svg){ const g = Graf(svg,{x:[-4,4],y:[-1,13],alto:330}).ejes({px:1,py:1});
+    g.curva(x=>-x+1,-4,-1); g.curva(x=>x+3,-1,0); g.curva(x=>-x*x*x+2*x*x+4*x+3,0,3.4,"b");
+    g.punto(-1,2); g.punto(0,3); g.punto(2,11);
+    g.texto(-1,2,"pico en x = −1","etq mano","middle",0,24); g.texto(2,11,"máximo (2, 11)","etq mano","start",10,-4); g.pinta(); },
   derivadaGraf(svg){ const g = Graf(svg,{x:[-1,4],y:[-3,4],alto:320}).ejes({px:1,py:1});
     const f=x=>x*x*x/3-x*x+0.5, d=x=>x*x-2*x;
     g.curva(f,-1,4); g.curva(d,-1,4,"r"); g.punto(0,f(0)); g.punto(2,f(2)); g.punto(0,0); g.punto(2,0);
