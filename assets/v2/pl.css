@@ -182,3 +182,4 @@
 .pl .sit,.pl .esp{grid-template-columns:minmax(0,1fr)}.pl .sit>*{min-width:0}
 .pl .pl-bloque{display:block}.pl .m{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden}
 .pl [style*="display:grid"]{grid-template-columns:minmax(0,1fr)}.pl [style*="display:grid"]>*{min-width:0;max-width:100%}
+.pl-sis{margin:.6rem 0}
