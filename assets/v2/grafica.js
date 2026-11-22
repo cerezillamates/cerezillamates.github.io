@@ -632,6 +632,19 @@ const ESTATICAS = {
     g.curva(x=>-x+1,-4,-1); g.curva(x=>x+3,-1,0); g.curva(x=>-x*x*x+2*x*x+4*x+3,0,3.4,"b");
     g.punto(-1,2); g.punto(0,3); g.punto(2,11);
     g.texto(-1,2,"pico en x = −1","etq mano","middle",0,24); g.texto(2,11,"máximo (2, 11)","etq mano","start",10,-4); g.pinta(); },
+  and23e(svg){ const g = Graf(svg,{x:[0,40],y:[-10,14],alto:320}).ejes({px:5,py:2,nx:"t (años)",ny:"millones €"});
+    const f=t=>(12*t-24)/(t+3); g.recta(0,12,40,12,"guia"); g.curva(f,0,40,"",200);
+    g.punto(0,-8); g.punto(2,0); g.texto(0,-8,"(0, −8)","etq","start",8,4); g.texto(2,0,"(2, 0)","etq","start",8,-10);
+    g.texto(40,12,"y = 12","etq mano","end",-4,-8); g.pinta(); },
+  and24e(svg){ const g = Graf(svg,{x:[-8,10],y:[-10,8],alto:340}).ejes({px:2,py:2});
+    const f=x=>(2*x-6)/(2-x); g.recta(2,-10,2,8,"prohibida"); g.recta(-8,-2,10,-2,"guia");
+    g.curva(f,-8,1.75,"",300); g.curva(f,2.2,10,"",300); g.punto(0,-3); g.punto(3,0);
+    g.texto(0,-3,"(0, −3)","etq","end",-10,20); g.texto(3,0,"(3, 0)","etq","start",6,-8);
+    g.texto(2,8,"x = 2","etq mano","start",6,16); g.texto(10,-2,"y = −2","etq mano","end",-4,18); g.pinta(); },
+  cesio25(svg){ const g = Graf(svg,{x:[0,150],y:[0,11],alto:300}).ejes({px:30,py:1,nx:"t (años)",ny:"mg"});
+    g.curva(t=>10*Math.pow(0.5,t/30),0,150,"",200); g.recta(0,9.771,53.3,0,"secante");
+    g.punto(0,10); g.punto(30,5); g.punto(10,7.937);
+    g.texto(30,5,"(30, 5)","etq","start",8,-6); g.texto(10,7.937,"tangente en t = 10","etq mano","start",10,-8); g.pinta(); },
   derivadaGraf(svg){ const g = Graf(svg,{x:[-1,4],y:[-3,4],alto:320}).ejes({px:1,py:1});
     const f=x=>x*x*x/3-x*x+0.5, d=x=>x*x-2*x;
     g.curva(f,-1,4); g.curva(d,-1,4,"r"); g.punto(0,f(0)); g.punto(2,f(2)); g.punto(0,0); g.punto(2,0);
