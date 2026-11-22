@@ -19,7 +19,7 @@ const lee = (k) => { try{ return JSON.parse(localStorage.getItem(k)); }catch(e){
 function tex(src, display){
   const s = src.replace(/(\d),(\d)/g, "$1{,}$2");
   if(!window.katex) return src;
-  try{ return katex.renderToString(s, {displayMode:display, throwOnError:false, strict:false, output:"html"}); }
+  try{ return katex.renderToString(s, {displayMode:display, throwOnError:false, strict:false, output:"htmlAndMathml"}); }
   catch(e){ return src; }
 }
 function formulas(raiz){
