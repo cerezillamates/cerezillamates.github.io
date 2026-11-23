@@ -264,3 +264,4 @@
 @media (max-width:760px){.pl-lab-cuerpo{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:520px){.pl-lab-r{flex-wrap:wrap}.pl-lab input[type=number]{width:3.1em}.pl-lab-cuerpo{padding:10px}.pl-lab-k input[type=range]{width:130px}}
 main .katex-display{overflow-x:auto;overflow-y:hidden;max-width:100%}
+.hojaex .tw,.mano .tw{max-width:100%;overflow-x:auto}
