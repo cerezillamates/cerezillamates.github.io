@@ -240,3 +240,27 @@
 .pl .pm-sub{margin:1.8rem 0 .6rem;padding-top:1rem;border-top:1px dashed var(--linea,#d9dde5)}
 .pl .pm-pasitos li{line-height:1.55}
 @media (max-width:600px){.pl .pm-dos{grid-template-columns:minmax(0,1fr)}}
+/* laboratorio de programación lineal (mismo aspecto que los laboratorios de Análisis) */
+.pl-lab{margin:26px 0;border:1.5px solid var(--tinta);border-radius:var(--radio);background:#fff}
+.pl-lab>header{padding:12px 16px;border-bottom:1px solid var(--linea)}
+.pl-lab>header h3{margin:0 0 2px;font-size:1.06rem}
+.pl-lab>header p{margin:0;color:var(--tinta-2);font-size:.95rem}
+.pl-lab-cuerpo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:6px 18px;padding:12px 16px}
+.pl-lab-t{margin:.2rem 0 .4rem;font:700 .82rem var(--f-titulo);color:var(--tinta-2);text-transform:uppercase;letter-spacing:.04em}
+.pl-lab-r{display:flex;flex-wrap:nowrap;align-items:center;gap:4px;margin:0 0 6px;font-family:var(--f-mates,serif)}
+.pl-lab input[type=number]{width:3.6em;min-width:0;padding:3px 5px;border:1.5px solid var(--linea);border-radius:6px;font:inherit;font-size:.95rem}
+.pl-lab select{padding:3px 4px;border:1.5px solid var(--linea);border-radius:6px;font:inherit}
+.pl-lab-x{border:0;background:none;color:var(--rojo);font-size:1.2rem;cursor:pointer;padding:0 6px}
+.pl-lab-bot{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:.3rem 0 .8rem}
+.pl-lab-f{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.pl-lab-graf svg{display:block;width:100%;height:auto}
+.pl-lab-k{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:.4rem 0 0;font-size:.95rem}
+.pl-lab-k input[type=range]{width:160px}
+.pl-lab-sal{padding:10px 16px 14px;border-top:1px solid var(--linea)}
+.pl-lab-sal p{margin:.5rem 0 0}
+.pl-lab-sal tr.opt td{font-weight:700;color:var(--verde)}
+.pl-lab-v.mal{color:var(--rojo)}
+.pl-lab.avisado{outline:3px solid var(--azul);outline-offset:4px}
+@media (max-width:760px){.pl-lab-cuerpo{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.pl-lab-r{flex-wrap:wrap}.pl-lab input[type=number]{width:3.1em}.pl-lab-cuerpo{padding:10px}.pl-lab-k input[type=range]{width:130px}}
+main .katex-display{overflow-x:auto;overflow-y:hidden;max-width:100%}
