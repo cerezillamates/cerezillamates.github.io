@@ -382,7 +382,7 @@ window.curvas = function(vals, steps, o){
     const col = s.up ? 'var(--ok)' : 'var(--rose)';
     // hacia delante (arriba): multiplico
     g += `<g style="opacity:${fwOp}"><path d="M${a} ${yT-4} Q${m} ${yT-92} ${b} ${yT-4}" style="fill:none;stroke:var(--sky);stroke-width:3.2"/>` + head(b, yT-4, b - m, 88, 'var(--sky)');
-    g += t(m, 24, s.pct, 16, 800, col) + t(m, 46, '× ' + s.idx, 18, 800, 'var(--sky)') + '</g>';
+    g += t(m, 24, s.pct, 16, 800, col) + t(m, 46, s.op || ('× ' + s.idx), 18, 800, s.op ? col : 'var(--sky)') + '</g>';
     // hacia atrás (abajo): divido
     if (!soloF) g += `<g style="opacity:${bkOp}"><path d="M${b} ${yB+4} Q${m} ${yB+92} ${a} ${yB+4}" style="fill:none;stroke:var(--amb);stroke-width:3.2;stroke-dasharray:9 6"/>` + head(a, yB+4, a - m, -88, 'var(--amb)');
     if (!soloF) g += t(m, yB + 72, ': ' + s.idx, 18, 800, 'var(--amb)') + t(m, yB + 93, '(' + s.pct + ')', 13, 700, col) + '</g>';
@@ -395,7 +395,7 @@ window.curvas = function(vals, steps, o){
     H += 54;
   }
   // leyenda (dos líneas)
-  g += t(W/2, H + 10, '➜ hacia delante: multiplico por el índice', 13, 800, 'var(--sky)');
+  if (o.leyenda !== false) g += t(W/2, H + 10, o.leyenda || '➜ hacia delante: multiplico por el índice', 13, 800, 'var(--sky)');
   if (!soloF) g += t(W/2, H + 28, '⟵ hacia atrás: divido entre el índice', 13, 800, 'var(--amb)');
   H += soloF ? 22 : 40;
   const minW = Math.max(W, 340);
