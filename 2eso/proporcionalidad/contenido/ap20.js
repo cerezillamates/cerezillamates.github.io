@@ -51,11 +51,14 @@ TEMA.registrar({
              R`<b>b)</b> El 60 % de 30: $C_F = I_V \cdot C_I = 0,60 \cdot 30 = 18$`],
       res:"a) Hace deporte en un club el <b>40 %</b>.<br>b) Juegan al fútbol <b>18 alumnos</b>." },
     { nivel:"Problema", min:6,
-      enun:"En agosto un artículo costaba 125 € y en diciembre costaba un 40 % más. Al verano siguiente lo compré por 210 €. ¿El segundo cambio fue una subida o una bajada? ¿De qué porcentaje?",
-      pasos:[R`Diciembre: el 40 % de 125 $= 50$ € → $125 + 50 = 175$ €`,
-             R`De 175 € a 210 € <b>sube</b> $210 - 175 = 35$ €. El total es lo de antes, 175 €:`,
-             R`$\% = \dfrac{35}{175} \cdot 100 = 20\,\%$ → subida del $20\,\%$`],
-      res:"El segundo cambio fue una <b>subida del 20 %</b>." },
+      enun:"En agosto un artículo costaba 125 €. En diciembre subió un 40 % y en las rebajas de enero bajó un 20 %. <b>a)</b> ¿Cuál es el precio final? <b>b)</b> ¿Qué porcentaje ha variado en total? ¿Ha subido o bajado?",
+      pasos:[window.curvas(["125 €","175 €","140 €"],[{up:true,pct:"+40 %",op:"+ 50 €"},{up:false,pct:"−20 %",op:"− 35 €"}],{solo:"F",leyenda:"➜ calculo el % del precio que hay y lo sumo o lo resto",subs:["agosto","diciembre","enero"]}),
+             R`<b>a)</b> Diciembre: el 40 % de 125 € $= 0,40 \cdot 125 = 50$ € → se suma: $125 + 50 = 175$ €`,
+             R`Enero: el 20 % de 175 € $= 0,20 \cdot 175 = 35$ € → se resta: $175 - 35 = 140$ €`,
+             R`<b>b)</b> En total sube: $140 - 125 = 15$ €. ¿Qué % es? (tipo 3, el total es 125 €)`,
+             R`$\% = \dfrac{15}{125} \cdot 100 = 12\,\%$`,
+             "¡No es el 20 %! Los porcentajes encadenados no se restan (40 − 20)."],
+      res:"a) El precio final es <b>140 €</b>.<br>b) En total ha <b>subido un 12 %</b>." },
     { nivel:"Aplicación", min:4,
       enun:"¿Qué interés producen 6000 € al 2,5 % anual durante 9 meses?",
       pasos:[R`1 año: el 2,5 % de 6000 $= 0,025 \cdot 6000 = 150$ €`, R`1 mes: $150 : 12 = 12,50$ €`, R`9 meses: $12,50 \cdot 9 = 112,50$ €`],
@@ -75,8 +78,8 @@ TEMA.registrar({
       pasos:["1 persona en 1 día: 300 : 20 = 15 €", "8 · 3 · 15 = 360 €"], res:"8 personas gastarán <b>360 €</b> en 3 días." },
     { nivel:"Consolidación", enun:"Tres primos de 5, 7 y 8 años reciben dinero de forma directamente proporcional a su edad. Al mayor le dan 96 €. ¿Cuánto les dan a los otros? ¿Cuánto se repartió?",
       pasos:["96 : 8 = 12 € por año", "5 · 12 = 60 € · 7 · 12 = 84 €", "Total: 96 + 60 + 84 = 240 €"], res:"A los otros les dan <b>60 €</b> y <b>84 €</b>. Se repartieron <b>240 €</b>." },
-    { nivel:"Consolidación", enun:"Un precio sube un 10 % y después baja un 10 %. ¿Cuánto ha variado en total?",
-      pasos:["Lo pruebo con 100 €:", window.curvas(["100 €","110 €","99 €"],[{up:true,pct:"+10 %",idx:"1,10"},{up:false,pct:"−10 %",idx:"0,90"}],{total:"Índice total: 1,10 × 0,90 = 0,99 → baja un 1 %"}), R`$100 \cdot 1,10 = 110$ € → $110 \cdot 0,90 = 99$ €`], res:"En total el precio baja un <b>1 %</b>." },
+    { nivel:"Consolidación", enun:"Unas gafas de sol cuestan 50 €. Suben un 10 % y después bajan un 10 %. <b>a)</b> ¿Cuánto cuestan al final? <b>b)</b> ¿Cuánto ha variado el precio en total?",
+      pasos:[window.curvas(["50 €","55 €","49,50 €"],[{up:true,pct:"+10 %",op:"+ 5 €"},{up:false,pct:"−10 %",op:"− 5,50 €"}],{solo:"F",leyenda:"➜ calculo el % del precio que hay y lo sumo o lo resto"}), R`<b>a)</b> El 10 % de 50 € $= 5$ € → $50 + 5 = 55$ €`, R`El 10 % de 55 € $= 5,50$ € → $55 - 5,50 = 49,50$ €`, R`<b>b)</b> Baja $50 - 49,50 = 0,50$ €: $\% = \dfrac{0,50}{50} \cdot 100 = 1\,\%$`, "No vuelve a 50 €: el segundo 10 % se calcula sobre 55 €."], res:"a) Al final cuestan <b>49,50 €</b>.<br>b) En total el precio baja un <b>1 %</b>." },
     { nivel:"Problema", enun:"Un grifo llena un depósito en 10 horas y otro en 15 horas. ¿Cuánto tardan los dos juntos?",
       pasos:[R`$\dfrac{1}{10} + \dfrac{1}{15} = \dfrac{3}{30} + \dfrac{2}{30} = \dfrac{5}{30} = \dfrac16$`], res:"Los dos juntos tardan <b>6 horas</b>." },
     { nivel:"Problema", enun:"Un grifo llena un depósito en 3 horas y el desagüe lo vacía en 12 horas. Si se abren los dos, ¿cuánto tarda en llenarse?",
@@ -123,6 +126,7 @@ TEMA.registrar({
         <tr><th>«reparte…», «de forma proporcional a…»</th><td><b>reparto</b> (¿directo o inverso?)</td></tr>
         <tr><th>«¿qué porcentaje…?», «el … %»</th><td><b>porcentajes</b></td></tr>
         <tr><th>IVA, rebaja, «costaba antes», «ha subido…»</th><td><b>aumentos y disminuciones</b></td></tr>
+        <tr><th>«dos rebajas seguidas», «rebaja y después IVA», «sube y después baja»</th><td><b>porcentajes encadenados</b> (tipo 4)</td></tr>
         <tr><th>banco, rédito, capital, préstamo</th><td><b>interés simple</b></td></tr>
         <tr><th>«juntos», «a la vez», «desagüe»</th><td><b>grifos y trabajo en común</b></td></tr></table>`}
     ]},
@@ -135,7 +139,7 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">🧩 Compuesta</span><p>flecha D o I a la x; a las I, la vuelta; multiplico</p></div>
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
         <div class="b-prop"><span class="etq">％ Porcentajes</span><p>tipo 1: $C_F = I_V \\cdot C_I$<br>tipo 2 (el total): regla de tres, el total es el 100 %<br>tipo 3 (el %): $\\dfrac{\\text{parte}}{\\text{total}} \\cdot 100$</p></div>
-        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>calculo el % y lo sumo o lo resto (🪄 $-20\\,\\%$ = pagar el $80\\,\\%$) <br>encadenados: flechas, hacia delante multiplico y hacia atrás divido; se multiplican los índices</p></div>
+        <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>calculo el % y lo sumo o lo resto (🪄 $-20\\,\\%$ = pagar el $80\\,\\%$) <br>tipo 4, encadenados: en cada cambio, el % del precio que hay, y lo sumo o lo resto; el % final con el tipo 3. ¡Los % no se suman ni se restan!</p></div>
         <div class="b-prop"><span class="etq">🏦 Interés</span><p>1 año: el % en decimal por el capital (tipo 1); después, por el tiempo (en meses, : 12 y por los meses)</p></div>
         <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta</p></div></div>`}
     ]},

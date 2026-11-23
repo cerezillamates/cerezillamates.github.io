@@ -9,10 +9,10 @@ TEMA.info = {
     {num:2, ico:"🔁", corto:"Simple", titulo:"Proporcionalidad simple", desc:"Magnitudes D, I y no proporcionales, constante, regla de tres, escalas y divisas.", listo:true},
     {num:3, ico:"🍰", corto:"Repartos", titulo:"Repartos proporcionales", desc:"Reparto directo e inverso.", listo:true},
     {num:4, ico:"🧮", corto:"Compuesta", titulo:"Proporcionalidad compuesta", desc:"Tres o más magnitudes: flechas D o I hacia la x.", listo:true},
-    {num:"5.1", ico:"✖️", corto:"Tipo 1", grupo:"5. Porcentajes", grupoDesc:"Tres tipos de problemas y los encadenados, siempre con la misma fórmula: C<sub>F</sub> = I<sub>V</sub> · C<sub>I</sub>.", tipo:"Tipo 1", titulo:"Calcular un %, un descuento o un incremento", desc:"Conozco lo que había y el %: multiplico.", listo:true},
+    {num:"5.1", ico:"✖️", corto:"Tipo 1", grupo:"5. Porcentajes", grupoDesc:"Cuatro tipos de problemas (el 4.º, los encadenados), siempre con la misma fórmula: C<sub>F</sub> = I<sub>V</sub> · C<sub>I</sub>.", tipo:"Tipo 1", titulo:"Calcular un %, un descuento o un incremento", desc:"Conozco lo que había y el %: multiplico.", listo:true},
     {num:"5.2", ico:"➗", corto:"Tipo 2", grupo:"5. Porcentajes", tipo:"Tipo 2", titulo:"Calcular el total", desc:"Dado el precio rebajado, el descuento, el IVA o el precio con IVA: divido.", listo:true},
     {num:"5.3", ico:"🔍", corto:"Tipo 3", grupo:"5. Porcentajes", tipo:"Tipo 3", titulo:"Calcular el %", desc:"Dadas la cantidad inicial y la final: cuánto ha subido o bajado.", listo:true},
-    {num:"5.4", ico:"🔗", corto:"Encadenados", grupo:"5. Porcentajes", tipo:"Varios cambios", titulo:"Encadenados y ofertas", desc:"Subidas y bajadas seguidas: se multiplican los índices. Ofertas 3x2, 2.ª unidad…", listo:true},
+    {num:"5.4", ico:"🔗", corto:"Tipo 4", grupo:"5. Porcentajes", tipo:"Tipo 4", titulo:"Porcentajes encadenados y ofertas", desc:"Ampliación de 2.º: precio final, % de variación total, precio inicial (rebaja e IVA), un % desconocido, volver al precio de antes y ofertas. Los % no se suman ni se restan: se multiplican los índices.", listo:true},
     {num:6, ico:"🏦", corto:"Interés", titulo:"Interés simple", desc:"Capital, rédito y tiempo. Años, meses y días.", listo:true},
     {num:7, ico:"🚰", corto:"Grifos y mezclas", titulo:"Grifos y mezclas", desc:"Trabajo en común, precio de una mezcla y aleaciones.", listo:true}
   ]

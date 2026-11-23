@@ -28,7 +28,9 @@ TEMA.registrar({
       {comp:{q:"Un portátil cuesta 605 € con el 21 % de IVA. ¿Y sin IVA?", sol:500, unidad:"€", explic:"605 = 1,21 · x → x = 605 : 1,21 = 500 €", pista:"C_F = I_V · C_I con I_V = 1,21."}},
       {comp:{q:"Un precio sube un 20 % y luego baja un 25 %. En total…", opciones:["baja un 5 %","baja un 10 %","no cambia"], ok:1, explic:"1,20 · 0,75 = 0,90 → baja un 10 %", pista:"Multiplica los índices."}},
       {comp:{q:"Una bici de 500 € se vende por 325 €. ¿Qué porcentaje ha bajado?", sol:35, unidad:"%", explic:"325 = x · 500 → x = 0,65 → baja 1 − 0,65 = 0,35 → 35 %", pista:"C_F = I_V · C_I: la x es el índice."}},
-      {comp:{q:"Con una rebaja del 20 % y un 21 % de IVA pagas 242 €. ¿Precio inicial?", sol:250, unidad:"€", explic:"Índice total 0,80 · 1,21 = 0,968 → 242 : 0,968 = 250 €", pista:"Multiplica los índices y divide."}}
+      {comp:{q:"Con una rebaja del 20 % y un 21 % de IVA pagas 242 €. ¿Precio inicial?", sol:250, unidad:"€", explic:"Índice total 0,80 · 1,21 = 0,968 → 242 : 0,968 = 250 €", pista:"Multiplica los índices y divide."}},
+      {comp:{q:"Un precio de 80 € baja un 15 % y después sube un 21 % (IVA). ¿Precio final?", sol:82.28, unidad:"€", explic:"0,85 · 1,21 = 1,0285 → 80 · 1,0285 = 82,28 € (no sube un 6 %)", pista:"Multiplica los índices."}},
+      {comp:{q:"Un artículo de 40 € sube un 25 % y después baja hasta 45 €. ¿Qué % ha bajado en el segundo cambio?", sol:10, unidad:"%", explic:"40 · 1,25 = 50 € → 45 = x · 50 → x = 0,90 → baja un 10 %", pista:"Calcula primero el precio intermedio."}}
     ]},
     { titulo:"Grifos y mezclas", cuerpo:[
       {comp:{q:"Un grifo llena un depósito en 4 h y una fuga lo vacía en 12 h. ¿Cuántas horas tarda en llenarse?", sol:6, unidad:"h", explic:"1/4 − 1/12 = 2/12 = 1/6 → 6 h", pista:"La fuga resta."}},

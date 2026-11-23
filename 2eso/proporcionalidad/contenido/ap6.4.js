@@ -1,135 +1,189 @@
-/* 2.º ESO · Tema 3 · Apartado 6.4: Porcentajes encadenados y ofertas.
-   Cambio pedido por la profesora (20-11-2026): con DIAGRAMAS DE FLECHAS CURVAS (window.curvas, en tema.js).
-   Hacia delante (arriba) multiplico por el índice; hacia atrás (abajo) divido entre el índice.
-   Encima de cada flecha, el % y su índice. Los % no se suman: los índices se multiplican.
-   Cuando preguntan qué % ha subido o bajado, el tipo 3: % = lo que sube o baja / lo de antes · 100. */
+/* 2.º ESO · Tema 3 · Apartado 6.4: TIPO 4 · Porcentajes encadenados.
+   Cambio pedido por la profesora (23-11-2026): en 2.º ESO SOLO dos preguntas:
+     1) el precio final después de varios descuentos o incrementos;
+     2) el % de variación final.
+   MÉTODO DE LA PROFESORA (el del tipo 1, repetido): calculo el % del precio que hay y lo sumo o lo resto;
+   después, otra vez el % del precio ya modificado y lo sumo o lo resto. Sin índices.
+   El % de variación final, con el tipo 3: lo que ha subido o bajado en total entre el precio del principio, por 100.
+   Siempre: los porcentajes NO se suman ni se restan.
+   Diagrama de flechas solo hacia delante (window.curvas con solo:"F"), con el % y los euros encima de cada flecha.
+   Hacia atrás (precio inicial), un % desconocido y las ofertas van en 3.º ESO (apartado 5.4).
+   Clase, casa, autoevaluación, batería (repaso) y control 1 usan los mismos dos tipos de pregunta. */
 (function(){
 const R = String.raw;
-const sube = (p, i) => ({up:true, pct:`+${p} %`, idx:i});
-const baja = (p, i) => ({up:false, pct:`−${p} %`, idx:i});
-const dia = (vals, pasos, o) => window.curvas(vals, pasos, o || {});
+// una flecha: % y los euros que se suman o se restan
+const sube = (p, e) => ({up:true, pct:`+${p} %`, op:`+ ${e} €`});
+const baja = (p, e) => ({up:false, pct:`−${p} %`, op:`− ${e} €`});
+const dia = (vals, pasos, o) => window.curvas(vals, pasos, Object.assign({solo:"F", leyenda:"➜ calculo el % del precio que hay y lo sumo o lo resto"}, o || {}));
+// un cambio con el método del tipo 1: calculo el % y lo sumo o lo resto
+const cambio = (que, p, dec, antes, cant, s, despues) => [
+  R`${que}: el ${p} % de ${antes} € $= ${dec} \cdot ${antes} = ${cant}$ €`,
+  R`Se ${s ? "suma" : "resta"}: $${antes} ${s ? "+" : "-"} ${cant} = ${despues}$ €`];
+// pone «a)» o «b)» delante del primer paso de un apartado
+const pre = (l, pasos) => [`<b>${l}</b> ` + pasos[0], ...pasos.slice(1)];
+// el % de variación final con el tipo 3
+const variacion = (ini, fin, dif, p, s) => [
+  R`En total ${s ? "sube" : "baja"}: $${s ? fin + " - " + ini : ini + " - " + fin} = ${dif}$ €`,
+  R`¿Qué % es? (tipo 3: el total es el precio del principio, ${ini} €)`,
+  R`$\% = \dfrac{${dif}}{${ini}} \cdot 100 = ${p}\,\%$`];
+
 TEMA.registrar({
   num: "6.4",
-  titulo: "Porcentajes · Encadenados y ofertas",
+  titulo: "Porcentajes · Tipo 4: encadenados",
   videos: [
     {t:"Porcentajes encadenados", url:"https://www.youtube.com/watch?v=ynSBIu_6zSE"}
   ],
 
   clase: [
     { nivel:"Aplicación", min:5,
-      enun:"Un reproductor de música costaba 110,50 €. Le aplican una rebaja del 20 %. ¿Cuál es su precio? ¿Y si después le aplican otra rebaja del 10 %?",
-      pasos:["Escribo el % y el índice encima de cada flecha: baja 20 % → 0,80; baja 10 % → 0,90.",
-             dia(["110,50 €","88,40 €","79,56 €"],[baja(20,"0,80"),baja(10,"0,90")],{subs:["inicial","con 1 rebaja","con 2 rebajas"]}),
-             "➡ Hacia delante multiplico:",
-             R`$110,50 \cdot 0,80 = 88,40$ €`,
-             R`$88,40 \cdot 0,90 = 79,56$ €`,
-             "La segunda rebaja se hace sobre 88,40 €, no sobre 110,50 €."],
-      res:"Con la rebaja cuesta <b>88,40 €</b> y con la segunda rebaja, <b>79,56 €</b>." },
-    { nivel:"Práctica", min:5, enun:"Una tablet cuesta 280 €. La rebajan un 15 % y al pagar le añaden el 21 % de IVA. ¿Cuánto pago?",
-      pasos:[dia(["280 €","238 €","287,98 €"],[baja(15,"0,85"),sube(21,"1,21")]),
-             R`$280 \cdot 0,85 = 238$ €`, R`$238 \cdot 1,21 = 287,98$ €`],
-      res:"Pago <b>287,98 €</b> por la tablet." },
-    { nivel:"Práctica", min:5, enun:"El abono del polideportivo cuesta 40 €. En enero sube un 10 % y en septiembre vuelve a subir otro 10 %. ¿Cuánto cuesta al final?",
-      pasos:[dia(["40 €","44 €","48,40 €"],[sube(10,"1,10"),sube(10,"1,10")],{total:"Índice total: 1,10 × 1,10 = 1,21 → sube un 21 %"}),
-             R`$40 \cdot 1,10 = 44$ €`, R`$44 \cdot 1,10 = 48,40$ €`,
-             "¡No son 48 €! La segunda subida se calcula sobre 44 €, no sobre 40 €."],
-      res:"Al final el abono cuesta <b>48,40 €</b>." },
-    { nivel:"Problema", min:6, enun:"Hace dos años había 150 alumnos en el conservatorio. El año pasado se matricularon un 10 % más y este año 110. ¿Subió o bajó este año? ¿Qué porcentaje?",
-      pasos:[dia(["150","165"],[sube(10,"1,10")],{subs:["hace 2 años","el año pasado"]}),
-             R`El año pasado: $150 \cdot 1,10 = 165$ alumnos`,
-             R`Este año <b>baja</b>: $165 - 110 = 55$ alumnos`,
-             R`¿Qué % es? (tipo 3, lo de antes es 165): $\% = \dfrac{55}{165} \cdot 100 \approx 33,33\,\%$`],
-      res:"Este año <b>bajó</b> un <b>33,33 %</b>." },
-    { nivel:"Reto", min:7,
-      enun:"Por el Black Friday, una videoconsola de 250 € tiene un descuento del 20 %. Después le aplican otro porcentaje, sin saber si es de subida o de bajada, y el precio final es 255 €. ¿Fue una subida o una bajada? ¿De cuánto?",
-      pasos:[dia(["250 €","200 €"],[baja(20,"0,80")]),
-             R`Con el descuento: $250 \cdot 0,80 = 200$ €`,
-             R`De 200 € a 255 €: <b>sube</b> $255 - 200 = 55$ €`,
-             R`¿Qué % es? (tipo 3, lo de antes es 200): $\% = \dfrac{55}{200} \cdot 100 = 27,5\,\%$`],
-      res:"Fue una <b>subida del 27,5 %</b>." }
+      enun:"Un reproductor de música costaba 110,50 €. Le aplican una rebaja del 20 % y después otra rebaja del 10 %.<br><b>a)</b> ¿Cuál es el precio final?<br><b>b)</b> ¿Qué porcentaje ha bajado en total?",
+      pasos:[dia(["110,50 €","88,40 €","79,56 €"],[baja(20,"22,10"),baja(10,"8,84")],{subs:["inicial","con 1 rebaja","final"]}),
+             ...pre("a)", cambio("1.ª rebaja","20","0,20","110,50","22,10",false,"88,40")),
+             ...cambio("2.ª rebaja","10","0,10","88,40","8,84",false,"79,56"),
+             "La segunda rebaja se calcula sobre 88,40 €, no sobre 110,50 €.",
+             ...pre("b)", variacion("110,50","79,56","30,94","28",false)),
+             "¡No es el 30 %! Los porcentajes no se suman."],
+      res:"a) El precio final es <b>79,56 €</b>.<br>b) En total ha bajado un <b>28 %</b>." },
+    { nivel:"Práctica", min:5,
+      enun:"Una tablet cuesta 280 €. La rebajan un 15 % y al pagar le añaden el 21 % de IVA.<br><b>a)</b> ¿Cuánto pago?<br><b>b)</b> ¿Qué porcentaje ha variado el precio? ¿Ha subido o bajado?",
+      pasos:[dia(["280 €","238 €","287,98 €"],[baja(15,"42"),sube(21,"49,98")]),
+             ...pre("a)", cambio("Rebaja","15","0,15","280","42",false,"238")),
+             ...cambio("IVA","21","0,21","238","49,98",true,"287,98"),
+             "<b>b)</b> Pago más que al principio: ha subido.",
+             ...variacion("280","287,98","7,98","2,85",true),
+             "¡No es el 6 %! No se resta 21 − 15."],
+      res:"a) Pago <b>287,98 €</b> por la tablet.<br>b) El precio ha <b>subido</b> un <b>2,85 %</b>." },
+    { nivel:"Práctica", min:5,
+      enun:"El abono del polideportivo cuesta 40 €. En enero sube un 10 % y en septiembre vuelve a subir otro 10 %.<br><b>a)</b> ¿Cuánto cuesta al final?<br><b>b)</b> ¿Qué porcentaje ha subido en total?",
+      pasos:[dia(["40 €","44 €","48,40 €"],[sube(10,"4"),sube(10,"4,40")]),
+             ...pre("a)", cambio("Enero","10","0,10","40","4",true,"44")),
+             ...cambio("Septiembre","10","0,10","44","4,40",true,"48,40"),
+             "¡No son 48 €! La segunda subida se calcula sobre 44 €, no sobre 40 €.",
+             ...pre("b)", variacion("40","48,40","8,40","21",true))],
+      res:"a) Al final el abono cuesta <b>48,40 €</b>.<br>b) Ha subido un <b>21 %</b> (no un 20 %)." },
+    { nivel:"Problema", min:6,
+      enun:"Un videojuego costaba 60 €. Cuando sale la nueva versión sube un 25 %; en rebajas baja un 20 % y en el Black Friday baja otro 10 %.<br><b>a)</b> ¿Cuál es el precio final?<br><b>b)</b> ¿Qué porcentaje ha variado en total?",
+      pasos:[dia(["60 €","75 €","60 €","54 €"],[sube(25,"15"),baja(20,"15"),baja(10,"6")],{subs:["inicial","nueva versión","rebajas","final"]}),
+             ...pre("a)", cambio("Subida","25","0,25","60","15",true,"75")),
+             ...cambio("Rebajas","20","0,20","75","15",false,"60"),
+             ...cambio("Black Friday","10","0,10","60","6",false,"54"),
+             ...pre("b)", variacion("60","54","6","10",false)),
+             "Si sumamos y restamos los % (+25 − 20 − 10) sale −5 %, y está mal."],
+      res:"a) El precio final es <b>54 €</b>.<br>b) En total ha <b>bajado un 10 %</b>." },
+    { nivel:"Reto", min:6,
+      enun:"Unas zapatillas de 80 € bajan un 50 % y después suben un 50 %.<br><b>a)</b> ¿Vuelven a costar 80 €?<br><b>b)</b> ¿Qué porcentaje han variado en total?",
+      pasos:[dia(["80 €","40 €","60 €"],[baja(50,"40"),sube(50,"20")]),
+             ...pre("a)", cambio("Bajada","50","0,50","80","40",false,"40")),
+             ...cambio("Subida","50","0,50","40","20",true,"60"),
+             "No vuelven a 80 €: el 50 % de la subida se calcula sobre 40 €, que es menos.",
+             ...pre("b)", variacion("80","60","20","25",false))],
+      res:"a) <b>No</b>: al final cuestan <b>60 €</b>.<br>b) En total han <b>bajado un 25 %</b>." }
   ],
 
   casa: [
-    { nivel:"Básico", enun:"Unos pantalones costaban 30 € y les aplican dos rebajas seguidas del 20 % y del 30 %. ¿Cuál es el precio final?",
-      pasos:[dia(["30 €","24 €","16,80 €"],[baja(20,"0,80"),baja(30,"0,70")],{total:"Índice total: 0,80 × 0,70 = 0,56 → baja un 44 %"}),
-             R`$30 \cdot 0,80 = 24$ €`, R`$24 \cdot 0,70 = 16,80$ €`, "¡No es una rebaja del 50 %!"],
-      res:"El precio final es <b>16,80 €</b>." },
-    { nivel:"Básico", enun:"Una camiseta de 20 € sube un 10 % y después baja un 10 %. ¿Cuánto cuesta al final?",
-      pasos:[dia(["20 €","22 €","19,80 €"],[sube(10,"1,10"),baja(10,"0,90")],{total:"Índice total: 1,10 × 0,90 = 0,99 → baja un 1 %"}),
-             R`$20 \cdot 1,10 = 22$ €`, R`$22 \cdot 0,90 = 19,80$ €`, "¡No vuelve a costar 20 €! El 10 % de la bajada se calcula sobre 22 €."],
-      res:"Al final la camiseta cuesta <b>19,80 €</b>." },
-    { nivel:"Consolidación", enun:"¿Qué porcentaje de descuento es la oferta «3x2» (llevas 3 y pagas 2)? ¿Y la oferta «4x3»? ¿Cuál es mejor?",
-      pasos:[R`3x2: me regalan 1 de cada 3: $\% = \dfrac{1}{3} \cdot 100 \approx 33\,\%$`,
-             R`4x3: me regalan 1 de cada 4: $\% = \dfrac{1}{4} \cdot 100 = 25\,\%$`],
-      res:"El 3x2 es un descuento de casi el <b>33 %</b> y el 4x3, del <b>25 %</b>: es mejor el <b>3x2</b>." },
-    { nivel:"Consolidación", enun:"Un móvil de 300 € tiene un 10 % de descuento y después hay que añadir el 21 % de IVA. ¿Cuánto pago?",
-      pasos:[dia(["300 €","270 €","326,70 €"],[baja(10,"0,90"),sube(21,"1,21")]),
-             R`$300 \cdot 0,90 = 270$ €`, R`$270 \cdot 1,21 = 326,70$ €`],
-      res:"Pago <b>326,70 €</b> por el móvil." },
-    { nivel:"Problema", enun:"Pagamos 290,40 € por una bici con un 20 % de rebaja y después el 21 % de IVA. ¿Cuál era el precio inicial?",
-      pasos:["Me dan el final: voy <b>hacia atrás</b> (flechas de abajo) y <b>divido</b>.",
-             dia(["300 €","240 €","290,40 €"],[baja(20,"0,80"),sube(21,"1,21")],{dir:"B",subs:["inicial (?)","","lo que pago"]}),
-             R`$290,40 : 1,21 = 240$ €`, R`$240 : 0,80 = 300$ €`,
-             R`Compruebo hacia delante: $300 \cdot 0,80 = 240$ y $240 \cdot 1,21 = 290,40$ ✓`],
-      res:"La bici costaba <b>300 €</b>." },
-    { nivel:"Para pensar", enun:"Un artículo sube un 20 % y después baja un 20 %. ¿Vuelve a su precio? Pruébalo con 100 €.",
-      pasos:[dia(["100 €","120 €","96 €"],[sube(20,"1,20"),baja(20,"0,80")],{total:"Índice total: 1,20 × 0,80 = 0,96 → baja un 4 %"}),
-             R`$100 \cdot 1,20 = 120$ €`, R`$120 \cdot 0,80 = 96$ €`],
+    { nivel:"Básico", enun:"Unos pantalones costaban 30 € y les aplican dos rebajas seguidas del 20 % y del 30 %.<br><b>a)</b> ¿Cuál es el precio final?<br><b>b)</b> ¿Qué porcentaje han bajado en total?",
+      pasos:[dia(["30 €","24 €","16,80 €"],[baja(20,"6"),baja(30,"7,20")]),
+             ...pre("a)", cambio("1.ª rebaja","20","0,20","30","6",false,"24")),
+             ...cambio("2.ª rebaja","30","0,30","24","7,20",false,"16,80"),
+             ...pre("b)", variacion("30","16,80","13,20","44",false)),
+             "¡No es una rebaja del 50 %!"],
+      res:"a) El precio final es <b>16,80 €</b>.<br>b) En total han bajado un <b>44 %</b>." },
+    { nivel:"Básico", enun:"La cuota del gimnasio cuesta 35 €. Este año sube un 10 % y el año que viene subirá un 20 %.<br><b>a)</b> ¿Cuánto costará?<br><b>b)</b> ¿Qué porcentaje habrá subido en total?",
+      pasos:[dia(["35 €","38,50 €","46,20 €"],[sube(10,"3,50"),sube(20,"7,70")]),
+             ...pre("a)", cambio("Este año","10","0,10","35","3,50",true,"38,50")),
+             ...cambio("El año que viene","20","0,20","38,50","7,70",true,"46,20"),
+             ...pre("b)", variacion("35","46,20","11,20","32",true)),
+             "¡No es el 30 %!"],
+      res:"a) La cuota costará <b>46,20 €</b>.<br>b) Habrá subido un <b>32 %</b>." },
+    { nivel:"Consolidación", enun:"Una camiseta de 20 € sube un 10 % y después baja un 10 %.<br><b>a)</b> ¿Cuánto cuesta al final?<br><b>b)</b> ¿Qué porcentaje ha variado en total?",
+      pasos:[dia(["20 €","22 €","19,80 €"],[sube(10,"2"),baja(10,"2,20")]),
+             ...pre("a)", cambio("Subida","10","0,10","20","2",true,"22")),
+             ...cambio("Bajada","10","0,10","22","2,20",false,"19,80"),
+             "¡No vuelve a costar 20 €! El 10 % de la bajada se calcula sobre 22 €.",
+             ...pre("b)", variacion("20","19,80","0,20","1",false))],
+      res:"a) Al final la camiseta cuesta <b>19,80 €</b>.<br>b) En total ha <b>bajado un 1 %</b>." },
+    { nivel:"Consolidación", enun:"Un móvil de 300 € tiene un 10 % de descuento y después hay que añadir el 21 % de IVA.<br><b>a)</b> ¿Cuánto pago?<br><b>b)</b> ¿Qué porcentaje ha variado el precio? ¿Ha subido o bajado?",
+      pasos:[dia(["300 €","270 €","326,70 €"],[baja(10,"30"),sube(21,"56,70")]),
+             ...pre("a)", cambio("Descuento","10","0,10","300","30",false,"270")),
+             ...cambio("IVA","21","0,21","270","56,70",true,"326,70"),
+             "<b>b)</b> Pago más que al principio: ha subido.",
+             ...variacion("300","326,70","26,70","8,9",true),
+             "¡No es el 11 %! No se resta 21 − 10."],
+      res:"a) Pago <b>326,70 €</b> por el móvil.<br>b) El precio ha <b>subido</b> un <b>8,9 %</b>." },
+    { nivel:"Problema", enun:"Una bici costaba 400 €. En primavera sube un 15 %, en verano la rebajan un 20 % y en septiembre baja otro 5 %.<br><b>a)</b> ¿Cuál es el precio final?<br><b>b)</b> ¿Qué porcentaje ha variado en total?",
+      pasos:[dia(["400 €","460 €","368 €","349,60 €"],[sube(15,"60"),baja(20,"92"),baja(5,"18,40")],{subs:["inicial","primavera","verano","final"]}),
+             ...pre("a)", cambio("Primavera","15","0,15","400","60",true,"460")),
+             ...cambio("Verano","20","0,20","460","92",false,"368"),
+             ...cambio("Septiembre","5","0,05","368","18,40",false,"349,60"),
+             ...pre("b)", variacion("400","349,60","50,40","12,6",false)),
+             "Sumando y restando los % (+15 − 20 − 5) saldría −10 %, y está mal."],
+      res:"a) El precio final es <b>349,60 €</b>.<br>b) En total ha <b>bajado un 12,6 %</b>." },
+    { nivel:"Problema", enun:"Unas zapatillas cuestan 80 € en dos tiendas. La tienda A hace un 35 % de descuento. La tienda B hace un 20 % y, sobre el precio rebajado, otro 15 %.<br><b>a)</b> ¿Cuánto cuestan en cada tienda?<br><b>b)</b> ¿Qué porcentaje de descuento hace en total la tienda B? ¿Dónde compro?",
+      pasos:["<b>a)</b> Tienda A:",
+             ...cambio("Descuento","35","0,35","80","28",false,"52"),
+             "Tienda B:",
+             dia(["80 €","64 €","54,40 €"],[baja(20,"16"),baja(15,"9,60")],{subs:["inicial","","tienda B"]}),
+             ...cambio("1.er descuento","20","0,20","80","16",false,"64"),
+             ...cambio("2.º descuento","15","0,15","64","9,60",false,"54,40"),
+             "<b>b)</b> Tienda B:",
+             ...variacion("80","54,40","25,60","32",false),
+             "La tienda B descuenta un 32 %, no un 35 %."],
+      res:"a) En la tienda A cuestan <b>52 €</b> y en la B, <b>54,40 €</b>.<br>b) La tienda B descuenta un <b>32 %</b>: compro en la <b>tienda A</b>." },
+    { nivel:"Para pensar", enun:"Un artículo sube un 20 % y después baja un 20 %. ¿Vuelve a su precio? Pruébalo con 100 € y di qué porcentaje ha variado.",
+      pasos:[dia(["100 €","120 €","96 €"],[sube(20,"20"),baja(20,"24")]),
+             ...cambio("Subida","20","0,20","100","20",true,"120"),
+             ...cambio("Bajada","20","0,20","120","24",false,"96"),
+             ...variacion("100","96","4","4",false)],
       res:"<b>No</b> vuelve a su precio: queda un <b>4 %</b> más barato." }
   ],
 
   laminas: [
     { portada:true, cuerpo:[
-      {html:`<p class="gancho">Dos rebajas seguidas, ¿son la suma?</p>`}
+      {html:`<p class="gancho">Dos rebajas seguidas del 20 % y del 30 %, ¿son una rebaja del 50 %?</p>`}
     ]},
     { titulo:"Porcentajes encadenados", cuerpo:[
-      {prop:["Cada cambio se hace sobre el precio que queda: los <b>índices se multiplican</b> y los porcentajes <b>no se suman</b>."], etq:"Encadenados"},
-      {prop:["Encima de cada flecha escribo el <b>%</b> y su <b>índice</b>.", "➡ <b>Hacia delante</b> (de lo inicial a lo final): <b>multiplico</b> por el índice.", "⬅ <b>Hacia atrás</b> (de lo final a lo inicial): <b>divido</b> entre el índice."], etq:"Las flechas"},
-      {html:dia(["200 €","220 €","165 €"],[sube(10,"1,10"),baja(25,"0,75")],{total:"Índice total: 1,10 × 0,75 = 0,825 → baja un 17,5 %"})}
+      {aviso:["Los porcentajes encadenados <b>NO se suman ni se restan</b>. Cada cambio se hace sobre el precio que queda."], etq:"⚠️ Lo más importante"},
+      {prop:["<b>Paso 1.</b> Calculo el % del precio que hay y lo <b>sumo</b> si sube o lo <b>resto</b> si baja (como en el tipo 1).", "<b>Paso 2.</b> Con el precio nuevo, otra vez: calculo el % y lo sumo o lo resto.", "Y así con cada cambio."], etq:"Cómo se hace"},
+      {html:dia(["200 €","220 €","165 €"],[sube(10,"20"),baja(25,"55")])}
     ]},
-    { titulo:"Hacia delante: multiplico", cuerpo:[
+    { titulo:"Pregunta 1: el precio final", cuerpo:[
       {ej:{etq:"👖 Problema de examen", enun:"Unos pantalones de 30 € tienen dos rebajas seguidas del 20 % y del 30 %. ¿Cuál es el precio final?",
-        pasos:[dia(["30 €","24 €","16,80 €"],[baja(20,"0,80"),baja(30,"0,70")],{dir:"F"}),
-               R`$30 \cdot 0,80 = 24$ €`, R`$24 \cdot 0,70 = 16,80$ €`,
-               "Índice total 0,80 · 0,70 = 0,56: es una rebaja del 44 %, ¡no del 50 %!"],
-        res:"El precio final es <b>16,80 €</b>."}}
+        pasos:[dia(["30 €","24 €","16,80 €"],[baja(20,"6"),baja(30,"7,20")]),
+               ...cambio("1.ª rebaja","20","0,20","30","6",false,"24"),
+               ...cambio("2.ª rebaja","30","0,30","24","7,20",false,"16,80")],
+        res:"El precio final es <b>16,80 €</b>."}},
+      {nota:["El 30 % se calcula sobre 24 €, que es lo que queda, no sobre 30 €."]}
     ]},
-    { titulo:"Hacia atrás: divido", cuerpo:[
-      {ej:{etq:"🚲 Me dan lo que pago", enun:"Pagamos 290,40 € con una rebaja del 20 % y después el 21 % de IVA. ¿Cuál era el precio inicial?",
-        pasos:[dia(["300 €","240 €","290,40 €"],[baja(20,"0,80"),sube(21,"1,21")],{dir:"B",subs:["inicial (?)","","lo que pago"]}),
-               R`$290,40 : 1,21 = 240$ €`, R`$240 : 0,80 = 300$ €`],
-        res:"El precio inicial era <b>300 €</b>."}},
-      {aviso:["Para volver atrás <b>no</b> se resta el %: se <b>divide</b> entre el índice."]}
+    { titulo:"Pregunta 2: el % de variación final", cuerpo:[
+      {prop:["Resto el precio del principio y el del final: es lo que ha <b>subido</b> o <b>bajado</b> en total.", "¿Qué % es? Es el <b>tipo 3</b>: lo que sube o baja entre el precio del <b>principio</b>, por 100."], etq:"Cómo se hace"},
+      {ej:{etq:"👖 Los mismos pantalones", enun:"De 30 € a 16,80 €. ¿Qué porcentaje han bajado en total?",
+        pasos:[...variacion("30","16,80","13,20","44",false)],
+        res:"Han bajado un <b>44 %</b>, no un 50 % (20 + 30)."}}
     ]},
-    { titulo:"Subida y bajada: ¿cuál fue?", cuerpo:[
-      {ej:{etq:"🛍️ Problema de examen", enun:"Un artículo costaba 180 €. Primero subió un 20 % y después le aplicaron otro porcentaje. El precio final es 162 €. ¿Fue subida o bajada? ¿De cuánto?",
-        pasos:[dia(["180 €","216 €"],[sube(20,"1,20")]),
-               R`Subida: $180 \cdot 1,20 = 216$ €`,
-               R`De 216 € a 162 €: <b>baja</b> $216 - 162 = 54$ €`,
-               R`¿Qué % es? (tipo 3, lo de antes es 216): $\% = \dfrac{54}{216} \cdot 100 = 25\,\%$`],
-        res:"Fue una <b>bajada del 25 %</b>."}}
-    ]},
-    { titulo:"Compras inteligentes: las ofertas", cuerpo:[
-      {cols:[
-        [{ej:{etq:"3 × 2", enun:"Llevas 3 y pagas 2.", pasos:["Me ahorro 1 de cada 3.", R`$\dfrac{1}{3} \cdot 100 \approx 33\,\%$`], res:"Es un descuento de casi el <b>33 %</b>."}}],
-        [{ej:{etq:"2.ª unidad a mitad de precio", enun:"Llevas 2 y pagas 1,5.", pasos:["Me ahorro 0,5 de cada 2.", R`$\dfrac{0,5}{2} \cdot 100 = 25\,\%$`], res:"Es un descuento del <b>25 %</b>."}}],
-        [{ej:{etq:"−70 % en la 2.ª unidad", enun:"Llevas 2 y pagas 1,3.", pasos:["Me ahorro 0,7 de cada 2.", R`$\dfrac{0,7}{2} \cdot 100 = 35\,\%$`], res:"Es un descuento del <b>35 %</b>."}}]
-      ]},
-      {nota:["Solo es buena oferta si de verdad necesitas las dos unidades 😉"]}
+    { titulo:"Subidas y bajadas mezcladas", cuerpo:[
+      {ej:{etq:"🛍️ Problema de examen", enun:"Un artículo de 200 € sube un 10 % y después baja un 25 %. <b>a)</b> ¿Precio final? <b>b)</b> ¿Qué porcentaje ha variado?",
+        pasos:[dia(["200 €","220 €","165 €"],[sube(10,"20"),baja(25,"55")]),
+               ...pre("a)", cambio("Subida","10","0,10","200","20",true,"220")),
+               ...cambio("Bajada","25","0,25","220","55",false,"165"),
+               ...pre("b)", variacion("200","165","35","17,5",false))],
+        res:"a) Cuesta <b>165 €</b>.<br>b) Ha <b>bajado un 17,5 %</b>: no un 15 % (25 − 10)."}}
     ]},
     { titulo:"⚠️ Errores típicos", cuerpo:[
-      {aviso:["<b>Sumar los porcentajes</b> encadenados: −20 % y −30 % no es −50 %. Se multiplican los índices."], etq:"⚠️ Error 1"},
-      {aviso:["<b>Subir un 20 % y bajar un 20 %</b> no deja el precio igual: 1,20 · 0,80 = 0,96."], etq:"⚠️ Error 2"},
-      {aviso:["<b>Multiplicar cuando voy hacia atrás</b>: si me dan lo que pago y busco el precio de antes, divido."], etq:"⚠️ Error 3"}
+      {aviso:["<b>Sumar los porcentajes</b>: dos rebajas del 20 % y del 30 % no son una rebaja del 50 %, sino del 44 %."], etq:"⚠️ Error 1"},
+      {aviso:["<b>Restar los porcentajes</b>: una rebaja del 15 % y el 21 % de IVA no es subir un 6 %, sino un 2,85 %."], etq:"⚠️ Error 2"},
+      {aviso:["<b>Calcular el segundo % sobre el precio del principio</b>: cada cambio se hace sobre el precio que queda."], etq:"⚠️ Error 3"},
+      {aviso:["<b>En el % final, dividir entre el precio del final</b>: el total es siempre el precio del <b>principio</b>."], etq:"⚠️ Error 4"},
+      {aviso:["<b>Creer que subir un 20 % y bajar un 20 % deja el precio igual</b>: 100 € → 120 € → 96 €, baja un 4 %."], etq:"⚠️ Error 5"}
     ]},
     { titulo:"📝 Resumen", cuerpo:[
-      {resumen:[{lista:["Cada cambio tiene su índice: sube → 1 + el %; baja → 1 − el %. Lo escribo encima de su flecha.",
-        "➡ Hacia delante multiplico; ⬅ hacia atrás divido.",
-        "Varios cambios seguidos: se multiplican los índices. Los % no se suman.",
-        "Ofertas: qué parte me ahorro de lo que me llevo, por 100."]}]},
+      {resumen:[{lista:["Precio final: en cada cambio calculo el % del precio que hay y lo sumo (sube) o lo resto (baja).",
+        "Cada % se calcula sobre el precio que queda, no sobre el del principio.",
+        "% de variación final: lo que ha subido o bajado en total entre el precio del principio, por 100 (tipo 3).",
+        "Los porcentajes encadenados no se suman ni se restan."]}]},
       {estudio:[
-        {comp:{q:"Sube un 10 % y luego otro 10 %. ¿Cuánto sube en total (%)?", sol:21, unidad:"%", explic:"1,10 · 1,10 = 1,21 → +21 %", pista:"Multiplica los índices."}},
-        {comp:{q:"Unos pantalones de 50 € tienen dos rebajas del 20 % y del 10 %. ¿Precio final?", sol:36, unidad:"€", explic:"50 · 0,80 = 40 € → 40 · 0,90 = 36 €", pista:"Hacia delante: multiplica por cada índice."}}
+        {comp:{q:"Unos pantalones de 50 € tienen dos rebajas del 20 % y del 10 %. ¿Precio final?", sol:36, unidad:"€", explic:"20 % de 50 = 10 → 50 − 10 = 40 €; 10 % de 40 = 4 → 40 − 4 = 36 €", pista:"El 10 % se calcula sobre lo que queda tras la primera rebaja."}},
+        {comp:{q:"Un precio de 100 € sube un 10 % y luego otro 10 %. ¿Cuánto sube en total (%)?", sol:21, unidad:"%", explic:"100 → 110 → 121 €: sube 21 € de 100 € → 21 %", pista:"La segunda subida es el 10 % de 110."}},
+        {comp:{q:"Un precio de 100 € baja un 40 % y después otro 50 %. ¿Qué % baja en total?", sol:70, unidad:"%", explic:"100 → 60 → 30 €: baja 70 € de 100 € → 70 % (no un 90 %)", pista:"El 50 % se calcula sobre 60 €."}}
       ]}
     ]}
   ]

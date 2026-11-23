@@ -11,10 +11,10 @@
 <title>Tema 3 · Proporcionalidad · 3.º ESO · Mercedes Cerezo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="../../assets/tema.css?v=20261113e">
+<link rel="stylesheet" href="../../assets/tema.css?v=20261123">
 <link rel="icon" href="../../assets/favicon.svg">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
-<script src="info.js?v=20261113e"></script>
+<script src="info.js?v=20261123"></script>
 <link rel="stylesheet" href="../../assets/v2/puente.css?v=20261120">
 <script src="../../assets/v2/profe.js?v=20261120"></script>
 </head>
@@ -90,6 +90,8 @@ SECC.forEach((s,i)=>{
   const aps = TEMA.info.apartados.filter(a=>a.listo), vids = {};
   let n = 0;
   TEMA.registrar = ap => { vids[ap.num] = ap.videos || []; };
+  // los dibujos de los apartados (flechas, despejes) no hacen falta aquí: sin esto no se leían sus vídeos
+  window.curvas = window.curvas || (()=>""); window.despeje = window.despeje || (()=>"");
   const pinta = () => {
     const el = document.getElementById("lista-videos"); if(!el) return;
     el.innerHTML = aps.map((a,k,L)=>(a.grupo && (k===0 || L[k-1].grupo!==a.grupo) ? `<div class="ap-grupo">${a.grupo}</div>` : "") + `<div class="ap${a.grupo?" sub":""}"><span class="n">${a.num}</span><div><h3>${a.titulo}</h3>${(vids[a.num]||[]).length ? "" : `<p>Sin vídeos todavía.</p>`}</div>
