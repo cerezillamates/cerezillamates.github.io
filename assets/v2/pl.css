@@ -212,3 +212,22 @@
 .pl a.pl-ej{white-space:normal}
 .pl .pl-tipo p,.pl .pl-tipo li{overflow-wrap:anywhere}
 .pl .pl-consulta-c .tryit{grid-template-columns:minmax(0,1fr)!important}.pl .pl-consulta-c svg.plot{max-width:480px}
+/* método sencillo */
+.pl .pm-paso{border:1px solid var(--linea,#d9dde5);border-radius:14px;padding:1.1rem 1.3rem 1.2rem;margin:2.2rem 0;background:var(--card,#fff)}
+.pl .pm-paso h2{display:flex;align-items:center;gap:.6rem;margin:0 0 .5rem}
+.pl .pm-num{display:inline-grid;place-items:center;flex:none;width:2.1rem;height:2.1rem;border-radius:50%;background:var(--azul,#1d4ed8);color:#fff;font-size:1.15rem}
+.pl .pm-que{font-size:1.12rem;line-height:1.55;margin:.2rem 0 1rem}
+.pl .pm-et{font:700 .78rem var(--f-mono,monospace);letter-spacing:.06em;text-transform:uppercase;color:var(--muted,#667);margin:1.1rem 0 .4rem}
+.pl .pm-escribe::before{display:none}
+.pl .pm-escribe .say{margin:.2rem 0}
+.pl .pm-escribe .formula{margin:.5rem 0}
+.pl .pm-ojo{margin:1rem 0 0;padding:.5rem .8rem;border-radius:8px;background:#fff4e5;border-left:4px solid #e8890c}
+.pl .pm-t th,.pl .pm-t td{white-space:normal}.pl .pm-t .katex{white-space:nowrap}@media (max-width:600px){.pl .pm-t th,.pl .pm-t td{padding:6px 5px;font-size:.86rem}}
+.pl .pm-lista{display:grid;gap:.35rem;padding-left:1.6em}
+.pl .pm-lista a{text-decoration:none;color:inherit}.pl .pm-lista a b{color:var(--azul,#1d4ed8)}
+.pl .pm-dic{margin:1rem 0;border:1px solid var(--linea,#d9dde5);border-radius:10px;padding:.5rem .9rem}
+.pl .pm-dic summary{cursor:pointer;font-weight:700}
+.pl .pm-dic dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:.4rem 1rem;margin:.8rem 0 .3rem}
+.pl .pm-dic dt{font-weight:700}.pl .pm-dic dd{margin:0}
+@media (max-width:600px){.pl .pm-dic dl{grid-template-columns:minmax(0,1fr)}.pl .pm-dic dd{margin-bottom:.4rem}.pl .pm-paso{padding:1rem .9rem}}
+@media (max-width:600px){.pl .pm-escribe{padding:8px 8px 10px}.pl .pm-escribe .formula{padding-left:4px;padding-right:4px}.pl .pm-paso{padding:1rem .7rem}}
