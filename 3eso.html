@@ -1,39 +1,59 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="sin-js">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.className="js"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="/manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Mates">
 <title>3.º ESO · Mercedes Cerezo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap">
-<link rel="stylesheet" href="assets/portal.css">
+<meta name="description" content="Matemáticas de 3.º de ESO: apuntes para proyectar en clase y para estudiar en casa, actividades, tareas y autoevaluación.">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#fdfdfb">
 <link rel="icon" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/v2/fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/v2/fuentes/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/v2/fuentes/caveat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://cerezillamates.github.io/3eso.html">
+<meta property="og:title" content="3.º ESO · Mercedes Cerezo">
+<meta property="og:description" content="Matemáticas de 3.º de ESO: apuntes para proyectar en clase y para estudiar en casa, actividades, tareas y autoevaluación.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="stylesheet" href="assets/v2/estilo.css?v=20261123">
+<script src="assets/v2/profe.js?v=20261123"></script>
+<script src="assets/v2/mates.js?v=20261123" defer></script>
 </head>
-<body>
-<div class="wrap">
-  <a class="back" href="index.html">← Mis cursos</a>
-  <header>
-    <a href="index.html" aria-label="Inicio"><img src="assets/logo-192.png" alt="Logotipo" width="64" height="64" style="display:block;border-radius:16px;margin-bottom:10px"></a>
-    <div style="font:600 .85rem var(--f-b);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Matemáticas · 3.º ESO</div>
-    <h1>3.º <span>ESO</span></h1>
-    <p class="lead">Apuntes para proyectar en clase y para estudiar en casa, actividades, tareas y autoevaluación. Pincha en un tema para abrirlo.</p>
-  </header>
-  <section>
-    <h2>Temas</h2>
-    <div class="grid">
-      <a class="card" href="3eso/proporcionalidad/" style="--c:var(--blue)"><span class="num">Tema 3</span><h3>Proporcionalidad y problemas aritméticos</h3><p>Razones, regla de tres, repartos, proporcionalidad compuesta, porcentajes, interés, grifos y mezclas.</p><span class="go">Abrir el tema →</span></a>
-      <a class="card" href="3eso/estadistica/" style="--c:var(--vio)"><span class="num">Estadística</span><h3>Tablas, gráficos y medidas</h3><p>Población y muestra, tablas, gráficos, media, mediana y moda, intervalos, cuartiles y caja, dispersión, y la calculadora y Excel.</p><span class="go">Abrir el tema →</span></a>
-    </div>
-  </section>
-  <footer>
-    <p>Materiales elaborados por <b>Mercedes Cerezo</b> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener license">Licencia Creative Commons BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y compartiéndolos con la misma licencia.</p>
-  </footer>
+<body class="ancha">
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra"><div class="barra-in">
+  <a class="marca" href="index.html"><img src="assets/logo.svg" alt="" width="34" height="34" style="border-radius:8px"><span>Matemáticas<small>Mercedes Cerezo</small></span></a>
+  <nav class="migas" aria-label="Estás en"><a href="index.html">Inicio</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">3.º ESO</span></nav><a class="volver" href="index.html">Inicio</a>
+  <div class="acciones"></div>
+</div></header>
+<div class="hoja">
+  <aside class="margen" aria-label="En esta página"></aside>
+  <main class="cuerpo" id="contenido">
+<header class="portada-pag">
+  <p class="curso">Matemáticas</p>
+  <h1>3.º ESO</h1>
+  <p class="entrada">Apuntes para proyectar en clase y para estudiar en casa, actividades, tareas y autoevaluación.</p>
+  <p class="seguir" data-seguir hidden></p>
+</header>
+<section id="temas" class="ancho">
+  <h2 class="sr">Temas</h2>
+  <ol class="temario">
+    <li><span class="num">3</span><div><h3>Proporcionalidad y problemas aritméticos</h3><p>Razones, regla de tres, repartos, proporcionalidad compuesta, porcentajes, interés, grifos y mezclas.</p>
+      <div class="piezas"><a class="prim" href="3eso/proporcionalidad/index.html">Abrir el tema</a></div></div></li>
+    <li><span class="num" aria-hidden="true">·</span><div><h3>Estadística</h3><p>Población y muestra, tablas, gráficos, media, mediana y moda, intervalos, cuartiles y caja, dispersión, y la calculadora y Excel.</p>
+      <div class="piezas"><a class="prim" href="3eso/estadistica/index.html">Abrir el tema</a></div></div></li>
+  </ol>
+</section>
+
+  </main>
 </div>
+<footer class="pie">
+  <p>Materiales de <b>Mercedes Cerezo</b>, profesora de Matemáticas. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license noopener" target="_blank">Licencia CC BY-NC-SA 4.0</a>: puedes usarlos y adaptarlos citando la autoría, sin fines comerciales y con la misma licencia.</p>
+  <p>Los enunciados de selectividad pertenecen a sus universidades y comunidades.</p>
+  <p><a href="pizarra.html">¿No se ve bien en tu pizarra? Prueba de compatibilidad</a></p>
+</footer>
 </body>
 </html>

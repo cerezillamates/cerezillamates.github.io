@@ -1,0 +1,48 @@
+/* ==========================================================================
+@font-face{font-family:"Caveat";src:url("../fonts/Caveat.ttf") format("truetype");font-weight:400 700;font-display:swap}
+   puente.css — viste los temas hechos con el motor anterior (tema.css)
+   y las páginas PAU con la identidad nueva, sin tocar su funcionamiento.
+   Se carga DESPUÉS de su hoja de estilos.
+   ========================================================================== */
+@font-face{font-family:"Schibsted Grotesk";src:url("fuentes/schibsted-grotesk-latin-700-normal.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("fuentes/schibsted-grotesk-latin-800-normal.woff2") format("woff2");font-weight:800 900;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible Next";src:url("fuentes/atkinson-hyperlegible-next-latin-400-normal.woff2") format("woff2");font-weight:400 500;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible Next";src:url("fuentes/atkinson-hyperlegible-next-latin-700-normal.woff2") format("woff2");font-weight:600 900;font-display:swap}
+
+:root{
+  --bg:#fdfdfb;--card:#fff;--ink:#1b2130;--muted:#525b6c;--line:#d9dee8;
+  --ind:#1c3dc2;--ind2:#1c3dc2;--ind-bg:#e8edfc;
+  --ok:#0f7a46;--ok-bg:#e3f4ea;--rose:#d2232a;--rose-bg:#fdecec;
+  --f-d:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-b:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;
+  --sombra:none;
+  /* páginas PAU (sistemas.html, programacion-lineal.html) */
+  --paper:#fdfdfb;--grid:#e4eaf3;--r1:#1c3dc2;--r2:#d2232a;
+}
+body{letter-spacing:0}
+/* Cabecera: papel cuadriculado con la línea roja de margen, en vez del degradado */
+.hero{background-color:#fdfdfb;color:#1b2130;
+  background-image:linear-gradient(90deg,transparent 22px,#d2232a 22px,#d2232a 23.5px,transparent 23.5px),
+    linear-gradient(#e4eaf3 1px,transparent 1px),linear-gradient(90deg,#e4eaf3 1px,transparent 1px);
+  background-size:100% 100%,20px 20px,20px 20px;border-bottom:1px solid #d9dee8}
+.hero a{color:#1c3dc2}
+.hero .kicker{opacity:1;color:#d2232a;letter-spacing:.02em;text-transform:none;font:700 1.35rem "Caveat",cursive}
+.hero .lead{opacity:1;color:#525b6c}
+.hero .btn{border-color:#1b2130;background:#fdfdfb;color:#1b2130}
+.hero .btn.main{background:#1c3dc2;color:#fff;border-color:#1c3dc2}
+.indice a{background:#e8edfc;color:#1c3dc2}
+/* Menos redondez y sin sombras ni degradados decorativos */
+.btn,.pb,.tabs button{border-radius:3px!important}
+.ap .n,.ap-g-cab .n{background:#1c3dc2!important;border-radius:50%!important}
+.proy-cab{background:#1b2130!important}
+.card,.ap,.caja,.regla{box-shadow:none!important}
+.card,.ap{border-radius:4px!important}
+/* Elegir «En clase / En casa» (ESO): colores planos de bolígrafo */
+.elige button[data-m="clase"]{background:#1c3dc2!important;border-radius:4px!important}
+.elige button[data-m="casa"]{background:#0f7a46!important;border-radius:4px!important}
+/* Páginas PAU */
+:root{--f-display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--f-body:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif}
+/* Entregas (portal.css): cabecera de papel en vez del degradado */
+body>.wrap>header{background:#fdfdfb!important;color:#1b2130!important;border:1.5px solid #1b2130;border-radius:4px!important;box-shadow:none!important}
+body>.wrap>header .lead,body>.wrap>header>div{color:#525b6c!important}
+body>.wrap>header h1 span{color:#1c3dc2!important}
