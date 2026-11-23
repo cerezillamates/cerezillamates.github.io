@@ -180,6 +180,34 @@
 .pl .pl-paso>*,.pl details.mas>.mb,.pl details.mas>.mb>*,.pl .two>*,.pl .tryit>*,.pl .esp>*,.pl li{min-width:0;max-width:100%}
 .pl details.mas>.mb{display:grid;grid-template-columns:minmax(0,1fr)}
 .pl .sit,.pl .esp{grid-template-columns:minmax(0,1fr)}.pl .sit>*{min-width:0}
-.pl .pl-bloque{display:block}.pl .m{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden}
+.pl .pl-bloque{display:block}
 .pl [style*="display:grid"]{grid-template-columns:minmax(0,1fr)}.pl [style*="display:grid"]>*{min-width:0;max-width:100%}
 .pl-sis{margin:.6rem 0}
+
+/* método: lo esencial a la vista, la consulta plegada */
+.pl .pl-lead{font-size:1.08rem;line-height:1.55;border-left:4px solid var(--azul);padding:.2rem 0 .2rem .9rem;margin:.4rem 0 1rem;color:var(--tinta)}
+.pl details.pl-consulta{border:1px solid var(--linea);border-radius:6px;background:#fff;margin:1.2rem 0}
+.pl details.pl-consulta>summary{cursor:pointer;padding:.7rem .9rem;font-weight:700;color:var(--tinta);list-style:none;display:flex;gap:.6rem;align-items:baseline}
+.pl details.pl-consulta>summary::-webkit-details-marker{display:none}
+.pl details.pl-consulta>summary::before{content:"▸";color:var(--azul);flex:none}
+.pl details.pl-consulta[open]>summary::before{content:"▾"}
+.pl .pl-consulta-et{flex:none;font:700 .7rem var(--f-titulo);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--tinta-2);padding:2px 7px;border-radius:4px}
+.pl .pl-consulta-c{padding:0 .9rem .9rem;display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+.pl .pl-consulta-c>h3:first-child{display:none}
+.pl ol.pl-resumen{display:grid;gap:8px;padding-left:1.4em;font-size:1.05rem}
+.pl .m .katex{white-space:nowrap}
+/* problemas tipo: siempre el mismo orden */
+.pl-tipo h3{font-size:1.02rem;margin:1.1rem 0 .4rem;color:var(--azul)}
+.pl ul.pl-preg{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.pl ul.pl-preg li{font-style:italic;color:var(--tinta);padding-left:.9rem;border-left:3px solid var(--linea)}
+.pl ol.pl-como{display:grid;gap:6px;padding-left:1.4em;margin:0}
+.pl .pl-resuelto{background:#fff;border:1px solid var(--linea);border-radius:6px;padding:.6rem 1rem;display:grid;gap:.4rem}
+.pl .pl-resuelto p{margin:0}
+.pl .pl-tipo .pl-escribe{margin:.9rem 0}
+.pl .pl-tipo .pl-escribe .say{margin:0;font-style:italic}
+.pl .pl-tipo .recuadro.fallo p{margin:0}
+.pl .pl-guia .formula{margin:.6rem 0}
+.pl .pl-resuelto{grid-template-columns:minmax(0,1fr)}
+.pl .pl-resuelto>*{min-width:0}
+.pl a.pl-ej{white-space:normal}
+.pl .pl-tipo p,.pl .pl-tipo li{overflow-wrap:anywhere}
