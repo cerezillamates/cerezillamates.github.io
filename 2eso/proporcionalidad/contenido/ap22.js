@@ -34,7 +34,10 @@ TEMA.registrar({
       {comp:{q:"Si te descuentan un 8 %, ¿qué porcentaje pagas?", opciones:["92 %","108 %","8 %"], ok:0, explic:"100 − 8 = 92 % (el índice es 0,92)", pista:"Del 100 % te quitan 8."}},
       {comp:{q:"¿Cuánto cuesta con el 21 % de IVA algo de 200 €?", sol:242, unidad:"€", explic:"200 · 1,21 = 242 €", pista:"Multiplica por 1,21."}},
       {comp:{q:"Con un 25 % de rebaja he pagado 60 €. ¿Cuánto costaba?", sol:80, unidad:"€", explic:"Pago el 75 %: 75 → 60; 100 → x = 100 · 60 : 75 = 80 €", pista:"Con la rebaja pagas el 75 %."}},
-      {comp:{q:"Subir un 10 % y después bajar un 10 % deja el precio igual.", opciones:VF, ok:1, explic:"Con 100 €: 100 · 1,10 = 110 € → 110 · 0,90 = 99 €. El índice total es 0,99: queda un 1 % más barato.", pista:"Prueba con 100 €."}}
+      {comp:{q:"Subir un 10 % y después bajar un 10 % deja el precio igual.", opciones:VF, ok:1, explic:"Con 100 €: 100 · 1,10 = 110 € → 110 · 0,90 = 99 €. El índice total es 0,99: queda un 1 % más barato.", pista:"Prueba con 100 €."}},
+      {comp:{q:"Unas zapatillas de 60 € tienen una rebaja del 20 % y después otra del 10 %. ¿Cuál es el precio final?", sol:43.2, unidad:"€", explic:"60 · 0,80 = 48 € → 48 · 0,90 = 43,20 €", pista:"Hacia delante: multiplica por cada índice (0,80 y 0,90)."}},
+      {comp:{q:"Una rebaja del 20 % y después otra del 30 % es, en total, una rebaja del:", opciones:["50 %","44 %","56 %"], ok:1, explic:"0,80 · 0,70 = 0,56 → pago el 56 % → baja un 44 %. Los % no se suman.", pista:"Multiplica los índices y mira cuánto falta para el 100 %."}},
+      {comp:{q:"Un precio baja un 10 % y después le añaden el 21 % de IVA. ¿Qué porcentaje sube en total?", sol:8.9, unidad:"%", explic:"0,90 · 1,21 = 1,089 → 108,9 % → sube un 8,9 % (no un 11 %)", pista:"Multiplica 0,90 por 1,21 y pásalo a %."}}
     ]},
     { titulo:"Interés y grifos", cuerpo:[
       {comp:{q:"¿Qué interés dan 1000 € al 3 % durante 2 años?", sol:60, unidad:"€", explic:"1 año: 0,03 · 1000 = 30 €. 2 años: 30 · 2 = 60 €", pista:"Primero el interés de 1 año: el 3 % de 1000 €."}},

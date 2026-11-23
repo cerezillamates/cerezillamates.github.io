@@ -44,7 +44,7 @@ TEMA.registrar({
       res:"Con IVA, el ordenador cuesta <b>1452 €</b>." },
     { nivel:"1,25 puntos", min:6,
       enun:"Un televisor de 325 € está rebajado un 25 %. Al pagar en caja nos añaden el 21 % de IVA. ¿Cuál es el precio final?",
-      pasos:[window.curvas(["325 €","243,75 €","294,94 €"],[{up:false,pct:"−25 %",idx:"0,75"},{up:true,pct:"+21 %",idx:"1,21"}],{dir:"F"}), R`Rebaja: $325 \cdot 0,75 = 243,75$ €`, R`IVA: $243,75 \cdot 1,21 \approx 294,94$ €`],
+      pasos:[window.curvas(["325 €","243,75 €","294,94 €"],[{up:false,pct:"−25 %",idx:"0,75"},{up:true,pct:"+21 %",idx:"1,21"}],{solo:"F"}), R`Rebaja: $325 \cdot 0,75 = 243,75$ €`, R`IVA: $243,75 \cdot 1,21 \approx 294,94$ €`],
       res:"El precio final del televisor es <b>294,94 €</b>." }
   ],
 

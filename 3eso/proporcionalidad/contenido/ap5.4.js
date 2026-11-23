@@ -1,4 +1,8 @@
-/* 3.º ESO · Tema 3 · Apartado 5.4: Porcentajes encadenados y ofertas. Se multiplican los índices; con el índice total, C_F = I_V · C_I (tipo 1, 2 o 3). */
+/* 3.º ESO · Tema 3 · Apartado 5.4: TIPO 4 · Porcentajes encadenados y ofertas. Se multiplican los índices; con el índice total, C_F = I_V · C_I (tipo 1, 2 o 3).
+   Revisión 23-11-2026 (petición de la profesora): es la AMPLIACIÓN de 2.º ESO. En 2.º solo se pide el precio final y el % de variación final;
+   en 3.º entran TODOS los casos: precio final, % de variación total, precio intermedio, precio inicial (hacia atrás: rebaja e IVA),
+   un % desconocido, qué % deshace un cambio, cambios repetidos, el orden da igual y ofertas.
+   Siempre: los % no se suman ni se restan. Los casos están en clase, casa, autoevaluación, batería (ap20 casa) y controles (ap20 y ap21). */
 (function(){
 const R = String.raw;
 // triángulo (solo como truco): C_F arriba; I_V × C_I abajo; tapa: "F", "I", "V" o ""
@@ -45,6 +49,15 @@ TEMA.registrar({
              R`Se han marchado: $1 - 0,80 = 0,20$ → $20\,\%$`,
              "¡No es el 25 %! El porcentaje de agosto se calcula sobre 150, no sobre 120."],
       res:"Se ha marchado el <b>20 %</b> de los participantes de julio." },
+    { nivel:"Práctica", min:6,
+      enun:"Has pagado 435,60 € por un patinete eléctrico que tenía una rebaja del 25 % y al que después han añadido el 21 % de IVA.<br><b>a)</b> ¿Cuál era el precio inicial?<br><b>b)</b> ¿Cuánto te has ahorrado con la rebaja? ¿Cuánto has pagado de IVA?",
+      pasos:[R`Rebaja del 25 %: $I_V = 1 - 0,25 = 0,75$`, R`IVA del 21 %: $I_V = 1 + 0,21 = 1,21$`,
+             R`Índice total: $I_V = 0,75 \cdot 1,21 = 0,9075$`,
+             R`<b>a)</b> Hacia atrás: $435,60 = 0,9075 \cdot x \;\Rightarrow\; x = \dfrac{435,60}{0,9075} = 480$ €`,
+             R`<b>b)</b> Precio rebajado: $0,75 \cdot 480 = 360$ € → ahorro $480 - 360 = 120$ €`,
+             R`IVA: $435,60 - 360 = 75,60$ € (es el 21 % de 360 €)`,
+             "¡No se resta el 4 % (25 − 21) a 435,60 €! Primero el índice total; después, una sola división."],
+      res:"a) El precio inicial era <b>480 €</b>.<br>b) Te has ahorrado <b>120 €</b> y has pagado <b>75,60 €</b> de IVA." },
     { nivel:"Problema", min:7,
       enun:"Los ingresos de una tienda suben un 20 % en octubre y un 30 % en noviembre, y bajan un 25 % en diciembre. En diciembre ingresa 14&nbsp;040 €.<br><b>a)</b> ¿Cuánto ingresaba en septiembre?<br><b>b)</b> ¿Cuánto ingresó en octubre?",
       pasos:[R`Octubre, sube un 20 %: $I_V = 1 + 0,20 = 1,20$`, R`Noviembre, sube un 30 %: $I_V = 1 + 0,30 = 1,30$`, R`Diciembre, baja un 25 %: $I_V = 1 - 0,25 = 0,75$`,
@@ -144,7 +157,18 @@ TEMA.registrar({
         pasos:[R`Sube un 20 %: $I_V = 1 + 0,20 = 1,20$`, R`Baja un 25 %: $I_V = 1 - 0,25 = 0,75$`, R`$I_V$ total $= 1,20 \cdot 0,75 = 0,90$`, R`$C_F = 0,90 \cdot 50 = 45$ €`],
         res:"Al final la mochila cuesta <b>45 €</b>."}},
       {html:flecha(["50 €","× 1,20","60 €","× 0,75","45 €"])},
-      {aviso:["<b>Los porcentajes NO se suman</b>: se multiplican los índices. Subir un 20 % y bajar un 25 % no es bajar un 5 %."]}
+      {aviso:["<b>Los porcentajes NO se suman ni se restan</b>: se multiplican los índices. Subir un 20 % y bajar un 25 % no es bajar un 5 %."]}
+    ]},
+    { titulo:"De 2.º a 3.º: todos los casos", cuerpo:[
+      {html:R`<table class="t tprop" style="font-size:.82em"><tr><th>Me dan…</th><th>Me piden…</th><td><b>Qué hago</b></td></tr>
+        <tr><th>el precio inicial y los %</th><th>el precio final</th><td>$C_F = I_V \cdot C_I$ con el índice total (2.º)</td></tr>
+        <tr><th>los %</th><th>el % de variación total</th><td>índice total: mayor que 1 sube, menor que 1 baja (2.º)</td></tr>
+        <tr><th>el precio final y los %</th><th>el precio inicial</th><td>hacia atrás: $C_I = C_F : I_V$, una sola división</td></tr>
+        <tr><th>el precio final y los %</th><th>un precio intermedio</th><td>primero el inicial; después, hacia delante</td></tr>
+        <tr><th>los dos precios y un %</th><th>el otro %</th><td>el precio intermedio y después el tipo 3</td></tr>
+        <tr><th>un % de subida</th><th>qué rebaja lo deshace</th><td>$I_V \cdot x = 1 \Rightarrow x = 1 : I_V$</td></tr>
+        <tr><th>el mismo % varias veces</th><th>el final</th><td>el índice multiplicado tantas veces como cambios</td></tr>
+        <tr><th>una oferta (3x2, 2.ª unidad…)</th><th>el descuento real</th><td>la parte que pago de lo que me llevo es el índice</td></tr></table>`},
     ]},
     { titulo:"Encadenados con IVA", cuerpo:[
       {ej:{etq:"🧾", enun:"Una factura de 350 € tiene un 20 % de descuento y después hay que añadir el 21 % de IVA. ¿Cuánto se paga?",
@@ -155,12 +179,21 @@ TEMA.registrar({
       {ej:{etq:"🎒", enun:"Una mochila sube un 20 % y después la rebajan un 25 %. ¿Cuánto ha cambiado en total?",
         pasos:[R`Índice total: $I_V = 1,20 \cdot 0,75 = 0,90$`, R`Menor que 1: baja $1 - 0,90 = 0,10$ → $10\,\%$`],
         res:"En total la mochila ha <b>bajado un 10 %</b>."}},
-      {aviso:["<b>Los porcentajes NO se suman</b>: subir un 20 % y bajar un 25 % no es bajar un 5 %."]}
+      {aviso:["<b>Los porcentajes NO se suman ni se restan</b>: subir un 20 % y bajar un 25 % no es bajar un 5 %."]}
     ]},
     { titulo:"Hacia atrás con porcentajes encadenados", cuerpo:[
       {ej:{etq:"📺", enun:"Pagamos 290,40 € por una tele con un 20 % de rebaja y el 21 % de IVA. ¿Cuál era el precio inicial?",
         pasos:[R`$I_V = 0,80 \cdot 1,21 = 0,968$`, R`$290,40 = 0,968 \cdot x$ ⇒ $x = \dfrac{290,40}{0,968} = 300$ €`], res:"El precio inicial era <b>300 €</b>."}},
       {nota:["Primero el índice total multiplicando; después, una sola división."]}
+    ]},
+    { titulo:"Un porcentaje desconocido", cuerpo:[
+      {ej:{etq:"👕", enun:"Una camiseta costaba 25 €. La subieron y después, en rebajas, la bajaron un 20 %. Ahora cuesta 24 €. ¿Qué porcentaje la habían subido?",
+        pasos:[R`Precio antes de las rebajas (hacia atrás): $24 = 0,80 \cdot x \Rightarrow x = 30$ €`,
+               R`De 25 € a 30 € (tipo 3): $30 = x \cdot 25 \Rightarrow x = 1,20$ → sube $20\,\%$`],
+        res:"La habían subido un <b>20 %</b>."}},
+      {ej:{etq:"↩️ Deshacer un cambio", enun:"Un precio ha subido un 25 %. ¿Qué rebaja lo deja como estaba?",
+        pasos:[R`$1,25 \cdot x = 1 \Rightarrow x = \dfrac{1}{1,25} = 0,80$ → rebaja del $20\,\%$, no del $25\,\%$`],
+        res:"Hace falta una rebaja del <b>20 %</b>."}}
     ]},
     { titulo:"🏷 ¿Cuánto descuento es de verdad una oferta?", cuerpo:[
       {cols:[
@@ -177,17 +210,22 @@ TEMA.registrar({
     ]},
     { titulo:"⚠️ Errores típicos", cuerpo:[
       {aviso:["<b>Sumar los porcentajes encadenados</b>: subir un 20 % y bajar un 25 % no es bajar un 5 %. Se multiplican los índices."], etq:"⚠️ Error 1"},
-      {aviso:["<b>Calcular el segundo % sobre la cantidad del principio</b>: cada cambio se hace sobre lo que queda."], etq:"⚠️ Error 2"},
-      {aviso:["<b>Creer que «2.ª unidad al 50 %» es un 50 % de descuento</b>: es un 25 %."], etq:"⚠️ Error 3"}
+      {aviso:["<b>Restar los porcentajes</b>: una rebaja del 25 % y el 21 % de IVA no es una rebaja del 4 %: $0,75 \\cdot 1,21 = 0,9075$ → baja un 9,25 %."], etq:"⚠️ Error 2"},
+      {aviso:["<b>Calcular el segundo % sobre la cantidad del principio</b>: cada cambio se hace sobre lo que queda."], etq:"⚠️ Error 3"},
+      {aviso:["<b>Ir hacia atrás restando o sumando el %</b>: para volver al precio inicial se divide entre el índice total."], etq:"⚠️ Error 4"},
+      {aviso:["<b>Creer que «2.ª unidad al 50 %» es un 50 % de descuento</b>: es un 25 %."], etq:"⚠️ Error 5"}
     ]},
     { titulo:"📝 Resumen", cuerpo:[
       {resumen:[{formula:R`I_V = I_{V_1} \cdot I_{V_2} \cdot I_{V_3} \cdots`},
         {lista:["Encadenados: primero, el índice de cada cambio; después, el índice total multiplicando.",
                 R`Con el índice total, la misma fórmula $C_F = I_V \cdot C_I$ (tipo 1, 2 o 3).`,
+                "Hacia atrás (precio inicial): divido entre el índice total.",
+                "Los % encadenados no se suman ni se restan.",
                 "Ofertas: qué parte pago de lo que me llevo es el índice."]}]},
       {estudio:[
         {comp:{q:"Sube un 10 % y luego otro 10 %. ¿Cuánto sube en total (%)?", sol:21, unidad:"%", explic:R`$1,10 \cdot 1,10 = 1,21$ → sube un 21 %`, pista:"Multiplica los índices."}},
         {comp:{q:"Un precio de 80 € baja un 10 % y después otro 10 %. ¿Precio final?", sol:64.8, unidad:"€", explic:R`$0,90 \cdot 0,90 \cdot 80 = 64,80$ €`, pista:"Multiplica los índices."}},
+        {comp:{q:"Pagas 96,80 € con una rebaja del 20 % y el 21 % de IVA. ¿Precio inicial?", sol:100, unidad:"€", explic:R`$0,80 \cdot 1,21 = 0,968$ → $96,80 : 0,968 = 100$ €`, pista:"Índice total y una sola división."}},
         {comp:{q:"¿Qué % de descuento es «llévate 4 y paga 3»?", sol:25, unidad:"%", explic:R`$3 = x \cdot 4 \Rightarrow x = 0,75$ → baja un 25 %`, pista:"¿Qué parte pagas?"}}
       ]}
     ]}
