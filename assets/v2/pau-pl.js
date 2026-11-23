@@ -160,7 +160,7 @@ function arranca(){
   const rep = $("[data-repaso-pl]");
   if(rep){
     const sel = $("#rep-seleccion");
-    if(sel) sel.innerHTML = SEL.map((b, i) => `<li class="pau-bloque"><h3>${i+1}. ${esc(b.t)}</h3><p class="pau-ayuda">${esc(b.d)}</p>
+    if(sel) sel.innerHTML = SEL.map((b, i) => `<li class="pau-bloque"><h3>${esc(b.t)}</h3><p class="pau-ayuda">${esc(b.d)}</p>
       <ol class="pau-lista">${b.x.map(x => { const e = POR.get(x.n); return e ? `<li class="pau-item" data-n="${e.n}"><p class="pau-porque"><b>Por qué este:</b> ${x.por}</p>${ficha(e)}<details class="sol"><summary>Resultado</summary><div class="dentro">${x.res}</div></details></li>` : ""; }).join("")}</ol></li>`).join("");
     LISTA_ACTUAL = SEL.flatMap(b => b.x.map(x => x.n));
     const sig = $("#rep-siguiente");
