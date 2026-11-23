@@ -211,3 +211,4 @@
 .pl .pl-resuelto>*{min-width:0}
 .pl a.pl-ej{white-space:normal}
 .pl .pl-tipo p,.pl .pl-tipo li{overflow-wrap:anywhere}
+.pl .pl-consulta-c .tryit{grid-template-columns:minmax(0,1fr)!important}.pl .pl-consulta-c svg.plot{max-width:480px}
