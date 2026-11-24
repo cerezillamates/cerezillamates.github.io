@@ -102,7 +102,7 @@ function dibuja(svg, cfg, S, k){
 function monta(root){
   let cfg = JSON.parse(root.dataset.pllab || '{}');
   cfg.r = cfg.r || [[2, 3, '<=', 60], [2, 1, '>=', 28]]; cfg.f = cfg.f || [4, 6, 0]; cfg.obj = cfg.obj || 'max';
-  root.innerHTML = `<header><h3>Laboratorio de programación lineal</h3><p>Escribe las restricciones y la función objetivo. El laboratorio dibuja la región, calcula los vértices y el valor de F en cada uno.</p></header>
+  root.innerHTML = `<header><h3>Dibuja la región</h3><p>Escribe las restricciones y la función objetivo. El laboratorio dibuja la región, calcula los vértices y el valor de F en cada uno.</p></header>
   <div class="pl-lab-cuerpo"><div class="pl-lab-datos">
     <p class="pl-lab-t">Restricciones</p><div class="pl-lab-rs"></div>
     <p class="pl-lab-bot"><button type="button" class="boton fino" data-mas>+ restricción</button> <label><input type="checkbox" data-pos ${cfg.pos === false ? '' : 'checked'}> x ≥ 0, y ≥ 0</label></p>
@@ -110,7 +110,7 @@ function monta(root){
     <p class="pl-lab-f">F(x, y) = <input type="number" step="any" data-f="0" value="${cfg.f[0]}" aria-label="coeficiente de x"> x + <input type="number" step="any" data-f="1" value="${cfg.f[1]}" aria-label="coeficiente de y"> y + <input type="number" step="any" data-f="2" value="${cfg.f[2] || 0}" aria-label="número suelto">
       <select data-obj aria-label="maximizar o minimizar"><option value="max">máximo</option><option value="min">mínimo</option></select></p>
   </div>
-  <div class="pl-lab-graf"><svg class="plot" viewBox="0 0 400 330" role="img" aria-label="Región factible del laboratorio"></svg>
+  <div class="pl-lab-graf"><svg class="plot" viewBox="0 0 400 330" role="img" aria-label="Región factible dibujada"></svg>
     <p class="pl-lab-k"><label>Recta F(x, y) = k: <input type="range" data-k></label> <output data-ko></output> <button type="button" class="boton fino" data-opt>En el valor óptimo</button></p></div></div>
   <div class="pl-lab-sal" aria-live="polite"></div>`;
   const rs = root.querySelector('.pl-lab-rs'), svg = root.querySelector('svg'), sal = root.querySelector('.pl-lab-sal'), K = root.querySelector('[data-k]'), KO = root.querySelector('[data-ko]');
