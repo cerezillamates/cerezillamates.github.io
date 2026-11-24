@@ -797,3 +797,9 @@ html.pau-proyectando{overflow:hidden}
 .pau-filtros-d>summary{cursor:pointer;font:700 1rem var(--f-titulo);color:var(--azul);padding:6px 0}
 #v-lista>.pau-fila{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 0 12px;border-bottom:1px solid var(--linea);margin:0 0 6px}
 .pp-cuerpo{font-size:clamp(1.15rem,2.1vw,1.9rem);line-height:1.5}
+
+/* Ejemplo dentro de un recuadro de teoría (la profesora: siempre un ejemplo para poder explicarlo; de PAU si lo hay) */
+.recuadro .ej{margin-top:12px;padding-top:10px;border-top:1px dashed var(--cuadro-fuerte)}
+.recuadro .ej .ej-t{display:block;font:600 .8rem var(--f-texto);letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:4px}
+.recuadro .ej p{margin:.35em 0}
+.recuadro .ej .fuente{font-size:.85em;color:var(--tinta-2)}
