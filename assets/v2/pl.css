@@ -265,3 +265,7 @@
 @media (max-width:520px){.pl-lab-r{flex-wrap:wrap}.pl-lab input[type=number]{width:3.1em}.pl-lab-cuerpo{padding:10px}.pl-lab-k input[type=range]{width:130px}}
 main .katex-display{overflow-x:auto;overflow-y:hidden;max-width:100%}
 .hojaex .tw,.mano .tw{max-width:100%;overflow-x:auto}
+/* Tablas de valores de F: nunca se parte una fórmula; en el móvil, letra más pequeña y, si no cabe, se desliza */
+.pl .tabla-desliza{overflow-x:auto;max-width:100%}
+.pl table.hwt.tv td,.pl table.hwt.tv th{white-space:nowrap}
+@media (max-width:600px){.pl table.hwt.tv{font-size:.86rem}.pl table.hwt.tv th,.pl table.hwt.tv td{padding:3px 4px}.pl table.hwt.tv .opt{display:block}}
