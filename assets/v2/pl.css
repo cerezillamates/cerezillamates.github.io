@@ -78,7 +78,7 @@
 .pl table.hwt th,.pl table.hwt td{border:1.5px solid var(--pen);padding:3px 10px;text-align:left;vertical-align:top}
 .pl table.hwt.tv th,.pl table.hwt.tv td{text-align:center}
 .pl .hw table.hwt{margin:2px 0 4px}
-.pl .hwres{font-size:1.5rem;font-weight:700;line-height:1.2;border:2.5px solid var(--pen);border-radius:14px 10px 16px 9px;padding:6px 12px;margin:2px 0;justify-self:start}
+.pl .hwres{font-size:1.5rem;font-weight:700;line-height:1.2;border:0;border-bottom:4px double var(--pen);padding:2px 0 3px;margin:2px 0;justify-self:start}
 .pl svg.solplot{max-width:520px}
 .pl .hw.rcts{display:flex;flex-wrap:wrap;gap:6px 34px;align-items:flex-start}
 .pl table.hwt.tv{min-width:7.5em}
