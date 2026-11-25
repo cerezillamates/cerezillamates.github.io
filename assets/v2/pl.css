@@ -269,3 +269,5 @@ main .katex-display{overflow-x:auto;overflow-y:hidden;max-width:100%}
 .pl .tabla-desliza{overflow-x:auto;max-width:100%}
 .pl table.hwt.tv td,.pl table.hwt.tv th{white-space:nowrap}
 @media (max-width:600px){.pl table.hwt.tv{font-size:.86rem}.pl table.hwt.tv th,.pl table.hwt.tv td{padding:3px 4px}.pl table.hwt.tv .opt{display:block}}
+.pl table.hwt.vs td{white-space:nowrap}
+@media (max-width:600px){.pl table.hwt.vs{font-size:.74rem}.pl table.hwt.vs th,.pl table.hwt.vs td{padding:3px 3px}}
