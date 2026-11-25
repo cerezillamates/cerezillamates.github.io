@@ -127,10 +127,10 @@ h4{font-size:1.06rem}
 .tenue{color:var(--tinta-2)}
 kbd{font:600 .85em var(--f-texto);border:1px solid var(--cuadro-fuerte);border-bottom-width:2px;border-radius:3px;padding:0 5px;background:#fff}
 
-/* Fórmula destacada: cada una en su propio cuadro, nunca encadenadas con «·» */
-.formula{margin:14px 0 18px;padding:12px 16px;border:1.5px solid var(--cuadro-fuerte);border-radius:var(--radio);background:#fff;overflow-x:auto;text-align:center}
+/* Fórmula destacada: centrada y con aire, SIN cuadro (la profesora: «los cuadritos parecen IA»). Nunca encadenadas con «·» */
+.formula{margin:14px 0 18px;padding:6px 0;border:0;border-radius:0;background:transparent;overflow-x:auto;text-align:center}
 .formula .katex-display{margin:0}
-.formulas{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:12px 0 18px}
+.formulas{display:grid;gap:4px 24px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:12px 0 18px}
 .formulas .formula{margin:0}
 
 /* ---------- Los tres recuadros (sin sombra, raya a la izquierda) ---------- */
@@ -371,7 +371,7 @@ a.parada:hover{background:var(--azul-claro)}
 }
 /* Funciones a trozos: versión apilada en pantallas estrechas */
 .f-estrecha{display:none}
-@media (max-width:600px){ .f-ancha{display:none}.f-estrecha{display:block} .formula{padding:10px 8px} }
+@media (max-width:600px){ .f-ancha{display:none}.f-estrecha{display:block} .formula{padding:6px 0} }
 .formula{scrollbar-width:thin}
 .tabla .katex{white-space:nowrap}
 /* Mandos de los laboratorios que no desbordan */
@@ -797,3 +797,9 @@ html.pau-proyectando{overflow:hidden}
 .pau-filtros-d>summary{cursor:pointer;font:700 1rem var(--f-titulo);color:var(--azul);padding:6px 0}
 #v-lista>.pau-fila{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 0 12px;border-bottom:1px solid var(--linea);margin:0 0 6px}
 .pp-cuerpo{font-size:clamp(1.15rem,2.1vw,1.9rem);line-height:1.5}
+
+/* Ejemplo dentro de un recuadro de teoría (la profesora: siempre un ejemplo para poder explicarlo; de PAU si lo hay) */
+.recuadro .ej{margin-top:12px;padding-top:10px;border-top:1px dashed var(--cuadro-fuerte)}
+.recuadro .ej .ej-t{display:block;font:600 .8rem var(--f-texto);letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:4px}
+.recuadro .ej p{margin:.35em 0}
+.recuadro .ej .fuente{font-size:.85em;color:var(--tinta-2)}
