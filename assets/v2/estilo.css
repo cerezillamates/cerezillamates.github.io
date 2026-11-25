@@ -804,3 +804,12 @@ html.pau-proyectando{overflow:hidden}
 .recuadro .ej .ej-t{display:block;font:600 .8rem var(--f-texto);letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:4px}
 .recuadro .ej p{margin:.35em 0}
 .recuadro .ej .fuente{font-size:.85em;color:var(--tinta-2)}
+
+/* Ejemplo plegado: no se ve hasta que se abre, para que la teoría quede limpia */
+details.ej>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;font:600 .8rem var(--f-texto);letter-spacing:.04em;text-transform:uppercase;color:var(--azul);padding:2px 0}
+details.ej>summary::-webkit-details-marker{display:none}
+details.ej>summary::before{content:"";width:0;height:0;border-left:6px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ej[open]>summary::before{transform:rotate(90deg)}
+details.ej[open]>summary{margin-bottom:4px}
+.recuadro .ej .fuente a{color:var(--azul)}
+.pau-volver a{font-size:1.05rem}

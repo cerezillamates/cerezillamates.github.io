@@ -177,7 +177,10 @@ function arranca(){
   document.addEventListener("click", ev => { const b = ev.target.closest("#v-tabla [data-res]"); if(!b) return; resalte = resalte === b.dataset.res ? null : b.dataset.res; aplicaResalte(); });
   let SUBRAYA = false;
   $("#pau-subraya").addEventListener("click", ev => { SUBRAYA = !SUBRAYA; ev.currentTarget.setAttribute("aria-pressed", String(SUBRAYA)); $("#v-tabla").classList.toggle("subrayando", SUBRAYA); });
-  let VOLVER = "#lista", RECUERDA = null;
+  let VOLVER = "#lista", RECUERDA = null, DESDE = null;
+  /* Si se llega desde un ejemplo de los apuntes (selectividad.html?desde=limites&ej=ej-1#e14), la flecha vuelve a ese ejemplo */
+  try{ const q = new URLSearchParams(location.search), d = q.get("desde"), j = q.get("ej") || "";
+    if(/^[a-z0-9-]+$/.test(d || "") && /^[a-z0-9-]*$/.test(j)) DESDE = d + ".html" + (j ? "#" + j : ""); }catch(e){}
   $("#pau-tablas").addEventListener("click", ev => {
     const c = ev.target.closest(".pau-chip[data-n]"); if(!c) return;
     const n = +c.dataset.n;
@@ -252,7 +255,8 @@ function arranca(){
     const i = lista.indexOf(n), ant = lista[i-1], sig = lista[i+1];
     const pon = (el, m) => { el.hidden = !m; if(m){ const x = POR.get(m); el.href = "#e" + m; el.querySelector("b").textContent = `nº ${m} · ${titulo(x)}`; } };
     pon($("#pau-ant"), ant); pon($("#pau-sig"), sig);
-    $("#pau-volver").href = VOLVER; $("#pau-volver").textContent = VOLVER === "#lista" ? "← Volver a la lista" : "← Volver a la tabla";
+    if(DESDE){ $("#pau-volver").href = DESDE; $("#pau-volver").textContent = "← Volver a los apuntes"; }
+    else { $("#pau-volver").href = VOLVER; $("#pau-volver").textContent = VOLVER === "#lista" ? "← Volver a la lista" : "← Volver a la tabla"; }
     document.title = `nº ${e.n} · ${titulo(e)} · Selectividad de Análisis`;
   }
 

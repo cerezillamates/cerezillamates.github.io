@@ -262,7 +262,7 @@ function puentes(){
 document.addEventListener("DOMContentLoaded", ()=>{
   formulas(document.body);
   ejemplos();
-  if(location.hash){ const ancla = () => { const d = document.getElementById(location.hash.slice(1)); if(d) d.scrollIntoView({block:"start"}); };
+  if(location.hash){ const ancla = () => { const d = document.getElementById(location.hash.slice(1)); if(d){ if(d.tagName === "DETAILS") d.open = true; d.scrollIntoView({block:"start"}); } };
     document.addEventListener("lab:listo", ancla, true); addEventListener("load", ()=>setTimeout(ancla, 50)); }
   const q = new URLSearchParams(location.search).get("pasos"), dest = location.hash && document.getElementById(location.hash.slice(1));
   if(q && dest && dest._pon){ dest._pon(+q); requestAnimationFrame(()=>dest.scrollIntoView({block:"start"})); }
