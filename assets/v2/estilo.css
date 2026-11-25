@@ -475,7 +475,7 @@ details.sol>summary{padding:6px 0}
 .mano .signos td{border:1.4px solid var(--tinta-boli);padding:0 12px;text-align:center;line-height:1.8rem}
 .mano .hoja-graf{margin:4px 0 8px;max-width:520px}
 /* las fórmulas, también a mano */
-.mano .katex{font-size:1.06em;color:var(--tinta-boli)}
+.mano .katex{font-size:1.06em;color:var(--tinta-boli);white-space:nowrap} /* una fórmula nunca se parte en dos líneas */
 .mano .katex .mathnormal,.mano .katex .mord,.mano .katex .mbin,.mano .katex .mpunct,
 .mano .katex .mopen,.mano .katex .mclose,.mano .katex .mop,.mano .katex .mathrm,.mano .katex .text,.mano .katex .textrm{
   font-family:"Kalam","Segoe Print",cursive;font-style:normal}
