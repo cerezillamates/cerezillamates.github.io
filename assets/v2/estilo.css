@@ -466,7 +466,7 @@ details.sol>summary{padding:6px 0}
     repeating-linear-gradient(transparent 0 calc(2rem - 1px),#dfe6f1 calc(2rem - 1px) 2rem);
   background-position:0 0,0 14px}
 .mano .r{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,210px);gap:0 22px;align-items:start}
-.mano .r>p,.mano .r>table,.mano .r>figure{grid-column:1;margin:0 0 .25rem}
+.mano .r>p,.mano .r>table,.mano .r>figure,.mano .r>.tabla-desliza{grid-column:1;margin:0 0 .25rem}
 .mano .r>p b{font-weight:700;color:var(--tinta-boli)}
 .mano .anota{grid-column:2;font:400 1.3rem/1.15 var(--f-mano);color:var(--rojo);position:relative;padding-left:14px;margin-top:4px;transform:rotate(-1.2deg)}
 .mano .anota::before{content:"";position:absolute;left:0;top:.45em;width:9px;height:9px;border-left:2px solid var(--rojo);border-bottom:2px solid var(--rojo);transform:rotate(45deg)}
