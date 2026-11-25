@@ -814,3 +814,5 @@ details.ej[open]>summary{margin-bottom:4px}
 .recuadro .ej .fuente a{color:var(--azul)}
 .pau-volver a{font-size:1.05rem}
 .recuadro .ej .katex{white-space:nowrap}
+.ej .v-movil{display:none}
+@media (max-width:640px){.ej .v-ancho{display:none}.ej .v-movil{display:block}}
