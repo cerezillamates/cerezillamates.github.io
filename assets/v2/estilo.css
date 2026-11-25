@@ -470,7 +470,8 @@ details.sol>summary{padding:6px 0}
 .mano .r>p b{font-weight:700;color:var(--tinta-boli)}
 .mano .anota{grid-column:2;font:400 1.3rem/1.15 var(--f-mano);color:var(--rojo);position:relative;padding-left:14px;margin-top:4px;transform:rotate(-1.2deg)}
 .mano .anota::before{content:"";position:absolute;left:0;top:.45em;width:9px;height:9px;border-left:2px solid var(--rojo);border-bottom:2px solid var(--rojo);transform:rotate(45deg)}
-.mano .res{display:inline-block;max-width:100%;padding:1px 6px 2px;line-height:1.75rem;border:1.6px solid var(--tinta-boli);border-radius:3px 7px 4px 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+/* Resultado: subrayado doble a boli, sin cuadro (la profesora: los cuadros azules se ven muy mal) */
+.mano .res{display:inline;padding:0;border:0;text-decoration:underline double var(--tinta-boli);text-decoration-thickness:1.4px;text-underline-offset:4px;text-decoration-skip-ink:none}
 .mano .signos{border-collapse:collapse;margin:4px 0 6px;font-size:1.02rem}
 .mano .signos td{border:1.4px solid var(--tinta-boli);padding:0 12px;text-align:center;line-height:1.8rem}
 .mano .hoja-graf{margin:4px 0 8px;max-width:520px}
@@ -587,7 +588,7 @@ body.inicio .hoja{max-width:1320px}
 .hm-graf{width:58%!important;margin-left:54px}
 .mesa{min-height:600px}
 .postit{bottom:-30px}
-.hoja-mesa .mano .res{border:1.6px solid #1f3aa8;display:inline-block;padding:0 6px;border-radius:3px 7px 4px 6px}
+.hoja-mesa .mano .res{border:0;display:inline;padding:0;text-decoration:underline double #1f3aa8;text-underline-offset:4px}
 /* Objetivos y consejos */
 .objetivos{margin:18px 0 0;font-size:1rem}
 .objetivos b{font-family:var(--f-titulo)}
@@ -803,3 +804,13 @@ html.pau-proyectando{overflow:hidden}
 .recuadro .ej .ej-t{display:block;font:600 .8rem var(--f-texto);letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-2);margin-bottom:4px}
 .recuadro .ej p{margin:.35em 0}
 .recuadro .ej .fuente{font-size:.85em;color:var(--tinta-2)}
+
+/* Ejemplo plegado: no se ve hasta que se abre, para que la teoría quede limpia */
+details.ej>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;font:600 .8rem var(--f-texto);letter-spacing:.04em;text-transform:uppercase;color:var(--azul);padding:2px 0}
+details.ej>summary::-webkit-details-marker{display:none}
+details.ej>summary::before{content:"";width:0;height:0;border-left:6px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent;transition:transform .15s}
+details.ej[open]>summary::before{transform:rotate(90deg)}
+details.ej[open]>summary{margin-bottom:4px}
+.recuadro .ej .fuente a{color:var(--azul)}
+.pau-volver a{font-size:1.05rem}
+.recuadro .ej .katex{white-space:nowrap}
