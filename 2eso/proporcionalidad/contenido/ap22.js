@@ -39,10 +39,10 @@ TEMA.registrar({
       {comp:{q:"Una rebaja del 20 % y después otra del 30 % es, en total, una rebaja del:", opciones:["50 %","44 %","56 %"], ok:1, explic:"Con 100 €: 100 − 20 = 80 €; 30 % de 80 = 24 → 80 − 24 = 56 €. Baja 44 € de 100 € → 44 %. Los % no se suman.", pista:"Pruébalo con 100 €."}},
       {comp:{q:"Un precio de 100 € baja un 10 % y después le añaden el 21 % de IVA. ¿Qué porcentaje sube en total?", sol:8.9, unidad:"%", explic:"100 − 10 = 90 €; 21 % de 90 = 18,90 → 90 + 18,90 = 108,90 €. Sube 8,90 € de 100 € → 8,9 % (no un 11 %)", pista:"El IVA se calcula sobre 90 €."}}
     ]},
-    { titulo:"Interés y grifos", cuerpo:[
+    { titulo:"Interés simple", cuerpo:[
       {comp:{q:"¿Qué interés dan 1000 € al 3 % durante 2 años?", sol:60, unidad:"€", explic:"1 año: 0,03 · 1000 = 30 €. 2 años: 30 · 2 = 60 €", pista:"Primero el interés de 1 año: el 3 % de 1000 €."}},
-      {comp:{q:"Dos grifos iguales tardan cada uno 2 h en llenar un depósito. ¿Cuántas horas tardan juntos?", sol:1, unidad:"h", explic:"½ + ½ = 1 → 1 hora", pista:"Suma lo que llena cada uno en 1 hora."}},
-      {comp:{q:"Un grifo llena un depósito en 2 h y el desagüe lo vacía en 6 h. ¿Cuántas horas tarda en llenarse?", sol:3, unidad:"h", explic:"1/2 − 1/6 = 2/6 = 1/3 → 3 horas", pista:"El desagüe resta; después, la vuelta."}}
+      {comp:{q:"Dejo 2000 € al 4 % durante 3 años. ¿Cuánto dinero tendré al final?", sol:2240, unidad:"€", explic:"1 año: 0,04 · 2000 = 80 €. 3 años: 80 · 3 = 240 €. Capital final: 2000 + 240 = 2240 €", pista:"Capital final = capital + interés."}},
+      {comp:{q:"Pido 1200 € al 5 % durante 6 meses. ¿Cuánto devuelvo?", sol:1230, unidad:"€", explic:"1 año: 0,05 · 1200 = 60 €. 1 mes: 60 : 12 = 5 €. 6 meses: 5 · 6 = 30 €. Devuelvo 1200 + 30 = 1230 €", pista:"El interés de 1 año entre 12, por 6, y lo sumo a lo que pedí."}}
     ]}
   ]
 });

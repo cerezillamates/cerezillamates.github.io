@@ -14,7 +14,8 @@ TEMA.info = {
     {num:"6.2", ico:"➗", corto:"Tipo 2", grupo:"6. Porcentajes", tipo:"Tipo 2", titulo:"Calcular el total", desc:"Dado el precio rebajado, el descuento, el IVA o el precio con IVA: regla de tres, porque el total es el 100 %.", listo:true},
     {num:"6.3", ico:"🔍", corto:"Tipo 3", grupo:"6. Porcentajes", tipo:"Tipo 3", titulo:"Calcular el %", desc:"Qué % es una parte, o cuánto ha subido o bajado: la parte entre el total, por 100 (o regla de tres).", listo:true},
     {num:"6.4", ico:"🔗", corto:"Tipo 4", grupo:"6. Porcentajes", tipo:"Tipo 4", titulo:"Porcentajes encadenados", desc:"Varios descuentos o incrementos seguidos: el precio final y el % de variación final, con flechas. Los % no se suman ni se restan: se multiplican los índices.", listo:true},
-    {num:7, ico:"🏦", corto:"Interés", titulo:"Interés simple", desc:"El interés de 1 año es el % del capital (multiplico) y después lo multiplico por el tiempo.", listo:true},
-    {num:8, ico:"🚰", corto:"Grifos", titulo:"Grifos y trabajo en común", desc:"Grifos, desagües y trabajos que se hacen entre varios.", listo:true}
+    {num:7, ico:"🏦", corto:"Interés", titulo:"Interés simple", desc:"Calcular el interés y el capital final: el interés de 1 año es el % del capital (multiplico), después lo multiplico por el tiempo y lo sumo al capital.", listo:true}
+    /* 26-11-2026: «Grifos y trabajo en común» (ap8.js) y «Interés: rédito, capital y tiempo» (ap25.js) pasan a AMPLIACIÓN:
+       se enlazan desde la pestaña «Ampliación y retos» de index.html */
   ]
 };

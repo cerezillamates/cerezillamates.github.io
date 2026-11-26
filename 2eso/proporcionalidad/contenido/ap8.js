@@ -1,6 +1,8 @@
 /* 2.º ESO · Tema 3 · Apartado 8: Grifos y trabajo en común
    Apuntes de la web de la profesora: ¿qué parte llena cada uno en 1 hora? 1/a + 1/b (el desagüe resta)
-   y al final se le da la vuelta. Decisión de la profesora (11-nov-2026): los MÓVILES se dejan para el tema de álgebra. */
+   y al final se le da la vuelta. Decisión de la profesora (11-nov-2026): los MÓVILES se dejan para el tema de álgebra.
+   Decisión de la profesora (26-11-2026): GRIFOS pasa a AMPLIACIÓN (no entra en el control). Se quita de la lista de apartados (info.js)
+   y se enlaza desde la pestaña «Ampliación y retos» del índice. */
 (function(){
 const R = String.raw;
 // depósito dividido en n partes; llenas = [nº partes de A, nº partes de B]
@@ -11,7 +13,7 @@ const deposito = (n, llenas, pie) => {
   return `<figure class="dib"><svg viewBox="0 0 180 230" role="img" aria-label="Depósito dividido en ${n} partes">${s}<rect x="30" y="10" width="120" height="200" fill="none" stroke="#1e1b3a" stroke-width="4"/></svg>${pie?`<figcaption>${pie}</figcaption>`:""}</figure>`;
 };
 TEMA.registrar({
-  num: 8,
+  num: "★", pref: "★", seccion: "Ampliación",
   titulo: "Grifos y trabajo en común",
   videos: [
     {t:"Problema de grifos: dos grifos llenando un depósito", url:"https://www.youtube.com/results?search_query=problema+de+grifos+dos+grifos+llenan+deposito"}
@@ -65,7 +67,7 @@ TEMA.registrar({
 
   laminas: [
     { portada:true, cuerpo:[
-      {html:`<p class="gancho">Si dos grifos llenan juntos, ¿tardan más o menos?</p>`}
+      {html:`<p class="gancho">⭐ Ampliación · Si dos grifos llenan juntos, ¿tardan más o menos?</p>`}
     ]},
 
     { titulo:"Dos grifos juntos", cuerpo:[

@@ -4,9 +4,8 @@
      Paso 1: el interés de 1 año es calcular un % (tipo 1): el % en decimal por el capital (0,03 · 2000).
      Paso 2: se multiplica por el tiempo (años). En meses: 1 año = 12 meses (el de 1 mes es el de 1 año : 12);
              en días: 1 año = 360 días.
-   Para buscar el rédito: el interés de 1 año y el % con la fórmula del tipo 3 (parte : total · 100).
-   Para buscar el capital: el interés de 1 año es el r % del capital → tipo 2 (regla de tres con el 100 %).
-   Para buscar el tiempo: cuántas veces cabe el interés de 1 año. */
+   Cambio pedido por la profesora (26-11-2026): en este apartado SOLO problemas de calcular el INTERÉS y el CAPITAL FINAL.
+     Buscar el rédito, el capital o el tiempo pasa a AMPLIACIÓN (contenido/ap25.js), sin borrar nada. */
 (function(){
 const R = String.raw;
 const cuadro = (m1, m2, a, b, t) => `<table class="t cuadro"><tr><th>${m1}</th><th class="fl">(${t||"D"}) ⟶</th><th>${m2}</th></tr><tr><td>${a[0]}</td><td></td><td>${a[1]}</td></tr><tr><td>${b[0]}</td><td></td><td class="x">${b[1]}</td></tr></table>`;
@@ -22,37 +21,37 @@ TEMA.registrar({
       pasos:["<b>Paso 1. Lo que me da el banco en 1 año</b>: el 3 % de 2000 € (tipo 1, multiplico).",
              R`$0,03 \cdot 2000 = 60$ € cada año`,
              "<b>Paso 2. Multiplico por el tiempo</b>: 2 años.",
-             R`$60 \cdot 2 = 120$ €`,
-             R`<b>b)</b> Al final: $2000 + 120 = 2120$ €`],
+             R`<b>a)</b> $60 \cdot 2 = 120$ €`,
+             R`<b>b)</b> Capital final: $2000 + 120 = 2120$ €`],
       res:"a) Me dan <b>120 €</b> de interés.<br>b) Al final tendré <b>2120 €</b>." },
     { nivel:"Aplicación", min:5,
-      enun:"¿Qué interés producen 4800 € al 3 % durante 8 meses?",
+      enun:"Guardo 8000 € al 1,5 % anual durante 4 años. ¿Qué interés me dan? ¿Cuánto tendré al final?",
+      pasos:[R`1 año: $0,015 \cdot 8000 = 120$ €`,
+             R`4 años: $120 \cdot 4 = 480$ €`,
+             R`Capital final: $8000 + 480 = 8480$ €`],
+      res:"Me dan <b>480 €</b> y al final tendré <b>8480 €</b>." },
+    { nivel:"Práctica", min:6,
+      enun:"Dejo 4800 € al 3 % durante 8 meses. <b>a)</b> ¿Qué interés producen? <b>b)</b> ¿Cuánto dinero tendré al final?",
       pasos:["<b>Paso 1. El interés de 1 año</b>: el 3 % de 4800 €.",
              R`$0,03 \cdot 4800 = 144$ € en 1 año`,
              R`<b>Paso 2. El tiempo está en meses</b>: 1 año son 12 meses. En 1 mes: $144 : 12 = 12$ €`,
-             R`En 8 meses: $12 \cdot 8 = 96$ €`],
-      res:"Producen <b>96 €</b> de interés." },
+             R`<b>a)</b> En 8 meses: $12 \cdot 8 = 96$ €`,
+             R`<b>b)</b> $4800 + 96 = 4896$ €`],
+      res:"a) Producen <b>96 €</b> de interés.<br>b) Al final tendré <b>4896 €</b>." },
     { nivel:"Práctica", min:6,
-      enun:"Unos ahorros de 5000 € han producido 450 € en 3 años. ¿A qué rédito (porcentaje anual) estaban?",
-      pasos:[R`<b>Paso 1. El interés de 1 año</b>: en 3 años, 450 € → en 1 año $450 : 3 = 150$ €`,
-             "<b>Paso 2. ¿Qué % de 5000 € son 150 €?</b> Es un tipo 3:",
-             R`$\% = \dfrac{\text{parte}}{\text{total}} \cdot 100 = \dfrac{150}{5000} \cdot 100 = 3\,\%$`],
-      res:"Estaban al <b>3 %</b> anual." },
-    { nivel:"Práctica", min:6,
-      enun:"¿Cuántos años tengo que dejar 1500 € al 4 % para ganar 180 € de intereses?",
-      pasos:["<b>Paso 1. El interés de 1 año</b>: el 4 % de 1500 €.",
-             R`$0,04 \cdot 1500 = 60$ € cada año`,
-             R`<b>Paso 2. ¿Cuántos años para 180 €?</b> Cada año gano 60 €: $180 : 60 = 3$ años`,
-             R`Compruebo: $60 \cdot 3 = 180$ € ✓`],
-      res:"Tengo que dejarlos <b>3 años</b>." },
+      enun:"Dejo 3600 € al 2 % durante 120 días. ¿Qué interés gano y cuánto dinero tengo al final? (El año de los bancos tiene 360 días.)",
+      pasos:[R`1 año: $0,02 \cdot 3600 = 72$ €`,
+             R`120 días son la tercera parte del año: $360 : 120 = 3$`,
+             R`Interés: $72 : 3 = 24$ €`,
+             R`Capital final: $3600 + 24 = 3624$ €`],
+      res:"Gano <b>24 €</b> y tengo <b>3624 €</b> al final." },
     { nivel:"Problema", min:6,
-      enun:"Quiero ganar 300 € de intereses en 2 años y el banco me paga un 2,5 % anual. ¿Cuánto dinero tengo que depositar?",
-      pasos:[R`<b>Paso 1. El interés de 1 año</b>: $300 : 2 = 150$ € cada año`,
-             "<b>Paso 2.</b> Esos 150 € son el 2,5 % del dinero que deposito. Busco el total (tipo 2): el dinero es el 100 %.",
-             cuadro("Porcentaje (%)", "Dinero (€)", ["2,5","150"], ["100","x"]),
-             R`$\dfrac{2,5}{100} = \dfrac{150}{x} \;\Rightarrow\; x = \dfrac{100 \cdot 150}{2,5} = \dfrac{15\,000}{2,5} = 6000$ €`,
-             R`Compruebo: $0,025 \cdot 6000 = 150$ € al año → $150 \cdot 2 = 300$ € ✓`],
-      res:"Tengo que depositar <b>6000 €</b>." },
+      enun:"Pido un préstamo de 1200 € al 8 % anual durante 6 meses para comprarme un móvil. <b>a)</b> ¿Cuánto pago de intereses? <b>b)</b> ¿Cuánto devuelvo en total?",
+      pasos:[R`1 año: $0,08 \cdot 1200 = 96$ €`,
+             R`1 mes: $96 : 12 = 8$ €`,
+             R`<b>a)</b> 6 meses: $8 \cdot 6 = 48$ €`,
+             R`<b>b)</b> $1200 + 48 = 1248$ €`],
+      res:"a) Pago <b>48 €</b> de intereses.<br>b) Devuelvo <b>1248 €</b>." },
     { nivel:"Reto", min:8,
       enun:"Mi hermano pide un préstamo de 3000 € para una moto al 6 % de interés simple anual y lo devuelve en 18 meses. <b>a)</b> ¿Cuánto paga de intereses? <b>b)</b> ¿Cuánto devuelve en total? <b>c)</b> Si paga lo mismo cada mes, ¿cuánto es cada cuota?",
       pasos:["<b>Paso 1. El interés de 1 año</b>: el 6 % de 3000 €.",
@@ -67,33 +66,33 @@ TEMA.registrar({
   casa: [
     { nivel:"Básico", enun:"Calcula el interés y el capital final de 1200 € al 2 % durante 5 años.",
       pasos:[R`1 año: $0,02 \cdot 1200 = 24$ €`,
-             R`5 años: $24 \cdot 5 = 120$ €`, "Capital final: 1200 + 120 = 1320 €"],
+             R`5 años: $24 \cdot 5 = 120$ €`, R`Capital final: $1200 + 120 = 1320$ €`],
       res:"El interés es de <b>120 €</b> y el capital final, <b>1320 €</b>." },
-    { nivel:"Básico", enun:"¿Qué interés dan 6000 € al 1,5 % durante 6 meses?",
+    { nivel:"Básico", enun:"Pido 2500 € prestados al 6 % durante 3 años. ¿Cuánto pago de intereses? ¿Cuánto devuelvo?",
+      pasos:[R`1 año: $0,06 \cdot 2500 = 150$ €`,
+             R`3 años: $150 \cdot 3 = 450$ €`, R`Devuelvo: $2500 + 450 = 2950$ €`],
+      res:"Pago <b>450 €</b> de intereses y devuelvo <b>2950 €</b>." },
+    { nivel:"Básico", enun:"Calcula el interés y el capital final de 6000 € al 1,5 % durante 6 meses.",
       pasos:[R`1 año: $0,015 \cdot 6000 = 90$ €`,
-             R`1 mes: $90 : 12 = 7,50$ €`, R`6 meses: $7,50 \cdot 6 = 45$ €`],
-      res:"Dan <b>45 €</b> de interés." },
-    { nivel:"Consolidación", enun:"Calcula el interés de 12 000 € durante 18 meses al 3,5 % anual.",
+             R`1 mes: $90 : 12 = 7,50$ €`, R`6 meses: $7,50 \cdot 6 = 45$ €`, R`Capital final: $6000 + 45 = 6045$ €`],
+      res:"El interés es de <b>45 €</b> y el capital final, <b>6045 €</b>." },
+    { nivel:"Consolidación", enun:"Calcula el interés y el capital final de 12 000 € durante 18 meses al 3,5 % anual.",
       pasos:[R`1 año: $0,035 \cdot 12\,000 = 420$ €`,
-             R`1 mes: $420 : 12 = 35$ €`, R`18 meses: $35 \cdot 18 = 630$ €`],
-      res:"El interés es de <b>630 €</b>." },
-    { nivel:"Consolidación", enun:"Unos ahorros de 3000 € han producido 360 € en 4 años. ¿A qué rédito?",
-      pasos:[R`1 año: $360 : 4 = 90$ €`,
-             R`¿Qué % de 3000 son 90? $\dfrac{90}{3000} \cdot 100 = 3\,\%$`],
-      res:"Estaban al <b>3 %</b>." },
-    { nivel:"Consolidación", enun:"¿Cuánto tiempo deben estar 8000 € al 5 % para ganar 600 €? Da el resultado en años y en meses.",
-      pasos:[R`1 año: $0,05 \cdot 8000 = 400$ €`,
-             R`¿Cuántos años para 600 €? $600 : 400 = 1,5$ años`, "1,5 años = 12 + 6 = 18 meses"],
-      res:"Deben estar <b>1,5 años</b>, es decir, <b>18 meses</b>." },
-    { nivel:"Problema", enun:"Si dejo 2400 € al 4 % durante 90 días, ¿qué interés gano? (En los bancos, el año comercial tiene 360 días.)",
+             R`1 mes: $420 : 12 = 35$ €`, R`18 meses: $35 \cdot 18 = 630$ €`, R`Capital final: $12\,000 + 630 = 12\,630$ €`],
+      res:"El interés es de <b>630 €</b> y el capital final, <b>12 630 €</b>." },
+    { nivel:"Consolidación", enun:"Una abuela deja 4500 € a su nieta en el banco al 2,4 % durante 10 meses. ¿Cuánto dinero tendrá la nieta al final?",
+      pasos:[R`1 año: $0,024 \cdot 4500 = 108$ €`,
+             R`1 mes: $108 : 12 = 9$ €`, R`10 meses: $9 \cdot 10 = 90$ €`, R`Al final: $4500 + 90 = 4590$ €`],
+      res:"La nieta tendrá <b>4590 €</b> (90 € de interés)." },
+    { nivel:"Problema", enun:"Si dejo 2400 € al 4 % durante 90 días, ¿qué interés gano? ¿Cuánto tengo al final? (En los bancos, el año comercial tiene 360 días.)",
       pasos:[R`1 año: $0,04 \cdot 2400 = 96$ €`,
-             R`1 año son 360 días; 90 días son la cuarta parte: $\dfrac{90}{360} = \dfrac{1}{4}$`, R`$96 : 4 = 24$ €`],
-      res:"Gano <b>24 €</b> de interés." },
-    { nivel:"Para pensar", enun:"Tengo 5000 €. El banco A me paga un 2 % durante 3 años y el banco B un 2,5 % durante 2 años. ¿Cuál me interesa más?",
-      pasos:[R`A: 1 año $= 0,02 \cdot 5000 = 100$ € → 3 años: $100 \cdot 3 = 300$ €`,
-             R`B: 1 año $= 0,025 \cdot 5000 = 125$ € → 2 años: $125 \cdot 2 = 250$ €`,
+             R`90 días son la cuarta parte del año: $360 : 90 = 4$`, R`Interés: $96 : 4 = 24$ €`, R`Capital final: $2400 + 24 = 2424$ €`],
+      res:"Gano <b>24 €</b> de interés y tengo <b>2424 €</b> al final." },
+    { nivel:"Para pensar", enun:"Tengo 5000 €. El banco A me paga un 2 % durante 3 años y el banco B un 2,5 % durante 2 años. ¿Con cuál tendré más dinero al final?",
+      pasos:[R`A: 1 año $= 0,02 \cdot 5000 = 100$ € → 3 años: $100 \cdot 3 = 300$ € → $5000 + 300 = 5300$ €`,
+             R`B: 1 año $= 0,025 \cdot 5000 = 125$ € → 2 años: $125 \cdot 2 = 250$ € → $5000 + 250 = 5250$ €`,
              "Aunque B paga un % mayor, A me da más porque el dinero está más tiempo."],
-      res:"Me interesa más <b>el banco A</b>: 50 € más." }
+      res:"Con <b>el banco A</b>: 5300 €, 50 € más." }
   ],
 
   laminas: [
@@ -117,34 +116,18 @@ TEMA.registrar({
       {prop:["🎁 <b>Interés</b>: lo que ganas (o lo que pagas si pides un préstamo).", "<b>Capital final</b> = capital + interés."], etq:"Interés"}
     ]},
 
-    { titulo:"Se resuelve en dos pasos", cuerpo:[
-      {prop:["<b>Paso 1.</b> Lo que me da el banco en <b>1 año</b>: el % del capital. Es un <b>tipo 1</b>: el % en decimal <b>por</b> el capital.", "<b>Paso 2.</b> Lo <b>multiplico por el tiempo</b> (los años)."], etq:"El método"},
-      {ej:{enun:"Dejo 2000 € al 3 % durante 2 años. ¿Qué interés me dan?",
-        pasos:[R`1 año: $0,03 \cdot 2000 = 60$ €`, R`2 años: $60 \cdot 2 = 120$ €`],
-        res:"Me dan <b>120 €</b>; al final tengo 2120 €."}}
+    { titulo:"Se resuelve en tres pasos", cuerpo:[
+      {prop:["<b>Paso 1.</b> Lo que me da el banco en <b>1 año</b>: el % del capital. Es un <b>tipo 1</b>: el % en decimal <b>por</b> el capital.", "<b>Paso 2.</b> Lo <b>multiplico por el tiempo</b> (los años): es el <b>interés</b>.", "<b>Paso 3.</b> <b>Capital final</b> = capital + interés."], etq:"El método"},
+      {ej:{enun:"Dejo 2000 € al 3 % durante 2 años. ¿Qué interés me dan? ¿Cuánto tengo al final?",
+        pasos:[R`1 año: $0,03 \cdot 2000 = 60$ €`, R`2 años: $60 \cdot 2 = 120$ €`, R`Capital final: $2000 + 120 = 2120$ €`],
+        res:"Me dan <b>120 €</b> y al final tengo <b>2120 €</b>."}}
     ]},
 
     { titulo:"¿Y si el tiempo está en meses o en días?", cuerpo:[
-      {prop:["1 año son <b>12 meses</b>: lo de 1 mes es lo de 1 año <b>: 12</b>.", "Si son <b>días</b>: 1 año son <b>360 días</b> (el año de los bancos)."], etq:"Meses y días"},
-      {ej:{enun:"¿Qué interés producen 4800 € al 3 % durante 8 meses?",
-        pasos:[R`1 año: $0,03 \cdot 4800 = 144$ €`, R`1 mes: $144 : 12 = 12$ €`, R`8 meses: $12 \cdot 8 = 96$ €`],
-        res:"Producen <b>96 €</b> de interés."}}
-    ]},
-
-    { titulo:"Busco el rédito (el %)", cuerpo:[
-      {ej:{enun:"5000 € han producido 450 € en 3 años. ¿A qué rédito estaban?",
-        pasos:[R`<b>1 año:</b> $450 : 3 = 150$ €`, "¿Qué % de 5000 € son 150 €? Es un <b>tipo 3</b>:", R`$\dfrac{150}{5000} \cdot 100 = 3\,\%$`],
-        res:"Estaban al <b>3 %</b>."}},
-      {nota:["El rédito es el % que da el banco en <b>1 año</b>: primero saco el interés de 1 año."]}
-    ]},
-
-    { titulo:"Busco el capital o el tiempo", cuerpo:[
-      {cols:[
-        [{ej:{etq:"Capital", enun:"¿Cuánto hay que depositar al 2 % para ganar 90 € en 3 años?",
-          pasos:[R`1 año: $90 : 3 = 30$ €`, "30 € son el 2 % del capital: busco el total (<b>tipo 2</b>).", cuadro("Porcentaje (%)", "Dinero (€)", ["2","30"], ["100","x"]), R`$x = \dfrac{100 \cdot 30}{2} = 1500$ €`], res:"Hay que depositar <b>1500 €</b>."}}],
-        [{ej:{etq:"Tiempo", enun:"¿Cuántos años hay que dejar 2500 € al 4 % para ganar 300 €?",
-          pasos:[R`1 año: $0,04 \cdot 2500 = 100$ €`, R`Cada año 100 €: $300 : 100 = 3$ años`], res:"Hay que dejarlos <b>3 años</b>."}}]
-      ]}
+      {prop:["1 año son <b>12 meses</b>: lo de 1 mes es lo de 1 año <b>: 12</b>.", "Si son <b>días</b>: 1 año son <b>360 días</b> (el año de los bancos). Miro qué parte del año es: 90 días son la cuarta parte."], etq:"Meses y días"},
+      {ej:{enun:"Dejo 4800 € al 3 % durante 8 meses. ¿Qué interés producen? ¿Cuánto tengo al final?",
+        pasos:[R`1 año: $0,03 \cdot 4800 = 144$ €`, R`1 mes: $144 : 12 = 12$ €`, R`8 meses: $12 \cdot 8 = 96$ €`, R`Capital final: $4800 + 96 = 4896$ €`],
+        res:"Producen <b>96 €</b> y al final tengo <b>4896 €</b>."}}
     ]},
 
     { titulo:"Pedir un préstamo", cuerpo:[
@@ -167,11 +150,13 @@ TEMA.registrar({
         "Paso 1: el interés de 1 año = el % en decimal por el capital (tipo 1).",
         "Paso 2: lo multiplico por los años. En meses: : 12 y por los meses. En días: : 360 y por los días.",
         "Capital final = capital + interés.",
-        "Rédito: interés de 1 año y el % con el tipo 3. Capital: regla de tres con el 100 % (tipo 2). Tiempo: cuántas veces cabe el interés de 1 año."
+        "⭐ Buscar el rédito, el capital o el tiempo es <b>ampliación</b>: está en la pestaña «Ampliación y retos»."
       ]}]},
       {estudio:[
         {comp:{q:"¿Qué interés dan 3000 € al 4 % durante 2 años?", sol:240, unidad:"€", explic:"1 año: 0,04 · 3000 = 120 €. 2 años: 120 · 2 = 240 €", pista:"Primero el interés de 1 año: el 4 % de 3000."}},
-        {comp:{q:"¿Y durante 6 meses?", sol:60, unidad:"€", explic:"1 mes: 120 : 12 = 10 €. 6 meses: 10 · 6 = 60 €", pista:"El de 1 año entre 12, y por 6."}}
+        {comp:{q:"¿Cuánto dinero tendré al final de esos 2 años?", sol:3240, unidad:"€", explic:"Capital final: 3000 + 240 = 3240 €", pista:"Capital final = capital + interés."}},
+        {comp:{q:"¿Qué interés dan 3000 € al 4 % durante 6 meses?", sol:60, unidad:"€", explic:"1 año: 120 €. 1 mes: 120 : 12 = 10 €. 6 meses: 10 · 6 = 60 €", pista:"El de 1 año entre 12, y por 6."}},
+        {html:`<p><a class="sa-btn" href="apuntes.html?ap=25">⭐ Ampliación: buscar el rédito, el capital o el tiempo</a></p>`}
       ]}
     ]}
   ]
