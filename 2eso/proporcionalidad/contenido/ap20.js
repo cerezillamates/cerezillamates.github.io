@@ -2,7 +2,9 @@
    Láminas: qué entra, cómo reconocer cada tipo de problema y el mapa del tema.
    Clase: MODELO DE CONTROL 1 (todos los enunciados con cronómetro y corrección uno a uno), hecho con problemas
    de los exámenes de la profesora (Colegio Cerrado de Calderón, 2016-2018) con nombres genéricos.
-   Casa: ejercicios de repaso que mezclan apartados. */
+   Casa: ejercicios de repaso que mezclan apartados.
+   26-11-2026: interés simple solo con el interés y el capital final; grifos y buscar rédito/capital/tiempo son ampliación
+   (los 3 ejercicios de repaso de grifos y de buscar el capital se cambian; el de capital está en ap25.js). */
 (function(){
 const R = String.raw;
 const cuadro = (m1, m2, a, b, t) => `<table class="t cuadro"><tr><th>${m1}</th><th class="fl">(${t||"D"}) ⟶</th><th>${m2}</th></tr><tr><td>${a[0]}</td><td></td><td>${a[1]}</td></tr><tr><td>${b[0]}</td><td></td><td class="x">${b[1]}</td></tr></table>`;
@@ -60,9 +62,9 @@ TEMA.registrar({
              "¡No es el 20 %! Los porcentajes encadenados no se restan (40 − 20)."],
       res:"a) El precio final es <b>140 €</b>.<br>b) En total ha <b>subido un 12 %</b>." },
     { nivel:"Aplicación", min:4,
-      enun:"¿Qué interés producen 6000 € al 2,5 % anual durante 9 meses?",
-      pasos:[R`1 año: el 2,5 % de 6000 $= 0,025 \cdot 6000 = 150$ €`, R`1 mes: $150 : 12 = 12,50$ €`, R`9 meses: $12,50 \cdot 9 = 112,50$ €`],
-      res:"Producen <b>112,50 €</b> de interés." }
+      enun:"Dejo 6000 € al 2,5 % anual durante 9 meses. <b>a)</b> ¿Qué interés producen? <b>b)</b> ¿Cuánto dinero tendré al final?",
+      pasos:[R`1 año: el 2,5 % de 6000 $= 0,025 \cdot 6000 = 150$ €`, R`1 mes: $150 : 12 = 12,50$ €`, R`<b>a)</b> 9 meses: $12,50 \cdot 9 = 112,50$ €`, R`<b>b)</b> $6000 + 112,50 = 6112,50$ €`],
+      res:"a) Producen <b>112,50 €</b> de interés.<br>b) Al final tendré <b>6112,50 €</b>." }
   ],
 
   casa: [
@@ -80,12 +82,12 @@ TEMA.registrar({
       pasos:["96 : 8 = 12 € por año", "5 · 12 = 60 € · 7 · 12 = 84 €", "Total: 96 + 60 + 84 = 240 €"], res:"A los otros les dan <b>60 €</b> y <b>84 €</b>. Se repartieron <b>240 €</b>." },
     { nivel:"Consolidación", enun:"Unas gafas de sol cuestan 50 €. Suben un 10 % y después bajan un 10 %. <b>a)</b> ¿Cuánto cuestan al final? <b>b)</b> ¿Cuánto ha variado el precio en total?",
       pasos:[window.curvas(["50 €","55 €","49,50 €"],[{up:true,pct:"+10 %",op:"+ 5 €"},{up:false,pct:"−10 %",op:"− 5,50 €"}],{solo:"F",leyenda:"➜ calculo el % del precio que hay y lo sumo o lo resto"}), R`<b>a)</b> El 10 % de 50 € $= 5$ € → $50 + 5 = 55$ €`, R`El 10 % de 55 € $= 5,50$ € → $55 - 5,50 = 49,50$ €`, R`<b>b)</b> Baja $50 - 49,50 = 0,50$ €: $\% = \dfrac{0,50}{50} \cdot 100 = 1\,\%$`, "No vuelve a 50 €: el segundo 10 % se calcula sobre 55 €."], res:"a) Al final cuestan <b>49,50 €</b>.<br>b) En total el precio baja un <b>1 %</b>." },
-    { nivel:"Problema", enun:"Un grifo llena un depósito en 10 horas y otro en 15 horas. ¿Cuánto tardan los dos juntos?",
-      pasos:[R`$\dfrac{1}{10} + \dfrac{1}{15} = \dfrac{3}{30} + \dfrac{2}{30} = \dfrac{5}{30} = \dfrac16$`], res:"Los dos juntos tardan <b>6 horas</b>." },
-    { nivel:"Problema", enun:"Un grifo llena un depósito en 3 horas y el desagüe lo vacía en 12 horas. Si se abren los dos, ¿cuánto tarda en llenarse?",
-      pasos:[R`El desagüe resta: $\dfrac13 - \dfrac{1}{12} = \dfrac{4}{12} - \dfrac{1}{12} = \dfrac{3}{12} = \dfrac14$`, "Le doy la vuelta: 4 horas"], res:"El depósito tarda <b>4 horas</b> en llenarse." },
-    { nivel:"Problema", enun:"¿Qué dinero hay que depositar al 2 % para ganar 150 € de intereses en 3 años?",
-      pasos:[R`1 año: $150 : 3 = 50$ €`, "50 € son el 2 % del dinero: busco el total (tipo 2), el dinero es el 100 %.", cuadro("Porcentaje (%)","Dinero (€)",["2","50"],["100","x"],"D"), R`$x = \dfrac{100 \cdot 50}{2} = 2500$ €`], res:"Hay que depositar <b>2500 €</b>." },
+    { nivel:"Problema", enun:"Pido un préstamo de 1800 € al 5 % anual durante 2 años. ¿Cuánto pago de intereses? ¿Cuánto devuelvo?",
+      pasos:[R`1 año: $0,05 \cdot 1800 = 90$ €`, R`2 años: $90 \cdot 2 = 180$ €`, R`Devuelvo: $1800 + 180 = 1980$ €`], res:"Pago <b>180 €</b> de intereses y devuelvo <b>1980 €</b>." },
+    { nivel:"Problema", enun:"Con 3 grifos iguales una piscina se llena en 12 horas. ¿Cuánto tarda en llenarse con 4 grifos?",
+      pasos:[cuadro("Grifos","Horas",["3","12"],["4","x"],"I"), "Más grifos → menos horas: <b>I</b>", R`Le damos la vuelta: $\dfrac{4}{3} = \dfrac{12}{x}$`, R`En cruz: $4 \cdot x = 3 \cdot 12 \Rightarrow x = 36 : 4 = 9$ horas`], res:"Con 4 grifos tarda <b>9 horas</b>." },
+    { nivel:"Problema", enun:"Un abrigo costaba 80 € y ahora cuesta 68 €. ¿Qué porcentaje ha bajado?",
+      pasos:[R`Ha bajado $80 - 68 = 12$ €`, R`Tipo 3: $\% = \dfrac{\text{parte}}{\text{total}} \cdot 100 = \dfrac{12}{80} \cdot 100 = 15\,\%$`], res:"Ha bajado un <b>15 %</b>." },
 
     { nivel:"Básico", enun:"La razón entre los chicos y las chicas de una clase es 4 : 5. En la clase hay 27 alumnos. ¿Cuántos chicos y cuántas chicas hay?",
       pasos:["4 + 5 = 9 partes", "27 : 9 = 3 alumnos cada parte", "Chicos: 4 · 3 = 12. Chicas: 5 · 3 = 15"], res:"Hay <b>12 chicos</b> y <b>15 chicas</b>." },
@@ -109,8 +111,8 @@ TEMA.registrar({
              R`$\dfrac{85}{100} = \dfrac{68}{x} \;\Rightarrow\; x = \dfrac{100 \cdot 68}{85} = 80$ €`], res:"Las zapatillas costaban <b>80 €</b>." },
     { nivel:"Problema", enun:"Una lavadora cuesta 350 € sin IVA. ¿Cuánto cuesta con el 21 % de IVA?",
       pasos:[R`IVA: el 21 % de 350 $= 73,50$ € → $350 + 73,50 = 423,50$ €`, R`🪄 O de una vez, pagando el $121\,\%$: $1,21 \cdot 350 = 423,50$ €`], res:"Con IVA, la lavadora cuesta <b>423,50 €</b>." },
-    { nivel:"Problema", enun:"¿Qué interés producen 4000 € al 3 % anual durante 8 meses?",
-      pasos:[R`1 año: $0,03 \cdot 4000 = 120$ €`, R`1 mes: $120 : 12 = 10$ €`, R`8 meses: $10 \cdot 8 = 80$ €`], res:"Producen <b>80 €</b> de interés." }
+    { nivel:"Problema", enun:"¿Qué interés producen 4000 € al 3 % anual durante 8 meses? ¿Cuánto dinero hay al final?",
+      pasos:[R`1 año: $0,03 \cdot 4000 = 120$ €`, R`1 mes: $120 : 12 = 10$ €`, R`8 meses: $10 \cdot 8 = 80$ €`, R`Capital final: $4000 + 80 = 4080$ €`], res:"Producen <b>80 €</b> de interés y al final hay <b>4080 €</b>." }
   ],
 
   laminas: [
@@ -127,8 +129,8 @@ TEMA.registrar({
         <tr><th>«¿qué porcentaje…?», «el … %»</th><td><b>porcentajes</b></td></tr>
         <tr><th>IVA, rebaja, «costaba antes», «ha subido…»</th><td><b>aumentos y disminuciones</b></td></tr>
         <tr><th>«dos rebajas seguidas», «rebaja y después IVA», «sube y después baja»</th><td><b>porcentajes encadenados</b> (tipo 4)</td></tr>
-        <tr><th>banco, rédito, capital, préstamo</th><td><b>interés simple</b></td></tr>
-        <tr><th>«juntos», «a la vez», «desagüe»</th><td><b>grifos y trabajo en común</b></td></tr></table>`}
+        <tr><th>banco, interés, capital final, préstamo</th><td><b>interés simple</b>: el interés y el capital final</td></tr>
+        <tr><th>«juntos», «a la vez», «desagüe»</th><td><b>grifos</b> ⭐ ampliación: no entra en el control</td></tr></table>`}
     ]},
 
     { titulo:"🧠 Mapa del tema", cuerpo:[
@@ -140,8 +142,8 @@ TEMA.registrar({
         <div class="b-prop"><span class="etq">🍰 Repartos</span><p>directo: sumo, divido, multiplico · inverso: primero la vuelta</p></div>
         <div class="b-prop"><span class="etq">％ Porcentajes</span><p>tipo 1: $C_F = I_V \\cdot C_I$<br>tipo 2 (el total): regla de tres, el total es el 100 %<br>tipo 3 (el %): $\\dfrac{\\text{parte}}{\\text{total}} \\cdot 100$</p></div>
         <div class="b-prop"><span class="etq">📈📉 Sube o baja</span><p>calculo el % y lo sumo o lo resto (🪄 $-20\\,\\%$ = pagar el $80\\,\\%$) <br>tipo 4, encadenados: en cada cambio, el % del precio que hay, y lo sumo o lo resto; el % final con el tipo 3. ¡Los % no se suman ni se restan!</p></div>
-        <div class="b-prop"><span class="etq">🏦 Interés</span><p>1 año: el % en decimal por el capital (tipo 1); después, por el tiempo (en meses, : 12 y por los meses)</p></div>
-        <div class="b-prop"><span class="etq">🚰 Grifos</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta</p></div></div>`}
+        <div class="b-prop"><span class="etq">🏦 Interés</span><p>1 año: el % en decimal por el capital (tipo 1); después, por el tiempo (en meses, : 12 y por los meses). Capital final = capital + interés</p></div>
+        <div class="b-prop"><span class="etq">⭐ Grifos (ampliación)</span><p>$\\dfrac1a + \\dfrac1b$ (el desagüe resta) y le doy la vuelta</p></div></div>`}
     ]},
 
     { titulo:"✅ Antes de entregar el control", cuerpo:[
