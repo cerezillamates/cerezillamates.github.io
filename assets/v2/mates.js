@@ -64,9 +64,9 @@ function ejemplos(){
       pasos.forEach((p,i)=> p.hidden = i >= vistos);
       if(resp) resp.hidden = !fin;
       $(".cuenta", tapa).textContent = fin ? "Solución completa." :
-        (vistos ? `Llevas ${vistos} de ${pasos.length} pasos. Intenta el siguiente antes de destaparlo.` : `${pasos.length} pasos. Piensa el primero antes de destaparlo.`);
+        (pasos.length === 1 ? "Piénsalo antes de destaparlo." : vistos ? `Llevas ${vistos} de ${pasos.length} pasos. Intenta el siguiente antes de destaparlo.` : `${pasos.length} pasos. Piensa el primero antes de destaparlo.`);
       bSig.hidden = fin; bTodo.hidden = fin; bTapar.hidden = !fin;
-      bSig.textContent = `Destapar el paso ${Math.min(vistos+1, pasos.length)}`;
+      bSig.textContent = pasos.length === 1 ? "Destapar la solución" : `Destapar el paso ${Math.min(vistos+1, pasos.length)}`;
     };
     tapa.addEventListener("click", e=>{
       const b = e.target.closest("button"); if(!b) return;
