@@ -816,3 +816,11 @@ details.ej[open]>summary{margin-bottom:4px}
 .recuadro .ej .katex{white-space:nowrap}
 .ej .v-movil{display:none}
 @media (max-width:640px){.ej .v-ancho{display:none}.ej .v-movil{display:block}}
+/* Tablas de signos (fuera de las hojas a mano) */
+.signos{border-collapse:collapse;margin:10px 0 14px}
+.signos td{border:1px solid var(--linea);padding:6px 12px;text-align:center;vertical-align:middle}
+.signos tr:first-child td{font-weight:600;border-bottom:1.5px solid var(--tinta)}
+.signos td:first-child{text-align:left;white-space:nowrap}
+.signos tr:first-child td:first-child{border-top-color:transparent;border-left-color:transparent}
+.mano .signos tr:first-child td{font-weight:inherit}
+.mano .signos tr:first-child td:first-child{border:1.4px solid var(--tinta-boli)}
