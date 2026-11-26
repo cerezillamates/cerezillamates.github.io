@@ -824,3 +824,6 @@ details.ej[open]>summary{margin-bottom:4px}
 .signos tr:first-child td:first-child{border-top-color:transparent;border-left-color:transparent}
 .mano .signos tr:first-child td{font-weight:inherit}
 .mano .signos tr:first-child td:first-child{border:1.4px solid var(--tinta-boli)}
+
+.portada-pag .atajo{margin:10px 0 4px}
+.portada-pag .atajo svg{width:24px;height:24px}
