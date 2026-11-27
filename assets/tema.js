@@ -609,7 +609,7 @@ function camino(ap, aqui){
   return `<nav class="camino" aria-label="Pasos de la sesión">
     ${paso("estudiar","📘","1. Explicación",url("estudiar"),"Apuntes del apartado")}
     ${ap.clase?paso("clase","✏️","2. Ejercicios de clase",url("clase"),`${ap.clase.length} ejercicios: todos juntos y corrección uno a uno`):""}
-    ${ap.casa?paso("casa","🏠","3. Tareas para casa",url("casa"),`${ap.casa.length} ejercicios con soluciones`):""}
+    ${ap.casa?(ap.num==="R"?paso("casa","📋","2. Ejercicios de repaso",url("casa"),`${ap.casa.length} ejercicios con soluciones: de aquí sale el control`):paso("casa","🏠","3. Tareas para casa",url("casa"),`${ap.casa.length} ejercicios con soluciones`)):""}
     ${!ap.clase && TEMA.info.final ? paso("fin","🔎","2. "+TEMA.info.final.t,TEMA.info.final.url,TEMA.info.final.d||"") : ""}
   </nav>
   <div class="cam-pie"><a class="btn" href="./">← Volver al tema</a>${sig?`<a class="btn main" href="apuntes.html?ap=${sig.num}">Apartado ${sig.num}: ${sig.titulo} →</a>`:""}</div>`;
@@ -731,17 +731,18 @@ function clase(ap){
 function casa(ap){
   const E = ap.casa || ap.clase || [];
   document.body.className = "estudio casa";
+  const rep = ap.num === "R";   // repaso para el control: una sola lista agrupada por apartados
   const NIV = [["Básico","🟢 Ejercicios básicos"],["Consolidación","🔵 Para consolidar"],["Problema","🟠 Problemas"],["Para pensar","🔴 Para pensar más"]];
   let h = `<header class="hero"><div class="wrap">
     <nav class="migas"><a href="../../index.html">Inicio</a><span>›</span><a href="../../${TEMA.info.cursoUrl||"3eso.html"}">${TEMA.info.curso}</a><span>›</span><a href="./">${TEMA.info.tema}</a></nav>
-    <div class="kicker">🏠 Tareas para casa · ${ap._ap}</div>
-    <h1>${ap._nt}</h1>
-    <p class="lead">Hazlos en tu cuaderno y después comprueba. Si te atascas, abre la solución <b>paso a paso</b>: mira solo el primer paso e intenta seguir tú.</p>
+    <div class="kicker">${rep ? "📋 Repaso para el control" : "🏠 Tareas para casa · "+ap._ap}</div>
+    <h1>${rep ? `Los ${E.length} ejercicios de repaso` : ap._nt}</h1>
+    <p class="lead">${rep ? "De aquí salen los ejercicios del control: hazlos todos. " : ""}Hazlos en tu cuaderno y después comprueba. Si te atascas, abre la solución <b>paso a paso</b>: mira solo el primer paso e intenta seguir tú.</p>
     <div class="est-cab"><a class="btn main" href="${url("estudiar")}">📘 Repasar la explicación</a><button class="btn" onclick="print()">🖨 Imprimir</button></div>
   </div></header><div class="wrap">`;
   let n = 0;
   // niveles propios (Reto, N1, 1 punto…) después de los habituales, en el orden en que aparecen
-  const propios = [...new Set(E.map(e=>e.nivel||"Básico"))].filter(k=>!NIV.some(x=>x[0]===k)).map(k=>[k,"⭐ "+k]);
+  const propios = [...new Set(E.map(e=>e.nivel||"Básico"))].filter(k=>!NIV.some(x=>x[0]===k)).map(k=>[k,(rep?"":"⭐ ")+k]);
   const unico = !E.some(e=>NIV.some(x=>x[0]===(e.nivel||"Básico"))) && ap.casa === undefined;
   (unico ? [["*", "📝 Ejercicios"]] : NIV.concat(propios)).forEach(([k,t])=>{
     const L = k==="*" ? E : E.filter(e=>(e.nivel||"Básico")===k); if(!L.length) return;

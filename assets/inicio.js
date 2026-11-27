@@ -22,12 +22,13 @@
     const sit = btnsExtra("situacion");
     const calc = sit.find(b=>/🧮/.test(b[0]));
     const L2 = [];
+    const REP = window.REPASO_INICIO;   // si el tema lo define, el repaso va como enlace arriba y no como icono
     if(modo==="clase"){
-      L2.push({ico:"📋", corto:"Control", titulo:"Repaso y modelos de control", acc:[["🖥","Repaso del tema","apuntes.html?ap=20&modo=proyectar","main"],["✏️","Modelo de control 1","clase.html?ap=20","verde"],["✏️","Modelo de control 2","clase.html?ap=21","verde"]]});
+      if(!REP) L2.push({ico:"📋", corto:"Control", titulo:"Repaso y modelos de control", acc:[["🖥","Repaso del tema","apuntes.html?ap=20&modo=proyectar","main"],["✏️","Modelo de control 1","clase.html?ap=20","verde"],["✏️","Modelo de control 2","clase.html?ap=21","verde"]]});
       L2.push({ico:"🌍", corto:"Situación", titulo:(EXTRA.situacion||[[0,""]])[0][1], acc:[["🖥","Presentar el reto","apuntes.html?ap=23&modo=proyectar","main"],["📋","Dosier del grupo","apuntes.html?ap=23","verde"]].concat(calc?[["🧮","Calculadora",calc[1],""]]:[])});
       L2.push({ico:"🧠", corto:"Retos", titulo:"Retos y estrategias", acc:[["🖥","Estrategias","apuntes.html?ap=24&modo=proyectar","main"],["✏️","Retos en clase","clase.html?ap=24","verde"]]});
     } else {
-      L2.push({ico:"📋", corto:"Repaso", titulo:"Repaso para el control", acc:[["🏠","Ejercicios de repaso (la batería del control)","tareas.html?ap=20","main"],["📝","Modelo de control 2","tareas.html?ap=21","verde"],["📖","Qué entra y el mapa del tema","apuntes.html?ap=20",""]]});
+      if(!REP) L2.push({ico:"📋", corto:"Repaso", titulo:"Repaso para el control", acc:[["🏠","Ejercicios de repaso (la batería del control)","tareas.html?ap=20","main"],["📝","Modelo de control 2","tareas.html?ap=21","verde"],["📖","Qué entra y el mapa del tema","apuntes.html?ap=20",""]]});
       L2.push({ico:"✅", corto:"Autoevaluación", href:"apuntes.html?ap=22"});
       L2.push({ico:"🎬", corto:"Vídeos", href:"#videos", todo:true});
       L2.push({ico:"🌍", corto:"Situación", titulo:(EXTRA.situacion||[[0,""]])[0][1], acc:[["📋","Dosier del grupo","apuntes.html?ap=23","main"]].concat(calc?[["🧮","Calculadora",calc[1],"verde"]]:[])});
@@ -57,7 +58,8 @@
     }
     const esp = especiales(modo);
     esp.forEach(e=>{ reg.push({esp:e}); items.push(app(e.ico, e.corto, "", reg.length-1, "esp")); });
-    raiz.innerHTML = `
+    const REP = window.REPASO_INICIO;
+    raiz.innerHTML = `${REP ? `<p class="rep-inicio" style="text-align:center;margin:4px 0 14px"><a class="btn main" href="${REP}">📋 Repaso para el control: los 20 ejercicios</a></p>` : ""}
       <div class="modo-sel" role="tablist">
         <button data-m="clase" aria-selected="${modo==="clase"}">🧑‍🏫 En clase</button>
         <button data-m="casa" aria-selected="${modo==="casa"}">🏠 En casa</button>
