@@ -1,6 +1,8 @@
 /* 3.º ESO · Tema 3 · REPASO PARA EL CONTROL
    Clase: MODELO DE CONTROL 1 = examen «Tema 6: Proporcionalidad numérica» de la profesora (IES Al-Baytar), con dos cambios:
    el reparto de 120 caramelos a 4, 6, 6 y 8 años no salía exacto → edades 4, 6, 6 y 12; y el IVA pasa del 16 % al 21 %.
+   27-nov-2026: se añade el ejercicio 9 de interés simple (de la batería de repaso) y se reparten los puntos:
+   ej. 1 y 2 → 1 p, ej. 8 → 0,5 p, el resto 1,25 p (total 10). Porcentajes escritos con C_F = I_V · C_I.
    Casa: ejercicios de repaso de su página anterior (todas las soluciones revisadas). */
 (function(){
 const R = String.raw;
@@ -13,17 +15,17 @@ TEMA.registrar({
   titulo: "Repaso para el control",
 
   clase: [
-    { nivel:"1,25 p", min:5,
+    { nivel:"1 p", min:5,
       enun:"Una persona mecanografía a una velocidad de 1680 pulsaciones cada 8 minutos. ¿Cuántas pulsaciones puede hacer en 100 segundos?",
       pasos:["Misma unidad: 8 min = 480 s", R`D: $\dfrac{480}{100} = \dfrac{1680}{x} \Rightarrow x = \dfrac{100 \cdot 1680}{480} = 350$`, R`Otra forma: $1680 : 480 = 3,5$ pulsaciones por segundo → $3,5 \cdot 100 = 350$`],
       res:"En 100 segundos puede hacer <b>350 pulsaciones</b>." },
-    { nivel:"1,25 p", min:4,
+    { nivel:"1 p", min:4,
       enun:"Si seis trabajadores han tardado 15 días en hacer un trabajo, ¿cuánto tardarían nueve trabajadores en hacer el mismo trabajo?",
       pasos:["Más trabajadores → menos días: <b>I</b>", R`$6 \cdot 15 = 9 \cdot x \Rightarrow x = \dfrac{90}{9} = 10$`, "Otra forma: 1 trabajador tardaría 90 días → 90 : 9 = 10"],
       res:"Nueve trabajadores tardarían <b>10 días</b>." },
     { nivel:"1,25 p", min:7,
       enun:"Con 2000 kg de pienso un granjero alimenta a sus 20 vacas durante dos meses. Si compra 10 vacas más y otros 1600 kg de pienso, ¿durante cuánto tiempo podrá alimentarlas a todas?",
-      pasos:["Ahora: 30 vacas y 3600 kg", cmp(["Vacas","Pienso (kg)","Meses"],["20","2000","2"],["30","3600","x"],["I","D"]),
+      pasos:["Lo primero, los datos nuevos: 20 + 10 = 30 vacas y 2000 + 1600 = 3600 kg", cmp(["Vacas","Pienso (kg)","Meses"],["20","2000","2"],["30","3600","x"],["I","D"]),
              R`$\dfrac{30}{20} \cdot \dfrac{2000}{3600} = \dfrac{2}{x} \Rightarrow \dfrac{60\,000}{72\,000} = \dfrac{2}{x} \Rightarrow x = 2,4$ meses`,
              "0,4 meses = 0,4 · 30 = 12 días"],
       res:"Podrá alimentarlas durante <b>2,4 meses</b> (2 meses y 12 días)." },
@@ -38,16 +40,23 @@ TEMA.registrar({
       res:"A los otros hermanos les tocan <b>400 €</b> y <b>300 €</b>. Se repartieron <b>1500 €</b>." },
     { nivel:"1,25 p", min:5,
       enun:"<b>a)</b> Una calculadora costaba 15 € y la rebajan un 35 %. ¿Cuál es su precio rebajado?<br><b>b)</b> Otro artículo, rebajado un 15 %, nos costó 19,55 €. ¿Cuánto costaba antes?",
-      pasos:[R`<b>a)</b> Índice $0,65$: $15 \cdot 0,65 = 9,75$ €`, R`<b>b)</b> Índice $0,85$; hacia atrás: $19,55 : 0,85 = 23$ €`],
+      pasos:[R`<b>a)</b> Baja un 35 %: $I_V = 1 - 0,35 = 0,65$`, R`$C_F = I_V \cdot C_I$ ⇒ $C_F = 0,65 \cdot 15 = 9,75$ €`,
+             R`<b>b)</b> Baja un 15 %: $I_V = 1 - 0,15 = 0,85$`, R`Busco el precio de antes: $19,55 = 0,85 \cdot x$ ⇒ $x = \dfrac{19,55}{0,85} = 23$ €`],
       res:"a) La calculadora cuesta <b>9,75 €</b> rebajada.<br>b) El artículo costaba <b>23 €</b> antes." },
     { nivel:"1,25 p", min:5,
       enun:"Un televisor que costaba 250 € está rebajado un 30 %. Al pagar en caja nos añaden el 21 % de IVA. ¿Cuál es el precio final?",
-      pasos:[R`Índice total: $0,70 \cdot 1,21 = 0,847$`, R`$250 \cdot 0,847 = 211,75$ €`],
+      pasos:[R`Baja un 30 %: $I_V = 1 - 0,30 = 0,70$. IVA del 21 %: $I_V = 1 + 0,21 = 1,21$`, R`Índice total: $0,70 \cdot 1,21 = 0,847$`, R`$C_F = I_V \cdot C_I$ ⇒ $C_F = 0,847 \cdot 250 = 211,75$ €`],
       res:"El precio final del televisor es <b>211,75 €</b>." },
-    { nivel:"1,25 p", min:3,
+    { nivel:"0,5 p", min:3,
       enun:"Tres de cada siete alumnos se dan cuenta de que dos ejercicios del examen aparecen resueltos en el libro. Exprésalo en forma de porcentaje.",
       pasos:[R`$\dfrac37 = 0,4285\ldots \approx 42,86\,\%$`],
-      res:"Se dan cuenta aproximadamente el <b>42,86 %</b> de los alumnos." }
+      res:"Se dan cuenta aproximadamente el <b>42,86 %</b> de los alumnos." },
+    { nivel:"1,25 p", min:5,
+      enun:"<b>a)</b> ¿Qué interés producen 7200 € al 4 % durante 75 días?<br><b>b)</b> ¿Cuántos días hay que depositar 4500 € al 2 % para ganar 30 €?",
+      pasos:["El tiempo está en días: divido entre 360.",
+             R`<b>a)</b> $I = \dfrac{7200 \cdot 0,04 \cdot 75}{360} = \dfrac{21\,600}{360} = 60$ €`,
+             R`<b>b)</b> Busco el tiempo: $30 = \dfrac{4500 \cdot 0,02 \cdot t}{360}$ ⇒ $30 = \dfrac{90t}{360}$ ⇒ $90t = 10\,800$ ⇒ $t = 120$ días`],
+      res:"a) Producen <b>60 €</b> de interés.<br>b) Hay que depositarlos <b>120 días</b>." }
   ],
 
   casa: [
