@@ -36,9 +36,9 @@
   <p style="margin-top:22px;font-size:.9rem;color:var(--muted)">¿Buscas la versión anterior del tema? <a href="../../Proporcionalidad%203%C2%BA%20ESO/index.html">Apuntes interactivos (versión anterior)</a>.</p>
 </div>
 <script>
+window.REPASO_INICIO = "tareas.html?ap=20";   // repaso: 20 ejercicios, enlace en el inicio
 const EXTRA = {
-  repaso: [["R","Repaso y modelo de control 1","Qué entra, cómo reconocer cada problema y el mapa del tema. Modelo de control con cronómetro y corrección; ejercicios de repaso para casa.",[["🖥 Explicación","apuntes.html?ap=20&modo=proyectar","main"],["✏️ Modelo de control 1","clase.html?ap=20","verde"],["🏠 Ejercicios de repaso","tareas.html?ap=20"]]],
-           ["C2","Modelo de control 2","Otro control completo para practicar, con la solución paso a paso.",[["✏️ Proyectar","clase.html?ap=21","verde"],["🏠 Hacerlo en casa","tareas.html?ap=21"]]]],
+  repaso: [["R","Repaso para el control","Los 20 ejercicios de repaso, agrupados por apartados y con la solución paso a paso. De aquí salen los ejercicios del control: hay que hacerlos todos.",[["📋 Los 20 ejercicios de repaso","tareas.html?ap=20","main"]]]],
   autoeval: [["✅","Autoevaluación del tema","Test, verdadero o falso y respuesta numérica. Te corrige al momento, explica los errores y te da la nota final.",[["Empezar","apuntes.html?ap=22","main"]]]],
   situacion: [["SA","¿Es saludable nuestra cesta de la compra?","Trabajo en grupo: detectives de etiquetas. Analizamos con porcentajes lo que comemos en casa. Producto final: una cartulina por grupo.",[["🖥 Presentar el reto","apuntes.html?ap=23&modo=proyectar","main"],["📋 Dosier del grupo","apuntes.html?ap=23","verde"],["🧮 Calculadora y cesta","situacion.html"]]]],
   ampliacion: [["★","Retos y estrategias","Problemas de ingenio y estilo olimpiada para pensar con calma.",[["🖥 Estrategias","apuntes.html?ap=24&modo=proyectar","main"],["✏️ Retos en clase","clase.html?ap=24","verde"],["🏠 Retos para casa","tareas.html?ap=24"]]]]
@@ -48,7 +48,7 @@ const SECC = [
   {id:"videos", t:"🎬 Vídeos", d:"Los vídeos de cada apartado, para volver a ver la explicación en casa."},
   {id:"clase", t:"🧑‍🏫 Actividades de clase", d:"Primero todos los enunciados juntos con cronómetro; después la corrección de uno en uno con la solución paso a paso."},
   {id:"tareas", t:"🏠 Tareas para casa", d:"Ejercicios graduados por dificultad con sus soluciones."},
-  {id:"repaso", t:"📋 Repaso para el control", d:"20 ejercicios de repaso (la batería del control: hay que hacerlos todos) y modelos de control resueltos."},
+  {id:"repaso", t:"📋 Repaso para el control", d:"Los 20 ejercicios de repaso: de aquí salen los ejercicios del control. Hay que hacerlos todos."},
   {id:"autoeval", t:"✅ Autoevaluación", d:"Test, verdadero/falso y respuesta numérica con corrección automática."},
   {id:"situacion", t:"🌍 Situación de aprendizaje", d:"Un reto en un contexto real que se hace en grupo, en clase y en casa. La presentación explica el trabajo y el dosier tiene las misiones."},
   {id:"ampliacion", t:"🧠 Ampliación y retos", d:"Problemas de ingenio, razonamiento y estilo olimpiada."}
@@ -107,6 +107,6 @@ function abrir(id){
 tabs.addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) abrir(b.id.slice(2)); });
 if(SECC.some(s=>"#"+s.id===location.hash)) abrir(location.hash.slice(1));
 </script>
-<script src="../../assets/inicio.js?v=20261113e"></script>
+<script src="../../assets/inicio.js?v=20261127b"></script>
 </body>
 </html>
